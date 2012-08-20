@@ -1,0 +1,10 @@
+/.classpath
+/.project
+/.settings/org.eclipse.jdt.core.prefs
+/lint.xml
+/proguard-project.txt
+/project.properties
+/bin/
+/res/
+/svg/
+/gen/
