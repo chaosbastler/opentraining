@@ -40,6 +40,7 @@ public class WorkoutConstraint {
 		TOO_SMALL, TOO_BIG;
 	}
 	
+	@SuppressWarnings("serial")
 	public class ValidationException extends RuntimeException{
 
         /**

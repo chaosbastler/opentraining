@@ -40,8 +40,10 @@ public class ManageDatabaseActivity extends Activity {
         Button button_download = (Button) findViewById(R.id.button_download);
         button_download.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) {
+				@SuppressWarnings("unused")
 				boolean succ1 = delete(DataManager.getAppFolder());
-		        boolean succ2 = download("http://skubware.de/osts/cc_exercises/list_files.php");
+		        @SuppressWarnings("unused")
+				boolean succ2 = download("http://skubware.de/osts/cc_exercises/list_files.php");
 		         	    
 		        //TODO:
 		        /*

@@ -20,9 +20,6 @@
 
 package de.skubware.opentraining;
 	
-import java.util.HashMap;
-import java.util.Map;
-
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.*;
 
@@ -36,6 +33,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.SparseIntArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,7 +48,7 @@ import android.widget.Toast;
 
 public class EditWorkoutActivity extends Activity {
 	
-	private Map<Integer, Integer> columnWidthMap = new HashMap<Integer, Integer>();
+	private SparseIntArray columnWidthMap = new SparseIntArray();// instead of HashMap<Integer,Integer>
 	
 	private int columnCount;
 	private int emptyRowCount;

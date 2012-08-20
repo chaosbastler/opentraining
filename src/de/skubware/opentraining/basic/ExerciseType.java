@@ -72,8 +72,8 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	public static class Builder {
 		// Default values
-		private static final String DEFAULT_DESCRIPTION = "Keine Beschreibung verf�gbar";
-		private static final String DEFAULT_LICENSE_TEXT = "Keine Lizenzinformationen verf�gbar";
+		private static final String DEFAULT_DESCRIPTION = "Keine Beschreibung verfügbar";
+		//private static final String DEFAULT_LICENSE_TEXT = "Keine Lizenzinformationen verfügbar";
 		// Collections do not have a default value
 
 		// Required parameters
