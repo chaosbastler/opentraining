@@ -1,3 +1,23 @@
+/**
+ * 
+ * This is OpenTraining, an Android application for planning your your fitness training.
+ * Copyright (C) 2012 Christian Skubich
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package de.skubware.opentraining;
 
 import java.util.ArrayList;
@@ -61,8 +81,8 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 						SelectExercisesActivity.this.exerciseList
 								.add(ExerciseType.getByName(exName));
 
-						CharSequence text = "Die Übung " + exName
-								+ " wurde hinzugefügt.";
+						CharSequence text = "Die ï¿½bung " + exName
+								+ " wurde hinzugefï¿½gt.";
 						int duration = Toast.LENGTH_LONG;
 						Toast toast = Toast.makeText(
 								SelectExercisesActivity.this, text, duration);
@@ -82,7 +102,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 							AlertDialog.Builder builder = new AlertDialog.Builder(
 									SelectExercisesActivity.this);
 							builder.setMessage(
-									"Es wurden noch keine Übungen ausgewählt.")
+									"Es wurden noch keine ï¿½bungen ausgewï¿½hlt.")
 									.setPositiveButton(
 											"OK",
 											new DialogInterface.OnClickListener() {
@@ -130,7 +150,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				}
 			});
 		}
-		MenuItem menuitem_uncheck_all = menu.add("Alle abwählen");
+		MenuItem menuitem_uncheck_all = menu.add("Alle abwï¿½hlen");
 		menuitem_uncheck_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			public boolean onMenuItemClick(MenuItem menuitem){
 				for(MenuItem item:muscleItems){
@@ -141,7 +161,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				return true;
 			}
 		});
-		MenuItem menuitem_check_all = menu.add("Alle wählen");
+		MenuItem menuitem_check_all = menu.add("Alle wï¿½hlen");
 		menuitem_check_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			public boolean onMenuItemClick(MenuItem menuitem){
 				for(MenuItem item:muscleItems){

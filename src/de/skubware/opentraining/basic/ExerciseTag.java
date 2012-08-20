@@ -1,3 +1,23 @@
+/**
+ * 
+ * This is OpenTraining, an Android application for planning your your fitness training.
+ * Copyright (C) 2012 Christian Skubich
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package de.skubware.opentraining.basic;
 
 import java.util.Collections;
@@ -35,41 +55,41 @@ public class ExerciseTag  implements Comparable<ExerciseTag>{
 	private static Set<ExerciseTag> values = new HashSet<ExerciseTag>();
 	
 	static{
-		 values.add(new ExerciseTag("Eigengewicht Übung", "Eine Übung die ohne extra Gewicht ausgeführt wird, also nur mit dem eigenen Körpergewicht als Widerstand."));
-		 values.add(new ExerciseTag("Fitness Studio Übung", "Eine Übung, die bevorzugt im Fitness Studio ausgeführt werden sollte(z.B. wegen \"exotischen\" Geräten),"));
-		 values.add(new ExerciseTag("Heim Übung", "Eine Übung die auch gut zu Hause ausgeführt werden kann(z.B. weil man keine außergewöhnlichen Geräte braucht)."));
-		 values.add(new ExerciseTag("Einsteiger Übung", "Eine Übung die auch für Einsteiger geeignet ist."));
-		 values.add(new ExerciseTag("Fortgeschrittenen Übung", "Eine Übung die für Fortgeschrittene geeignet ist. Könnte zu schwierig oder kompliziert für Anfänger sein."));
-		 values.add(new ExerciseTag("Experten Übung", "Eine Übung die fÜr Experten geeignet ist. Sollte nur von erfahrenen Personen ausgefÜhrt werden"));
-		 values.add(new ExerciseTag("Isolierte Übung", "Eine Übung die primÜr eine einzelne Muskelgruppe anspricht"));
-		 values.add(new ExerciseTag("Komplexe Übung", "Eine Übung die mehrere Muskelgruppen anspricht"));
+		 values.add(new ExerciseTag("Eigengewicht ï¿½bung", "Eine ï¿½bung die ohne extra Gewicht ausgefï¿½hrt wird, also nur mit dem eigenen Kï¿½rpergewicht als Widerstand."));
+		 values.add(new ExerciseTag("Fitness Studio ï¿½bung", "Eine ï¿½bung, die bevorzugt im Fitness Studio ausgefï¿½hrt werden sollte(z.B. wegen \"exotischen\" Gerï¿½ten),"));
+		 values.add(new ExerciseTag("Heim ï¿½bung", "Eine ï¿½bung die auch gut zu Hause ausgefï¿½hrt werden kann(z.B. weil man keine auï¿½ergewï¿½hnlichen Gerï¿½te braucht)."));
+		 values.add(new ExerciseTag("Einsteiger ï¿½bung", "Eine ï¿½bung die auch fï¿½r Einsteiger geeignet ist."));
+		 values.add(new ExerciseTag("Fortgeschrittenen ï¿½bung", "Eine ï¿½bung die fï¿½r Fortgeschrittene geeignet ist. Kï¿½nnte zu schwierig oder kompliziert fï¿½r Anfï¿½nger sein."));
+		 values.add(new ExerciseTag("Experten ï¿½bung", "Eine ï¿½bung die fï¿½r Experten geeignet ist. Sollte nur von erfahrenen Personen ausgefï¿½hrt werden"));
+		 values.add(new ExerciseTag("Isolierte ï¿½bung", "Eine ï¿½bung die primï¿½r eine einzelne Muskelgruppe anspricht"));
+		 values.add(new ExerciseTag("Komplexe ï¿½bung", "Eine ï¿½bung die mehrere Muskelgruppen anspricht"));
 	}
 	/*
-	 * Bisheriger Quellcode mit enum Lösung:
+	 * Bisheriger Quellcode mit enum Lï¿½sung:
 	 * 
 	 * 
-	 * BODY_WEIGHT_EXERCISE("Eigengewicht Übung",
-	 * "Eine Übung die ohne extra Gewicht ausgeführt wird, also nur mit dem eigenen Körpergewicht als Widerstand."
+	 * BODY_WEIGHT_EXERCISE("Eigengewicht ï¿½bung",
+	 * "Eine ï¿½bung die ohne extra Gewicht ausgefï¿½hrt wird, also nur mit dem eigenen Kï¿½rpergewicht als Widerstand."
 	 * ),
 	 * 
-	 * STUDIO_EXERCISE("Fitness Studio Übung",
-	 * "Eine Übung, die bevorzugt im Fitness Studio ausgeführt werden sollte(z.B. wegen \"exotischen\" Geräten),"
-	 * ), HOME_EXERCISE("Heim Übung",
-	 * "Eine Übung die auch gut zu Hause ausgeführt werden kann(z.B. weil man keine außergewöhnlichen Geräte braucht)."
+	 * STUDIO_EXERCISE("Fitness Studio ï¿½bung",
+	 * "Eine ï¿½bung, die bevorzugt im Fitness Studio ausgefï¿½hrt werden sollte(z.B. wegen \"exotischen\" Gerï¿½ten),"
+	 * ), HOME_EXERCISE("Heim ï¿½bung",
+	 * "Eine ï¿½bung die auch gut zu Hause ausgefï¿½hrt werden kann(z.B. weil man keine auï¿½ergewï¿½hnlichen Gerï¿½te braucht)."
 	 * ),
 	 * 
-	 * DIFFICULTY_BEGINNER("Einsteiger Übung",
-	 * "Eine Übung die auch für Einsteiger geeignet ist."),
-	 * DIFFICULTY_ADVANCED("Fortgeschrittenen Übung",
-	 * "Eine Übung die für Fortgeschrittene geeignet ist. Könnte zu schwierig oder kompliziert für Anfänger sein."
-	 * ), DIFFICULTY_EXPERT("Experten Übung",
-	 * "Eine Übung die fÜr Experten geeignet ist. Sollte nur von erfahrenen Personen ausgefÜhrt werden"
+	 * DIFFICULTY_BEGINNER("Einsteiger ï¿½bung",
+	 * "Eine ï¿½bung die auch fï¿½r Einsteiger geeignet ist."),
+	 * DIFFICULTY_ADVANCED("Fortgeschrittenen ï¿½bung",
+	 * "Eine ï¿½bung die fï¿½r Fortgeschrittene geeignet ist. Kï¿½nnte zu schwierig oder kompliziert fï¿½r Anfï¿½nger sein."
+	 * ), DIFFICULTY_EXPERT("Experten ï¿½bung",
+	 * "Eine ï¿½bung die fï¿½r Experten geeignet ist. Sollte nur von erfahrenen Personen ausgefï¿½hrt werden"
 	 * ),
 	 * 
-	 * ISOLATED_EXERCISE("Isolierte Übung",
-	 * "Eine Übung die primÜr eine einzelne Muskelgruppe anspricht"),
-	 * COMPLEX_EXERCISE("Komplexe Übung",
-	 * "Eine Übung die mehrere Muskelgruppen anspricht");
+	 * ISOLATED_EXERCISE("Isolierte ï¿½bung",
+	 * "Eine ï¿½bung die primï¿½r eine einzelne Muskelgruppe anspricht"),
+	 * COMPLEX_EXERCISE("Komplexe ï¿½bung",
+	 * "Eine ï¿½bung die mehrere Muskelgruppen anspricht");
 	 */
 
 	private String name;
