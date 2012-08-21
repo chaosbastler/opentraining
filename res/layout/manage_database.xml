@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/wrapper_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_green" >
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_black"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:text="@string/database_managment_hint" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editText1"
+            android:layout_below="@+id/editText1"
+            android:text="@string/source"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_alignRight="@+id/editText1"
+            android:layout_below="@+id/textView1"
+            android:ems="10"
+            android:hint="Source for downloading exercises."
+            android:inputType="textUri"
+            android:text="http://skubware.de/osts/cc_exercises/list_files.php" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/editText2"
+            android:layout_alignLeft="@+id/editText2"
+            android:layout_alignRight="@+id/editText2"
+            android:layout_below="@+id/editText2" />
+
+        <Button
+            android:id="@+id/button_download"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText2"
+            android:background="@drawable/btn_black"
+            android:text="Download" />
+
+        <Button
+            android:id="@+id/Button01"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/editText2"
+            android:layout_below="@+id/editText2"
+            android:background="@drawable/btn_black"
+            android:text="Datenbank überprüfen" />
+
+        <EditText
+            android:id="@+id/edittext_information"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:inputType="textMultiLine" android:textIsSelectable="false">
+
+            <requestFocus />
+        </EditText>
+
+    </RelativeLayout>
+
+</RelativeLayout>

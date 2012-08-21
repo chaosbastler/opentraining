@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Open Training</string>
+    <string name="textcolor">@android:color/black</string>
+    <string name="button_textcolor">@android:color/white</string>
+    <string name="workout_name">Workoutname</string>
+    <string name="empty_rows">Empty columns:</string>
+    <string name="export">Export</string>
+    <string name="settings">Settings</string>
+    <string name="exercise_tags">Exercise tags:</string>
+    <string name="equipment">Equipment:</string>
+    <string name="activated_muscles">Activated muscles:</string>
+    <string name="exercise_name">Exercise name:</string>
+    <string name="image_currently_selected">Image of currently selected exercise</string>
+    <string name="hint">Hint</string>
+    <string name="logo_of_open_training">Logo of OpenTraining</string>
+    <string name="database_managment_hint">You can download here new exercises. Each time you download new files, old ones are removed. Files are saved to the folder OpenTraining.</string>
+    <string name="source">Source</string>
+    
+    
+    
+    <style name="ButtonText">
+    	<item name="android:layout_width">fill_parent</item>
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:textColor">#FFFFFF</item>
+    	<item name="android:gravity">center</item>
+    	<item name="android:layout_margin">3dp</item>
+    	<item name="android:textSize">22dp</item>
+    	<item name="android:textStyle">bold</item>
+    	<item name="android:shadowColor">#000000</item>
+    	<item name="android:shadowDx">1</item>
+    	<item name="android:shadowDy">1</item>
+    	<item name="android:shadowRadius">2</item>
+	</style>
+	
+    <style name="LargeTextView">
+    	<item name="android:layout_width">fill_parent</item>
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:textColor">#000000</item>
+    	<item name="android:gravity">center</item>
+    	<item name="android:layout_margin">3dp</item>
+    	<item name="android:textSize">22dp</item>
+    	<item name="android:textStyle">bold</item>
+	</style>
+	
+    
+
+</resources>
