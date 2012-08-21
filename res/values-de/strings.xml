@@ -17,7 +17,9 @@
     <string name="logo_of_open_training">Logo of OpenTraining</string>
     <string name="database_managment_hint">Hier können neue Übungen aus dem Internet heruntergeladen werden.  Eine Standardquelle ist vorkonfiguriert. Bei jedem Import werden alle bisher heruntergeladenen Dateien gelöscht. Die Speicherung erfolgt in dem Ordner OpenTraining.</string>
     <string name="source">Quelle</string>
-    
+    <string name="add_exercise">Übung hinzufügen</string>
+    <string name="download">Download</string>
+    <string name="check_database">Datenbank überprüfen</string>
     
     
     

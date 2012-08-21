@@ -48,7 +48,7 @@
             android:id="@+id/button1"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:text="Übung hinzufügen" />
+            android:text="@string/add_exercise" />
 
     </LinearLayout>
 

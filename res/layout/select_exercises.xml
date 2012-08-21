@@ -75,20 +75,15 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/wrapper_meta_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/exListView"
-        android:background="#111111" >
-
-        <LinearLayout
-            android:id="@+id/wrapper2_meta_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+        android:background="#111111"
+		android:orientation="vertical" >
 
             <LinearLayout
                 android:id="@+id/linearLayout25"
@@ -222,6 +217,5 @@
             </LinearLayout>
         </LinearLayout>
 
-    </RelativeLayout>
 
 </RelativeLayout>

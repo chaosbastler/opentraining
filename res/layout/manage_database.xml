@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:id="@+id/wrapper_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/btn_green" >
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/btn_green" >
 
         <EditText
             android:id="@+id/editText1"
@@ -31,7 +27,7 @@
             android:layout_below="@+id/editText1"
             android:text="@string/source"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
         <EditText
             android:id="@+id/editText2"
             android:layout_width="wrap_content"
@@ -40,9 +36,10 @@
             android:layout_alignRight="@+id/editText1"
             android:layout_below="@+id/textView1"
             android:ems="10"
-            android:hint="Source for downloading exercises."
+            android:hint="@string/source"
             android:inputType="textUri"
-            android:text="http://skubware.de/osts/cc_exercises/list_files.php" />
+            android:text="http://skubware.de/osts/cc_exercises/list_files.php"
+            tools:ignore="HardcodedText" />
 
         <ProgressBar
             android:id="@+id/progressbar"
@@ -62,7 +59,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/editText2"
             android:background="@drawable/btn_black"
-            android:text="Download" />
+            android:text="@string/download" />
 
         <Button
             android:id="@+id/Button01"
@@ -72,7 +69,7 @@
             android:layout_alignRight="@+id/editText2"
             android:layout_below="@+id/editText2"
             android:background="@drawable/btn_black"
-            android:text="Datenbank überprüfen" />
+            android:text="@string/check_database" />
 
         <EditText
             android:id="@+id/edittext_information"
@@ -87,6 +84,5 @@
             <requestFocus />
         </EditText>
 
-    </RelativeLayout>
 
 </RelativeLayout>

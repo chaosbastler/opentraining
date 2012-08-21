@@ -17,6 +17,10 @@
     <string name="logo_of_open_training">Logo of OpenTraining</string>
     <string name="database_managment_hint">You can download here new exercises. Each time you download new files, old ones are removed. Files are saved to the folder OpenTraining.</string>
     <string name="source">Source</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="download">Download</string>
+    <string name="check_database">Check database</string>
+    
     
     
     
