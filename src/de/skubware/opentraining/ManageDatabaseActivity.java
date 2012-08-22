@@ -72,6 +72,7 @@ public class ManageDatabaseActivity extends Activity {
 		button_download.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 
+				// when button was clicked -> start download in new thread
 				new Thread(new Runnable() {
 					public void run() {
 						current = 0;
@@ -173,16 +174,16 @@ public class ManageDatabaseActivity extends Activity {
 	 * For an example simply have a look at @value{EXERCISE_SOURCE}
 	 * 
 	 * @param destination The destination folder.
-	 * @param url_string The URL of the list of files.
+	 * @param urlString The URL of the list of files.
 	 * 
 	 * @return True if no problem did occur.
 	 */
-	public boolean download(File destination, String url_string) {
+	public boolean download(File destination, String urlString) {
 
 		try {
 			// set the download URL, a url that points to a file on the internet
 			// this is the file to be downloaded
-			URL url = new URL(url_string);
+			URL url = new URL(urlString);
 
 			// create the new connection
 			HttpURLConnection urlConnection = (HttpURLConnection) url
@@ -197,7 +198,7 @@ public class ManageDatabaseActivity extends Activity {
 
 			// create a new file, specifying the path, and the filename
 			// which we want to save the file as.
-			String[] split = url_string.split("/");
+			String[] split = urlString.split("/");
 			String fileName = split[split.length - 1];
 			System.out.println(fileName);
 
@@ -210,10 +211,11 @@ public class ManageDatabaseActivity extends Activity {
 			// this will be used in reading the data from the internet
 			InputStream inputStream = urlConnection.getInputStream();
 
+			
 			// this is the total size of the file
-			int totalSize = urlConnection.getContentLength();
+			// int totalSize = urlConnection.getContentLength();
 			// variable to store total downloaded bytes
-			int downloadedSize = 0;
+			// int downloadedSize = 0;
 
 			// create a buffer...
 			byte[] buffer = new byte[1024];
@@ -227,7 +229,7 @@ public class ManageDatabaseActivity extends Activity {
 				// stream (the file on the sd card
 				fileOutput.write(buffer, 0, bufferLength);
 				// add up the size so we know how much is downloaded
-				downloadedSize += bufferLength;
+				// downloadedSize += bufferLength;
 				// here a progressbar might be updated
 
 			}
