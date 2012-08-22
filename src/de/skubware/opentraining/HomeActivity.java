@@ -33,9 +33,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 
-
+/**
+ * This activity is the starting point for the user.
+ * The user can start creating a new plan or manage the database.
+ * 
+ * @author Christian Skubich
+ *
+ */
 public class HomeActivity extends Activity {
 	
+	/**
+	 * Configures the menu actions.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();
@@ -49,7 +58,7 @@ public class HomeActivity extends Activity {
 					startActivity(new Intent(HomeActivity.this, SelectExercisesActivity.class));
 				else{
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-	            	builder.setMessage("Es sind keine �bungen in der Datenbank vorhanden.");
+	            	builder.setMessage(getString(R.string.no_exercise_in_databbase));
 	            	AlertDialog alert = builder.create();
 	            	alert.show();
 				}
@@ -81,23 +90,24 @@ public class HomeActivity extends Activity {
 	
 	
 	
-    /** Called when the activity is first created. */
+    /** 
+     * Called when the activity is first created. 
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        
         // Load exercises
 		DataManager.INSTANCE.loadExercises(this);
-        
     }
     
     
+    
     /**
-     * Creates a dialog that informs the user, that this is not supported yet.
+     * Creates a dialog that informs the user, that this action is not supported yet.
      * 
-     * @return
+     * @return The generated dialog.
      */
     private OnMenuItemClickListener getNotSupportedYetOnMenuItemClickListener(){
     	
@@ -105,14 +115,14 @@ public class HomeActivity extends Activity {
 
 			public boolean onMenuItemClick(MenuItem item) {
             	AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-            	builder.setMessage("Diese Funktion ist noch nicht verf�gbar.")
+            	builder.setMessage(getString(R.string.action_not_supported))
             	       .setCancelable(true)
             	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
             	           public void onClick(DialogInterface dialog, int id) {
             	        	   dialog.cancel();
             	           }
             	       })
-            	       .setNegativeButton("Na toll ...", new DialogInterface.OnClickListener() {
+            	       .setNegativeButton("Ohhh :-(", new DialogInterface.OnClickListener() {
             	           public void onClick(DialogInterface dialog, int id) {
             	                dialog.cancel();
             	           }

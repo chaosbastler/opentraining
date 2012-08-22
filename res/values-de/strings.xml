@@ -22,6 +22,9 @@
     <string name="check_database">Datenbank überprüfen</string>
     <string name="continu">Weiter</string>
     <string name="help">Hilfe</string>
+    <string name="no_exercise_in_databbase">Es sind keine Übungen in der Datenbank vorhanden.</string>
+    <string name="action_not_supported">Diese Funktion ist noch nicht verfügbar.</string>
+    
     
     
     

@@ -29,6 +29,7 @@
         <activity android:name="de.skubware.opentraining.SelectExercisesActivity"></activity>
         <activity android:name="de.skubware.opentraining.ManageDatabaseActivity" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name="de.skubware.opentraining.ShowTPActivity"></activity>
+        <activity android:name="de.skubware.opentraining.EditWorkoutActivity" android:windowSoftInputMode="stateHidden"></activity>
     </application>
 
 </manifest>

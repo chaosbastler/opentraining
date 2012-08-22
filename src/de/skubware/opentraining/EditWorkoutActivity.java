@@ -44,7 +44,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//TODO: use hints and icon image
 
 public class EditWorkoutActivity extends Activity {
 	
