@@ -1,55 +1,0 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
-
-    <ListView
-        android:id="@+id/exListView"
-        android:layout_width="191dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:drawSelectorOnTop="true" >
-    </ListView>
-
-    <LinearLayout
-        android:id="@+id/threeRowWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/exListView"
-        android:orientation="horizontal" >
-
-        <WebView
-            android:id="@+id/webView1"
-            android:layout_width="match_parent"
-            android:layout_height="586dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/underControlWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/threeRowWrapper"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/threeRowWrapper"
-        android:background="#BDBDBD"
-        android:orientation="vertical" >
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:text="@string/add_exercise" />
-
-    </LinearLayout>
-
-</RelativeLayout>

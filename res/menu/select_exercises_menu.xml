@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_item_add_exercise"
-          android:title="Übung hinzufügen"
+          android:title="@string/add_exercise"
           android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/menu_item_next" android:title="Weiter" android:showAsAction="always|withText" />
     

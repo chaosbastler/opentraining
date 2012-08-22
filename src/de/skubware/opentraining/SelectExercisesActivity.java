@@ -81,8 +81,8 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 						SelectExercisesActivity.this.exerciseList
 								.add(ExerciseType.getByName(exName));
 
-						CharSequence text = "Die �bung " + exName
-								+ " wurde hinzugef�gt.";
+						CharSequence text = "Die Übung " + exName
+								+ " wurde hinzugefügt.";
 						int duration = Toast.LENGTH_LONG;
 						Toast toast = Toast.makeText(
 								SelectExercisesActivity.this, text, duration);
@@ -102,7 +102,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 							AlertDialog.Builder builder = new AlertDialog.Builder(
 									SelectExercisesActivity.this);
 							builder.setMessage(
-									"Es wurden noch keine �bungen ausgew�hlt.")
+									"Es wurden noch keine Übungen ausgewählt.")
 									.setPositiveButton(
 											"OK",
 											new DialogInterface.OnClickListener() {
