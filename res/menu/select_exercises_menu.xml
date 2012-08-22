@@ -3,7 +3,7 @@
     <item android:id="@+id/menu_item_add_exercise"
           android:title="@string/add_exercise"
           android:showAsAction="ifRoom|withText" />
-    <item android:id="@+id/menu_item_next" android:title="Weiter" android:showAsAction="always|withText" />
+    <item android:id="@+id/menu_item_next" android:title="@string/continu" android:showAsAction="always|withText" />
     
     
 </menu>

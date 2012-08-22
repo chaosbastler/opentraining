@@ -20,6 +20,8 @@
     <string name="add_exercise">Add exercise</string>
     <string name="download">Download</string>
     <string name="check_database">Check database</string>
+    <string name="continu">Continue</string><!-- continuE did not work -->
+    <string name="help">Help</string>
     
     
     

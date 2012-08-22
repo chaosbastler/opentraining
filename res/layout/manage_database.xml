@@ -17,7 +17,11 @@
             android:background="@drawable/btn_black"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:text="@string/database_managment_hint" />
+            android:text="@string/database_managment_hint" 
+            android:clickable="false" 
+        	android:cursorVisible="false" 
+        	android:focusable="false" 
+        	android:focusableInTouchMode="false"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -70,7 +74,7 @@
             android:layout_below="@+id/editText2"
             android:background="@drawable/btn_black"
             android:text="@string/check_database" />
-
+
         <EditText
             android:id="@+id/edittext_information"
             android:layout_width="wrap_content"
@@ -79,7 +83,12 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:ems="10"
-            android:inputType="textMultiLine" android:textIsSelectable="false">
+            android:inputType="none"
+            android:textIsSelectable="false" 
+            android:clickable="false" 
+        	android:cursorVisible="false" 
+        	android:focusable="false" 
+        	android:focusableInTouchMode="false">
 
             <requestFocus />
         </EditText>

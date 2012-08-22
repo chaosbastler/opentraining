@@ -34,8 +34,8 @@ public class ManageDatabaseActivity extends Activity {
     
         
         //TODO REMOVE BEFORE RELEASE!!!!!!!
-        ThreadPolicy tp = ThreadPolicy.LAX;
-        StrictMode.setThreadPolicy(tp);
+        //ThreadPolicy tp = ThreadPolicy..LAX;
+        //StrictMode.setThreadPolicy(tp);
         
         Button button_download = (Button) findViewById(R.id.button_download);
         button_download.setOnClickListener(new OnClickListener(){
