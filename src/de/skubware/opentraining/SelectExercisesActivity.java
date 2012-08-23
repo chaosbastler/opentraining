@@ -238,9 +238,14 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				android.R.layout.simple_list_item_1, exes);
 		exListView.setAdapter(listAdapter);
 		
-		String name = exListView.getAdapter().getItem(0).toString();
-		ExerciseType ex = ExerciseType.getByName(name);
-		showExercise(ex);
+		// consider that there is no exercise in the list
+		if(listAdapter.getCount()>0){
+			String name = exListView.getAdapter().getItem(0).toString();
+			ExerciseType ex = ExerciseType.getByName(name);
+			showExercise(ex);
+		}else{
+			showExercise(ExerciseType.NULL);
+		}	
 	}
 
 	private void showExercise(ExerciseType ex) {

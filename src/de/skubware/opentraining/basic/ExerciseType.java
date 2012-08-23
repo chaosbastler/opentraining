@@ -69,6 +69,8 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	private static final TreeSet<ExerciseType> exerciseTypes = new TreeSet<ExerciseType>(); // stores
 																							// all
 																							// instances
+	// Nullobject, see http://de.wikipedia.org/wiki/Nullobjekt_(Entwurfsmuster)
+	public static final ExerciseType NULL = new Builder("No exercise").build();
 
 	public static class Builder {
 		// Default values
