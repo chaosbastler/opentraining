@@ -52,6 +52,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Shows a list with all exercises. The user can add these exercises to the training plan.
+ * There is an illustration for each exercise(otherwise a dummy image is shown) and 
+ * more data, like required equipment, the muscles that are activated, ...
+ * The user also can set which exercises are shown(user can select muscles). 
+ * 
+ * @author Christian Skubich
+ *
+ */
 public class SelectExercisesActivity extends Activity implements OnGestureListener {
 
 	private List<ExerciseType> exerciseList = new ArrayList<ExerciseType>();
@@ -81,8 +90,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 						SelectExercisesActivity.this.exerciseList
 								.add(ExerciseType.getByName(exName));
 
-						CharSequence text = "Die Übung " + exName
-								+ " wurde hinzugefügt.";
+						CharSequence text = getString(R.string.exercise) + " " + exName + " " + getString(R.string.has_been_added);
 						int duration = Toast.LENGTH_LONG;
 						Toast toast = Toast.makeText(
 								SelectExercisesActivity.this, text, duration);

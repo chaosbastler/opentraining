@@ -27,10 +27,10 @@
     <string name="choose_design">Design wählen</string>
     <string name="no_internet_connection">Es ist kein Internetzugriff möglich. Der Plan kann nicht korrekt angezeigt werden.</string>
     <string name="date">Datum</string>
-    
-    
-    
-    
+    <string name="create_plan">Trainingsplan erstellen</string>
+    <string name="manage_db">Datenbank verwalten</string>
+    <string name="exercise">Übung </string>
+    <string name="has_been_added">wurde hinzugefügt</string>    
     
     <style name="ButtonText">
     	<item name="android:layout_width">fill_parent</item>

@@ -20,7 +20,7 @@
 
 package de.skubware.opentraining.basic;
 
-//TODO: make more dynamic
+//TODO: Find a way for I18N
 
 /**
  * An enumeration class for the different muscles of a men(or women).
@@ -35,9 +35,7 @@ public enum Muscle{
 
         // define the different muscles
         // new muscles must be added here
-        
-        // ...
-        
+                
         // chest
         BRUSTMUSKEL("Brustmuskel"), 
         

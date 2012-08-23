@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_button_select_exercises" android:showAsAction="always|withText" android:title="Trainingsplan erstellen"></item><item android:id="@+id/menu_button_manage_database" android:showAsAction="ifRoom|withText" android:title="Datenbank verwalten"></item><item android:id="@+id/menu_button_settings"
+    <item android:id="@+id/menu_button_select_exercises" android:showAsAction="always|withText" android:title="@string/create_plan"></item><item android:id="@+id/menu_button_manage_database" android:showAsAction="ifRoom|withText" android:title="@string/manage_db"></item><item android:id="@+id/menu_button_settings"
           android:title="@string/settings"
           android:showAsAction="ifRoom|withText" />
     <item android:id="@+id/menu_button_help"
