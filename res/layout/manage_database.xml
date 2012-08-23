@@ -64,9 +64,9 @@
             android:layout_below="@+id/editText2"
             android:background="@drawable/btn_black"
             android:text="@string/download" />
-
+
         <Button
-            android:id="@+id/Button01"
+            android:id="@+id/button_check_database"
             style="@style/ButtonText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -60,7 +60,7 @@ public class ShowTPActivity extends Activity {
 		// warn user if there is no internet connection
 		if(!isOnline()){
 		   	AlertDialog.Builder builder = new AlertDialog.Builder(ShowTPActivity.this);
-        	builder.setMessage(getString(R.string.no_internet_connection))
+        	builder.setMessage(getString(R.string.no_internet_connection_plan_not_shown))
         	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
         	           public void onClick(DialogInterface dialog, int id) {
         	        	   dialog.cancel();
@@ -104,6 +104,11 @@ public class ShowTPActivity extends Activity {
 
 	}	
 	
+	/**
+	 * Checks the network status.
+	 * 
+	 * @return True, if internet connection is available, false otherwise.
+	 */
 	public boolean isOnline(){
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
