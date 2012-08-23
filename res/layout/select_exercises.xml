@@ -16,7 +16,7 @@
 
     <RelativeLayout
         android:id="@+id/threeRowWrapper"
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/wrapper_meta_data"
@@ -74,16 +74,16 @@
 
         </RelativeLayout>
     </RelativeLayout>
-
+
     <LinearLayout
         android:id="@+id/wrapper_meta_data"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/exListView"
         android:background="#111111"
-		android:orientation="vertical" >
+        android:orientation="vertical" >
 
             <LinearLayout
                 android:id="@+id/linearLayout25"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_tag"
                     style="@style/LargeTextView"
@@ -124,7 +124,7 @@
                 android:gravity="center|left"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_equipment"
                     style="@style/LargeTextView"
@@ -157,11 +157,11 @@
                 android:gravity="center|left"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_muscle"
                     style="@style/LargeTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_orange"
                     android:text="@string/activated_muscles"
