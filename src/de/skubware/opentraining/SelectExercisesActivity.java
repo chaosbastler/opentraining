@@ -109,8 +109,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 						if (exerciseList.isEmpty()) {
 							AlertDialog.Builder builder = new AlertDialog.Builder(
 									SelectExercisesActivity.this);
-							builder.setMessage(
-									"Es wurden noch keine Übungen ausgewählt.")
+							builder.setMessage(getString(R.string.no_exercises_choosen))
 									.setPositiveButton(
 											"OK",
 											new DialogInterface.OnClickListener() {
@@ -158,7 +157,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				}
 			});
 		}
-		MenuItem menuitem_uncheck_all = menu.add("Alle abw�hlen");
+		MenuItem menuitem_uncheck_all = menu.add(getString(R.string.disselect_all));
 		menuitem_uncheck_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			public boolean onMenuItemClick(MenuItem menuitem){
 				for(MenuItem item:muscleItems){
@@ -169,7 +168,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				return true;
 			}
 		});
-		MenuItem menuitem_check_all = menu.add("Alle w�hlen");
+		MenuItem menuitem_check_all = menu.add(getString(R.string.select_all));
 		menuitem_check_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			public boolean onMenuItemClick(MenuItem menuitem){
 				for(MenuItem item:muscleItems){

@@ -31,7 +31,9 @@
     <string name="manage_db">Manage database</string>
     <string name="exercise">Exercise</string>
     <string name="has_been_added">has been added</string>
-        
+    <string name="no_exercises_choosen">You did not choose any exercises.</string>
+    <string name="disselect_all">Disselect all.</string>
+    <string name="select_all">Select all</string>
     
     
     

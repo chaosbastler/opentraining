@@ -30,7 +30,14 @@
     <string name="create_plan">Trainingsplan erstellen</string>
     <string name="manage_db">Datenbank verwalten</string>
     <string name="exercise">Übung </string>
-    <string name="has_been_added">wurde hinzugefügt</string>    
+    <string name="has_been_added">wurde hinzugefügt</string>
+    <string name="no_exercises_choosen">Es wurde keine Übung ausgewählt.</string>
+    <string name="disselect_all">Alle abwählen</string>
+    <string name="select_all">Alle wählen all</string>
+    
+    
+    
+    
     
     <style name="ButtonText">
     	<item name="android:layout_width">fill_parent</item>
