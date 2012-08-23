@@ -53,26 +53,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Shows a list with all exercises. The user can add these exercises to the training plan.
- * There is an illustration for each exercise(otherwise a dummy image is shown) and 
- * more data, like required equipment, the muscles that are activated, ...
- * The user also can set which exercises are shown(user can select muscles). 
+ * Shows a list with all exercises. The user can add these exercises to the
+ * training plan. There is an illustration for each exercise(otherwise a dummy
+ * image is shown) and more data, like required equipment, the muscles that are
+ * activated, ... The user also can set which exercises are shown(user can
+ * select muscles).
  * 
  * @author Christian Skubich
- *
+ * 
  */
 public class SelectExercisesActivity extends Activity implements OnGestureListener {
 
-	private List<ExerciseType> exerciseList = new ArrayList<ExerciseType>();
+	private List<FitnessExercise> exerciseList = new ArrayList<FitnessExercise>();
 	private Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
-	
+
 	private ExerciseType currentExercise = ExerciseType.listExerciseTypes().first();
 	private int currentImage = 0;
 
 	private GestureDetector gestureScanner = new GestureDetector(this);
-
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,66 +79,49 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 
 		// configure menu_item_add_exercise
 		MenuItem menu_item_add_exercise = (MenuItem) menu.findItem(R.id.menu_item_add_exercise);
-		menu_item_add_exercise
-				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-					public boolean onMenuItemClick(MenuItem item) {
-						//
-						if(currentExercise==null){
-							Toast.makeText(SelectExercisesActivity.this, getString(R.string.no_exercises_choosen), Toast.LENGTH_LONG).show();
-							return true;
-						}
-						
-						SelectExercisesActivity.this.exerciseList
-								.add(currentExercise);
+		menu_item_add_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				//
+				if (currentExercise == null) {
+					Toast.makeText(SelectExercisesActivity.this, getString(R.string.no_exercises_choosen), Toast.LENGTH_LONG).show();
+					return true;
+				}
 
-						CharSequence text = getString(R.string.exercise) + " " + currentExercise.getName() + " " + getString(R.string.has_been_added);
-						int duration = Toast.LENGTH_LONG;
-						Toast toast = Toast.makeText(
-								SelectExercisesActivity.this, text, duration);
-						toast.show();
+				SelectExercisesActivity.this.exerciseList.add(new FitnessExercise(currentExercise));
 
-						return true;
-					}
-				});
+				CharSequence text = getString(R.string.exercise) + " " + currentExercise.getName() + " " + getString(R.string.has_been_added);
+				int duration = Toast.LENGTH_LONG;
+				Toast toast = Toast.makeText(SelectExercisesActivity.this, text, duration);
+				toast.show();
+
+				return true;
+			}
+		});
 
 		// configure menu_item_next
-		final MenuItem menu_item_next = (MenuItem) menu
-				.findItem(R.id.menu_item_next);
-		menu_item_next
-				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-					public boolean onMenuItemClick(MenuItem item) {
-						if (exerciseList.isEmpty()) {
-							AlertDialog.Builder builder = new AlertDialog.Builder(
-									SelectExercisesActivity.this);
-							builder.setMessage(getString(R.string.no_exercises_choosen))
-									.setPositiveButton(
-											"OK",
-											new DialogInterface.OnClickListener() {
-												public void onClick(
-														DialogInterface dialog,
-														int id) {
-													dialog.cancel();
-												}
-											});
-							AlertDialog alert = builder.create();
-							alert.show();
-							return true;
-						} else {
-							List<FitnessExercise> fEx = new ArrayList<FitnessExercise>();
-							for (ExerciseType ex : exerciseList) {
-								fEx.add(new FitnessExercise(ex));
-							}
-							DataManager.INSTANCE.setWorkout(
-									new Workout("Mein Trainingsplan", fEx));
-							startActivity(new Intent(
-									SelectExercisesActivity.this,
-									EditWorkoutActivity.class));
+		final MenuItem menu_item_next = (MenuItem) menu.findItem(R.id.menu_item_next);
+		menu_item_next.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				if (exerciseList.isEmpty()) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(SelectExercisesActivity.this);
+					builder.setMessage(getString(R.string.no_exercises_choosen)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
 						}
+					});
+					AlertDialog alert = builder.create();
+					alert.show();
+					return true;
+				} else {
 
-						return true;
-					}
+					DataManager.INSTANCE.setWorkout(new Workout("Mein Trainingsplan", exerciseList));
+					startActivity(new Intent(SelectExercisesActivity.this, EditWorkoutActivity.class));
+				}
 
-				});
+				return true;
+			}
+
+		});
 
 		// configure muscle drop down menu
 		final List<MenuItem> muscleItems = new ArrayList<MenuItem>();
@@ -152,8 +133,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				public boolean onMenuItemClick(MenuItem item) {
 					item.setChecked(!item.isChecked());
-					muscleMap.put(Muscle.getByName(item.getTitle().toString()),
-							item.isChecked());
+					muscleMap.put(Muscle.getByName(item.getTitle().toString()), item.isChecked());
 					updateExList();
 
 					return true;
@@ -161,22 +141,22 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 			});
 		}
 		MenuItem menuitem_uncheck_all = menu.add(getString(R.string.unselect_all));
-		menuitem_uncheck_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
-			public boolean onMenuItemClick(MenuItem menuitem){
-				for(MenuItem item:muscleItems){
+		menuitem_uncheck_all.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem menuitem) {
+				for (MenuItem item : muscleItems) {
 					item.setChecked(false);
-					muscleMap.put(Muscle.getByName(item.getTitle().toString()),item.isChecked());
+					muscleMap.put(Muscle.getByName(item.getTitle().toString()), item.isChecked());
 					updateExList();
 				}
 				return true;
 			}
 		});
 		MenuItem menuitem_check_all = menu.add(getString(R.string.select_all));
-		menuitem_check_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
-			public boolean onMenuItemClick(MenuItem menuitem){
-				for(MenuItem item:muscleItems){
+		menuitem_check_all.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem menuitem) {
+				for (MenuItem item : muscleItems) {
 					item.setChecked(true);
-					muscleMap.put(Muscle.getByName(item.getTitle().toString()),item.isChecked());
+					muscleMap.put(Muscle.getByName(item.getTitle().toString()), item.isChecked());
 					updateExList();
 				}
 				return true;
@@ -195,7 +175,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		for (Muscle m : Muscle.values()) {
 			muscleMap.put(m, true);
 		}
-		
+
 		setContentView(R.layout.select_exercises);
 
 		final ListView exListView = (ListView) findViewById(R.id.exListView);
@@ -218,6 +198,17 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 
 		});
 
+	}
+	
+	@Override
+	public void onRestart(){
+		super.onRestart();
+		// update exercise list, because the old, saved state my not be up-to-date
+		//Workout w = DataManager.INSTANCE.getCurrentWorkout();
+		//if(w!=null)
+			this.exerciseList = DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises();
+		//else
+			//this.exerciseList = new ArrayList<FitnessExercise>();
 
 	}
 
@@ -237,32 +228,32 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				exes.add(exType.getName());
 		}
 
-		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, exes);
+		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, exes);
 		exListView.setAdapter(listAdapter);
-		
+
 		// consider that there is no exercise in the list
-		if(listAdapter.getCount()>0){
+		if (listAdapter.getCount() > 0) {
 			String name = exListView.getAdapter().getItem(0).toString();
 			ExerciseType ex = ExerciseType.getByName(name);
 			showExercise(ex);
-		}else{
+		} else {
 			showExercise(null);
-		}	
+		}
 	}
 
 	/**
-	 * Sh
+	 * Shows the currently exercise. That means that the different TextViews and
+	 * the image are updated.
+	 * 
 	 * @param ex
 	 */
 	private void showExercise(ExerciseType ex) {
 		this.currentExercise = ex;
-		
-		if(ex==null){
+
+		if (ex == null) {
 			ex = new ExerciseType.Builder(getString(R.string.no_exercise_choosen)).build();
 		}
-		
-		
+
 		// Description
 		// EditText description = (EditText)
 		// findViewById(R.id.edittext_description);
@@ -278,13 +269,13 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		{
 			Collection<Muscle> muscles = ex.getActivatedMuscles();
 			Iterator<Muscle> it = muscles.iterator();
-			
+
 			TextView textview_muscle = (TextView) findViewById(R.id.textview_muscle);
-			if(muscles.isEmpty())
+			if (muscles.isEmpty())
 				textview_muscle.setVisibility(View.GONE);
 			else
 				textview_muscle.setVisibility(View.VISIBLE);
-				
+
 			TextView textview_muscle0 = (TextView) findViewById(R.id.textview_muscle0);
 			TextView textview_muscle1 = (TextView) findViewById(R.id.textview_muscle1);
 
@@ -296,21 +287,20 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				textview_muscle1.setText("");
 			else
 				textview_muscle1.setText(it.next().toString());
-			
 
 		}
 
 		// Equipment
-		{	
+		{
 			Collection<SportsEquipment> eq = ex.getRequiredEquipment();
 			Iterator<SportsEquipment> it = eq.iterator();
-			
+
 			TextView textview_equipment = (TextView) findViewById(R.id.textview_equipment);
-			if(eq.isEmpty())
+			if (eq.isEmpty())
 				textview_equipment.setVisibility(View.GONE);
 			else
 				textview_equipment.setVisibility(View.VISIBLE);
-			
+
 			TextView textview_equipment0 = (TextView) findViewById(R.id.textview_equipment0);
 			TextView textview_equipment1 = (TextView) findViewById(R.id.textview_equipment1);
 
@@ -328,13 +318,13 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		{
 			Collection<ExerciseTag> tags = ex.getTags();
 			Iterator<ExerciseTag> it = tags.iterator();
-			
+
 			TextView textview_tag = (TextView) findViewById(R.id.textview_tag);
-			if(tags.isEmpty())
+			if (tags.isEmpty())
 				textview_tag.setVisibility(View.GONE);
 			else
 				textview_tag.setVisibility(View.VISIBLE);
-			
+
 			TextView textview_tag0 = (TextView) findViewById(R.id.textview_tag0);
 			TextView textview_tag1 = (TextView) findViewById(R.id.textview_tag1);
 
@@ -347,18 +337,18 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 			else
 				textview_tag1.setText(it.next().toString());
 		}
-		
+
 		// Hints
 		{
 			Collection<String> hints = ex.getHints();
 			Iterator<String> it = hints.iterator();
-			
+
 			TextView textview_hint = (TextView) findViewById(R.id.textview_hint);
-			if(hints.isEmpty())
+			if (hints.isEmpty())
 				textview_hint.setVisibility(View.GONE);
 			else
 				textview_hint.setVisibility(View.VISIBLE);
-			
+
 			TextView textview_hint0 = (TextView) findViewById(R.id.textview_hint0);
 			TextView textview_hint1 = (TextView) findViewById(R.id.textview_hint1);
 
@@ -375,8 +365,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		// Image License
 		TextView image_license = (TextView) findViewById(R.id.textview_image_license);
 		if (ex.getImageLicenseMap().values().iterator().hasNext()) {
-			image_license.setText(ex.getImageLicenseMap().values().iterator()
-					.next());
+			image_license.setText(ex.getImageLicenseMap().values().iterator().next());
 		} else {
 			image_license.setText("Keine Lizenzinformationen vorhanden");
 		}
@@ -384,14 +373,13 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		// Images
 		// TODO remove dummy code
 		ImageView imageview = (ImageView) findViewById(R.id.imageview);
-		if(!ex.getImagePaths().isEmpty()){
+		if (!ex.getImagePaths().isEmpty()) {
 			imageview.setImageDrawable(DataManager.INSTANCE.getDrawable(ex.getImagePaths().get(0).toString()));
-		}else{
+		} else {
 			imageview.setImageResource(R.drawable.defaultimage);
 		}
-		
-		
-		if(ex.getName().equals(getString(R.string.no_exercise_choosen)))
+
+		if (ex.getName().equals(getString(R.string.no_exercise_choosen)))
 			ExerciseType.removeExerciseType(ex);
 
 	}
@@ -406,11 +394,9 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		return false;
 	}
 
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-		final ViewConfiguration vc = ViewConfiguration
-				.get(SelectExercisesActivity.this);
+		final ViewConfiguration vc = ViewConfiguration.get(SelectExercisesActivity.this);
 		final int swipeMinDistance = vc.getScaledTouchSlop();
 		final int swipeMaxDistance = vc.getScaledMaximumFlingVelocity();
 		final int swipeThresholdVelocity = vc.getScaledMinimumFlingVelocity();
@@ -419,34 +405,34 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 			if (Math.abs(e1.getY() - e2.getY()) > swipeMaxDistance)
 				return false;
 			// right to left swipe
-			if (e1.getX() - e2.getX() > swipeMinDistance
-					&& Math.abs(velocityX) > swipeThresholdVelocity) {
-				//Toast.makeText(SelectExercisesActivity.this, "Left Swipe",	Toast.LENGTH_SHORT).show();
+			if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+				// Toast.makeText(SelectExercisesActivity.this, "Left Swipe",
+				// Toast.LENGTH_SHORT).show();
 				ImageView imageview = (ImageView) findViewById(R.id.imageview);
-				
-				currentImage --;
-				if(currentImage<0)
-					currentImage = currentExercise.getImagePaths().size()-1;
-				//TODO find a better solution than exception
-				try{
+
+				currentImage--;
+				if (currentImage < 0)
+					currentImage = currentExercise.getImagePaths().size() - 1;
+				// TODO find a better solution than exception
+				try {
 					imageview.setImageDrawable(DataManager.INSTANCE.getDrawable(currentExercise.getImagePaths().get(currentImage).toString()));
-				}catch(IndexOutOfBoundsException ex){
-					
+				} catch (IndexOutOfBoundsException ex) {
+
 				}
-				
-			} else if (e2.getX() - e1.getX() > swipeMinDistance
-					&& Math.abs(velocityX) > swipeThresholdVelocity) {
-				//Toast.makeText(SelectExercisesActivity.this, "Right Swipe",			Toast.LENGTH_SHORT).show();
+
+			} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+				// Toast.makeText(SelectExercisesActivity.this, "Right Swipe",
+				// Toast.LENGTH_SHORT).show();
 				ImageView imageview = (ImageView) findViewById(R.id.imageview);
-				
-				currentImage ++;
-				if(currentImage>=currentExercise.getImagePaths().size())
+
+				currentImage++;
+				if (currentImage >= currentExercise.getImagePaths().size())
 					currentImage = 0;
-				//TODO find a better solution than exception
-				try{
+				// TODO find a better solution than exception
+				try {
 					imageview.setImageDrawable(DataManager.INSTANCE.getDrawable(currentExercise.getImagePaths().get(currentImage).toString()));
-				}catch(IndexOutOfBoundsException ex){
-					
+				} catch (IndexOutOfBoundsException ex) {
+
 				}
 			}
 		} catch (Exception e) {
@@ -459,8 +445,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 	public void onLongPress(MotionEvent e) {
 	}
 
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-			float distanceY) {
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 		// TODO Auto-generated method stub
 		return false;
 	}
