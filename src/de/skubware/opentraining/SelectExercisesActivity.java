@@ -139,7 +139,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 
 				});
 
-		// confiugre muscle drop down menu
+		// configure muscle drop down menu
 		final List<MenuItem> muscleItems = new ArrayList<MenuItem>();
 		for (Muscle m : Muscle.values()) {
 			MenuItem item = menu.add(m.toString());
@@ -157,7 +157,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				}
 			});
 		}
-		MenuItem menuitem_uncheck_all = menu.add(getString(R.string.disselect_all));
+		MenuItem menuitem_uncheck_all = menu.add(getString(R.string.unselect_all));
 		menuitem_uncheck_all.setOnMenuItemClickListener(new OnMenuItemClickListener(){
 			public boolean onMenuItemClick(MenuItem menuitem){
 				for(MenuItem item:muscleItems){
