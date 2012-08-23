@@ -39,7 +39,12 @@
     <string name="not_valid_exercises">not valid exercise(s)</string>
     <string name="images">images</string>
     <string name="no_exercise_choosen">No exercise choosen</string>
-    
+    <string name="really_delete">Really delete?</string>
+    <string name="exercise_was_removed">Exercise was removed</string>
+    <string name="exerciser_wont_be_removed">Exercise was not removed</string>
+    <string name="need_more_than_1">You need at least 1 exercise</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
         
     
     

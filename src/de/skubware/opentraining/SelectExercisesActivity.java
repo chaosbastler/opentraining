@@ -200,15 +200,16 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 
 	}
 	
+	
 	@Override
 	public void onRestart(){
 		super.onRestart();
 		// update exercise list, because the old, saved state my not be up-to-date
-		//Workout w = DataManager.INSTANCE.getCurrentWorkout();
-		//if(w!=null)
-			this.exerciseList = DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises();
-		//else
-			//this.exerciseList = new ArrayList<FitnessExercise>();
+		Workout w = DataManager.INSTANCE.getCurrentWorkout();
+		if(w!=null)
+			this.exerciseList = w.getFitnessExercises();
+		else
+			this.exerciseList = new ArrayList<FitnessExercise>();
 
 	}
 

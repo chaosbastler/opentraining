@@ -32,8 +32,6 @@ import de.skubware.training_app.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -280,12 +278,12 @@ public class EditWorkoutActivity extends Activity {
 
 		public boolean onLongClick(View arg0) {
 			if (DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
-				Toast.makeText(getApplicationContext(), "You need >= 1 exercise.", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), getString(R.string.need_more_than_1), Toast.LENGTH_LONG).show();
 				return true;
 			}
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
-			builder.setMessage("Really delete?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			builder.setMessage(getString(R.string.really_delete)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					int column = columnNumberMap.get(tw);
 					DataManager.INSTANCE.getCurrentWorkout().removeFitnessExercise(DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column-1));
@@ -301,10 +299,12 @@ public class EditWorkoutActivity extends Activity {
 							columnNumberMap.put(tw, c - 1);
 					}
 					updateTable();
+					Toast.makeText(getApplicationContext(), getString(R.string.exercise_was_removed), Toast.LENGTH_LONG).show();
+
 				}
-			}).setNegativeButton("No", new DialogInterface.OnClickListener() {
+			}).setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
-					Toast.makeText(getApplicationContext(), "Exercise will not be removed", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.exerciser_wont_be_removed), Toast.LENGTH_LONG).show();
 				}
 			});
 			AlertDialog alert = builder.create();

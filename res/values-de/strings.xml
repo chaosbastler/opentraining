@@ -39,10 +39,12 @@
     <string name="not_valid_exercises">ungültige Übung(en)</string>
     <string name="images">Bilder</string>
     <string name="no_exercise_choosen">Keine Übung ausgewählt</string>
-    
-    
-    
-    
+    <string name="really_delete">Wirklich löschen?</string>
+    <string name="exercise_was_removed">Übung wurde entfernt</string>
+    <string name="exerciser_wont_be_removed">Es wurde keine Übung entfernt</string>    
+    <string name="need_more_than_1">Es wird mindestens eine Übung benötigt</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
     
     
     
