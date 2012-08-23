@@ -122,9 +122,23 @@ public class ManageDatabaseActivity extends Activity {
 
 	}
 	
+	/**
+	 * 
+	 */
 	private void checkDatabase(){
 		DataManager.INSTANCE.loadExercises(this);
-		appendMsg(ExerciseType.listExerciseTypes().size() + " exercises");
+		int exCnt = ExerciseType.listExerciseTypes().size();
+		appendMsg( exCnt + " " + getString(R.string.valid_exercises));
+		
+		int totalEx = DataManager.getExerciseXMLFolder().listFiles().length;
+		appendMsg( totalEx-exCnt + " " + getString(R.string.not_valid_exercises));
+
+		
+		int imgCnt = 0;
+		for(ExerciseType ex:ExerciseType.listExerciseTypes()){
+			imgCnt += ex.getImagePaths().size();
+		}
+		appendMsg(imgCnt + " " + getString(R.string.images));
 
 	}
 	

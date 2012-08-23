@@ -35,7 +35,9 @@
     <string name="no_exercises_choosen">You did not choose any exercises.</string>
     <string name="unselect_all">Unselect all.</string>
     <string name="select_all">Select all</string>
-    
+    <string name="valid_exercises">valid exercise(s)</string>
+    <string name="not_valid_exercises">not valid exercise(s)</string>
+    <string name="images">images</string>
     
     
     

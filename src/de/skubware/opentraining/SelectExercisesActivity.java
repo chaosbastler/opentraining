@@ -244,12 +244,18 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 			ExerciseType ex = ExerciseType.getByName(name);
 			showExercise(ex);
 		}else{
-			showExercise(ExerciseType.NULL);
+			showExercise(null);
 		}	
 	}
 
 	private void showExercise(ExerciseType ex) {
 		this.currentExercise = ex;
+		
+		if(ex==null){
+			return;
+		}
+		
+		
 		// Description
 		// EditText description = (EditText)
 		// findViewById(R.id.edittext_description);

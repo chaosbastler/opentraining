@@ -35,6 +35,10 @@
     <string name="no_exercises_choosen">Es wurde keine Übung ausgewählt.</string>
     <string name="unselect_all">Alle abwählen</string>
     <string name="select_all">Alle wählen</string>
+    <string name="valid_exercises">gültige Übung(en)</string>
+    <string name="not_valid_exercises">ungültige Übung(en)</string>
+    
+    <string name="images">Bilder</string>
     
     
     
