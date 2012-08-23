@@ -25,7 +25,8 @@
     <string name="no_exercise_in_databbase">Es sind keine Übungen in der Datenbank vorhanden.</string>
     <string name="action_not_supported">Diese Funktion ist noch nicht verfügbar.</string>
     <string name="choose_design">Design wählen</string>
-    <string name="no_internet_connection">Es ist kein Internetzugriff möglich. Der Plan kann nicht korrekt angezeigt werden.</string>
+    <string name="no_internet_connection">Es ist kein Internetzugriff möglich.</string>
+    <string name="no_internet_connection_plan_not_shown">Es ist kein Internetzugriff möglich. Der Plan kann nicht korrekt angezeigt werden.</string>
     <string name="date">Datum</string>
     <string name="create_plan">Trainingsplan erstellen</string>
     <string name="manage_db">Datenbank verwalten</string>

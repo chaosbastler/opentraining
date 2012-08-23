@@ -32,9 +32,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.datamanagement.DataManager;
 import de.skubware.training_app.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -71,6 +77,19 @@ public class ManageDatabaseActivity extends Activity {
 		Button button_download = (Button) findViewById(R.id.button_download);
 		button_download.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				// warn user if there is no internet connection
+				if(!isOnline()){
+				   	AlertDialog.Builder builder = new AlertDialog.Builder(ManageDatabaseActivity.this);
+		        	builder.setMessage(getString(R.string.no_internet_connection))
+		        	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		        	           public void onClick(DialogInterface dialog, int id) {
+		        	        	   dialog.cancel();
+		        	           }
+		        	       });
+		        	AlertDialog alert = builder.create();
+		        	alert.show();
+		        	return;
+				}
 
 				// when button was clicked -> start download in new thread
 				new Thread(new Runnable() {
@@ -89,7 +108,40 @@ public class ManageDatabaseActivity extends Activity {
 			}
 
 		});
+		
+		
+		
+		
+		
+		Button button_check_database = (Button) findViewById(R.id.button_check_database);
+		button_check_database.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				checkDatabase();
+			}
+		});
 
+	}
+	
+	private void checkDatabase(){
+		DataManager.INSTANCE.loadExercises(this);
+		appendMsg(ExerciseType.listExerciseTypes().size() + " exercises");
+
+	}
+	
+	/**
+	 * Checks the network status.
+	 * Note: duplicate code, see ShowTPActivity.java
+	 * 
+	 * @return True, if internet connection is available, false otherwise.
+	 */
+	public boolean isOnline(){
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()){
+			return true;
+		}
+		
+		return false;
 	}
 
 	/**
@@ -242,10 +294,8 @@ public class ManageDatabaseActivity extends Activity {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					String msg = "Download " + current + " of " + total
-							+ " finished\n";
-					EditText edittext_information = (EditText) findViewById(R.id.edittext_information);
-					edittext_information.append(msg);
-
+							+ " finished";
+					appendMsg(msg);
 				}
 			});
 
@@ -259,6 +309,11 @@ public class ManageDatabaseActivity extends Activity {
 		}
 
 		return true;
+	}
+	
+	private void appendMsg(String msg){
+		EditText edittext_information = (EditText) findViewById(R.id.edittext_information);
+		edittext_information.append(msg + "\n");
 	}
 
 }
