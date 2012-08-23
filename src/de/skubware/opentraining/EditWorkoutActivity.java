@@ -44,22 +44,42 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * This activity shows the plan(table) with the selected exercises.
+ * The user can select the columnwidth, the number of empty rows,
+ * change the name of the plan and finally export it.
+ * 
+ * 
+ * @author Christian Skubich
+ *
+ */
 public class EditWorkoutActivity extends Activity {
+	/**
+	 * This 'Map' saves the width for each column.
+	 * SparseIntArray is a replacement of HashMap<Integer,Integer> (->performance) 
+	 */
+	private SparseIntArray columnWidthMap = new SparseIntArray();
 	
-	private SparseIntArray columnWidthMap = new SparseIntArray();// instead of HashMap<Integer,Integer>
-	
+	/** number of columns, cannot be changed */
 	private int columnCount;
+	/** number of rows, can be changed, must be positive*/
 	private int emptyRowCount;
 
+	// some attributes for the style/design of the table
 	private final static int COLUMN_PADDING = 5;
 	private final static int ROW_PADDING = 5;
 	private final static int ROW_HEIGHT = 80;
 
-	
-	public EditWorkoutActivity(){
-		super();
-
+	/**
+	 * Initializes the variables, updates the UI,
+	 * sets the action for export button. 
+	 * 
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		
+		//init variables
 		this.emptyRowCount = 6;
 		
 		this.columnCount =  DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() + 1;
@@ -67,11 +87,8 @@ public class EditWorkoutActivity extends Activity {
 		for(int i = 1; i<columnCount; i++){
 			columnWidthMap.put(i, 180);
 		}
-	}
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
+		
+		
         setContentView(R.layout.edit_workout);
         
         // workout name
@@ -104,7 +121,7 @@ public class EditWorkoutActivity extends Activity {
 				final CharSequence[] items = {"Default", "Boring", "Modern", "Ninja"};
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
-				builder.setTitle("Design w�hlen");
+				builder.setTitle(getString(R.string.choose_design));
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 				    public void onClick(DialogInterface dialog, int item) {
 				    	String css;

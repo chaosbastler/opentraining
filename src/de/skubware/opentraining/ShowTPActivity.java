@@ -28,6 +28,11 @@ import de.skubware.opentraining.exporter.WorkoutExporter;
 
 import de.skubware.training_app.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,6 +50,20 @@ public class ShowTPActivity extends Activity {
 
 		setContentView(R.layout.show_tp);
 		WebView webview = (WebView) findViewById(R.id.tpWebView);
+		
+		// warn user if there is no internet connection
+		if(!isOnline()){
+		   	AlertDialog.Builder builder = new AlertDialog.Builder(ShowTPActivity.this);
+        	builder.setMessage(getString(R.string.no_internet_connection))
+        	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        	           public void onClick(DialogInterface dialog, int id) {
+        	        	   dialog.cancel();
+        	           }
+        	       });
+        	AlertDialog alert = builder.create();
+        	alert.show();
+		}
+		
 		
 		webview.getSettings().setBuiltInZoomControls(true);
 		
@@ -78,6 +97,16 @@ public class ShowTPActivity extends Activity {
 		
 
 	}	
+	
+	public boolean isOnline(){
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()){
+			return true;
+		}
+		
+		return false;
+	}
 	
 
 
