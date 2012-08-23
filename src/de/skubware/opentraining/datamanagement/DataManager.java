@@ -150,9 +150,20 @@ public enum DataManager {
 		return data;
 	}
 	
+	/**
+	 * Removes all ExerciseTypes and reads them again.
+	 * 
+	 * @param context
+	 */
 	public void loadExercises(Context context){
 		
 		try{
+			// next line is necessary to avaid current modification exception while iterating
+			Set<ExerciseType> l = new HashSet<ExerciseType>(ExerciseType.listExerciseTypes());
+			for(ExerciseType exType:l){
+				ExerciseType.removeExerciseType(exType);
+			}
+			
 		
 			String[] files = DataManager.getExerciseXMLFolder().list();
 		
