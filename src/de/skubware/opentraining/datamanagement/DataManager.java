@@ -158,7 +158,7 @@ public enum DataManager {
 	public void loadExercises(Context context){
 		
 		try{
-			// next line is necessary to avaid current modification exception while iterating
+			// next line is necessary to avoid current modification exception while iterating
 			Set<ExerciseType> l = new HashSet<ExerciseType>(ExerciseType.listExerciseTypes());
 			for(ExerciseType exType:l){
 				ExerciseType.removeExerciseType(exType);
