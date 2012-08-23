@@ -259,7 +259,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		this.currentExercise = ex;
 		
 		if(ex==null){
-			return;
+			ex = new ExerciseType.Builder(getString(R.string.no_exercise_choosen)).build();
 		}
 		
 		
@@ -389,6 +389,10 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		}else{
 			imageview.setImageResource(R.drawable.defaultimage);
 		}
+		
+		
+		if(ex.getName().equals(getString(R.string.no_exercise_choosen)))
+			ExerciseType.removeExerciseType(ex);
 
 	}
 
