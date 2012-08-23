@@ -1,7 +1,8 @@
 Open Training
 =============
 
-Open Training is an Android App for planing your fitness training.
+Open Training is an Android app for planning your fitness training.
+
 More information:
 http://skubware.de/opentraining/
 
@@ -11,4 +12,13 @@ Java
 
 License
 -------
-GPL
+GPL 3 (some files may be CC licensed)
+
+
+Translations
+------------
+English, German
+
+Available in Play Store?
+------------------------
+Not yet.
