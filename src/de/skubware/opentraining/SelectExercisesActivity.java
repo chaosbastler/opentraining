@@ -84,13 +84,16 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		menu_item_add_exercise
 				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 					public boolean onMenuItemClick(MenuItem item) {
-						// Exercise Name
-						TextView btn_ex_name = (TextView) findViewById(R.id.textview_exercise_name);
-						String exName = btn_ex_name.getText().toString();
+						//
+						if(currentExercise==null){
+							Toast.makeText(SelectExercisesActivity.this, getString(R.string.no_exercises_choosen), Toast.LENGTH_LONG).show();
+							return true;
+						}
+						
 						SelectExercisesActivity.this.exerciseList
-								.add(ExerciseType.getByName(exName));
+								.add(currentExercise);
 
-						CharSequence text = getString(R.string.exercise) + " " + exName + " " + getString(R.string.has_been_added);
+						CharSequence text = getString(R.string.exercise) + " " + currentExercise.getName() + " " + getString(R.string.has_been_added);
 						int duration = Toast.LENGTH_LONG;
 						Toast toast = Toast.makeText(
 								SelectExercisesActivity.this, text, duration);
@@ -248,6 +251,10 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		}	
 	}
 
+	/**
+	 * Sh
+	 * @param ex
+	 */
 	private void showExercise(ExerciseType ex) {
 		this.currentExercise = ex;
 		
