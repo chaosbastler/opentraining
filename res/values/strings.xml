@@ -26,6 +26,7 @@
     <string name="action_not_supported">This action is not supported yet.</string>
     <string name="choose_design">Choose the design</string>
     <string name="no_internet_connection">No internet connection available. The plan cannot be shown correctly.</string>
+    <string name="date">Date</string>
     
     
     

@@ -40,7 +40,13 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.webkit.WebView;
 
-
+/**
+ * Shows the generated training plan.
+ * To load the .css file (styling information) an internet connection is required.
+ * 
+ * @author Christian Skubich
+ *
+ */
 public class ShowTPActivity extends Activity {
 	
 	/** Called when the activity is first created. */

@@ -139,7 +139,7 @@ public class EditWorkoutActivity extends Activity {
 				    			css = "trainingplan_ninja.css";
 				    			break;
 				    		default:
-				    			throw new IllegalStateException("This action is not supported.");
+				    			throw new IllegalStateException(getString(R.string.action_not_supported));
 				    	}
 				    	DataManager.INSTANCE.setCSSFile(css);
 						startActivity(new Intent(EditWorkoutActivity.this, ShowTPActivity.class));						 
@@ -157,11 +157,13 @@ public class EditWorkoutActivity extends Activity {
         
 	}
 	
+	/** Increases the number of rows. */
 	private void addRow(){
 		this.emptyRowCount ++;
 		this.updateTable();
 	}
 	
+	/** Decreases the number of rows (if >1). */
 	private void removeRow(){
 		if(this.emptyRowCount>1)
 			this.emptyRowCount--;
@@ -169,8 +171,8 @@ public class EditWorkoutActivity extends Activity {
 	}
 	
 	/**
-	 * Updates the workout table
-	 * @param workout2
+	 * Updates the workout table.
+	 * 
 	 */
 	private void updateTable() {
         // workout name
@@ -190,10 +192,11 @@ public class EditWorkoutActivity extends Activity {
         this.buildEmptyRows();		
 	}
 
+	
+	
+	
 	public TextView getStyledTextView(String text){
-		
-	    
-        /*<style name="LargeTextView">
+		/*<style name="LargeTextView">
     	<item name="android:layout_width">fill_parent</item>
     	<item name="android:layout_height">wrap_content</item>
     	<item name="android:textColor">#000000</item>
@@ -210,9 +213,6 @@ public class EditWorkoutActivity extends Activity {
         tw.setPadding(15, 15, 15, 15);
         tw.setHeight(ROW_HEIGHT);
         tw.setGravity(Gravity.CENTER_HORIZONTAL);
-        
-
-
         
         Drawable border = (Drawable) getResources().getDrawable(R.drawable.border);
         tw.setBackgroundDrawable(border);
@@ -238,11 +238,11 @@ public class EditWorkoutActivity extends Activity {
 
 		
 		// Date
-		TextView date = this.getStyledTextView("Datum");
+		TextView date = this.getStyledTextView(getString(R.string.date));
         date.setWidth(this.columnWidthMap.get(0));
         firstrow.addView(date);
         
-        // for space between colums empty tw
+        // for space between columns empty tw
     	this.addColumPadding(firstrow, COLUMN_PADDING);
         
         int i = 1;
