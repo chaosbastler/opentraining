@@ -36,21 +36,50 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Toast;
 import android.webkit.WebView;
 
 /**
- * Shows the generated training plan.
- * To load some Fonts an internet connection may be required.
+ * Shows the generated training plan. To load some Fonts an internet connection
+ * may be required.
  * 
  * @author Christian Skubich
- *
+ * 
  */
 public class ShowTPActivity extends Activity {
 	
+	private File exportedFile;
+
+	/**
+	 * Configures the menu actions.
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.show_tp_activity_menu, menu);
+		
+
+		// configure export
+		final MenuItem menu_item_send_plan = (MenuItem) menu.findItem(R.id.menu_item_send_plan);
+		menu_item_send_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				
+				Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + exportedFile.toString(), Toast.LENGTH_LONG).show();
+
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				intent.setType("text/plain");
+				intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(exportedFile.toString()));
+				startActivity(Intent.createChooser(intent, getString(R.string.send_file) + " ..."));
+				return true;
+			}
+		});
+		return true;
+	}
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,63 +87,42 @@ public class ShowTPActivity extends Activity {
 
 		setContentView(R.layout.show_tp);
 		WebView webview = (WebView) findViewById(R.id.tpWebView);
-		
+
 		// warn user if there is no internet connection
-		if(!isOnline()){
-		   	AlertDialog.Builder builder = new AlertDialog.Builder(ShowTPActivity.this);
-        	builder.setMessage(getString(R.string.no_internet_connection_plan_not_shown))
-        	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-        	           public void onClick(DialogInterface dialog, int id) {
-        	        	   dialog.cancel();
-        	           }
-        	       });
-        	AlertDialog alert = builder.create();
-        	alert.show();
+		if (!isOnline()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(ShowTPActivity.this);
+			builder.setMessage( getString(R.string.no_internet_connection_plan_not_shown)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
 		}
-		
-		
+
 		webview.getSettings().setBuiltInZoomControls(true);
 		
-		//TODO instead of 5 enter real columncount
-		final WorkoutExporter exporter = new HTMLExporter( 5, this, webview, DataManager.INSTANCE.getCurrentWorkout());
+		// TODO instead of 5 enter real columncount
+		final WorkoutExporter exporter = new HTMLExporter(5, ShowTPActivity.this, webview, DataManager.INSTANCE.getCurrentWorkout());
 
-		Button button_export = (Button) findViewById(R.id.button_export);
-		button_export.setOnClickListener(new OnClickListener(){
 
-			public void onClick(View v) {
+		exportedFile = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());
 
-				File f = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());
-				
-				Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + f.toString(), Toast.LENGTH_LONG).show();			
-				
-				
-				Intent intent = new Intent(Intent.ACTION_SEND);
-				intent.setType("text/plain"); 
-				intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(f.toString()));
-				startActivity(Intent.createChooser(intent, "Export plan to ..."));
-				
-			}
+	}
 
-		});
-		
-
-	}	
-	
 	/**
 	 * Checks the network status.
 	 * 
 	 * @return True, if internet connection is available, false otherwise.
 	 */
-	public boolean isOnline(){
+	public boolean isOnline() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo != null && netInfo.isConnectedOrConnecting()){
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
-
 
 }
