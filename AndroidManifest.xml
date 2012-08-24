@@ -19,7 +19,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" android:logo="@drawable/ic_launcher">
         <activity
-            android:name="de.skubware.opentraining.HomeActivity"
+            android:name="de.skubware.opentraining.activity.HomeActivity"
             android:label="@string/app_name" android:stateNotNeeded="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="de.skubware.opentraining.SelectExercisesActivity"></activity>
-        <activity android:name="de.skubware.opentraining.ManageDatabaseActivity" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name="de.skubware.opentraining.ShowTPActivity"></activity>
-        <activity android:name="de.skubware.opentraining.EditWorkoutActivity" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name="de.skubware.opentraining.activity.SelectExercisesActivity"></activity>
+        <activity android:name="de.skubware.opentraining.activity.ManageDatabaseActivity" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name="de.skubware.opentraining.activity.ShowTPActivity"></activity>
+        <activity android:windowSoftInputMode="stateHidden" android:name="de.skubware.opentraining.activity.EditWorkoutActivity"></activity>
     </application>
 
 </manifest>

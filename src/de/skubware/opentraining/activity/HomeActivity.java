@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity;
 
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.datamanagement.*;

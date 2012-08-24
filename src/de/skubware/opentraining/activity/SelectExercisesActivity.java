@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,7 +62,7 @@ import android.widget.Toast;
  * @author Christian Skubich
  * 
  */
-public class SelectExercisesActivity extends Activity implements OnGestureListener {
+public class SelectExercisesActivity extends Activity{
 
 	private List<FitnessExercise> exerciseList = new ArrayList<FitnessExercise>();
 	private Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
@@ -70,7 +70,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 	private ExerciseType currentExercise = ExerciseType.listExerciseTypes().first();
 	private int currentImage = 0;
 
-	private GestureDetector gestureScanner = new GestureDetector(this);
+	private GestureDetector gestureScanner = new GestureDetector(new SelectExerciseGesture());
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -390,23 +390,38 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 		return gestureScanner.onTouchEvent(me);
 	}
 
-	public boolean onDown(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
+	private class SelectExerciseGesture implements OnGestureListener{
+		public boolean onSingleTapUp(MotionEvent e) {
+			switchImage(false);
+			return true;
+		}
+		
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			final ViewConfiguration vc = ViewConfiguration.get(SelectExercisesActivity.this);
+			final int swipeMinDistance = vc.getScaledTouchSlop();
+			final int swipeMaxDistance = vc.getScaledMaximumFlingVelocity();
+			final int swipeThresholdVelocity = vc.getScaledMinimumFlingVelocity();
 
-		final ViewConfiguration vc = ViewConfiguration.get(SelectExercisesActivity.this);
-		final int swipeMinDistance = vc.getScaledTouchSlop();
-		final int swipeMaxDistance = vc.getScaledMaximumFlingVelocity();
-		final int swipeThresholdVelocity = vc.getScaledMinimumFlingVelocity();
+			try {
+				if (Math.abs(e1.getY() - e2.getY()) > swipeMaxDistance)
+					return false;
+				// right to left swipe
+				if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+					switchImage(true);
+				} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+					switchImage(false);
+				}
+			} catch (Exception e) {
+				// nothing
+			}
 
-		try {
-			if (Math.abs(e1.getY() - e2.getY()) > swipeMaxDistance)
-				return false;
-			// right to left swipe
-			if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+			return true;
+		}
+		
+		private void switchImage(boolean toLeft){
+			if(toLeft){
 				// Toast.makeText(SelectExercisesActivity.this, "Left Swipe",
 				// Toast.LENGTH_SHORT).show();
 				ImageView imageview = (ImageView) findViewById(R.id.imageview);
@@ -420,8 +435,7 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 				} catch (IndexOutOfBoundsException ex) {
 
 				}
-
-			} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+			}else{
 				// Toast.makeText(SelectExercisesActivity.this, "Right Swipe",
 				// Toast.LENGTH_SHORT).show();
 				ImageView imageview = (ImageView) findViewById(R.id.imageview);
@@ -436,29 +450,17 @@ public class SelectExercisesActivity extends Activity implements OnGestureListen
 
 				}
 			}
-		} catch (Exception e) {
-			// nothing
+			
 		}
 
-		return true;
+		public void onLongPress(MotionEvent e) {}
+
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) { return false;}
+
+		public void onShowPress(MotionEvent e) {}
+
+		public boolean onDown(MotionEvent e) { return false;}	
 	}
-
-	public void onLongPress(MotionEvent e) {
-	}
-
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void onShowPress(MotionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public boolean onSingleTapUp(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
+	
 }

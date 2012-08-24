@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity;
 
 import java.util.HashMap;
 import java.util.HashSet;
