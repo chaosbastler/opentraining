@@ -51,7 +51,7 @@
             android:ems="10"
             android:enabled="false"
             android:gravity="center"
-            android:textColor="@string/textcolor" />
+            android:textColor="@color/White" />
 
         <RelativeLayout
             android:id="@+id/wrapper_image"
@@ -108,14 +108,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
 
                 <TextView
                     android:id="@+id/textview_tag1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <LinearLayout
@@ -143,14 +143,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
 
                 <TextView
                     android:id="@+id/textview_equipment1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <LinearLayout
@@ -176,14 +176,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
 
                 <TextView
                     android:id="@+id/textview_muscle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <LinearLayout
@@ -209,14 +209,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
 
                 <TextView
                     android:id="@+id/textview_hint1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/White" />
             </LinearLayout>
         </LinearLayout>
 

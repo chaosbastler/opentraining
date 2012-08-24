@@ -2,10 +2,8 @@
 <resources>
     
     <string name="app_name">Open Training</string>
-    <string name="textcolor">@android:color/black</string>
-    <string name="button_textcolor">@android:color/white</string>
     <string name="workout_name">Workoutname</string>
-    <string name="empty_rows">Leere Zeilen:</string>
+    <string name="empty_rows">Leere Zeilen</string>
     <string name="export">Exportieren</string>
     <string name="settings">Einstellungen</string>
     <string name="exercise_tags">Tags der Übung:</string>
