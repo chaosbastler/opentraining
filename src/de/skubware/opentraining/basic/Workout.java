@@ -34,7 +34,10 @@ import java.util.*;
  */
 public class Workout implements Iterable<FitnessExercise>{
 
+	public static int DEFAULT_EMPTYROWS = 5;
+	
 	private String name;
+	private int emptyRows = DEFAULT_EMPTYROWS;
 	private ArrayList<FitnessExercise> fitnessExercises = new ArrayList<FitnessExercise>();
 
 	
@@ -162,6 +165,17 @@ public class Workout implements Iterable<FitnessExercise>{
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	public int getEmptyRows() {
+		return emptyRows;
+	}
+
+	public void setEmptyRows(int emptyRows) {
+		if(emptyRows>0)
+			this.emptyRows = emptyRows;
+		else
+			throw new IllegalArgumentException("There must be more than 0 empty rows");
 	}
 
 }

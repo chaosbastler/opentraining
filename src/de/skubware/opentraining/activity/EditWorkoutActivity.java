@@ -88,7 +88,7 @@ public class EditWorkoutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// init variables
-		this.emptyRowCount = 6;
+		this.emptyRowCount = DataManager.INSTANCE.getCurrentWorkout().getEmptyRows();
 
 		this.columnCount = DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() + 1;
 		this.columnWidthMap.put(0, 100);
@@ -165,13 +165,17 @@ public class EditWorkoutActivity extends Activity {
 	/** Increases the number of rows. */
 	private void addRow() {
 		this.emptyRowCount++;
+		DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(emptyRowCount);
+		
 		this.updateTable();
 	}
 
 	/** Decreases the number of rows (if >1). */
 	private void removeRow() {
-		if (this.emptyRowCount > 1)
+		if (this.emptyRowCount > 1){
 			this.emptyRowCount--;
+			DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(emptyRowCount);
+		}	
 		this.updateTable();
 	}
 

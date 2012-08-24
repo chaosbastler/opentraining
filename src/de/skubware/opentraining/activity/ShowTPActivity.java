@@ -22,6 +22,7 @@ package de.skubware.opentraining.activity;
 
 import java.io.File;
 
+import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.datamanagement.DataManager;
 import de.skubware.opentraining.exporter.HTMLExporter;
 import de.skubware.opentraining.exporter.WorkoutExporter;
@@ -103,8 +104,8 @@ public class ShowTPActivity extends Activity {
 
 		webview.getSettings().setBuiltInZoomControls(true);
 		
-		// TODO instead of 5 enter real columncount
-		final WorkoutExporter exporter = new HTMLExporter(5, ShowTPActivity.this, webview, DataManager.INSTANCE.getCurrentWorkout());
+		Workout w = DataManager.INSTANCE.getCurrentWorkout();
+		final WorkoutExporter exporter = new HTMLExporter(w.getEmptyRows(), ShowTPActivity.this, webview, w);
 
 
 		exportedFile = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());
