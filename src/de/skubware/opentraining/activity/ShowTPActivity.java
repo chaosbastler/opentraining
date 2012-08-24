@@ -83,29 +83,16 @@ public class ShowTPActivity extends Activity {
 
 			public void onClick(View v) {
 
-				//TODO: test this and fix bugs
 				File f = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());
 				
-				//Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + f.toString(), Toast.LENGTH_LONG).show();			
+				Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + f.toString(), Toast.LENGTH_LONG).show();			
 				
 				
 				Intent intent = new Intent(Intent.ACTION_SEND);
-				//intent.setType(fileType); 
-				intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(f.getPath()));  
+				intent.setType("text/plain"); 
+				intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(f.toString()));
 				startActivity(Intent.createChooser(intent, "Export plan to ..."));
 				
-				
-				
-				/*Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); 
-				emailIntent.setType("plain/text");
-				
-				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"christian.skubich@googlemail.com"}); 
-			    emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,   "Test Subject"); 
-			    emailIntent.putExtra(android.content.Intent.EXTRA_TEXT,  "go on read the emails"); 
-			    emailIntent.putExtra(Intent.EXTRA_STREAM, f);//Uri.parse(f.toString()));//"file://"+ sPhotoFileName));
-
-			    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-			    */
 			}
 
 		});
