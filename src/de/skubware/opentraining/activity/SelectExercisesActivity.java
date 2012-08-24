@@ -63,7 +63,7 @@ import android.widget.Toast;
  * @author Christian Skubich
  * 
  */
-public class SelectExercisesActivity extends Activity{
+public class SelectExercisesActivity extends Activity {
 
 	private List<FitnessExercise> exerciseList = new ArrayList<FitnessExercise>();
 	private Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
@@ -72,6 +72,8 @@ public class SelectExercisesActivity extends Activity{
 	private int currentImage = 0;
 
 	private GestureDetector gestureScanner = new GestureDetector(new SelectExerciseGesture());
+
+	private static final String TAG = "SelectExercisesActivity";
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,7 +173,7 @@ public class SelectExercisesActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// fill muscle map
 		for (Muscle m : Muscle.values()) {
 			muscleMap.put(m, true);
@@ -200,14 +202,14 @@ public class SelectExercisesActivity extends Activity{
 		});
 
 	}
-	
-	
+
 	@Override
-	public void onRestart(){
+	public void onRestart() {
 		super.onRestart();
-		// update exercise list, because the old, saved state my not be up-to-date
+		// update exercise list, because the old, saved state my not be
+		// up-to-date
 		Workout w = DataManager.INSTANCE.getCurrentWorkout();
-		if(w!=null)
+		if (w != null)
 			this.exerciseList = w.getFitnessExercises();
 		else
 			this.exerciseList = new ArrayList<FitnessExercise>();
@@ -247,7 +249,7 @@ public class SelectExercisesActivity extends Activity{
 	 * Shows the currently exercise. That means that the different TextViews and
 	 * the image are updated.
 	 * 
-	 * @param ex
+	 * @param ex	The exercise to show
 	 */
 	private void showExercise(ExerciseType ex) {
 		this.currentExercise = ex;
@@ -256,115 +258,66 @@ public class SelectExercisesActivity extends Activity{
 			ex = new ExerciseType.Builder(getString(R.string.no_exercise_choosen)).build();
 		}
 
-		// Description
-		// EditText description = (EditText)
-		// findViewById(R.id.edittext_description);
-		// description.setText(ex.getDescription());
-
 		// Exercise Name
 		TextView exerciseName = (TextView) findViewById(R.id.textview_exercise_name);
 		exerciseName.setText(ex.getName());
 
-		// TODO: refactor this code, duplicate code can propably be replaced by
-		// a generic one
-		// Muscles
-		{
-			Collection<Muscle> muscles = ex.getActivatedMuscles();
-			Iterator<Muscle> it = muscles.iterator();
 
-			TextView textview_muscle = (TextView) findViewById(R.id.textview_muscle);
-			if (muscles.isEmpty())
-				textview_muscle.setVisibility(View.GONE);
+		// for loop is a try to reduce code length.
+		for (int i = 0; i < 4; i++) {
+
+			@SuppressWarnings("rawtypes")
+			Collection c;
+			TextView tw, tw0, tw1;
+
+			switch (i) {
+			case 0:
+				c = ex.getActivatedMuscles();
+				tw = (TextView) findViewById(R.id.textview_muscle);
+				tw0 = (TextView) findViewById(R.id.textview_muscle0);
+				tw1 = (TextView) findViewById(R.id.textview_muscle1);
+				break;
+			case 1:
+				c = ex.getRequiredEquipment();
+				tw = (TextView) findViewById(R.id.textview_equipment);
+				tw0 = (TextView) findViewById(R.id.textview_equipment0);
+				tw1 = (TextView) findViewById(R.id.textview_equipment1);
+				break;
+			case 2:
+				c = ex.getTags();
+				tw = (TextView) findViewById(R.id.textview_tag);
+				tw0 = (TextView) findViewById(R.id.textview_tag0);
+				tw1 = (TextView) findViewById(R.id.textview_tag1);
+				break;
+			case 3:
+				c = ex.getHints();
+				tw = (TextView) findViewById(R.id.textview_hint);
+				tw0 = (TextView) findViewById(R.id.textview_hint0);
+				tw1 = (TextView) findViewById(R.id.textview_hint1);
+				break;	
+			default:
+				throw new AssertionError("");
+			}
+
+			@SuppressWarnings("rawtypes")
+			Iterator it = c.iterator();
+			if (c.isEmpty())
+				tw.setVisibility(View.GONE);
 			else
-				textview_muscle.setVisibility(View.VISIBLE);
-
-			TextView textview_muscle0 = (TextView) findViewById(R.id.textview_muscle0);
-			TextView textview_muscle1 = (TextView) findViewById(R.id.textview_muscle1);
+				tw.setVisibility(View.VISIBLE);
 
 			if (!it.hasNext())
-				textview_muscle0.setText("");
+				tw0.setText("");
 			else
-				textview_muscle0.setText(it.next().toString());
+				tw0.setText(it.next().toString());
 			if (!it.hasNext())
-				textview_muscle1.setText("");
+				tw1.setText("");
 			else
-				textview_muscle1.setText(it.next().toString());
-
+				tw1.setText(it.next().toString());
 		}
+		
 
-		// Equipment
-		{
-			Collection<SportsEquipment> eq = ex.getRequiredEquipment();
-			Iterator<SportsEquipment> it = eq.iterator();
-
-			TextView textview_equipment = (TextView) findViewById(R.id.textview_equipment);
-			if (eq.isEmpty())
-				textview_equipment.setVisibility(View.GONE);
-			else
-				textview_equipment.setVisibility(View.VISIBLE);
-
-			TextView textview_equipment0 = (TextView) findViewById(R.id.textview_equipment0);
-			TextView textview_equipment1 = (TextView) findViewById(R.id.textview_equipment1);
-
-			if (!it.hasNext())
-				textview_equipment0.setText("");
-			else
-				textview_equipment0.setText(it.next().toString());
-			if (!it.hasNext())
-				textview_equipment1.setText("");
-			else
-				textview_equipment1.setText(it.next().toString());
-		}
-
-		// Tags
-		{
-			Collection<ExerciseTag> tags = ex.getTags();
-			Iterator<ExerciseTag> it = tags.iterator();
-
-			TextView textview_tag = (TextView) findViewById(R.id.textview_tag);
-			if (tags.isEmpty())
-				textview_tag.setVisibility(View.GONE);
-			else
-				textview_tag.setVisibility(View.VISIBLE);
-
-			TextView textview_tag0 = (TextView) findViewById(R.id.textview_tag0);
-			TextView textview_tag1 = (TextView) findViewById(R.id.textview_tag1);
-
-			if (!it.hasNext())
-				textview_tag0.setText("");
-			else
-				textview_tag0.setText(it.next().toString());
-			if (!it.hasNext())
-				textview_tag1.setText("");
-			else
-				textview_tag1.setText(it.next().toString());
-		}
-
-		// Hints
-		{
-			Collection<String> hints = ex.getHints();
-			Iterator<String> it = hints.iterator();
-
-			TextView textview_hint = (TextView) findViewById(R.id.textview_hint);
-			if (hints.isEmpty())
-				textview_hint.setVisibility(View.GONE);
-			else
-				textview_hint.setVisibility(View.VISIBLE);
-
-			TextView textview_hint0 = (TextView) findViewById(R.id.textview_hint0);
-			TextView textview_hint1 = (TextView) findViewById(R.id.textview_hint1);
-
-			if (!it.hasNext())
-				textview_hint0.setText("");
-			else
-				textview_hint0.setText(it.next().toString());
-			if (!it.hasNext())
-				textview_hint1.setText("");
-			else
-				textview_hint1.setText(it.next().toString());
-		}
-
-		// Image License
+		// Image license
 		TextView image_license = (TextView) findViewById(R.id.textview_image_license);
 		if (ex.getImageLicenseMap().values().iterator().hasNext()) {
 			image_license.setText(ex.getImageLicenseMap().values().iterator().next());
@@ -373,7 +326,6 @@ public class SelectExercisesActivity extends Activity{
 		}
 
 		// Images
-		// TODO remove dummy code
 		ImageView imageview = (ImageView) findViewById(R.id.imageview);
 		if (!ex.getImagePaths().isEmpty()) {
 			imageview.setImageDrawable(DataManager.INSTANCE.getDrawable(ex.getImagePaths().get(0).toString()));
@@ -391,25 +343,28 @@ public class SelectExercisesActivity extends Activity{
 		return gestureScanner.onTouchEvent(me);
 	}
 
-	
-	
-	
-	/** Enumeration for defining direction for image change, only used in an inner class */
-	private enum DIRECTION{FORWARD, BACKWARD};
+	/**
+	 * Enumeration for defining direction for image change, only used in an
+	 * inner class
+	 */
+	private enum DIRECTION {
+		FORWARD, BACKWARD
+	};
 
 	/**
 	 * A private inner class that handles gestures.
 	 */
-	private class SelectExerciseGesture implements OnGestureListener{
+	private class SelectExerciseGesture implements OnGestureListener {
 
 		/**
 		 * Next image is shown when image is just taped.
 		 */
 		public boolean onSingleTapUp(MotionEvent e) {
+			Log.i(TAG, "Taped on image");
 			switchImage(DIRECTION.FORWARD);
 			return true;
 		}
-		
+
 		/**
 		 * When the user swipes, he can also go back.
 		 */
@@ -420,29 +375,29 @@ public class SelectExercisesActivity extends Activity{
 			final int swipeMaxDistance = vc.getScaledMaximumFlingVelocity();
 			final int swipeThresholdVelocity = vc.getScaledMinimumFlingVelocity();
 
-				if (Math.abs(e1.getY() - e2.getY()) > swipeMaxDistance)
-					return false;
-				
-				
-				// right to left swipe
-				if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
-					switchImage(DIRECTION.FORWARD);
-				} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
-					switchImage(DIRECTION.BACKWARD);
-				}
+			if (Math.abs(e1.getY() - e2.getY()) > swipeMaxDistance)
+				return false;
+
+			// right to left swipe
+			if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+				switchImage(DIRECTION.FORWARD);
+			} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
+				switchImage(DIRECTION.BACKWARD);
+			}
 
 			return true;
 		}
-		
+
 		/**
 		 * Changes the image according to the given directin.
 		 * 
-		 * @param direction  @see{SelectExercisesActivity.DIRECTION}
+		 * @param direction
+		 * @see{SelectExercisesActivity.DIRECTION
 		 */
-		private void switchImage(DIRECTION direction){
+		private void switchImage(DIRECTION direction) {
 			ImageView imageview = (ImageView) findViewById(R.id.imageview);
-			if(direction == DIRECTION.FORWARD){
-				Log.i("SelectExercisesActivity","(Right to) left Swipe");
+			if (direction == DIRECTION.FORWARD) {
+				Log.i(TAG, "(Right to) left swipe on image");
 
 				currentImage--;
 				if (currentImage < 0)
@@ -453,8 +408,8 @@ public class SelectExercisesActivity extends Activity{
 				} catch (IndexOutOfBoundsException ex) {
 
 				}
-			}else{
-				Log.i("SelectExercisesActivity","(Left to) right Swipe");
+			} else {
+				Log.i(TAG, "(Left to) right swipe on image");
 
 				currentImage++;
 				if (currentImage >= currentExercise.getImagePaths().size())
@@ -466,21 +421,26 @@ public class SelectExercisesActivity extends Activity{
 
 				}
 			}
-			
+
 		}
 
 		/** Not used */
-		public void onLongPress(MotionEvent e) {}
+		public void onLongPress(MotionEvent e) {
+		}
 
 		/** Not used */
-		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) { return false;}
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			return false;
+		}
 
 		/** Not used */
-		public void onShowPress(MotionEvent e) {}
+		public void onShowPress(MotionEvent e) {
+		}
 
 		/** Not used */
-		public boolean onDown(MotionEvent e) { return false;}	
+		public boolean onDown(MotionEvent e) {
+			return false;
+		}
 	}
-	
-	
+
 }
