@@ -35,6 +35,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
@@ -391,12 +392,27 @@ public class SelectExercisesActivity extends Activity{
 	}
 
 	
+	
+	
+	/** Enumeration for defining direction for image change, only used in an inner class */
+	private enum DIRECTION{FORWARD, BACKWARD};
+
+	/**
+	 * A private inner class that handles gestures.
+	 */
 	private class SelectExerciseGesture implements OnGestureListener{
+
+		/**
+		 * Next image is shown when image is just taped.
+		 */
 		public boolean onSingleTapUp(MotionEvent e) {
-			switchImage(false);
+			switchImage(DIRECTION.FORWARD);
 			return true;
 		}
 		
+		/**
+		 * When the user swipes, he can also go back.
+		 */
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
 			final ViewConfiguration vc = ViewConfiguration.get(SelectExercisesActivity.this);
@@ -404,27 +420,29 @@ public class SelectExercisesActivity extends Activity{
 			final int swipeMaxDistance = vc.getScaledMaximumFlingVelocity();
 			final int swipeThresholdVelocity = vc.getScaledMinimumFlingVelocity();
 
-			try {
 				if (Math.abs(e1.getY() - e2.getY()) > swipeMaxDistance)
 					return false;
+				
+				
 				// right to left swipe
 				if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
-					switchImage(true);
+					switchImage(DIRECTION.FORWARD);
 				} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
-					switchImage(false);
+					switchImage(DIRECTION.BACKWARD);
 				}
-			} catch (Exception e) {
-				// nothing
-			}
 
 			return true;
 		}
 		
-		private void switchImage(boolean toLeft){
-			if(toLeft){
-				// Toast.makeText(SelectExercisesActivity.this, "Left Swipe",
-				// Toast.LENGTH_SHORT).show();
-				ImageView imageview = (ImageView) findViewById(R.id.imageview);
+		/**
+		 * Changes the image according to the given directin.
+		 * 
+		 * @param direction  @see{SelectExercisesActivity.DIRECTION}
+		 */
+		private void switchImage(DIRECTION direction){
+			ImageView imageview = (ImageView) findViewById(R.id.imageview);
+			if(direction == DIRECTION.FORWARD){
+				Log.i("SelectExercisesActivity","(Right to) left Swipe");
 
 				currentImage--;
 				if (currentImage < 0)
@@ -436,9 +454,7 @@ public class SelectExercisesActivity extends Activity{
 
 				}
 			}else{
-				// Toast.makeText(SelectExercisesActivity.this, "Right Swipe",
-				// Toast.LENGTH_SHORT).show();
-				ImageView imageview = (ImageView) findViewById(R.id.imageview);
+				Log.i("SelectExercisesActivity","(Left to) right Swipe");
 
 				currentImage++;
 				if (currentImage >= currentExercise.getImagePaths().size())
@@ -453,12 +469,16 @@ public class SelectExercisesActivity extends Activity{
 			
 		}
 
+		/** Not used */
 		public void onLongPress(MotionEvent e) {}
 
+		/** Not used */
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) { return false;}
 
+		/** Not used */
 		public void onShowPress(MotionEvent e) {}
 
+		/** Not used */
 		public boolean onDown(MotionEvent e) { return false;}	
 	}
 	
