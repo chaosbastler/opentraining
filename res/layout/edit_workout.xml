@@ -47,14 +47,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/workout_name"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
             <EditText
                 android:id="@+id/edittext_workout_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_blue"
+                android:background="@drawable/btn_white"
                 android:hint="@string/workout_name"
-                android:inputType="text" >
+                android:inputType="text"
+                android:textColor="@color/Gray" >
 
                 <requestFocus />
             </EditText>

@@ -288,6 +288,15 @@ public enum DataManager {
 	public String getCSSFile() {
 		return css;
 	}
+	
+	public String getCSSString(Context context){
+		try {
+			return this.loadFile(css, Source.ASSETS, context);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "<!--Error reading style information-->";
+		}
+	}
 
 
 }

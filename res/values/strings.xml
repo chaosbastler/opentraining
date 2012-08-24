@@ -24,7 +24,7 @@
     <string name="action_not_supported">This action is not supported yet.</string>
     <string name="choose_design">Choose the design</string>
     <string name="no_internet_connection">No internet connection available.</string>
-    <string name="no_internet_connection_plan_not_shown">No internet connection available. The plan cannot be shown correctly.</string>
+    <string name="no_internet_connection_plan_not_shown">No internet connection available. It is possible, that the plan cannot be displayed correctly.</string>
     <string name="date">Date</string>
     <string name="create_plan">Create plan</string>
     <string name="manage_db">Manage database</string>

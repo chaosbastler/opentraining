@@ -52,6 +52,8 @@ public class HTMLExporter extends WorkoutExporter {
 	private void loadWorkout(Workout w){
 		File f = new File( DataManager.getHTMLFolder().toString() + "/trainingplan.html" );
 		DataManager.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, DataManager.getHTMLFolder());
+		// assert, that the style sheets are there
+		
 		try {
 			webview.loadUrl(f.toURL().toString());//.loadData(f.toURL(), "text/html", "utf-8");
 		} catch (MalformedURLException e) {
@@ -167,7 +169,7 @@ public class HTMLExporter extends WorkoutExporter {
 		
 		
 
-		data = data.replaceAll("trainingplan.css", DataManager.INSTANCE.getCSSFile());
+		data = data.replaceAll("<!--CSS-->", DataManager.INSTANCE.getCSSString(context));
 		
 		
 		
