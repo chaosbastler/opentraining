@@ -31,8 +31,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +44,7 @@ import android.webkit.WebView;
 
 /**
  * Shows the generated training plan.
- * To load the .css file (styling information) an internet connection is required.
+ * To load some Fonts an internet connection may be required.
  * 
  * @author Christian Skubich
  *
@@ -84,11 +86,18 @@ public class ShowTPActivity extends Activity {
 				//TODO: test this and fix bugs
 				File f = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());
 				
-				Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + f.toString(), Toast.LENGTH_LONG).show();			
+				//Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + f.toString(), Toast.LENGTH_LONG).show();			
+				
+				
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				//intent.setType(fileType); 
+				intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(f.getPath()));  
+				startActivity(Intent.createChooser(intent, "Export plan to ..."));
+				
 				
 				
 				/*Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND); 
-				emailIntent.setType("image/jpeg");
+				emailIntent.setType("plain/text");
 				
 				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {"christian.skubich@googlemail.com"}); 
 			    emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,   "Test Subject"); 

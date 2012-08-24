@@ -75,6 +75,7 @@ public class HTMLExporter extends WorkoutExporter {
 		try{
 			DataManager.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, DataManager.getHTMLFolder());
 			
+			/*
 			// render HTML to Picture
 			Picture picture = webview.capturePicture();
 			
@@ -115,9 +116,9 @@ public class HTMLExporter extends WorkoutExporter {
 			// Write file to cache
 			
 			
-			assert(f!=null);
+			assert(f!=null);*/
 			
-			return f;
+			return new File(DataManager.getHTMLFolder().toString() + "/" + "trainingplan.html");
 		}catch(UnsupportedOperationException unsupported){
 			// may happen when String export doesn't work
 			throw unsupported;

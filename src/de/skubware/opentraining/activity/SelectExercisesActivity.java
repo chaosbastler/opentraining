@@ -53,6 +53,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// TODO define own exercises; improve muscle choosing(own dialog); no warranty;
+
 /**
  * Shows a list with all exercises. The user can add these exercises to the
  * training plan. There is an illustration for each exercise(otherwise a dummy

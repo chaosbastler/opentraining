@@ -55,14 +55,14 @@ public class ExerciseTag  implements Comparable<ExerciseTag>{
 	private static Set<ExerciseTag> values = new HashSet<ExerciseTag>();
 	
 	static{
-		 values.add(new ExerciseTag("Eigengewicht �bung", "Eine �bung die ohne extra Gewicht ausgef�hrt wird, also nur mit dem eigenen K�rpergewicht als Widerstand."));
-		 values.add(new ExerciseTag("Fitness Studio �bung", "Eine �bung, die bevorzugt im Fitness Studio ausgef�hrt werden sollte(z.B. wegen \"exotischen\" Ger�ten),"));
-		 values.add(new ExerciseTag("Heim �bung", "Eine �bung die auch gut zu Hause ausgef�hrt werden kann(z.B. weil man keine au�ergew�hnlichen Ger�te braucht)."));
-		 values.add(new ExerciseTag("Einsteiger �bung", "Eine �bung die auch f�r Einsteiger geeignet ist."));
-		 values.add(new ExerciseTag("Fortgeschrittenen �bung", "Eine �bung die f�r Fortgeschrittene geeignet ist. K�nnte zu schwierig oder kompliziert f�r Anf�nger sein."));
-		 values.add(new ExerciseTag("Experten �bung", "Eine �bung die f�r Experten geeignet ist. Sollte nur von erfahrenen Personen ausgef�hrt werden"));
-		 values.add(new ExerciseTag("Isolierte �bung", "Eine �bung die prim�r eine einzelne Muskelgruppe anspricht"));
-		 values.add(new ExerciseTag("Komplexe �bung", "Eine �bung die mehrere Muskelgruppen anspricht"));
+		 values.add(new ExerciseTag("Eigengewicht Übung", "Eine Übung die ohne extra Gewicht ausgeführt wird, also nur mit dem eigenen Körpergewicht als Widerstand."));
+		 values.add(new ExerciseTag("Fitness Studio Übung", "Eine Übung, die bevorzugt im Fitness Studio ausgeführt werden sollte(z.B. wegen \"exotischen\" Geräten),"));
+		 values.add(new ExerciseTag("Heim Übung", "Eine Übung die auch gut zu Hause ausgeführt werden kann(z.B. weil man keine außergewöhnlichen Geräte braucht)."));
+		 values.add(new ExerciseTag("Einsteiger Übung", "Eine Übung die auch für Einsteiger geeignet ist."));
+		 values.add(new ExerciseTag("Fortgeschrittenen Übung", "Eine Übung die für Fortgeschrittene geeignet ist. Könnte zu schwierig oder kompliziert für Anfänger sein."));
+		 values.add(new ExerciseTag("Experten Übung", "Eine Übung die für Experten geeignet ist. Sollte nur von erfahrenen Personen ausgeführt werden"));
+		 values.add(new ExerciseTag("Isolierte Übung", "Eine Übung die primär eine einzelne Muskelgruppe anspricht"));
+		 values.add(new ExerciseTag("Komplexe Übung", "Eine Übung die mehrere Muskelgruppen anspricht"));
 	}
 	/*
 	 * Bisheriger Quellcode mit enum L�sung:

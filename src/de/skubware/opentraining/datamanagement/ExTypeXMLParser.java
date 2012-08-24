@@ -174,7 +174,7 @@ public class ExTypeXMLParser extends DefaultHandler {
 	  if(qname.equals("Tag")){
 		  ExerciseTag tag = ExerciseTag.getTagByValue(attributes.getValue("name"));
 		  if(tag==null){
-			  throw new NullPointerException("The Tag couldn't be found: " + attributes.getValue("name"));
+			  throw new NullPointerException("The Tag of exercise " + this.name  + " couldn't be found: " + attributes.getValue("name"));
 		  }
 		  this.exerciseTag.add(tag);
 	  }
