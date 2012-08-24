@@ -91,16 +91,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_tag"
                     style="@style/LargeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_purple"
+                    android:background="@drawable/btn_white"
                     android:text="@string/exercise_tags"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/Gray"
+                    android:textColorLink="@color/Gray" />
 
                 <TextView
                     android:id="@+id/textview_tag0"
@@ -124,16 +125,18 @@
                 android:gravity="center|left"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_equipment"
                     style="@style/LargeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_blue_light"
+                    android:background="@drawable/btn_white"
                     android:text="@string/equipment"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/Gray"
+                    android:textColorHint="@color/Gray"
+                    android:textColorLink="@color/Gray" />
 
                 <TextView
                     android:id="@+id/textview_equipment0"
@@ -157,16 +160,16 @@
                 android:gravity="center|left"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_muscle"
                     style="@style/LargeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_orange"
+                    android:background="@drawable/btn_white"
                     android:text="@string/activated_muscles"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/Gray" />
 
                 <TextView
                     android:id="@+id/textview_muscle0"
@@ -190,16 +193,16 @@
                 android:gravity="center|left"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
+
                 <TextView
                     android:id="@+id/textview_hint"
                     style="@style/LargeTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_red"
+                    android:background="@drawable/btn_white"
                     android:text="@string/hint"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@string/button_textcolor" />
+                    android:textColor="@color/Gray" />
 
                 <TextView
                     android:id="@+id/textview_hint0"

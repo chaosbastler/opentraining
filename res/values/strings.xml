@@ -8,10 +8,10 @@
     <string name="empty_rows">Empty columns:</string>
     <string name="export">Export</string>
     <string name="settings">Settings</string>
-    <string name="exercise_tags">Exercise tags:</string>
-    <string name="equipment">Equipment:</string>
-    <string name="activated_muscles">Activated muscles:</string>
-    <string name="exercise_name">Exercise name:</string>
+    <string name="exercise_tags">Exercise tags</string>
+    <string name="equipment">Equipment</string>
+    <string name="activated_muscles">Activated muscles</string>
+    <string name="exercise_name">Exercise name</string>
     <string name="image_currently_selected">Image of currently selected exercise</string>
     <string name="hint">Hint</string>
     <string name="logo_of_open_training">Logo of OpenTraining</string>

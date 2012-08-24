@@ -9,9 +9,9 @@
     <string name="export">Exportieren</string>
     <string name="settings">Einstellungen</string>
     <string name="exercise_tags">Tags der Übung:</string>
-    <string name="equipment">Equipment:</string>
-    <string name="activated_muscles">Aktivierte Muskeln:</string>
-    <string name="exercise_name">Name der Übung:</string>
+    <string name="equipment">Equipment</string>
+    <string name="activated_muscles">Aktivierte Muskeln</string>
+    <string name="exercise_name">Name der Übung</string>
     <string name="image_currently_selected">Bild der Übung</string>
     <string name="hint">Hinweis</string>
     <string name="logo_of_open_training">Logo of OpenTraining</string>
