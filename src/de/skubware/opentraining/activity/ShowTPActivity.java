@@ -68,6 +68,7 @@ public class ShowTPActivity extends Activity {
 		menu_item_send_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				
+				//TODO E-Mail export does not work yet
 				Toast.makeText(ShowTPActivity.this, "Workout erstellt: " + exportedFile.toString(), Toast.LENGTH_LONG).show();
 
 				Intent intent = new Intent(Intent.ACTION_SEND);
