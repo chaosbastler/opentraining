@@ -44,6 +44,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="send_file">Send file</string>
+    <string name="success">Success</string>
+    <string name="no_success">No success</string>
+    <string name="save">Save</string>
     
     
     

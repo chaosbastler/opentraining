@@ -184,6 +184,22 @@ public enum DataManager {
 		}
 	}
 	
+	/**
+	 * Saves the current plan to the HTML folder.
+	 */
+	public boolean savePlan(){
+		return XMLSaver.writeTrainingPlan(this.workout, DataManager.getHTMLFolder());
+	}
+	
+	/**
+	 * Saves the ExerciseType to exercise folder.
+	 *
+	 * @param ex The exercise to save.
+	 */
+	public boolean saveExercise(ExerciseType ex){
+		return XMLSaver.writeExerciseType(ex, DataManager.getExerciseXMLFolder());
+	}
+	
 	
 	public enum Source{
 		RAW_FOLDER, ASSETS, FILE_SYSTEM;

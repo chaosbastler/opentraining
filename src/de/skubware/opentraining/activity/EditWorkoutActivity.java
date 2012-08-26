@@ -40,7 +40,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,6 +82,36 @@ public class EditWorkoutActivity extends Activity {
 	private final static int ROW_PADDING = 5;
 	private final static int ROW_HEIGHT = 80;
 
+	
+	/**
+	 * Configures the menu actions.
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.edit_workout_activity_menu, menu);
+    	
+    	// configure menu_button_select_exercises
+        final MenuItem  menu_item_save_plan =(MenuItem) menu.findItem(R.id.menu_item_save_plan);
+        menu_item_save_plan.setOnMenuItemClickListener( new OnMenuItemClickListener(){
+			public boolean onMenuItemClick(MenuItem item) {
+				boolean success = DataManager.INSTANCE.savePlan();
+				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
+				if(success){
+	            	builder.setMessage(getString(R.string.success));
+				}else{
+	            	builder.setMessage(getString(R.string.no_success));
+
+				}
+            	AlertDialog alert = builder.create();
+            	alert.show();
+				return true;
+			}
+        }); 
+    	
+    	return true;
+	}
+	
 	/**
 	 * Initializes the variables, updates the UI, sets the action for export
 	 * button.
