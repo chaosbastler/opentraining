@@ -21,16 +21,6 @@
             android:text="@string/settings"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <Button
-            android:id="@+id/button_export"
-            style="@style/ButtonText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/wrapper_empty_rows"
-            android:background="@drawable/btn_yellow"
-            android:text="@string/export" />
-
         <LinearLayout
             android:id="@+id/wrapper_workout_name"
             android:layout_width="wrap_content"

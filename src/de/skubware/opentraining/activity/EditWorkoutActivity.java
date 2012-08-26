@@ -82,41 +82,77 @@ public class EditWorkoutActivity extends Activity {
 	private final static int ROW_PADDING = 5;
 	private final static int ROW_HEIGHT = 80;
 
-	
 	/**
 	 * Configures the menu actions.
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.edit_workout_activity_menu, menu);
-    	
-    	// configure menu_button_select_exercises
-        final MenuItem  menu_item_save_plan =(MenuItem) menu.findItem(R.id.menu_item_save_plan);
-        menu_item_save_plan.setOnMenuItemClickListener( new OnMenuItemClickListener(){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.edit_workout_activity_menu, menu);
+
+		// configure menu_item_save_plan
+		final MenuItem menu_item_save_plan = (MenuItem) menu.findItem(R.id.menu_item_save_plan);
+		menu_item_save_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				boolean success = DataManager.INSTANCE.savePlan();
 				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
-				if(success){
-	            	builder.setMessage(getString(R.string.success));
-				}else{
-	            	builder.setMessage(getString(R.string.no_success));
+				if (success) {
+					builder.setMessage(getString(R.string.success));
+				} else {
+					builder.setMessage(getString(R.string.no_success));
 
 				}
-				builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener(){
+				builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 					}
 				});
-            	AlertDialog alert = builder.create();
-            	alert.show();
+				AlertDialog alert = builder.create();
+				alert.show();
 				return true;
 			}
-        }); 
-    	
-    	return true;
+		});
+
+		// configure menu_item_export_plan
+		final MenuItem menu_item_export_plan = (MenuItem) menu.findItem(R.id.menu_item_export_plan);
+		menu_item_export_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				final CharSequence[] items = { "Default", "Boring", "Modern", "Ninja" };
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
+				builder.setTitle(getString(R.string.choose_design));
+				builder.setItems(items, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int item) {
+						String css;
+						switch (item) {
+						case 0:
+							css = "trainingplan_default.css";
+							break;
+						case 1:
+							css = "trainingplan_boring.css";
+							break;
+						case 2:
+							css = "trainingplan_modern.css";
+							break;
+						case 3:
+							css = "trainingplan_ninja.css";
+							break;
+						default:
+							throw new IllegalStateException(getString(R.string.action_not_supported));
+						}
+						DataManager.INSTANCE.setCSSFile(css);
+						startActivity(new Intent(EditWorkoutActivity.this, ShowTPActivity.class));
+					}
+				});
+				AlertDialog dialog = builder.create();
+				dialog.show();
+				return true;
+			}
+		});
+
+		return true;
 	}
-	
+
 	/**
 	 * Initializes the variables, updates the UI, sets the action for export
 	 * button.
@@ -157,45 +193,6 @@ public class EditWorkoutActivity extends Activity {
 			}
 		});
 
-		// button export
-		Button button_export = (Button) findViewById(R.id.button_export);
-		button_export.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-
-				final CharSequence[] items = { "Default", "Boring", "Modern", "Ninja" };
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
-				builder.setTitle(getString(R.string.choose_design));
-				builder.setItems(items, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
-						String css;
-						switch (item) {
-						case 0:
-							css = "trainingplan_default.css";
-							break;
-						case 1:
-							css = "trainingplan_boring.css";
-							break;
-						case 2:
-							css = "trainingplan_modern.css";
-							break;
-						case 3:
-							css = "trainingplan_ninja.css";
-							break;
-						default:
-							throw new IllegalStateException(getString(R.string.action_not_supported));
-						}
-						DataManager.INSTANCE.setCSSFile(css);
-						startActivity(new Intent(EditWorkoutActivity.this, ShowTPActivity.class));
-						Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
-					}
-				});
-				AlertDialog dialog = builder.create();
-				dialog.show();
-
-			}
-		});
-
 		// finally show the current workout
 		this.updateTable();
 
@@ -205,16 +202,16 @@ public class EditWorkoutActivity extends Activity {
 	private void addRow() {
 		this.emptyRowCount++;
 		DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(emptyRowCount);
-		
+
 		this.updateTable();
 	}
 
 	/** Decreases the number of rows (if >1). */
 	private void removeRow() {
-		if (this.emptyRowCount > 1){
+		if (this.emptyRowCount > 1) {
 			this.emptyRowCount--;
 			DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(emptyRowCount);
-		}	
+		}
 		this.updateTable();
 	}
 
@@ -329,8 +326,8 @@ public class EditWorkoutActivity extends Activity {
 			builder.setMessage(getString(R.string.really_delete)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					int column = columnNumberMap.get(tw);
-					DataManager.INSTANCE.getCurrentWorkout().removeFitnessExercise(DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column-1));
-					
+					DataManager.INSTANCE.getCurrentWorkout().removeFitnessExercise(DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column - 1));
+
 					// after removing a column, the map with columns should be
 					// updated
 					Set<TextView> tws = new HashSet<TextView>(columnNumberMap.keySet());
@@ -370,7 +367,6 @@ public class EditWorkoutActivity extends Activity {
 				emptyTW.setOnLongClickListener(new ColumnListener(emptyTW));
 				this.columnNumberMap.put(emptyTW, k);
 
-				
 				row.addView(emptyTW);
 				this.addColumPadding(row, COLUMN_PADDING);
 			}
