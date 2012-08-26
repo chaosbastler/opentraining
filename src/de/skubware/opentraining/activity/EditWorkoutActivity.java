@@ -252,10 +252,13 @@ public class EditWorkoutActivity extends Activity {
 		tw.setTextSize(22);
 		tw.setPadding(15, 15, 15, 15);
 		tw.setHeight(ROW_HEIGHT);
-		tw.setGravity(Gravity.CENTER_HORIZONTAL);
+		tw.setGravity(Gravity.CENTER);
+
 
 		Drawable border = (Drawable) getResources().getDrawable(R.drawable.border);
 		tw.setBackgroundDrawable(border);
+		tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_white));
+
 		return tw;
 
 	}
@@ -277,6 +280,8 @@ public class EditWorkoutActivity extends Activity {
 		// Date
 		TextView date = this.getStyledTextView(getString(R.string.date));
 		date.setWidth(this.columnWidthMap.get(0));
+		date.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
+
 		firstrow.addView(date);
 
 		// for space between columns empty tw
@@ -286,6 +291,7 @@ public class EditWorkoutActivity extends Activity {
 		for (FitnessExercise fEx : DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises()) {
 			TextView tw = this.getStyledTextView(fEx.toString());
 			tw.setWidth(this.columnWidthMap.get(i));
+			tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
 
 			firstrow.addView(tw);
 

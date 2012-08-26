@@ -25,13 +25,10 @@ import java.util.*;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 
-import de.skubware.opentraining.activity.EditWorkoutActivity;
-import de.skubware.opentraining.activity.SelectExercisesActivity;
 import de.skubware.opentraining.basic.*;
 
 /**
