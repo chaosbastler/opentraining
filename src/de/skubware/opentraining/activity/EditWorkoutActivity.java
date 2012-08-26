@@ -103,6 +103,11 @@ public class EditWorkoutActivity extends Activity {
 	            	builder.setMessage(getString(R.string.no_success));
 
 				}
+				builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
             	AlertDialog alert = builder.create();
             	alert.show();
 				return true;

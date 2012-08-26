@@ -25,10 +25,13 @@ import java.util.*;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 
+import de.skubware.opentraining.activity.EditWorkoutActivity;
+import de.skubware.opentraining.activity.SelectExercisesActivity;
 import de.skubware.opentraining.basic.*;
 
 /**
@@ -189,6 +192,36 @@ public enum DataManager {
 	 */
 	public boolean savePlan(){
 		return XMLSaver.writeTrainingPlan(this.workout, DataManager.getHTMLFolder());
+	}
+	
+	/**
+	 * Loads a saved plan.
+	 * 
+	 * @return true if successful
+	 */
+	public boolean loadPlan(Context context){
+		// XML einlesen und neu speichern
+		String xmlData;
+		try {
+			xmlData = loadFile(DataManager.getHTMLFolder().toString() + "/plan.xml", Source.FILE_SYSTEM, context);
+
+			
+			
+			FileOutputStream fos = context.openFileOutput("my_xml", Context.MODE_PRIVATE);
+			fos.write(xmlData.getBytes());
+			fos.close();
+
+			
+			WorkoutXMLParser parser = new WorkoutXMLParser();
+			Workout w = parser.read(context.getFileStreamPath("my_xml"));
+			DataManager.INSTANCE.setWorkout(w);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
 	}
 	
 	/**

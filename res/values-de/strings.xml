@@ -47,6 +47,9 @@
     <string name="success">Erfolg</string>
     <string name="no_success">Nicht erfolgreich</string>
     <string name="save">Speichern</string>
+    <string name="ok">OK</string>
+    <string name="load_plan">Trainingsplan laden</string>
+    
     
     
     

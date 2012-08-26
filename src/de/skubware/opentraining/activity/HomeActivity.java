@@ -77,10 +77,40 @@ public class HomeActivity extends Activity {
 			}
         }); 
     	
-        // configure menu_button_settings
-    	MenuItem menu_button_settings = (MenuItem) menu.findItem(R.id.menu_button_settings);
-        menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener());
+        // configure menu_item_load_plan
+    	MenuItem menu_item_load_plan = (MenuItem) menu.findItem(R.id.menu_item_load_plan);
+    	menu_item_load_plan.setOnMenuItemClickListener( new OnMenuItemClickListener(){
+			public boolean onMenuItemClick(MenuItem item) {
+				boolean success = DataManager.INSTANCE.loadPlan(HomeActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+				if(success){
+	            	builder.setMessage(getString(R.string.success));
+					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							startActivity(new Intent(HomeActivity.this, EditWorkoutActivity.class));
+						}
+					});
+				}else{
+	            	builder.setMessage(getString(R.string.no_success));
+					builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+				}
 
+
+            	AlertDialog alert = builder.create();
+            	alert.show();
+				return true;
+			}
+        }); 
+
+        // configure menu_button_settings
+        final MenuItem  menu_button_settings =(MenuItem) menu.findItem(R.id.menu_button_settings);
+        menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener()); 
+        
         // configure menu_button_help
         final MenuItem  menu_button_help =(MenuItem) menu.findItem(R.id.menu_button_help);
         menu_button_help.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener()); 
