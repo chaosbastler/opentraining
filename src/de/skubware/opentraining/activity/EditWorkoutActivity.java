@@ -40,6 +40,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -378,6 +379,20 @@ public class EditWorkoutActivity extends Activity {
 			}
 			table.addView(row);
 		}
+	}
+	
+	/**
+	 * Redefine 'backbutton'.
+	 * User should always return to SelectExerciseActivity.
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if (keyCode == KeyEvent.KEYCODE_BACK) {
+	    	finish();
+			startActivity(new Intent(EditWorkoutActivity.this, SelectExercisesActivity.class));
+	        return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 
 }
