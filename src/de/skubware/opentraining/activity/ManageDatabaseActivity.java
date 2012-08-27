@@ -63,7 +63,6 @@ public class ManageDatabaseActivity extends Activity {
 	/** Total number of files that should be downloaded */
 	private int total;
 	
-	/** The base of the URL of @see{EXERCISE_SOURCE} */
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -218,7 +217,7 @@ public class ManageDatabaseActivity extends Activity {
 			else
 				dest = DataManager.getImageFolder();
 
-
+			//TODO: correct dest_folder 'calculation'
 			String dest_folder = url_string.replaceAll("list_files.php", "");
 			succ = download(dest, dest_folder
 					+ name)

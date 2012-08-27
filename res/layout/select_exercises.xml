@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:drawSelectorOnTop="true" >
     </ListView>
-
+
     <RelativeLayout
         android:id="@+id/threeRowWrapper"
         android:layout_width="260dp"
@@ -22,33 +22,12 @@
         android:layout_toRightOf="@+id/exListView"
         android:background="@drawable/btn_green"
         android:gravity="center" >
-
-        <LinearLayout
-            android:id="@+id/wrapper_btn_ex_name_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="10dp" >
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textview_image_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:ems="10"
-            android:enabled="false"
-            android:gravity="center"
-            android:textColor="@color/White" />
-
+
         <RelativeLayout
             android:id="@+id/wrapper_image"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/textview_exercise_name"
             android:orientation="vertical"
             android:padding="20dp" >
 
@@ -56,11 +35,13 @@
                 android:id="@+id/imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_marginBottom="49dp"
                 android:contentDescription="@string/image_currently_selected"
                 android:scaleType="centerInside"
                 android:src="@drawable/ex_dummy" />
+
         </RelativeLayout>
 
         <TextView
@@ -68,11 +49,22 @@
             style="@style/LargeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/wrapper_btn_ex_name_2"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="@string/exercise_name"
             android:textColor="@color/White"
             android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/textview_image_license"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:enabled="false"
+            android:gravity="center"
+            android:textColor="@color/White" />
 
     </RelativeLayout>
 
