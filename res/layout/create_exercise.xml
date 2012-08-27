@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignTop="@+id/wrapper_equipment"
-            android:layout_toLeftOf="@+id/wrapper_extags"
+            android:layout_toLeftOf="@+id/wrapper_exercisetags"
             android:layout_toRightOf="@+id/wrapper_equipment"
             android:orientation="vertical"
             android:padding="10dp" >

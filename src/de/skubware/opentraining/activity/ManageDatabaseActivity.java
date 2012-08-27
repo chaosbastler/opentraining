@@ -63,10 +63,7 @@ public class ManageDatabaseActivity extends Activity {
 	/** Total number of files that should be downloaded */
 	private int total;
 	
-	/** The URL with the list of exercises */
-	public static String EXERCISE_SOURCE = "http://skubware.de/osts/cc_exercises/list_files.php";
 	/** The base of the URL of @see{EXERCISE_SOURCE} */
-	public static String EXERCISE_SOURCE_BASE_FOLDER = "http://skubware.de/osts/cc_exercises/";
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -100,7 +97,8 @@ public class ManageDatabaseActivity extends Activity {
 						// delete the old folder
 						delete(DataManager.getAppFolder());
 						// start downloading new exercises
-						download(EXERCISE_SOURCE);
+						EditText edittext_url = (EditText) findViewById(R.id.edittext_url);
+						download(edittext_url.getText().toString());
 
 					}
 				}).start();
@@ -185,7 +183,7 @@ public class ManageDatabaseActivity extends Activity {
 	 */
 	public boolean download(String url_string) {
 
-		URL url;
+		URL url = null;
 		InputStream is = null;
 		DataInputStream dis;
 		String line;
@@ -220,7 +218,9 @@ public class ManageDatabaseActivity extends Activity {
 			else
 				dest = DataManager.getImageFolder();
 
-			succ = download(dest, EXERCISE_SOURCE_BASE_FOLDER
+
+			String dest_folder = url_string.replaceAll("list_files.php", "");
+			succ = download(dest, dest_folder
 					+ name)
 					& succ;
 

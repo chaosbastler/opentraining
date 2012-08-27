@@ -10,10 +10,9 @@
         android:layout_width="191dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:drawSelectorOnTop="true" >
     </ListView>
-
+
     <RelativeLayout
         android:id="@+id/threeRowWrapper"
         android:layout_width="260dp"
@@ -23,24 +22,15 @@
         android:layout_toRightOf="@+id/exListView"
         android:background="@drawable/btn_green"
         android:gravity="center" >
-
+
         <LinearLayout
             android:id="@+id/wrapper_btn_ex_name_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/wrapper_image"
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/textview_exercise_name"
-                style="@style/LargeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/exercise_name"
-                android:textSize="40dp" />
         </LinearLayout>
 
         <TextView
@@ -52,16 +42,16 @@
             android:enabled="false"
             android:gravity="center"
             android:textColor="@color/White" />
-
+
         <RelativeLayout
             android:id="@+id/wrapper_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/textview_image_license"
-            android:layout_below="@+id/wrapper_btn_ex_name_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:orientation="vertical"
-            android:padding="10dp" >
-
+            android:padding="20dp" >
+
             <ImageView
                 android:id="@+id/imageview"
                 android:layout_width="wrap_content"
@@ -71,10 +61,21 @@
                 android:contentDescription="@string/image_currently_selected"
                 android:scaleType="centerInside"
                 android:src="@drawable/ex_dummy" />
-
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textview_exercise_name"
+            style="@style/LargeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wrapper_btn_ex_name_2"
+            android:layout_centerHorizontal="true"
+            android:text="@string/exercise_name"
+            android:textColor="@color/White"
+            android:textSize="40dp" />
+
     </RelativeLayout>
-
+
     <LinearLayout
         android:id="@+id/wrapper_meta_data"
         android:layout_width="260dp"
@@ -85,140 +86,139 @@
         android:background="#111111"
         android:orientation="vertical" >
 
-            <LinearLayout
-                android:id="@+id/linearLayout25"
+        <LinearLayout
+            android:id="@+id/linearLayout25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textview_tag"
+                style="@style/LargeTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp" >
-
-                <TextView
-                    android:id="@+id/textview_tag"
-                    style="@style/LargeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_white"
-                    android:text="@string/exercise_tags"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/Gray"
-                    android:textColorLink="@color/Gray" />
+                android:background="@drawable/btn_white"
+                android:text="@string/exercise_tags"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/Gray"
+                android:textColorLink="@color/Gray" />
 
-                <TextView
-                    android:id="@+id/textview_tag0"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-
-                <TextView
-                    android:id="@+id/textview_tag1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout24"
+            <TextView
+                android:id="@+id/textview_tag0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|left"
-                android:orientation="vertical"
-                android:padding="10dp" >
-
-                <TextView
-                    android:id="@+id/textview_equipment"
-                    style="@style/LargeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_white"
-                    android:text="@string/equipment"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/Gray"
-                    android:textColorHint="@color/Gray"
-                    android:textColorLink="@color/Gray" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
 
-                <TextView
-                    android:id="@+id/textview_equipment0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-
-                <TextView
-                    android:id="@+id/textview_equipment1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout23"
+            <TextView
+                android:id="@+id/textview_tag1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|left"
-                android:orientation="vertical"
-                android:padding="10dp" >
-
-                <TextView
-                    android:id="@+id/textview_muscle"
-                    style="@style/LargeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_white"
-                    android:text="@string/activated_muscles"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/Gray" />
-
-                <TextView
-                    android:id="@+id/textview_muscle0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-
-                <TextView
-                    android:id="@+id/textview_muscle1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/LinearLayout01"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center|left"
-                android:orientation="vertical"
-                android:padding="10dp" >
-
-                <TextView
-                    android:id="@+id/textview_hint"
-                    style="@style/LargeTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_white"
-                    android:text="@string/hint"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/Gray" />
-
-                <TextView
-                    android:id="@+id/textview_hint0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-
-                <TextView
-                    android:id="@+id/textview_hint1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/White" />
-            </LinearLayout>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textview_equipment"
+                style="@style/LargeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white"
+                android:text="@string/equipment"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/Gray"
+                android:textColorHint="@color/Gray"
+                android:textColorLink="@color/Gray" />
+
+            <TextView
+                android:id="@+id/textview_equipment0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textview_equipment1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textview_muscle"
+                style="@style/LargeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white"
+                android:text="@string/activated_muscles"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/Gray" />
+
+            <TextView
+                android:id="@+id/textview_muscle0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textview_muscle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textview_hint"
+                style="@style/LargeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white"
+                android:text="@string/hint"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/Gray" />
+
+            <TextView
+                android:id="@+id/textview_hint0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
+
+            <TextView
+                android:id="@+id/textview_hint1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/White" />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
