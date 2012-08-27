@@ -187,7 +187,7 @@ public class XMLSaver {
 			// save
 			TransformerFactory 	tf = TransformerFactory.newInstance();
 
-			tf.setAttribute("indent-number", 3);
+			//tf.setAttribute("indent-number", 3);
 			Transformer t = tf.newTransformer();
 
 			// set parameters

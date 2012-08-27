@@ -49,7 +49,13 @@
     <string name="save">Speichern</string>
     <string name="ok">OK</string>
     <string name="load_plan">Trainingsplan laden</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="muscle">Muskel</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="create_new_exercise">Neue Übung erstellen</string>        
+    <string name="name_required">Es muss ein Name angegeben werden</string>    
     
+
     
     
     

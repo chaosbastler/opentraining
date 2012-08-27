@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">Open Training</string>
     <string name="workout_name">Workoutname</string>
     <string name="empty_rows">Empty columns</string>
@@ -18,7 +18,7 @@
     <string name="add_exercise">Add exercise</string>
     <string name="download">Download</string>
     <string name="check_database">Check database</string>
-    <string name="continu">Continue</string><!-- continuE did not work -->
+    <string name="continu">Continue</string> <!-- continuE did not work -->
     <string name="help">Help</string>
     <string name="no_exercise_in_databbase">There are no exercises in the database.</string>
     <string name="action_not_supported">This action is not supported yet.</string>
@@ -49,39 +49,44 @@
     <string name="save">Save</string>
     <string name="ok">OK</string>
     <string name="load_plan">Load plan</string>
+    <string name="menu_settings">Settings</string>
+    <string name="muscle">Muscle</string>
+    <string name="cancel">Cancel</string>
+    <string name="create_new_exercise">Create new exercise</string>    
+    <string name="name_required">Name required</string>    
     
     
     
     
     
-        
     
     
-    
+
     <style name="ButtonText">
-    	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">wrap_content</item>
-    	<item name="android:textColor">#FFFFFF</item>
-    	<item name="android:gravity">center</item>
-    	<item name="android:layout_margin">3dp</item>
-    	<item name="android:textSize">22dp</item>
-    	<item name="android:textStyle">bold</item>
-    	<item name="android:shadowColor">#000000</item>
-    	<item name="android:shadowDx">1</item>
-    	<item name="android:shadowDy">1</item>
-    	<item name="android:shadowRadius">2</item>
-	</style>
-	
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
     <style name="LargeTextView">
-    	<item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">wrap_content</item>
-    	<item name="android:textColor">#000000</item>
-    	<item name="android:gravity">center</item>
-    	<item name="android:layout_margin">3dp</item>
-    	<item name="android:textSize">22dp</item>
-    	<item name="android:textStyle">bold</item>
-	</style>
-	
-    
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
 
 </resources>

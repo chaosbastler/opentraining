@@ -53,7 +53,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO define own exercises; improve muscle choosing(own dialog); no warranty;
+// TODO improve muscle choosing(own dialog); no warranty;
+// TODO Change layout to master/detail flow for supporting smaller screens
 
 /**
  * Shows a list with all exercises. The user can add these exercises to the
@@ -127,6 +128,15 @@ public class SelectExercisesActivity extends Activity {
 			}
 
 		});
+		
+	    // configure menu_item_create_new_exercise
+	    final MenuItem  menu_item_create_new_exercise =(MenuItem) menu.findItem(R.id.menu_item_create_new_exercise);
+	    menu_item_create_new_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			public boolean onMenuItemClick(MenuItem item) {
+				startActivity(new Intent(SelectExercisesActivity.this, CreateExerciseActivity.class));
+				return true;
+			}
+	    }); 
 
 		// configure muscle drop down menu
 		final List<MenuItem> muscleItems = new ArrayList<MenuItem>();
@@ -208,6 +218,8 @@ public class SelectExercisesActivity extends Activity {
 	@Override
 	public void onRestart() {
 		super.onRestart();
+		this.updateExList();
+		
 		// update exercise list, because the old, saved state my not be
 		// up-to-date
 		Workout w = DataManager.INSTANCE.getCurrentWorkout();
