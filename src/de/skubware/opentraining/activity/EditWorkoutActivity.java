@@ -386,13 +386,10 @@ public class EditWorkoutActivity extends Activity {
 	 * User should always return to SelectExerciseActivity.
 	 */
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-	    if (keyCode == KeyEvent.KEYCODE_BACK) {
-	    	finish();
-			startActivity(new Intent(EditWorkoutActivity.this, SelectExercisesActivity.class));
-	        return true;
-	    }
-	    return super.onKeyDown(keyCode, event);
+	public void onBackPressed() {
+    	finish();
+		startActivity(new Intent(EditWorkoutActivity.this, SelectExercisesActivity.class));	
+		return;
 	}
 
 }
