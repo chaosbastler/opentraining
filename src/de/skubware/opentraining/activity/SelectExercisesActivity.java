@@ -36,6 +36,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
@@ -53,7 +54,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO improve muscle choosing(own dialog); no warranty;
+// TODO no warranty dialog;
 // TODO Change layout to master/detail flow for supporting smaller screens
 
 /**
@@ -138,42 +139,43 @@ public class SelectExercisesActivity extends Activity {
 			}
 	    }); 
 
-		// configure muscle drop down menu
-		final List<MenuItem> muscleItems = new ArrayList<MenuItem>();
-		for (Muscle m : Muscle.values()) {
-			MenuItem item = menu.add(m.toString());
-			muscleItems.add(item);
-			item.setCheckable(true);
-			item.setChecked(true);
-			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				public boolean onMenuItemClick(MenuItem item) {
-					item.setChecked(!item.isChecked());
-					muscleMap.put(Muscle.getByName(item.getTitle().toString()), item.isChecked());
-					updateExList();
 
-					return true;
-				}
-			});
-		}
-		MenuItem menuitem_uncheck_all = menu.add(getString(R.string.unselect_all));
-		menuitem_uncheck_all.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		MenuItem menu_item_select_muscles = (MenuItem) menu.findItem(R.id.menu_item_select_muscles);
+		menu_item_select_muscles.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem menuitem) {
-				for (MenuItem item : muscleItems) {
-					item.setChecked(false);
-					muscleMap.put(Muscle.getByName(item.getTitle().toString()), item.isChecked());
-					updateExList();
+			    final CharSequence[] items = new CharSequence[Muscle.values().length];
+			    final boolean[] states = new boolean[Muscle.values().length];
+				int i = 0;
+				for(Muscle m:Muscle.values()){
+					items[i] = m.toString();
+					states[i] = muscleMap.get(m);
+					i++;
 				}
-				return true;
-			}
-		});
-		MenuItem menuitem_check_all = menu.add(getString(R.string.select_all));
-		menuitem_check_all.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem menuitem) {
-				for (MenuItem item : muscleItems) {
-					item.setChecked(true);
-					muscleMap.put(Muscle.getByName(item.getTitle().toString()), item.isChecked());
-					updateExList();
-				}
+			    
+			    
+			    AlertDialog.Builder builder = new AlertDialog.Builder(SelectExercisesActivity.this);
+			    builder.setTitle(getString(R.string.select_muscles));
+			    builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener(){
+			        public void onClick(DialogInterface dialogInterface, int item, boolean state) {
+			        }
+			    });
+			    builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int id) {
+			            SparseBooleanArray Checked = ((AlertDialog)dialog).getListView().getCheckedItemPositions();
+			            for(int i = 0; i<Checked.size();i++){
+			            	muscleMap.put(Muscle.getByName(items[i].toString()), states[i]);
+			            }
+						updateExList();
+			        }
+			    });
+			    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int id) {
+			             dialog.cancel();
+			        }
+			    });
+			    builder.create().show();
+				
+
 				return true;
 			}
 		});
