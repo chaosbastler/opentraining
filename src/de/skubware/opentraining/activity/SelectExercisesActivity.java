@@ -173,6 +173,7 @@ public class SelectExercisesActivity extends Activity {
 			             dialog.cancel();
 			        }
 			    });
+			    builder.setIcon(R.drawable.icon_attention);
 			    builder.create().show();
 				
 
