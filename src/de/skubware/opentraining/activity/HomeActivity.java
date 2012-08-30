@@ -109,14 +109,7 @@ public class HomeActivity extends Activity {
 
         // configure menu_button_settings
         final MenuItem  menu_button_settings =(MenuItem) menu.findItem(R.id.menu_button_settings);
-        menu_button_settings.setOnMenuItemClickListener(new OnMenuItemClickListener(){
-			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(HomeActivity.this, CreateExerciseActivity.class));
-				return true;
-			}
-        }); 
-        
-        //menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener()); 
+        menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener()); 
         
         // configure menu_button_help
         final MenuItem  menu_button_help =(MenuItem) menu.findItem(R.id.menu_button_help);

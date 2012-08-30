@@ -42,6 +42,7 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -58,12 +59,14 @@ import android.widget.EditText;
  * 
  */
 public class ManageDatabaseActivity extends Activity {
+	/** Tag for logging */
+	private static final String TAG = "ManageDatabaseActivity";
+	
 	/** Number of the file that's downloaded at the moment */
 	private int current;
 	/** Total number of files that should be downloaded */
 	private int total;
-	
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,17 +77,16 @@ public class ManageDatabaseActivity extends Activity {
 		button_download.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// warn user if there is no internet connection
-				if(!isOnline()){
-				   	AlertDialog.Builder builder = new AlertDialog.Builder(ManageDatabaseActivity.this);
-		        	builder.setMessage(getString(R.string.no_internet_connection))
-		        	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-		        	           public void onClick(DialogInterface dialog, int id) {
-		        	        	   dialog.cancel();
-		        	           }
-		        	       });
-		        	AlertDialog alert = builder.create();
-		        	alert.show();
-		        	return;
+				if (!isOnline()) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(ManageDatabaseActivity.this);
+					builder.setMessage(getString(R.string.no_internet_connection)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+						}
+					});
+					AlertDialog alert = builder.create();
+					alert.show();
+					return;
 				}
 
 				// when button was clicked -> start download in new thread
@@ -105,11 +107,7 @@ public class ManageDatabaseActivity extends Activity {
 			}
 
 		});
-		
-		
-		
-		
-		
+
 		Button button_check_database = (Button) findViewById(R.id.button_check_database);
 		button_check_database.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -118,47 +116,46 @@ public class ManageDatabaseActivity extends Activity {
 		});
 
 	}
-	
+
 	/**
 	 * 
 	 */
-	private void checkDatabase(){
+	private void checkDatabase() {
 		DataManager.INSTANCE.loadExercises(this);
 		int exCnt = ExerciseType.listExerciseTypes().size();
-		appendMsg( exCnt + " " + getString(R.string.valid_exercises));
-		
-		int totalEx = DataManager.getExerciseXMLFolder().listFiles().length;
-		appendMsg( totalEx-exCnt + " " + getString(R.string.not_valid_exercises));
+		appendMsg(exCnt + " " + getString(R.string.valid_exercises));
 
-		
+		int totalEx = DataManager.getExerciseXMLFolder().listFiles().length;
+		appendMsg(totalEx - exCnt + " " + getString(R.string.not_valid_exercises));
+
 		int imgCnt = 0;
-		for(ExerciseType ex:ExerciseType.listExerciseTypes()){
+		for (ExerciseType ex : ExerciseType.listExerciseTypes()) {
 			imgCnt += ex.getImagePaths().size();
 		}
 		appendMsg(imgCnt + " " + getString(R.string.images));
 
 	}
-	
+
 	/**
-	 * Checks the network status.
-	 * Note: duplicate code, see ShowTPActivity.java
+	 * Checks the network status. Note: duplicate code, see ShowTPActivity.java
 	 * 
 	 * @return True, if internet connection is available, false otherwise.
 	 */
-	public boolean isOnline(){
+	public boolean isOnline() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo != null && netInfo.isConnectedOrConnecting()){
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	/**
-	 * Deletes a directory 
+	 * Deletes a directory
 	 * 
-	 * @param dir The directory to delete.
+	 * @param dir
+	 *            The directory to delete.
 	 * 
 	 * @return True, if deletion was successful, false otherwise.
 	 */
@@ -176,11 +173,12 @@ public class ManageDatabaseActivity extends Activity {
 	 * Downloads a single file.
 	 * 
 	 * 
-	 * @param url_string The URL of the file that should be downloaded.
+	 * @param urlString
+	 *            The URL of the file that should be downloaded.
 	 * 
 	 * @return True if no problem did occur.
 	 */
-	public boolean download(String url_string) {
+	public boolean download(String urlString) {
 
 		URL url = null;
 		InputStream is = null;
@@ -189,7 +187,7 @@ public class ManageDatabaseActivity extends Activity {
 		List<String> lines = new ArrayList<String>();
 
 		try {
-			url = new URL(url_string);
+			url = new URL(urlString);
 			is = url.openStream(); // throws an IOException
 			dis = new DataInputStream(new BufferedInputStream(is));
 
@@ -208,6 +206,11 @@ public class ManageDatabaseActivity extends Activity {
 				// nothing to see here
 			}
 		}
+		
+		// 'calculate' the name of the folder of the exercises
+		String urlBase = urlString.substring(0 , urlString.lastIndexOf('/') );
+
+		
 
 		boolean succ = true;
 		for (String name : lines) {
@@ -217,11 +220,9 @@ public class ManageDatabaseActivity extends Activity {
 			else
 				dest = DataManager.getImageFolder();
 
-			//TODO: correct dest_folder 'calculation'
-			String dest_folder = url_string.replaceAll("list_files.php", "");
-			succ = download(dest, dest_folder
-					+ name)
-					& succ;
+
+
+			succ = download(dest, urlBase +"/" + name) & succ;
 
 		}
 
@@ -232,14 +233,15 @@ public class ManageDatabaseActivity extends Activity {
 	/**
 	 * Downloads a list of files.
 	 * 
-	 * How the list with files should look like:
-	 * - just a list of the names of the files
-	 * - every image is in the same folder as the list of the files
-	 * - the files have to be separated by new lines
-	 * For an example simply have a look at @value{EXERCISE_SOURCE}
+	 * How the list with files should look like: - just a list of the names of
+	 * the files - every image is in the same folder as the list of the files -
+	 * the files have to be separated by new lines For an example simply have a
+	 * look at @value{EXERCISE_SOURCE}
 	 * 
-	 * @param destination The destination folder.
-	 * @param urlString The URL of the list of files.
+	 * @param destination
+	 *            The destination folder.
+	 * @param urlString
+	 *            The URL of the list of files.
 	 * 
 	 * @return True if no problem did occur.
 	 */
@@ -251,8 +253,7 @@ public class ManageDatabaseActivity extends Activity {
 			URL url = new URL(urlString);
 
 			// create the new connection
-			HttpURLConnection urlConnection = (HttpURLConnection) url
-					.openConnection();
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
 			// set up some things on the connection
 			urlConnection.setRequestMethod("GET");
@@ -265,7 +266,7 @@ public class ManageDatabaseActivity extends Activity {
 			// which we want to save the file as.
 			String[] split = urlString.split("/");
 			String fileName = split[split.length - 1];
-			System.out.println(fileName);
+			Log.i(TAG, fileName);
 
 			File file = new File(destination, fileName);
 
@@ -276,7 +277,6 @@ public class ManageDatabaseActivity extends Activity {
 			// this will be used in reading the data from the internet
 			InputStream inputStream = urlConnection.getInputStream();
 
-			
 			// this is the total size of the file
 			// int totalSize = urlConnection.getContentLength();
 			// variable to store total downloaded bytes
@@ -306,8 +306,7 @@ public class ManageDatabaseActivity extends Activity {
 			// Updates for UI
 			runOnUiThread(new Runnable() {
 				public void run() {
-					String msg = "Download " + current + " of " + total
-							+ " finished";
+					String msg = "Download " + current + " of " + total + " finished";
 					appendMsg(msg);
 				}
 			});
@@ -323,8 +322,8 @@ public class ManageDatabaseActivity extends Activity {
 
 		return true;
 	}
-	
-	private void appendMsg(String msg){
+
+	private void appendMsg(String msg) {
 		EditText edittext_information = (EditText) findViewById(R.id.edittext_information);
 		edittext_information.append(msg + "\n");
 	}

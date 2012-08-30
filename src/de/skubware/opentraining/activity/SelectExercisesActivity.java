@@ -382,6 +382,7 @@ public class SelectExercisesActivity extends Activity {
 			return true;
 		}
 
+		//TODO change swiping action to switch to next exercise
 		/**
 		 * When the user swipes, he can also go back.
 		 */
