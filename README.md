@@ -14,6 +14,10 @@ License
 -------
 GPL 3 (some files may be CC licensed)
 
+Exercises
+---------
+I put the exercises to another github repository: https://github.com/chaosbastler/opentraining-exercises
+I did not want to mix up code and content.
 
 Translations
 ------------
