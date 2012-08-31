@@ -226,7 +226,7 @@ public enum DataManager {
 						fos.write(xmlData.getBytes());
 						fos.close();
 
-						ExTypeXMLParser parser = new ExTypeXMLParser();
+						ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser();
 						parser.read(context.getFileStreamPath("my_xml"));
 					}
 				} catch (IOException ioEx) {
