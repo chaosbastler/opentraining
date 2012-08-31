@@ -45,16 +45,6 @@
         android:text="http://skubware.de/opentraining/cc_exercises/list_files.php"
         tools:ignore="HardcodedText" />
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_below="@+id/editText2" />
-
     <EditText
         android:id="@+id/edittext_information"
         android:layout_width="wrap_content"
