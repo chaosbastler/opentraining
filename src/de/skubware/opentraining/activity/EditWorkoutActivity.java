@@ -27,6 +27,7 @@ import java.util.Set;
 
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.*;
+import de.skubware.opentraining.datamanagement.DataManager.CSSFile;
 
 import de.skubware.training_app.R;
 
@@ -117,30 +118,17 @@ public class EditWorkoutActivity extends Activity {
 		final MenuItem menu_item_export_plan = (MenuItem) menu.findItem(R.id.menu_item_export_plan);
 		menu_item_export_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				final CharSequence[] items = { "Default", "Boring", "Modern", "Ninja" };
+				final CharSequence[] items = CSSFile.items;
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
 				builder.setTitle(getString(R.string.choose_design));
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int item) {
-						String css;
-						switch (item) {
-						case 0:
-							css = "trainingplan_default.css";
-							break;
-						case 1:
-							css = "trainingplan_boring.css";
-							break;
-						case 2:
-							css = "trainingplan_modern.css";
-							break;
-						case 3:
-							css = "trainingplan_ninja.css";
-							break;
-						default:
-							throw new IllegalStateException(getString(R.string.action_not_supported));
-						}
-						DataManager.INSTANCE.setCSSFile(css);
+						String css = CSSFile.items[item].toString();
+						CSSFile cssFile = CSSFile.valueOf(CSSFile.class, css);
+						
+
+						DataManager.INSTANCE.setCSSFile(cssFile);
 						startActivity(new Intent(EditWorkoutActivity.this, ShowTPActivity.class));
 					}
 				});

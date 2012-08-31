@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
 
@@ -40,11 +41,38 @@ import de.skubware.opentraining.basic.*;
 public enum DataManager {
 	INSTANCE;
 
+	/** Tag for logging */
+	private static final String TAG = "DataManager";
+
 	private Workout workout;
 	private Map<ExerciseType, String> htmlMap = new HashMap<ExerciseType, String>();
 
-	private String css = "trainingplan_modern.css";
+	private CSSFile css = CSSFile.Default;
 
+	
+	/**
+	 * Enumeration for .css files.
+	 *
+	 */
+	public enum CSSFile {
+		Default, Boring, Modern, Ninja;
+
+		public final static CharSequence[] items = new CharSequence[CSSFile.values().length];
+		static {
+			int i = 0;
+			for (CSSFile css : CSSFile.values()) {
+				items[i] = css.name();
+				i++;
+			}
+		}
+
+		String filename;
+
+		CSSFile() {
+			this.filename = "trainingplan_" + this.name().toLowerCase() + ".css";
+		}
+
+	}
 
 	/**
 	 * Static method to get app folder. Folder will be created, if it does not
@@ -332,19 +360,22 @@ public enum DataManager {
 		this.workout = workout;
 	}
 
-	public void setCSSFile(String css) {
+	public void setCSSFile(CSSFile css) {
 		this.css = css;
 	}
 
-	public String getCSSFile() {
-		return css;
-	}
-
-	public String getCSSString(Context context) {
+	/**
+	 * Reads and returns the .css file for the plan.
+	 * 
+	 * @param context
+	 *            The context from which this method is called from.
+	 * @return A string of the .css file.
+	 */
+	public String getCSSFileAsString(Context context) {
 		try {
-			return this.loadFile(css, Source.ASSETS, context);
+			return this.loadFile(css.filename, Source.ASSETS, context);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(TAG, "Error reading .css file: " + css + "\n" + e.getMessage());
 			return "<!--Error reading style information-->";
 		}
 	}

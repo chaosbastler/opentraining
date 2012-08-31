@@ -122,7 +122,7 @@ public class HTMLExporter extends WorkoutExporter {
 		
 		
 
-		data = data.replaceAll("<!--CSS-->", DataManager.INSTANCE.getCSSString(context));
+		data = data.replaceAll("<!--CSS-->", DataManager.INSTANCE.getCSSFileAsString(context));
 		
 		
 		
