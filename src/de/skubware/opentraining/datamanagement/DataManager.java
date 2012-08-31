@@ -44,15 +44,24 @@ public enum DataManager {
 	/** Tag for logging */
 	private static final String TAG = "DataManager";
 
+	/** Current workout */
 	private Workout workout;
+	/** A map to support the caching of generated .html files */
 	private Map<ExerciseType, String> htmlMap = new HashMap<ExerciseType, String>();
 
+	/** Currently choosen .css style for plan */
 	private CSSFile css = CSSFile.Default;
 
-	
+	/**
+	 * Enumeration to define the source, where a file should be loaded from.
+	 */
+	public enum Source {
+		RAW_FOLDER, ASSETS, FILE_SYSTEM;
+	}
+
 	/**
 	 * Enumeration for .css files.
-	 *
+	 * 
 	 */
 	public enum CSSFile {
 		Default, Boring, Modern, Ninja;
@@ -130,7 +139,7 @@ public enum DataManager {
 	}
 
 	/**
-	 * Returns a Drawable when an image with such a name is there.
+	 * Returns a {@code Drawable} when an image with such a name is there.
 	 * 
 	 * @param name
 	 *            The name of the image
@@ -145,9 +154,9 @@ public enum DataManager {
 			img = Drawable.createFromStream(fis, "icon");
 			fis.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Log.e(TAG, "Could not find drawable: " + name + "\n" + e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(TAG, "Could not find drawable: " + name + "\n" + e.getMessage());
 		}
 
 		return img;
@@ -169,8 +178,7 @@ public enum DataManager {
 		try {
 			data = loadFile("template", Source.RAW_FOLDER, context);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, "Could not load html template \n" + e.getMessage());
 		}
 
 		data = data.replaceAll("EX_NAME", ex.getName());
@@ -190,9 +198,12 @@ public enum DataManager {
 	}
 
 	/**
-	 * Removes all ExerciseTypes and reads them again.
+	 * Removes all ExerciseTypes and reads them again. A new thread is started
+	 * for this.
 	 */
 	public void loadExercises(final Context context) {
+
+		// do this in background
 		new Thread(new Runnable() {
 			public void run() {
 
@@ -239,7 +250,7 @@ public enum DataManager {
 	 * @return true if successful
 	 */
 	public boolean loadPlan(Context context) {
-		// XML einlesen und neu speichern
+		// read xml, save again and parse it
 		String xmlData;
 		try {
 			xmlData = loadFile(DataManager.getHTMLFolder().toString() + "/plan.xml", Source.FILE_SYSTEM, context);
@@ -253,7 +264,7 @@ public enum DataManager {
 			DataManager.INSTANCE.setWorkout(w);
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.i(TAG, "Could not read training plan \n" + e.getMessage());
 			return false;
 		}
 
@@ -270,11 +281,21 @@ public enum DataManager {
 		return XMLSaver.writeExerciseType(ex, DataManager.getExerciseXMLFolder());
 	}
 
-	public enum Source {
-		RAW_FOLDER, ASSETS, FILE_SYSTEM;
-	}
-
-	// load file from apps res/raw folder or Assets folder
+	/**
+	 * Loads a file from the raw folder, the assets folder or the file system.
+	 * 
+	 * @param fileName
+	 *            The name/path of the file
+	 * @param src
+	 *            Where the file is located
+	 * @param context
+	 *            Current context
+	 * 
+	 * @return String with the content of the file
+	 * 
+	 * @throws IOException
+	 *             if loading file fails
+	 */
 	public String loadFile(String fileName, Source src, Context context) throws IOException {
 		Resources resources = context.getResources();
 
@@ -314,6 +335,17 @@ public enum DataManager {
 		return workout;
 	}
 
+	/**
+	 * Writes a file to the cache folder.
+	 * 
+	 * @param data
+	 *            Data to write
+	 * @param name
+	 *            Name of the file
+	 * @param context
+	 *            Current context
+	 * @return The file that was written or null if a problem occurred.
+	 */
 	public File writeFileToCache(String data, String name, Context context) {
 		File destination = context.getCacheDir();
 
@@ -326,15 +358,31 @@ public enum DataManager {
 			fos.close();
 		} catch (FileNotFoundException e) {
 			f = null;
-			e.printStackTrace();
+			Log.e(TAG, "Could not write file to cache: " + name + "\n" + e.getMessage());
 		} catch (IOException e) {
 			f = null;
-			e.printStackTrace();
+			Log.e(TAG, "Could not write file to cache: " + name + "\n" + e.getMessage());
 		}
 
 		return f;
 	}
 
+	/**
+	 * Writes a file to a folder.
+	 * 
+	 * @param data
+	 *            Data to write
+	 * @param name
+	 *            Name of the file
+	 * @param context
+	 *            Current context
+	 * @param destination
+	 *            The destination folder
+	 * @return The file that was written or null if a problem occurred.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if destination is no directory
+	 */
 	public File writeFile(String data, String name, Context context, File destination) {
 		if (!destination.isDirectory())
 			throw new IllegalArgumentException("No valid directory");
@@ -347,20 +395,39 @@ public enum DataManager {
 			fileOutput.close();
 		} catch (FileNotFoundException e) {
 			f = null;
-			e.printStackTrace();
+			Log.e(TAG, "Could not write to cache: " + name + ", destination: " + destination.toString() + "\n" + e.getMessage());
 		} catch (IOException e) {
 			f = null;
-			e.printStackTrace();
+			Log.e(TAG, "Could not write to cache: " + name + ", destination: " + destination.toString() + "\n" + e.getMessage());
 		}
 
 		return f;
 	}
 
+	/**
+	 * Setter for workout
+	 * 
+	 * @param workout
+	 *            The new workout
+	 */
 	public void setWorkout(Workout workout) {
 		this.workout = workout;
 	}
 
+	/**
+	 * Setter for css
+	 * 
+	 * @param css
+	 *            The new CSSFile
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if css is null
+	 */
 	public void setCSSFile(CSSFile css) {
+		if (css == null) {
+			Log.e(TAG, "You tried to set a css file to null. This is not allowed. \n");
+			throw new IllegalArgumentException("CSS must not be null");
+		}
 		this.css = css;
 	}
 
