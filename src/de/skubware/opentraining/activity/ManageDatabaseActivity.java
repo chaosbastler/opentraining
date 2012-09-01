@@ -225,6 +225,9 @@ public class ManageDatabaseActivity extends Activity {
 			succ = download(dest, urlBase +"/" + name) & succ;
 
 		}
+		
+		// finally reload database
+		DataManager.INSTANCE.loadExercises(ManageDatabaseActivity.this);
 
 		return succ;
 
