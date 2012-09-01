@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="icon_add.svg">
+   sodipodi:docname="icon_attention.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -72,7 +72,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -83,7 +83,7 @@
      transform="translate(-323.89028,-411.3547)">
     <path
        sodipodi:type="arc"
-       style="fill:#808080;fill-opacity:1;stroke:#ffffff;stroke-width:1.71642601;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#333333;fill-opacity:1;stroke:#ffffff;stroke-width:1.71642600999999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="path3011"
        sodipodi:cx="18.392857"
        sodipodi:cy="-4.2054815"
@@ -105,7 +105,7 @@
        sodipodi:cy="18.639339"
        sodipodi:rx="1.420527"
        sodipodi:ry="1.420527"
-       d="m 12.658474,18.639339 a 1.420527,1.420527 0 1 1 -2.8410535,0 1.420527,1.420527 0 1 1 2.8410535,0 z"
+       d="m 12.658474,18.639339 c 0,0.784536 -0.635991,1.420527 -1.420527,1.420527 -0.784535,0 -1.4205265,-0.635991 -1.4205265,-1.420527 0,-0.784535 0.6359915,-1.420527 1.4205265,-1.420527 0.784536,0 1.420527,0.635992 1.420527,1.420527 z"
        transform="matrix(1.276721,0,0,1.276721,319.65677,401.71441)" />
   </g>
 </svg>
