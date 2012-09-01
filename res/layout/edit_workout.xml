@@ -99,6 +99,16 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageview_waste_basket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/wrapper_empty_rows"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/wrapper_empty_rows"
+            android:src="@drawable/icon_waste_basket" />
+
     </RelativeLayout>
 
     <HorizontalScrollView

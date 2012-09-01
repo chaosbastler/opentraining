@@ -51,6 +51,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -58,8 +59,8 @@ import android.widget.Toast;
 
 /**
  * This activity shows the plan(table) with the selected exercises. The user can
- * select the number of empty rows and change the name of the plan.
- * and finally export it.
+ * select the number of empty rows and change the name of the plan. and finally
+ * export it.
  * 
  * 
  * @author Christian Skubich
@@ -68,7 +69,7 @@ import android.widget.Toast;
 public class EditWorkoutActivity extends Activity {
 	/** Tag for logging */
 	private static final String TAG = "EditWorkoutActivity";
-	
+
 	/** Contains the current column number of each TextView */
 	private Map<TextView, Integer> columnNumberMap = new HashMap<TextView, Integer>();
 
@@ -81,7 +82,7 @@ public class EditWorkoutActivity extends Activity {
 	// some attributes for the style/design of the table
 	private final static int COLUMN_PADDING = 5;
 	private final static int ROW_PADDING = 5;
-	
+
 	private final static int ROW_HEIGHT = 90;
 	private final static int COLUMN_WIDTH = 200;
 	private final static int DATE_COLUMN_WIDTH = 100;
@@ -177,6 +178,10 @@ public class EditWorkoutActivity extends Activity {
 			}
 		});
 
+		// waste basket
+		ImageView imageview_waste_basket = (ImageView) findViewById(R.id.imageview_waste_basket);
+		imageview_waste_basket.setOnDragListener(new DragColumnListener());
+
 		// finally show the current workout
 		this.updateTable();
 
@@ -229,7 +234,6 @@ public class EditWorkoutActivity extends Activity {
 		tw.setHeight(ROW_HEIGHT);
 		tw.setWidth(COLUMN_WIDTH);
 
-
 		tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_white));
 
 		return tw;
@@ -269,7 +273,6 @@ public class EditWorkoutActivity extends Activity {
 
 			// add touch action, anonymous class did not work (because the
 			// argument is needed)
-			tw.setOnLongClickListener(new ColumnListener(tw));
 			tw.setOnTouchListener(new TouchColumnListener());
 			tw.setOnDragListener(new DragColumnListener());
 			this.columnNumberMap.put(tw, i);
@@ -284,11 +287,9 @@ public class EditWorkoutActivity extends Activity {
 		table.addView(firstrow);
 
 	}
-	
-	
-	
+
 	/** Tiny class for a listener that handles on touch. */
-	class TouchColumnListener implements View.OnTouchListener{
+	class TouchColumnListener implements View.OnTouchListener {
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
 			if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
@@ -300,73 +301,74 @@ public class EditWorkoutActivity extends Activity {
 				view.startDrag(clipData, dsb, view, 0);
 
 				view.setVisibility(View.INVISIBLE);
-				
+
 				return true;
 			} else {
 				return false;
 			}
 		}
 	}
-	
-	
+
 	/** Tiny class for a listener that handles drag and drop */
-	class DragColumnListener implements View.OnDragListener{
-        boolean containsDragable = false;
+	class DragColumnListener implements View.OnDragListener {
+		boolean containsDragable = false;
+		boolean overWasteBasket = false;
 
 		@Override
-		    public boolean onDrag(final View view, final DragEvent dragEvent) {
-		        int dragAction = dragEvent.getAction();
-		        final View dragView = (View) dragEvent.getLocalState();
-		        if (dragAction == DragEvent.ACTION_DRAG_EXITED) {
-		            containsDragable = false;
-					Log.d(TAG, "Action drag exited, containsDragable now false");
-		        } else if (dragAction == DragEvent.ACTION_DRAG_ENTERED) {
-		            containsDragable = true;
-					Log.d(TAG, "Action drag entered, containsDragable now true");
-		        } else if (dragAction == DragEvent.ACTION_DRAG_ENDED) {
-		            if (dropEventNotHandled(dragEvent)) {
-		        	dragView.post(new Runnable(){
+		public boolean onDrag(final View view, final DragEvent dragEvent) {
+			int dragAction = dragEvent.getAction();
+			final View dragView = (View) dragEvent.getLocalState();
+			if (dragAction == DragEvent.ACTION_DRAG_EXITED) {
+				containsDragable = false;
+				overWasteBasket = false;
+				Log.d(TAG, "Action drag exited, containsDragable now false");
+			} else if (dragAction == DragEvent.ACTION_DRAG_ENTERED) {
+				containsDragable = true;
+				if (view.getClass().equals(ImageView.class))
+					overWasteBasket = true;
+				Log.d(TAG, "Action drag entered, containsDragable now true");
+			} else if (dragAction == DragEvent.ACTION_DRAG_ENDED) {
+				if (dropEventNotHandled(dragEvent)) {
+					dragView.post(new Runnable() {
 						@Override
 						public void run() {
-			        		dragView.setVisibility(View.VISIBLE);
+							dragView.setVisibility(View.VISIBLE);
 						}
-		        	    });
-						Log.d(TAG, "Action drag ended, set visible");
-		            }
-		        } else if (dragAction == DragEvent.ACTION_DROP && containsDragable) {
-					Log.d(TAG, "Action drop endend and contains dragable, set visible");
-		        	dragView.post(new Runnable(){
-						@Override
-						public void run() {
-			        		dragView.setVisibility(View.VISIBLE);
-							Workout current = DataManager.INSTANCE.getCurrentWorkout();
-							current.switchExercises(exerciseMap.get(view), exerciseMap.get(dragView));
-							updateTable();
-						}
-		        	    });		        
-		        	}
-		        return true;
-		    }
-		 
-		    private boolean dropEventNotHandled(DragEvent dragEvent) {
-		        return !dragEvent.getResult();
-		    }
-
-	}
-
-	/** Tiny class for a listener that creates a dialog. */
-	class ColumnListener implements View.OnLongClickListener {
-		private TextView tw;
-
-		public ColumnListener(TextView tw) {
-			this.tw = tw;
+					});
+					Log.d(TAG, "Action drag ended, set visible");
+				}
+			} else if (dragAction == DragEvent.ACTION_DROP && containsDragable && !overWasteBasket) {
+				Log.d(TAG, "Action drop endend and contains dragable, set visible");
+				dragView.post(new Runnable() {
+					@Override
+					public void run() {
+						dragView.setVisibility(View.VISIBLE);
+						Workout current = DataManager.INSTANCE.getCurrentWorkout();
+						current.switchExercises(exerciseMap.get(view), exerciseMap.get(dragView));
+						updateTable();
+					}
+				});
+			} else if (dragAction == DragEvent.ACTION_DROP && containsDragable && overWasteBasket) {
+				Log.i(TAG, "Drag and drop over WASTE BASKET");
+				dragView.post(new Runnable() {
+					@Override
+					public void run() {
+						dragView.setVisibility(View.VISIBLE);
+						removeColumn((TextView) dragView);
+					}
+				});
+			}
+			return true;
 		}
 
+		private boolean dropEventNotHandled(DragEvent dragEvent) {
+			return !dragEvent.getResult();
+		}
 
-		public boolean onLongClick(View arg0) {
+		private void removeColumn(final TextView tw) {
 			if (DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
 				Toast.makeText(getApplicationContext(), getString(R.string.need_more_than_1), Toast.LENGTH_LONG).show();
-				return true;
+				return;
 			}
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
@@ -396,8 +398,8 @@ public class EditWorkoutActivity extends Activity {
 			});
 			AlertDialog alert = builder.create();
 			alert.show();
-			return true;
 		}
+
 	}
 
 	private void buildEmptyRows() {
@@ -409,11 +411,10 @@ public class EditWorkoutActivity extends Activity {
 
 			for (int k = 0; k <= DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size(); k++) {
 				TextView emptyTW = this.getStyledTextView("");
-				if(k==0)
+				if (k == 0)
 					emptyTW.setWidth(DATE_COLUMN_WIDTH);
 				// for performance reasons one could cache the ColumnListeners
 				// in a Map
-				emptyTW.setOnLongClickListener(new ColumnListener(emptyTW));
 				this.columnNumberMap.put(emptyTW, k);
 
 				row.addView(emptyTW);
