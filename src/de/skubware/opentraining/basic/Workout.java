@@ -22,6 +22,8 @@ package de.skubware.opentraining.basic;
 
 import java.util.*;
 
+import android.util.Log;
+
 
 /**
  * This class represents a single workout.
@@ -165,6 +167,18 @@ public class Workout implements Iterable<FitnessExercise>{
 	@Override
 	public String toString() {
 		return this.name;
+	}
+	
+	public void switchExercises(FitnessExercise first, FitnessExercise second){
+		if(!this.fitnessExercises.contains(first) || !this.fitnessExercises.contains(second)){
+			throw new AssertionError("FitnessExercise does not exist in workout");
+		}	
+		
+		int idxFirst = this.fitnessExercises.indexOf(first);
+		int idxSecond = this.fitnessExercises.indexOf(second);
+
+		Collections.swap(fitnessExercises, idxFirst, idxSecond);
+
 	}
 
 	public int getEmptyRows() {

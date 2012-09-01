@@ -33,20 +33,26 @@ import de.skubware.training_app.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.util.SparseIntArray;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -73,6 +79,10 @@ public class EditWorkoutActivity extends Activity {
 	/** Contains the current column number of each TextView */
 	private Map<TextView, Integer> columnNumberMap = new HashMap<TextView, Integer>();
 
+	/** Contains the exercise that belongs to a textview */
+	private Map<TextView, FitnessExercise> exerciseMap = new HashMap<TextView, FitnessExercise>();
+
+	
 	/** number of columns, cannot be changed */
 	private int columnCount;
 	/** number of rows, can be changed, must be positive */
@@ -81,7 +91,7 @@ public class EditWorkoutActivity extends Activity {
 	// some attributes for the style/design of the table
 	private final static int COLUMN_PADDING = 5;
 	private final static int ROW_PADDING = 5;
-	private final static int ROW_HEIGHT = 80;
+	private final static int ROW_HEIGHT = 90;
 
 	/**
 	 * Configures the menu actions.
@@ -126,7 +136,6 @@ public class EditWorkoutActivity extends Activity {
 					public void onClick(DialogInterface dialog, int item) {
 						String css = CSSFile.items[item].toString();
 						CSSFile cssFile = CSSFile.valueOf(CSSFile.class, css);
-						
 
 						DataManager.INSTANCE.setCSSFile(cssFile);
 						startActivity(new Intent(EditWorkoutActivity.this, ShowTPActivity.class));
@@ -238,13 +247,13 @@ public class EditWorkoutActivity extends Activity {
 		tw.setText(text);
 		tw.setTypeface(null, Typeface.BOLD);
 		tw.setTextSize(22);
-		tw.setPadding(15, 15, 15, 15);
+		// tw.setPadding(15, 15, 15, 15);
+		tw.setGravity(Gravity.CENTER_HORIZONTAL);
 		tw.setHeight(ROW_HEIGHT);
-		tw.setGravity(Gravity.CENTER);
 
+		// tw.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+		// LayoutParams.FILL_PARENT));
 
-		Drawable border = (Drawable) getResources().getDrawable(R.drawable.border);
-		tw.setBackgroundDrawable(border);
 		tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_white));
 
 		return tw;
@@ -285,8 +294,11 @@ public class EditWorkoutActivity extends Activity {
 
 			// add touch action, anonymous class did not work (because the
 			// argument is needed)
-			tw.setOnLongClickListener(new ColumnListener(tw));
+			//tw.setOnLongClickListener(new ColumnListener(tw));
+			tw.setOnTouchListener(new TouchColumnListener());
+			tw.setOnDragListener(new DragColumnListener());
 			this.columnNumberMap.put(tw, i);
+			this.exerciseMap.put(tw, fEx);
 
 			// for space between colums empty tw
 			this.addColumPadding(firstrow, COLUMN_PADDING);
@@ -295,6 +307,80 @@ public class EditWorkoutActivity extends Activity {
 		}
 
 		table.addView(firstrow);
+
+	}
+	
+	class TouchColumnListener implements View.OnTouchListener{
+		@Override
+		public boolean onTouch(View view, MotionEvent motionEvent) {
+			if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+
+				ClipData clipData = ClipData.newPlainText("", "");
+
+				View.DragShadowBuilder dsb = new View.DragShadowBuilder(view);
+
+				view.startDrag(clipData, dsb, view, 0);
+
+				view.setVisibility(View.INVISIBLE);
+				
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	class DragColumnListener implements View.OnDragListener{
+        boolean containsDragable = false;
+
+		@Override
+		    public boolean onDrag(final View view, final DragEvent dragEvent) {
+		        int dragAction = dragEvent.getAction();
+		        final View dragView = (View) dragEvent.getLocalState();
+		        if (dragAction == DragEvent.ACTION_DRAG_EXITED) {
+					//Toast.makeText(getApplicationContext(), "Action drag exited", Toast.LENGTH_SHORT).show();
+		            containsDragable = false;
+		        } else if (dragAction == DragEvent.ACTION_DRAG_ENTERED) {
+		            containsDragable = true;
+					//Toast.makeText(getApplicationContext(), "Action drag entered", Toast.LENGTH_SHORT).show();
+		        } else if (dragAction == DragEvent.ACTION_DRAG_ENDED) {
+		            if (dropEventNotHandled(dragEvent)) {
+		        	dragView.post(new Runnable(){
+						@Override
+						public void run() {
+			        		dragView.setVisibility(View.VISIBLE);
+						}
+		        	    });
+						//Toast.makeText(getApplicationContext(), "Action drag ended, set visible", Toast.LENGTH_SHORT).show();
+		            }
+		        } else if (dragAction == DragEvent.ACTION_DROP && containsDragable) {
+					Toast.makeText(getApplicationContext(), "Action drop endend and contains dragable, set visible", Toast.LENGTH_SHORT).show();
+		        	dragView.post(new Runnable(){
+						@Override
+						public void run() {
+			        		dragView.setVisibility(View.VISIBLE);
+							Workout current = DataManager.INSTANCE.getCurrentWorkout();
+							current.switchExercises(exerciseMap.get(view), exerciseMap.get(dragView));
+							updateTable();
+						}
+		        	    });		        
+		        	}
+		        return true;
+		    }
+		 
+		    private boolean dropEventNotHandled(DragEvent dragEvent) {
+		        return !dragEvent.getResult();
+		    }
+		    
+		    /*private void switchColumns(View dragView, View notDraggedView){
+			    ViewGroup owner = (ViewGroup) dragView.getParent();
+                owner.removeView(dragView);
+                owner.addView(dragView);
+                owner.removeView(notDraggedView);
+                owner.addView(notDraggedView);
+
+		    }*/
+
 
 	}
 
@@ -309,6 +395,8 @@ public class EditWorkoutActivity extends Activity {
 		public ColumnListener(TextView tw) {
 			this.tw = tw;
 		}
+
+
 
 		public boolean onLongClick(View arg0) {
 			if (DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
@@ -367,15 +455,15 @@ public class EditWorkoutActivity extends Activity {
 			table.addView(row);
 		}
 	}
-	
+
 	/**
-	 * Redefine 'backbutton'.
-	 * User should always return to SelectExerciseActivity.
+	 * Redefine 'backbutton'. User should always return to
+	 * SelectExerciseActivity.
 	 */
 	@Override
 	public void onBackPressed() {
-    	finish();
-		startActivity(new Intent(EditWorkoutActivity.this, SelectExercisesActivity.class));	
+		finish();
+		startActivity(new Intent(EditWorkoutActivity.this, SelectExercisesActivity.class));
 		return;
 	}
 
