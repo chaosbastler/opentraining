@@ -26,12 +26,17 @@ import de.skubware.training_app.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.TextView;
 
 /**
  * This activity is the starting point for the user. The user can start creating
@@ -124,8 +129,35 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 
-		// Load exercises
+		// load exercises
 		DataManager.INSTANCE.loadExercises(this);
+		
+		// show disclaimer
+		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+		// Linkify the message
+	    final SpannableString s = new SpannableString(getString(R.string.disclaimer) + "http://www.gnu.org/licenses/gpl-3.0.html");
+	    Linkify.addLinks(s, Linkify.ALL);
+		
+		builder.setTitle(getString(R.string.license));
+		builder.setMessage(s);
+		builder.setPositiveButton(getString(R.string.accept), new OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.setNegativeButton(getString(R.string.not_accept), new OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				finish();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
+		// Make the textview clickable. Must be called after show()
+	    ((TextView)alert.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+		
 	}
 
 	/**

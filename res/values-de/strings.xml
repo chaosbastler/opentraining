@@ -53,12 +53,19 @@
     <string name="name_required">Es muss ein Name angegeben werden</string>    
     <string name="select_muscles">Muskeln wählen</string>
     <string name="name">Name</string>
-    <string name="name_of_exercise">Name der Übung exercise</string>
+    <string name="name_of_exercise">Name der Übung</string>
     <string name="hint_for_exercise">Hinweis zur Übung</string>
     <string name="description">Beschreibung</string>
     <string name="description_of_exercise">Beschreibung der Übung</string>
     <string name="tags">Tags</string>
     <string name="exercise_image">Bild der Übung</string>
+    <string name="disclaimer">Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, daß es Ihnen von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE.
+    Insbesondere sollten sie NIE ohne professionelle Anleitung trainieren und vor dem Training einen Arzt konsultieren. Details finden Sie in der GNU General Public License: \n\n</string>
+    <string name="accept">Akzeptieren</string>
+    <string name="not_accept">Nicht akzeptieren</string>
+    <string name="license">Lizenzbedingungen</string>
+    
+    
     
     
     

@@ -54,7 +54,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// TODO no warranty dialog;
 // TODO Change layout to master/detail flow for supporting smaller screens
 
 /**

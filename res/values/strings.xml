@@ -59,9 +59,15 @@
     <string name="description_of_exercise">Description of the exercise</string>
     <string name="tags">Tags</string>
     <string name="exercise_image">Exercise image</string>
+    <string name="disclaimer">This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
     
-    
-    
+    Especially NEVER train without professional help and consult a doctor before training.</string>
+    <string name="accept">Accept</string>
+    <string name="not_accept">Not accept</string>
+    <string name="license">License</string>
     
     
 
