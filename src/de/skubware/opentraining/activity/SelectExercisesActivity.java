@@ -123,6 +123,7 @@ public class SelectExercisesActivity extends Activity {
 
 					DataManager.INSTANCE.setWorkout(new Workout("Mein Trainingsplan", exerciseList));
 					startActivity(new Intent(SelectExercisesActivity.this, EditWorkoutActivity.class));
+					finish();
 				}
 
 				return true;
