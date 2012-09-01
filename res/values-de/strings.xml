@@ -31,8 +31,6 @@
     <string name="exercise">Übung </string>
     <string name="has_been_added">wurde hinzugefügt</string>
     <string name="no_exercises_choosen">Es wurde keine Übung ausgewählt.</string>
-    <string name="unselect_all">Alle abwählen</string>
-    <string name="select_all">Alle wählen</string>
     <string name="valid_exercises">gültige Übung(en)</string>
     <string name="not_valid_exercises">ungültige Übung(en)</string>
     <string name="images">Bilder</string>
@@ -49,14 +47,18 @@
     <string name="save">Speichern</string>
     <string name="ok">OK</string>
     <string name="load_plan">Trainingsplan laden</string>
-    <string name="menu_settings">Einstellungen</string>
     <string name="muscle">Muskel</string>
     <string name="cancel">Abbrechen</string>
     <string name="create_new_exercise">Neue Übung erstellen</string>        
     <string name="name_required">Es muss ein Name angegeben werden</string>    
     <string name="select_muscles">Muskeln wählen</string>
-
-    
+    <string name="name">Name</string>
+    <string name="name_of_exercise">Name der Übung exercise</string>
+    <string name="hint_for_exercise">Hinweis zur Übung</string>
+    <string name="description">Beschreibung</string>
+    <string name="description_of_exercise">Beschreibung der Übung</string>
+    <string name="tags">Tags</string>
+    <string name="exercise_image">Bild der Übung</string>
     
     
     
