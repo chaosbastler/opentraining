@@ -34,136 +34,127 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 
 /**
- * This activity is the starting point for the user.
- * The user can start creating a new plan or manage the database.
+ * This activity is the starting point for the user. The user can start creating
+ * a new plan or manage the database.
  * 
  * @author Christian Skubich
- *
+ * 
  */
 public class HomeActivity extends Activity {
-	
+
 	/**
 	 * Configures the menu actions.
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.home_menu, menu);
-    	
-    	// configure menu_button_select_exercises
-        final MenuItem  menu_button_select_exercises =(MenuItem) menu.findItem(R.id.menu_button_select_exercises);
-        menu_button_select_exercises.setOnMenuItemClickListener( new OnMenuItemClickListener(){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.home_menu, menu);
+
+		// configure menu_button_select_exercises
+		final MenuItem menu_button_select_exercises = (MenuItem) menu.findItem(R.id.menu_button_select_exercises);
+		menu_button_select_exercises.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				if(!ExerciseType.listExerciseTypes().isEmpty())
+				if (!ExerciseType.listExerciseTypes().isEmpty())
 					startActivity(new Intent(HomeActivity.this, SelectExercisesActivity.class));
-				else{
+				else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-	            	builder.setMessage(getString(R.string.no_exercise_in_databbase));
-	            	AlertDialog alert = builder.create();
-	            	alert.show();
+					builder.setMessage(getString(R.string.no_exercise_in_databbase));
+					AlertDialog alert = builder.create();
+					alert.show();
 				}
 				return true;
 			}
-        }); 
+		});
 
-    	
-    	// configure menu_button_manage_database
-        final MenuItem  menu_button_manage_database =(MenuItem) menu.findItem(R.id.menu_button_manage_database);
-        menu_button_manage_database.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+		// configure menu_button_manage_database
+		final MenuItem menu_button_manage_database = (MenuItem) menu.findItem(R.id.menu_button_manage_database);
+		menu_button_manage_database.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				startActivity(new Intent(HomeActivity.this, ManageDatabaseActivity.class));
-			
+
 				return true;
 			}
-        }); 
-    	
-        // configure menu_item_load_plan
-    	MenuItem menu_item_load_plan = (MenuItem) menu.findItem(R.id.menu_item_load_plan);
-    	menu_item_load_plan.setOnMenuItemClickListener( new OnMenuItemClickListener(){
+		});
+
+		// configure menu_item_load_plan
+		MenuItem menu_item_load_plan = (MenuItem) menu.findItem(R.id.menu_item_load_plan);
+		menu_item_load_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				boolean success = DataManager.INSTANCE.loadPlan(HomeActivity.this);
 				AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-				if(success){
-	            	builder.setMessage(getString(R.string.success));
-					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener(){
+				if (success) {
+					builder.setMessage(getString(R.string.success));
+					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
 							startActivity(new Intent(HomeActivity.this, EditWorkoutActivity.class));
 						}
 					});
-				}else{
-	            	builder.setMessage(getString(R.string.no_success));
-					builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener(){
+				} else {
+					builder.setMessage(getString(R.string.no_success));
+					builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
 						}
 					});
 				}
 
-
-            	AlertDialog alert = builder.create();
-            	alert.show();
+				AlertDialog alert = builder.create();
+				alert.show();
 				return true;
 			}
-        }); 
+		});
 
-        // configure menu_button_settings
-        final MenuItem  menu_button_settings =(MenuItem) menu.findItem(R.id.menu_button_settings);
-        menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener()); 
-        
-        // configure menu_button_help
-        final MenuItem  menu_button_help =(MenuItem) menu.findItem(R.id.menu_button_help);
-        menu_button_help.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener()); 
+		// configure menu_button_settings
+		final MenuItem menu_button_settings = (MenuItem) menu.findItem(R.id.menu_button_settings);
+		menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener());
 
-    	return true;
+		// configure menu_button_help
+		final MenuItem menu_button_help = (MenuItem) menu.findItem(R.id.menu_button_help);
+		menu_button_help.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener());
+
+		return true;
 	}
-	
-	
-	
-    /** 
-     * Called when the activity is first created. 
-     */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
 
-        // Load exercises
+	/**
+	 * Called when the activity is first created.
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.home);
+
+		// Load exercises
 		DataManager.INSTANCE.loadExercises(this);
-    }
-    
-    
-    
-    /**
-     * Creates a dialog that informs the user, that this action is not supported yet.
-     * 
-     * @return The generated dialog.
-     */
-    private OnMenuItemClickListener getNotSupportedYetOnMenuItemClickListener(){
-    	
-    	return new OnMenuItemClickListener() {
+	}
+
+	/**
+	 * Creates a dialog that informs the user, that this action is not supported
+	 * yet.
+	 * 
+	 * @return The generated dialog.
+	 */
+	private OnMenuItemClickListener getNotSupportedYetOnMenuItemClickListener() {
+
+		return new OnMenuItemClickListener() {
 
 			public boolean onMenuItemClick(MenuItem item) {
-            	AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-            	builder.setMessage(getString(R.string.action_not_supported))
-            	       .setCancelable(true)
-            	       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            	           public void onClick(DialogInterface dialog, int id) {
-            	        	   dialog.cancel();
-            	           }
-            	       })
-            	       .setNegativeButton("Ohhh :-(", new DialogInterface.OnClickListener() {
-            	           public void onClick(DialogInterface dialog, int id) {
-            	                dialog.cancel();
-            	           }
-            	       });
-            	AlertDialog alert = builder.create();
-            	alert.show();
-            	return true;
+				AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+				builder.setMessage(getString(R.string.action_not_supported)).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				}).setNegativeButton("Ohhh :-(", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+				AlertDialog alert = builder.create();
+				alert.show();
+				return true;
 			}
-        };
-  
-    }
+		};
 
-    
+	}
+
 }
