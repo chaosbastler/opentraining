@@ -39,9 +39,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
-import android.util.SparseIntArray;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.Menu;
@@ -51,8 +49,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -62,7 +58,7 @@ import android.widget.Toast;
 
 /**
  * This activity shows the plan(table) with the selected exercises. The user can
- * select the columnwidth, the number of empty rows, change the name of the plan
+ * select the number of empty rows and change the name of the plan.
  * and finally export it.
  * 
  * 
@@ -70,28 +66,25 @@ import android.widget.Toast;
  * 
  */
 public class EditWorkoutActivity extends Activity {
-	/**
-	 * This 'Map' saves the width for each column. SparseIntArray is a
-	 * replacement of HashMap<Integer,Integer> (->performance)
-	 */
-	private SparseIntArray columnWidthMap = new SparseIntArray();
-
+	/** Tag for logging */
+	private static final String TAG = "EditWorkoutActivity";
+	
 	/** Contains the current column number of each TextView */
 	private Map<TextView, Integer> columnNumberMap = new HashMap<TextView, Integer>();
 
 	/** Contains the exercise that belongs to a textview */
 	private Map<TextView, FitnessExercise> exerciseMap = new HashMap<TextView, FitnessExercise>();
 
-	
-	/** number of columns, cannot be changed */
-	private int columnCount;
 	/** number of rows, can be changed, must be positive */
 	private int emptyRowCount;
 
 	// some attributes for the style/design of the table
 	private final static int COLUMN_PADDING = 5;
 	private final static int ROW_PADDING = 5;
+	
 	private final static int ROW_HEIGHT = 90;
+	private final static int COLUMN_WIDTH = 200;
+	private final static int DATE_COLUMN_WIDTH = 100;
 
 	/**
 	 * Configures the menu actions.
@@ -162,12 +155,6 @@ public class EditWorkoutActivity extends Activity {
 		// init variables
 		this.emptyRowCount = DataManager.INSTANCE.getCurrentWorkout().getEmptyRows();
 
-		this.columnCount = DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() + 1;
-		this.columnWidthMap.put(0, 100);
-		for (int i = 1; i < columnCount; i++) {
-			columnWidthMap.put(i, 180);
-		}
-
 		setContentView(R.layout.edit_workout);
 
 		// workout name
@@ -232,27 +219,16 @@ public class EditWorkoutActivity extends Activity {
 	}
 
 	public TextView getStyledTextView(String text) {
-		/*
-		 * <style name="LargeTextView"> <item
-		 * name="android:layout_width">fill_parent</item> <item
-		 * name="android:layout_height">wrap_content</item> <item
-		 * name="android:textColor">#000000</item> <item
-		 * name="android:gravity">center</item> <item
-		 * name="android:layout_margin">3dp</item> <item
-		 * name="android:textSize">22dp</item> <item
-		 * name="android:textStyle">bold</item> </style>
-		 */
 		TextView tw = new TextView(this);
 		tw.setTextColor(Color.BLACK);
 		tw.setText(text);
 		tw.setTypeface(null, Typeface.BOLD);
 		tw.setTextSize(22);
-		// tw.setPadding(15, 15, 15, 15);
+		tw.setPadding(15, 15, 15, 15);
 		tw.setGravity(Gravity.CENTER_HORIZONTAL);
 		tw.setHeight(ROW_HEIGHT);
+		tw.setWidth(COLUMN_WIDTH);
 
-		// tw.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-		// LayoutParams.FILL_PARENT));
 
 		tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_white));
 
@@ -276,8 +252,8 @@ public class EditWorkoutActivity extends Activity {
 
 		// Date
 		TextView date = this.getStyledTextView(getString(R.string.date));
-		date.setWidth(this.columnWidthMap.get(0));
 		date.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
+		date.setWidth(DATE_COLUMN_WIDTH);
 
 		firstrow.addView(date);
 
@@ -287,14 +263,13 @@ public class EditWorkoutActivity extends Activity {
 		int i = 1;
 		for (FitnessExercise fEx : DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises()) {
 			TextView tw = this.getStyledTextView(fEx.toString());
-			tw.setWidth(this.columnWidthMap.get(i));
 			tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
 
 			firstrow.addView(tw);
 
 			// add touch action, anonymous class did not work (because the
 			// argument is needed)
-			//tw.setOnLongClickListener(new ColumnListener(tw));
+			tw.setOnLongClickListener(new ColumnListener(tw));
 			tw.setOnTouchListener(new TouchColumnListener());
 			tw.setOnDragListener(new DragColumnListener());
 			this.columnNumberMap.put(tw, i);
@@ -310,6 +285,9 @@ public class EditWorkoutActivity extends Activity {
 
 	}
 	
+	
+	
+	/** Tiny class for a listener that handles on touch. */
 	class TouchColumnListener implements View.OnTouchListener{
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -330,6 +308,8 @@ public class EditWorkoutActivity extends Activity {
 		}
 	}
 	
+	
+	/** Tiny class for a listener that handles drag and drop */
 	class DragColumnListener implements View.OnDragListener{
         boolean containsDragable = false;
 
@@ -338,11 +318,11 @@ public class EditWorkoutActivity extends Activity {
 		        int dragAction = dragEvent.getAction();
 		        final View dragView = (View) dragEvent.getLocalState();
 		        if (dragAction == DragEvent.ACTION_DRAG_EXITED) {
-					//Toast.makeText(getApplicationContext(), "Action drag exited", Toast.LENGTH_SHORT).show();
 		            containsDragable = false;
+					Log.d(TAG, "Action drag exited, containsDragable now false");
 		        } else if (dragAction == DragEvent.ACTION_DRAG_ENTERED) {
 		            containsDragable = true;
-					//Toast.makeText(getApplicationContext(), "Action drag entered", Toast.LENGTH_SHORT).show();
+					Log.d(TAG, "Action drag entered, containsDragable now true");
 		        } else if (dragAction == DragEvent.ACTION_DRAG_ENDED) {
 		            if (dropEventNotHandled(dragEvent)) {
 		        	dragView.post(new Runnable(){
@@ -351,10 +331,10 @@ public class EditWorkoutActivity extends Activity {
 			        		dragView.setVisibility(View.VISIBLE);
 						}
 		        	    });
-						//Toast.makeText(getApplicationContext(), "Action drag ended, set visible", Toast.LENGTH_SHORT).show();
+						Log.d(TAG, "Action drag ended, set visible");
 		            }
 		        } else if (dragAction == DragEvent.ACTION_DROP && containsDragable) {
-					Toast.makeText(getApplicationContext(), "Action drop endend and contains dragable, set visible", Toast.LENGTH_SHORT).show();
+					Log.d(TAG, "Action drop endend and contains dragable, set visible");
 		        	dragView.post(new Runnable(){
 						@Override
 						public void run() {
@@ -371,31 +351,16 @@ public class EditWorkoutActivity extends Activity {
 		    private boolean dropEventNotHandled(DragEvent dragEvent) {
 		        return !dragEvent.getResult();
 		    }
-		    
-		    /*private void switchColumns(View dragView, View notDraggedView){
-			    ViewGroup owner = (ViewGroup) dragView.getParent();
-                owner.removeView(dragView);
-                owner.addView(dragView);
-                owner.removeView(notDraggedView);
-                owner.addView(notDraggedView);
-
-		    }*/
-
 
 	}
 
-	/**
-	 * Tiny class for a listener that creates a dialog.
-	 * 
-	 * 
-	 */
+	/** Tiny class for a listener that creates a dialog. */
 	class ColumnListener implements View.OnLongClickListener {
 		private TextView tw;
 
 		public ColumnListener(TextView tw) {
 			this.tw = tw;
 		}
-
 
 
 		public boolean onLongClick(View arg0) {
@@ -444,6 +409,8 @@ public class EditWorkoutActivity extends Activity {
 
 			for (int k = 0; k <= DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size(); k++) {
 				TextView emptyTW = this.getStyledTextView("");
+				if(k==0)
+					emptyTW.setWidth(DATE_COLUMN_WIDTH);
 				// for performance reasons one could cache the ColumnListeners
 				// in a Map
 				emptyTW.setOnLongClickListener(new ColumnListener(emptyTW));
