@@ -22,8 +22,6 @@ package de.skubware.opentraining.basic;
 
 import java.util.*;
 
-import android.util.Log;
-
 
 /**
  * This class represents a single workout.

@@ -141,6 +141,39 @@ public class WorkoutTest extends TestCase {
 		assertFalse(WORKOUT_1.equals(w_noteq_1));
 		assertFalse(w_noteq_1.equals(WORKOUT_1));
 	}
+	
+	/**
+	 * Test of method {@code switchExercises()}
+	 */
+	@Test
+	public void testSwitching(){
+		// clone WORKOUT_1
+		Workout WORKOUT_1_CLONE = new Workout(TEST_NAME_1, FEX_LIST_1);
+		assertEquals(WORKOUT_1, WORKOUT_1_CLONE);
+		
+		// test switching one exercise with itself
+		WORKOUT_1_CLONE.switchExercises(FEX_1, FEX_1);
+		// should have no effect
+		assertEquals(WORKOUT_1, WORKOUT_1_CLONE);
+		
+		// test switching two times
+		WORKOUT_1_CLONE.switchExercises(FEX_2, FEX_3);
+		WORKOUT_1_CLONE.switchExercises(FEX_2, FEX_3);
+		// should have no effect
+		assertEquals(WORKOUT_1, WORKOUT_1_CLONE);
+		
+		// test switching one time
+		int idx1 = WORKOUT_1.getFitnessExercises().indexOf(FEX_1);
+		int idx2 = WORKOUT_1.getFitnessExercises().indexOf(FEX_2);
+		WORKOUT_1_CLONE.switchExercises(FEX_2, FEX_1);
+		
+		assertEquals(idx2, WORKOUT_1_CLONE.getFitnessExercises().indexOf(FEX_1));
+		assertEquals(idx1, WORKOUT_1_CLONE.getFitnessExercises().indexOf(FEX_2));
+
+		// workouts now should be different
+		assertNotSame(WORKOUT_1, WORKOUT_1_CLONE);
+
+	}
 
 
 }
