@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Open Training</string>
+    <string name="app_name">Open Training Preview</string>
     <string name="workout_name">Workoutname</string>
     <string name="empty_rows">Empty columns</string>
     <string name="export">Export</string>
@@ -68,6 +68,7 @@
     <string name="accept">Accept</string>
     <string name="not_accept">Not accept</string>
     <string name="license">License</string>
+    <string name="app_description">Plan your fitness training with this open source app.</string>
     
     
 
