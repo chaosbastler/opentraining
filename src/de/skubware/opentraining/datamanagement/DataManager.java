@@ -304,7 +304,7 @@ public enum DataManager {
 
 		if (src == Source.RAW_FOLDER) {
 			// get the resource id from the file name
-			int rID = resources.getIdentifier("de.skubware.training_app:raw/" + fileName, null, null);
+			int rID = resources.getIdentifier("de.skubware.opentraining:raw/" + fileName, null, null);
 			// get the file as a stream
 			iS = resources.openRawResource(rID);
 		} else if (src == Source.ASSETS) {
