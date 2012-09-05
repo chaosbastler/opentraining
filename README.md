@@ -8,7 +8,7 @@ http://skubware.de/opentraining/
 
 Where can I download the app?
 -----------------------------
-Google Play Store: https://play.google.com/apps/publish/Home?dev_acc=07349490940890406183#
+Google Play Store: https://play.google.com/store/apps/details?id=de.skubware.opentraining
 
 Programming language
 --------------------
