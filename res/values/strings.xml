@@ -20,7 +20,7 @@
     <string name="check_database">Check database</string>
     <string name="continu">Continue</string> <!-- continuE did not work -->
     <string name="help">Help</string>
-    <string name="no_exercise_in_databbase">There are no exercises in the database.</string>
+    <string name="no_exercise_in_databbase">There are no exercises in the database. Should the download be started?</string>
     <string name="action_not_supported">This action is not supported yet.</string>
     <string name="choose_design">Choose the design</string>
     <string name="no_internet_connection">No internet connection available.</string>

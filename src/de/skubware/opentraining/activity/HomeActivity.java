@@ -62,8 +62,21 @@ public class HomeActivity extends Activity {
 				if (!ExerciseType.listExerciseTypes().isEmpty())
 					startActivity(new Intent(HomeActivity.this, SelectExercisesActivity.class));
 				else {
+					// ask user, if new exercises should be downloaded
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 					builder.setMessage(getString(R.string.no_exercise_in_databbase));
+					builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							startActivity((new Intent(HomeActivity.this, SettingsActivity.class)).putExtra(SettingsActivity.KEY_START_DOWNLOAD, true));
+						}
+					});
+					builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
 					AlertDialog alert = builder.create();
 					alert.show();
 				}
@@ -123,22 +136,22 @@ public class HomeActivity extends Activity {
 
 		// load exercises
 		DataManager.INSTANCE.loadExercises(this);
-		
+
 		// show disclaimer
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 		// Linkify the message
-	    final SpannableString s = new SpannableString(getString(R.string.disclaimer) + "http://www.gnu.org/licenses/gpl-3.0.html");
-	    Linkify.addLinks(s, Linkify.ALL);
-		
+		final SpannableString s = new SpannableString(getString(R.string.disclaimer) + "http://www.gnu.org/licenses/gpl-3.0.html");
+		Linkify.addLinks(s, Linkify.ALL);
+
 		builder.setTitle(getString(R.string.license));
 		builder.setMessage(s);
-		builder.setPositiveButton(getString(R.string.accept), new OnClickListener(){
+		builder.setPositiveButton(getString(R.string.accept), new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 			}
 		});
-		builder.setNegativeButton(getString(R.string.not_accept), new OnClickListener(){
+		builder.setNegativeButton(getString(R.string.not_accept), new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -148,9 +161,8 @@ public class HomeActivity extends Activity {
 		AlertDialog alert = builder.create();
 		alert.show();
 		// Make the textview clickable. Must be called after show()
-	    ((TextView)alert.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-		
-	}
+		((TextView) alert.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
 
+	}
 
 }

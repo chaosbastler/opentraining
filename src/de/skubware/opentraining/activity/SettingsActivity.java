@@ -62,6 +62,9 @@ public class SettingsActivity extends Activity {
 	/** Tag for logging */
 	private static final String TAG = "ManageDatabaseActivity";
 	
+	/** Key for intent, to set if download should be started at activity startup */
+	public static String KEY_START_DOWNLOAD = "de.skubware.opentraining.SettingsActivity.startDownload";
+
 	/** Number of the file that's downloaded at the moment */
 	private int current;
 	/** Total number of files that should be downloaded */
@@ -76,36 +79,8 @@ public class SettingsActivity extends Activity {
 		Button button_download = (Button) findViewById(R.id.button_download);
 		button_download.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// warn user if there is no internet connection
-				if (!isOnline()) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-					builder.setMessage(getString(R.string.no_internet_connection)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-					AlertDialog alert = builder.create();
-					alert.show();
-					return;
-				}
-
-				// when button was clicked -> start download in new thread
-				new Thread(new Runnable() {
-					public void run() {
-						current = 0;
-						total = 0;
-
-						// delete the old folder
-						delete(DataManager.getAppFolder());
-						// start downloading new exercises
-						EditText edittext_url = (EditText) findViewById(R.id.edittext_url);
-						download(edittext_url.getText().toString());
-
-					}
-				}).start();
-
+				startDownload();
 			}
-
 		});
 
 		Button button_check_database = (Button) findViewById(R.id.button_check_database);
@@ -115,6 +90,44 @@ public class SettingsActivity extends Activity {
 			}
 		});
 
+		// check if download should be started
+		Bundle extras = getIntent().getExtras();
+		if (extras == null) {
+			return;
+		}
+		if (extras.containsKey(KEY_START_DOWNLOAD) && extras.getBoolean(KEY_START_DOWNLOAD))
+			startDownload();
+
+	}
+
+	private void startDownload() {
+		// warn user if there is no internet connection
+		if (!isOnline()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+			builder.setMessage(getString(R.string.no_internet_connection)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.cancel();
+				}
+			});
+			AlertDialog alert = builder.create();
+			alert.show();
+			return;
+		}
+
+		// when button was clicked -> start download in new thread
+		new Thread(new Runnable() {
+			public void run() {
+				current = 0;
+				total = 0;
+
+				// delete the old folder
+				delete(DataManager.getAppFolder());
+				// start downloading new exercises
+				EditText edittext_url = (EditText) findViewById(R.id.edittext_url);
+				download(edittext_url.getText().toString());
+
+			}
+		}).start();
 	}
 
 	/**
@@ -206,11 +219,9 @@ public class SettingsActivity extends Activity {
 				// nothing to see here
 			}
 		}
-		
-		// 'calculate' the name of the folder of the exercises
-		String urlBase = urlString.substring(0 , urlString.lastIndexOf('/') );
 
-		
+		// 'calculate' the name of the folder of the exercises
+		String urlBase = urlString.substring(0, urlString.lastIndexOf('/'));
 
 		boolean succ = true;
 		for (String name : lines) {
@@ -220,12 +231,10 @@ public class SettingsActivity extends Activity {
 			else
 				dest = DataManager.getImageFolder();
 
-
-
-			succ = download(dest, urlBase +"/" + name) & succ;
+			succ = download(dest, urlBase + "/" + name) & succ;
 
 		}
-		
+
 		// finally reload database
 		DataManager.INSTANCE.loadExercises(SettingsActivity.this);
 
