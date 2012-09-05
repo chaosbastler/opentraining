@@ -6,6 +6,10 @@ Open Training is an Android app for planning your fitness training.
 More information:
 http://skubware.de/opentraining/
 
+Where can I download the app?
+-----------------------------
+Google Play Store: https://play.google.com/apps/publish/Home?dev_acc=07349490940890406183#
+
 Programming language
 --------------------
 Java (and some shell scripts for development)
@@ -22,7 +26,3 @@ I did not want to mix up code and content.
 Translations
 ------------
 English, German.
-
-Available in Play Store?
-------------------------
-Not yet. I will upload an alpha version of the app in september 2012.
