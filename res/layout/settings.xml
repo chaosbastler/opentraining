@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/background_green"
+    android:dither="true" >
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/btn_black"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="textMultiLine"
+        android:text="@string/database_managment_hint" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:text="@string/source"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/edittext_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/editText1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:hint="@string/source"
+        android:inputType="textUri"
+        android:text="http://skubware.de/opentraining/cc_exercises/list_files.php"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/edittext_information"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/button_check_database"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="none"
+        android:textIsSelectable="false" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/button_check_database"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/edittext_url"
+        android:layout_below="@+id/edittext_url"
+        android:layout_marginRight="41dp"
+        android:background="@drawable/btn_black"
+        android:text="@string/check_database" />
+
+    <Button
+        android:id="@+id/button_download"
+        style="@style/ButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_check_database"
+        android:layout_alignBottom="@+id/button_check_database"
+        android:layout_alignLeft="@+id/edittext_url"
+        android:background="@drawable/btn_black"
+        android:text="@string/download" />
+
+</RelativeLayout>
