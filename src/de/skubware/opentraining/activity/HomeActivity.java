@@ -22,7 +22,7 @@ package de.skubware.opentraining.activity;
 
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.datamanagement.*;
-import de.skubware.training_app.R;
+import de.skubware.opentraining.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -71,11 +71,11 @@ public class HomeActivity extends Activity {
 			}
 		});
 
-		// configure menu_button_manage_database
-		final MenuItem menu_button_manage_database = (MenuItem) menu.findItem(R.id.menu_button_manage_database);
-		menu_button_manage_database.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		// configure menu_button_settings
+		final MenuItem menu_button_settings = (MenuItem) menu.findItem(R.id.menu_button_settings);
+		menu_button_settings.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(HomeActivity.this, ManageDatabaseActivity.class));
+				startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
 
 				return true;
 			}
@@ -109,14 +109,6 @@ public class HomeActivity extends Activity {
 				return true;
 			}
 		});
-
-		// configure menu_button_settings
-		final MenuItem menu_button_settings = (MenuItem) menu.findItem(R.id.menu_button_settings);
-		menu_button_settings.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener());
-
-		// configure menu_button_help
-		final MenuItem menu_button_help = (MenuItem) menu.findItem(R.id.menu_button_help);
-		menu_button_help.setOnMenuItemClickListener(this.getNotSupportedYetOnMenuItemClickListener());
 
 		return true;
 	}
@@ -160,33 +152,5 @@ public class HomeActivity extends Activity {
 		
 	}
 
-	/**
-	 * Creates a dialog that informs the user, that this action is not supported
-	 * yet.
-	 * 
-	 * @return The generated dialog.
-	 */
-	private OnMenuItemClickListener getNotSupportedYetOnMenuItemClickListener() {
-
-		return new OnMenuItemClickListener() {
-
-			public boolean onMenuItemClick(MenuItem item) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-				builder.setMessage(getString(R.string.action_not_supported)).setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				}).setNegativeButton("Ohhh :-(", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-				AlertDialog alert = builder.create();
-				alert.show();
-				return true;
-			}
-		};
-
-	}
 
 }

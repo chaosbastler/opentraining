@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.skubware.training_app"
+    package="de.skubware.opentraining"
     android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="0.0.1" >
+    android:versionName="0.1" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -38,10 +38,6 @@
         </activity>
         <activity android:name="de.skubware.opentraining.activity.SelectExercisesActivity" >
         </activity>
-        <activity
-            android:name="de.skubware.opentraining.activity.ManageDatabaseActivity"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
         <activity android:name="de.skubware.opentraining.activity.ShowTPActivity" >
         </activity>
         <activity
@@ -52,6 +48,7 @@
             android:name="de.skubware.opentraining.activity.CreateExerciseActivity"
             android:label="@string/create_new_exercise" android:windowSoftInputMode="stateHidden">
         </activity>
+        <activity android:windowSoftInputMode="stateHidden" android:name=".activity.SettingsActivity"></activity>
     </application>
 
 </manifest>

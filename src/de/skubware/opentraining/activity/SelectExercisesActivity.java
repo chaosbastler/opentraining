@@ -29,7 +29,7 @@ import java.util.Map;
 
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.DataManager;
-import de.skubware.training_app.R;
+import de.skubware.opentraining.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
