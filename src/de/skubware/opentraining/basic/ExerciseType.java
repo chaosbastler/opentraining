@@ -24,7 +24,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.*;
 
-
 /**
  * An instance of this class represents a certain type of fitness exercise.
  * <p>
@@ -47,8 +46,8 @@ import java.util.*;
  */
 
 public final class ExerciseType implements Comparable<ExerciseType> {
-
-
+	//TODO add unit tests for checking if the field 'deleted' works.
+	
 	private final String name; // required
 
 	private final String description; // optional
@@ -66,6 +65,8 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	private String md5; // auto-calculated
 
+	private boolean deleted = false;
+
 	private static final TreeSet<ExerciseType> exerciseTypes = new TreeSet<ExerciseType>(); // stores
 																							// all
 																							// instances
@@ -73,7 +74,8 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	public static class Builder {
 		// Default values
 		private static final String DEFAULT_DESCRIPTION = "Keine Beschreibung verfügbar";
-		//private static final String DEFAULT_LICENSE_TEXT = "Keine Lizenzinformationen verfügbar";
+		// private static final String DEFAULT_LICENSE_TEXT =
+		// "Keine Lizenzinformationen verfügbar";
 		// Collections do not have a default value
 
 		// Required parameters
@@ -213,8 +215,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		this.name = builder.name;
 
 		this.description = builder.description;
-		this.imageLicenseMap = new HashMap<File, String>(
-				builder.imageLicenseMap);
+		this.imageLicenseMap = new HashMap<File, String>(builder.imageLicenseMap);
 		this.imageHeight = builder.imageHeight;
 		this.imageWidth = builder.imageWidth;
 		this.exerciseTag = builder.exerciseTag;
@@ -233,8 +234,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 		// this copy is necessary, because builder.neededTools may be a
 		// unmodifiable collection
-		TreeSet<SportsEquipment> tools = new TreeSet<SportsEquipment>(
-				builder.neededTools);
+		TreeSet<SportsEquipment> tools = new TreeSet<SportsEquipment>(builder.neededTools);
 		if (tools.size() > 1) {
 			tools.remove(SportsEquipment.NONE);
 		}
@@ -276,22 +276,27 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	}
 
 	public String getName() {
+		check();
 		return this.name;
 	}
 
 	public String getDescription() {
+		check();
 		return this.description;
 	}
 
 	public List<File> getImagePaths() {
+		check();
 		return java.util.Collections.unmodifiableList(this.imagePaths);
 	}
 
 	public File getIconPath() {
+		check();
 		return new File(this.iconPath.toString());
 	}
 
 	public Map<File, String> getImageLicenseMap() {
+		check();
 		return java.util.Collections.unmodifiableMap(this.imageLicenseMap);
 	}
 
@@ -301,6 +306,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 * @return the image width
 	 */
 	public int getImageWidth() {
+		check();
 		return this.imageWidth;
 	}
 
@@ -310,21 +316,18 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 * @return the image height
 	 */
 	public int getImageHeight() {
+		check();
 		return this.imageHeight;
 	}
 
 	public SortedSet<SportsEquipment> getRequiredEquipment() {
-		return java.util.Collections.unmodifiableSortedSet(requiredEquipment); // set
-																				// contains
-																				// immutable
-																				// objects
+		check();
+		return java.util.Collections.unmodifiableSortedSet(requiredEquipment); 
 	}
 
 	public SortedSet<Muscle> getActivatedMuscles() {
-		return java.util.Collections.unmodifiableSortedSet(activatedMuscles); // set
-																				// contains
-																				// immutable
-																				// objects
+		check();
+		return java.util.Collections.unmodifiableSortedSet(activatedMuscles);
 	}
 
 	public Map<Muscle, ActivationLevel> getActivationMap() {
@@ -335,20 +338,16 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	}
 
 	public SortedSet<ExerciseTag> getTags() {
-		return java.util.Collections.unmodifiableSortedSet(this.exerciseTag); // set
-																				// contains
-																				// immutable
-																				// objects
+		return java.util.Collections.unmodifiableSortedSet(this.exerciseTag); 
 	}
 
 	public List<URL> getURLs() {
-		return java.util.Collections.unmodifiableList(this.relatedURL); // set
-																		// contains
-																		// immutable
-																		// objects
+		check();
+		return java.util.Collections.unmodifiableList(this.relatedURL); 
 	}
 
 	public List<String> getHints() {
+		check();
 		return java.util.Collections.unmodifiableList(this.hints);
 	}
 
@@ -367,16 +366,29 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	/**
 	 * Tries to delete an ExerciseType, that means removing it from the list and
-	 * deleting the files containing it. If there is still a reference out
-	 * there, it is NOT destroyed. A possible approach to achieve this would be
-	 * a weak reference or a boolean field 'deleted' that is check in each
-	 * method.
+	 * deleting the files containing it.
 	 * 
-	 * @param exType The ExerciseType to remove
+	 * If any method is used on the deleted object an AssertionError will be
+	 * thrown.
+	 * 
+	 * @param exType
+	 *            The ExerciseType to remove
 	 * @return true if deleting was successful
 	 */
 	public static synchronized boolean removeExerciseType(ExerciseType exType) {
+		exType.deleted = true;
 		return ExerciseType.exerciseTypes.remove(exType);
+	}
+
+	/**
+	 * Is called in every method before execution.
+	 * 
+	 * @throws AssertionError
+	 *             if object has been deleted before
+	 */
+	private void check() {
+		if (deleted)
+			throw new AssertionError("An ExerciseType that has been removed is used. This must not happen.");
 	}
 
 	/**
@@ -392,6 +404,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		check();
 		if (this == obj) {
 			return true;
 		}
@@ -407,6 +420,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
+		check();
 		// For a (very small) performance boost you could consider
 		// saving the hashcode in a final int variable with lazy
 		// initialization, as this class is immutable
@@ -416,11 +430,13 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
+		check();
 		return this.name;
 	}
 
 	/** {@inheritDoc} */
 	public int compareTo(ExerciseType o) {
+		check();
 		return this.name.compareTo(o.name);
 	}
 
@@ -430,6 +446,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 * @return The MD5 hash value.
 	 */
 	public String getMd5() {
+		check();
 		// exception if hash does not exist
 		if (this.md5 == null)
 			throw new UnsupportedOperationException();
@@ -439,12 +456,12 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	}
 
 	public FitnessExercise asFitnessExercise() {
+		check();
 		return new FitnessExercise(this);
 
 	}
 
-	public static Collection<FitnessExercise> asFitnessExercise(
-			List<ExerciseType> exes) {
+	public static Collection<FitnessExercise> asFitnessExercise(List<ExerciseType> exes) {
 		List<FitnessExercise> fExes = new ArrayList<FitnessExercise>();
 		for (ExerciseType ex : exes) {
 			fExes.add(new FitnessExercise(ex));
