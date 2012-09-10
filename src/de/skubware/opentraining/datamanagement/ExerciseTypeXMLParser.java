@@ -130,9 +130,14 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 			this.requiredEquipment.add(eq);
 		}
 		if (qname.equals("Muscle")) {
-			Muscle muscle = Muscle.getByName(attributes.getValue("name"));
+			Muscle muscle = null;
+			try{
+				muscle = Muscle.getByName(attributes.getValue("name"));
+			}catch(IllegalArgumentException illEx){
+				Log.e(TAG, "The Muscle: " + attributes.getValue("name") + " couldn't be found. Ex: " + this.name);
+			}
 			if (muscle == null) {
-				Log.e(TAG, "The Muscle: " + attributes.getValue("name") + " couldn't be found.");
+				Log.e(TAG, "The Muscle: " + attributes.getValue("name") + " couldn't be found. Ex: " + this.name);
 			}
 
 			this.activatedMuscles.add(muscle);
