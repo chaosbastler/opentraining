@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="800"
+   height="800"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="background_white.svg"
+   inkscape:export-filename="/home/christian/Arbeitsfläche/Dropbox/Website/opentraining/cc_exercises/Bench-press-1.png"
+   inkscape:export-xdpi="199.63289"
+   inkscape:export-ydpi="199.63289">
+  <defs
+     id="defs4">
+    <filter
+       inkscape:collect="always"
+       id="filter5283"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="10.211719"
+         id="feGaussianBlur5285" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter5427"
+       x="-0.28619286"
+       width="1.5723857"
+       y="-0.28619286"
+       height="1.5723857"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="15.757641"
+         id="feGaussianBlur5429" />
+    </filter>
+    <radialGradient
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1,0,0,0.91819829,-19.285714,-7.9105395)"
+       r="209.56604"
+       fy="287.50052"
+       fx="398.1105"
+       cy="287.50052"
+       cx="398.1105"
+       id="radialGradient5255"
+       xlink:href="#linearGradient5249"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient5249"
+       inkscape:collect="always">
+      <stop
+         id="stop5251"
+         offset="0"
+         style="stop-color:#e3e3e3;stop-opacity:1;" />
+      <stop
+         id="stop5253"
+         offset="1"
+         style="stop-color:#e3e3e3;stop-opacity:0;" />
+    </linearGradient>
+    <filter
+       inkscape:collect="always"
+       id="filter3834"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="16"
+         id="feGaussianBlur3836" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="184.46984"
+     inkscape:cy="236.85523"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="true">
+    <sodipodi:guide
+       orientation="-0.70710678,0.70710678"
+       position="-1660.4797,620.12297"
+       id="guide2985" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid2996"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-0.96350645px"
+       originy="0.96350688px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-231.90832,153.22916)">
+    <g
+       id="g5449"
+       transform="matrix(2.3389467,0,0,2.6252703,-528.56567,-576.12589)"
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:export-filename="/home/christian/Arbeitsfläche/Dropbox/Website/opentraining/cc_exercises/Bench-dips-1.png"
+       inkscape:export-xdpi="214.51434"
+       inkscape:export-ydpi="214.51434">
+      <rect
+         inkscape:export-ydpi="150"
+         inkscape:export-xdpi="150"
+         inkscape:export-filename="/home/christian/Dokumente/Code/workspace/OpenTraining/res/drawable/background.png"
+         y="185.22804"
+         x="352.24948"
+         height="255.71428"
+         width="290"
+         id="rect2987"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5283)" />
+      <path
+         transform="matrix(1.6074318,0,0,0.77372547,-152.97598,82.347784)"
+         d="m 467.14287,292.00504 c 0,36.49024 -29.58119,66.07142 -66.07143,66.07142 -36.49024,0 -66.07142,-29.58118 -66.07142,-66.07142 0,-36.49025 29.58118,-66.07143 66.07142,-66.07143 36.49024,0 66.07143,29.58118 66.07143,66.07143 z"
+         sodipodi:ry="66.071426"
+         sodipodi:rx="66.071426"
+         sodipodi:cy="292.00504"
+         sodipodi:cx="401.07144"
+         id="path5317"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;filter:url(#filter5427)"
+         sodipodi:type="arc" />
+    </g>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.38431373;stroke:none;filter:url(#filter3834)"
+       id="rect3000"
+       width="800"
+       height="800"
+       x="0"
+       y="0"
+       transform="matrix(0.91240876,0,0,0.91240876,266.94482,-118.19266)"
+       inkscape:export-filename="/home/christian/Dokumente/Code/workspace/OpenTraining/svg/background_white.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>

@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:drawSelectorOnTop="true" >
     </ListView>
-
+
     <RelativeLayout
         android:id="@+id/threeRowWrapper"
         android:layout_width="260dp"
@@ -22,22 +22,23 @@
         android:layout_toRightOf="@+id/exListView"
         android:background="@drawable/btn_green"
         android:gravity="center" >
-
+
         <RelativeLayout
             android:id="@+id/wrapper_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="700dp"
             android:layout_below="@+id/textview_exercise_name"
+            android:background="@drawable/background_white"
             android:orientation="vertical"
-            android:padding="20dp" >
+            android:padding="80dp" >
 
             <ImageView
                 android:id="@+id/imageview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="49dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
                 android:contentDescription="@string/image_currently_selected"
                 android:scaleType="centerInside"
                 android:src="@drawable/ex_dummy" />
@@ -65,7 +66,6 @@
             android:enabled="false"
             android:gravity="center"
             android:textColor="@color/White" />
-
     </RelativeLayout>
 
     <LinearLayout
