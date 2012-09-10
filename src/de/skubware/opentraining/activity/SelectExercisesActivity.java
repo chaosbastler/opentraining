@@ -129,53 +129,50 @@ public class SelectExercisesActivity extends Activity {
 			}
 
 		});
-		
-	    // configure menu_item_create_new_exercise
-	    final MenuItem  menu_item_create_new_exercise =(MenuItem) menu.findItem(R.id.menu_item_create_new_exercise);
-	    menu_item_create_new_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+
+		// configure menu_item_create_new_exercise
+		final MenuItem menu_item_create_new_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_new_exercise);
+		menu_item_create_new_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				startActivity(new Intent(SelectExercisesActivity.this, CreateExerciseActivity.class));
 				return true;
 			}
-	    }); 
-
+		});
 
 		MenuItem menu_item_select_muscles = (MenuItem) menu.findItem(R.id.menu_item_select_muscles);
 		menu_item_select_muscles.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem menuitem) {
-			    final CharSequence[] items = new CharSequence[Muscle.values().length];
-			    final boolean[] states = new boolean[Muscle.values().length];
+				final CharSequence[] items = new CharSequence[Muscle.values().length];
+				final boolean[] states = new boolean[Muscle.values().length];
 				int i = 0;
-				for(Muscle m:Muscle.values()){
+				for (Muscle m : Muscle.values()) {
 					items[i] = m.toString();
 					states[i] = muscleMap.get(m);
 					i++;
 				}
-			    
-			    
-			    AlertDialog.Builder builder = new AlertDialog.Builder(SelectExercisesActivity.this);
-			    builder.setTitle(getString(R.string.select_muscles));
-			    builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener(){
-			        public void onClick(DialogInterface dialogInterface, int item, boolean state) {
-			        }
-			    });
-			    builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int id) {
-			            SparseBooleanArray Checked = ((AlertDialog)dialog).getListView().getCheckedItemPositions();
-			            for(int i = 0; i<Checked.size();i++){
-			            	muscleMap.put(Muscle.getByName(items[i].toString()), states[i]);
-			            }
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(SelectExercisesActivity.this);
+				builder.setTitle(getString(R.string.select_muscles));
+				builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener() {
+					public void onClick(DialogInterface dialogInterface, int item, boolean state) {
+					}
+				});
+				builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						SparseBooleanArray Checked = ((AlertDialog) dialog).getListView().getCheckedItemPositions();
+						for (int i = 0; i < Checked.size(); i++) {
+							muscleMap.put(Muscle.getByName(items[i].toString()), states[i]);
+						}
 						updateExList();
-			        }
-			    });
-			    builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-			        public void onClick(DialogInterface dialog, int id) {
-			             dialog.cancel();
-			        }
-			    });
-			    builder.setIcon(R.drawable.icon_attention);
-			    builder.create().show();
-				
+					}
+				});
+				builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+				builder.setIcon(R.drawable.icon_attention);
+				builder.create().show();
 
 				return true;
 			}
@@ -222,7 +219,7 @@ public class SelectExercisesActivity extends Activity {
 	public void onRestart() {
 		super.onRestart();
 		this.updateExList();
-		
+
 		// update exercise list, because the old, saved state my not be
 		// up-to-date
 		Workout w = DataManager.INSTANCE.getCurrentWorkout();
@@ -266,7 +263,8 @@ public class SelectExercisesActivity extends Activity {
 	 * Shows the currently exercise. That means that the different TextViews and
 	 * the image are updated.
 	 * 
-	 * @param ex	The exercise to show
+	 * @param ex
+	 *            The exercise to show
 	 */
 	private void showExercise(ExerciseType ex) {
 		this.currentExercise = ex;
@@ -278,7 +276,6 @@ public class SelectExercisesActivity extends Activity {
 		// Exercise Name
 		TextView exerciseName = (TextView) findViewById(R.id.textview_exercise_name);
 		exerciseName.setText(ex.getName());
-
 
 		// for loop is a try to reduce code length.
 		for (int i = 0; i < 4; i++) {
@@ -311,7 +308,7 @@ public class SelectExercisesActivity extends Activity {
 				tw = (TextView) findViewById(R.id.textview_hint);
 				tw0 = (TextView) findViewById(R.id.textview_hint0);
 				tw1 = (TextView) findViewById(R.id.textview_hint1);
-				break;	
+				break;
 			default:
 				throw new AssertionError("");
 			}
@@ -332,7 +329,6 @@ public class SelectExercisesActivity extends Activity {
 			else
 				tw1.setText(it.next().toString());
 		}
-		
 
 		// Image license
 		TextView image_license = (TextView) findViewById(R.id.textview_image_license);
@@ -382,7 +378,6 @@ public class SelectExercisesActivity extends Activity {
 			return true;
 		}
 
-		//TODO change swiping action to switch to next exercise
 		/**
 		 * When the user swipes, he can also go back.
 		 */
@@ -398,12 +393,48 @@ public class SelectExercisesActivity extends Activity {
 
 			// right to left swipe
 			if (e1.getX() - e2.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
-				switchImage(DIRECTION.FORWARD);
+				switchExercise(DIRECTION.FORWARD);
 			} else if (e2.getX() - e1.getX() > swipeMinDistance && Math.abs(velocityX) > swipeThresholdVelocity) {
-				switchImage(DIRECTION.BACKWARD);
+				switchExercise(DIRECTION.BACKWARD);
 			}
 
 			return true;
+		}
+
+		/**
+		 * Shows the next or previous {@link ExerciseType}.
+		 * 
+		 * @param direction
+		 */
+		private void switchExercise(DIRECTION direction) {
+
+			// attention - copied code from above
+			ArrayList<ExerciseType> exList = new ArrayList<ExerciseType>();
+			for (ExerciseType exType : ExerciseType.listExerciseTypes()) {
+				boolean shouldAdd = false;
+				for (Muscle m : exType.getActivatedMuscles()) {
+					if (muscleMap.get(m)) {
+						shouldAdd = true;
+						break;
+					}
+				}
+				if (shouldAdd || exType.getActivatedMuscles().isEmpty())
+					exList.add(exType);
+			}
+			// end copied
+
+			int idx = exList.indexOf(currentExercise);
+
+			if (direction == DIRECTION.FORWARD) {
+				if (idx < exList.size() -1)
+					idx++;
+			} else {
+				if (idx > 0)
+					idx--;
+			}
+
+			showExercise(exList.get(idx));
+
 		}
 
 		/**
