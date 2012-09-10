@@ -376,8 +376,9 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 * @return true if deleting was successful
 	 */
 	public static synchronized boolean removeExerciseType(ExerciseType exType) {
+		boolean succ = ExerciseType.exerciseTypes.remove(exType);
 		exType.deleted = true;
-		return ExerciseType.exerciseTypes.remove(exType);
+		return succ;
 	}
 
 	/**
