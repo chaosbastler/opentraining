@@ -31,6 +31,7 @@ public enum SportsEquipment {
         LEG_EXTENSION_MACHINE("Beinstrecker Maschine"),
         LEG_PRESS("Beinpresse"),
         MAT("Gymnastikmatte"),
+        SIT_UP_BANK("Sit Up Bank"),
         SWISS_BALL("Swiss Ball"),
         PULL_UP_BAR("Klimmzug Stange"),
         WEIGHT("Hantelscheibe")
