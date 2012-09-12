@@ -236,10 +236,10 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		// unmodifiable collection
 		TreeSet<SportsEquipment> tools = new TreeSet<SportsEquipment>(builder.neededTools);
 		if (tools.size() > 1) {
-			tools.remove(SportsEquipment.NONE);
+			tools.remove(SportsEquipment.getByName("None"));
 		}
 		if (tools.size() == 0) {
-			tools.add(SportsEquipment.NONE);
+			tools.add(SportsEquipment.getByName("None"));
 		}
 		this.requiredEquipment = tools;
 

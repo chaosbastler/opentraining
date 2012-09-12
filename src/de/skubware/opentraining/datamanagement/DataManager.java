@@ -206,6 +206,8 @@ public enum DataManager {
 		// do this in background
 		new Thread(new Runnable() {
 			public void run() {
+				// start localizing first
+				SportsEquipment.localize(context);
 
 				try {
 					// next line is necessary to avoid current modification
@@ -229,6 +231,8 @@ public enum DataManager {
 						ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser();
 						parser.read(context.getFileStreamPath("my_xml"));
 					}
+					
+
 				} catch (IOException ioEx) {
 					ioEx.printStackTrace();
 				}

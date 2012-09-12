@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="None">
+        <item>None</item>
+        <item>Keine</item>
+    </string-array>
+    
+	<string-array name="Barbell">
+        <item>Barbell</item>
+         <item>Langhantel</item>
+    </string-array> 
+    
+    <string-array name="Dumbbell">
+        <item>Dumbbell</item>
+        <item>Kurzhantel</item> 
+    </string-array>
+    
+	<string-array name="SZ_Curl_Bar">
+        <item>S-Z Curl Bar</item>
+        <item>SZ Stange</item>
+        
+    </string-array> 
+    
+    <string-array name="Arm_Curl_Pad">
+        <item>Arm Curl Pad</item>
+        <item>Curlpult</item>        
+    </string-array>
+    
+
+	<string-array name="Exercise_Mat">
+        <item>Exercise Mat</item>
+        <item>Übungsmatte</item>
+        <item>Gymnastikmatte</item>
+    </string-array> 
+    
+    <string-array name="Swiss_ball">
+        <item>Swiss ball</item>
+        <item>Swiss Ball</item>
+        <item>Swissball</item>
+    </string-array>
+    
+	<string-array name="PullUp_Bar">
+        <item>Pull-Up Bar</item>
+        <item>Klimmzugsstange</item>
+    </string-array>
+    
+	<string-array name="Plate">
+        <item>Plates</item>
+        <item>Hantelscheibe</item>
+        <item>Gewichtsscheibe</item>
+    </string-array>
+    
+	<string-array name="Bench">
+        <item>Bench</item>
+        <item>Trainingsbank</item>
+        <item>Hantelbank</item>
+    </string-array> 
+    
+    <string-array name="Leg_Press">
+        <item>Leg Press</item>
+        <item>Beinpresse</item>
+    </string-array>
+    
+	<string-array name="Hand_Strengtheners">
+        <item>Hand Strengtheners</item>
+        <item>Fingertrainer</item>
+    </string-array>
+    
+	<string-array name="Dip_Stands">
+        <item>Dip Stands</item>
+        <item>Dip Barren</item>
+    </string-array>
+	
+</resources>
+
+
+

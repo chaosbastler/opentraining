@@ -20,65 +20,157 @@
 
 package de.skubware.opentraining.basic;
 
-//TODO replace by dynamic variant
-public enum SportsEquipment {
-        NONE("Keine"), 
-        BARBELL_L("Langhantel"),
-        BARBELL_SZ("SZ-Stange"),
-        BARBELL_S("Kurzhantel"),
-        BANK("Trainingsbank"),
-        CURL_PULT("Curlpult"),
-        LEG_EXTENSION_MACHINE("Beinstrecker Maschine"),
-        LEG_PRESS("Beinpresse"),
-        MED_BALL("Medizinball"),
-        MAT("Gymnastikmatte"),
-        SIT_UP_BANK("Sit Up Bank"),
-        SWISS_BALL("Swiss Ball"),
-        PULL_UP_BAR("Klimmzug Stange"),
-        WEIGHT("Hantelscheibe")
-        ;
+import java.util.*;
 
-        
-        /** The name of the SportsEquipment */
-        final private String name;
-        
-        /**
-         * The Constructor
-         * 
-         * @param name The name of the Tool, names should be used only once
-         */
-        private SportsEquipment(String name){           
-                this.name = name;
-        }
-        
-        
-        /**
-         * Getter for name
-         * @return the name of the SportsEquipment
-         */
-        public String getName(){
-                return this.name;
-        }
-        
-        
-        @Override
-        public String toString() {
-                return name;
-        }
+import de.skubware.opentraining.R;
 
 
-        /**
-         * @param toolName
-         * @return
-         */
-        public static SportsEquipment getByName(String toolName) {
-                for(SportsEquipment s:values()){
-                        if(s.getName().equals(toolName)){
-                                return s;
-                        }
-                }
-                //return NONE;
-                throw new IllegalArgumentException("No " + toolName + " SportsEquipment was found in enum SportsEquipment");
-        }
+import android.content.Context;
+import android.util.Log;
+
+/**
+ * A class for handling SportsEquipment.
+ * E.g. different names for the same equipment should be connected to the same equipment.
+ * 
+ * Only standard equipment can be localized.
+ */
+public class SportsEquipment implements Comparable<SportsEquipment>{
+	/** Tag for logging */
+	private static final String TAG = "SportsEquipment";
+	
+	/** Flag for the localization status of this class. Just for asserting, that localize() has been called. */
+	private static boolean localized = false;
+
+
+	/**
+	 * Map that connects names and SportsEquipment objects.
+	 * 
+	 * Reason: there may be alternative names
+	 */
+	private static Map<String, SportsEquipment> eqMap = new HashMap<String, SportsEquipment>();
+
+	/** The name of the SportsEquipment */
+	private String name;
+
+	/**
+	 * The Constructor
+	 * 
+	 * @param name
+	 *            The name of the Tool, names should be used only once
+	 */
+	private SportsEquipment(String name) {
+		this.name = name;
+		eqMap.put(name, this);
+	}
+	
+	/**
+	 * Adds an alternative name to the SportsEquipment.
+	 * 
+	 * @param altName The new alternative name.
+	 */
+	public void provideAlternativeName(String altName){
+		if(altName.equals(this.toString()))
+			return;
+		
+		if(eqMap.containsKey(altName)){
+			Log.w(TAG, "Warning: " + altName + " is already connected with " + eqMap.get(altName).toString() + ". Will now be connected to " + this.name);
+		}
+		eqMap.put(altName, this);
+	}
+	
+	/**
+	 * Sets the String that is returned by toString().
+	 * 
+	 * @param localizedSting The localized String
+	 */
+	public static void localize(Context context){
+		eqMap = new HashMap<String, SportsEquipment>();
+		localized = true;
+		
+		
+		int language = 0;
+		if(Locale.getDefault().equals(Locale.GERMANY)){
+			language = 1;
+		}
+		
+		String[][] arr = new String[13][];
+		arr[0] = context.getResources().getStringArray(R.array.None);
+		arr[1] = context.getResources().getStringArray(R.array.Arm_Curl_Pad);
+		arr[2] = context.getResources().getStringArray(R.array.Barbell);
+		arr[3] = context.getResources().getStringArray(R.array.Bench);
+		arr[4] = context.getResources().getStringArray(R.array.Dip_Stands);
+		arr[5] = context.getResources().getStringArray(R.array.Dumbbell);
+		arr[6] = context.getResources().getStringArray(R.array.Exercise_Mat);
+		arr[7] = context.getResources().getStringArray(R.array.Hand_Strengtheners);
+		arr[9] = context.getResources().getStringArray(R.array.Plate);
+		arr[10] = context.getResources().getStringArray(R.array.PullUp_Bar);
+		arr[11] = context.getResources().getStringArray(R.array.Swiss_ball);
+		arr[12] = context.getResources().getStringArray(R.array.SZ_Curl_Bar);
+
+
+		for(String[] eqs:arr){
+			if(eqs==null)
+				continue;
+			
+			SportsEquipment eq;
+			if(eqs.length>=language)
+				eq =  getByName(eqs[language]);
+			else
+				eq =  getByName(eqs[0]);
+			for(String s:eqs){
+				eq.provideAlternativeName(s);
+			}
+		}
+		
+	}
+
+
+	/**
+	 * Returns the localized name.
+	 */
+	@Override
+	public String toString() {
+		if(!localized)
+			throw new AssertionError("SportsEquipment.localize() was not called.");
+
+		return name;
+	}
+
+	/**
+	 * Static factory method. Objects will only be created once, aftet that old
+	 * objects will be reused.
+	 * 
+	 * @param toolName
+	 *            The name of the SportsEquipment
+	 * 
+	 * @return The SportsEquipment
+	 */
+	public static SportsEquipment getByName(String toolName) {
+		SportsEquipment eq = eqMap.get(toolName);
+		if (eq == null) {
+			eq = new SportsEquipment(toolName);
+			eqMap.put(toolName, eq);
+			Log.i(TAG, "Created new SportsEquipment: " + toolName);
+		}
+		return eq;
+
+	}
+	
+	public static Iterable<SportsEquipment> values(){
+		return new HashSet<SportsEquipment>(SportsEquipment.eqMap.values());
+	}
+
+	@Override
+	public int compareTo(SportsEquipment eq) {
+		return this.toString().compareTo(eq.toString());
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(! (o instanceof SportsEquipment) )
+			return false;
+		
+		return ((SportsEquipment)o).toString().equals(this.toString());
+	}
 
 }

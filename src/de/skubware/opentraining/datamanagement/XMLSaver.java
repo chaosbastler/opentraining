@@ -154,7 +154,7 @@ public class XMLSaver {
 
 			for (SportsEquipment eq : ex.getRequiredEquipment()) {
 				Element wE = doc.createElement("SportsEquipment");
-				wE.setAttribute("name", eq.getName());
+				wE.setAttribute("name", eq.toString());
 				exE.appendChild(wE);
 			}
 
