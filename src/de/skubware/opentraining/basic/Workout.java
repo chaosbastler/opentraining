@@ -102,6 +102,15 @@ public class Workout implements Iterable<FitnessExercise>{
 	public String getName() {
 		return this.name;
 	}
+	
+	/**
+	 * Setter for name
+	 * 
+	 * @param name The new name of the workout
+	 */
+	public void setName(String name) {
+		this.name =name;
+	}
 
 	/**
 	 * Getter for the {@code FitnessExercises}

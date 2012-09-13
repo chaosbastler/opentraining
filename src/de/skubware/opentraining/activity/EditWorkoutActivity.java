@@ -39,6 +39,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
@@ -161,6 +163,23 @@ public class EditWorkoutActivity extends Activity {
 		// workout name
 		EditText edittext_name = (EditText) findViewById(R.id.edittext_workout_name);
 		edittext_name.setText(DataManager.INSTANCE.getCurrentWorkout().getName());
+		edittext_name.addTextChangedListener(new TextWatcher(){
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				if(!s.toString().isEmpty())
+					DataManager.INSTANCE.getCurrentWorkout().setName(s.toString());
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {				
+			}
+			
+		});
 
 		// button + row
 		Button btn_add_row = (Button) findViewById(R.id.btn_add_row);
