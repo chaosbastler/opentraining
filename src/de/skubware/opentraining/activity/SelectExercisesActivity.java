@@ -67,7 +67,6 @@ import android.widget.Toast;
  */
 public class SelectExercisesActivity extends Activity {
 
-	private List<FitnessExercise> exerciseList = new ArrayList<FitnessExercise>();
 	private Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
 
 	private ExerciseType currentExercise = ExerciseType.listExerciseTypes().first();
@@ -86,13 +85,18 @@ public class SelectExercisesActivity extends Activity {
 		MenuItem menu_item_add_exercise = (MenuItem) menu.findItem(R.id.menu_item_add_exercise);
 		menu_item_add_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				//
 				if (currentExercise == null) {
 					Toast.makeText(SelectExercisesActivity.this, getString(R.string.no_exercises_choosen), Toast.LENGTH_LONG).show();
 					return true;
 				}
 
-				SelectExercisesActivity.this.exerciseList.add(new FitnessExercise(currentExercise));
+				Workout w = DataManager.INSTANCE.getCurrentWorkout();
+				if (w == null) {
+					w = new Workout("My Plan", new FitnessExercise(currentExercise));
+					DataManager.INSTANCE.setWorkout(w);
+				} else {
+					w.addFitnessExercise(new FitnessExercise(currentExercise));
+				}
 
 				CharSequence text = getString(R.string.exercise) + " " + currentExercise.getName() + " " + getString(R.string.has_been_added);
 				int duration = Toast.LENGTH_LONG;
@@ -107,7 +111,7 @@ public class SelectExercisesActivity extends Activity {
 		final MenuItem menu_item_next = (MenuItem) menu.findItem(R.id.menu_item_next);
 		menu_item_next.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				if (exerciseList.isEmpty()) {
+				if (DataManager.INSTANCE.getCurrentWorkout() == null) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(SelectExercisesActivity.this);
 					builder.setMessage(getString(R.string.no_exercises_choosen)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
@@ -119,7 +123,6 @@ public class SelectExercisesActivity extends Activity {
 					return true;
 				} else {
 
-					DataManager.INSTANCE.setWorkout(new Workout("Mein Trainingsplan", exerciseList));
 					startActivity(new Intent(SelectExercisesActivity.this, EditWorkoutActivity.class));
 					finish();
 				}
@@ -155,9 +158,9 @@ public class SelectExercisesActivity extends Activity {
 				builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener() {
 					public void onClick(DialogInterface dialogInterface, int item, boolean state) {
 						muscleMap.put(Muscle.getByName(items[item].toString()), state);
-						
-						if(! muscleMap.values().contains(Boolean.TRUE)){
-							Toast.makeText(SelectExercisesActivity.this, getString(R.string.please_select_muscle) , Toast.LENGTH_LONG).show();
+
+						if (!muscleMap.values().contains(Boolean.TRUE)) {
+							Toast.makeText(SelectExercisesActivity.this, getString(R.string.please_select_muscle), Toast.LENGTH_LONG).show();
 						}
 					}
 				});
@@ -167,7 +170,7 @@ public class SelectExercisesActivity extends Activity {
 						for (Muscle m : Muscle.values()) {
 							items[i] = m.toString();
 							states[i] = true;
-							muscleMap.put(m,true);
+							muscleMap.put(m, true);
 							i++;
 						}
 						updateExList();
@@ -176,12 +179,12 @@ public class SelectExercisesActivity extends Activity {
 				});
 				builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						if(! muscleMap.values().contains(Boolean.TRUE)){
+						if (!muscleMap.values().contains(Boolean.TRUE)) {
 							muscleMap.put(Muscle.values()[0], true);
-							Toast.makeText(SelectExercisesActivity.this, Muscle.values()[0].toString() + " " + getString(R.string.was_choosen) , Toast.LENGTH_LONG).show();
+							Toast.makeText(SelectExercisesActivity.this, Muscle.values()[0].toString() + " " + getString(R.string.was_choosen), Toast.LENGTH_LONG).show();
 
 						}
-							updateExList();
+						updateExList();
 					}
 				});
 				builder.setIcon(R.drawable.icon_attention);
@@ -231,16 +234,9 @@ public class SelectExercisesActivity extends Activity {
 	@Override
 	public void onRestart() {
 		super.onRestart();
+		
+		// update exercise list, saved state my not be up-to-date
 		this.updateExList();
-
-		// update exercise list, because the old, saved state my not be
-		// up-to-date
-		Workout w = DataManager.INSTANCE.getCurrentWorkout();
-		if (w != null)
-			this.exerciseList = w.getFitnessExercises();
-		else
-			this.exerciseList = new ArrayList<FitnessExercise>();
-
 	}
 
 	private void updateExList() {
@@ -439,7 +435,7 @@ public class SelectExercisesActivity extends Activity {
 			int idx = exList.indexOf(currentExercise);
 
 			if (direction == DIRECTION.FORWARD) {
-				if (idx < exList.size() -1)
+				if (idx < exList.size() - 1)
 					idx++;
 			} else {
 				if (idx > 0)
