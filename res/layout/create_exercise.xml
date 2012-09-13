@@ -30,32 +30,40 @@
         </EditText>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/wrapper_equipment"
+    <ScrollView
+        android:id="@+id/scrollview_equipment"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
-        android:orientation="vertical"
         android:padding="10dp" >
 
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/wrapper_equipment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/equipment"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/equipment"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/wrapper_muscles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignTop="@+id/wrapper_equipment"
+        android:layout_alignTop="@+id/scrollview_equipment"
         android:layout_toLeftOf="@+id/wrapper_exercisetags"
-        android:layout_toRightOf="@+id/wrapper_equipment"
+        android:layout_toRightOf="@+id/scrollview_equipment"
         android:orientation="vertical"
         android:padding="10dp" >
 
@@ -65,6 +73,7 @@
             android:layout_height="wrap_content"
             android:text="@string/muscle"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </LinearLayout>
 
     <LinearLayout

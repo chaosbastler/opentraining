@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -152,7 +153,7 @@ public class CreateExerciseActivity extends Activity {
 		setContentView(R.layout.create_exercise);
 
 		// add muscle checkboxes
-		LinearLayout layout = (LinearLayout) findViewById(R.id.wrapper_muscles);
+		ViewGroup layout = (ViewGroup) findViewById(R.id.wrapper_muscles);
 		for (Muscle m : Muscle.values()) {
 			CheckBox b = new CheckBox(this);
 			b.setText(m.toString());
@@ -161,7 +162,7 @@ public class CreateExerciseActivity extends Activity {
 		}
 
 		// add equipment checkboxes
-		layout = (LinearLayout) findViewById(R.id.wrapper_equipment);
+		layout = (ViewGroup) findViewById(R.id.wrapper_equipment);
 		for (SportsEquipment e : SportsEquipment.values()) {
 			CheckBox b = new CheckBox(this);
 			b.setText(e.toString());
@@ -170,7 +171,7 @@ public class CreateExerciseActivity extends Activity {
 		}
 
 		// add tag checkboxes
-		layout = (LinearLayout) findViewById(R.id.wrapper_exercisetags);
+		layout = (ViewGroup) findViewById(R.id.wrapper_exercisetags);
 		for (ExerciseTag tag : ExerciseTag.values()) {
 			CheckBox b = new CheckBox(this);
 			b.setText(tag.toString());

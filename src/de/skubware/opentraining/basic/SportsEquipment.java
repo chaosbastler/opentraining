@@ -157,7 +157,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 	}
 	
 	public static Iterable<SportsEquipment> values(){
-		return new HashSet<SportsEquipment>(SportsEquipment.eqMap.values());
+		return new TreeSet<SportsEquipment>(SportsEquipment.eqMap.values());
 	}
 
 	@Override

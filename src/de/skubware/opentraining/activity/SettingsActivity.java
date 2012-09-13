@@ -4,7 +4,6 @@ import de.skubware.opentraining.R;
 import android.os.Bundle;
 import android.app.TabActivity;
 import android.content.Intent;
-import android.view.Menu;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
