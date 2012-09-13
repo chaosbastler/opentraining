@@ -68,7 +68,7 @@ public class HomeActivity extends Activity {
 					builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							startActivity((new Intent(HomeActivity.this, SettingsActivity.class)).putExtra(SettingsActivity.KEY_START_DOWNLOAD, true));
+							startActivity((new Intent(HomeActivity.this, DownloadExercisesActivity.class)).putExtra(DownloadExercisesActivity.KEY_START_DOWNLOAD, true));
 						}
 					});
 					builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {

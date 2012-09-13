@@ -46,8 +46,8 @@
     <string name="load_plan">Load plan</string>
     <string name="muscle">Muscle</string>
     <string name="cancel">Cancel</string>
-    <string name="create_new_exercise">Create new exercise</string>    
-    <string name="name_required">Name required</string>    
+    <string name="create_new_exercise">Create new exercise</string>
+    <string name="name_required">Name required</string>
     <string name="select_muscles">Select muscles</string>
     <string name="name">Name</string>
     <string name="name_of_exercise">Name of exercise</string>
@@ -68,9 +68,12 @@
     <string name="select_all">Select all</string>
     <string name="please_select_muscle">Please choose at least one muscle</string>
     <string name="was_choosen">was choosen</string>
+    <string name="manage_exercises">Manage exercises</string>
     
     
     
+    
+
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -94,8 +97,5 @@
         <item name="android:textSize">22dp</item>
         <item name="android:textStyle">bold</item>
     </style>
-
-
-
 
 </resources>

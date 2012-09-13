@@ -36,7 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="de.skubware.opentraining.activity.SelectExercisesActivity" android:label="@string/create_plan">
+        <activity
+            android:name="de.skubware.opentraining.activity.SelectExercisesActivity"
+            android:label="@string/create_plan" >
         </activity>
         <activity android:name="de.skubware.opentraining.activity.ShowTPActivity" >
         </activity>
@@ -46,9 +48,20 @@
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.CreateExerciseActivity"
-            android:label="@string/create_new_exercise" android:windowSoftInputMode="stateHidden">
+            android:label="@string/create_new_exercise"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
-        <activity android:windowSoftInputMode="stateHidden" android:name=".activity.SettingsActivity" android:label="@string/settings"></activity>
+        <activity
+            android:name=".activity.DownloadExercisesActivity"
+            android:label="@string/settings"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/settings"
+            android:windowSoftInputMode="stateHidden" >
+
+        </activity>
     </application>
 
 </manifest>
