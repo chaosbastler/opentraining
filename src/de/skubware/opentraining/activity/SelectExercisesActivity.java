@@ -36,7 +36,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Menu;
@@ -155,14 +154,11 @@ public class SelectExercisesActivity extends Activity {
 				builder.setTitle(getString(R.string.select_muscles));
 				builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener() {
 					public void onClick(DialogInterface dialogInterface, int item, boolean state) {
+						muscleMap.put(Muscle.getByName(items[item].toString()), state);
 					}
 				});
 				builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						SparseBooleanArray Checked = ((AlertDialog) dialog).getListView().getCheckedItemPositions();
-						for (int i = 0; i < Checked.size(); i++) {
-							muscleMap.put(Muscle.getByName(items[i].toString()), states[i]);
-						}
 						updateExList();
 					}
 				});
