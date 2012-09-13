@@ -35,18 +35,34 @@ do
 	NEWFILE=`basename $f .svg`.png
 	echo -e "\033[46;1;31m STARTING $NEWFILE \033[0m"
 
-	inkscape --without-gui --export-png=../res/drawable-mdpi/$NEWFILE --export-dpi=160 $f
-	echo finished mdpi
-	echo ""
+	if [ -f ../res/drawable-mdpi/$NEWFILE ]
+		then
+		echo ../res/drawable-mdpi/$NEWFILE existiert bereits
+	else
+		inkscape --without-gui --export-png=../res/drawable-mdpi/$NEWFILE --export-dpi=160 $f
+		echo finished mdpi
+		echo ""
+	fi 
 
 
-	inkscape --without-gui --export-png=../res/drawable-hdpi/$NEWFILE --export-dpi=240 $f
-	echo finished hdpi
-	echo ""
+	if [ -f ../res/drawable-hdpi/$NEWFILE ]
+		then
+		echo ../res/drawable-hdpi/$NEWFILE existiert bereits
+	else
+		inkscape --without-gui --export-png=../res/drawable-hdpi/$NEWFILE --export-dpi=240 $f
+		echo finished hdpi
+		echo ""
+	fi 
 
-	inkscape --without-gui --export-png=../res/drawable-xhdpi/$NEWFILE --export-dpi=320 $f
-	echo -e finished hdpi
+
+	if [ -f ../res/drawable-xhdpi/$NEWFILE ]
+		then
+		echo ../res/drawable-xhdpi/$NEWFILE existiert bereits
+	else
+			inkscape --without-gui --export-png=../res/drawable-xhdpi/$NEWFILE --export-dpi=240 $f
+	echo finished xhdpi
 	echo ""
+	fi 
 
 	
 	echo -e "\033[46;1;31m FINISHED $NEWFILE \033[0m"
