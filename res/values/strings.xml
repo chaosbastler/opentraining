@@ -69,7 +69,7 @@
     <string name="please_select_muscle">Please choose at least one muscle</string>
     <string name="was_choosen">was choosen</string>
     <string name="manage_exercises">Manage exercises</string>
-    
+    <string name="select_equipment">Select equipment</string>
     
     
     
@@ -97,5 +97,6 @@
         <item name="android:textSize">22dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 
 </resources>

@@ -26,6 +26,7 @@ import de.skubware.opentraining.R;
 
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 /**
@@ -40,6 +41,9 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 	
 	/** Flag for the localization status of this class. Just for asserting, that localize() has been called. */
 	private static boolean localized = false;
+	
+	/** An image of the SportsEquipment */
+	private Drawable image;
 
 
 	/**
@@ -120,6 +124,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 			for(String s:eqs){
 				eq.provideAlternativeName(s);
 			}
+
 		}
 		
 	}
@@ -171,6 +176,15 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 			return false;
 		
 		return ((SportsEquipment)o).toString().equals(this.toString());
+	}
+
+	/**
+	 * Getter for image.
+	 * 
+	 * @return an image of the SportsEquipment, null if not set
+	 */
+	public Drawable getImage() {
+		return image;
 	}
 
 }

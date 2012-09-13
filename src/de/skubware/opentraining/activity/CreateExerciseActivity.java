@@ -16,7 +16,6 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
