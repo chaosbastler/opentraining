@@ -42,6 +42,7 @@
 	<string-array name="PullUp_Bar">
         <item>Pull-Up Bar</item>
         <item>Klimmzugsstange</item>
+        <item>Klimmzugs Stange</item>
     </string-array>
     
 	<string-array name="Plate">
