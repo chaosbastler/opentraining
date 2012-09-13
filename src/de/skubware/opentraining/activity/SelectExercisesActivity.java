@@ -155,16 +155,33 @@ public class SelectExercisesActivity extends Activity {
 				builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener() {
 					public void onClick(DialogInterface dialogInterface, int item, boolean state) {
 						muscleMap.put(Muscle.getByName(items[item].toString()), state);
+						
+						if(! muscleMap.values().contains(Boolean.TRUE)){
+							Toast.makeText(SelectExercisesActivity.this, getString(R.string.please_select_muscle) , Toast.LENGTH_LONG).show();
+						}
+					}
+				});
+				builder.setNeutralButton(getString(R.string.select_all), new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						int i = 0;
+						for (Muscle m : Muscle.values()) {
+							items[i] = m.toString();
+							states[i] = true;
+							muscleMap.put(m,true);
+							i++;
+						}
+						updateExList();
+						dialog.dismiss();
 					}
 				});
 				builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						updateExList();
-					}
-				});
-				builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
+						if(! muscleMap.values().contains(Boolean.TRUE)){
+							muscleMap.put(Muscle.values()[0], true);
+							Toast.makeText(SelectExercisesActivity.this, Muscle.values()[0].toString() + " " + getString(R.string.was_choosen) , Toast.LENGTH_LONG).show();
+
+						}
+							updateExList();
 					}
 				});
 				builder.setIcon(R.drawable.icon_attention);

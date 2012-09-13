@@ -65,9 +65,12 @@
     <string name="accept">Accept</string>
     <string name="not_accept">Not accept</string>
     <string name="license">License</string>
+    <string name="select_all">Select all</string>
+    <string name="please_select_muscle">Please choose at least one muscle</string>
+    <string name="was_choosen">was choosen</string>
     
     
-
+    
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

@@ -61,9 +61,9 @@
     <string name="accept">Akzeptieren</string>
     <string name="not_accept">Nicht akzeptieren</string>
     <string name="license">Lizenzbedingungen</string>
-    
-    
-    
+    <string name="select_all">Alle auswählen</string>
+    <string name="please_select_muscle">Bite mindestends einen Muskel wählen</string>
+    <string name="was_choosen">wurde gewählt</string>
     
     <style name="ButtonText">
     	<item name="android:layout_width">fill_parent</item>
