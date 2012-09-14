@@ -1,6 +1,8 @@
 package de.skubware.opentraining;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.AlertDialog;
@@ -15,7 +17,9 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import de.skubware.opentraining.activity.CreateExerciseActivity;
@@ -23,17 +27,15 @@ import de.skubware.opentraining.activity.EditWorkoutActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.DataManager;
 
-
 public class ExerciseDetailFragment extends Fragment {
 
 	public static final String ARG_ITEM_ID = "item_id";
 
 	/** Currently selected exercise */
 	private ExerciseType exercise;
-	
+
 	/** Map to store, which muscles should be shown */
 	private Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
-
 
 	public ExerciseDetailFragment() {
 	}
@@ -41,11 +43,11 @@ public class ExerciseDetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		for(Muscle m:Muscle.values()){
+
+		for (Muscle m : Muscle.values()) {
 			muscleMap.put(m, true);
 		}
-		
+
 		setHasOptionsMenu(true);
 		if (getArguments().containsKey(ARG_ITEM_ID)) {
 			exercise = ExerciseType.getByName(getArguments().getString(ARG_ITEM_ID));
@@ -75,20 +77,18 @@ public class ExerciseDetailFragment extends Fragment {
 		return rootView;
 	}
 
-	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    	
-		//MenuInflater inflater = getMenuInflater();
+
+		// MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.select_exercises_menu, menu);
 
-				
 		// configure menu_item_add_exercise
 		MenuItem menu_item_add_exercise = (MenuItem) menu.findItem(R.id.menu_item_add_exercise);
 		menu_item_add_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				if (exercise == null) {
-					
+
 					Toast.makeText(ExerciseDetailFragment.this.getActivity(), getString(R.string.no_exercises_choosen), Toast.LENGTH_LONG).show();
 					return true;
 				}
@@ -184,7 +184,8 @@ public class ExerciseDetailFragment extends Fragment {
 					public void onClick(DialogInterface dialog, int id) {
 						if (!muscleMap.values().contains(Boolean.TRUE)) {
 							muscleMap.put(Muscle.values()[0], true);
-							Toast.makeText(ExerciseDetailFragment.this.getActivity(), Muscle.values()[0].toString() + " " + getString(R.string.was_choosen), Toast.LENGTH_LONG).show();
+							Toast.makeText(ExerciseDetailFragment.this.getActivity(), Muscle.values()[0].toString() + " " + getString(R.string.was_choosen), Toast.LENGTH_LONG)
+									.show();
 
 						}
 						updateExList();
@@ -196,13 +197,29 @@ public class ExerciseDetailFragment extends Fragment {
 				return true;
 			}
 		});
-		
-	    super.onCreateOptionsMenu(menu, inflater);
+
+		super.onCreateOptionsMenu(menu, inflater);
 
 	}
-	
-	private void updateExList(){
-		//TODO implement
+
+	private void updateExList() {
+		ExerciseListFragment list = (ExerciseListFragment) this.getActivity().getSupportFragmentManager().findFragmentById(R.id.exercise_list);
+
+		ArrayList<ExerciseType> exList = new ArrayList<ExerciseType>();
+		for (ExerciseType exType : ExerciseType.listExerciseTypes()) {
+			boolean shouldAdd = false;
+			for (Muscle m : exType.getActivatedMuscles()) {
+				if (muscleMap.get(m)) {
+					shouldAdd = true;
+					break;
+				}
+			}
+			if (shouldAdd || exType.getActivatedMuscles().isEmpty())
+				exList.add(exType);
+		}
+
+		ListAdapter adapter = new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, exList);
+		list.setListAdapter(adapter);
 	}
-	
+
 }

@@ -5,7 +5,6 @@ import java.util.*;
 
 import de.skubware.opentraining.basic.*;
 
-import android.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -43,8 +42,8 @@ public class ExerciseListFragment extends ListFragment {
         this.exList = new ArrayList<ExerciseType>(ExerciseType.listExerciseTypes());
         
         setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
-                R.layout.simple_list_item_activated_1,
-                R.id.text1,
+                android.R.layout.simple_list_item_activated_1,
+                android.R.id.text1,
                 exList));
     }
 
