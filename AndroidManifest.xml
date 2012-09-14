@@ -6,8 +6,8 @@
     android:versionName="0.1" >
 
     <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="11" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="15" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -63,12 +63,24 @@
         </activity>
         <activity
             android:name=".activity.SettingsEquipmentActivity"
-            android:label="@string/select_equipment" android:stateNotNeeded="true">
+            android:label="@string/select_equipment"
+            android:stateNotNeeded="true" >
+        </activity>
+        <activity
+            android:name=".ItemListActivity"
+            android:label="@string/title_item_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ItemDetailActivity"
+            android:label="@string/title_item_detail" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemListActivity" />
         </activity>
     </application>
 

@@ -3,6 +3,8 @@ package de.skubware.opentraining.activity;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.SportsEquipment;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -11,9 +13,19 @@ import android.widget.ImageView;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
-public class SettingsEquipmentActivity extends Activity {
+public class SettingsEquipmentActivity extends PreferenceFragment {
+	
+	 @Override
+	    public void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+	        
+	        
+	        for(SportsEquipment eq:SportsEquipment.values()){
+;	        }
+	        addPreferencesFromResource(R.xml.prefs);
+	    }
 
-	@Override
+	/*@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings_equipment);
@@ -40,6 +52,6 @@ public class SettingsEquipmentActivity extends Activity {
 			layout.addView(b);
 		}
 
-	}
+	}*/
 
 }

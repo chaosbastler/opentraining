@@ -50,6 +50,7 @@
         <item>Plates</item>
         <item>Hantelscheibe</item>
         <item>Gewichtsscheibe</item>
+        <item>Plate</item>
     </string-array>
     
 	<string-array name="Bench">

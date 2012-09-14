@@ -65,6 +65,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 	private SportsEquipment(String name) {
 		this.name = name;
 		eqMap.put(name, this);
+		eqMap.put(name.toLowerCase(), this);
 	}
 	
 	/**
@@ -80,6 +81,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 			Log.w(TAG, "Warning: " + altName + " is already connected with " + eqMap.get(altName).toString() + ". Will now be connected to " + this.name);
 		}
 		eqMap.put(altName, this);
+		eqMap.put(altName.toLowerCase(), this);
 	}
 	
 	/**
@@ -126,7 +128,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 			}
 
 		}
-		
+				
 	}
 
 
@@ -178,6 +180,15 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 		return ((SportsEquipment)o).toString().equals(this.toString());
 	}
 
+	/**
+	 * Setter for image.
+	 * 
+	 * @param image The new image
+	 */
+	public void setImage(Drawable image) {
+		this.image = image;
+	}
+	
 	/**
 	 * Getter for image.
 	 * 

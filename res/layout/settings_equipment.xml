@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/wrapper_equipment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>
@@ -34,6 +34,23 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:src="@drawable/defaultimage" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none"
+            android:textIsSelectable="false" 
+            android:text="@string/select_equipment_hint" >
+
+            <requestFocus />
+        </EditText>
 
     </RelativeLayout>
 

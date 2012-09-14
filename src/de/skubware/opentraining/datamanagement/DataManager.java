@@ -24,6 +24,7 @@ import java.io.*;
 import java.util.*;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
@@ -208,7 +209,20 @@ public enum DataManager {
 			public void run() {
 				// start localizing first
 				SportsEquipment.localize(context);
+				// load images for equipment
+				String[] eq;
+				try {
+					eq = context.getAssets().list("equipment");
+					for(String image:eq){
+						String without_suffix = image.substring(0, image.lastIndexOf('.'));
+						SportsEquipment equipment = SportsEquipment.getByName(without_suffix);
+						equipment.setImage(Drawable.createFromStream(context.getAssets().open("equipment/" + image), null));
+					}
+				} catch (IOException e) {
+					Log.e(TAG, "Loading images for equipment failed", e);
+				}
 
+				
 				try {
 					// next line is necessary to avoid current modification
 					// exception while iterating
