@@ -14,7 +14,7 @@ public class ExerciseListActivity extends FragmentActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise_list);
+        setContentView(R.layout.exercise_list);
 
         if (findViewById(R.id.exercise_detail_container) != null) {
             mTwoPane = true;
