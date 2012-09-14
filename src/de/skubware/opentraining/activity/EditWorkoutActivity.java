@@ -450,7 +450,7 @@ public class EditWorkoutActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		finish();
-		startActivity(new Intent(EditWorkoutActivity.this, SelectExercisesActivity.class));
+		startActivity(new Intent(EditWorkoutActivity.this, de.skubware.opentraining.ExerciseListActivity.class));
 		return;
 	}
 
