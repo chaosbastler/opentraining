@@ -67,20 +67,15 @@
             android:stateNotNeeded="true" >
         </activity>
         <activity
-            android:name=".ItemListActivity"
-            android:label="@string/title_item_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".ExerciseListActivity"
+            android:label="@string/select_exercises" >
         </activity>
         <activity
-            android:name=".ItemDetailActivity"
-            android:label="@string/title_item_detail" >
+            android:name=".ExerciseDetailActivity"
+            android:label="@string/exercise_detail" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ItemListActivity" />
+                android:value=".ExerciseListActivity" />
         </activity>
     </application>
 

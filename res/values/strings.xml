@@ -72,6 +72,8 @@
     <string name="select_equipment">Select equipment</string>
     <string name="select_equipment_hint">Select the equipment you want to use for your training. 
         Exercises that require equipment you don\'t have will be filtered.</string>
+    <string name="select_exercises">Select exercises</string>
+    <string name="exercise_detail">Exercises detail</string>
 
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
@@ -96,10 +98,5 @@
         <item name="android:textSize">22dp</item>
         <item name="android:textStyle">bold</item>
     </style>
-
-    <string name="title_item_detail">Item Detail</string>
-    <string name="title_item_list">Items</string>
-    <string name="title_exercise_detail">Exercise Detail</string>
-    <string name="title_exercise_list">Exercises</string>
 
 </resources>

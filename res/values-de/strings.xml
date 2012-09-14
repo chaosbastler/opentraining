@@ -68,8 +68,8 @@
     <string name="select_equipment">Equipment auswählen</string>
     <string name="select_equipment_hint">Wähle das Equipment aus, das du benutzen willst.
         Übungen, die nicht zu deinem Equipment passen, werden in Zukunft nicht mehr angezeigt.</string>    
-    
-    
+    <string name="select_exercises">Übungen wählen</string>
+    <string name="exercise_detail">Details zur Übung detail</string>    
     
     <style name="ButtonText">
     	<item name="android:layout_width">fill_parent</item>

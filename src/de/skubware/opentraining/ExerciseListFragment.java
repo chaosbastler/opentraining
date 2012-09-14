@@ -1,10 +1,10 @@
 package de.skubware.opentraining;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.*;
+
 import android.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,14 +13,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class ItemListFragment extends ListFragment {
+public class ExerciseListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     private Callbacks mCallbacks = sDummyCallbacks;
     private int mActivatedPosition = ListView.INVALID_POSITION;
     
-    private List<ExerciseType> exList; 
+    private List<ExerciseType> exList;
 
     public interface Callbacks {
 
@@ -33,14 +33,14 @@ public class ItemListFragment extends ListFragment {
         }
     };
 
-    public ItemListFragment() {
+    public ExerciseListFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        exList = new ArrayList<ExerciseType>(ExerciseType.listExerciseTypes());
+        this.exList = new ArrayList<ExerciseType>(ExerciseType.listExerciseTypes());
         
         setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
                 R.layout.simple_list_item_activated_1,

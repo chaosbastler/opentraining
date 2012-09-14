@@ -60,7 +60,7 @@ public class HomeActivity extends Activity {
 		menu_button_select_exercises.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				if (!ExerciseType.listExerciseTypes().isEmpty())
-					startActivity(new Intent(HomeActivity.this, de.skubware.opentraining.ItemListActivity.class));
+					startActivity(new Intent(HomeActivity.this, de.skubware.opentraining.ExerciseListActivity.class));
 				else {
 					// ask user, if new exercises should be downloaded
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);

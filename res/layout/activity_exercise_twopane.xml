@@ -7,15 +7,15 @@
     android:layout_marginRight="16dp"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="middle"
-    tools:context=".ItemListActivity">
+    tools:context=".ExerciseListActivity">
 
-    <fragment android:name="de.skubware.opentraining.ItemListFragment"
-        android:id="@+id/item_list"
+    <fragment android:name="de.skubware.opentraining.ExerciseListFragment"
+        android:id="@+id/exercise_list"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
-    <FrameLayout android:id="@+id/item_detail_container"
+    <FrameLayout android:id="@+id/exercise_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3" />

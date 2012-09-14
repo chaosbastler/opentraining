@@ -1,7 +1,6 @@
 package de.skubware.opentraining;
 
-
-import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.*;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class ItemDetailFragment extends Fragment {
+public class ExerciseDetailFragment extends Fragment {
 
     public static final String ARG_ITEM_ID = "item_id";
 
     ExerciseType exercise;
 
-    public ItemDetailFragment() {
+    public ExerciseDetailFragment() {
     }
 
     @Override
@@ -29,9 +28,9 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_exercise_detail, container, false);
         if (exercise != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(exercise.getName());
+            ((TextView) rootView.findViewById(R.id.exercise_detail)).setText(exercise.getName());
         }
         return rootView;
     }
