@@ -71,7 +71,7 @@ public class SelectExercisesActivity extends Activity {
 	private ExerciseType currentExercise = ExerciseType.listExerciseTypes().first();
 	private int currentImage = 0;
 
-	private GestureDetector gestureScanner = new GestureDetector(new SelectExerciseGesture());
+	private GestureDetector gestureScanner = new GestureDetector(this, new SelectExerciseGesture());
 
 	private static final String TAG = "SelectExercisesActivity";
 

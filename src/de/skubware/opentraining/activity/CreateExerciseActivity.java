@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//TODO change to master/detail layout
 /**
  * Activity to create new exercises.
  * 

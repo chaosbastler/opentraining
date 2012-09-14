@@ -2,16 +2,22 @@ package de.skubware.opentraining;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 public class ExerciseDetailActivity extends FragmentActivity {
 
+	
+	private Fragment fragment;
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_exercise_detail);//.exercise_detail);
+        
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -19,7 +25,7 @@ public class ExerciseDetailActivity extends FragmentActivity {
             Bundle arguments = new Bundle();
             arguments.putString(ExerciseDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(ExerciseDetailFragment.ARG_ITEM_ID));
-            ExerciseDetailFragment fragment = new ExerciseDetailFragment();
+            fragment = new ExerciseDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.exercise_detail_container, fragment)
@@ -36,4 +42,6 @@ public class ExerciseDetailActivity extends FragmentActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    
+    
 }
