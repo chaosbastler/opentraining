@@ -11,7 +11,7 @@ public class ExerciseDetailActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercise_detail);
+        setContentView(R.layout.fragment_exercise_detail);//.exercise_detail);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
