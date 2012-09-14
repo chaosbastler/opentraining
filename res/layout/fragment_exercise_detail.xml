@@ -2,12 +2,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="?android:attr/textAppearanceLarge"
-    android:id="@+id/exercise_detail"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ExerciseDetailFragment" />
+	<RelativeLayout
+	    android:id="@+id/wrapper_image"
+	    android:layout_width="match_parent"
+	    android:layout_height="700dp"
+	    android:background="@drawable/background_white"
+	    android:orientation="vertical"
+	    android:padding="80dp" >
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/image_currently_selected"
+                android:scaleType="centerInside"
+                android:src="@drawable/ex_dummy" />
+
+        </RelativeLayout>
+
+	<TextView
+	    android:id="@+id/textview_image_license"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:text="TextView"
+	    android:textColor="@color/White" />
+
 </RelativeLayout>
