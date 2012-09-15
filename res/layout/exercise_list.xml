@@ -1,9 +1,9 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="de.skubware.opentraining.ExerciseListFragment"
+    android:name="de.skubware.opentraining.activity.select_exercises.ExerciseListFragment"
     android:id="@+id/exercise_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    tools:context=".ExerciseListActivity" />
+    tools:context="de.skubware.opentraining.activity.select_exercises.ExerciseListActivity" />

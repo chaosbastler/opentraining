@@ -7,9 +7,9 @@
     android:layout_marginRight="16dp"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="middle"
-    tools:context=".ExerciseListActivity">
+    tools:context="de.skubware.opentraining.activity.select_exercises.ExerciseListActivity">
 
-    <fragment android:name="de.skubware.opentraining.ExerciseListFragment"
+    <fragment android:name="de.skubware.opentraining.activity.select_exercises.ExerciseListFragment"
         android:id="@+id/exercise_list"
         android:layout_width="0dp"
         android:layout_height="match_parent"

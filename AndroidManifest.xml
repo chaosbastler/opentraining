@@ -66,11 +66,11 @@
             android:stateNotNeeded="true" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
-            android:name=".ExerciseListActivity"
+            android:name="de.skubware.opentraining.activity.select_exercises.ExerciseListActivity"
             android:label="@string/select_exercises" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
-            android:name=".ExerciseDetailActivity"
+            android:name="de.skubware.opentraining.activity.select_exercises.ExerciseDetailActivity"
             android:label="@string/exercise_detail" android:screenOrientation="sensorLandscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

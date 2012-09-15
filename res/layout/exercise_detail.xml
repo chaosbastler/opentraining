@@ -3,4 +3,4 @@
     android:id="@+id/exercise_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseDetailActivity" />
+    tools:context="de.skubware.opentraining.activity.select_exercises.ExerciseDetailActivity" />

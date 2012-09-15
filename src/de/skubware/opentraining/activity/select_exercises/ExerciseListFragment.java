@@ -18,10 +18,15 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.select_exercises;
 
 import java.util.*;
 
+import de.skubware.opentraining.R;
+import de.skubware.opentraining.R.drawable;
+import de.skubware.opentraining.R.id;
+import de.skubware.opentraining.R.menu;
+import de.skubware.opentraining.R.string;
 import de.skubware.opentraining.activity.CreateExerciseActivity;
 import de.skubware.opentraining.activity.EditWorkoutActivity;
 import de.skubware.opentraining.basic.*;

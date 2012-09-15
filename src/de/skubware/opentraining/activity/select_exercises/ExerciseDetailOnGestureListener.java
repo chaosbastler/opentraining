@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.select_exercises;
 
 import java.io.File;
 import java.util.List;
