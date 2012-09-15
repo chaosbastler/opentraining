@@ -80,7 +80,7 @@ public class EditWorkoutActivity extends Activity {
 
 	/** number of rows, can be changed, must be positive */
 	private int emptyRowCount;
-
+	
 	// some attributes for the style/design of the table
 	private final static int COLUMN_PADDING = 5;
 	private final static int ROW_PADDING = 5;
@@ -95,7 +95,7 @@ public class EditWorkoutActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.edit_workout_activity_menu, menu);
+		inflater.inflate(R.menu.edit_workout_menu, menu);
 
 		// configure menu_item_save_plan
 		final MenuItem menu_item_save_plan = (MenuItem) menu.findItem(R.id.menu_item_save_plan);
@@ -250,8 +250,11 @@ public class EditWorkoutActivity extends Activity {
 		tw.setTextSize(22);
 		tw.setPadding(15, 15, 15, 15);
 		tw.setGravity(Gravity.CENTER_HORIZONTAL);
-		tw.setHeight(ROW_HEIGHT);
+		
+
 		tw.setWidth(COLUMN_WIDTH);
+		tw.setHeight(ROW_HEIGHT);
+
 
 		tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_white));
 
