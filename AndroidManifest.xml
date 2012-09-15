@@ -12,7 +12,7 @@
 
     <supports-screens
         android:anyDensity="false"
-        android:largeScreens="false"
+        android:largeScreens="true"
         android:normalScreens="false"
         android:resizeable="false"
         android:smallScreens="false"
