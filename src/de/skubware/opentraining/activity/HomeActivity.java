@@ -88,7 +88,7 @@ public class HomeActivity extends Activity {
 		final MenuItem menu_button_settings = (MenuItem) menu.findItem(R.id.menu_button_settings);
 		menu_button_settings.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+				startActivity(new Intent(HomeActivity.this, PreferencesActivity.class));
 
 				return true;
 			}
