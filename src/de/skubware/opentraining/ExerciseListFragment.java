@@ -20,7 +20,6 @@
 
 package de.skubware.opentraining;
 
-
 import java.util.*;
 
 import de.skubware.opentraining.activity.CreateExerciseActivity;
@@ -34,6 +33,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,120 +44,117 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * Fragment that shows the list of the ExerciseType. Has an own options menu.
+ * Some code may be auto-generated from eclipse template for fragments.
+ * 
+ */
 public class ExerciseListFragment extends ListFragment {
+	/** Tag for logging */
+	private static final String TAG = "ExerciseDetailFragment";
 
-    private static final String STATE_ACTIVATED_POSITION = "activated_position";
-
-    private Callbacks mCallbacks = sDummyCallbacks;
-    private int mActivatedPosition = ListView.INVALID_POSITION;
-    
 	/** Map to store, which muscles should be shown */
 	Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
-    
-    private List<ExerciseType> exList;
-    private static ExerciseType exercise;
 
-    public interface Callbacks {
+	/** */
+	private List<ExerciseType> exList;
 
-        public void onItemSelected(String id);
-    }
+	// auto-generated stuff
+	private static final String STATE_ACTIVATED_POSITION = "activated_position";
+	private Callbacks mCallbacks = sDummyCallbacks;
+	private int mActivatedPosition = ListView.INVALID_POSITION;
 
-    private static Callbacks sDummyCallbacks = new Callbacks() {
-        @Override
-        public void onItemSelected(String id) {
-        }
-    };
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    public ExerciseListFragment() {
-    }
+		// init exList
+		this.exList = new ArrayList<ExerciseType>(ExerciseType.listExerciseTypes());
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        this.exList = new ArrayList<ExerciseType>(ExerciseType.listExerciseTypes());
-        
-        this.setHasOptionsMenu(true);
+		this.setHasOptionsMenu(true);
+		// fill muscle map
 		for (Muscle m : Muscle.values()) {
 			muscleMap.put(m, true);
 		}
-        
-        setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                exList));
-    }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null && savedInstanceState
-                .containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
-        }
-    }
+		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, exList));
+	}
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if (!(activity instanceof Callbacks)) {
-            throw new IllegalStateException("Activity must implement fragment's callbacks.");
-        }
+	// BEGIN auto-generated stuff
 
-        mCallbacks = (Callbacks) activity;
-    }
+	public interface Callbacks {
+		public void onItemSelected(String id);
+	}
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mCallbacks = sDummyCallbacks;
-    }
+	private static Callbacks sDummyCallbacks = new Callbacks() {
+		@Override
+		public void onItemSelected(String id) {
+		}
+	};
 
-    @Override
-    public void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, view, position, id);
-   	 	exercise = exList.get(position);
-        mCallbacks.onItemSelected(exList.get(position).getName());
-    }
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+			setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+		}
+	}
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mActivatedPosition != ListView.INVALID_POSITION) {
-            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
-        }
-    }
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		if (!(activity instanceof Callbacks)) {
+			throw new IllegalStateException("Activity must implement fragment's callbacks.");
+		}
 
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
-        getListView().setChoiceMode(activateOnItemClick
-                ? ListView.CHOICE_MODE_SINGLE
-                : ListView.CHOICE_MODE_NONE);
-    }
+		mCallbacks = (Callbacks) activity;
+	}
 
-    public void setActivatedPosition(int position) {
-        if (position == ListView.INVALID_POSITION) {
-            getListView().setItemChecked(mActivatedPosition, false);
-        } else {
-            getListView().setItemChecked(position, true);
-        }
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		mCallbacks = sDummyCallbacks;
+	}
 
-        mActivatedPosition = position;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    @Override
+	@Override
+	public void onListItemClick(ListView listView, View view, int position, long id) {
+		super.onListItemClick(listView, view, position, id);
+		mCallbacks.onItemSelected(exList.get(position).getName());
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (mActivatedPosition != ListView.INVALID_POSITION) {
+			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+		}
+	}
+
+	public void setActivateOnItemClick(boolean activateOnItemClick) {
+		getListView().setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE : ListView.CHOICE_MODE_NONE);
+	}
+
+	public void setActivatedPosition(int position) {
+		if (position == ListView.INVALID_POSITION) {
+			getListView().setItemChecked(mActivatedPosition, false);
+		} else {
+			getListView().setItemChecked(position, true);
+		}
+
+		mActivatedPosition = position;
+	}
+
+	// END auto-generated stuff
+	
+	
+	
+
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
 		// MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.exercise_list_menu, menu);
-
-
 
 		// configure menu_item_next
 		final MenuItem menu_item_next = (MenuItem) menu.findItem(R.id.menu_item_next);
@@ -174,7 +171,6 @@ public class ExerciseListFragment extends ListFragment {
 					alert.show();
 					return true;
 				} else {
-
 					startActivity(new Intent(ExerciseListFragment.this.getActivity(), EditWorkoutActivity.class));
 					getActivity().finish();
 				}
@@ -252,9 +248,14 @@ public class ExerciseListFragment extends ListFragment {
 
 	}
 
+	
+	/**
+	 * Updates the list of exercises.
+	 * Only exercises that fit to the chosen {@link Muscle}s and {@link SportsEquipment} will be shown.
+	 */
 	private void updateExList() {
-		ExerciseListFragment list = (ExerciseListFragment) this.getActivity().getSupportFragmentManager().findFragmentById(R.id.exercise_list);
-
+		Log.i(TAG, "Updating exercise list.");
+		
 		ArrayList<ExerciseType> exList = new ArrayList<ExerciseType>();
 		for (ExerciseType exType : ExerciseType.listExerciseTypes()) {
 			boolean shouldAdd = false;
@@ -267,8 +268,9 @@ public class ExerciseListFragment extends ListFragment {
 			if (shouldAdd || exType.getActivatedMuscles().isEmpty())
 				exList.add(exType);
 		}
+		//TODO filter sports equipment
 
 		ListAdapter adapter = new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, exList);
-		list.setListAdapter(adapter);
+		this.setListAdapter(adapter);
 	}
 }
