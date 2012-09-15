@@ -1,8 +1,5 @@
 package de.skubware.opentraining;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -12,7 +9,6 @@ import android.view.GestureDetector.OnGestureListener;
 import android.widget.ImageView;
 import de.skubware.opentraining.activity.EditWorkoutActivity;
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.datamanagement.DataManager;
 
 public class ExerciseDetailOnGestureListener implements OnGestureListener {
@@ -21,7 +17,6 @@ public class ExerciseDetailOnGestureListener implements OnGestureListener {
 	private static final String TAG = "ExerciseDetailOnGestureListener";
 
 	private Activity activity;
-	private Map<Muscle, Boolean> muscleMap;
 	private ExerciseType exercise;
 	private int currentImage = 0;
 	private ImageView imageview;
@@ -29,7 +24,6 @@ public class ExerciseDetailOnGestureListener implements OnGestureListener {
 	public ExerciseDetailOnGestureListener(ExerciseDetailFragment fragment, ImageView imageview) {
 		this.activity = fragment.getActivity();
 		this.exercise = fragment.exercise;
-		this.muscleMap = fragment.muscleMap;
 		this.imageview = imageview;
 	}
 
