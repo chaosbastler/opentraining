@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.skubware.opentraining"
     android:installLocation="auto"
@@ -29,7 +28,7 @@
         <activity
             android:name="de.skubware.opentraining.activity.HomeActivity"
             android:label="@string/app_name"
-            android:stateNotNeeded="true" >
+            android:stateNotNeeded="true" android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,41 +37,41 @@
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.SelectExercisesActivity"
-            android:label="@string/create_plan" >
+            android:label="@string/create_plan" android:screenOrientation="sensorLandscape">
         </activity>
-        <activity android:name="de.skubware.opentraining.activity.ShowTPActivity" >
+        <activity android:name="de.skubware.opentraining.activity.ShowTPActivity" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.EditWorkoutActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.CreateExerciseActivity"
             android:label="@string/create_new_exercise"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name=".activity.DownloadExercisesActivity"
             android:label="@string/settings"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/settings"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name=".activity.SettingsEquipmentActivity"
             android:label="@string/select_equipment"
-            android:stateNotNeeded="true" >
+            android:stateNotNeeded="true" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name=".ExerciseListActivity"
-            android:label="@string/select_exercises" >
+            android:label="@string/select_exercises" android:screenOrientation="sensorLandscape">
         </activity>
         <activity
             android:name=".ExerciseDetailActivity"
-            android:label="@string/exercise_detail" >
+            android:label="@string/exercise_detail" android:screenOrientation="sensorLandscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ExerciseListActivity" />

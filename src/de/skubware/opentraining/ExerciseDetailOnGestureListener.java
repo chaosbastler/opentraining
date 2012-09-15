@@ -23,7 +23,6 @@ package de.skubware.opentraining;
 import java.io.File;
 import java.util.List;
 
-import android.app.Activity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.GestureDetector.OnGestureListener;
