@@ -76,7 +76,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ExerciseListActivity" />
         </activity>
-        <activity android:screenOrientation="sensorLandscape" android:name=".activity.PreferencesActivity"></activity>
+        <activity android:screenOrientation="sensorLandscape" android:name=".activity.preferences.PreferencesActivity"></activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@
 
 package de.skubware.opentraining.activity;
 
+import de.skubware.opentraining.activity.preferences.PreferencesActivity;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.datamanagement.*;
 import de.skubware.opentraining.R;

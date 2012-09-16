@@ -1,4 +1,4 @@
-package de.skubware.opentraining.activity;
+package de.skubware.opentraining.activity.preferences;
 
 import java.util.List;
 

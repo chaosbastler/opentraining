@@ -1,6 +1,6 @@
 /**
  * 
- * This is OpenTraining, an Android application for planning your your fitness training.
+* This is OpenTraining, an Android application for planning your your fitness training.
  * Copyright (C) 2012 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -32,7 +32,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.Menu;
@@ -80,6 +82,7 @@ public class ExerciseListFragment extends ListFragment {
 		}
 
 		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, exList));
+		this.updateExList();
 	}
 
 	// BEGIN auto-generated stuff
@@ -257,14 +260,26 @@ public class ExerciseListFragment extends ListFragment {
 	private void updateExList() {
 		Log.i(TAG, "Updating exercise list.");
 		
+		
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+        Map<SportsEquipment,Boolean> eqMap = new HashMap<SportsEquipment,Boolean>();
+		for(SportsEquipment eq:SportsEquipment.values()){
+			eqMap.put(eq, sharedPref.getBoolean(eq.toString(), true));
+			Log.i(TAG, "Loaded: " + eq.toString() + ", value is " + eqMap.get(eq));
+		}
+		
 		ArrayList<ExerciseType> exList = new ArrayList<ExerciseType>();
 		for (ExerciseType exType : ExerciseType.listExerciseTypes()) {
 			boolean shouldAdd = false;
 			for (Muscle m : exType.getActivatedMuscles()) {
 				if (muscleMap.get(m)) {
 					shouldAdd = true;
+					for(SportsEquipment eq:exType.getRequiredEquipment()){
+						shouldAdd = shouldAdd && eqMap.get(eq);
+					}
 					break;
 				}
+
 			}
 			if (shouldAdd || exType.getActivatedMuscles().isEmpty())
 				exList.add(exType);
