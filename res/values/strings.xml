@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Open Training</string>
     <string name="workout_name">Workoutname</string>
     <string name="empty_rows">Empty columns</string>
@@ -80,7 +79,7 @@
     <string name="edit">Edit</string>
     <string name="edit_exercises">Edit exercises</string>
     <string name="download_exercises">Download exercises</string>
-    
+    <string name="edit_plan">Edit plan</string>
     
     
     

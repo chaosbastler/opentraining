@@ -20,7 +20,9 @@
 
 package de.skubware.opentraining.activity;
 
+
 import de.skubware.opentraining.activity.preferences.PreferencesActivity;
+import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.datamanagement.*;
 import de.skubware.opentraining.R;
@@ -106,7 +108,7 @@ public class HomeActivity extends Activity {
 					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
-							startActivity(new Intent(HomeActivity.this, EditWorkoutActivity.class));
+							startActivity(new Intent(HomeActivity.this, ShowWorkoutActivity.class));//ShowWorkoutActivity.class));
 						}
 					});
 				} else {

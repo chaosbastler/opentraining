@@ -18,13 +18,16 @@
  * 
  */
 
-package de.skubware.opentraining.activity;
+package de.skubware.opentraining.activity.show_workout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.skubware.opentraining.activity.ShowTPActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.*;
 import de.skubware.opentraining.datamanagement.DataManager.CSSFile;
@@ -34,12 +37,14 @@ import de.skubware.opentraining.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.DragEvent;
@@ -51,6 +56,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -68,7 +74,7 @@ import android.widget.Toast;
  * @author Christian Skubich
  * 
  */
-public class EditWorkoutActivity extends Activity {
+public class ShowWorkoutActivity extends Activity {
 	/** Tag for logging */
 	private static final String TAG = "EditWorkoutActivity";
 
@@ -80,14 +86,10 @@ public class EditWorkoutActivity extends Activity {
 
 	/** number of rows, can be changed, must be positive */
 	private int emptyRowCount;
-	
-	// some attributes for the style/design of the table
-	private final static int COLUMN_PADDING = 5;
-	private final static int ROW_PADDING = 5;
 
-	private final static int ROW_HEIGHT = 90;
-	private final static int COLUMN_WIDTH = 200;
-	private final static int DATE_COLUMN_WIDTH = 100;
+	// some attributes for the style/design of the table
+	private int max_height = 50;
+	private int max_width = 100;
 
 	/**
 	 * Configures the menu actions.
@@ -102,7 +104,7 @@ public class EditWorkoutActivity extends Activity {
 		menu_item_save_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				boolean success = DataManager.INSTANCE.savePlan();
-				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(ShowWorkoutActivity.this);
 				if (success) {
 					builder.setMessage(getString(R.string.success));
 				} else {
@@ -126,7 +128,7 @@ public class EditWorkoutActivity extends Activity {
 			public boolean onMenuItemClick(MenuItem item) {
 				final CharSequence[] items = CSSFile.items;
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(ShowWorkoutActivity.this);
 				builder.setTitle(getString(R.string.choose_design));
 				builder.setItems(items, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int item) {
@@ -134,7 +136,7 @@ public class EditWorkoutActivity extends Activity {
 						CSSFile cssFile = CSSFile.valueOf(CSSFile.class, css);
 
 						DataManager.INSTANCE.setCSSFile(cssFile);
-						startActivity(new Intent(EditWorkoutActivity.this, ShowTPActivity.class));
+						startActivity(new Intent(ShowWorkoutActivity.this, ShowTPActivity.class));
 					}
 				});
 				AlertDialog dialog = builder.create();
@@ -158,27 +160,27 @@ public class EditWorkoutActivity extends Activity {
 		// init variables
 		this.emptyRowCount = DataManager.INSTANCE.getCurrentWorkout().getEmptyRows();
 
-		setContentView(R.layout.edit_workout);
+		setContentView(R.layout.show_workout);
 
 		// workout name
 		EditText edittext_name = (EditText) findViewById(R.id.edittext_workout_name);
 		edittext_name.setText(DataManager.INSTANCE.getCurrentWorkout().getName());
-		edittext_name.addTextChangedListener(new TextWatcher(){
+		edittext_name.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if(!s.toString().isEmpty())
+				if (!s.toString().isEmpty())
 					DataManager.INSTANCE.getCurrentWorkout().setName(s.toString());
 			}
 
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {				
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {				
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 			}
-			
+
 		});
 
 		// button + row
@@ -244,54 +246,38 @@ public class EditWorkoutActivity extends Activity {
 
 	public TextView getStyledTextView(String text) {
 		TextView tw = new TextView(this);
-		tw.setTextColor(Color.BLACK);
+
+		tw.setGravity(Gravity.CENTER);
+		tw.setPadding(5, 5, 5, 5);
+		tw.setBackgroundResource(R.drawable.border);
+		tw.setTextAppearance(this, R.style.textview_firstrow);
 		tw.setText(text);
-		tw.setTypeface(null, Typeface.BOLD);
-		tw.setTextSize(22);
-		tw.setPadding(15, 15, 15, 15);
-		tw.setGravity(Gravity.CENTER_HORIZONTAL);
-		
-
-		tw.setWidth(COLUMN_WIDTH);
-		tw.setHeight(ROW_HEIGHT);
-
-
-		tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_white));
 
 		return tw;
 
-	}
-
-	private void addColumPadding(TableRow row, int paddingwidht) {
-		TextView tw = new TextView(this);
-		tw.setHeight(ROW_HEIGHT);
-		tw.setWidth(paddingwidht);
-
-		row.addView(tw);
 	}
 
 	private void buildFirstRow() {
 		TableLayout table = (TableLayout) findViewById(R.id.table);
 
 		TableRow firstrow = new TableRow(this);
-		firstrow.setPadding(0, ROW_PADDING, ROW_PADDING, 0);
+		firstrow.setBackgroundColor(0xFF7FAF7F);
+		firstrow.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
 		// Date
 		TextView date = this.getStyledTextView(getString(R.string.date));
-		date.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
-		date.setWidth(DATE_COLUMN_WIDTH);
-
 		firstrow.addView(date);
 
-		// for space between columns empty tw
-		this.addColumPadding(firstrow, COLUMN_PADDING);
+		// store all textviews to calculate max with / height
+		List<TextView> textviewList = new ArrayList<TextView>();
 
 		int i = 1;
 		for (FitnessExercise fEx : DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises()) {
 			TextView tw = this.getStyledTextView(fEx.toString());
-			tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
+			// tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
 
 			firstrow.addView(tw);
+			textviewList.add(tw);
 
 			// add touch action, anonymous class did not work (because the
 			// argument is needed)
@@ -300,14 +286,51 @@ public class EditWorkoutActivity extends Activity {
 			this.columnNumberMap.put(tw, i);
 			this.exerciseMap.put(tw, fEx);
 
-			// for space between colums empty tw
-			this.addColumPadding(firstrow, COLUMN_PADDING);
-
 			i++;
 		}
 
 		table.addView(firstrow);
 
+		for (TextView tw : textviewList) {
+			tw.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			if (tw.getMeasuredHeight() > this.max_height)
+				this.max_height = tw.getMeasuredHeight();
+			if (tw.getMeasuredWidth() > this.max_width)
+				this.max_width = tw.getMeasuredWidth();
+		}
+
+		Log.d(TAG, "max_width = " + this.max_width);
+		Log.d(TAG, "max_height = " + this.max_height);
+
+		for (TextView tw : textviewList) {
+			tw.setHeight(this.max_height);
+			tw.setWidth(this.max_width);
+		}
+		date.setHeight(this.max_height);
+
+	}
+
+	private void buildEmptyRows() {
+		TableLayout table = (TableLayout) findViewById(R.id.table);
+
+		for (int i = 0; i < this.emptyRowCount; i++) {
+			TableRow row = new TableRow(this);
+			row.setBackgroundColor(0xFFDFDFDF);
+
+			for (int k = 0; k <= DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size(); k++) {
+				TextView emptyTW = this.getStyledTextView("");
+				emptyTW.setTextAppearance(this, R.style.textview_emptyrow);
+				emptyTW.setTextColor(0xFF7F7F7F);
+
+				// for performance reasons one could cache the ColumnListeners
+				// in a Map
+				this.columnNumberMap.put(emptyTW, k);
+
+				row.addView(emptyTW);
+				// this.addColumPadding(row, COLUMN_PADDING);
+			}
+			table.addView(row);
+		}
 	}
 
 	/** Tiny class for a listener that handles on touch. */
@@ -393,7 +416,7 @@ public class EditWorkoutActivity extends Activity {
 				return;
 			}
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(EditWorkoutActivity.this);
+			AlertDialog.Builder builder = new AlertDialog.Builder(ShowWorkoutActivity.this);
 			builder.setMessage(getString(R.string.really_delete)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					int column = columnNumberMap.get(tw);
@@ -424,28 +447,6 @@ public class EditWorkoutActivity extends Activity {
 
 	}
 
-	private void buildEmptyRows() {
-		TableLayout table = (TableLayout) findViewById(R.id.table);
-
-		for (int i = 0; i < this.emptyRowCount; i++) {
-			TableRow row = new TableRow(this);
-			row.setPadding(0, ROW_PADDING, ROW_PADDING, 0);
-
-			for (int k = 0; k <= DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size(); k++) {
-				TextView emptyTW = this.getStyledTextView("");
-				if (k == 0)
-					emptyTW.setWidth(DATE_COLUMN_WIDTH);
-				// for performance reasons one could cache the ColumnListeners
-				// in a Map
-				this.columnNumberMap.put(emptyTW, k);
-
-				row.addView(emptyTW);
-				this.addColumPadding(row, COLUMN_PADDING);
-			}
-			table.addView(row);
-		}
-	}
-
 	/**
 	 * Redefine 'backbutton'. User should always return to
 	 * SelectExerciseActivity.
@@ -453,7 +454,7 @@ public class EditWorkoutActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		finish();
-		startActivity(new Intent(EditWorkoutActivity.this, de.skubware.opentraining.activity.select_exercises.ExerciseListActivity.class));
+		startActivity(new Intent(ShowWorkoutActivity.this, de.skubware.opentraining.activity.select_exercises.ExerciseListActivity.class));
 		return;
 	}
 

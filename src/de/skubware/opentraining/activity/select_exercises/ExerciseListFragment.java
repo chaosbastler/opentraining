@@ -25,9 +25,9 @@ import java.util.zip.Inflater;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.CreateExerciseActivity;
-import de.skubware.opentraining.activity.EditWorkoutActivity;
 import de.skubware.opentraining.activity.preferences.PreferencesActivity;
 import de.skubware.opentraining.activity.preferences.PreferencesEquipmentFragment;
+import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.DataManager;
 
@@ -184,7 +184,7 @@ public class ExerciseListFragment extends ListFragment {
 					alert.show();
 					return true;
 				} else {
-					startActivity(new Intent(ExerciseListFragment.this.getActivity(), EditWorkoutActivity.class));
+					startActivity(new Intent(ExerciseListFragment.this.getActivity(), ShowWorkoutActivity.class));
 					getActivity().finish();
 				}
 
