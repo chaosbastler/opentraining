@@ -21,10 +21,13 @@
 package de.skubware.opentraining.activity.select_exercises;
 
 import java.util.*;
+import java.util.zip.Inflater;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.CreateExerciseActivity;
 import de.skubware.opentraining.activity.EditWorkoutActivity;
+import de.skubware.opentraining.activity.preferences.PreferencesActivity;
+import de.skubware.opentraining.activity.preferences.PreferencesEquipmentFragment;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.DataManager;
 
@@ -37,11 +40,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -56,10 +61,7 @@ public class ExerciseListFragment extends ListFragment {
 	/** Tag for logging */
 	private static final String TAG = "ExerciseDetailFragment";
 
-	/** Map to store, which muscles should be shown */
-	Map<Muscle, Boolean> muscleMap = new HashMap<Muscle, Boolean>();
-
-	/** */
+	/** List with the ExerciseTypes that are shown at the moment */
 	private List<ExerciseType> exList;
 
 	// auto-generated stuff
@@ -76,10 +78,6 @@ public class ExerciseListFragment extends ListFragment {
 		this.exList = new ArrayList<ExerciseType>(ExerciseType.listExerciseTypes());
 
 		this.setHasOptionsMenu(true);
-		// fill muscle map
-		for (Muscle m : Muscle.values()) {
-			muscleMap.put(m, true);
-		}
 
 		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1, exList));
 		this.updateExList();
@@ -145,13 +143,24 @@ public class ExerciseListFragment extends ListFragment {
 		} else {
 			getListView().setItemChecked(position, true);
 		}
-
 		mActivatedPosition = position;
 	}
 
 	// END auto-generated stuff
 	
-	
+
+	/**
+	 * On resume the exercise list must be updated.
+	 */
+	@Override
+	public void onResume(){
+		super.onResume();
+		Log.d(TAG, "Resuming.");
+		this.updateExList();
+		// Alternative solution:
+		//SharedPreferences.OnSharedPreferenceChangeListener spChanged = new SharedPreferences.OnSharedPreferenceChangeListener() {}
+	}
+
 	
 
 	@Override
@@ -196,54 +205,10 @@ public class ExerciseListFragment extends ListFragment {
 		// configure menu_item_select_muscles
 		MenuItem menu_item_select_muscles = (MenuItem) menu.findItem(R.id.menu_item_select_muscles);
 		menu_item_select_muscles.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem menuitem) {
-				final CharSequence[] items = new CharSequence[Muscle.values().length];
-				final boolean[] states = new boolean[Muscle.values().length];
-				int i = 0;
-				for (Muscle m : Muscle.values()) {
-					items[i] = m.toString();
-					states[i] = muscleMap.get(m);
-					i++;
-				}
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(ExerciseListFragment.this.getActivity());
-				builder.setTitle(getString(R.string.select_muscles));
-				builder.setMultiChoiceItems(items, states, new DialogInterface.OnMultiChoiceClickListener() {
-					public void onClick(DialogInterface dialogInterface, int item, boolean state) {
-						muscleMap.put(Muscle.getByName(items[item].toString()), state);
-
-						if (!muscleMap.values().contains(Boolean.TRUE)) {
-							Toast.makeText(ExerciseListFragment.this.getActivity(), getString(R.string.please_select_muscle), Toast.LENGTH_LONG).show();
-						}
-					}
-				});
-				builder.setNeutralButton(getString(R.string.select_all), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						int i = 0;
-						for (Muscle m : Muscle.values()) {
-							items[i] = m.toString();
-							states[i] = true;
-							muscleMap.put(m, true);
-							i++;
-						}
-						updateExList();
-						dialog.dismiss();
-					}
-				});
-				builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						if (!muscleMap.values().contains(Boolean.TRUE)) {
-							muscleMap.put(Muscle.values()[0], true);
-							Toast.makeText(ExerciseListFragment.this.getActivity(), Muscle.values()[0].toString() + " " + getString(R.string.was_choosen), Toast.LENGTH_LONG)
-									.show();
-
-						}
-						updateExList();
-					}
-				});
-				builder.setIcon(R.drawable.icon_attention);
-				builder.create().show();
-
+			@Override
+			public boolean onMenuItemClick(MenuItem arg0) {
+				Intent intent = new Intent(getActivity(), PreferencesActivity.class);
+				startActivity(intent);
 				return true;
 			}
 		});
@@ -262,26 +227,44 @@ public class ExerciseListFragment extends ListFragment {
 		
 		
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-        Map<SportsEquipment,Boolean> eqMap = new HashMap<SportsEquipment,Boolean>();
-		for(SportsEquipment eq:SportsEquipment.values()){
-			eqMap.put(eq, sharedPref.getBoolean(eq.toString(), true));
-			Log.i(TAG, "Loaded: " + eq.toString() + ", value is " + eqMap.get(eq));
+        
+        List<Muscle> wantedMuscles = new ArrayList<Muscle>();
+		for(Muscle m:Muscle.values()){
+			if(sharedPref.getBoolean(m.toString(), true))
+				wantedMuscles.add(m);
 		}
+        
+        List<SportsEquipment> usableEquipment = new ArrayList<SportsEquipment>();
+		for(SportsEquipment eq:SportsEquipment.values()){
+			if(sharedPref.getBoolean(eq.toString(), true))
+				usableEquipment.add(eq);
+		}
+
+
+		
 		
 		this.exList = new ArrayList<ExerciseType>();
 		for (ExerciseType exType : ExerciseType.listExerciseTypes()) {
 			boolean shouldAdd = false;
+			
+
 			for (Muscle m : exType.getActivatedMuscles()) {
-				if (muscleMap.get(m)) {
+				if(wantedMuscles.contains(m)){
 					shouldAdd = true;
 					for(SportsEquipment eq:exType.getRequiredEquipment()){
-						shouldAdd = shouldAdd && eqMap.get(eq);
+						shouldAdd = shouldAdd && usableEquipment.contains(eq);
 					}
-					break;
 				}
-
 			}
-			if (shouldAdd || exType.getActivatedMuscles().isEmpty())
+			if(exType.getActivatedMuscles().isEmpty()){
+				shouldAdd = true;
+				for(SportsEquipment eq:exType.getRequiredEquipment()){
+					shouldAdd = shouldAdd && usableEquipment.contains(eq);
+				}
+			}
+
+			
+			if(shouldAdd)
 				exList.add(exType);
 		}
 		//TODO filter sports equipment
