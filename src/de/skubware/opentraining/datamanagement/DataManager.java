@@ -24,7 +24,6 @@ import java.io.*;
 import java.util.*;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;

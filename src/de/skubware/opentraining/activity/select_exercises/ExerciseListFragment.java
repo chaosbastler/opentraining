@@ -21,12 +21,9 @@
 package de.skubware.opentraining.activity.select_exercises;
 
 import java.util.*;
-import java.util.zip.Inflater;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.CreateExerciseActivity;
 import de.skubware.opentraining.activity.preferences.PreferencesActivity;
-import de.skubware.opentraining.activity.preferences.PreferencesEquipmentFragment;
 import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.DataManager;
@@ -40,17 +37,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Fragment that shows the list of the ExerciseType. Has an own options menu.
