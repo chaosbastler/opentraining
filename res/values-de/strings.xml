@@ -70,6 +70,17 @@
         Übungen, die nicht zu deinem Equipment passen, werden in Zukunft nicht mehr angezeigt.</string>    
     <string name="select_exercises">Übungen wählen</string>
     <string name="exercise_detail">Details zur Übung detail</string>    
+    <string name="choose_equipment">Zur Verfügung stehendes Equipment wählen</string>
+    <string name="create">Erstellen</string>
+    <string name="create_new_exercises">Neue Übungen erstellen</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="edit_exercises">Bestehende Übungen bearbeiten</string>
+    <string name="download_exercises">Übungen downloaden</string>
+    
+    
+    
+    
+    
     
     <style name="ButtonText">
     	<item name="android:layout_width">fill_parent</item>

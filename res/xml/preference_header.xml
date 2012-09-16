@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
     <header 
-        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesFragment"
-        android:title="Equipment"
-        android:summary="Zur Verfügung stehendes Equipment wählen" />
+        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesEquipmentFragment"
+        android:title="@string/equipment"
+        android:summary="@string/choose_equipment" />
     <header 
-        android:fragment="de.skubware.opentraining.activity.preferences.CreateExerciseActivity"
-        android:title="Übung erstellen"
-        android:summary="Neue Übungen erstellen" />
+        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment"
+        android:title="@string/create"
+        android:summary="@string/create_new_exercises" />
     <header 
-        android:fragment="de.skubware.opentraining.preferences.activity.?"
-        android:title="Übungen bearbeiten"
-        android:summary="Bestehende Übungen bearbeiten" />
+        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment"
+        android:title="@string/edit"
+        android:summary="@string/edit_exercises" />
     <header 
-        android:fragment="de.skubware.opentraining.preferences.activity.?"
-        android:title="Übungen downloaden"
-        android:summary="Übungen downloaden" />
+        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment"
+        android:title="@string/download"
+        android:summary="@string/download_exercises" />
 </preference-headers>

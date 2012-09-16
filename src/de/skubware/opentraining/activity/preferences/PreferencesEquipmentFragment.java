@@ -12,20 +12,20 @@ import android.util.Log;
 /**
  * Fragment for equipment preferences.
  */
-public class PreferencesFragment extends PreferenceFragment {
+public class PreferencesEquipmentFragment extends PreferenceFragment {
 
 	/** Tag for logging */
 	private static final String TAG = "PreferencesFragment";
 	
 	/** Empty constructor is required */
-	public PreferencesFragment(){ }
+	public PreferencesEquipmentFragment(){ }
 
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-        addPreferencesFromResource(R.xml.preferences_equipment);
+        addPreferencesFromResource(R.xml.preferences_empty);
         
         // load settings
         SharedPreferences settings = this.getActivity().getSharedPreferences("OpenTraining", Context.MODE_PRIVATE);

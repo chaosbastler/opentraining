@@ -74,6 +74,16 @@
         Exercises that require equipment you don\'t have will be filtered.</string>
     <string name="select_exercises">Select exercises</string>
     <string name="exercise_detail">Exercises detail</string>
+    <string name="choose_equipment">Select the equipment you want to use</string>
+    <string name="create">Create</string>
+    <string name="create_new_exercises">Create new exercises</string>
+    <string name="edit">Edit</string>
+    <string name="edit_exercises">Edit exercises</string>
+    <string name="download_exercises">Download exercises</string>
+    
+    
+    
+    
 
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>
