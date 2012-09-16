@@ -268,7 +268,7 @@ public class ExerciseListFragment extends ListFragment {
 			Log.i(TAG, "Loaded: " + eq.toString() + ", value is " + eqMap.get(eq));
 		}
 		
-		ArrayList<ExerciseType> exList = new ArrayList<ExerciseType>();
+		this.exList = new ArrayList<ExerciseType>();
 		for (ExerciseType exType : ExerciseType.listExerciseTypes()) {
 			boolean shouldAdd = false;
 			for (Muscle m : exType.getActivatedMuscles()) {
