@@ -22,7 +22,6 @@ package de.skubware.opentraining.activity.show_workout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,23 +35,17 @@ import de.skubware.opentraining.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View.OnClickListener;
@@ -63,11 +56,10 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * This activity shows the plan(table) with the selected exercises. The user can
- * select the number of empty rows and change the name of the plan. and finally
+ * select the number of empty rows, change the name of the plan and finally
  * export it.
  * 
  * 
@@ -76,20 +68,20 @@ import android.widget.Toast;
  */
 public class ShowWorkoutActivity extends Activity {
 	/** Tag for logging */
-	private static final String TAG = "EditWorkoutActivity";
+	static final String TAG = "EditWorkoutActivity";
 
 	/** Contains the current column number of each TextView */
-	private Map<TextView, Integer> columnNumberMap = new HashMap<TextView, Integer>();
+	Map<TextView, Integer> columnNumberMap = new HashMap<TextView, Integer>();
 
 	/** Contains the exercise that belongs to a textview */
-	private Map<TextView, FitnessExercise> exerciseMap = new HashMap<TextView, FitnessExercise>();
+	Map<TextView, FitnessExercise> exerciseMap = new HashMap<TextView, FitnessExercise>();
 
 	/** number of rows, can be changed, must be positive */
 	private int emptyRowCount;
 
 	// some attributes for the style/design of the table
-	private int max_height = 50;
-	private int max_width = 100;
+	private int max_height;
+	private int max_width;
 
 	/**
 	 * Configures the menu actions.
@@ -201,7 +193,7 @@ public class ShowWorkoutActivity extends Activity {
 
 		// waste basket
 		ImageView imageview_waste_basket = (ImageView) findViewById(R.id.imageview_waste_basket);
-		imageview_waste_basket.setOnDragListener(new DragColumnListener());
+		imageview_waste_basket.setOnDragListener(new DragColumnListener(this));
 
 		// finally show the current workout
 		this.updateTable();
@@ -228,7 +220,7 @@ public class ShowWorkoutActivity extends Activity {
 	/**
 	 * Updates the workout table.
 	 */
-	private void updateTable() {
+	void updateTable() {
 		// workout name
 		EditText edittext_name = (EditText) findViewById(R.id.edittext_workout_name);
 		String new_name = edittext_name.getText().toString();
@@ -252,6 +244,7 @@ public class ShowWorkoutActivity extends Activity {
 		tw.setBackgroundResource(R.drawable.border);
 		tw.setTextAppearance(this, R.style.textview_firstrow);
 		tw.setText(text);
+		tw.setMovementMethod(ScrollingMovementMethod.getInstance());
 
 		return tw;
 
@@ -282,7 +275,7 @@ public class ShowWorkoutActivity extends Activity {
 			// add touch action, anonymous class did not work (because the
 			// argument is needed)
 			tw.setOnTouchListener(new TouchColumnListener());
-			tw.setOnDragListener(new DragColumnListener());
+			tw.setOnDragListener(new DragColumnListener(this));
 			this.columnNumberMap.put(tw, i);
 			this.exerciseMap.put(tw, fEx);
 
@@ -291,6 +284,11 @@ public class ShowWorkoutActivity extends Activity {
 
 		table.addView(firstrow);
 
+		// set minimum values
+		this.max_height = 50;
+		this.max_width = 100;
+
+		
 		for (TextView tw : textviewList) {
 			tw.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			if (tw.getMeasuredHeight() > this.max_height)
@@ -307,7 +305,6 @@ public class ShowWorkoutActivity extends Activity {
 			tw.setWidth(this.max_width);
 		}
 		date.setHeight(this.max_height);
-
 	}
 
 	private void buildEmptyRows() {
@@ -332,120 +329,7 @@ public class ShowWorkoutActivity extends Activity {
 			table.addView(row);
 		}
 	}
-
-	/** Tiny class for a listener that handles on touch. */
-	class TouchColumnListener implements View.OnTouchListener {
-		@Override
-		public boolean onTouch(View view, MotionEvent motionEvent) {
-			if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
-				ClipData clipData = ClipData.newPlainText("", "");
-
-				View.DragShadowBuilder dsb = new View.DragShadowBuilder(view);
-
-				view.startDrag(clipData, dsb, view, 0);
-
-				view.setVisibility(View.INVISIBLE);
-
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	/** Tiny class for a listener that handles drag and drop */
-	class DragColumnListener implements View.OnDragListener {
-		boolean containsDragable = false;
-		boolean overWasteBasket = false;
-
-		@Override
-		public boolean onDrag(final View view, final DragEvent dragEvent) {
-			int dragAction = dragEvent.getAction();
-			final View dragView = (View) dragEvent.getLocalState();
-			if (dragAction == DragEvent.ACTION_DRAG_EXITED) {
-				containsDragable = false;
-				overWasteBasket = false;
-				Log.d(TAG, "Action drag exited, containsDragable now false");
-			} else if (dragAction == DragEvent.ACTION_DRAG_ENTERED) {
-				containsDragable = true;
-				if (view.getClass().equals(ImageView.class))
-					overWasteBasket = true;
-				Log.d(TAG, "Action drag entered, containsDragable now true");
-			} else if (dragAction == DragEvent.ACTION_DRAG_ENDED) {
-				if (dropEventNotHandled(dragEvent)) {
-					dragView.post(new Runnable() {
-						@Override
-						public void run() {
-							dragView.setVisibility(View.VISIBLE);
-						}
-					});
-					Log.d(TAG, "Action drag ended, set visible");
-				}
-			} else if (dragAction == DragEvent.ACTION_DROP && containsDragable && !overWasteBasket) {
-				Log.d(TAG, "Action drop endend and contains dragable, set visible");
-				dragView.post(new Runnable() {
-					@Override
-					public void run() {
-						dragView.setVisibility(View.VISIBLE);
-						Workout current = DataManager.INSTANCE.getCurrentWorkout();
-						current.switchExercises(exerciseMap.get(view), exerciseMap.get(dragView));
-						updateTable();
-					}
-				});
-			} else if (dragAction == DragEvent.ACTION_DROP && containsDragable && overWasteBasket) {
-				Log.i(TAG, "Drag and drop over WASTE BASKET");
-				dragView.post(new Runnable() {
-					@Override
-					public void run() {
-						dragView.setVisibility(View.VISIBLE);
-						removeColumn((TextView) dragView);
-					}
-				});
-			}
-			return true;
-		}
-
-		private boolean dropEventNotHandled(DragEvent dragEvent) {
-			return !dragEvent.getResult();
-		}
-
-		private void removeColumn(final TextView tw) {
-			if (DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
-				Toast.makeText(getApplicationContext(), getString(R.string.need_more_than_1), Toast.LENGTH_LONG).show();
-				return;
-			}
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(ShowWorkoutActivity.this);
-			builder.setMessage(getString(R.string.really_delete)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					int column = columnNumberMap.get(tw);
-					DataManager.INSTANCE.getCurrentWorkout().removeFitnessExercise(DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column - 1));
-
-					// after removing a column, the map with columns should be
-					// updated
-					Set<TextView> tws = new HashSet<TextView>(columnNumberMap.keySet());
-					for (TextView tw : tws) {
-						int c = columnNumberMap.get(tw);
-						if (c == column)
-							columnNumberMap.remove(tw);
-						if (c > column)
-							columnNumberMap.put(tw, c - 1);
-					}
-					updateTable();
-					Toast.makeText(getApplicationContext(), getString(R.string.exercise_was_removed), Toast.LENGTH_LONG).show();
-
-				}
-			}).setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int id) {
-					Toast.makeText(getApplicationContext(), getString(R.string.exerciser_wont_be_removed), Toast.LENGTH_LONG).show();
-				}
-			});
-			AlertDialog alert = builder.create();
-			alert.show();
-		}
-
-	}
+	
 
 	/**
 	 * Redefine 'backbutton'. User should always return to
