@@ -56,6 +56,8 @@ public class XMLSaver {
 			// create root element
 			Element wE = doc.createElement("Workout");
 			wE.setAttribute("name", w.getName());
+			wE.setAttribute("rows", Integer.toString(w.getEmptyRows()));
+
 
 			for (FitnessExercise fEx : w.getFitnessExercises()) {
 				// create element for FitnessExercise

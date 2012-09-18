@@ -75,9 +75,6 @@ public class ShowWorkoutActivity extends Activity {
 	/** Contains the exercise that belongs to a textview */
 	Map<TextView, FitnessExercise> exerciseMap = new HashMap<TextView, FitnessExercise>();
 
-	/** number of rows, can be changed, must be positive */
-	private int emptyRowCount;
-
 	// some attributes for the style/design of the table
 	private int max_height;
 	private int max_width;
@@ -149,9 +146,6 @@ public class ShowWorkoutActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init variables
-		this.emptyRowCount = DataManager.INSTANCE.getCurrentWorkout().getEmptyRows();
-
 		setContentView(R.layout.show_workout);
 
 		// workout name
@@ -202,17 +196,15 @@ public class ShowWorkoutActivity extends Activity {
 
 	/** Increases the number of rows. */
 	private void addRow() {
-		this.emptyRowCount++;
-		DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(emptyRowCount);
+		DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(DataManager.INSTANCE.getCurrentWorkout().getEmptyRows() + 1);
 
 		this.updateTable();
 	}
 
 	/** Decreases the number of rows (if >1). */
 	private void removeRow() {
-		if (this.emptyRowCount > 1) {
-			this.emptyRowCount--;
-			DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(emptyRowCount);
+		if (DataManager.INSTANCE.getCurrentWorkout().getEmptyRows() > 1) {
+			DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(DataManager.INSTANCE.getCurrentWorkout().getEmptyRows() - 1);
 		}
 		this.updateTable();
 	}
@@ -309,7 +301,7 @@ public class ShowWorkoutActivity extends Activity {
 	private void buildEmptyRows() {
 		TableLayout table = (TableLayout) findViewById(R.id.table);
 
-		for (int i = 0; i < this.emptyRowCount; i++) {
+		for (int i = 0; i < DataManager.INSTANCE.getCurrentWorkout().getEmptyRows(); i++) {
 			TableRow row = new TableRow(this);
 			row.setBackgroundColor(0xFFDFDFDF);
 
