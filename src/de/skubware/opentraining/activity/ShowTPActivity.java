@@ -37,6 +37,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,6 +53,8 @@ import android.webkit.WebView;
  * 
  */
 public class ShowTPActivity extends Activity {
+	/** Tag for logging */
+	static final String TAG = "ShowTPActivity";
 	
 	private File exportedFile;
 
@@ -105,7 +108,8 @@ public class ShowTPActivity extends Activity {
 		webview.getSettings().setBuiltInZoomControls(true);
 		
 		Workout w = DataManager.INSTANCE.getCurrentWorkout();
-		final WorkoutExporter exporter = new HTMLExporter(w.getEmptyRows(), ShowTPActivity.this, webview, w);
+		Log.d(TAG, "Empty rows: " + w.getEmptyRows());
+		final WorkoutExporter exporter = new HTMLExporter(ShowTPActivity.this, webview, w);
 
 
 		exportedFile = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());

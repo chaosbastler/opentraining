@@ -34,8 +34,8 @@ import android.content.Context;
  */
 public class LaTeXExporter extends WorkoutExporter {
 
-	public LaTeXExporter(int rowCount, Context context) {
-		super(rowCount, context);
+	public LaTeXExporter(Context context) {
+		super(context);
 	}
 
 	/**

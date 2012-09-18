@@ -36,8 +36,8 @@ import de.skubware.opentraining.basic.Workout;
 public class HTMLExporter extends WorkoutExporter {
 	private WebView webview;
 	
-	public HTMLExporter(int rowCount, Context context, WebView webview, Workout w) {
-		super(rowCount, context);
+	public HTMLExporter(Context context, WebView webview, Workout w) {
+		super(context);
 		this.webview = webview;
 
 		this.loadWorkout(w);
@@ -85,7 +85,7 @@ public class HTMLExporter extends WorkoutExporter {
 		String data = "";
 	
 		try {
-			data = DataManager.INSTANCE.loadFile("trainingplan_template", Source.RAW_FOLDER, context);
+			data = DataManager.INSTANCE.loadFile("trainingplan_template.html", Source.ASSETS, context);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class HTMLExporter extends WorkoutExporter {
 		// Exercises
 		StringBuilder exes = new StringBuilder();
 		for(FitnessExercise fEx:w.getFitnessExercises()){
-			exes.append("\t\t <th>");
+				exes.append("\t\t <th>");
 			exes.append(fEx.getExType().getName());
 			exes.append("</th>\n");
 		}
@@ -109,13 +109,27 @@ public class HTMLExporter extends WorkoutExporter {
 		emptyRow.append("\t<tr>\n");
 		// an empty row
 		for(int i = 0; i<=w.getFitnessExercises().size(); i++){
-			emptyRow.append("\t\t<td></td>\n");
+				emptyRow.append("\t\t<td></td>\n");
 		}
 		emptyRow.append("\t</tr>\n");
 
+		StringBuilder emptyRowOdd = new StringBuilder();
+		emptyRow.append("\t<tr class=\"alt\">\n");
+		// an empty row
+		for(int i = 0; i<=w.getFitnessExercises().size(); i++){
+				emptyRow.append("\t\t<td></td>\n");
+		}
+		emptyRow.append("\t</tr>\n");
+		
+		
 		StringBuilder emptyCells = new StringBuilder();
-		for(int i = 0; i< rowCount; i++){
-			emptyCells.append(emptyRow.toString());
+		boolean odd = true;
+		for(int i = 0; i< w.getEmptyRows(); i++){
+			if(odd)
+				emptyCells.append(emptyRowOdd.toString());
+			else
+				emptyCells.append(emptyRow.toString());
+			odd=!odd;
 		}
 		
 		data = data.replaceAll("<!--EMPTY_CELLS-->", emptyCells.toString() );

@@ -127,6 +127,7 @@ public class ShowWorkoutActivity extends Activity {
 						CSSFile cssFile = CSSFile.valueOf(CSSFile.class, css);
 
 						DataManager.INSTANCE.setCSSFile(cssFile);
+						Log.d(TAG, "Starting export of workout, row count: " + DataManager.INSTANCE.getCurrentWorkout().getEmptyRows());
 						startActivity(new Intent(ShowWorkoutActivity.this, ShowTPActivity.class));
 					}
 				});
@@ -224,8 +225,7 @@ public class ShowWorkoutActivity extends Activity {
 		EditText edittext_name = (EditText) findViewById(R.id.edittext_workout_name);
 		String new_name = edittext_name.getText().toString();
 		if (new_name != null && !new_name.isEmpty()) {
-			Workout newWorkout = new Workout(new_name, DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises());
-			DataManager.INSTANCE.setWorkout(newWorkout);
+			DataManager.INSTANCE.getCurrentWorkout().setName(new_name);
 		}
 
 		TableLayout table = (TableLayout) findViewById(R.id.table);

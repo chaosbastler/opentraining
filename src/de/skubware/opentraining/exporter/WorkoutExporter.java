@@ -39,8 +39,6 @@ import de.skubware.opentraining.basic.Workout;
  */
 // Idea: http://code.google.com/p/droidtext/
 public abstract class WorkoutExporter {
-	// consider removing this attribute, as it can be gained by workout.getEmptyRows()
-	protected int rowCount;
 	protected Context context;
 	
 	
@@ -49,9 +47,8 @@ public abstract class WorkoutExporter {
 	 * 
 	 * @param rowCount The number of rows.
 	 */
-	public WorkoutExporter(int rowCount, Context context){
+	public WorkoutExporter(Context context){
 		this.context = context;
-		this.rowCount = rowCount;
 	}
 	
 	/**

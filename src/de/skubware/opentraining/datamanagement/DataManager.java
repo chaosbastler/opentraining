@@ -64,7 +64,7 @@ public enum DataManager {
 	 * 
 	 */
 	public enum CSSFile {
-		Default, Boring, Modern, Ninja;
+		Default, Boring, Modern, Ninja, Standard;
 
 		public final static CharSequence[] items = new CharSequence[CSSFile.values().length];
 		static {
@@ -428,6 +428,7 @@ public enum DataManager {
 	 *            The new workout
 	 */
 	public void setWorkout(Workout workout) {
+		Log.d(TAG, "Set new workout");
 		this.workout = workout;
 	}
 

@@ -22,39 +22,45 @@ package de.skubware.opentraining.basic;
 
 import java.util.*;
 
+import android.util.Log;
 
 /**
- * This class represents a single workout.
- * A workout needs a name and consists out of more than one {@code FitnessExercises}.
+ * This class represents a single workout. A workout needs a name and consists
+ * out of more than one {@code FitnessExercises}.
  * 
- * It is possible to iterate through the {@code FitnessExercises} and to add new ones.
+ * It is possible to iterate through the {@code FitnessExercises} and to add new
+ * ones.
  * 
  * @author Christian Skubich
  * 
  */
-public class Workout implements Iterable<FitnessExercise>{
+public class Workout implements Iterable<FitnessExercise> {
+	/** Tag for logging */
+	static final String TAG = "Workout";
 
-	public static int DEFAULT_EMPTYROWS = 5;
-	
+	public static int DEFAULT_EMPTYROWS = 8;
+
 	private String name;
 	private int emptyRows = DEFAULT_EMPTYROWS;
 	private ArrayList<FitnessExercise> fitnessExercises = new ArrayList<FitnessExercise>();
 
-	
 	/**
 	 * Constructor of this class.
 	 * 
-	 * @param name The name of the workout
-	 * @param fExes The FitnessExercises of the workout
+	 * @param name
+	 *            The name of the workout
+	 * @param fExes
+	 *            The FitnessExercises of the workout
 	 * 
-	 * @throws NullPointerException if any argument is null or empty
+	 * @throws NullPointerException
+	 *             if any argument is null or empty
 	 * 
 	 */
 	public Workout(String name, Collection<FitnessExercise> fExes) {
 		if (name == null || fExes == null || fExes.isEmpty() || fExes.contains(null)) {
 			throw new NullPointerException();
 		}
-		
+
 		// Assign given values
 		this.name = name;
 		this.fitnessExercises = new ArrayList<FitnessExercise>();
@@ -67,26 +73,26 @@ public class Workout implements Iterable<FitnessExercise>{
 	public Workout(String name, FitnessExercise... fExes) {
 		this(name, Arrays.asList(fExes));
 	}
-	
+
 	/**
-	 * Alternative constructor of this class for given ExerciseTypes.
-	 * Have a look at @see #Workout(String, Collection<FitnessExercise>) 
-	 * for more information.
-	 *
-	 * @param name The name of the workout
-	 * @param exes The ExerciseTypes that should be added to workout.
+	 * Alternative constructor of this class for given ExerciseTypes. Have a
+	 * look at @see #Workout(String, Collection<FitnessExercise>) for more
+	 * information.
+	 * 
+	 * @param name
+	 *            The name of the workout
+	 * @param exes
+	 *            The ExerciseTypes that should be added to workout.
 	 */
-	public Workout(String name, List<ExerciseType> exes){
+	public Workout(String name, List<ExerciseType> exes) {
 		this(name, ExerciseType.asFitnessExercise(exes));
 	}
-	
+
 	/** {@inheritDoc} */
 	public Iterator<FitnessExercise> iterator() {
 		return this.fitnessExercises.iterator();
 	}
 
-	
-	
 	/**
 	 * @see java.util.List#contains(Object)
 	 */
@@ -102,14 +108,15 @@ public class Workout implements Iterable<FitnessExercise>{
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Setter for name
 	 * 
-	 * @param name The new name of the workout
+	 * @param name
+	 *            The new name of the workout
 	 */
 	public void setName(String name) {
-		this.name =name;
+		this.name = name;
 	}
 
 	/**
@@ -124,7 +131,8 @@ public class Workout implements Iterable<FitnessExercise>{
 	/**
 	 * Adds the given {@code FitnessExercise} to the Workout.
 	 * 
-	 * @param fEx The FitnessExercise to add
+	 * @param fEx
+	 *            The FitnessExercise to add
 	 */
 	public void addFitnessExercise(FitnessExercise fEx) {
 		this.fitnessExercises.add(fEx);
@@ -133,70 +141,87 @@ public class Workout implements Iterable<FitnessExercise>{
 	/**
 	 * Removes the given {@code FitnessExercise} from the Workout.
 	 * 
-	 * @param fEx The FitnessExercise to remove
+	 * @param fEx
+	 *            The FitnessExercise to remove
 	 */
 	public void removeFitnessExercise(FitnessExercise fEx) {
 		this.fitnessExercises.remove(fEx);
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
-	public boolean equals(Object o){
-		if(! (o instanceof Workout) )
+	public boolean equals(Object o) {
+		if (!(o instanceof Workout))
 			return false;
 		Workout w = (Workout) o;
-		
+
 		// hashCode() check
-		if(this.hashCode() != w.hashCode())
+		if (this.hashCode() != w.hashCode())
 			return false;
-		
+
 		// name check
-		if(!w.getName().equals(this.getName()))
+		if (!w.getName().equals(this.getName()))
 			return false;
-		
+
 		// FitnessExercise check
-		if(!w.getFitnessExercises().containsAll(this.fitnessExercises))
+		if (!w.getFitnessExercises().containsAll(this.fitnessExercises))
 			return false;
-		if(!this.fitnessExercises.containsAll(w.getFitnessExercises()))
+		if (!this.fitnessExercises.containsAll(w.getFitnessExercises()))
 			return false;
-		
+
 		return true;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return this.name.hashCode() + this.fitnessExercises.hashCode();
 	}
-	
-		
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return this.name;
 	}
-	
-	public void switchExercises(FitnessExercise first, FitnessExercise second){
-		if(!this.fitnessExercises.contains(first) || !this.fitnessExercises.contains(second)){
+
+	public void switchExercises(FitnessExercise first, FitnessExercise second) {
+		if (!this.fitnessExercises.contains(first) || !this.fitnessExercises.contains(second)) {
 			throw new AssertionError("FitnessExercise does not exist in workout");
-		}	
-		
+		}
+
 		int idxFirst = this.fitnessExercises.indexOf(first);
 		int idxSecond = this.fitnessExercises.indexOf(second);
 
 		Collections.swap(fitnessExercises, idxFirst, idxSecond);
 
 	}
+	
 
+	/**
+	 * Getter for emptyRows
+	 * 
+	 * @return The number of empty rows (>0)
+	 */
 	public int getEmptyRows() {
-		return emptyRows;
+		return this.emptyRows;
 	}
 
+	/**
+	 * Setter for emptyRows
+	 * 
+	 * @param emptyRows
+	 *            New number of empty rows, must be positive
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if argument is below 0
+	 */
 	public void setEmptyRows(int emptyRows) {
-		if(emptyRows>0)
+		if (emptyRows > 0)
 			this.emptyRows = emptyRows;
 		else
 			throw new IllegalArgumentException("There must be more than 0 empty rows");
+		
+		Log.d(TAG, "setEmptyRows() to " + this.emptyRows);
 	}
 
 }

@@ -25,6 +25,7 @@ import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.CreateExerciseActivity;
 import de.skubware.opentraining.activity.preferences.PreferencesActivity;
 import de.skubware.opentraining.activity.preferences.PreferencesMusclesFragment;
+import de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment;
 import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.DataManager;
@@ -36,7 +37,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -194,7 +194,9 @@ public class ExerciseListFragment extends ListFragment {
 		final MenuItem menu_item_create_new_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_new_exercise);
 		menu_item_create_new_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(ExerciseListFragment.this.getActivity(), CreateExerciseActivity.class));
+				Intent intent = new Intent(getActivity(), PreferencesActivity.class);
+				intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, PreferencesNotImplementedFragment.class.getName());
+				startActivity(intent);				
 				return true;
 			}
 		});
