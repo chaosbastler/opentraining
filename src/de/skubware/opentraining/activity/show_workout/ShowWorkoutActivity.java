@@ -22,8 +22,10 @@ package de.skubware.opentraining.activity.show_workout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.skubware.opentraining.activity.ShowTPActivity;
 import de.skubware.opentraining.basic.*;
@@ -39,15 +41,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This activity shows the plan(table) with the selected exercises. The user can
@@ -67,6 +74,8 @@ public class ShowWorkoutActivity extends Activity {
 
 	/** Contains the exercise that belongs to a textview */
 	Map<TextView, FitnessExercise> exerciseMap = new HashMap<TextView, FitnessExercise>();
+	
+	TextView lastTouched;
 
 	// some attributes for the style/design of the table
 	private int max_height;
@@ -240,7 +249,7 @@ public class ShowWorkoutActivity extends Activity {
 
 			// add touch action, anonymous class did not work (because the
 			// argument is needed)
-			tw.setOnTouchListener(new TouchColumnListener());
+			tw.setOnTouchListener(new TouchColumnListener(this));
 			tw.setOnDragListener(new DragColumnListener(this));
 			this.columnNumberMap.put(tw, i);
 			this.exerciseMap.put(tw, fEx);
@@ -306,6 +315,88 @@ public class ShowWorkoutActivity extends Activity {
 		finish();
 		startActivity(new Intent(ShowWorkoutActivity.this, de.skubware.opentraining.activity.select_exercises.ExerciseListActivity.class));
 		return;
+	}
+	
+	
+	ActionMode mActionMode= null;
+	ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
+	    // Called when the action mode is created; startActionMode() was called
+	    @Override
+	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+	        // Inflate a menu resource providing context menu items
+	        MenuInflater inflater = mode.getMenuInflater();
+	        inflater.inflate(R.menu.show_workout_context_menu, menu);
+	        
+	        return true;
+	    }
+
+	    // Called each time the action mode is shown. Always called after onCreateActionMode, but
+	    // may be called multiple times if the mode is invalidated.
+	    @Override
+	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+
+	        return false; // Return false if nothing is done
+	    }
+
+	    // Called when the user selects a contextual menu item
+	    @Override
+	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+	        switch (item.getItemId()) {
+	            case R.id.menu_item_waste_basket:
+	            	if(lastTouched!=null)
+	            		removeColumn(lastTouched);
+	            	lastTouched=null;
+	                //shareCurrentItem();
+	                mode.finish(); // Action picked, so close the CAB
+	                return true;
+	            default:
+	                return false;
+	        }
+	    }
+
+	    // Called when the user exits the action mode
+	    @Override
+	    public void onDestroyActionMode(ActionMode mode) {
+	        mActionMode = null;
+	    }
+	};
+	
+	 void removeColumn(final TextView tw) {
+		if (DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
+			Toast.makeText(this.getApplicationContext(), this.getString(R.string.need_more_than_1), Toast.LENGTH_LONG).show();
+			return;
+		}
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(this.getString(R.string.really_delete)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				int column = columnNumberMap.get(tw);
+				DataManager.INSTANCE.getCurrentWorkout().removeFitnessExercise(DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column - 1));
+
+				// after removing a column, the map with columns should be
+				// updated
+				Set<TextView> tws = new HashSet<TextView>(columnNumberMap.keySet());
+				for (TextView tw : tws) {
+					int c = columnNumberMap.get(tw);
+					if (c == column){
+						columnNumberMap.remove(tw);
+						exerciseMap.remove(tw);
+					}
+					if (c > column)
+						columnNumberMap.put(tw, c - 1);
+				}
+				updateTable();
+				Toast.makeText(getApplicationContext(), getString(R.string.exercise_was_removed), Toast.LENGTH_LONG).show();
+
+			}
+		}).setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				Toast.makeText(getApplicationContext(), getString(R.string.exerciser_wont_be_removed), Toast.LENGTH_LONG).show();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 }

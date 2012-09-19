@@ -42,10 +42,14 @@ class DragColumnListener implements View.OnDragListener {
 			Log.d(ShowWorkoutActivity.TAG, "Action drag exited, containsDragable now false");
 		} else if (dragAction == DragEvent.ACTION_DRAG_ENTERED) {
 			containsDragable = true;
-			if (view.getClass().equals(ImageView.class))
-				overWasteBasket = true;
 			Log.d(ShowWorkoutActivity.TAG, "Action drag entered, containsDragable now true");
+			if (view.getClass().equals(android.widget.ImageButton.class)){
+				overWasteBasket = true;
+				Log.d(ShowWorkoutActivity.TAG, "containsDragable, but draggable is not a TextView. so draggable must be wastebasket.");
+			}
 		} else if (dragAction == DragEvent.ACTION_DRAG_ENDED) {
+
+
 			if (dropEventNotHandled(dragEvent)) {
 				dragView.post(new Runnable() {
 					@Override
