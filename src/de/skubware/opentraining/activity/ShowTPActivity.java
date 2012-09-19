@@ -94,7 +94,7 @@ public class ShowTPActivity extends Activity {
 		WebView webview = (WebView) findViewById(R.id.tpWebView);
 
 		// warn user if there is no internet connection
-		if (!isOnline()) {
+		/*if (!isOnline()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ShowTPActivity.this);
 			builder.setMessage( getString(R.string.no_internet_connection_plan_not_shown)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
@@ -103,7 +103,7 @@ public class ShowTPActivity extends Activity {
 			});
 			AlertDialog alert = builder.create();
 			alert.show();
-		}
+		}*/
 
 		webview.getSettings().setBuiltInZoomControls(true);
 		
