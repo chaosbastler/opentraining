@@ -85,7 +85,7 @@ public class ShowWorkoutActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.edit_workout_menu, menu);
+		inflater.inflate(R.menu.show_workout_menu, menu);
 
 		// configure menu_item_save_plan
 		final MenuItem menu_item_save_plan = (MenuItem) menu.findItem(R.id.menu_item_save_plan);
