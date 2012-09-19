@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item android:id="@+id/menu_item_add_row" android:showAsAction="ifRoom" android:title="@string/add_row" android:icon="@drawable/icon_add" /><item android:id="@+id/menu_item_remove_row" android:showAsAction="ifRoom" android:title="@string/remove_row" android:icon="@drawable/icon_remove" /><item
+    <item
+        android:id="@+id/menu_item_add_row"
+        android:icon="@drawable/icon_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_row"/>
+    <item
+        android:id="@+id/menu_item_remove_row"
+        android:icon="@drawable/icon_remove"
+        android:showAsAction="ifRoom"
+        android:title="@string/remove_row"/>
+    <item
         android:id="@+id/menu_item_export_plan"
         android:showAsAction="always|withText"
         android:title="@string/export">
@@ -10,7 +20,5 @@
         android:id="@+id/menu_item_save_plan"
         android:showAsAction="ifRoom|withText"
         android:title="@string/save"/>
-    
-	
-    
+
 </menu>
