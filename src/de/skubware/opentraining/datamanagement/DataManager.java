@@ -64,7 +64,7 @@ public enum DataManager {
 	 * 
 	 */
 	public enum CSSFile {
-		Default, Boring, Modern, Ninja, Standard;
+		Default, Green;
 
 		public final static CharSequence[] items = new CharSequence[CSSFile.values().length];
 		static {

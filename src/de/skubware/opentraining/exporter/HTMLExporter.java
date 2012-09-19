@@ -123,13 +123,13 @@ public class HTMLExporter extends WorkoutExporter {
 		
 		
 		StringBuilder emptyCells = new StringBuilder();
-		boolean odd = true;
+		boolean even = false;
 		for(int i = 0; i< w.getEmptyRows(); i++){
-			if(odd)
+			if(even)
 				emptyCells.append(emptyRowOdd.toString());
 			else
 				emptyCells.append(emptyRow.toString());
-			odd=!odd;
+			even=!even;
 		}
 		
 		data = data.replaceAll("<!--EMPTY_CELLS-->", emptyCells.toString() );
