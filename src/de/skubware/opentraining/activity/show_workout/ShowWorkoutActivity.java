@@ -37,21 +37,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -113,6 +106,7 @@ public class ShowWorkoutActivity extends Activity {
 		// configure menu_item_export_plan
 		final MenuItem menu_item_export_plan = (MenuItem) menu.findItem(R.id.menu_item_export_plan);
 		menu_item_export_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				final CharSequence[] items = CSSFile.items;
 
@@ -133,7 +127,29 @@ public class ShowWorkoutActivity extends Activity {
 				return true;
 			}
 		});
+		
+		
+		// configure menu_item_add_row
+		final MenuItem menu_item_add_row = (MenuItem) menu.findItem(R.id.menu_item_add_row);
+		menu_item_add_row.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				addRow();
+				return true;
+			}
+		});
 
+		// configure menu_item_remove_row
+		final MenuItem menu_item_remove_row = (MenuItem) menu.findItem(R.id.menu_item_remove_row);
+		menu_item_remove_row.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				removeRow();
+				return true;
+			}
+		});
+		
+		
 		return true;
 	}
 
@@ -148,46 +164,11 @@ public class ShowWorkoutActivity extends Activity {
 
 		setContentView(R.layout.show_workout);
 
-		// workout name
-		EditText edittext_name = (EditText) findViewById(R.id.edittext_workout_name);
-		edittext_name.setText(DataManager.INSTANCE.getCurrentWorkout().getName());
-		edittext_name.addTextChangedListener(new TextWatcher() {
 
-			@Override
-			public void afterTextChanged(Editable s) {
-				if (!s.toString().isEmpty())
-					DataManager.INSTANCE.getCurrentWorkout().setName(s.toString());
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-		});
-
-		// button + row
-		Button btn_add_row = (Button) findViewById(R.id.btn_add_row);
-		btn_add_row.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				addRow();
-			}
-		});
-
-		// button - row
-		Button btn_remove_row = (Button) findViewById(R.id.btn_remove_row);
-		btn_remove_row.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				removeRow();
-			}
-		});
 
 		// waste basket
-		ImageView imageview_waste_basket = (ImageView) findViewById(R.id.imageview_waste_basket);
-		imageview_waste_basket.setOnDragListener(new DragColumnListener(this));
+		//ImageView imageview_waste_basket = (ImageView) findViewById(R.id.imageview_waste_basket);
+		//imageview_waste_basket.setOnDragListener(new DragColumnListener(this));
 
 		// finally show the current workout
 		this.updateTable();
@@ -213,12 +194,6 @@ public class ShowWorkoutActivity extends Activity {
 	 * Updates the workout table.
 	 */
 	void updateTable() {
-		// workout name
-		EditText edittext_name = (EditText) findViewById(R.id.edittext_workout_name);
-		String new_name = edittext_name.getText().toString();
-		if (new_name != null && !new_name.isEmpty()) {
-			DataManager.INSTANCE.getCurrentWorkout().setName(new_name);
-		}
 
 		TableLayout table = (TableLayout) findViewById(R.id.table);
 		table.removeAllViews();

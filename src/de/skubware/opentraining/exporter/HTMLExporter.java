@@ -47,10 +47,9 @@ public class HTMLExporter extends WorkoutExporter {
 	private void loadWorkout(Workout w){
 		File f = new File( DataManager.getHTMLFolder().toString() + "/trainingplan.html" );
 		DataManager.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, DataManager.getHTMLFolder());
-		// assert, that the style sheets are there
 		
 		try {
-			webview.loadUrl(f.toURL().toString());//.loadData(f.toURL(), "text/html", "utf-8");
+			webview.loadUrl(f.toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -114,12 +113,12 @@ public class HTMLExporter extends WorkoutExporter {
 		emptyRow.append("\t</tr>\n");
 
 		StringBuilder emptyRowOdd = new StringBuilder();
-		emptyRow.append("\t<tr class=\"alt\">\n");
+		emptyRowOdd.append("\t<tr class=\"alt\">\n");
 		// an empty row
 		for(int i = 0; i<=w.getFitnessExercises().size(); i++){
-				emptyRow.append("\t\t<td></td>\n");
+			emptyRowOdd.append("\t\t<td></td>\n");
 		}
-		emptyRow.append("\t</tr>\n");
+		emptyRowOdd.append("\t</tr>\n");
 		
 		
 		StringBuilder emptyCells = new StringBuilder();
