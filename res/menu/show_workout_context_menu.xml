@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menu_item_waste_basket"
         android:icon="@drawable/icon_waste_basket"
-        android:showAsAction="always"/>
+        android:showAsAction="always" android:title="@string/delete"/>
 
 </menu>
