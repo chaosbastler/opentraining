@@ -26,7 +26,6 @@ import java.util.*;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
@@ -39,8 +38,10 @@ import de.skubware.opentraining.basic.*;
  * 
  */
 public enum ContentProvider {
+	/** Reference to singleton instance */
 	INSTANCE;
 
+	/** The name of the folder that contains exercises .xml files and images */
 	private static final String EXERCISE_FOLDER = "opentraining-exercises";
 
 	/** Tag for logging */
@@ -48,23 +49,16 @@ public enum ContentProvider {
 
 	/** Current workout */
 	private Workout workout;
-	/** A map to support the caching of generated .html files */
-	private Map<ExerciseType, String> htmlMap = new HashMap<ExerciseType, String>();
 
 	/** Currently choosen .css style for plan */
 	private CSSFile css = CSSFile.Default;
 
-	/**
-	 * Enumeration to define the source, where a file should be loaded from.
-	 */
+	/** Enumeration to define the source, where a file should be loaded from */
 	public enum Source {
 		RAW_FOLDER, ASSETS, FILE_SYSTEM;
 	}
 
-	/**
-	 * Enumeration for .css files.
-	 * 
-	 */
+	/** Enumeration for .css files	*/
 	public enum CSSFile {
 		Default, Green;
 
@@ -109,40 +103,7 @@ public enum ContentProvider {
 		return img;
 	}
 
-	/**
-	 * Builds the HTML or returns a recently generated one.
-	 * 
-	 * @param ex
-	 *            The ExerciseType
-	 * 
-	 * @return A String that represents the content of a .html file.
-	 */
-	public String buildHTML(ExerciseType ex, Context context) {
-		if (htmlMap.containsKey(ex))
-			return htmlMap.get(ex);
 
-		String data = null;
-		try {
-			data = loadFile("template", Source.RAW_FOLDER, context);
-		} catch (IOException e) {
-			Log.e(TAG, "Could not load html template \n" + e.getMessage());
-		}
-
-		data = data.replaceAll("EX_NAME", ex.getName());
-		data = data.replaceAll("DESCRIPTION", ex.getDescription());
-
-		if (!ex.getActivatedMuscles().isEmpty())
-			data = data.replaceAll("ACTIVATED_MUSCLES", ex.getActivatedMuscles().first().toString());
-		if (!ex.getRequiredEquipment().isEmpty())
-			data = data.replaceAll("EQUIPMENT", ex.getRequiredEquipment().first().toString());
-		if (!ex.getTags().isEmpty())
-			data = data.replaceAll("TAGS", ex.getTags().first().toString());
-		if (!ex.getURLs().isEmpty())
-			data = data.replaceAll("LINKS", ex.getURLs().get(0).toString());
-
-		this.htmlMap.put(ex, data);
-		return data;
-	}
 
 	/**
 	 * Removes all ExerciseTypes and reads them again. A new thread is started
