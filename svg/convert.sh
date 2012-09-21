@@ -59,7 +59,7 @@ do
 		then
 		echo ../res/drawable-xhdpi/$NEWFILE existiert bereits
 	else
-			inkscape --without-gui --export-png=../res/drawable-xhdpi/$NEWFILE --export-dpi=240 $f
+			inkscape --without-gui --export-png=../res/drawable-xhdpi/$NEWFILE --export-dpi=320 $f
 	echo finished xhdpi
 	echo ""
 	fi 
