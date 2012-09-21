@@ -45,8 +45,8 @@ public class HTMLExporter extends WorkoutExporter {
 	}
 	
 	private void loadWorkout(Workout w){
-		File f = new File( ContentProvider.getAppFolder().toString() + "/trainingplan.html" );
-		ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, ContentProvider.getAppFolder());
+		File f = new File( context.getFilesDir().toString() + "/trainingplan.html" );
+		ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, context.getFilesDir());
 		
 		try {
 			webview.loadUrl(f.toURI().toURL().toString());
@@ -67,9 +67,9 @@ public class HTMLExporter extends WorkoutExporter {
 	 */
 	public File exportWorkoutToFile(Workout w){
 		try{
-			ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, ContentProvider.getAppFolder());
+			ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, context.getFilesDir());
 			
-			return new File(ContentProvider.getAppFolder().toString() + "/" + "trainingplan.html");
+			return new File(context.getFilesDir().toString() + "/" + "trainingplan.html");
 		}catch(UnsupportedOperationException unsupported){
 			// may happen when String export doesn't work
 			throw unsupported;

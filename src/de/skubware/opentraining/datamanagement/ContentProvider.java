@@ -85,54 +85,6 @@ public enum ContentProvider {
 
 	}
 
-	/**
-	 * Static method to get app folder. Folder will be created, if it does not
-	 * exist.
-	 * 
-	 * @return The app folder
-	 */
-	public static File getAppFolder() {
-		File appFolder = new File(Environment.getExternalStorageDirectory().toString() + "/OpenTraining");
-		appFolder.mkdir();
-		if (!appFolder.exists())
-			throw new AssertionError();
-		return appFolder;
-	}
-
-	/**
-	 * Static method to get image. Folder will be created, if it does not exist.
-	 * 
-	 * @return The image folder
-	 */
-	/*
-	 * public static File getImageFolder() { File imageFolder = new
-	 * File(getAppFolder().toString() + "/images"); imageFolder.mkdir(); if
-	 * (!imageFolder.exists()) throw new AssertionError(); return imageFolder; }
-	 */
-
-	/**
-	 * Static method to get exercise xml folder. Folder will be created, if it
-	 * does not exist.
-	 * 
-	 * @return The exercise xml folder.
-	 */
-	/*
-	 * public static File getExerciseXMLFolder() { File exFolder = new
-	 * File(getAppFolder().toString() + "/exercises"); exFolder.mkdir(); if
-	 * (!exFolder.exists()) throw new AssertionError(); return exFolder; }
-	 */
-
-	/**
-	 * Static method to get html folder. Folder will be created, if it does not
-	 * exist.
-	 * 
-	 * @return The exercise html folder.
-	 */
-	/*
-	 * public static File getHTMLFolder() { File htmlFolder = new
-	 * File(getAppFolder().toString() + "/html"); htmlFolder.mkdir(); if
-	 * (!htmlFolder.exists()) throw new AssertionError(); return htmlFolder; }
-	 */
 
 	/**
 	 * Returns a {@code Drawable} when an image with such a name is there.
@@ -249,8 +201,8 @@ public enum ContentProvider {
 	/**
 	 * Saves the current plan to the HTML folder.
 	 */
-	public boolean savePlan() {
-		return XMLSaver.writeTrainingPlan(this.workout, ContentProvider.getAppFolder());
+	public boolean savePlan(Context context) {
+		return XMLSaver.writeTrainingPlan(this.workout, context.getFilesDir());
 	}
 
 	/**
@@ -262,7 +214,7 @@ public enum ContentProvider {
 		// read xml, save again and parse it
 		String xmlData;
 		try {
-			xmlData = loadFile(ContentProvider.getAppFolder().toString() + "/plan.xml", Source.FILE_SYSTEM, context);
+			xmlData = loadFile(context.getFilesDir().toString() + "/plan.xml", Source.FILE_SYSTEM, context);
 
 			FileOutputStream fos = context.openFileOutput("my_xml", Context.MODE_PRIVATE);
 			fos.write(xmlData.getBytes());

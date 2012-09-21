@@ -90,7 +90,7 @@ public class ShowWorkoutActivity extends Activity {
 		final MenuItem menu_item_save_plan = (MenuItem) menu.findItem(R.id.menu_item_save_plan);
 		menu_item_save_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				boolean success = ContentProvider.INSTANCE.savePlan();
+				boolean success = ContentProvider.INSTANCE.savePlan(ShowWorkoutActivity.this);
 				AlertDialog.Builder builder = new AlertDialog.Builder(ShowWorkoutActivity.this);
 				if (success) {
 					builder.setMessage(getString(R.string.success));
