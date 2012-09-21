@@ -68,13 +68,7 @@ public class HomeActivity extends Activity {
 					// ask user, if new exercises should be downloaded
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 					builder.setMessage(getString(R.string.no_exercise_in_databbase));
-					builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							startActivity((new Intent(HomeActivity.this, DownloadExercisesActivity.class)).putExtra(DownloadExercisesActivity.KEY_START_DOWNLOAD, true));
-						}
-					});
-					builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
@@ -101,7 +95,7 @@ public class HomeActivity extends Activity {
 		MenuItem menu_item_load_plan = (MenuItem) menu.findItem(R.id.menu_item_load_plan);
 		menu_item_load_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				boolean success = DataManager.INSTANCE.loadPlan(HomeActivity.this);
+				boolean success = ContentProvider.INSTANCE.loadPlan(HomeActivity.this);
 				AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 				if (success) {
 					builder.setMessage(getString(R.string.success));
@@ -138,7 +132,7 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.home);
 
 		// load exercises
-		DataManager.INSTANCE.loadExercises(this);
+		ContentProvider.INSTANCE.loadExercises(this);
 
 		// show disclaimer
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
