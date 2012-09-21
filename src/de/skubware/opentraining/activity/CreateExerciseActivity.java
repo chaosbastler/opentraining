@@ -3,7 +3,7 @@ package de.skubware.opentraining.activity;
 import java.util.*;
 
 import de.skubware.opentraining.basic.*;
-import de.skubware.opentraining.datamanagement.DataManager;
+import de.skubware.opentraining.datamanagement.ContentProvider;
 import de.skubware.opentraining.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -105,7 +105,7 @@ public class CreateExerciseActivity extends Activity {
 					ExerciseType exType = builder.build();
 					Log.i(TAG, "Created ExerciseType: " + exType.toString());
 
-					boolean succ = DataManager.INSTANCE.saveExercise(exType);
+					boolean succ = ContentProvider.INSTANCE.saveExercise(exType);
 
 					AlertDialog.Builder b = new AlertDialog.Builder(CreateExerciseActivity.this);
 					b.setPositiveButton("OK", new DialogInterface.OnClickListener() {

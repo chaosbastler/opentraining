@@ -62,7 +62,7 @@ public abstract class WorkoutExporter {
 	 */
 	public File exportWorkoutToFile(Workout w){
 		try{
-			File f = DataManager.INSTANCE.writeFileToCache(this.exportWorkoutToString(w), w.getName(), context);
+			File f = ContentProvider.INSTANCE.writeFileToCache(this.exportWorkoutToString(w), w.getName(), context);
 			
 			assert(f!=null);
 			

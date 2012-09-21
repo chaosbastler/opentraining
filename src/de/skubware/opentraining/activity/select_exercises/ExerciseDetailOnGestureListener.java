@@ -28,7 +28,7 @@ import android.view.MotionEvent;
 import android.view.GestureDetector.OnGestureListener;
 import android.widget.ImageView;
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.datamanagement.DataManager;
+import de.skubware.opentraining.datamanagement.ContentProvider;
 
 /**
  * A GestureListener for {@link ExerciseDetailFragment}.
@@ -45,6 +45,9 @@ public class ExerciseDetailOnGestureListener implements OnGestureListener {
 	/** ImageView for the image of the exercise*/
 	private ImageView imageview;
 	
+	/** Reference to the 'parent' fragment */
+	private ExerciseDetailFragment fragment;
+	
 	private int imageIndex = 0;
 
 	public ExerciseDetailOnGestureListener(ExerciseDetailFragment fragment, ImageView imageview) {
@@ -53,6 +56,7 @@ public class ExerciseDetailOnGestureListener implements OnGestureListener {
 		
 		this.exercise = fragment.exercise;
 		this.imageview = imageview;
+		this.fragment = fragment;
 	}
 
 	
@@ -73,7 +77,7 @@ public class ExerciseDetailOnGestureListener implements OnGestureListener {
 			imageIndex = exercise.getImagePaths().size() - 1;
 		}
 		
-		imageview.setImageDrawable(DataManager.INSTANCE.getDrawable(paths.get(imageIndex).toString()));
+		imageview.setImageDrawable(ContentProvider.INSTANCE.getDrawable(paths.get(imageIndex).toString(), fragment.getActivity()));
 			
 		return true;
 	}

@@ -29,7 +29,7 @@ import android.webkit.WebView;
 
 
 import de.skubware.opentraining.datamanagement.*;
-import de.skubware.opentraining.datamanagement.DataManager.Source;
+import de.skubware.opentraining.datamanagement.ContentProvider.Source;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
 
@@ -45,8 +45,8 @@ public class HTMLExporter extends WorkoutExporter {
 	}
 	
 	private void loadWorkout(Workout w){
-		File f = new File( DataManager.getHTMLFolder().toString() + "/trainingplan.html" );
-		DataManager.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, DataManager.getHTMLFolder());
+		File f = new File( ContentProvider.getAppFolder().toString() + "/trainingplan.html" );
+		ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, ContentProvider.getAppFolder());
 		
 		try {
 			webview.loadUrl(f.toURI().toURL().toString());
@@ -67,9 +67,9 @@ public class HTMLExporter extends WorkoutExporter {
 	 */
 	public File exportWorkoutToFile(Workout w){
 		try{
-			DataManager.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, DataManager.getHTMLFolder());
+			ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, ContentProvider.getAppFolder());
 			
-			return new File(DataManager.getHTMLFolder().toString() + "/" + "trainingplan.html");
+			return new File(ContentProvider.getAppFolder().toString() + "/" + "trainingplan.html");
 		}catch(UnsupportedOperationException unsupported){
 			// may happen when String export doesn't work
 			throw unsupported;
@@ -84,7 +84,7 @@ public class HTMLExporter extends WorkoutExporter {
 		String data = "";
 	
 		try {
-			data = DataManager.INSTANCE.loadFile("trainingplan_template.html", Source.ASSETS, context);
+			data = ContentProvider.INSTANCE.loadFile("trainingplan_template.html", Source.ASSETS, context);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -135,7 +135,7 @@ public class HTMLExporter extends WorkoutExporter {
 		
 		
 
-		data = data.replaceAll("<!--CSS-->", DataManager.INSTANCE.getCSSFileAsString(context));
+		data = data.replaceAll("<!--CSS-->", ContentProvider.INSTANCE.getCSSFileAsString(context));
 		
 		
 		

@@ -99,6 +99,28 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 
 		return null;
 	}
+	
+	/**
+	 * Parses xml file
+	 * 
+	 * @param Einzulesende
+	 *            Datei
+	 */
+	public ExerciseType read(InputStream f) {
+		try {
+			parser.parse(f, this);
+
+			return this.exType;
+		} catch (SAXException e) {
+			Log.e(TAG, "Error parsing file: " + f.toString() + "\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (Exception e) {
+			Log.e(TAG, "Error parsing file: " + f.toString() + "\n" + e.getMessage());
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 	/**
 	 * Called when element begins.

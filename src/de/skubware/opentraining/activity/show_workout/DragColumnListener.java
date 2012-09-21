@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.datamanagement.DataManager;
+import de.skubware.opentraining.datamanagement.ContentProvider;
 
 /** Tiny class for a listener that handles drag and drop */
 class DragColumnListener implements View.OnDragListener {
@@ -50,7 +50,7 @@ class DragColumnListener implements View.OnDragListener {
 				@Override
 				public void run() {
 					dragView.setVisibility(View.VISIBLE);
-					Workout current = DataManager.INSTANCE.getCurrentWorkout();
+					Workout current = ContentProvider.INSTANCE.getCurrentWorkout();
 					current.switchExercises(DragColumnListener.this.showWorkoutActivity.exerciseMap.get(view), DragColumnListener.this.showWorkoutActivity.exerciseMap.get(dragView));
 					DragColumnListener.this.showWorkoutActivity.updateTable();
 				}

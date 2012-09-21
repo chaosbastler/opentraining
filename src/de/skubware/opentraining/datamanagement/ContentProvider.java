@@ -38,11 +38,13 @@ import de.skubware.opentraining.basic.*;
  * @author Christian Skubich
  * 
  */
-public enum DataManager {
+public enum ContentProvider {
 	INSTANCE;
 
+	private static final String EXERCISE_FOLDER = "opentraining-exercises";
+
 	/** Tag for logging */
-	private static final String TAG = "DataManager";
+	private static final String TAG = "ContentProvider";
 
 	/** Current workout */
 	private Workout workout;
@@ -102,13 +104,11 @@ public enum DataManager {
 	 * 
 	 * @return The image folder
 	 */
-	public static File getImageFolder() {
-		File imageFolder = new File(getAppFolder().toString() + "/images");
-		imageFolder.mkdir();
-		if (!imageFolder.exists())
-			throw new AssertionError();
-		return imageFolder;
-	}
+	/*
+	 * public static File getImageFolder() { File imageFolder = new
+	 * File(getAppFolder().toString() + "/images"); imageFolder.mkdir(); if
+	 * (!imageFolder.exists()) throw new AssertionError(); return imageFolder; }
+	 */
 
 	/**
 	 * Static method to get exercise xml folder. Folder will be created, if it
@@ -116,13 +116,11 @@ public enum DataManager {
 	 * 
 	 * @return The exercise xml folder.
 	 */
-	public static File getExerciseXMLFolder() {
-		File exFolder = new File(getAppFolder().toString() + "/exercises");
-		exFolder.mkdir();
-		if (!exFolder.exists())
-			throw new AssertionError();
-		return exFolder;
-	}
+	/*
+	 * public static File getExerciseXMLFolder() { File exFolder = new
+	 * File(getAppFolder().toString() + "/exercises"); exFolder.mkdir(); if
+	 * (!exFolder.exists()) throw new AssertionError(); return exFolder; }
+	 */
 
 	/**
 	 * Static method to get html folder. Folder will be created, if it does not
@@ -130,13 +128,11 @@ public enum DataManager {
 	 * 
 	 * @return The exercise html folder.
 	 */
-	public static File getHTMLFolder() {
-		File htmlFolder = new File(getAppFolder().toString() + "/html");
-		htmlFolder.mkdir();
-		if (!htmlFolder.exists())
-			throw new AssertionError();
-		return htmlFolder;
-	}
+	/*
+	 * public static File getHTMLFolder() { File htmlFolder = new
+	 * File(getAppFolder().toString() + "/html"); htmlFolder.mkdir(); if
+	 * (!htmlFolder.exists()) throw new AssertionError(); return htmlFolder; }
+	 */
 
 	/**
 	 * Returns a {@code Drawable} when an image with such a name is there.
@@ -145,14 +141,13 @@ public enum DataManager {
 	 *            The name of the image
 	 * @return The generated Drawable
 	 */
-	public Drawable getDrawable(String name) {
-		FileInputStream fis = null;
+	public Drawable getDrawable(String name, Context context) {
+		InputStream is = null;
 		Drawable img = null;
 		try {
-			File file = new File(DataManager.getImageFolder(), name);
-			fis = new FileInputStream(file);
-			img = Drawable.createFromStream(fis, "icon");
-			fis.close();
+			is = context.getAssets().open("opentraining-exercises/" + name);
+			img = Drawable.createFromStream(is, "icon");
+			is.close();
 		} catch (FileNotFoundException e) {
 			Log.e(TAG, "Could not find drawable: " + name + "\n" + e.getMessage());
 		} catch (IOException e) {
@@ -212,7 +207,7 @@ public enum DataManager {
 				String[] eq;
 				try {
 					eq = context.getAssets().list("equipment");
-					for(String image:eq){
+					for (String image : eq) {
 						String without_suffix = image.substring(0, image.lastIndexOf('.'));
 						SportsEquipment equipment = SportsEquipment.getByName(without_suffix);
 						equipment.setImage(Drawable.createFromStream(context.getAssets().open("equipment/" + image), null));
@@ -221,30 +216,27 @@ public enum DataManager {
 					Log.e(TAG, "Loading images for equipment failed", e);
 				}
 
-				
 				try {
 					// next line is necessary to avoid current modification
 					// exception while iterating
 					Set<ExerciseType> l = new HashSet<ExerciseType>(ExerciseType.listExerciseTypes());
+					int removedExercises = 0;
 					for (ExerciseType exType : l) {
-						ExerciseType.removeExerciseType(exType);
+						boolean removed = ExerciseType.removeExerciseType(exType);
+						if (removed)
+							removedExercises++;
 					}
+					Log.d(TAG, "Loading exercises, removed " + removedExercises + " old exercises");
 
-					String[] files = DataManager.getExerciseXMLFolder().list();
+					String[] files = context.getAssets().list(EXERCISE_FOLDER);
 
 					for (String f : files) {
-						// read XML and save again
-						String xmlData = loadFile(DataManager.getExerciseXMLFolder().toString() + "/" + f, Source.FILE_SYSTEM, context);
-						String FILENAME = "my_xml";
+						if (f.endsWith(".xml")) {
+							ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser();
+							parser.read(context.getAssets().open("opentraining-exercises/" + f) );
+						}
 
-						FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
-						fos.write(xmlData.getBytes());
-						fos.close();
-
-						ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser();
-						parser.read(context.getFileStreamPath("my_xml"));
 					}
-					
 
 				} catch (IOException ioEx) {
 					ioEx.printStackTrace();
@@ -258,7 +250,7 @@ public enum DataManager {
 	 * Saves the current plan to the HTML folder.
 	 */
 	public boolean savePlan() {
-		return XMLSaver.writeTrainingPlan(this.workout, DataManager.getHTMLFolder());
+		return XMLSaver.writeTrainingPlan(this.workout, ContentProvider.getAppFolder());
 	}
 
 	/**
@@ -270,7 +262,7 @@ public enum DataManager {
 		// read xml, save again and parse it
 		String xmlData;
 		try {
-			xmlData = loadFile(DataManager.getHTMLFolder().toString() + "/plan.xml", Source.FILE_SYSTEM, context);
+			xmlData = loadFile(ContentProvider.getAppFolder().toString() + "/plan.xml", Source.FILE_SYSTEM, context);
 
 			FileOutputStream fos = context.openFileOutput("my_xml", Context.MODE_PRIVATE);
 			fos.write(xmlData.getBytes());
@@ -278,7 +270,7 @@ public enum DataManager {
 
 			WorkoutXMLParser parser = new WorkoutXMLParser();
 			Workout w = parser.read(context.getFileStreamPath("my_xml"));
-			DataManager.INSTANCE.setWorkout(w);
+			ContentProvider.INSTANCE.setWorkout(w);
 
 		} catch (IOException e) {
 			Log.i(TAG, "Could not read training plan \n" + e.getMessage());
@@ -295,7 +287,8 @@ public enum DataManager {
 	 *            The exercise to save.
 	 */
 	public boolean saveExercise(ExerciseType ex) {
-		return XMLSaver.writeExerciseType(ex, DataManager.getExerciseXMLFolder());
+		throw new AssertionError("Not implemented");
+		//return XMLSaver.writeExerciseType(ex, ContentProvider.getExerciseXMLFolder());
 	}
 
 	/**

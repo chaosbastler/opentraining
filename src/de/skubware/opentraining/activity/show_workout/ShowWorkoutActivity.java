@@ -30,7 +30,7 @@ import java.util.Set;
 import de.skubware.opentraining.activity.ShowTPActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.*;
-import de.skubware.opentraining.datamanagement.DataManager.CSSFile;
+import de.skubware.opentraining.datamanagement.ContentProvider.CSSFile;
 
 import de.skubware.opentraining.R;
 
@@ -90,7 +90,7 @@ public class ShowWorkoutActivity extends Activity {
 		final MenuItem menu_item_save_plan = (MenuItem) menu.findItem(R.id.menu_item_save_plan);
 		menu_item_save_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				boolean success = DataManager.INSTANCE.savePlan();
+				boolean success = ContentProvider.INSTANCE.savePlan();
 				AlertDialog.Builder builder = new AlertDialog.Builder(ShowWorkoutActivity.this);
 				if (success) {
 					builder.setMessage(getString(R.string.success));
@@ -123,8 +123,8 @@ public class ShowWorkoutActivity extends Activity {
 						String css = CSSFile.items[item].toString();
 						CSSFile cssFile = CSSFile.valueOf(CSSFile.class, css);
 
-						DataManager.INSTANCE.setCSSFile(cssFile);
-						Log.d(TAG, "Starting export of workout, row count: " + DataManager.INSTANCE.getCurrentWorkout().getEmptyRows());
+						ContentProvider.INSTANCE.setCSSFile(cssFile);
+						Log.d(TAG, "Starting export of workout, row count: " + ContentProvider.INSTANCE.getCurrentWorkout().getEmptyRows());
 						startActivity(new Intent(ShowWorkoutActivity.this, ShowTPActivity.class));
 					}
 				});
@@ -183,15 +183,15 @@ public class ShowWorkoutActivity extends Activity {
 
 	/** Increases the number of rows. */
 	private void addRow() {
-		DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(DataManager.INSTANCE.getCurrentWorkout().getEmptyRows() + 1);
+		ContentProvider.INSTANCE.getCurrentWorkout().setEmptyRows(ContentProvider.INSTANCE.getCurrentWorkout().getEmptyRows() + 1);
 
 		this.updateTable();
 	}
 
 	/** Decreases the number of rows (if >1). */
 	private void removeRow() {
-		if (DataManager.INSTANCE.getCurrentWorkout().getEmptyRows() > 1) {
-			DataManager.INSTANCE.getCurrentWorkout().setEmptyRows(DataManager.INSTANCE.getCurrentWorkout().getEmptyRows() - 1);
+		if (ContentProvider.INSTANCE.getCurrentWorkout().getEmptyRows() > 1) {
+			ContentProvider.INSTANCE.getCurrentWorkout().setEmptyRows(ContentProvider.INSTANCE.getCurrentWorkout().getEmptyRows() - 1);
 		}
 		this.updateTable();
 	}
@@ -237,7 +237,7 @@ public class ShowWorkoutActivity extends Activity {
 		List<TextView> textviewList = new ArrayList<TextView>();
 
 		int i = 1;
-		for (FitnessExercise fEx : DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises()) {
+		for (FitnessExercise fEx : ContentProvider.INSTANCE.getCurrentWorkout().getFitnessExercises()) {
 			TextView tw = this.getStyledTextView(fEx.toString());
 			// tw.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.btn_yellow));
 
@@ -282,11 +282,11 @@ public class ShowWorkoutActivity extends Activity {
 	private void buildEmptyRows() {
 		TableLayout table = (TableLayout) findViewById(R.id.table);
 
-		for (int i = 0; i < DataManager.INSTANCE.getCurrentWorkout().getEmptyRows(); i++) {
+		for (int i = 0; i < ContentProvider.INSTANCE.getCurrentWorkout().getEmptyRows(); i++) {
 			TableRow row = new TableRow(this);
 			row.setBackgroundColor(0xFFDFDFDF);
 
-			for (int k = 0; k <= DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size(); k++) {
+			for (int k = 0; k <= ContentProvider.INSTANCE.getCurrentWorkout().getFitnessExercises().size(); k++) {
 				TextView emptyTW = this.getStyledTextView("");
 				emptyTW.setTextAppearance(this, R.style.textview_emptyrow);
 				emptyTW.setTextColor(0xFF7F7F7F);
@@ -360,7 +360,7 @@ public class ShowWorkoutActivity extends Activity {
 	};
 	
 	 void removeColumn(final TextView tw) {
-		if (DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
+		if (ContentProvider.INSTANCE.getCurrentWorkout().getFitnessExercises().size() < 2) {
 			Toast.makeText(this.getApplicationContext(), this.getString(R.string.need_more_than_1), Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -369,7 +369,7 @@ public class ShowWorkoutActivity extends Activity {
 		builder.setMessage(this.getString(R.string.really_delete)).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				int column = columnNumberMap.get(tw);
-				DataManager.INSTANCE.getCurrentWorkout().removeFitnessExercise(DataManager.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column - 1));
+				ContentProvider.INSTANCE.getCurrentWorkout().removeFitnessExercise(ContentProvider.INSTANCE.getCurrentWorkout().getFitnessExercises().get(column - 1));
 
 				// after removing a column, the map with columns should be
 				// updated

@@ -37,7 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.*;
-import de.skubware.opentraining.datamanagement.DataManager;
+import de.skubware.opentraining.datamanagement.ContentProvider;
 
 /**
  * Fragment that shows the details of the ExerciseType. Has an own options menu.
@@ -77,7 +77,7 @@ public class ExerciseDetailFragment extends Fragment {
 		if (exercise != null) {
 			// Images
 			if (!exercise.getImagePaths().isEmpty()) {
-				imageview.setImageDrawable(DataManager.INSTANCE.getDrawable(exercise.getImagePaths().get(0).toString()));
+				imageview.setImageDrawable(ContentProvider.INSTANCE.getDrawable(exercise.getImagePaths().get(0).toString(), this.getActivity()));
 			} else {
 				imageview.setImageResource(R.drawable.defaultimage);
 			}
@@ -124,10 +124,10 @@ public class ExerciseDetailFragment extends Fragment {
 				}
 
 				// add exercise to workout or create a new one
-				Workout w = DataManager.INSTANCE.getCurrentWorkout();
+				Workout w = ContentProvider.INSTANCE.getCurrentWorkout();
 				if (w == null) {
 					w = new Workout("My Plan", new FitnessExercise(exercise));
-					DataManager.INSTANCE.setWorkout(w);
+					ContentProvider.INSTANCE.setWorkout(w);
 				} else {
 					w.addFitnessExercise(new FitnessExercise(exercise));
 				}

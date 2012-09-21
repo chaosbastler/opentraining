@@ -23,7 +23,7 @@ package de.skubware.opentraining.activity;
 import java.io.File;
 
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.datamanagement.DataManager;
+import de.skubware.opentraining.datamanagement.ContentProvider;
 import de.skubware.opentraining.exporter.HTMLExporter;
 import de.skubware.opentraining.exporter.WorkoutExporter;
 
@@ -107,12 +107,12 @@ public class ShowTPActivity extends Activity {
 
 		webview.getSettings().setBuiltInZoomControls(true);
 		
-		Workout w = DataManager.INSTANCE.getCurrentWorkout();
+		Workout w = ContentProvider.INSTANCE.getCurrentWorkout();
 		Log.d(TAG, "Empty rows: " + w.getEmptyRows());
 		final WorkoutExporter exporter = new HTMLExporter(ShowTPActivity.this, webview, w);
 
 
-		exportedFile = exporter.exportWorkoutToFile(DataManager.INSTANCE.getCurrentWorkout());
+		exportedFile = exporter.exportWorkoutToFile(ContentProvider.INSTANCE.getCurrentWorkout());
 
 	}
 

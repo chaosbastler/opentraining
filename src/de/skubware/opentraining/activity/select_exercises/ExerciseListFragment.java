@@ -28,7 +28,7 @@ import de.skubware.opentraining.activity.preferences.PreferencesMusclesFragment;
 import de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment;
 import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.*;
-import de.skubware.opentraining.datamanagement.DataManager;
+import de.skubware.opentraining.datamanagement.ContentProvider;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -170,7 +170,7 @@ public class ExerciseListFragment extends ListFragment {
 		final MenuItem menu_item_next = (MenuItem) menu.findItem(R.id.menu_item_next);
 		menu_item_next.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				if (DataManager.INSTANCE.getCurrentWorkout() == null) {
+				if (ContentProvider.INSTANCE.getCurrentWorkout() == null) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ExerciseListFragment.this.getActivity());
 					builder.setMessage(getString(R.string.no_exercises_choosen)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
