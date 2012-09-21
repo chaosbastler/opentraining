@@ -108,6 +108,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 		arr[5] = context.getResources().getStringArray(R.array.Dumbbell);
 		arr[6] = context.getResources().getStringArray(R.array.Exercise_Mat);
 		arr[7] = context.getResources().getStringArray(R.array.Hand_Strengtheners);
+		arr[8] = context.getResources().getStringArray(R.array.Leg_Press);
 		arr[9] = context.getResources().getStringArray(R.array.Plate);
 		arr[10] = context.getResources().getStringArray(R.array.PullUp_Bar);
 		arr[11] = context.getResources().getStringArray(R.array.Swiss_ball);
