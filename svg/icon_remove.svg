@@ -60,7 +60,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.919596"
-     inkscape:cx="-2.4401993"
+     inkscape:cx="-30.15626"
      inkscape:cy="13.303816"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -102,19 +102,9 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-323.55293,-407.38755)">
-    <path
-       sodipodi:type="arc"
-       style="fill:url(#radialGradient3781);fill-opacity:1;stroke:none;stroke-width:1.71642600999999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3011"
-       sodipodi:cx="18.392857"
-       sodipodi:cy="-4.2054815"
-       sodipodi:rx="9.4642859"
-       sodipodi:ry="9.4642859"
-       d="m 27.857142,-4.2054815 c 0,5.2269807 -4.237305,9.4642858 -9.464285,9.4642858 -5.226981,0 -9.4642863,-4.2373051 -9.4642863,-9.4642858 0,-5.2269808 4.2373053,-9.4642855 9.4642863,-9.4642855 5.22698,0 9.464285,4.2373047 9.464285,9.4642855 z"
-       transform="matrix(1.1652119,0,0,1.1652119,314.15841,424.31954)" />
     <g
        id="g3859"
-       style="stroke:#ffffff;stroke-opacity:1">
+       style="stroke:#ffffff;stroke-opacity:1;fill:#b3b3b3">
       <rect
          transform="matrix(0,-1,1,0,0,0)"
          y="329.00162"
@@ -122,7 +112,7 @@
          height="13.28271"
          width="0.63251007"
          id="rect3013-0-8"
-         style="fill:none;stroke:#ffffff;stroke-width:2.86199999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:#b3b3b3;stroke:#ffffff;stroke-width:2.86199999000000016;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
   </g>
 </svg>
