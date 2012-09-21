@@ -115,6 +115,7 @@ public enum ContentProvider {
 		new Thread(new Runnable() {
 			public void run() {
 				// start localizing first
+				Muscle.localize(context);
 				SportsEquipment.localize(context);
 				// load images for equipment
 				String[] eq;

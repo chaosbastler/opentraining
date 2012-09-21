@@ -162,7 +162,7 @@ public class XMLSaver {
 
 			for (Muscle m : ex.getActivatedMuscles()) {
 				Element mE = doc.createElement("Muscle");
-				mE.setAttribute("name", m.getName());
+				mE.setAttribute("name", m.toString());
 				mE.setAttribute("level", Integer.toString(ex.getActivationMap().get(m).getLevel()));
 				exE.appendChild(mE);
 			}

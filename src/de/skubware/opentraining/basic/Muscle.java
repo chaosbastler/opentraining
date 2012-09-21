@@ -20,86 +20,163 @@
 
 package de.skubware.opentraining.basic;
 
-//TODO: Find a way for I18N
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeSet;
+
+import android.content.Context;
+import android.util.Log;
+import de.skubware.opentraining.R;
 
 /**
  * An enumeration class for the different muscles of a men(or women).
- * There might be missing some muscles - they have to be added with
- * future releases of this program. Internationalization is also a
- * missing feature.
+ * 
+ * This class is very similar to the class SportsEquipment, so I tried to extract a common super class.
+ * But as static methods can't be inherited, I couldn't write my own 'enum-like' super type.
+ * 
  * 
  * @author Christian Skubich
- *
+ * 
  */
-public enum Muscle{
+public class Muscle implements Comparable<Muscle> {
+	/** Tag for logging */
+	private static final String TAG = "Muscle";
 
-        // define the different muscles
-        // new muscles must be added here
-                
-        // chest
-        BRUSTMUSKEL("Brustmuskel"), 
-        
-        // stomach
-        BAUCHMUSKELN("Bauchmuskeln"),
-        
-        // back
-        RÜCKENMUSKELN("Rückenmuskeln"),
-        
-        PO("Po"),
-        
-        // schoulders
-        SCHULTER("Schulter"),
-        
-        // arms
-        BIZEPS("Bizeps"),
-        TRIZEPS("Trizeps"),
-        
-        // leg
-        OBERSCHENKELMUSKEL("Oberschenkelmuskel"),
-        UNTERSCHENKELMUSKEL("Unterschenkelmuskel");
-        
-        
-        private final String name;
+	/**
+	 * Flag for the localization status of this class. Just for asserting, that
+	 * localize() has been called.
+	 */
+	private static boolean localized = false;
 
-        /**
-         * Constructor for muscle
-         * @param name The name of the muscle
-         */
-        private Muscle(String name) {
-                this.name = name;
-        }
-        
-        /**
-         * Getter for the name of the muscle
-         * @return The name of the muscle
-         */
-        public String getName(){
-                return this.name;
-        }
+	/**
+	 * Map that connects names and Muscle objects.
+	 * 
+	 * Reason: there may be alternative names
+	 */
+	private static Map<String, Muscle> nameMap = new HashMap<String, Muscle>();
 
-        @Override
-        public String toString() {
-                return name;
-        }
-        
-        /**
-         * Return the corresponding Muscle
-         * 
-         * @param s
-         * 
-         * @return
-         * 
-         * @throws IllegalArgumentExeption
-         */
-        public static Muscle getByName(String s){
-                for(Muscle m:values()){
-                        if(m.getName().equalsIgnoreCase(s)){
-                                return m;
-                        }
-                }
-                
-                throw new IllegalArgumentException( s + " was not found in enum Muscle");
-        }
+	/** The name of the Muscle */
+	private String name;
 
+	/**
+	 * The Constructor
+	 * 
+	 * @param name
+	 *            The name of the Tool, names should be used only once
+	 */
+	private Muscle(String name) {
+		this.name = name;
+		nameMap.put(name, this);
+		nameMap.put(name.toLowerCase(), this);
+	}
+
+	/**
+	 * Adds an alternative name to the Muscle.
+	 * 
+	 * @param altName
+	 *            The new alternative name.
+	 */
+	public void provideAlternativeName(String altName) {
+		if (altName.equals(this.toString()))
+			return;
+
+		if (nameMap.containsKey(altName)) {
+			Log.w(TAG, "Warning: " + altName + " is already connected with " + nameMap.get(altName).toString() + ". Will now be connected to " + this.name);
+		}
+		nameMap.put(altName, this);
+		nameMap.put(altName.toLowerCase(), this);
+	}
+
+	/**
+	 * Sets the String that is returned by toString().
+	 * 
+	 * @param localizedSting
+	 *            The localized String
+	 */
+	public static void localize(Context context) {
+		nameMap = new HashMap<String, Muscle>();
+		localized = true;
+
+		int language = 0;
+		if (Locale.getDefault().equals(Locale.GERMANY)) {
+			language = 1;
+		}
+
+		String[][] arr = new String[13][];
+		arr[0] = context.getResources().getStringArray(R.array.Chest);
+		arr[1] = context.getResources().getStringArray(R.array.Abdominal);
+		arr[2] = context.getResources().getStringArray(R.array.Back);
+		arr[3] = context.getResources().getStringArray(R.array.Derriere);
+		arr[4] = context.getResources().getStringArray(R.array.Shoulder);
+		arr[5] = context.getResources().getStringArray(R.array.Biceps);
+		arr[6] = context.getResources().getStringArray(R.array.Triceps);
+		arr[7] = context.getResources().getStringArray(R.array.Thigh);
+		arr[8] = context.getResources().getStringArray(R.array.Lower_leg);
+
+		for (String[] mus : arr) {
+			if (mus == null)
+				continue;
+
+			Muscle m;
+			if (mus.length >= language)
+				m = getByName(mus[language]);
+			else
+				m = getByName(mus[0]);
+			for (String s : mus) {
+				m.provideAlternativeName(s);
+			}
+
+		}
+
+	}
+
+	/**
+	 * Returns the localized name.
+	 */
+	@Override
+	public String toString() {
+		if (!localized)
+			throw new AssertionError("localize() was not called.");
+
+		return name;
+	}
+
+	/**
+	 * Static factory method. Objects will only be created once, after that old
+	 * objects will be reused.
+	 * 
+	 * @param toolName
+	 *            The name of the Muscle
+	 * 
+	 * @return The Muscle
+	 */
+	public static Muscle getByName(String toolName) {
+		Muscle m = nameMap.get(toolName);
+		if (m == null) {
+			m = new Muscle(toolName);
+			nameMap.put(toolName, m);
+			Log.d(TAG, "Created new Muscle: " + toolName);
+		}
+		return m;
+
+	}
+
+	public static Iterable<Muscle> values() {
+		return new TreeSet<Muscle>(Muscle.nameMap.values());
+	}
+
+	@Override
+	public int compareTo(Muscle eq) {
+		return this.toString().compareTo(eq.toString());
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Muscle))
+			return false;
+
+		return ((Muscle) o).toString().equals(this.toString());
+	}
 
 }

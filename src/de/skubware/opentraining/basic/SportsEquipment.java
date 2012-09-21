@@ -145,7 +145,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 	}
 
 	/**
-	 * Static factory method. Objects will only be created once, aftet that old
+	 * Static factory method. Objects will only be created once, after that old
 	 * objects will be reused.
 	 * 
 	 * @param toolName
@@ -158,7 +158,7 @@ public class SportsEquipment implements Comparable<SportsEquipment>{
 		if (eq == null) {
 			eq = new SportsEquipment(toolName);
 			eqMap.put(toolName, eq);
-			Log.i(TAG, "Created new SportsEquipment: " + toolName);
+			Log.d(TAG, "Created new SportsEquipment: " + toolName);
 		}
 		return eq;
 
