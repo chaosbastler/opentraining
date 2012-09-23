@@ -27,10 +27,13 @@ import de.skubware.opentraining.R;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+/**
+ * Activity for the preferences of this app.
+ * User can set muscles and equipment.
+ *
+ */
 public class PreferencesActivity extends PreferenceActivity {
 
-	/** {@link onResume()} */
-	private List<Header> mHeaders;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +43,7 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	public void onBuildHeaders(List<Header> target) {
 		loadHeadersFromResource(R.xml.preference_header, target);
-		mHeaders = target;
 	}
 
-	/**
-	 * This is a workaround for a bug/strange behaviour of android.
-	 * http://code.google.com/p/android/issues/detail?id=22430
-	 */
-	/*@Override
-	protected void onResume() {
-		super.onResume();
-		final String showFragment = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
-		if (showFragment != null) {
-			for (final Header header : mHeaders) {
-				if (showFragment.equals(header.fragment)) {
-					switchToHeader(header);
-					break;
-				}
-			}
-		}
-	}*/
 
 }
