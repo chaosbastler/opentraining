@@ -189,16 +189,6 @@ public class ExerciseListFragment extends ListFragment {
 
 		});
 
-		// configure menu_item_create_new_exercise
-		final MenuItem menu_item_create_new_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_new_exercise);
-		menu_item_create_new_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				Intent intent = new Intent(getActivity(), PreferencesActivity.class);
-				intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, PreferencesNotImplementedFragment.class.getName());
-				startActivity(intent);				
-				return true;
-			}
-		});
 
 		// configure menu_item_select_muscles
 		MenuItem menu_item_select_muscles = (MenuItem) menu.findItem(R.id.menu_item_select_muscles);

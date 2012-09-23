@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_item_next" android:title="@string/continu" android:showAsAction="always" android:icon="@drawable/icon_next"/>
-    <item android:id="@+id/menu_item_create_new_exercise" android:title="@string/create_new_exercise" android:showAsAction="withText"></item>
     <item android:id="@+id/menu_item_select_muscles" android:title="@string/select_muscles" android:showAsAction="ifRoom" android:icon="@drawable/icon_muscle"></item>
     
     
