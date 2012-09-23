@@ -47,7 +47,7 @@ public class PreferencesActivity extends PreferenceActivity {
 	 * This is a workaround for a bug/strange behaviour of android.
 	 * http://code.google.com/p/android/issues/detail?id=22430
 	 */
-	@Override
+	/*@Override
 	protected void onResume() {
 		super.onResume();
 		final String showFragment = getIntent().getStringExtra(EXTRA_SHOW_FRAGMENT);
@@ -59,6 +59,6 @@ public class PreferencesActivity extends PreferenceActivity {
 				}
 			}
 		}
-	}
+	}*/
 
 }
