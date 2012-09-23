@@ -8,16 +8,4 @@
         android:fragment="de.skubware.opentraining.activity.preferences.PreferencesMusclesFragment"
         android:title="@string/muscle"
         android:summary="@string/select_muscles" />
-    <header 
-        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment"
-        android:title="@string/create"
-        android:summary="@string/create_new_exercises" />
-    <header 
-        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment"
-        android:title="@string/edit"
-        android:summary="@string/edit_exercises" />
-    <header 
-        android:fragment="de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment"
-        android:title="@string/download"
-        android:summary="@string/download_exercises" />
 </preference-headers>
