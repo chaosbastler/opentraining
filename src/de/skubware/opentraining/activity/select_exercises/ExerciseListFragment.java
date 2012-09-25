@@ -24,7 +24,6 @@ import java.util.*;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.preferences.PreferencesActivity;
 import de.skubware.opentraining.activity.preferences.PreferencesMusclesFragment;
-import de.skubware.opentraining.activity.preferences.PreferencesNotImplementedFragment;
 import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.ContentProvider;
