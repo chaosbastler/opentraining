@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType name="Swiss Ball Pull-In">
+	<Muscle name="Bauchmuskel" level="1"/>
+	<SportsEquipment name="Swiss Ball"/>
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Exercise-ball-pull-in-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Exercise-ball-pull-in-2.png"/> 
+</ExerciseType> 

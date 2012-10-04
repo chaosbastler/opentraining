@@ -1,4 +1,5 @@
-/assets/opentraining-exercises/
+/assets/opentraining-exercises/clone.sh
+/assets/opentraining-exercises/list_files.php
 /.classpath
 /.project
 /.settings/org.eclipse.jdt.core.prefs

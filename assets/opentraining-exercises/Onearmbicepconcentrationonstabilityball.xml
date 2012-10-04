@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType name="Curl (einarmig, auf Ball)">
+	<Muscle name="Bizeps" level="3"/>
+	<SportsEquipment name="Kurzhantel"/>
+	<SportsEquipment name="Swiss Ball"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-bicep-concentration-on-stability-ball-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-bicep-concentration-on-stability-ball-2.png"/> 
+</ExerciseType> 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType name="Curl (umgedreht)">
+	<Muscle name="Bizeps" level="3"/>
+	<SportsEquipment name="Kurzhantel"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Biceps-curl-reverse-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Biceps-curl-reverse-2.png"/> 
+</ExerciseType> 

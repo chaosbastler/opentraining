@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType name="Curl (mit Kabel, stehend)">
+	<Muscle name="Bizeps" level="3"/>
+	<SportsEquipment name="Kabelzug"/>
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Standing-biceps-curl-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Standing-biceps-curl-2.png"/> 
+</ExerciseType> 

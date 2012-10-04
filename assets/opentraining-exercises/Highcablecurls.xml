@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType name="Curl (mit Kabelzug, auf Trainingsbank)">
+	<Muscle name="Bizeps" level="3"/>
+	<SportsEquipment name="Kabelzug"/>
+	<SportsEquipment name="Trainingsbank"/>	
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="High-cable-curls-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="High-cable-curls-2.png"/> 
+</ExerciseType> 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType name="Bankdrücken (einarmig)">
+	<SportsEquipment name="Trainingsbank"/>
+	<SportsEquipment name="Kurzhantel"/>
+	<Muscle name="Bizeps" level="3"/>
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-bench-press-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-bench-press-2.png"/> 
+</ExerciseType> 
