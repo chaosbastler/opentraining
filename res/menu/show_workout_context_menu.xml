@@ -8,7 +8,7 @@
     
    <item
         android:id="@+id/menu_item_custom_name"
-        android:showAsAction="withText" android:title="@string/change_name"/>
+        android:showAsAction="ifRoom|withText" android:title="@string/change_name" android:icon="@drawable/icon_edit"/>
 
    <!-- <item
         android:id="@+id/menu_item_show_exercise"
