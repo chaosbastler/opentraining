@@ -65,7 +65,7 @@ public class HomeActivity extends Activity {
 				if (!ExerciseType.listExerciseTypes().isEmpty())
 					startActivity(new Intent(HomeActivity.this, de.skubware.opentraining.activity.select_exercises.ExerciseListActivity.class));
 				else {
-					// ask user, if new exercises should be downloaded
+					// this should not happen, there should always be exercises; tell this the user
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 					builder.setMessage(getString(R.string.no_exercise_in_databbase));
 					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {

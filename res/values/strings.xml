@@ -18,7 +18,7 @@
     <string name="download">Download</string>
     <string name="check_database">Check database</string>
     <string name="continu">Continue</string> <!-- continuE did not work -->
-    <string name="no_exercise_in_databbase">There are no exercises in the database. Should the download be started?</string>
+    <string name="no_exercise_in_databbase">There are no exercises in the database. This should not happen, please contact the developer.</string>
     <string name="choose_design">Choose the design</string>
     <string name="no_internet_connection">No internet connection available.</string>
     <string name="no_internet_connection_plan_not_shown">No internet connection available. It is possible, that the plan cannot be displayed correctly.</string>

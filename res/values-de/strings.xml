@@ -19,7 +19,7 @@
     <string name="download">Download</string>
     <string name="check_database">Datenbank überprüfen</string>
     <string name="continu">Weiter</string>
-    <string name="no_exercise_in_databbase">Es sind keine Übungen in der Datenbank vorhanden. Soll versucht werden, neue Übungen herunterzuladen?</string>
+    <string name="no_exercise_in_databbase">Es sind keine Übungen in der Datenbank vorhanden. Dies sollte nicht passieren, bitte kontaktieren sie den Entwickler dieser App.</string>
     <string name="choose_design">Design wählen</string>
     <string name="no_internet_connection">Es ist kein Internetzugriff möglich.</string>
     <string name="no_internet_connection_plan_not_shown">Es ist kein Internetzugriff möglich. Der Plan kann vermutlich nicht korrekt angezeigt werden, da keine Schriftarten heruntergeladen werden können.</string>
