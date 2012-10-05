@@ -32,6 +32,7 @@ public class FitnessExercise {
 
 	private ExerciseType exType;
 	private ArrayList<FSet> fSets = new ArrayList<FSet>();
+	private String customName;
 
 	/**
 	 * Constructor of this class
@@ -57,6 +58,7 @@ public class FitnessExercise {
 		for (FSet fs : set) {
 			this.fSets.add(fs);
 		}
+		this.customName = exType.getName();
 	}
 
 	/**
@@ -77,14 +79,29 @@ public class FitnessExercise {
 		return Collections.unmodifiableList(this.fSets);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns a String representation of this object.
+	 * This is identical to the {@code customName}.
 	 * 
-	 * @see java.lang.Object#toString()
+	 * @return The custumName
 	 */
 	@Override
 	public String toString() {
-		return exType.toString();
+		return customName;
+	}
+	
+	/**
+	 * Setter for {@code customName}
+	 * 
+	 * @param newName The new custom name for this FitnessExercise.
+	 * 
+	 * @throws NullPointerException if argument is null
+	 */
+	public void setCustomName(String newName){
+		if(newName==null)
+			throw new NullPointerException("setCustonName() Argument must not be null");
+		
+		this.customName = newName;
 	}
 
 	/*
@@ -101,10 +118,10 @@ public class FitnessExercise {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Compares two FitnessExercises.
+	 * Important: a different customName does not change the result of equals()
 	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.skubware.opentraining.activity.HomeActivity;
 import de.skubware.opentraining.activity.ShowTPActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.*;
@@ -48,6 +49,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -347,6 +349,33 @@ public class ShowWorkoutActivity extends Activity {
 	                //shareCurrentItem();
 	                mode.finish(); // Action picked, so close the CAB
 	                return true;
+	            case R.id.menu_item_custom_name:
+	            	// show dialog to change name
+	            	final FitnessExercise fEx = exerciseMap.get(lastTouched);
+					AlertDialog.Builder alert = new AlertDialog.Builder(ShowWorkoutActivity.this);
+					
+					alert.setTitle(getString(R.string.please_enter_new_name));
+					// Set an EditText view to get user input 
+					final EditText input = new EditText(ShowWorkoutActivity.this);
+					alert.setView(input);
+					input.setText(fEx.toString());
+					
+					alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							String newName = input.getText().toString();
+							fEx.setCustomName(newName);
+							updateTable();
+							dialog.dismiss();
+						}
+					});
+					alert.create().show();
+	            	return true;
+	            
+	            	//TODO implement
+	            //case R.id.menu_item_show_exercise:
+	            	//return false;
+	
 	            default:
 	                return false;
 	        }

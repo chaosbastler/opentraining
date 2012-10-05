@@ -4,6 +4,14 @@
     <item
         android:id="@+id/menu_item_waste_basket"
         android:icon="@drawable/icon_waste_basket"
-        android:showAsAction="always" android:title="@string/delete"/>
+        android:showAsAction="always|withText" android:title="@string/delete"/>
+    
+   <item
+        android:id="@+id/menu_item_custom_name"
+        android:showAsAction="withText" android:title="@string/change_name"/>
 
+   <!-- <item
+        android:id="@+id/menu_item_show_exercise"
+        android:showAsAction="withText" android:title="@string/show_exercise"/> -->
+        
 </menu>
