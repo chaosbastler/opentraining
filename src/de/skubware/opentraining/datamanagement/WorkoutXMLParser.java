@@ -31,6 +31,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 	private List<FitnessExercise> fList = new ArrayList<FitnessExercise>();;
 	private ExerciseType exType;
 	private List<FSet> fSets = new ArrayList<FSet>();
+	private String customName;
 	private List<Category> cat = new ArrayList<Category>();;
 	private String catName;
 	private Integer catValue;
@@ -91,6 +92,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 			}
 		}
 		if (qname.equals("FitnessExercise")) {
+			this.customName = attributes.getValue("customname");
 		}
 		if (qname.equals("ExerciseType")) {
 			String exName = attributes.getValue("name");
@@ -137,7 +139,13 @@ public class WorkoutXMLParser extends DefaultHandler {
 			this.wName = null;
 		}
 		if (qName.equals("FitnessExercise")) {
-			this.fList.add(new FitnessExercise(this.exType, this.fSets.toArray(new FSet[0])));
+			FitnessExercise fEx = new FitnessExercise(this.exType, this.fSets.toArray(new FSet[0]));
+			if(this.customName != null){
+				fEx.setCustomName(customName);
+			}
+			this.fList.add(fEx);
+			
+			this.customName = null;
 			this.exType = null;
 			this.fSets = new ArrayList<FSet>();
 		}

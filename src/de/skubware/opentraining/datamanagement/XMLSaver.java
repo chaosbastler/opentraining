@@ -71,6 +71,7 @@ public class XMLSaver {
 
 				for (FSet set : fEx.getFSetList()) {
 					Element fSetE = doc.createElement("FSet");
+					fSetE.setAttribute("customname", fEx.toString());
 
 					for (Category c : set.getCategories()) {
 						Element catE = doc.createElement("Category");
