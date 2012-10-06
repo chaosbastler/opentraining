@@ -20,7 +20,6 @@
 
 package de.skubware.opentraining.activity;
 
-
 import de.skubware.opentraining.activity.preferences.PreferencesActivity;
 import de.skubware.opentraining.activity.show_workout.ShowWorkoutActivity;
 import de.skubware.opentraining.basic.ExerciseType;
@@ -65,7 +64,8 @@ public class HomeActivity extends Activity {
 				if (!ExerciseType.listExerciseTypes().isEmpty())
 					startActivity(new Intent(HomeActivity.this, de.skubware.opentraining.activity.select_exercises.ExerciseListActivity.class));
 				else {
-					// this should not happen, there should always be exercises; tell this the user
+					// this should not happen, there should always be exercises;
+					// tell this the user
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 					builder.setMessage(getString(R.string.no_exercise_in_databbase));
 					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -96,26 +96,19 @@ public class HomeActivity extends Activity {
 		menu_item_load_plan.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				boolean success = ContentProvider.INSTANCE.loadPlan(HomeActivity.this);
-				AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 				if (success) {
-					builder.setMessage(getString(R.string.success));
-					builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-							startActivity(new Intent(HomeActivity.this, ShowWorkoutActivity.class));//ShowWorkoutActivity.class));
-						}
-					});
+					startActivity(new Intent(HomeActivity.this, ShowWorkoutActivity.class));
 				} else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 					builder.setMessage(getString(R.string.no_success));
 					builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							dialog.dismiss();
 						}
 					});
+					builder.create().show();
 				}
 
-				AlertDialog alert = builder.create();
-				alert.show();
 				return true;
 			}
 		});
