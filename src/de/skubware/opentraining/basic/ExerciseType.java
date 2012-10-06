@@ -24,6 +24,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.*;
 
+import android.util.Log;
+
 /**
  * An instance of this class represents a certain type of fitness exercise.
  * <p>
@@ -46,7 +48,8 @@ import java.util.*;
  */
 
 public final class ExerciseType implements Comparable<ExerciseType> {
-	//TODO add unit tests for checking if the field 'deleted' works.
+	/** Tag for logging */
+	static final String TAG = "ExerciseType";
 	
 	private final String name; // required
 
@@ -389,7 +392,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 */
 	private void check() {
 		if (deleted)
-			throw new AssertionError("An ExerciseType that has been removed is used. This must not happen.");
+			Log.e(TAG, "An ExerciseType that has been removed is used. This must not happen.");
 	}
 
 	/**
