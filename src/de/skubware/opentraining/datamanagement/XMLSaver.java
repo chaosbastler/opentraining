@@ -67,7 +67,7 @@ public class XMLSaver {
 
 				// create element for ExerciseType
 				Element exTypeE = doc.createElement("ExerciseType");
-				exTypeE.setAttribute("name", fEx.getExType().getName());
+				exTypeE.setAttribute("name", fEx.getExType().getUnlocalizedName());
 				// append ExerciseType
 				fE.appendChild(exTypeE);
 
@@ -134,7 +134,9 @@ public class XMLSaver {
 	 * 
 	 * @return true, if writing was successful, false otherwise
 	 */
-	public static boolean writeExerciseType(ExerciseType ex, File destination) {
+	//TODO before adding again: add support to save translations for different languages
+	/*public static boolean writeExerciseType(ExerciseType ex, File destination) {
+		
 		boolean success = true;
 		// write the tp to an xml file with DOM
 		DocumentBuilder docBuilder;
@@ -147,7 +149,7 @@ public class XMLSaver {
 
 			// create root element
 			Element exE = doc.createElement("ExerciseType");
-			exE.setAttribute("name", ex.getName()); 
+			exE.setAttribute("name", ex.getUnlocalizedName()); 
 			
 			// add root element
 			doc.appendChild(exE);
@@ -200,7 +202,7 @@ public class XMLSaver {
 			// t.setOutputProperty(OutputKeys.MEDIA_TYPE, "text/xml");
 			// encoding t.setOutputProperty(OutputKeys.ENCODING, "utf8");
 
-			FileWriter fw = new FileWriter(destination.toString() + "/" + ex.getName() + ".xml");
+			FileWriter fw = new FileWriter(destination.toString() + "/" + ex.getUnlocalizedName() + ".xml");
 
 			t.transform(new DOMSource(doc), new StreamResult(fw));
 
@@ -218,5 +220,5 @@ public class XMLSaver {
 			e.printStackTrace();
 		}
 		return success;
-	}
+	}*/
 }

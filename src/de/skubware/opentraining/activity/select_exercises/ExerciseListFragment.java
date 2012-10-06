@@ -117,7 +117,7 @@ public class ExerciseListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
 		super.onListItemClick(listView, view, position, id);
-		mCallbacks.onItemSelected(exList.get(position).getName());
+		mCallbacks.onItemSelected(exList.get(position).toString());
 	}
 
 	@Override

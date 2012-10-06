@@ -35,6 +35,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -56,6 +57,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	private String name;
 
 	// optional arguments
+	private Map<Locale,String> translationMap = new HashMap<Locale, String>(); // optional
 	private String description;
 	private List<File> imagePaths = new ArrayList<File>();
 	private Map<File, String> imageLicenseMap = new HashMap<File, String>();
@@ -143,6 +145,24 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 		
 		if (qname.equals("ExerciseType")) {
 			this.name = attributes.getValue("name");
+			String language = attributes.getValue("language");
+			if (language == null) {
+				Log.i(TAG, "Default name without language" + attributes.getValue("name"));
+			}else{
+				this.translationMap.put(new Locale(language), this.name);
+			}
+		}
+		if(qname.equals("Locale")){
+			String language = attributes.getValue("language");
+			if (language == null) {
+				Log.e(TAG, "Locale without language" + attributes.getValue("name"));
+			}
+			String translatedname = attributes.getValue("name");
+			if (translatedname == null) {
+				Log.e(TAG, "Locale without translatedname" + attributes.getValue("name"));
+			}
+			this.translationMap.put(new Locale(language), translatedname);
+			Log.d(TAG, "Added translation to exercise" + name + ": " + translatedname + ", " + language);
 		}
 		if (qname.equals("SportsEquipment")) {
 			SportsEquipment eq = SportsEquipment.getByName(attributes.getValue("name"));
@@ -219,12 +239,13 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("ExerciseType")) {
 			// let the builder do its job :)
-			this.exType = new ExerciseType.Builder(this.name).activatedMuscles(this.activatedMuscles).activationMap(this.activationMap).description(this.description)
+			this.exType = new ExerciseType.Builder(this.name).translationMap(this.translationMap).activatedMuscles(this.activatedMuscles).activationMap(this.activationMap).description(this.description)
 					.exerciseTags(this.exerciseTag).imagePath(this.imagePaths).neededTools(this.requiredEquipment).relatedURL(this.relatedURL)
 					.imageLicenseText(this.imageLicenseMap).hints(hints).iconPath(iconPath).build();
 
 			this.name = null;
-
+			
+			this.translationMap = new HashMap<Locale, String>();
 			this.description = null;
 			this.imagePaths = new ArrayList<File>();
 			this.imageLicenseMap = null;

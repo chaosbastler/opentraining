@@ -96,7 +96,7 @@ public class HTMLExporter extends WorkoutExporter {
 		StringBuilder exes = new StringBuilder();
 		for(FitnessExercise fEx:w.getFitnessExercises()){
 				exes.append("\t\t <th>");
-			exes.append(fEx.getExType().getName());
+			exes.append(fEx.getExType().getLocalizedName());
 			exes.append("</th>\n");
 		}
 		data = data.replaceAll("<!--EXERCISES-->", exes.toString());

@@ -126,7 +126,7 @@ public class LaTeXExporter extends WorkoutExporter {
 		tex.append(NEW);
 		tex.append("Datum ");
 		for (FitnessExercise fEx : w.getFitnessExercises()) {
-			tex.append("& " + fEx.getExType().getName() + " ");
+			tex.append("& " + fEx.getExType().getLocalizedName() + " ");
 		}
 		tex.append("\\\\");
 		tex.append(NEW);

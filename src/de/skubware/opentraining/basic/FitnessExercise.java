@@ -58,7 +58,7 @@ public class FitnessExercise {
 		for (FSet fs : set) {
 			this.fSets.add(fs);
 		}
-		this.customName = exType.getName();
+		this.customName = exType.getUnlocalizedName();
 	}
 
 	/**

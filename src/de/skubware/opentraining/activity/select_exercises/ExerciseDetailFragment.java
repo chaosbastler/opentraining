@@ -133,7 +133,7 @@ public class ExerciseDetailFragment extends Fragment {
 				}
 
 				// finally show message
-				CharSequence text = getString(R.string.exercise) + " " + exercise.getName() + " " + getString(R.string.has_been_added);
+				CharSequence text = getString(R.string.exercise) + " " + exercise.toString() + " " + getString(R.string.has_been_added);
 				Toast.makeText(ExerciseDetailFragment.this.getActivity(), text, Toast.LENGTH_LONG).show();
 
 				return true;

@@ -52,7 +52,8 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	static final String TAG = "ExerciseType";
 	
 	private final String name; // required
-
+	
+	private final Map<Locale,String> translationMap; // optional
 	private final String description; // optional
 	private final List<File> imagePaths; // optional
 	private final Map<File, String> imageLicenseMap; // optional
@@ -85,6 +86,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		private final String name;
 
 		// Optional parameters - initialized to default values
+		private Map<Locale,String> translationMap = new HashMap<Locale,String>(); // optional
 		private String description = DEFAULT_DESCRIPTION;
 		private List<File> imagePaths = new ArrayList<File>(); // optional
 		private Map<File, String> imageLicenseMap = new HashMap<File, String>();
@@ -107,6 +109,12 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 			}
 
 			this.name = name;
+		}
+		
+		public Builder translationMap(Map<Locale,String> translationMap) {
+			if(translationMap != null)
+				this.translationMap = translationMap;
+			return this;
 		}
 
 		public Builder description(String description) {
@@ -188,21 +196,19 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		}
 
 		public ExerciseType build() {
-			// build new object
-			ExerciseType propablyNewOne = new ExerciseType(this);
-
-			// only return the new created object, if no
-			// equal object exists
-			for (ExerciseType eT : exerciseTypes) {
-				if (eT.equals(propablyNewOne)) {
-					return eT;
-				}
-			}
+			ExerciseType propablyNewOne = getByName(this.name);
+			if(propablyNewOne!=null)
+				return propablyNewOne;
+			
+			// build new object if no old one could be returned
+			 propablyNewOne = new ExerciseType(this);
 
 			// now it is assured, that propablyNewOne is unique
 			boolean asserted = exerciseTypes.add(propablyNewOne);
 			// just for getting a bit more security
-			assert (asserted);
+			if(!asserted)
+				Log.e(TAG, "ExerciseType was created two times, this must not happen");
+			
 			return propablyNewOne;
 		}
 
@@ -217,6 +223,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	private ExerciseType(Builder builder) {
 		this.name = builder.name;
 
+		this.translationMap = builder.translationMap;
 		this.description = builder.description;
 		this.imageLicenseMap = new HashMap<File, String>(builder.imageLicenseMap);
 		this.imageHeight = builder.imageHeight;
@@ -278,9 +285,24 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 																			// objects
 	}
 
-	public String getName() {
+	
+	public String getUnlocalizedName(){
 		check();
 		return this.name;
+	}
+	
+	public String getLocalizedName() {
+		check();
+		Locale currentLocale = Locale.getDefault();
+		currentLocale = new Locale(currentLocale.getLanguage());
+		String localizedName = this.translationMap.get(currentLocale);
+		if(localizedName==null){
+			localizedName= this.name;
+			Log.v(TAG, "Found no localized name for: " + currentLocale.toString() + ". Using unlocalized exercise name:" + this.name);
+		}else{
+			Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
+		}
+		return localizedName;
 	}
 
 	public String getDescription() {
@@ -361,8 +383,13 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 */
 	public static ExerciseType getByName(String name) {
 		for (ExerciseType ex : ExerciseType.listExerciseTypes()) {
-			if (ex.getName().equals(name))
+			if (ex.name.equals(name))
 				return ex;
+			for(String translatedName:ex.translationMap.values()){
+				if (translatedName.equals(name))
+					return ex;
+			}
+
 		}
 		return null;
 	}
@@ -435,7 +462,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	@Override
 	public String toString() {
 		check();
-		return this.name;
+		return this.getLocalizedName();
 	}
 
 	/** {@inheritDoc} */

@@ -84,8 +84,8 @@ public class ExerciseTypeTest {
 
 	@Test
 	public void testGetName() {
-		assertEquals(EX_1_NAME, EX_1.getName());
-		assertEquals(EX_2_NAME, EX_2.getName());
+		assertEquals(EX_1_NAME, EX_1.getUnlocalizedName());
+		assertEquals(EX_2_NAME, EX_2.getUnlocalizedName());
 	}
 
 	@Test
