@@ -236,6 +236,10 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("ExerciseType")) {
+			if(ExerciseType.exists(this.name)){
+				Log.w(TAG, "Warning: ExerciseType that should be parsed(read) already exists. No new data can be loaded.");
+			}
+			
 			// let the builder do its job :)
 			this.exType = new ExerciseType.Builder(this.name).translationMap(this.translationMap).activatedMuscles(this.activatedMuscles).activationMap(this.activationMap).description(this.description)
 					.exerciseTags(this.exerciseTag).imagePath(this.imagePaths).neededTools(this.requiredEquipment).relatedURL(this.relatedURL)

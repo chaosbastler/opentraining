@@ -497,4 +497,15 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		return fExes;
 	}
 
+	/**
+	 * Checks if an exercise does exist.
+	 * 
+	 * @param name The name of the exercise that should be checked
+	 * 
+	 * @return True if the exercise exists, false otherwise.
+	 */
+	public static boolean exists(String name) {
+		return ExerciseType.getByName(name)!=null;
+	}
+
 }
