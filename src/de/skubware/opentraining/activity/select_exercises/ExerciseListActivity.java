@@ -20,10 +20,13 @@
 
 package de.skubware.opentraining.activity.select_exercises;
 
+import java.util.Locale;
+
 import de.skubware.opentraining.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
 
 
 /**
@@ -47,6 +50,11 @@ public class ExerciseListActivity extends FragmentActivity
                     .findFragmentById(R.id.exercise_list))
                     .setActivateOnItemClick(true);
         }
+        
+		String language = Locale.getDefault().getLanguage();
+		if(!language.equalsIgnoreCase("de")){
+			Toast.makeText(this, getString(R.string.default_language_not_german), Toast.LENGTH_LONG).show();
+		}
     }
 
     @Override

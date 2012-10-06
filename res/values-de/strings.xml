@@ -85,7 +85,7 @@
     <string name="please_enter_new_name">Bitte neuen Übungsnamen eingeben</string>
     <string name="show_exercise">Übung anzeigen</string>
     <string name="reset_to_default">Auf Standard zurücksetzen</string>
-    
+    <string name="default_language_not_german">default_language_not_germand</string><!-- should never be used ... -->
     
     
     

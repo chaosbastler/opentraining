@@ -88,7 +88,7 @@
     <string name="please_enter_new_name">Please enter the new name for the exercise</string>
     <string name="show_exercise">Show exercise</string>
     <string name="reset_to_default">Reset to default</string>
-
+    <string name="default_language_not_german">Please report any translation errors to littleskub@googlemail.com</string>
     
     
 
