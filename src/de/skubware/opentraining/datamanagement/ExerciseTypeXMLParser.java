@@ -114,11 +114,9 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 
 			return this.exType;
 		} catch (SAXException e) {
-			Log.e(TAG, "Error parsing file: " + f.toString() + "\n" + e.getMessage());
-			e.printStackTrace();
+			Log.e(TAG, "Error parsing file: " + f.toString() + "\n" + e.getMessage(), e);
 		} catch (Exception e) {
-			Log.e(TAG, "Error parsing file: " + f.toString() + "\n" + e.getMessage());
-			e.printStackTrace();
+			Log.e(TAG, "Error parsing file: " + f.toString() + "\n" + e.getMessage(), e);
 		}
 
 		return null;
@@ -147,7 +145,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 			this.name = attributes.getValue("name");
 			String language = attributes.getValue("language");
 			if (language == null) {
-				Log.i(TAG, "Default name without language" + attributes.getValue("name"));
+				Log.i(TAG, "Default name without language " + attributes.getValue("name"));
 			}else{
 				this.translationMap.put(new Locale(language), this.name);
 			}

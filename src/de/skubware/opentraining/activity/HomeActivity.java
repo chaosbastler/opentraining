@@ -61,9 +61,9 @@ public class HomeActivity extends Activity {
 		final MenuItem menu_button_select_exercises = (MenuItem) menu.findItem(R.id.menu_button_select_exercises);
 		menu_button_select_exercises.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				if (!ExerciseType.listExerciseTypes().isEmpty())
+				if (!ExerciseType.listExerciseTypes().isEmpty()){
 					startActivity(new Intent(HomeActivity.this, de.skubware.opentraining.activity.select_exercises.ExerciseListActivity.class));
-				else {
+				}else {
 					// this should not happen, there should always be exercises;
 					// tell this the user
 					AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
