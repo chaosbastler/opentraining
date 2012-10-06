@@ -62,6 +62,8 @@ public class XMLSaver {
 			for (FitnessExercise fEx : w.getFitnessExercises()) {
 				// create element for FitnessExercise
 				Element fE = doc.createElement("FitnessExercise");
+				fE.setAttribute("customname", fEx.toString());
+
 
 				// create element for ExerciseType
 				Element exTypeE = doc.createElement("ExerciseType");
@@ -71,7 +73,6 @@ public class XMLSaver {
 
 				for (FSet set : fEx.getFSetList()) {
 					Element fSetE = doc.createElement("FSet");
-					fSetE.setAttribute("customname", fEx.toString());
 
 					for (Category c : set.getCategories()) {
 						Element catE = doc.createElement("Category");

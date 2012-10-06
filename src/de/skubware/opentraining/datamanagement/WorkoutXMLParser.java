@@ -142,6 +142,9 @@ public class WorkoutXMLParser extends DefaultHandler {
 			FitnessExercise fEx = new FitnessExercise(this.exType, this.fSets.toArray(new FSet[0]));
 			if(this.customName != null){
 				fEx.setCustomName(customName);
+				Log.d(TAG, "customName=" + customName);
+			}else{
+				Log.d(TAG, "No customName");
 			}
 			this.fList.add(fEx);
 			
