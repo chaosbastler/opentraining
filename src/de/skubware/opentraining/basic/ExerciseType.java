@@ -50,10 +50,10 @@ import android.util.Log;
 public final class ExerciseType implements Comparable<ExerciseType> {
 	/** Tag for logging */
 	static final String TAG = "ExerciseType";
-	
+
 	private final String name; // required
-	
-	private final Map<Locale,String> translationMap; // optional
+
+	private final Map<Locale, String> translationMap; // optional
 	private final String description; // optional
 	private final List<File> imagePaths; // optional
 	private final Map<File, String> imageLicenseMap; // optional
@@ -86,7 +86,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		private final String name;
 
 		// Optional parameters - initialized to default values
-		private Map<Locale,String> translationMap = new HashMap<Locale,String>(); // optional
+		private Map<Locale, String> translationMap = new HashMap<Locale, String>(); // optional
 		private String description = DEFAULT_DESCRIPTION;
 		private List<File> imagePaths = new ArrayList<File>(); // optional
 		private Map<File, String> imageLicenseMap = new HashMap<File, String>();
@@ -110,9 +110,9 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 			this.name = name;
 		}
-		
-		public Builder translationMap(Map<Locale,String> translationMap) {
-			if(translationMap != null)
+
+		public Builder translationMap(Map<Locale, String> translationMap) {
+			if (translationMap != null)
 				this.translationMap = translationMap;
 			return this;
 		}
@@ -197,18 +197,18 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 		public ExerciseType build() {
 			ExerciseType propablyNewOne = getByName(this.name);
-			if(propablyNewOne!=null)
+			if (propablyNewOne != null)
 				return propablyNewOne;
-			
+
 			// build new object if no old one could be returned
-			 propablyNewOne = new ExerciseType(this);
+			propablyNewOne = new ExerciseType(this);
 
 			// now it is assured, that propablyNewOne is unique
 			boolean asserted = exerciseTypes.add(propablyNewOne);
 			// just for getting a bit more security
-			if(!asserted)
+			if (!asserted)
 				Log.e(TAG, "ExerciseType was created two times, this must not happen");
-			
+
 			return propablyNewOne;
 		}
 
@@ -279,27 +279,24 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	 * @return an unmodifiable Set with all ExerciseTypes
 	 */
 	public static SortedSet<ExerciseType> listExerciseTypes() {
-		return java.util.Collections.unmodifiableSortedSet(exerciseTypes); // set
-																			// contains
-																			// immutable
-																			// objects
+		// set contains immutable objects
+		return java.util.Collections.unmodifiableSortedSet(exerciseTypes);
 	}
 
-	
-	public String getUnlocalizedName(){
+	public String getUnlocalizedName() {
 		check();
 		return this.name;
 	}
-	
+
 	public String getLocalizedName() {
 		check();
 		Locale currentLocale = Locale.getDefault();
 		currentLocale = new Locale(currentLocale.getLanguage());
 		String localizedName = this.translationMap.get(currentLocale);
-		if(localizedName==null){
-			localizedName= this.name;
+		if (localizedName == null) {
+			localizedName = this.name;
 			Log.v(TAG, "Found no localized name for: " + currentLocale.toString() + ". Using unlocalized exercise name:" + this.name);
-		}else{
+		} else {
 			Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
 		}
 		return localizedName;
@@ -347,7 +344,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	public SortedSet<SportsEquipment> getRequiredEquipment() {
 		check();
-		return java.util.Collections.unmodifiableSortedSet(requiredEquipment); 
+		return java.util.Collections.unmodifiableSortedSet(requiredEquipment);
 	}
 
 	public SortedSet<Muscle> getActivatedMuscles() {
@@ -363,12 +360,12 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	}
 
 	public SortedSet<ExerciseTag> getTags() {
-		return java.util.Collections.unmodifiableSortedSet(this.exerciseTag); 
+		return java.util.Collections.unmodifiableSortedSet(this.exerciseTag);
 	}
 
 	public List<URL> getURLs() {
 		check();
-		return java.util.Collections.unmodifiableList(this.relatedURL); 
+		return java.util.Collections.unmodifiableList(this.relatedURL);
 	}
 
 	public List<String> getHints() {
@@ -385,7 +382,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		for (ExerciseType ex : ExerciseType.listExerciseTypes()) {
 			if (ex.name.equals(name))
 				return ex;
-			for(String translatedName:ex.translationMap.values()){
+			for (String translatedName : ex.translationMap.values()) {
 				if (translatedName.equals(name))
 					return ex;
 			}
