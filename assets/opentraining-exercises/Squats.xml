@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Kniebeuge">
+<ExerciseType language="de" name="Kniebeuge">
+	<Locale language="en" name="Squats"/>		
 	<Muscle name="Oberschenkelmuskel" level="3"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-1.png"/> 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-2-1.png"/> 

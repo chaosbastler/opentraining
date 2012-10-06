@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Liegestütze (mit Swiss Ball)"> 
+<ExerciseType language="de" name="Liegestütze (mit Swiss Ball)">
+	<Locale language="en" name="Pushup (feet on ball)"/>																																
 	<Muscle name="Brustmuskel" level="3"/>
 	<SportsEquipment name="Swiss Ball"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Push-up-with-feet-on-an-exercise-ball-1.png"/> 

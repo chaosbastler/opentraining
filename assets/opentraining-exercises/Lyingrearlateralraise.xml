@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Butterfly (auf Hantelbank)">
+<ExerciseType language="de" name="Butterfly (auf Hantelbank)">
+	<Locale language="en" name="Rear lateral raise (lying)"/>														
 	<Muscle name="Brustmuskel" level="3"/>
 	<Muscle name="Schulter" level="3"/>
 	<SportsEquipment name="Trainingsbank"/>

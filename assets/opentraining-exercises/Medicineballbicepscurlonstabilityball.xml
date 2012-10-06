@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Curl (auf Ball)">
+<ExerciseType language="de" name="Curl (auf Ball)">
+	<Locale language="en" name="Curl (on ball)"/>																							
 	<Muscle name="Bizeps" level="3"/>
 	<SportsEquipment name="Kurzhantel"/> 
 	<SportsEquipment name="Swiss Ball"/>  

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Trizepsdrücken (sitzend)">
+<ExerciseType language="de" name="Trizepsdrücken (sitzend)">
+	<Locale language="en" name="Triceps press (seated)"/>		
 	<Muscle name="Trizeps" level="3"/>
 	<SportsEquipment name="Kurzhantel"/>
 	<SportsEquipment name="Trainingsbank"/>

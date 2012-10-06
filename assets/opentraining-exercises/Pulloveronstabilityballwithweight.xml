@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Pullover (mit Gewichtsscheibe)">
+<ExerciseType language="de" name="Pullover (mit Gewichtsscheibe)">
+	<Locale language="en" name="Pullover (on ball, with weight)"/>																														
 	<SportsEquipment name="Hantelscheibe"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Pullover-on-stability-ball-with-weight-1.png"/> 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Pullover-on-stability-ball-with-weight-2.png"/> 

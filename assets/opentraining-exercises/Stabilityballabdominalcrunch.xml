@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Crunch (auf Swiss Ball)">
+<ExerciseType language="de" name="Crunch (auf Swiss Ball)">
+	<Locale language="en" name="Crunch (on swiss ball)"/>		
 	<Muscle name="Bauchmuskeln" level="3"/>
 	<SportsEquipment name="Swiss Ball"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Stability-ball-abdominal-crunch-1.png"/> 

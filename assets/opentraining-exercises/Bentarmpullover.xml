@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Trizepsdrücken über Kopf (liegend, 180°)">
+<ExerciseType language="de" name="Trizepsdrücken über Kopf (liegend, 180°)">
+	<Locale language="en" name="Bent arm pullover"/>	
 	<Muscle name="Trizeps" level="3"/>
 	<SportsEquipment name="Langhantel"/>
 	<SportsEquipment name="Trainingsbank"/>

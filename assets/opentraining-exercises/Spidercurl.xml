@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Spidercurl">
+<ExerciseType language="de" name="Spidercurl">
+	<Locale language="en" name="Spidercurl"/>		
 	<Muscle name="Bizeps" level="3"/>
 	<SportsEquipment name="Langhantel"/>
 	<SportsEquipment name="Curlpult"/>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Trizepsstrecken (liegend)">
+<ExerciseType language="de" name="Trizepsstrecken (liegend)">
+	<Locale language="en" name="Triceps extension across face (lying)"/>																						
 	<Muscle name="Trizeps" level="3"/>
 	<SportsEquipment name="Trainingsbank"/>
 	<SportsEquipment name="Kurzhantel"/>  

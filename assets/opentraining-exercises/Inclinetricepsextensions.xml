@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Trizepsstrecken (schräg liegend)">
+<ExerciseType language="de" name="Trizepsstrecken (schräg liegend)">
+	<Locale language="en" name="Incline triceps extensions"/>													
 	<SportsEquipment name="Kurzhantel"/>
 	<SportsEquipment name="Trainingsbank"/>
 	<Muscle name="Trizeps" level="3"/>

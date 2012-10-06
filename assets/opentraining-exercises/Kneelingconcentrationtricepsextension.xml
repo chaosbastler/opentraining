@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Konzentrationscurl (kniend, mit Kabelzug)">
+<ExerciseType language="de" name="Konzentrationscurl (kniend, mit Kabelzug)">
+	<Locale language="en" name="Concentration triceps extension (kneeling)"/>														
 	<SportsEquipment name="Kabelzug"/>
-	<Muscle name="Bizeps" level="3"/>	 
+	<Muscle name="Trizeps" level="3"/>	 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Kneeling-concentration-triceps-extension-1.png"/> 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Kneeling-concentration-triceps-extension-2.png"/> 
 </ExerciseType> 

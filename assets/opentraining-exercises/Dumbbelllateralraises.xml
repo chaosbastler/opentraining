@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Seitheben (beidseitig)">
+<ExerciseType language="de" name="Seitheben (beidseitig)">
+	<Locale language="en" name="Dumbbell lateral raise"/>									
 	<SportsEquipment name="Kurzhantel"/>
 	<Muscle name="Schulter" level="3"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-1.png"/> 

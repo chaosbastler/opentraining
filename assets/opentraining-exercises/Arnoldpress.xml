@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Arnoldpress">
+<ExerciseType language="de" name="Arnold Presse">
+	<Locale language="en" name="Arnoldpress"/>
 	<Muscle name="Schulter" level="3"/>
 	<SportsEquipment name="Trainingsbank"/>
 	<SportsEquipment name="Kurzhantel"/>

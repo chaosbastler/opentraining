@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Trizepsdrücken über Kopf (liegend, 90°)">
+<ExerciseType language="de" name="Trizepsdrücken über Kopf (liegend, 90°)">
+	<Locale language="en" name="Triceps press to chin (lying, close grip)"/>																				
 	<Muscle name="Trizeps" level="3"/>
 	<SportsEquipment name="Langhantel"/>
 	<SportsEquipment name="Trainingsbank"/>

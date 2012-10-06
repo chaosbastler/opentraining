@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Schulterpresse (einarmig)">
+<ExerciseType language="de" name="Schulterpresse (einarmig)">
+	<Locale language="en" name="Shoulder press (one arm)"/>																											
 	<SportsEquipment name="Kurzhantel"/>
 	<Muscle name="Schulter" level="3"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-shoulder-press-1.png"/> 

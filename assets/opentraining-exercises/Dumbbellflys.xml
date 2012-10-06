@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Butterfly (schräg)">
+<ExerciseType language="de" name="Butterfly (schräg)">
+	<Locale language="en" name="Dumbell flies"/>								
 	<Muscle name="Brustmuskel" level="3"/>
 	<SportsEquipment name="Kurzhantel"/>
 	<SportsEquipment name="Hantelbank"/> 	

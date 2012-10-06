@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Frontheben (Kurzhantel)">
+<ExerciseType language="de" name="Frontheben (Kurzhantel)">
+	<Locale language="en" name="Dumbbell front raise (dumbell)"/>									
 	<Muscle name="Schulter" level="3"/>
 	<SportsEquipment name="Kurzhantel"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-front-raises-2-1.png"/> 

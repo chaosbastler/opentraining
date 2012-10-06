@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Hammercurl (mit Kabelzug)">
+<ExerciseType language="de" name="Hammercurl (mit Kabelzug)">
+	<Locale language="en" name="Hammer curls with rope"/>											
 	<Muscle name="Bizeps" level="3"/>
 	<SportsEquipment name="Kabelzug"/>	
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Hammer-curls-with-rope-1.png"/> 

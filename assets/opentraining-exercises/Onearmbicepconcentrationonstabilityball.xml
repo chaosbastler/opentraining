@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Curl (einarmig, auf Ball)">
+<ExerciseType language="de" name="Curl (einarmig, auf Ball)">
+	<Locale language="en" name="Biceps concentration curl (on ball, one arm)"/>																										
 	<Muscle name="Bizeps" level="3"/>
 	<SportsEquipment name="Kurzhantel"/>
 	<SportsEquipment name="Swiss Ball"/> 

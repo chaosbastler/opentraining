@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Curl (mit Kabelzug, auf Trainingsbank)">
+<ExerciseType language="de" name="Curl (mit Kabelzug, auf Trainingsbank)">
+	<Locale language="en" name="High cable cursl"/>												
 	<Muscle name="Bizeps" level="3"/>
 	<SportsEquipment name="Kabelzug"/>
 	<SportsEquipment name="Trainingsbank"/>	

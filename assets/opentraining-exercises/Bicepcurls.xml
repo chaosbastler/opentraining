@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Curl (Langhantel)">
+<ExerciseType language="de" name="Curl (Langhantel)">
+	<Locale language="en" name="Curl (barbell)"/>			
 	<Muscle name="Bizeps" level="3"/>
 	<SportsEquipment name="Langhantel"/> 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-curls-1.png"/> 

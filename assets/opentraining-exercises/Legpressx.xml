@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Beinpresse">
+<ExerciseType language="de" name="Beinpresse">
+	<Locale language="en" name="Legpress"/>															
 	<SportsEquipment name="Beinpresse"/>
 	<Muscle name="Oberschenkelmuskel" level="3"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Leg-press-1-1024x670.png"/> 

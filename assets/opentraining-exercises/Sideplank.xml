@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Seitstütz">
+<ExerciseType language="de" name="Seitstütz">
+	<Locale language="en" name="Sideplank"/>		
 	<Muscle name="Bauchmuskeln" level="3"/>
 	<SportsEquipment name="Keine"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Side-plank-1.png"/> 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Trizepsstrecken (liegend, mit Kabelzug)">
+<ExerciseType language="de" name="Trizepsstrecken (liegend, mit Kabelzug)">
+	<Locale language="en" name="Low triceps extension"/>																
 	<SportsEquipment name="Kabelzug"/>
 	<Muscle name="Trizeps" level="3"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Low-triceps-extension-1.png"/> 

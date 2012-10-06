@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Schulterheben (Langhantel)">
+<ExerciseType language="de" name="Schulterheben (Langhantel)">
+	<Locale language="en" name="Barbell shrugs"/>
 	<Muscle name="Schulter" level="3"/>
 	<SportsEquipment name="Langhantel"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-shrugs-1.png"/> 

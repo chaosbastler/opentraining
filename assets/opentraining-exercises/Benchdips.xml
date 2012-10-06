@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Dips"> 
+<ExerciseType language="de" name="Dips">
+	<Locale language="en" name="Dips"/>
 	<Muscle name="Trizeps" level="3"/>
 	<SportsEquipment name="Trainingsbank"/> 
 	<Tag name="Eigengewicht Übung" description="Eine Übung die ohne extra Gewicht ausgeführt wird, also nur mit dem eigenen Körpergewicht als Widerstand."/> 

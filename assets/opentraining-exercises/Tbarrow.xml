@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Rudern (mit T-Bar Rower)">
+<ExerciseType language="de" name="Rudern (mit T-Bar Rudergerät)">
+	<Locale language="en" name="T-Bar row"/>		
 	<Muscle name="Schulter" level="3"/>
 	<SportsEquipment name="Rudergerät"/>
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="T-bar-row-1.png"/> 

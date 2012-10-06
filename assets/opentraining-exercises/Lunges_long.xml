@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Ausfallschritt (Langhantel)"> 
+<ExerciseType language="de" name="Ausfallschritt (Langhantel)">
+	<Locale language="en" name="Lunges (barbell)"/>																	
 	<SportsEquipment name="Langhantel"/> 
 	<Muscle name="Po" level="3"/>
 	<Muscle name="Oberschenkelmuskel" level="3"/>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Crunch (geneigt)">
+<ExerciseType language="de" name="Crunch (geneigt)">
+	<Locale language="en" name="Crunch (declined)"/>							
 	<Muscle name="Bauchmuskeln" level="3"/>
 	<SportsEquipment name="Sit Up Bank"/> 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Decline-crunch-1.png"/> 

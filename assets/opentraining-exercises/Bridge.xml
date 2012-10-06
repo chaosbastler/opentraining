@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Brücke">
+<ExerciseType language="de" name="Brücke">
+	<Locale language="en" name="Bridge"/>						
 	<Muscle name="Bauchmuskeln" level="3"/>
 	<SportsEquipment name="Keine"/> 
 	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bridge-1.png"/> 

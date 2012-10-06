@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Curl (einarmig, auf Pult, Kurzhantel)">
+<ExerciseType language="de" name="Curl (einarmig, auf Pult, Kurzhantel)">
+	<Locale language="en" name="Preacher curl(one arm, biased)"/>																										
 	<SportsEquipment name="Curlpult"/>
 	<SportsEquipment name="Swiss Ball"/>
 	<SportsEquipment name="Kurzhantel"/>

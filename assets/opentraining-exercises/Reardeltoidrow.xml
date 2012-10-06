@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType name="Rudern (einarmig, mit Kurzhantel)">
+<ExerciseType language="de" name="Rudern (einarmig, mit Kurzhantel)">
+	<Locale language="en" name="Rear deltoid row"/>							
 	<Muscle name="Rückenmuskeln" level="3"/>
 	<SportsEquipment name="Kurzhantel"/>
 	<SportsEquipment name="Trainingsbank"/>
