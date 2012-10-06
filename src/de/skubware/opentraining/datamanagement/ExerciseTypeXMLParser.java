@@ -160,7 +160,6 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 				Log.e(TAG, "Locale without translatedname" + attributes.getValue("name"));
 			}
 			this.translationMap.put(new Locale(language), translatedname);
-			Log.d(TAG, "Added translation to exercise" + name + ": " + translatedname + ", " + language);
 		}
 		if (qname.equals("SportsEquipment")) {
 			SportsEquipment eq = SportsEquipment.getByName(attributes.getValue("name"));

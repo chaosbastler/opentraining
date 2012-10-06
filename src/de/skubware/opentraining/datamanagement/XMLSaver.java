@@ -3,7 +3,6 @@ package de.skubware.opentraining.datamanagement;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.OutputKeys;

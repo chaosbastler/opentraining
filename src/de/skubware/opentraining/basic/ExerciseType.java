@@ -52,6 +52,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	static final String TAG = "ExerciseType";
 
 	private final String name; // required
+	private final String localizedName; // optional
 
 	private final Map<Locale, String> translationMap; // optional
 	private final String description; // optional
@@ -241,6 +242,18 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		this.hints = new ArrayList<String>(builder.hints);
 
 		// treat some attributes special
+		
+		// localize name
+		Locale currentLocale = Locale.getDefault();
+		currentLocale = new Locale(currentLocale.getLanguage());
+
+		if (this.translationMap.get(currentLocale) == null) {
+			localizedName = this.name;
+			Log.i(TAG, "Found no localized name for: " + currentLocale.toString() + ". Using unlocalized exercise name:" + this.name);
+		} else {
+			localizedName = this.translationMap.get(currentLocale);
+			Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
+		}
 
 		// this copy is necessary, because builder.neededTools may be a
 		// unmodifiable collection
@@ -290,15 +303,6 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	public String getLocalizedName() {
 		check();
-		Locale currentLocale = Locale.getDefault();
-		currentLocale = new Locale(currentLocale.getLanguage());
-		String localizedName = this.translationMap.get(currentLocale);
-		if (localizedName == null) {
-			localizedName = this.name;
-			Log.v(TAG, "Found no localized name for: " + currentLocale.toString() + ". Using unlocalized exercise name:" + this.name);
-		} else {
-			Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
-		}
 		return localizedName;
 	}
 
@@ -465,7 +469,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	/** {@inheritDoc} */
 	public int compareTo(ExerciseType o) {
 		check();
-		return this.name.compareTo(o.name);
+		return this.getLocalizedName().compareTo(o.getLocalizedName());
 	}
 
 	/**
