@@ -87,6 +87,8 @@
     <string name="change_name">Change name</string>
     <string name="please_enter_new_name">Please enter the new name for the exercise</string>
     <string name="show_exercise">Show exercise</string>
+    <string name="reset_to_default">Reset to default</string>
+
     
     
 

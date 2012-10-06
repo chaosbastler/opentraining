@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import de.skubware.opentraining.activity.HomeActivity;
 import de.skubware.opentraining.activity.ShowTPActivity;
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.datamanagement.*;
@@ -98,7 +97,6 @@ public class ShowWorkoutActivity extends Activity {
 					builder.setMessage(getString(R.string.success));
 				} else {
 					builder.setMessage(getString(R.string.no_success));
-
 				}
 				builder.setNeutralButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -162,8 +160,7 @@ public class ShowWorkoutActivity extends Activity {
 	}
 
 	/**
-	 * Initializes the variables, updates the UI, sets the action for export
-	 * button.
+	 * Called when activity is created, updates the table.
 	 * 
 	 */
 	@Override
@@ -171,12 +168,6 @@ public class ShowWorkoutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.show_workout);
-
-
-
-		// waste basket
-		//ImageView imageview_waste_basket = (ImageView) findViewById(R.id.imageview_waste_basket);
-		//imageview_waste_basket.setOnDragListener(new DragColumnListener(this));
 
 		// finally show the current workout
 		this.updateTable();
@@ -334,7 +325,6 @@ public class ShowWorkoutActivity extends Activity {
 	    // may be called multiple times if the mode is invalidated.
 	    @Override
 	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-
 	        return false; // Return false if nothing is done
 	    }
 
@@ -365,6 +355,14 @@ public class ShowWorkoutActivity extends Activity {
 						public void onClick(DialogInterface dialog, int which) {
 							String newName = input.getText().toString();
 							fEx.setCustomName(newName);
+							updateTable();
+							dialog.dismiss();
+						}
+					});
+					alert.setNegativeButton(getString(R.string.reset_to_default), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							fEx.setCustomName(fEx.getExType().toString());
 							updateTable();
 							dialog.dismiss();
 						}
