@@ -58,7 +58,7 @@ public class FitnessExercise {
 		for (FSet fs : set) {
 			this.fSets.add(fs);
 		}
-		this.customName = exType.getUnlocalizedName();
+		this.customName = exType.getLocalizedName();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class FitnessExercise {
 	 * @return The custumName
 	 */
 	@Override
-	public String toString() {
+	public String toString(){
 		return customName;
 	}
 	
