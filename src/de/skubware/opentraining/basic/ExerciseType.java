@@ -72,32 +72,32 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	private boolean deleted = false;
 
-	private static final TreeSet<ExerciseType> exerciseTypes = new TreeSet<ExerciseType>(); // stores
-																							// all
-																							// instances
+	// stores instance for instance controll
+	private static final TreeSet<ExerciseType> exerciseTypes = new TreeSet<ExerciseType>();
 
+	/**
+	 * Inner builder class for creating new instances of {@link ExerciseType}.
+	 * 
+	 */
 	public static class Builder {
-		// Default values
-		private static final String DEFAULT_DESCRIPTION = "Keine Beschreibung verfügbar";
-		// private static final String DEFAULT_LICENSE_TEXT =
-		// "Keine Lizenzinformationen verfügbar";
-		// Collections do not have a default value
+		// default values
+		private static final String DEFAULT_DESCRIPTION = "No description available";
 
 		// Required parameters
 		private final String name;
 
 		// Optional parameters - initialized to default values
 		private Map<Locale, String> translationMap = new HashMap<Locale, String>(); // optional
-		private String description = DEFAULT_DESCRIPTION;
+		private String description = DEFAULT_DESCRIPTION; // optional
 		private List<File> imagePaths = new ArrayList<File>(); // optional
-		private Map<File, String> imageLicenseMap = new HashMap<File, String>();
+		private Map<File, String> imageLicenseMap = new HashMap<File, String>(); // optional
 		private int imageWidth = 214;
 		private int imageHeight = 137;
-		private SortedSet<SportsEquipment> neededTools = new TreeSet<SportsEquipment>();
-		private SortedSet<Muscle> activatedMuscles = new TreeSet<Muscle>();
-		private Map<Muscle, ActivationLevel> activationMap = new LinkedHashMap<Muscle, ActivationLevel>();
-		private SortedSet<ExerciseTag> exerciseTag = new TreeSet<ExerciseTag>();
-		private List<URL> relatedURL = new ArrayList<URL>();
+		private SortedSet<SportsEquipment> neededTools = new TreeSet<SportsEquipment>(); // optional
+		private SortedSet<Muscle> activatedMuscles = new TreeSet<Muscle>(); // optional
+		private Map<Muscle, ActivationLevel> activationMap = new LinkedHashMap<Muscle, ActivationLevel>(); // optional
+		private SortedSet<ExerciseTag> exerciseTag = new TreeSet<ExerciseTag>(); // optional
+		private List<URL> relatedURL = new ArrayList<URL>(); // optional
 		private List<String> hints = new ArrayList<String>(); // optional
 		private File iconPath = new File(""); // optional
 
@@ -242,7 +242,7 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		this.hints = new ArrayList<String>(builder.hints);
 
 		// treat some attributes special
-		
+
 		// localize name
 		Locale currentLocale = Locale.getDefault();
 		currentLocale = new Locale(currentLocale.getLanguage());
@@ -296,31 +296,65 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 		return java.util.Collections.unmodifiableSortedSet(exerciseTypes);
 	}
 
+	/**
+	 * Getter for the unlocalized name. This is the default name of the
+	 * ExerciseType
+	 * 
+	 * @return the unlocalized name
+	 */
 	public String getUnlocalizedName() {
 		check();
 		return this.name;
 	}
 
+	/**
+	 * Getter for the unlocalized name. If there is no translation available,
+	 * the result will be the same as {@link #getUnlocalizedName()}
+	 * 
+	 * @return the unlocalized name
+	 */
 	public String getLocalizedName() {
 		check();
 		return localizedName;
 	}
 
+	/**
+	 * Getter for the description of the exercise.
+	 * 
+	 * @return the description
+	 */
 	public String getDescription() {
 		check();
 		return this.description;
 	}
 
+	/**
+	 * Getter for a list of paths to the images.
+	 * 
+	 * @return list of paths of the images
+	 */
 	public List<File> getImagePaths() {
 		check();
 		return java.util.Collections.unmodifiableList(this.imagePaths);
 	}
 
+	/**
+	 * Getter for the icon path. The icon should be small (like a symbol) and
+	 * the user should be able to recognize the exercise when he sees the icon.
+	 * 
+	 * @return the icon path.
+	 */
 	public File getIconPath() {
 		check();
 		return new File(this.iconPath.toString());
 	}
 
+	/**
+	 * Getter for the image license map. This map stores the license for every
+	 * image.
+	 * 
+	 * @return a map containing the licenses for the images
+	 */
 	public Map<File, String> getImageLicenseMap() {
 		check();
 		return java.util.Collections.unmodifiableMap(this.imageLicenseMap);
@@ -487,12 +521,23 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 
 	}
 
+	/**
+	 * Generates a FitnessExercise.
+	 * 
+	 * @return A new {@link FitnessExercise} with this ExerciseType.
+	 */
 	public FitnessExercise asFitnessExercise() {
 		check();
 		return new FitnessExercise(this);
-
 	}
 
+	/**
+	 * Turns a list of ExerciseTypes to a collection of FitnessExercises.
+	 * 
+	 * @param exes
+	 *            The ExerciseTypes
+	 * @return The created FitnessExercises
+	 */
 	public static Collection<FitnessExercise> asFitnessExercise(List<ExerciseType> exes) {
 		List<FitnessExercise> fExes = new ArrayList<FitnessExercise>();
 		for (ExerciseType ex : exes) {
@@ -504,12 +549,13 @@ public final class ExerciseType implements Comparable<ExerciseType> {
 	/**
 	 * Checks if an exercise does exist.
 	 * 
-	 * @param name The name of the exercise that should be checked
+	 * @param name
+	 *            The name of the exercise that should be checked
 	 * 
 	 * @return True if the exercise exists, false otherwise.
 	 */
 	public static boolean exists(String name) {
-		return ExerciseType.getByName(name)!=null;
+		return ExerciseType.getByName(name) != null;
 	}
 
 }
