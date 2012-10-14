@@ -37,3 +37,7 @@ Changes of the repository opentraining-exercises should also be added to this re
 Translations
 ------------
 English, German.
+
+JUnit Tests
+-----------
+Can be found in this repository: https://github.com/chaosbastler/opentraining-test
