@@ -208,10 +208,17 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	 *             if the Exercise is not contained in this Workout
 	 */
 	public void updateFitnessExercise(FitnessExercise changedFEx) {
+		Log.d(TAG, "updateFitnessExercise(), changedFEx: " + changedFEx.toDebugString());
 		FitnessExercise oldFex = null;
 		for (FitnessExercise fEx : this.fitnessExercises) {
-			if (fEx.getExType().equals(changedFEx.getExType()))
+			//this comparison relies on the fact that each Workout can only contain each ExerciseType once
+			if (fEx.getExType().equals(changedFEx.getExType())){
 				oldFex = changedFEx;
+				int oldIndex = fitnessExercises.indexOf(fEx);
+				fitnessExercises.remove(oldIndex);
+				fitnessExercises.add(oldIndex, changedFEx);
+				break;
+			}	
 		}
 
 		if (oldFex == null) {

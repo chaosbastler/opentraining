@@ -41,14 +41,14 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	/** Tag for logging */
 	static final String TAG = "TrainingEntry";
 	
-	/** The date to which this Entry refers to. May be null. */
-	private Date date;
+	/** The mDate to which this Entry refers to. May be null. */
+	private Date mDate;
 
 	/** List with all {@link TrainingSubEntry}s. May be empty, but never null. */
-	private List<TrainingSubEntry> subEntryList = new ArrayList<TrainingSubEntry>();
+	private List<TrainingSubEntry> mSubEntryList = new ArrayList<TrainingSubEntry>();
 
 	/**
-	 * This constructor should be used, if the {@link #date} is unknown.
+	 * This constructor should be used, if the {@link #mDate} is unknown.
 	 * 
 	 * @deprecated Should only be used for parsing .xml files, use {@link Workout#addTrainingEntry(java.util.Date)} instead.
 	 */
@@ -58,16 +58,16 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	}
 
 	/**
-	 * This constructor should be used, if the {@link #date} is known.
+	 * This constructor should be used, if the {@link #mDate} is known.
 	 * 
-	 * @param date
-	 *            The date.
+	 * @param mDate
+	 *            The mDate.
 	 *            
 	 * @deprecated Should only be used for parsing .xml files, use {@link Workout#addTrainingEntry(java.util.Date)} instead.
 	 */
 	@Deprecated
 	public TrainingEntry(Date date) {
-		this.date = date;
+		this.mDate = date;
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 		Log.v(TAG, "Added TrainingSubEntry: " + content);
 		@SuppressWarnings("deprecation")
 		TrainingSubEntry entry = new TrainingSubEntry(content);
-		this.subEntryList.add(entry);
+		this.mSubEntryList.add(entry);
 
 		return entry;
 	}
@@ -97,41 +97,41 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	 * @return True if operation was successful
 	 */
 	public boolean remove(TrainingSubEntry entry) {
-		return this.subEntryList.remove(entry);
+		return this.mSubEntryList.remove(entry);
 	}
 
 	/**
-	 * Getter for {@link #subEntryList}.
+	 * Getter for {@link #mSubEntryList}.
 	 * 
-	 * @return The {@link #subEntryList}
+	 * @return The {@link #mSubEntryList}
 	 */
 	public List<TrainingSubEntry> getSubEntryList() {
-		return subEntryList;
+		return mSubEntryList;
 	}
 
 	/**
-	 * Getter for {@link #date}.
+	 * Getter for {@link #mDate}.
 	 * 
-	 * @return The {@link #date} (may be null)
+	 * @return The {@link #mDate} (may be null)
 	 */
 	public Date getDate() {
-		return date;
+		return mDate;
 	}
 
 	/**
-	 * Setter for {@link #date}.
+	 * Setter for {@link #mDate}.
 	 * 
-	 * @param date
-	 *            The new date to set, may be null
+	 * @param mDate
+	 *            The new mDate to set, may be null
 	 */
 	public void setDate(Date date) {
-		this.date = date;
+		this.mDate = date;
 	}
 
 	/** Returns the comparison of the dates of the two TrainingEntries. */
 	@Override
 	public int compareTo(TrainingEntry another) {
-		return this.date.compareTo(another.date);
+		return this.mDate.compareTo(another.mDate);
 	}
 
 	/**
@@ -143,8 +143,8 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	public String toDebugString(){
 		StringBuilder builder = new StringBuilder();
 		
-		builder.append("Date: " + date + "\n");
-		for(TrainingSubEntry entry:subEntryList){
+		builder.append("Date: " + mDate + "\n");
+		for(TrainingSubEntry entry:mSubEntryList){
 			builder.append("\n TrainingEntry: " + entry.toString());
 		}
 
