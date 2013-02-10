@@ -1,11 +1,14 @@
-/assets/opentraining-exercises/clone.sh
-/assets/opentraining-exercises/list_files.php
-/.classpath
-/.project
-/.settings/org.eclipse.jdt.core.prefs
-/lint.xml
-/proguard-project.txt
-/bin/
-/svg/old/
-/svg/ideas/
-/gen/
+app/assets/opentraining-exercises/clone.sh
+app/assets/opentraining-exercises/list_files.php
+app/bin/
+app/gen/
+.metadata
+
+app/svg/old/
+
+app/svg/.SVG
+
+[submodule "ActionBarSherlock"]
+	path = ActionBarSherlock
+	url = https://github.com/JakeWharton/ActionBarSherlock
+        ignore = dirty

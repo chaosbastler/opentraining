@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.skubware.opentraining"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="de.skubware.opentraining.activity.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity"
+            android:label="@string/title_exercisetype_list"
+            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.skubware.opentraining.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="de.skubware.opentraining.activity.create_workout.ExerciseTypeDetailActivity"
+            android:label="@string/title_exercisetype_detail"
+            android:parentActivityName=".ExerciseTypeListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ExerciseTypeListActivity" />
+        </activity>
+        <activity
+            android:name="de.skubware.opentraining.activity.start_training.FExListActivity"
+            android:label="@string/title_exercise_list"
+            android:windowSoftInputMode="stateHidden"
+            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.skubware.opentraining.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="de.skubware.opentraining.activity.start_training.FExDetailActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_exercise_detail"
+            android:parentActivityName=".ExerciseListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ExerciseListActivity" />
+        </activity>
+    </application>
+
+</manifest>

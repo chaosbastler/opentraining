@@ -1,0 +1,514 @@
+/**
+ * 
+ * This is OpenTraining, an Android application for planning your your fitness training.
+ * Copyright (C) 2012-2013 Christian Skubich
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+
+package de.skubware.opentraining.basic;
+
+import java.io.File;
+import java.io.Serializable;
+import java.net.URL;
+import java.util.*;
+
+
+import android.util.Log;
+
+/**
+ * An instance of this class represents a certain type of (fitness) exercise.
+ * <p>
+ * 
+ * 
+ * @author Christian Skubich
+ * 
+ */
+
+public final class ExerciseType implements Comparable<ExerciseType>, IExercise, Serializable {
+	/** Default serialVersionUID */
+	private static final long serialVersionUID = 1L;
+
+	
+	/** Tag for logging */
+	static final String TAG = ExerciseType.class.getName();
+
+	private String name; // required
+	private String localizedName; // optional
+
+	private Map<Locale, String> translationMap; // optional
+	private String description; // optional
+	private List<File> imagePaths; // optional
+	private Map<File, String> imageLicenseMap; // optional
+	private int imageWidth; // optional
+	private int imageHeight; // optional
+	private SortedSet<SportsEquipment> requiredEquipment; // optional
+	private SortedSet<Muscle> activatedMuscles; // optional
+	private Map<Muscle, ActivationLevel> activationMap; // optional
+	private SortedSet<ExerciseTag> exerciseTag; // optional
+	private List<URL> relatedURL; // optional
+	private List<String> hints; // optional
+	private File iconPath; // optional
+
+	
+	/**
+	 * Inner builder class for creating new instances of {@link ExerciseType}.
+	 * 
+	 */
+	public static class Builder {
+		// default values
+		private static final String DEFAULT_DESCRIPTION = "No description available";
+
+		// Required parameters
+		private final String name;
+
+		// Optional parameters - initialized to default values
+		private Map<Locale, String> translationMap = new HashMap<Locale, String>(); // optional
+		private String description = DEFAULT_DESCRIPTION; // optional
+		private List<File> imagePaths = new ArrayList<File>(); // optional
+		private Map<File, String> imageLicenseMap = new HashMap<File, String>(); // optional
+		private int imageWidth = 214;
+		private int imageHeight = 137;
+		private SortedSet<SportsEquipment> neededTools = new TreeSet<SportsEquipment>(); // optional
+		private SortedSet<Muscle> activatedMuscles = new TreeSet<Muscle>(); // optional
+		private Map<Muscle, ActivationLevel> activationMap = new LinkedHashMap<Muscle, ActivationLevel>(); // optional
+		private SortedSet<ExerciseTag> exerciseTag = new TreeSet<ExerciseTag>(); // optional
+		private List<URL> relatedURL = new ArrayList<URL>(); // optional
+		private List<String> hints = new ArrayList<String>(); // optional
+		private File iconPath = new File(""); // optional
+
+		public Builder(String name) {
+			// null name is NOT allowed
+			if (name == null) {
+				throw new NullPointerException();
+			}
+
+			this.name = name;
+		}
+
+		public Builder translationMap(Map<Locale, String> translationMap) {
+			if (translationMap != null)
+				this.translationMap = translationMap;
+			return this;
+		}
+
+		public Builder description(String description) {
+			if (description != null)
+				this.description = description;
+			return this;
+		}
+
+		public Builder imagePath(List<File> imagePaths) {
+			if (imagePaths.size() > 0)
+				this.imagePaths = imagePaths;
+			return this;
+		}
+
+		public Builder imageLicenseText(Map<File, String> imageLicenseMap) {
+			if (imageLicenseMap.size() > 0)
+				this.imageLicenseMap = imageLicenseMap;
+			return this;
+		}
+
+		public Builder imageWidth(int imageWidth) {
+			if (imageWidth > 0)
+				this.imageWidth = imageWidth;
+			return this;
+		}
+
+		public Builder imageHeigth(int imageHeight) {
+			if (imageHeight > 0)
+				this.imageHeight = imageHeight;
+			return this;
+		}
+
+		public Builder neededTools(SortedSet<SportsEquipment> neededTools) {
+			if (neededTools.size() > 0)
+				this.neededTools = neededTools;
+			return this;
+		}
+
+		public Builder activatedMuscles(SortedSet<Muscle> activatedMuscles) {
+			if (activatedMuscles.size() > 0)
+				this.activatedMuscles = activatedMuscles;
+			return this;
+		}
+
+		public Builder activationMap(Map<Muscle, ActivationLevel> activationMap) {
+			if (activationMap.size() > 0)
+				this.activationMap = activationMap;
+			return this;
+		}
+
+		public Builder exerciseTags(SortedSet<ExerciseTag> exerciseTag) {
+			if (exerciseTag.size() > 0)
+				this.exerciseTag = exerciseTag;
+			return this;
+		}
+
+		public Builder relatedURL(List<URL> relatedURL) {
+			if (relatedURL.size() > 0)
+				this.relatedURL = relatedURL;
+			return this;
+		}
+
+		public Builder hints(List<String> hints) {
+			if (hints.size() > 0)
+				this.hints = hints;
+			return this;
+		}
+
+		public Builder iconPath(File iconPath) {
+			if (iconPath != null)
+				this.iconPath = iconPath;
+			return this;
+		}
+
+		public ExerciseType build() {
+			return new ExerciseType(this);
+		}
+
+	}
+
+	/**
+	 * Constructor for ExerciseType
+	 * 
+	 * @param builder
+	 *            The builder
+	 */
+	private ExerciseType(Builder builder) {
+		this.name = builder.name;
+
+		this.translationMap = builder.translationMap;
+		this.description = builder.description;
+		this.imageLicenseMap = new HashMap<File, String>(builder.imageLicenseMap);
+		this.imageHeight = builder.imageHeight;
+		this.imageWidth = builder.imageWidth;
+		this.exerciseTag = builder.exerciseTag;
+		this.relatedURL = new ArrayList<URL>(builder.relatedURL);
+		this.iconPath = builder.iconPath;
+
+		this.imagePaths = new ArrayList<File>();
+		for (File f : builder.imagePaths) {
+			imagePaths.add(new File(f.toString()));
+		}
+
+		this.hints = new ArrayList<String>(builder.hints);
+
+		// treat some attributes special
+
+		// localize name
+		Locale currentLocale = Locale.getDefault();
+		currentLocale = new Locale(currentLocale.getLanguage());
+
+		if (this.translationMap.get(currentLocale) == null) {
+			localizedName = this.name;
+			Log.i(TAG, "Found no localized name for: " + currentLocale.toString() + ". Using unlocalized exercise name:" + this.name);
+		} else {
+			localizedName = this.translationMap.get(currentLocale);
+			Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
+		}
+
+		// this copy is necessary, because builder.neededTools may be a
+		// unmodifiable collection
+		TreeSet<SportsEquipment> tools = new TreeSet<SportsEquipment>(builder.neededTools);
+		if (tools.size() > 1) {
+			tools.remove(SportsEquipment.getByName("None"));
+		}
+		if (tools.size() == 0) {
+			tools.add(SportsEquipment.getByName("None"));
+		}
+		this.requiredEquipment = tools;
+
+		// activationMap and activatedMuscles must be in sync
+		for (Muscle m : builder.activationMap.keySet()) {
+			if (!builder.activatedMuscles.contains(m)) {
+				builder.activatedMuscles.add(m);
+			}
+		}
+
+		// activationMap and activatedMuscles must be in sync
+		for (Muscle m : builder.activatedMuscles) {
+			if (!builder.activationMap.containsKey(m)) {
+				builder.activationMap.put(m, ActivationLevel.MEDIUM);
+			}
+		}
+
+		this.activationMap = builder.activationMap;
+
+		this.activatedMuscles = builder.activatedMuscles;
+
+	}
+
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getUnlocalizedName()
+	 */
+	@Override
+	public String getUnlocalizedName() {
+		return this.name;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getLocalizedName()
+	 */
+	@Override
+	public String getLocalizedName() {
+		return localizedName;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getDescription()
+	 */
+	@Override
+	public String getDescription() {
+		return this.description;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getImagePaths()
+	 */
+	@Override
+	public List<File> getImagePaths() {
+		return java.util.Collections.unmodifiableList(this.imagePaths);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getIconPath()
+	 */
+	@Override
+	public File getIconPath() {
+		return new File(this.iconPath.toString());
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getImageLicenseMap()
+	 */
+	@Override
+	public Map<File, String> getImageLicenseMap() {
+		return java.util.Collections.unmodifiableMap(this.imageLicenseMap);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getImageWidth()
+	 */
+	@Override
+	public int getImageWidth() {
+		return this.imageWidth;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getImageHeight()
+	 */
+	@Override
+	public int getImageHeight() {
+		return this.imageHeight;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getRequiredEquipment()
+	 */
+	@Override
+	public SortedSet<SportsEquipment> getRequiredEquipment() {
+		return java.util.Collections.unmodifiableSortedSet(requiredEquipment);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getActivatedMuscles()
+	 */
+	@Override
+	public SortedSet<Muscle> getActivatedMuscles() {
+		return java.util.Collections.unmodifiableSortedSet(activatedMuscles);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getActivationMap()
+	 */
+	@Override
+	public Map<Muscle, ActivationLevel> getActivationMap() {
+		if (activationMap.isEmpty()) {
+			throw new AssertionError();
+		}
+		return java.util.Collections.unmodifiableMap(activationMap);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getTags()
+	 */
+	@Override
+	public SortedSet<ExerciseTag> getTags() {
+		return java.util.Collections.unmodifiableSortedSet(this.exerciseTag);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getURLs()
+	 */
+	@Override
+	public List<URL> getURLs() {
+		return java.util.Collections.unmodifiableList(this.relatedURL);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.skubware.opentraining.basic.IExercise#getHints()
+	 */
+	@Override
+	public List<String> getHints() {
+		return java.util.Collections.unmodifiableList(this.hints);
+	}
+
+	
+
+	/**
+	 * Indicates whether some other object is "equal to" this one.
+	 * 
+	 * <p>
+	 * Two instances are equal if their names are equal.
+	 * 
+	 * @return {@code true} if the given object represents a
+	 *         {@code ExerciseType} equivalent to this {@code ExerciseType},
+	 *         false otherwise
+	 * 
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof ExerciseType)) {
+			return false;
+		}
+		// now it's guaranteed that this cast will work
+		ExerciseType e = (ExerciseType) obj;
+
+		return this.name.equalsIgnoreCase(e.name);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return this.getLocalizedName();
+	}
+
+	/** {@inheritDoc} */
+	public int compareTo(ExerciseType o) {
+		return this.getLocalizedName().compareTo(o.getLocalizedName());
+	}
+
+
+	/**
+	 * Generates a FitnessExercise.
+	 * 
+	 * @return A new {@link FitnessExercise} with this ExerciseType.
+	 */
+	public FitnessExercise asFitnessExercise() {
+		return new FitnessExercise(this);
+	}
+
+	/**
+	 * Turns a list of ExerciseTypes to a collection of FitnessExercises.
+	 * 
+	 * @param exes
+	 *            The ExerciseTypes
+	 * @return The created FitnessExercises
+	 */
+	public static Collection<FitnessExercise> asFitnessExercise(List<ExerciseType> exes) {
+		List<FitnessExercise> fExes = new ArrayList<FitnessExercise>();
+		for (ExerciseType ex : exes) {
+			fExes.add(new FitnessExercise(ex));
+		}
+		return fExes;
+	}
+
+
+	/*@Override
+	public int describeContents() {
+		return 0;
+	}
+
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+
+    	private String name; // required
+    	private String localizedName; // optional
+
+    	private Map<Locale, String> translationMap; // optional
+    	private String description; // optional
+    	private List<File> imagePaths; // optional
+    	private Map<File, String> imageLicenseMap; // optional
+    	private int imageWidth; // optional
+    	private int imageHeight; // optional
+    	private SortedSet<SportsEquipment> requiredEquipment; // optional
+    	private SortedSet<Muscle> activatedMuscles; // optional
+    	private Map<Muscle, ActivationLevel> activationMap; // optional
+    	private SortedSet<ExerciseTag> exerciseTag; // optional
+    	private List<URL> relatedURL; // optional
+    	private List<String> hints; // optional
+    	private File iconPath; // optional
+    	
+    	out.writeString(name);
+    	out.writeString(localizedName);
+    	
+    	out.writeBundle(translationMap);
+    	out.writeString(description);
+    	out.writeList(imagePaths);
+    	out.writeBundle(imageLicenseMap);
+    	out.writeInt(imageWidth);
+    	out.writeInt(imageHeight);
+    	out.writeS
+    	
+        out.writeLong(mId);
+        out.writeLong(mServerReportId);
+        out.writeLong(mReportId);
+        out.writeLong(mServerId);
+        out.writeInt(mSyncState.ordinal());
+        out.writeLong(mDate);
+        out.writeLong(mCreatedAt);
+        out.writeLong(mUpdatedAt);
+        out.writeString(mText);
+    }
+
+    /** Required for all parcable classes*/
+    /*public static final Parcelable.Creator<ExerciseType> CREATOR = new Parcelable.Creator<ExerciseType>() {
+        public ExerciseType createFromParcel(Parcel in) {
+        	ExerciseType r = new ExerciseType();
+
+            r.setId(in.readLong());
+            r.setServerReportId(in.readLong());
+            r.setReportId(in.readLong());
+            r.setServerId(in.readLong());
+            r.setSyncState(SyncState.byValue(in.readInt()));
+            r.setDate(in.readLong());
+            r.setCreatedAt(in.readLong());
+            r.setUpdatedAt(in.readLong());
+            r.setText(in.readString());
+
+            return r;
+        }
+
+        public ReportEntry[] newArray(int size) {
+            return new ReportEntry[size];
+        }
+    };*/
+
+
+}

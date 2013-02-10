@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General -->
+    <string name="app_name">Open Training</string>
+
+    <!-- MainActivity -->
+    <string name="create_workout">Create workout</string>
+    <string name="start_training">Start training</string>
+    <string name="manage_workouts">Manage workouts</string>
+    <string name="choose_workout">Choose a workout</string>
+    
+    
+    <!-- Disclaimer Dialog -->
+    <string name="disclaimer">This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    Especially NEVER train without professional help and consult a doctor before training.</string>
+    <string name="license">License</string>
+    <string name="accept">Accept</string>
+    <string name="not_accept">Do not accept</string>    
+    <string name="do_not_show_again">Do not show again.</string>        
+    
+
+    <!-- Exercise Detail -->
+    <string name="title_exercisetype_detail">ExerciseType Detail</string>
+    <string name="title_exercisetype_list">ExerciseTypes</string>
+    <!-- Exercise Detail Menu -->
+    <string name="add_exercise">Add exercise</string>
+    <string name="exercise">Exercise</string>
+    <string name="has_been_added">has been added</string>
+    <string name="show_workout">Show workout</string>
+    <string name="workout_empty">The Workout is empty.</string>
+
+    <!-- DialogWorkoutOverviewFragment -->
+    <string name="save_workout">Save workout</string>
+    <string name="add_more_exercises">Add more exercises</string>
+    <string name="discard">"Discard workout</string>
+    <string name="title_exercise_detail">Exercise Detail</string>
+    <string name="title_exercise_list">Exercise</string>
+    
+    
+    <!-- FExDetailFragment -->
+    <string name="no_entry_for_today">Click on \'+\' to add an entry</string>
+    <string name="license">License:</string>
+    <string name="old_entries">Click to view old entries</string>
+    <string name="add_entry">Add entry</string>
+    <string name="choose_subentry">Choose the entry you want to edit</string>
+    
+    
+    <!-- DialogFragmentAddEntry  -->
+    <string name="save_entry">Save</string>
+    <string name="discard_entry">"Discard</string>
+    
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="released_button_background">#33B5E5</color>
+    <color name="pressed_button_background">#3BA7FF</color>
+    <color name="button_color">#FFFFFF</color>
+    
+
+</resources>    
