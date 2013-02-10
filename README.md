@@ -26,18 +26,36 @@ License
 GPL 3
 Exercises are CC licensed(currently all CC-BY-SA)
 
-Exercises
----------
-The exercises currently are stored in the assets folder.
-
-For adding new exercises, fixing exercise errors and similar stuff there is another repository: https://github.com/chaosbastler/opentraining-exercises. This also contains the original files, my generated .svg files and some shell scripts.
-
-Changes of the repository opentraining-exercises should also be added to this repository before a new release.
-
 Translations
 ------------
 English, German.
 
-JUnit Tests
------------
-Can be found in this repository: https://github.com/chaosbastler/opentraining-test
+
+Building Open Training
+======================
+
+Requirements
+------------
+  * Git
+  * Eclipse with Android-SDK
+  
+Building with Eclipse
+--------------------- 
+
+#### 1. Clone repository
+
+#### 2. Add submodule
+    * git submodule init
+    * git submodule update
+
+#### 3. Change Eclipse workspace
+
+#### 4. Import 'app'
+    * File -> Import -> Existing Projects into Workspace
+
+#### 5. Import ActionBarSherlock
+    *File -> New -> Other -> Android Project from Existing Code
+    *Root Directory: choose ActionBarSherlock/library
+
+#### 6. Disable Lint für ActionBarSherlock
+    *Click right on project 'library' -> Properties -> Android Lint Preferences -> Ignore all
