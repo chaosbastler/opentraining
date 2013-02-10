@@ -256,6 +256,24 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	public String toString() {
 		return this.name;
 	}
+	
+	/**
+	 * Returns a String that represents this object.
+	 * Should only be used for debugging.
+	 * 
+	 * @return A String that represents this object.
+	 */
+	public String toDebugString(){
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("Name: " + name + "\n");
+		builder.append("Empty Rows: " + emptyRows + "\n");
+		for(FitnessExercise fEx:getFitnessExercises()){
+			builder.append("\n" + fEx.toDebugString());
+		}
+		
+		return builder.toString();
+	}
 
 	public void switchExercises(FitnessExercise first, FitnessExercise second) {
 		if (!this.fitnessExercises.contains(first) || !this.fitnessExercises.contains(second)) {

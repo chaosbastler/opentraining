@@ -52,7 +52,7 @@ public class FitnessExercise implements IExercise, Serializable{
 	 * For each day there is one TrainingEntry saved in this list. The order of
 	 * the list should be according to the dates of the entries.
 	 */
-	private ArrayList<TrainingEntry> trainingEntryList = new ArrayList<TrainingEntry>();
+	private ArrayList<TrainingEntry> mTrainingEntryList = new ArrayList<TrainingEntry>();
 
 	/**
 	 * Constructor of this class
@@ -90,13 +90,13 @@ public class FitnessExercise implements IExercise, Serializable{
 	 * @return A list with TrainingEntries
 	 */
 	public List<TrainingEntry> getTrainingEntryList() {
-		return trainingEntryList;
+		return mTrainingEntryList;
 	}
 
 	@SuppressWarnings("deprecation")
 	TrainingEntry addTrainingEntry(Date date) {
 		TrainingEntry entry = new TrainingEntry(date);
-		this.trainingEntryList.add(entry);
+		this.mTrainingEntryList.add(entry);
 		return entry;
 	}
 
@@ -108,7 +108,7 @@ public class FitnessExercise implements IExercise, Serializable{
 	 * @return true if successful, false otherwise
 	 */
 	public boolean removeTrainingEntry(TrainingEntry entry) {
-		return this.trainingEntryList.remove(entry);
+		return this.mTrainingEntryList.remove(entry);
 	}
 
 	/**
@@ -142,6 +142,28 @@ public class FitnessExercise implements IExercise, Serializable{
 	@Override
 	public String toString() {
 		return mCustomName;
+	}
+	
+	/**
+	 * Returns a String that represents this object.
+	 * Should only be used for debugging.
+	 * 
+	 * @return A String that represents this object.
+	 */
+	public String toDebugString(){
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("ExerciseType: " + mExerciseType + "\n");
+		builder.append("Custom name: " + mCustomName + "\n");
+		for(FSet set:mFSetList){
+			builder.append("\n FSet: " + set.toString());
+		}
+		for(TrainingEntry entry:mTrainingEntryList){
+			builder.append("\n TrainingEntry: " + entry.toDebugString());
+		}
+
+		
+		return builder.toString();
 	}
 
 	/**
@@ -277,5 +299,6 @@ public class FitnessExercise implements IExercise, Serializable{
 	public List<String> getHints() {
 		return this.mExerciseType.getHints();
 	}
+
 
 }

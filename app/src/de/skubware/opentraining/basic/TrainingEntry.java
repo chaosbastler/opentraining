@@ -134,4 +134,23 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 		return this.date.compareTo(another.date);
 	}
 
+	/**
+	 * Returns a String that represents this object.
+	 * Should only be used for debugging.
+	 * 
+	 * @return A String that represents this object.
+	 */
+	public String toDebugString(){
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("Date: " + date + "\n");
+		for(TrainingSubEntry entry:subEntryList){
+			builder.append("\n TrainingEntry: " + entry.toString());
+		}
+
+		
+		return builder.toString();
+	}
+
+
 }
