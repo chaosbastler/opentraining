@@ -100,7 +100,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 	private Integer catValue;
 
 	public WorkoutXMLParser() {
-		// Parser instanziieren
+		// IParser instanziieren
 		try {
 			SAXParserFactory fac = SAXParserFactory.newInstance();
 			parser = fac.newSAXParser();
@@ -245,8 +245,8 @@ public class WorkoutXMLParser extends DefaultHandler {
 			
 			
 			// now add TrainingEntrys
-			//List<TrainingEntry> originalList = fEx.getTrainingEntryList();
-			//originalList.addAll(this.trainingEntryList);
+			List<TrainingEntry> originalList = fEx.getTrainingEntryList();
+			originalList.addAll(this.trainingEntryList);
 
 			
 			this.fList.add(fEx);

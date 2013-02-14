@@ -1,0 +1,48 @@
+[ 
+ {
+   "de": { "name" : "Bauchmuskeln" },
+   "en": { "name" : "Abdominal muscle" }
+ },
+  
+ {
+   "de": { "name" : "Rückenmuskeln", "alternative_names": ["Rückenmuskel", "Rücken"] },
+   "en": { "name" : "Back muscle", "alternative_names": ["Back"]  }
+ },
+ 
+ {
+   "de": { "name" : "Bizeps" },
+   "en": { "name" : "Biceps" }
+ },
+    
+ {
+   "de": { "name" : "Brustmuskel" },
+   "en": { "name" : "Chest" }
+ },
+ 
+     
+ {
+   "de": { "name" : "Po" },
+   "en": { "name" : "Derriere" }
+ },
+ 
+ {
+   "de": { "name" : "Unterschenkelmuskel" },
+   "en": { "name" : "Lower leg" }
+ },
+    
+ {
+   "de": { "name" : "Schulter" },
+   "en": { "name" : "Shoulder" }
+ }, 
+ 
+ {
+   "de": { "name" : "Oberschenkelmuskel" },
+   "en": { "name" : "Thigh" }
+ },   
+ 
+ {
+   "de": { "name" : "Trizeps" },
+   "en": { "name" : "Triceps", "alternative_names": ["Triceps muscle"]  }
+ }
+    
+]

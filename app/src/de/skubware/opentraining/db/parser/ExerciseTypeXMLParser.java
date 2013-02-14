@@ -26,9 +26,12 @@ import javax.xml.parsers.*;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
+import android.content.Context;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -52,6 +55,8 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	private static final String TAG = "ExTypeXMLParser";
 
 	private SAXParser parser = null;
+	
+	private Context mContext;
 
 	private ExerciseType exType;
 	// required argument
@@ -70,7 +75,8 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	private List<String> hints = new ArrayList<String>();
 	private File iconPath = null;
 
-	public ExerciseTypeXMLParser() {
+	public ExerciseTypeXMLParser(Context context) {
+		mContext = context;
 		// create parser
 		try {
 			SAXParserFactory fac = SAXParserFactory.newInstance();
@@ -172,7 +178,8 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 		if (qname.equals("Muscle")) {
 			Muscle muscle = null;
 			try{
-				muscle = Muscle.getByName(attributes.getValue("name"));
+				IDataProvider dataProvider = new DataProvider(mContext);
+				muscle = dataProvider.getMuscleByName(attributes.getValue("name"));
 			}catch(IllegalArgumentException illEx){
 				Log.e(TAG, "The Muscle: " + attributes.getValue("name") + " couldn't be found. Ex: " + this.name);
 			}

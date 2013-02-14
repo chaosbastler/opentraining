@@ -22,9 +22,13 @@
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 import android.util.Log;
@@ -41,93 +45,60 @@ public class Muscle implements Comparable<Muscle>, Serializable {
 	private static final long serialVersionUID = 1L;	
 	
 	/** Tag for logging */
-	private static final String TAG = Muscle.class.getName();
-
+	private static final String TAG = "Muscle";
 
 	/**
 	 * Map that connects names and Muscle objects.
-	 * 
-	 * Reason: there may be alternative names
 	 */
-	private static Map<String, Muscle> nameMap = new HashMap<String, Muscle>();
+	private Map<Locale, Set<String>> nameMap = new HashMap<Locale, Set<String>>();
 
-	/** The name of the Muscle */
+	/** The (primary) name of the Muscle */
 	private String name;
 
 	/**
-	 * The Constructor
 	 * 
-	 * @param name
-	 *            The name of the Muscle, names can be used only once
+	 * 
+	 * @param locale
+	 * @param nameList The list with the primary name and the alternative names. The first name of the list will be the primary name.
 	 */
-	private Muscle(String name) {
-		if(nameMap.containsKey(name))
-			throw new AssertionError("Names cannot be used twice.");
+	public Muscle(Locale locale, List<String> nameList) {
+		this.addNames(locale, nameList);
+		name = nameList.get(0);
+	}
+
+
+	public void addNames(Locale locale, String ... names){
+		if(nameMap.get(locale) == null){
+			Set<String> nameSet = new HashSet<String>();
+			nameMap.put(locale, nameSet);
+		}
 		
-		this.name = name;
-		nameMap.put(name, this);
-		nameMap.put(name.toLowerCase(Locale.GERMANY), this);
+		Locale userLocale = Locale.getDefault();
+		if(locale.getLanguage().equals(userLocale.getLanguage())){
+			this.name = names[0];
+		}
+		
+		Set<String> nameSet = nameMap.get(locale);
+		for(String name:names){
+			nameSet.add(name);
+			nameSet.add(name.toLowerCase(Locale.GERMANY));
+		}
+		
 	}
-
-	/**
-	 * Adds an alternative name to the Muscle.
-	 * 
-	 * @param altName
-	 *            The new alternative name.
-	 */
-	public void provideAlternativeName(String altName) {
-		if (altName.equals(this.toString()))
-			return;
-
-		if (nameMap.containsKey(altName)) {
-			Log.w(TAG, "Warning: " + altName + " is already connected with " + nameMap.get(altName).toString() + ". Will now be connected to " + this.name);
-		}
-		nameMap.put(altName, this);
-		nameMap.put(altName.toLowerCase(Locale.GERMANY), this);
+	
+	public void addNames(Locale locale, List<String> nameList){
+		this.addNames(locale, nameList.toArray(new String[nameList.size()]));
 	}
-
-	/**
-	 * Sets the String that is returned by toString().
-	 * 
-	 * @param localizedSting
-	 *            The localized String
-	 */
-	/*public static void localize(Context context) {
-		nameMap = new HashMap<String, Muscle>();
-		localized = true;
-
-		int language = 0;
-		if (Locale.getDefault().equals(Locale.GERMANY)) {
-			language = 1;
-		}
-
-		String[][] arr = new String[13][];
-		arr[0] = context.getResources().getStringArray(R.array.Chest);
-		arr[1] = context.getResources().getStringArray(R.array.Abdominal);
-		arr[2] = context.getResources().getStringArray(R.array.Back);
-		arr[3] = context.getResources().getStringArray(R.array.Derriere);
-		arr[4] = context.getResources().getStringArray(R.array.Shoulder);
-		arr[5] = context.getResources().getStringArray(R.array.Biceps);
-		arr[6] = context.getResources().getStringArray(R.array.Triceps);
-		arr[7] = context.getResources().getStringArray(R.array.Thigh);
-		arr[8] = context.getResources().getStringArray(R.array.Lower_leg);
-
-		for (String[] mus : arr) {
-			if (mus == null)
-				continue;
-
-			Muscle m;
-			if (mus.length >= language)
-				m = getByName(mus[language]);
-			else
-				m = getByName(mus[0]);
-			for (String s : mus) {
-				m.provideAlternativeName(s);
-			}
+	
+	public boolean isAlternativeName(String name){
+		for(Locale locale:nameMap.keySet()){
+			if(nameMap.get(locale).contains(name))
+				return true;
 
 		}
-
-	}*/
+		
+		return false;
+	}
 
 	/**
 	 * Returns the localized name.
@@ -136,30 +107,28 @@ public class Muscle implements Comparable<Muscle>, Serializable {
 	public String toString(){
 		return name;
 	}
-
+	
 	/**
-	 * Static factory method. Objects will only be created once, after that old
-	 * objects will be reused.
+	 * Returns a String that represents this object.
+	 * Should only be used for debugging.
 	 * 
-	 * @param toolName
-	 *            The name of the Muscle
-	 * 
-	 * @return The Muscle
+	 * @return A String that represents this object.
 	 */
-	public static Muscle getByName(String toolName) {
-		Muscle m = nameMap.get(toolName);
-		if (m == null) {
-			m = new Muscle(toolName);
-			nameMap.put(toolName, m);
-			Log.d(TAG, "Created new Muscle: " + toolName);
+	public String toDebugString(){
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("Primary name: " + name+ "\n");
+		for(Locale locale:nameMap.keySet()){
+			builder.append("\n Locale/language: " + locale.getLanguage().toString());
+			for(String name:nameMap.get(locale)){
+				builder.append("\n  - " + name);
+			}
 		}
-		return m;
 
+		
+		return builder.toString();
 	}
-
-	public static Iterable<Muscle> values() {
-		return new TreeSet<Muscle>(Muscle.nameMap.values());
-	}
+	
 
 	@Override
 	public int compareTo(Muscle eq) {

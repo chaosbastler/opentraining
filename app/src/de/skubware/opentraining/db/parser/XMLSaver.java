@@ -109,7 +109,7 @@ public class XMLSaver {
 					fE.appendChild(fSetE);
 				}
 
-				/*for (TrainingEntry entry : fEx.getTrainingEntryList()) {
+				for (TrainingEntry entry : fEx.getTrainingEntryList()) {
 					Element entryE = doc.createElement("TrainingEntry");
 					
 					// save date
@@ -129,8 +129,8 @@ public class XMLSaver {
 
 					// append TrainingEntry
 					fE.appendChild(entryE);
-				}*/
-
+				}
+				
 				wE.appendChild(fE);
 			}
 

@@ -31,8 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
+import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.parser.ExerciseTypeXMLParser;
+import de.skubware.opentraining.db.parser.MuscleJSONParser;
+import de.skubware.opentraining.db.parser.IParser;
 import de.skubware.opentraining.db.parser.WorkoutXMLParser;
 import de.skubware.opentraining.db.parser.XMLSaver;
 import android.content.Context;
@@ -47,7 +50,7 @@ import android.util.Log;
  */
 public class DataProvider implements IDataProvider {
 	/** Tag for logging */
-	public static final String TAG = DataProvider.class.getName();
+	public static final String TAG = "DataProvider";
 
 	private Context mContext;
 
@@ -79,12 +82,12 @@ public class DataProvider implements IDataProvider {
 		List<ExerciseType> list = new ArrayList<ExerciseType>();
 
 		try {
-			String[] files = mContext.getAssets().list(EXERCISE_FOLDER);
+			String[] files = mContext.getAssets().list(IDataProvider.EXERCISE_FOLDER);
 
 			for (String f : files) {
 				if (f.endsWith(".xml")) {
-					ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser();
-					ExerciseType ex = parser.read(mContext.getAssets().open("opentraining-exercises/" + f));
+					ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
+					ExerciseType ex = parser.read(mContext.getAssets().open(IDataProvider.EXERCISE_FOLDER + "/" + f));
 					list.add(ex);
 				}
 			}
@@ -113,6 +116,32 @@ public class DataProvider implements IDataProvider {
 	@Override
 	public boolean exerciseExists(String name) {
 		return getExerciseByName(name) != null;
+	}
+	
+	//TODO cache muscles
+	@Override
+	public List<Muscle> getMuscles(){
+		List<Muscle> list = new ArrayList<Muscle>();
+
+		try {
+			IParser<List<Muscle>> muscleParser = new MuscleJSONParser();
+			list = muscleParser.parse(mContext.getAssets().open(IDataProvider.MUSCLE_FOLDER + "/muscles.json"));
+		} catch (IOException ioEx) {
+			Log.e(TAG, "Error during parsing muscles.", ioEx);
+		}
+
+		return list;
+
+	}
+	
+	@Override
+	public Muscle getMuscleByName(String name) {
+		for(Muscle m:getMuscles()){
+			if(m.isAlternativeName(name))
+				return m;
+		}
+
+		return null;
 	}
 
 	@Override

@@ -24,6 +24,7 @@ import java.util.List;
 
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
+import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.Workout;
 
 /**
@@ -35,6 +36,9 @@ import de.skubware.opentraining.basic.Workout;
 public interface IDataProvider {
 	/** The name of the folder that contains exercises .xml files and images */
 	static public final String EXERCISE_FOLDER = "opentraining-exercises";
+	
+	/** The name of the folder that contains muscle .xml files (and perhaps images) */
+	static public final String MUSCLE_FOLDER = "muscles";
 		
 	/**
 	 * Lists all {@link ExerciseType}s
@@ -70,6 +74,22 @@ public interface IDataProvider {
 	 */
 	public boolean exerciseExists(String name);
 	
+	/**
+	 * Lists all {@link Muscle}s
+	 * 
+	 * @return All {@link Muscle}s
+	 */
+	List<Muscle> getMuscles();
+
+	/**
+	 * Tries to find and return the {@link Muscle} with the name.
+	 *
+	 * @param name The name of the {@link Muscle} to look for
+	 *
+	 * @return An {@link Muscle} with the name or null.
+	 */
+	public Muscle getMuscleByName(String name);
+	
 
 	/**
 	 * Lists all {@link Workout}s
@@ -86,5 +106,6 @@ public interface IDataProvider {
 	 * @return true if successful
 	 */
 	public boolean saveWorkout(Workout w);
+
 
 }
