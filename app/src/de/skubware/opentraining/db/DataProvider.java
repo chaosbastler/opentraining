@@ -121,6 +121,18 @@ public class DataProvider implements IDataProvider {
 	//TODO cache muscles
 	@Override
 	public List<Muscle> getMuscles(){
+		if(Cache.INSTANCE.getMuscles() == null)
+			Cache.INSTANCE.updateCache(mContext);
+		
+		return Cache.INSTANCE.getMuscles();
+	}
+	
+	/**
+	 * Loads the {@link Muscle}s from the filesytem.
+	 * 
+	 * @return The loaded {@link Muscle}s
+	 */
+	List<Muscle> loadMuscles(){
 		List<Muscle> list = new ArrayList<Muscle>();
 
 		try {
