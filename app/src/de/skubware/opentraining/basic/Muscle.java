@@ -22,16 +22,12 @@
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
-
-import android.util.Log;
 
 /**
  * An enumeration like class for the different muscles of a men(or women).
@@ -45,6 +41,7 @@ public class Muscle implements Comparable<Muscle>, Serializable {
 	private static final long serialVersionUID = 1L;	
 	
 	/** Tag for logging */
+	@SuppressWarnings("unused")
 	private static final String TAG = "Muscle";
 
 	/**

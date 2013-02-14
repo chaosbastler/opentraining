@@ -36,11 +36,9 @@ import de.skubware.opentraining.db.DataProvider;
 public class XMLParserTest extends AndroidTestCase {
 	
 	final String EXERCISE_NAME = "exercise";
-	final String MUSCLE_NAME = "test muscle!";
-
 
 	
-	public void testParseMuscleXML(){
+	public void testParseMuscleJSON(){
 		DataProvider dataProvider = new DataProvider(getContext());
 		List<Muscle> muscleList = dataProvider.getMuscles();
 		assertFalse(muscleList.isEmpty());
