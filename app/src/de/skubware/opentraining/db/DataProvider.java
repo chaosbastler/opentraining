@@ -33,7 +33,6 @@ import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
-import de.skubware.opentraining.basic.Translatable;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.parser.ExerciseTypeXMLParser;
 import de.skubware.opentraining.db.parser.IParser;
@@ -46,7 +45,7 @@ import android.content.res.Resources;
 import android.util.Log;
 
 /**
- * Implementation of {@link IDataProvider}. TODO implement caching
+ * Implementation of {@link IDataProvider}.
  * 
  * @author Christian Skubich
  * 
@@ -188,7 +187,7 @@ public class DataProvider implements IDataProvider {
 	
 	@Override
 	public SportsEquipment getEquipmentByName(String name) {
-		for(SportsEquipment m:loadEquipment()){
+		for(SportsEquipment m:getEquipment()){
 			if(m.isAlternativeName(name))
 				return m;
 		}
