@@ -28,15 +28,29 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-
-public class Translatable implements Comparable<Translatable>, Serializable {
+/**
+ * A class that makes (dynamic) translation easier. The Android I18N mechanism
+ * only supports translation at compile time, this class supports translating at
+ * runtime.
+ * 
+ * Furthermore it is possible to define synonyms. These alternative names and
+ * translations can be used to improve searching: It does not matter if the user
+ * searches for "Übungsmatte", "Gymnastikmatte" or "Exercise Mat".
+ * 
+ * Another advantage of using this translation mechanism is, that it will be
+ * much easier to use the database(exercises, muscles, equipment, ...) for other
+ * projects, e.g. an iOS app or a web application. Therefore translations are in
+ * XML or JSON format.
+ * 
+ * @author Christian Skubich
+ * 
+ */
+public abstract class Translatable implements Comparable<Translatable>, Serializable {
 
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
 	
-	/**
-	 * Map that connects names and Muscle objects.
-	 */
+	/** Map that stores the primary name and alternative names for each Locale. */
 	private Map<Locale, Set<String>> nameMap = new HashMap<Locale, Set<String>>();
 	
 	/** The (primary) name of the Muscle */
@@ -45,13 +59,27 @@ public class Translatable implements Comparable<Translatable>, Serializable {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param locale The Locale of the names.
-	 * @param nameList The list with the primary name and the alternative names. The first name of the list will be the primary name.
+	 * @param locale
+	 *            The Locale of the names.
+	 * @param nameList
+	 *            The list with the primary name and the alternative names. The
+	 *            first name of the list will be the primary name.
 	 */
 	public Translatable(Locale locale, List<String> nameList) {
 		this.addNames(locale, nameList);
 		name = nameList.get(0);
 	}
+	
+	/**
+	 * Adds the names to the list of alternative names. First name will be the
+	 * primary name for this locale.
+	 * 
+	 * @param locale
+	 *            The Locale of the names.
+	 * @param names
+	 *            The list with the primary name and the alternative names. The
+	 *            first name of the list will be the primary name.
+	 */
 	public void addNames(Locale locale, String ... names) {
 		if(nameMap.get(locale) == null){
 			Set<String> nameSet = new HashSet<String>();
@@ -71,6 +99,9 @@ public class Translatable implements Comparable<Translatable>, Serializable {
 		
 	}
 
+	/**
+	 * @see #addNames(Locale, String...)
+	 */
 	public void addNames(Locale locale, List<String> nameList) {
 		this.addNames(locale, nameList.toArray(new String[nameList.size()]));
 	}
@@ -87,6 +118,8 @@ public class Translatable implements Comparable<Translatable>, Serializable {
 
 	/**
 	 * Returns the (localized) name.
+	 * 
+	 * @return The (localized) name of this object.
 	 */
 	@Override
 	public String toString() {
@@ -114,11 +147,25 @@ public class Translatable implements Comparable<Translatable>, Serializable {
 		return builder.toString();
 	}
 
+	/**
+	 * Two {@link Translatable}s are compared by comparing the result of
+	 * toString().
+	 * 
+	 * @param t
+	 *            The object that should be compared
+	 */
 	@Override
 	public int compareTo(Translatable t) {
 		return this.toString().compareTo(t.toString());
 	}
 
+	/**
+	 * Two {@link Translatable}s are considered equal, if their toString()
+	 * returns the same String.
+	 * 
+	 * @param t
+	 *            The object that should be compared
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (!( Translatable.class.isAssignableFrom(o.getClass())))
