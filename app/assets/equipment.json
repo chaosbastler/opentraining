@@ -1,0 +1,82 @@
+[ 
+ {
+   "de": { "name" : "Keine"},
+   "en": { "name" : "None" }
+ },
+ 
+ {
+   "de": { "name" : "Langhantel"},
+   "en": { "name" : "Barbell" }
+ },
+
+ {
+   "de": { "name" : "Kurzhantel"},
+   "en": { "name" : "Dumbbell" }
+ },
+    
+ {
+   "de": { "name" : "SZ Stange"},
+   "en": { "name" : "S-Z Curl Bar" }
+ },
+    
+ {
+   "de": { "name" : "Curlpult"},
+   "en": { "name" : "Arm Curl Pad" }
+ },
+     
+ {
+   "de": { "name" : "Übungsmatte", "alternative_names": ["Gymnastikmatte"] },
+   "en": { "name" : "Exercise Mat" }
+ },
+        
+ {
+   "de": { "name" : "Swissball" },
+   "en": { "name" : "Swiss Ball"}
+ },
+ 
+ {
+   "de": { "name" : "Klimmzugsstange", "alternative_names": ["Klimmzugs Stange", "Klimmzug Stange"] },
+   "en": { "name" : "Pull-Up Bar"}
+ },
+     
+ {
+   "de": { "name" : "Hantelscheibe", "alternative_names": ["Gewichtsscheibe"] },
+   "en": { "name" : "Plate", "alternative_names": ["Plates"] }
+ },
+ 
+ {
+   "de": { "name" : "Trainingsbank", "alternative_names": ["Hantelbank"] },
+   "en": { "name" : "Bench" }
+ },
+ 
+ {
+   "de": { "name" : "Beinpresse"},
+   "en": { "name" : "Leg Press" }
+ },
+  
+ {
+   "de": { "name" : "Fingertrainer" },
+   "en": { "name" : "Hand Strengtheners" }
+ },
+
+ {
+   "de": { "name" : "Dip Barren" },
+   "en": { "name" : "Dip Stands" }
+ },
+ 
+ {
+   "de": { "name" : "Rudergerät" },
+   "en": { "name" : "Rowing Machine" }
+ },
+  
+ {
+   "de": { "name" : "Kabelzug", "alternative_names": ["Lat"]},
+   "en": { "name" : "Latissimus" }
+ },
+ 
+ {
+   "de": { "name" : "Medizinball"},
+   "en": { "name" : "Medicine Ball" }
+ }
+ 
+]

@@ -32,10 +32,13 @@ import java.util.List;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.basic.SportsEquipment;
+import de.skubware.opentraining.basic.Translatable;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.parser.ExerciseTypeXMLParser;
-import de.skubware.opentraining.db.parser.MuscleJSONParser;
 import de.skubware.opentraining.db.parser.IParser;
+import de.skubware.opentraining.db.parser.MuscleJSONParser;
+import de.skubware.opentraining.db.parser.SportsEquipmentJSONParser;
 import de.skubware.opentraining.db.parser.WorkoutXMLParser;
 import de.skubware.opentraining.db.parser.XMLSaver;
 import android.content.Context;
@@ -118,7 +121,6 @@ public class DataProvider implements IDataProvider {
 		return getExerciseByName(name) != null;
 	}
 	
-	//TODO cache muscles
 	@Override
 	public List<Muscle> getMuscles(){
 		if(Cache.INSTANCE.getMuscles() == null)
@@ -137,7 +139,7 @@ public class DataProvider implements IDataProvider {
 
 		try {
 			IParser<List<Muscle>> muscleParser = new MuscleJSONParser();
-			list = muscleParser.parse(mContext.getAssets().open(IDataProvider.MUSCLE_FOLDER + "/muscles.json"));
+			list = muscleParser.parse(mContext.getAssets().open(IDataProvider.MUSCLE_FILE));
 		} catch (IOException ioEx) {
 			Log.e(TAG, "Error during parsing muscles.", ioEx);
 		}
@@ -155,6 +157,48 @@ public class DataProvider implements IDataProvider {
 
 		return null;
 	}
+	
+	
+	@Override
+	public List<SportsEquipment> getEquipment(){
+		if(Cache.INSTANCE.getMuscles() == null)
+			Cache.INSTANCE.updateCache(mContext);
+		
+		return Cache.INSTANCE.getEquipment();
+	}
+	
+	/**
+	 * Loads the {@link Muscle}s from the filesytem.
+	 * 
+	 * @return The loaded {@link Muscle}s
+	 */
+	List<SportsEquipment> loadEquipment(){
+		List<SportsEquipment> list = new ArrayList<SportsEquipment>();
+
+		try {
+			IParser<List<SportsEquipment>> equipmentParser = new SportsEquipmentJSONParser();
+			list = equipmentParser.parse(mContext.getAssets().open(IDataProvider.EQUIPMENT_FILE));
+		} catch (IOException ioEx) {
+			Log.e(TAG, "Error during parsing muscles.", ioEx);
+		}
+
+		return list;
+
+	}
+	
+	@Override
+	public SportsEquipment getEquipmentByName(String name) {
+		for(SportsEquipment m:loadEquipment()){
+			if(m.isAlternativeName(name))
+				return m;
+		}
+
+		return null;
+	}
+	
+	
+	
+	
 
 	@Override
 	public List<Workout> getWorkouts() {

@@ -6,6 +6,7 @@ import android.content.Context;
 
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.basic.SportsEquipment;
 
 /**
  * Singleton Cache for {@link ExerciseType}s.
@@ -23,7 +24,7 @@ public enum Cache {
 	
 	private List<ExerciseType> mExerciseList = null;
 	private List<Muscle> mMuscleList = null;
-
+	private List<SportsEquipment> mSportsEquipmentList = null;
 	
 	/**
 	 * Refreshes the cached data.
@@ -33,6 +34,7 @@ public enum Cache {
 	public void updateCache(Context mContext){
 		DataProvider dataProvider = new DataProvider(mContext);
 		mMuscleList = dataProvider.loadMuscles();
+		mSportsEquipmentList = dataProvider.loadEquipment();
 		mExerciseList = dataProvider.loadExercises();
 	}
 	
@@ -48,4 +50,9 @@ public enum Cache {
 	public List<Muscle> getMuscles(){
 		return mMuscleList;
 	}
+	
+	public List<SportsEquipment> getEquipment(){
+		return mSportsEquipmentList;
+	}
+	
 }

@@ -25,6 +25,7 @@ import java.util.List;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
 
 /**
@@ -37,9 +38,13 @@ public interface IDataProvider {
 	/** The name of the folder that contains exercises .xml files and images */
 	static public final String EXERCISE_FOLDER = "opentraining-exercises";
 	
-	/** The name of the folder that contains muscle .xml files (and perhaps images) */
-	static public final String MUSCLE_FOLDER = "muscles";
+	/** The JSON file that contains the {@link Muscle}s */
+	static public final String MUSCLE_FILE = "muscles.json";
+	
+	/** The JSON file that contains the {@link SportsEquipment} */
+	static public final String EQUIPMENT_FILE = "equipment.json";
 		
+	
 	/**
 	 * Lists all {@link ExerciseType}s
 	 * 
@@ -79,7 +84,8 @@ public interface IDataProvider {
 	 * 
 	 * @return All {@link Muscle}s
 	 */
-	List<Muscle> getMuscles();
+	public List<Muscle> getMuscles();
+	
 
 	/**
 	 * Tries to find and return the {@link Muscle} with the name.
@@ -89,8 +95,24 @@ public interface IDataProvider {
 	 * @return An {@link Muscle} with the name or null.
 	 */
 	public Muscle getMuscleByName(String name);
-	
 
+	/**
+	 * Tries to find and return the {@link SportsEquipment} with the name.
+	 *
+	 * @param name The name of the {@link SportsEquipment} to look for
+	 *
+	 * @return An {@link SportsEquipment} with the name or null.
+	 */
+	public SportsEquipment getEquipmentByName(String name);
+	
+	/**
+	 * Lists all {@link SportsEquipment}s
+	 * 
+	 * @return All {@link SportsEquipment}s
+	 */
+	public List<SportsEquipment> getEquipment();
+
+	
 	/**
 	 * Lists all {@link Workout}s
 	 * 

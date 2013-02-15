@@ -225,12 +225,12 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		// this copy is necessary, because builder.neededTools may be a
 		// unmodifiable collection
 		TreeSet<SportsEquipment> tools = new TreeSet<SportsEquipment>(builder.neededTools);
-		if (tools.size() > 1) {
+		/*if (tools.size() > 1) {
 			tools.remove(SportsEquipment.getByName("None"));
 		}
 		if (tools.size() == 0) {
 			tools.add(SportsEquipment.getByName("None"));
-		}
+		}*/
 		this.requiredEquipment = tools;
 
 		// activationMap and activatedMuscles must be in sync

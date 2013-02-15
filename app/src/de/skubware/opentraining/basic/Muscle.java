@@ -22,21 +22,14 @@
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 /**
- * An enumeration like class for the different muscles of a men(or women).
- * 
- * 
- * @author Christian Skubich
  * 
  */
-public class Muscle implements Comparable<Muscle>, Serializable {
+public class Muscle extends Translatable{
+	
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;	
 	
@@ -44,100 +37,10 @@ public class Muscle implements Comparable<Muscle>, Serializable {
 	@SuppressWarnings("unused")
 	private static final String TAG = "Muscle";
 
-	/**
-	 * Map that connects names and Muscle objects.
-	 */
-	private Map<Locale, Set<String>> nameMap = new HashMap<Locale, Set<String>>();
-
-	/** The (primary) name of the Muscle */
-	private String name;
-
-	/**
-	 * 
-	 * 
-	 * @param locale
-	 * @param nameList The list with the primary name and the alternative names. The first name of the list will be the primary name.
-	 */
+	
 	public Muscle(Locale locale, List<String> nameList) {
-		this.addNames(locale, nameList);
-		name = nameList.get(0);
+		super(locale, nameList);
 	}
 
-
-	public void addNames(Locale locale, String ... names){
-		if(nameMap.get(locale) == null){
-			Set<String> nameSet = new HashSet<String>();
-			nameMap.put(locale, nameSet);
-		}
-		
-		Locale userLocale = Locale.getDefault();
-		if(locale.getLanguage().equals(userLocale.getLanguage())){
-			this.name = names[0];
-		}
-		
-		Set<String> nameSet = nameMap.get(locale);
-		for(String name:names){
-			nameSet.add(name);
-			nameSet.add(name.toLowerCase(Locale.GERMANY));
-		}
-		
-	}
-	
-	public void addNames(Locale locale, List<String> nameList){
-		this.addNames(locale, nameList.toArray(new String[nameList.size()]));
-	}
-	
-	public boolean isAlternativeName(String name){
-		for(Locale locale:nameMap.keySet()){
-			if(nameMap.get(locale).contains(name))
-				return true;
-
-		}
-		
-		return false;
-	}
-
-	/**
-	 * Returns the localized name.
-	 */
-	@Override
-	public String toString(){
-		return name;
-	}
-	
-	/**
-	 * Returns a String that represents this object.
-	 * Should only be used for debugging.
-	 * 
-	 * @return A String that represents this object.
-	 */
-	public String toDebugString(){
-		StringBuilder builder = new StringBuilder();
-		
-		builder.append("Primary name: " + name+ "\n");
-		for(Locale locale:nameMap.keySet()){
-			builder.append("\n Locale/language: " + locale.getLanguage().toString());
-			for(String name:nameMap.get(locale)){
-				builder.append("\n  - " + name);
-			}
-		}
-
-		
-		return builder.toString();
-	}
-	
-
-	@Override
-	public int compareTo(Muscle eq) {
-		return this.toString().compareTo(eq.toString());
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (!(o instanceof Muscle))
-			return false;
-
-		return ((Muscle) o).toString().equals(this.toString());
-	}
 
 }

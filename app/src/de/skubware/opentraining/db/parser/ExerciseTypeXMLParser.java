@@ -169,7 +169,8 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 			this.translationMap.put(new Locale(language), translatedname);
 		}
 		if (qname.equals("SportsEquipment")) {
-			SportsEquipment eq = SportsEquipment.getByName(attributes.getValue("name"));
+			IDataProvider dataProvider = new DataProvider(mContext);
+			SportsEquipment eq = dataProvider.getEquipmentByName(attributes.getValue("name"));
 			if (eq == null) {
 				Log.e(TAG, "The SportsEquipment: " + attributes.getValue("name") + " couldn't be found.");
 			}
