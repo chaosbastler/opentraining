@@ -15,7 +15,7 @@
    id="svg6588"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="logo.svg"
+   sodipodi:docname="logo_large.svg"
    inkscape:export-filename="/home/christian/Dokumente/Code/workspace/OpenTraining/svg/feature_logo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -651,9 +651,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49"
-     inkscape:cx="199.75977"
-     inkscape:cy="52.781715"
+     inkscape:zoom="0.98"
+     inkscape:cx="353.05736"
+     inkscape:cy="104.16157"
      inkscape:current-layer="layer1"
      inkscape:document-units="px"
      showgrid="false"
@@ -701,7 +701,7 @@
      inkscape:groupmode="layer"
      transform="translate(-640.93542,-499.4375)">
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none"
+       style="fill:#000000;fill-opacity:1;stroke:none;opacity:0"
        id="rect3065"
        width="1024"
        height="344.89795"
