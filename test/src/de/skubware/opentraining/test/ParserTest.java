@@ -31,7 +31,7 @@ import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
 /**
- * Tests for the Parsers for {@link Muscle}, {@link SportsEquipment} and {@link ExerciseType}.
+ * Tests for the Parsers for {@link Muscle}, {@link SportsEquipment}, {@link ExerciseType} and {@link Workout}.
  *
  * @author Christian Skubich
  *
@@ -40,10 +40,9 @@ public class ParserTest extends AndroidTestCase {
 
 	final String WORKOUT_NAME = "TEST_woRkout!=0";
 	
-	final String EXERCISE_NAME_1 = "First exercise";
-	final String EXERCISE_NAME_2 = "2. exercise";
+	final String EXERCISE_NAME_1 = "Curl";
+	final String EXERCISE_NAME_2 = "Crunch";
 
-	
 	
 	
 	public void testParseMuscleJSON(){
