@@ -2,6 +2,8 @@ app/assets/opentraining-exercises/clone.sh
 app/assets/opentraining-exercises/list_files.php
 app/bin/
 app/gen/
+test/bin/
+test/gen/
 .metadata
 
 app/svg/old/

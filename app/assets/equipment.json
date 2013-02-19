@@ -50,6 +50,11 @@
  },
  
  {
+   "de": { "name" : "Sit-Up Bank", "alternative_names": ["Sit Up Bank"] },
+   "en": { "name" : "Sit Up Bench" }
+ },
+ 
+ {
    "de": { "name" : "Beinpresse"},
    "en": { "name" : "Leg Press" }
  },
@@ -77,6 +82,12 @@
  {
    "de": { "name" : "Medizinball"},
    "en": { "name" : "Medicine Ball" }
+ },
+ 
+ {
+   "de": { "name" : "Rückenstrecker", "alternative_names": ["Hyperextension Bank"]  },
+   "en": { "name" : "Hyperextension Bench", "alternative_names": ["Hyperextensions Bench"] }
  }
+ 
  
 ]
