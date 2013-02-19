@@ -28,7 +28,7 @@ import android.util.Log;
 
 /**
  * This class represents a single workout. A workout needs a name and consists
- * out of more than one {@code FitnessExercises}.
+ * out of more than one {@code FitnessExercise}s.
  * 
  * It is possible to iterate through the {@code FitnessExercises} and to add new
  * ones.

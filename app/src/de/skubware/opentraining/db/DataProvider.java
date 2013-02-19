@@ -28,6 +28,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
@@ -93,6 +94,8 @@ public class DataProvider implements IDataProvider {
 					list.add(ex);
 				}
 			}
+			
+			Collections.sort(list);
 		} catch (IOException ioEx) {
 			Log.e(TAG, "Error during parsing exercises.", ioEx);
 		}
