@@ -41,6 +41,19 @@
     <string name="title_exercise_detail">Übungsdetails</string>
     <string name="title_exercise_list">Übungen</string>
     
+    <!-- DialogSaveWorkoutFragment -->
+    <string name="workout_name_hint">Workout Namen eingeben</string>
+    <string name="some_suggestions">Namensvorschläge:</string>
+    <string name="monday">Montag</string>
+    <string name="tuesday">Dienstag</string>
+    <string name="wednesday">Mittwoch</string>
+    <string name="thursday">Donnerstag</string>
+    <string name="friday">Freitag</string>
+    <string name="saturday">Samstag</string>
+    <string name="sunday">Sonntag</string>
+    <string name="workout">Workout</string>
+    <string name="workout_already_exists">Es gibt bereits ein Workout mit diesem Namen.</string>
+    
     
     <!-- FExDetailFragment -->
     <string name="no_entry_for_today">Klicke auf \'+\' um einen Eintrag hinzuzufügen</string>

@@ -32,8 +32,6 @@ import android.widget.ListView;
 
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.DataProvider;
-import de.skubware.opentraining.db.IDataProvider;
 
 /**
  * A list fragment representing a list of Exercise. This fragment also supports

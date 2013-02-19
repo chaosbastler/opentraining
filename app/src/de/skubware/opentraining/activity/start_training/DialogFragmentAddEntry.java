@@ -32,10 +32,12 @@ import de.skubware.opentraining.basic.TrainingSubEntry;
 import de.skubware.opentraining.basic.Workout;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 /**
@@ -122,9 +124,9 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 						}
 						
 						FExDetailFragment fragment = (FExDetailFragment) getFragmentManager().findFragmentById(R.id.exercise_detail_container);
-						((Callbacks) getActivity()).onEntryEdited(mFex);
 						fragment.onEntryEdited(mFex);
 						
+						hideKeyboard(edittext_training_entry);
 						dialog.dismiss();
 					}
 				}).setNegativeButton(getString(R.string.discard_entry), new DialogInterface.OnClickListener() {
@@ -136,9 +138,20 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 							mLatestTrainingEntry.remove(mSubEntry);
 						}
 						
+						hideKeyboard(edittext_training_entry);
 						dialog.dismiss();
 					}
 				}).create();
+	}
+	
+	/**
+	 * Hides the keyboard.
+	 * 
+	 * @param edittext_training_entry The EditText.
+	 */
+	private void hideKeyboard(EditText edittext_training_entry) {
+		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(edittext_training_entry.getWindowToken(), 0);
 	}
 
 }

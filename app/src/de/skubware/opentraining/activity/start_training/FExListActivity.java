@@ -94,7 +94,6 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 		
 		}
 
-		// TODO: If exposing deep links into your app, handle intents here.
 	}
 
 	
@@ -147,8 +146,18 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 		if (requestCode == RESULT_WORKOUT) {
 			if (resultCode == RESULT_OK) {
 				// Workout has been changed, so update data
-				Log.v(TAG, "updating Workout of FExListActivity"); 
 				mWorkout = (Workout) data.getSerializableExtra(FExListActivity.ARG_WORKOUT);
+				Log.v(TAG, "updating Workout of FExListActivity:\n" + mWorkout.toDebugString());
+				
+				// update in fragment too
+				FExListFragment fragment = (FExListFragment) getSupportFragmentManager().findFragmentById(R.id.exercise_list);
+				if(fragment != null){
+					Log.d(TAG, "updating FExListFragment");
+					// either notify list fragment if it's there (on tablets)
+					fragment.setWorkout(mWorkout);
+				}else{
+					Log.e(TAG, "Did not find FExListFragment");
+				}
 			}
 		}
 	}

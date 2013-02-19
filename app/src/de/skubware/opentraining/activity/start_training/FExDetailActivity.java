@@ -22,11 +22,6 @@ package de.skubware.opentraining.activity.start_training;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
-import de.skubware.opentraining.basic.FitnessExercise;
-import de.skubware.opentraining.basic.Workout;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 /**
@@ -38,10 +33,10 @@ import android.os.Bundle;
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link FExDetailFragment}.
  */
-public class FExDetailActivity extends SherlockFragmentActivity implements DialogFragmentAddEntry.Callbacks{
-	
-	private Workout mWorkout;
-	
+public class FExDetailActivity extends SherlockFragmentActivity{
+	/** Tag for logging */
+	public static final String TAG = "FExDetailActivity";
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,10 +45,6 @@ public class FExDetailActivity extends SherlockFragmentActivity implements Dialo
 		// Don't show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-		
-		mWorkout = (Workout) getIntent().getSerializableExtra(FExDetailFragment.ARG_WORKOUT);
-
-		
 		// savedInstanceState is non-null when there is fragment state
 		// saved from previous configurations of this activity
 		// (e.g. when rotating the screen from portrait to landscape).
@@ -75,21 +66,6 @@ public class FExDetailActivity extends SherlockFragmentActivity implements Dialo
 		}
 	}
 
-	@Override
-	public void onEntryEdited(FitnessExercise fitnessExercise) {		
-		Intent i = new Intent();
-		mWorkout.updateFitnessExercise(fitnessExercise);
-		i.putExtra(FExListActivity.ARG_WORKOUT, mWorkout);
-		this.setResult(Activity.RESULT_OK, i);		
-	}
 
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			NavUtils.navigateUpTo(this, new Intent(this, FExListActivity.class));
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
+
 }

@@ -37,10 +37,11 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
+import android.util.Log;
+
 import de.skubware.opentraining.basic.*;
 import de.skubware.opentraining.basic.FSet.Category;
 
-//TODO write UNITTests
 
 /**
  * A class to save plans and exercises as XML files.
@@ -49,7 +50,10 @@ import de.skubware.opentraining.basic.FSet.Category;
  * 
  */
 public class XMLSaver {
-
+	/** Tag for logging */
+	public static final String TAG = "XMLSaver";
+	
+	
 	/**
 	 * Saves a Workout to the given destination.
 	 * 
@@ -65,8 +69,10 @@ public class XMLSaver {
 		// check arguments
 		if (destination.isDirectory()) {
 			String filename = w.getName();
-			if(filename == null || filename.equals(""))
+			if(filename == null || filename.equals("")){
 				filename = "plan";
+				Log.w(TAG, "Warning: Trying to save Workout, but did not find a name. Workout: " + w.toDebugString());
+			}
 			
 			destination = new File(destination.toString() + "/" + filename + ".xml");
 		}

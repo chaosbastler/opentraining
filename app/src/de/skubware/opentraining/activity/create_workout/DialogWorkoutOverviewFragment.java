@@ -26,34 +26,35 @@ import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.DataProvider;
-import de.skubware.opentraining.db.IDataProvider;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
- * Dialog Fragment that shows the {@link FitnessExercise}s of the current
- * {@link Workout}.
+ * Dialog Fragment that shows dialog when a {@link Workout} should be saved.
  * 
  * @author Christian Skubich
  * 
  */
 public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
-
+	/** Tag for logging */
+	public static final String TAG = "DialogWorkoutOverviewFragment";
+	
 	/** Currently displayed {@link Workout}. */
 	Workout mWorkout;
 
 	private static String ARG_ID_WORKOUT = "workout";
 
 	/**
-	 * Create a new instance of MyDialogFragment, providing "num" as an
-	 * argument.
+	 * Create a new instance of DialogWorkoutOverviewFragment.
 	 */
 	static DialogWorkoutOverviewFragment newInstance(Workout workout) {
 		DialogWorkoutOverviewFragment f = new DialogWorkoutOverviewFragment();
@@ -92,11 +93,10 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 				.setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// save Workout before exiting
-						IDataProvider dataProvider = new DataProvider(getActivity());
-						dataProvider.saveWorkout(mWorkout);
 						
-						finishActivities();
+						showDialogSaveWorkoutFragment();
+						dialog.dismiss();
+						
 					}
 				}).setNeutralButton(getString(R.string.add_more_exercises), new DialogInterface.OnClickListener() {
 					@Override
@@ -130,5 +130,25 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 			getActivity().finish();
 		}
 	}
+	
+	
+	/** Shows DialogSaveWorkoutFragment. */
+	void showDialogSaveWorkoutFragment() {
+
+		// DialogFragment.show() will take care of adding the fragment
+		// in a transaction. We also want to remove any currently showing
+		// dialog, so make our own transaction and take care of that here.
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+		if (prev != null) {
+			ft.remove(prev);
+		}
+		ft.addToBackStack(null);
+
+		// Create and show the dialog.
+		DialogFragment newFragment = DialogSaveWorkoutFragment.newInstance(mWorkout);
+		newFragment.show(ft, "dialog");
+	}
+
 
 }

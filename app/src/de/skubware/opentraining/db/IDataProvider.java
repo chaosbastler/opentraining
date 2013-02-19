@@ -38,6 +38,9 @@ public interface IDataProvider {
 	/** The name of the folder that contains exercises .xml files and images */
 	static public final String EXERCISE_FOLDER = "opentraining-exercises";
 	
+	/** The name of the folder that contains the workout .xml files */
+	static public final String WORKOUT_FOLDER = "";
+	
 	/** The JSON file that contains the {@link Muscle}s */
 	static public final String MUSCLE_FILE = "muscles.json";
 	

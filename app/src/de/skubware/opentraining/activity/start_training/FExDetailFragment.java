@@ -28,12 +28,15 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -164,10 +167,15 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 			}
 		});
-
+		
 		return rootView;
 	}
 	
+	@Override
+	public void onStart(){
+		super.onStart();
+		updateTrainingEntries();	
+	}	
 	
 	
 	@Override
@@ -213,15 +221,26 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 	@Override
 	public void onEntryEdited(FitnessExercise fitnessExercise) {
-		mWorkout.updateFitnessExercise(mExercise);
-				
+		Log.d(TAG, "onEntryEdited()");
+						
+		mWorkout.updateFitnessExercise(fitnessExercise);
+
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		dataProvider.saveWorkout(mWorkout);
 		
 		FExListFragment fragment = (FExListFragment) getFragmentManager().findFragmentById(R.id.exercise_list);
 		if(fragment != null){
+			Log.d(TAG, "updating FExListFragment");
+			// either notify list fragment if it's there (on tablets)
 			fragment.setWorkout(mWorkout);
+		}else{
+			Log.d(TAG, "setting Intent for FExListActivity");
+			// or return intent if list fragment is not visible (on small screens)
+			Intent i = new Intent();
+			i.putExtra(FExListActivity.ARG_WORKOUT, mWorkout);
+			this.getActivity().setResult(Activity.RESULT_OK, i);		
 		}
+		
 		
 		mExercise = fitnessExercise;
 		updateTrainingEntries();
