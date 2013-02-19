@@ -27,6 +27,7 @@
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">ExerciseType Detail</string>
     <string name="title_exercisetype_list">ExerciseTypes</string>
+    <string name="exercise_already_in_workout">You\'ve already added this exercise to your workout.</string>
     <!-- Exercise Detail Menu -->
     <string name="add_exercise">Add exercise</string>
     <string name="exercise">Exercise</string>

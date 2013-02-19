@@ -144,10 +144,22 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 					return true;
 				}
 
+
 				// add exercise to workout or create a new one
 				if (mWorkout == null) {
 					mWorkout = new Workout("My Plan", new FitnessExercise(mExercise));
 				} else {
+					
+					// assert that there is not already such an exercise in the workout
+					for(FitnessExercise fEx:mWorkout.getFitnessExercises()){
+						if(fEx.getExType().equals(mExercise)){
+							Toast.makeText(getActivity(),
+									getString(R.string.exercise_already_in_workout),
+									Toast.LENGTH_LONG).show();
+							return true;
+						}
+					}
+					
 					mWorkout.addFitnessExercise(new FitnessExercise(mExercise));
 				}
 
