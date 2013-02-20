@@ -44,7 +44,6 @@
     
     <!-- DialogSaveWorkoutFragment -->
     <string name="workout_name_hint">Workout Namen eingeben</string>
-    <string name="some_suggestions">Namensvorschläge:</string>
     <string name="monday">Montag</string>
     <string name="tuesday">Dienstag</string>
     <string name="wednesday">Mittwoch</string>

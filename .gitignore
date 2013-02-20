@@ -9,8 +9,3 @@ test/gen/
 app/svg/old/
 
 app/svg/.SVG
-
-[submodule "ActionBarSherlock"]
-	path = ActionBarSherlock
-	url = https://github.com/JakeWharton/ActionBarSherlock
-        ignore = dirty
