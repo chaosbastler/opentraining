@@ -9,8 +9,7 @@
     <string name="start_training">Start training</string>
     <string name="manage_workouts">Manage workouts</string>
     <string name="choose_workout">Choose a workout</string>
-    
-    
+
     <!-- Disclaimer Dialog -->
     <string name="disclaimer">This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,9 +19,8 @@
     Especially NEVER train without professional help and consult a doctor before training.</string>
     <string name="license">License</string>
     <string name="accept">Accept</string>
-    <string name="not_accept">Do not accept</string>    
-    <string name="do_not_show_again">Do not show again.</string>        
-    
+    <string name="not_accept">Do not accept</string>
+    <string name="do_not_show_again">Do not show again.</string>
 
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">ExerciseType Detail</string>
@@ -41,7 +39,7 @@
     <string name="discard">"Discard workout</string>
     <string name="title_exercise_detail">Exercise Detail</string>
     <string name="title_exercise_list">Exercise</string>
-    
+
     <!-- DialogSaveWorkoutFragment -->
     <string name="workout_name_hint">Enter workout name</string>
     <string name="monday">Monday</string>
@@ -54,17 +52,17 @@
     <string name="workout">Workout</string>
     <string name="workout_already_exists">There is already a Workout with this name.</string>
 
-    
     <!-- FExDetailFragment -->
     <string name="no_entry_for_today">Click on \'+\' to add an entry</string>
     <string name="license">License:</string>
     <string name="old_entries">View old entries</string>
     <string name="add_entry">Add entry</string>
     <string name="choose_subentry">Choose the entry you want to edit</string>
-    
-    
-    <!-- DialogFragmentAddEntry  -->
+
+    <!-- DialogFragmentAddEntry -->
     <string name="save_entry">Save</string>
     <string name="discard_entry">"Discard</string>
-    
+    <string name="title_workout_list">Workouts</string>
+    <string name="title_workout_detail">Workout Detail</string>
+
 </resources>

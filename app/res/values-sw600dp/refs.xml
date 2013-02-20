@@ -10,5 +10,6 @@
     -->
     <item name="activity_exercisetype_list" type="layout">@layout/activity_exercisetype_twopane</item>
     <item name="activity_fex_list" type="layout">@layout/activity_fex_twopane</item>
+    <item name="activity_workout_list" type="layout">@layout/activity_workout_twopane</item>
 
 </resources>

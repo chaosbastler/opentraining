@@ -41,20 +41,36 @@
         <activity
             android:name="de.skubware.opentraining.activity.start_training.FExListActivity"
             android:label="@string/title_exercise_list"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
+            android:parentActivityName="de.skubware.opentraining.activity.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.skubware.opentraining.activity.MainActivity" />
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.start_training.FExDetailActivity"
-            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_exercise_detail"
-            android:parentActivityName=".ExerciseListActivity" >
+            android:parentActivityName=".ExerciseListActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ExerciseListActivity" />
+        </activity>
+        <activity
+            android:name="de.skubware.opentraining.WorkoutListActivity"
+            android:label="@string/title_workout_list"
+            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.skubware.opentraining.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name="de.skubware.opentraining.WorkoutDetailActivity"
+            android:label="@string/title_workout_detail"
+            android:parentActivityName=".WorkoutListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".WorkoutListActivity" />
         </activity>
     </application>
 
