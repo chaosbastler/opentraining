@@ -1,8 +1,31 @@
+/**
+ * 
+ * This is OpenTraining, an Android application for planning your your fitness training.
+ * Copyright (C) 2012 Christian Skubich
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package de.skubware.opentraining;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -79,6 +102,20 @@ public class WorkoutListFragment extends SherlockListFragment {
 		
 		setListAdapter(new ArrayAdapter<Workout>(getActivity(), android.R.layout.simple_list_item_single_choice,
 				android.R.id.text1, arr));
+		
+		// notify user if there are no workouts
+		if(arr.length==0){
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setMessage(getString(R.string.no_workout));
+			builder.setPositiveButton(getString(R.string.ok), new OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					getActivity().finish();
+				}
+			});
+			builder.create().show();
+		}
 	}
 
 	@Override
