@@ -64,5 +64,15 @@
     <string name="discard_entry">"Discard</string>
     <string name="title_workout_list">Workouts</string>
     <string name="title_workout_detail">Workout Detail</string>
+    
+    <!-- WorkoutListFragment -->
+    <string name="no_workout">Did not find a workout.</string>
+    <string name="ok">Ok</string>
+    
+    <!-- WorkoutDetailFragment -->
+    <string name="workout_name">Workout name</string>
+    <string name="exercises">Exercises:</string>
+    <string name="rename_workout">Rename</string>
+    <string name="delete_workout">Delete</string>
 
 </resources>

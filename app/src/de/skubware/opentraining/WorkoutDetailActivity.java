@@ -1,3 +1,23 @@
+/**
+ * 
+ * This is OpenTraining, an Android application for planning your your fitness training.
+ * Copyright (C) 2012 Christian Skubich
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 package de.skubware.opentraining;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -38,7 +58,7 @@ public class WorkoutDetailActivity extends SherlockFragmentActivity {
 			// Create the detail fragment and add it to the activity
 			// using a fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putString(WorkoutDetailFragment.ARG_WORKOUT, getIntent().getStringExtra(WorkoutDetailFragment.ARG_WORKOUT));
+			arguments.putSerializable(WorkoutDetailFragment.ARG_WORKOUT, getIntent().getSerializableExtra(WorkoutDetailFragment.ARG_WORKOUT));
 			WorkoutDetailFragment fragment = new WorkoutDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction().add(R.id.workout_detail_container, fragment).commit();

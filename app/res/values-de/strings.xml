@@ -67,4 +67,16 @@
     <string name="save_entry">Speichern</string>
     <string name="discard_entry">"Abbrechen</string>
     
-</resources>
+    <!-- WorkoutListFragment -->
+    <string name="no_workout">Es wurde kein Workout gefunden.</string>
+    <string name="ok">Ok</string>
+    
+    
+    <!-- WorkoutDetailFragment -->
+    <string name="workout_name">Workoutname</string>
+    <string name="exercises">Übungen:</string>
+    <string name="rename_workout">Umbennen</string>
+    <string name="delete_workout">Löschen</string>
+    
+    
+    </resources>

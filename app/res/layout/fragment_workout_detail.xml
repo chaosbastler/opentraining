@@ -1,9 +1,27 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/workout_detail"
-    style="?android:attr/textAppearanceLarge"
+    android:id="@+id/container_workout_detail"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".WorkoutDetailFragment" />
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textview_workout_name"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp"
+        android:text="@string/workout_name"
+        android:textIsSelectable="true"
+        tools:context=".WorkoutDetailFragment" />
+
+    <ListView
+        android:id="@+id/listview_exercises"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textview_workout_name" >
+    </ListView>
+
+</RelativeLayout>
