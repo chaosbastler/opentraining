@@ -33,6 +33,13 @@
     <string name="show_workout">Show workout</string>
     <string name="workout_empty">The Workout is empty.</string>
 
+    <!-- DialogSearchExercise -->
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="muscles">Muscles</string>
+    <string name="equipment">Equipment</string>
+    
+    
     <!-- DialogWorkoutOverviewFragment -->
     <string name="save_workout">Save workout</string>
     <string name="add_more_exercises">Add more exercises</string>

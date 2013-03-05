@@ -72,7 +72,7 @@ public class DataProvider implements IDataProvider {
 		if(Cache.INSTANCE.getExercises() == null)
 			Cache.INSTANCE.updateCache(mContext);
 		
-		return Cache.INSTANCE.getExercises();
+		return new ArrayList<ExerciseType>(Cache.INSTANCE.getExercises());
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class DataProvider implements IDataProvider {
 		if(Cache.INSTANCE.getMuscles() == null)
 			Cache.INSTANCE.updateCache(mContext);
 		
-		return Cache.INSTANCE.getMuscles();
+		return new ArrayList<Muscle>(Cache.INSTANCE.getMuscles());
 	}
 	
 	/**
@@ -166,7 +166,7 @@ public class DataProvider implements IDataProvider {
 		if(Cache.INSTANCE.getMuscles() == null)
 			Cache.INSTANCE.updateCache(mContext);
 		
-		return Cache.INSTANCE.getEquipment();
+		return new ArrayList<SportsEquipment>(Cache.INSTANCE.getEquipment());
 	}
 	
 	/**

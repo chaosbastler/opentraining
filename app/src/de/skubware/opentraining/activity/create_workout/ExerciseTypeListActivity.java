@@ -111,6 +111,7 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		
 		case android.R.id.home:
 			if (mWorkout != null)
 				showDialog();
@@ -120,6 +121,13 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 		case R.id.menu_item_show_workout:
 			showDialog();
 			break;
+			
+		case R.id.menu_item_search_settings:
+			DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
+			dialog.show();
+
+			break;
+			
 		}
 
 		return super.onOptionsItemSelected(item);

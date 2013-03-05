@@ -20,17 +20,24 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
@@ -44,7 +51,16 @@ import de.skubware.opentraining.db.IDataProvider;
  * interface.
  */
 public class ExerciseTypeListFragment extends SherlockListFragment {
+	/** Tag for logging */
+	public static final String TAG = "ExerciseTypeListFragment";	
+	
+	/** Currently display exercises */
+	List<ExerciseType> mExericseList;
+	
+	
+	private OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
 
+	
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
 	 * activated item position. Only used on tablets.
@@ -91,16 +107,83 @@ public class ExerciseTypeListFragment extends SherlockListFragment {
 	public ExerciseTypeListFragment() {
 	}
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		IDataProvider dataProvider = new DataProvider(getActivity());
-		List<ExerciseType> list = dataProvider.getExercises();
-		ExerciseType[] arr = list.toArray(new ExerciseType[list.size()]);
+		mExericseList = dataProvider.getExercises();
+
+		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
+				android.R.layout.simple_list_item_single_choice,
+				android.R.id.text1, mExericseList));
+
+		// register for changed settings
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(getActivity());
+
+		onSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
+			@Override
+			public void onSharedPreferenceChanged(SharedPreferences pref,
+					String key) {
+				Log.v(TAG, "Preference changed, will update shown exercises");
+				filterExercises();
+			}
+
+		};
+		sharedPrefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+
+		filterExercises();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	private void filterExercises(){
+		IDataProvider dataProvider = new DataProvider(getActivity());
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(getActivity());
 		
 		
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice,
-				android.R.id.text1, arr));
+		List<Muscle> acceptedMuscles = new ArrayList<Muscle>();
+		for(Muscle m:dataProvider.getMuscles()){
+			if(sharedPrefs.getBoolean(m.toString(), true)){
+				acceptedMuscles.add(m);
+			}
+		}
+		
+		List<SportsEquipment> acceptedEquipment = new ArrayList<SportsEquipment>();
+		for(SportsEquipment e:dataProvider.getEquipment()){
+			if(sharedPrefs.getBoolean(e.toString(), true)){
+				acceptedEquipment.add(e);
+			}
+		}
+		
+		mExericseList = dataProvider.getExercises();
+		for(ExerciseType ex:dataProvider.getExercises()){
+			boolean accepted = false;
+			for(Muscle m:acceptedMuscles){
+				if(ex.getActivatedMuscles().contains(m))
+					accepted = true;
+			}
+			
+			if(!accepted){
+				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Muscles do not fit.");
+				mExericseList.remove(ex);
+				continue;
+			}
+			
+			
+			if(!acceptedEquipment.containsAll(ex.getRequiredEquipment())){
+				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Equipment does not fit");
+				mExericseList.remove(ex);
+				continue;
+			}
+		}
+		
+		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
+				android.R.layout.simple_list_item_single_choice,
+				android.R.id.text1, mExericseList));
+		((ArrayAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 
 	@Override

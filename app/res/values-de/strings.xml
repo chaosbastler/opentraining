@@ -35,6 +35,12 @@
     <string name="show_workout">Zeige Workout</string>
     <string name="workout_empty">Das Workout ist leer.</string>
 
+    <!-- DialogSearchExercise -->
+    <string name="settings">Einstellungen</string>
+    <string name="search">Suchen</string>
+    <string name="muscles">Muskeln</string>
+    <string name="equipment">Equipment</string>
+    
     <!-- DialogWorkoutOverviewFragment -->
     <string name="save_workout">Workout speichern</string>
     <string name="add_more_exercises">Mehr Übungen hinzufügen</string>

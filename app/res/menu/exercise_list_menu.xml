@@ -4,4 +4,7 @@
           android:title="@string/show_workout"
           android:showAsAction="ifRoom" android:icon="@drawable/icon_exercise"/>
     
+    <item android:id="@+id/menu_item_search_settings"
+          android:title="@string/search"
+          android:showAsAction="ifRoom" android:icon="@drawable/icon_settings"/>    
 </menu>
