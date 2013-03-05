@@ -268,6 +268,17 @@ public class DataProvider implements IDataProvider {
 	public boolean saveWorkout(Workout w) {
 		return XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
 	}
+	
+	
+	@Override
+	public boolean deleteWorkout(Workout w) {
+		File directory = mContext.getFilesDir();
+		File workout_file = new File(directory.toString() + "/" + w.getName() + ".xml");
+		if(!workout_file.exists())
+			throw new IllegalArgumentException("The workout that should be deleted does not exist.");
+		
+		return workout_file.delete();
+	}
 
 	/**
 	 * Loads a file from the raw folder.
@@ -348,5 +359,6 @@ public class DataProvider implements IDataProvider {
 		// return the output stream as a String
 		return oS.toString();
 	}
+
 
 }

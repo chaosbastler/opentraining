@@ -23,11 +23,15 @@ package de.skubware.opentraining;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
+import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.basic.Workout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 /**
  * An activity representing a list of Workouts. This activity has different
@@ -45,8 +49,18 @@ import android.support.v4.app.NavUtils;
  * {@link WorkoutListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class WorkoutListActivity extends SherlockFragmentActivity implements WorkoutListFragment.Callbacks {
+public class WorkoutListActivity extends SherlockFragmentActivity implements WorkoutListFragment.Callbacks {	
+	/** Tag for logging */
+	public static final String TAG = "WorkoutListActivity";
+	
 
+	/** Constant for result */
+	static final int RESULT_WORKOUT = 404;
+
+	/** Constant for argument */
+	public static String ARG_WORKOUT = "workout";
+
+	
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
@@ -79,13 +93,6 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
@@ -113,7 +120,33 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 			// for the selected item ID.
 			Intent detailIntent = new Intent(this, WorkoutDetailActivity.class);
 			detailIntent.putExtra(WorkoutDetailFragment.ARG_WORKOUT, workout);
-			startActivity(detailIntent);
+			startActivityForResult(detailIntent, RESULT_WORKOUT);
 		}
 	}
+	
+
+	/**
+	 * Handles changed {@link Workout}s(e.g. name was changed in {@link WorkoutDetailActivity}).
+	 */
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.v(TAG, "onActivityResult()");
+		if (requestCode == RESULT_WORKOUT) {
+			if (resultCode == RESULT_OK) {
+				Workout mWorkout = (Workout) data.getSerializableExtra(WorkoutListActivity.ARG_WORKOUT);
+				this.onWorkoutChanged(mWorkout);
+			}
+		}
+	}
+	
+	/**
+	 * Called when a {@link Workout} (that is in the list of currently shown
+	 * Workouts) has changed. This will update the ListAdapter and thus the GUI.
+	 * 
+	 * @param changedWorkout
+	 *            The Workout that has changed.
+	 */
+	public void onWorkoutChanged(Workout changedWorkout){
+		((WorkoutListFragment) getSupportFragmentManager().findFragmentById(R.id.workout_list)).onWorkoutChanged(changedWorkout);
+	}
 }
+

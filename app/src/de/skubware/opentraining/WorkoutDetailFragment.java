@@ -30,12 +30,14 @@ import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -100,18 +102,30 @@ public class WorkoutDetailFragment extends SherlockFragment {
 		MenuItem menu_item_rename_workout = (MenuItem) menu.findItem(R.id.menu_item_rename_workout);
 		menu_item_rename_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				throw new IllegalStateException("Not implemented yet.");
-				//return true;
+				
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+				if (prev != null) {
+					ft.remove(prev);
+				}
+				ft.addToBackStack(null);
+
+				// Create and show the dialog.
+				DialogFragment newFragment = RenameWorkoutDialogFragment.newInstance(mWorkout);
+				newFragment.show(ft, "dialog");
+				
+				return true;
 			}
 		});
 		
 		// configure menu_item_delete_workout
 		MenuItem menu_item_delete_workout = (MenuItem) menu.findItem(R.id.menu_item_delete_workout);
-		menu_item_rename_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		menu_item_delete_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				throw new IllegalStateException("Not implemented yet.");
 				//return true;
 			}
 		});
 	}
+
 }

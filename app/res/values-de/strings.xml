@@ -78,5 +78,10 @@
     <string name="rename_workout">Umbennen</string>
     <string name="delete_workout">Löschen</string>
     
+    <!-- RenameWorkoutDialogFragment -->
+    <string name="save">Speichern</string>
+    <string name="cancel">Abbrechen</string>    
+    <string name="workout_name_cannot_be_empty">Workoutname darf nicht leer sein</string>
+    <string name="error_during_saving">Das Workout konnte nicht gespeichert werden.</string>
     
     </resources>

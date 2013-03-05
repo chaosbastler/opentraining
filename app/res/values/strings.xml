@@ -74,5 +74,11 @@
     <string name="exercises">Exercises:</string>
     <string name="rename_workout">Rename</string>
     <string name="delete_workout">Delete</string>
-
+    
+    <!-- RenameWorkoutDialogFragment -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="workout_name_cannot_be_empty">Workout name cannot be empty</string>
+    <string name="error_during_saving">The workout could not be saved.</string>
+    
 </resources>

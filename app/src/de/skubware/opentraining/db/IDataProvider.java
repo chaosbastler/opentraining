@@ -32,82 +32,85 @@ import de.skubware.opentraining.basic.Workout;
  * Interface for classes that handle I/O.
  * 
  * @author Christian Skubich
- *
+ * 
  */
 public interface IDataProvider {
 	/** The name of the folder that contains exercises .xml files and images */
 	static public final String EXERCISE_FOLDER = "opentraining-exercises";
-	
+
 	/** The name of the folder that contains the workout .xml files */
 	static public final String WORKOUT_FOLDER = "";
-	
+
 	/** The JSON file that contains the {@link Muscle}s */
 	static public final String MUSCLE_FILE = "muscles.json";
-	
+
 	/** The JSON file that contains the {@link SportsEquipment} */
 	static public final String EQUIPMENT_FILE = "equipment.json";
-		
-	
+
 	/**
 	 * Lists all {@link ExerciseType}s
 	 * 
 	 * @return All {@link ExerciseType}s
 	 */
 	public List<ExerciseType> getExercises();
-	
+
 	/**
 	 * Saves the exercise.
 	 * 
-	 * @param ex The {@link ExerciseType} to save.
+	 * @param ex
+	 *            The {@link ExerciseType} to save.
 	 * 
 	 * @return true if successful
 	 */
 	public boolean saveExercise(IExercise ex);
-	
+
 	/**
 	 * Tries to find and return the exercise with the name.
-	 *
-	 * @param name The name of the exercise to look for
-	 *
+	 * 
+	 * @param name
+	 *            The name of the exercise to look for
+	 * 
 	 * @return An exercise with the name or null.
 	 */
 	public ExerciseType getExerciseByName(String name);
-	
+
 	/**
 	 * Checks if the exercise does exist.
 	 * 
-	 * @param name The name of the exercise to look for
+	 * @param name
+	 *            The name of the exercise to look for
 	 * 
 	 * @return true if the exercise exists, false otherwise
 	 */
 	public boolean exerciseExists(String name);
-	
+
 	/**
 	 * Lists all {@link Muscle}s
 	 * 
 	 * @return All {@link Muscle}s
 	 */
 	public List<Muscle> getMuscles();
-	
 
 	/**
 	 * Tries to find and return the {@link Muscle} with the name.
-	 *
-	 * @param name The name of the {@link Muscle} to look for
-	 *
+	 * 
+	 * @param name
+	 *            The name of the {@link Muscle} to look for
+	 * 
 	 * @return An {@link Muscle} with the name or null.
 	 */
 	public Muscle getMuscleByName(String name);
 
 	/**
 	 * Tries to find and return the {@link SportsEquipment} with the name.
-	 *
-	 * @param name The name of the {@link SportsEquipment} to look for
-	 *
+	 * 
+	 * @param name
+	 *            The name of the {@link SportsEquipment} to look for
+	 * 
 	 * @return An {@link SportsEquipment} with the name or null.
 	 */
 	public SportsEquipment getEquipmentByName(String name);
-	
+
 	/**
 	 * Lists all {@link SportsEquipment}s
 	 * 
@@ -115,22 +118,31 @@ public interface IDataProvider {
 	 */
 	public List<SportsEquipment> getEquipment();
 
-	
 	/**
 	 * Lists all {@link Workout}s
 	 * 
 	 * @return All {@link Workout}s
 	 */
 	public List<Workout> getWorkouts();
-	
+
 	/**
-	 * Saves the workout.
+	 * Saves the {@link Workout}.
 	 * 
-	 * @param w The {@link Workout} to save.
+	 * @param w
+	 *            The {@link Workout} to save.
 	 * 
 	 * @return true if successful
 	 */
 	public boolean saveWorkout(Workout w);
 
+	/**
+	 * Deletes the {@link Workout}
+	 * 
+	 * @param w
+	 *            The {@link Workout} to delete
+	 * 
+	 * @return True if successful, false otherwise
+	 */
+	public boolean deleteWorkout(Workout w);
 
 }
