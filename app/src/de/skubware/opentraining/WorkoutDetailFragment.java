@@ -26,9 +26,17 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
+import de.skubware.opentraining.activity.MainActivity;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -122,8 +130,31 @@ public class WorkoutDetailFragment extends SherlockFragment {
 		MenuItem menu_item_delete_workout = (MenuItem) menu.findItem(R.id.menu_item_delete_workout);
 		menu_item_delete_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				throw new IllegalStateException("Not implemented yet.");
-				//return true;
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				
+				builder.setTitle("Really delete?");
+				builder.setMessage("Do you really want to delete this Workout? This cannot be undone.");
+				
+				builder.setPositiveButton(getString(R.string.delete_workout), new OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int wich) {
+						IDataProvider dataProvider = new DataProvider(getActivity());
+						dataProvider.deleteWorkout(mWorkout);
+						getActivity().finish();
+						startActivity(new Intent(getActivity(), WorkoutListActivity.class));
+						
+					}
+				});
+				builder.setNegativeButton(getString(R.string.cancel), new OnClickListener(){
+					@Override
+					public void onClick(DialogInterface dialog, int wich) {
+						dialog.dismiss();
+					}
+				});
+				
+				builder.create().show();
+				
+				return true;
 			}
 		});
 	}
