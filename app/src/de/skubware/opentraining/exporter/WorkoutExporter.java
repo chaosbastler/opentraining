@@ -26,7 +26,6 @@ import java.io.File;
 import android.content.Context;
 
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.ContentProvider;
 
 /**
  * The super class for all WorkoutExporter.
@@ -63,11 +62,13 @@ public abstract class WorkoutExporter {
 	 */
 	public File exportWorkoutToFile(Workout w){
 		try{
-			File f = ContentProvider.INSTANCE.writeFileToCache(this.exportWorkoutToString(w), w.getName(), context);
+			throw new IllegalStateException("Not implemented");
+
+			//File f = ContentProvider.INSTANCE.writeFileToCache(this.exportWorkoutToString(w), w.getName(), context);
 			
-			assert(f!=null);
+			//assert(f!=null);
 			
-			return f;
+			//return f;
 		}catch(UnsupportedOperationException unsupported){
 			// may happen when String export doesn't work
 			throw unsupported;

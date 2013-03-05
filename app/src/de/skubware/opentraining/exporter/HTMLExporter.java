@@ -31,8 +31,8 @@ import android.webkit.WebView;
 
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.ContentProvider;
-import de.skubware.opentraining.db.ContentProvider.Source;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 
 public class HTMLExporter extends WorkoutExporter {
 	private WebView webview;
@@ -47,13 +47,16 @@ public class HTMLExporter extends WorkoutExporter {
 	
 	private void loadWorkout(Workout w){
 		File f = new File( context.getFilesDir().toString() + "/trainingplan.html" );
-		ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, context.getFilesDir());
+		IDataProvider dataProvider = new DataProvider(this.context);
 		
-		try {
+		throw new IllegalStateException("Not implemented");
+		//ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, context.getFilesDir());
+		
+		/*try {
 			webview.loadUrl(f.toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	@Override
@@ -68,9 +71,11 @@ public class HTMLExporter extends WorkoutExporter {
 	 */
 	public File exportWorkoutToFile(Workout w){
 		try{
-			ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, context.getFilesDir());
+			throw new IllegalStateException("Not implemented");
+
+			//ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w), "trainingplan.html", context, context.getFilesDir());
 			
-			return new File(context.getFilesDir().toString() + "/" + "trainingplan.html");
+			//return new File(context.getFilesDir().toString() + "/" + "trainingplan.html");
 		}catch(UnsupportedOperationException unsupported){
 			// may happen when String export doesn't work
 			throw unsupported;
