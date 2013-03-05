@@ -18,20 +18,18 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.manage_workouts;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
-import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
+import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.Workout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
 /**
  * An activity representing a list of Workouts. This activity has different
@@ -56,6 +54,8 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 
 	/** Constant for result */
 	static final int RESULT_WORKOUT = 404;
+	
+	static final int REQUEST_EXIT = 99;
 
 	/** Constant for argument */
 	public static String ARG_WORKOUT = "workout";
@@ -126,15 +126,28 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 	
 
 	/**
-	 * Handles changed {@link Workout}s(e.g. name was changed in {@link WorkoutDetailActivity}).
+	 * Handles changed {@link Workout}s(e.g. name was changed in
+	 * {@link WorkoutDetailActivity}) and other requests..
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.v(TAG, "onActivityResult()");
+
 		if (requestCode == RESULT_WORKOUT) {
+			Log.w(TAG, "RESULT_WORKOUT");
+
 			if (resultCode == RESULT_OK) {
-				Workout mWorkout = (Workout) data.getSerializableExtra(WorkoutListActivity.ARG_WORKOUT);
+				Workout mWorkout = (Workout) data
+						.getSerializableExtra(WorkoutListActivity.ARG_WORKOUT);
 				this.onWorkoutChanged(mWorkout);
+				return;
 			}
+			if (resultCode == REQUEST_EXIT) {
+				Log.d(TAG, "Requested exit. Will finish acitivty.");
+
+				finish();
+				return;
+			}
+
 		}
 	}
 	

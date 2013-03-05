@@ -25,8 +25,8 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.WorkoutListActivity;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
+import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
 import de.skubware.opentraining.activity.start_training.FExListActivity;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.Cache;

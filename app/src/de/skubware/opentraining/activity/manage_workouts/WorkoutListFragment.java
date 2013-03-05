@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.manage_workouts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import de.skubware.opentraining.R;
+import de.skubware.opentraining.R.string;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;

@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.manage_workouts;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -28,6 +28,9 @@ import java.util.Set;
 import com.actionbarsherlock.app.SherlockDialogFragment;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.R.id;
+import de.skubware.opentraining.R.layout;
+import de.skubware.opentraining.R.string;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeDetailFragment.Callbacks;
 import de.skubware.opentraining.basic.Workout;

@@ -57,7 +57,7 @@
                 android:value=".ExerciseListActivity" />
         </activity>
         <activity
-            android:name="de.skubware.opentraining.WorkoutListActivity"
+            android:name="de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity"
             android:label="@string/title_workout_list"
             android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
             <meta-data
@@ -65,9 +65,9 @@
                 android:value="de.skubware.opentraining.activity.MainActivity" />
         </activity>
         <activity
-            android:name="de.skubware.opentraining.WorkoutDetailActivity"
+ 			android:name="de.skubware.opentraining.activity.manage_workouts.WorkoutDetailActivity"
             android:label="@string/title_workout_detail"
-            android:parentActivityName=".WorkoutListActivity" >
+            android:parentActivityName="de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WorkoutListActivity" />

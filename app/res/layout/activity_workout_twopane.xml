@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/workout_list"
-        android:name="de.skubware.opentraining.WorkoutListFragment"
+        android:name="de.skubware.opentraining.activity.manage_workouts.WorkoutListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

@@ -18,10 +18,14 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.manage_workouts;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+
+import de.skubware.opentraining.R;
+import de.skubware.opentraining.R.id;
+import de.skubware.opentraining.R.layout;
 
 import android.content.Intent;
 import android.os.Bundle;

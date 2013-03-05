@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.manage_workouts;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -26,13 +26,12 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-import de.skubware.opentraining.activity.MainActivity;
+import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -125,25 +124,46 @@ public class WorkoutDetailFragment extends SherlockFragment {
 				return true;
 			}
 		});
-		
+
 		// configure menu_item_delete_workout
-		MenuItem menu_item_delete_workout = (MenuItem) menu.findItem(R.id.menu_item_delete_workout);
-		menu_item_delete_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				
-				builder.setTitle("Really delete?");
-				builder.setMessage("Do you really want to delete this Workout? This cannot be undone.");
-				
-				builder.setPositiveButton(getString(R.string.delete_workout), new OnClickListener(){
-					@Override
-					public void onClick(DialogInterface dialog, int wich) {
-						IDataProvider dataProvider = new DataProvider(getActivity());
-						dataProvider.deleteWorkout(mWorkout);
-						getActivity().finish();
-						startActivity(new Intent(getActivity(), WorkoutListActivity.class));
-						
-					}
+		MenuItem menu_item_delete_workout = (MenuItem) menu
+				.findItem(R.id.menu_item_delete_workout);
+		menu_item_delete_workout
+				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					public boolean onMenuItemClick(MenuItem item) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(
+								getActivity());
+
+						builder.setTitle("Really delete?");
+						builder.setMessage("Do you really want to delete this Workout? This cannot be undone.");
+
+						builder.setPositiveButton(
+								getString(R.string.delete_workout),
+								new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int wich) {
+										IDataProvider dataProvider = new DataProvider(
+												getActivity());
+										dataProvider.deleteWorkout(mWorkout);
+
+										if (getActivity() instanceof WorkoutDetailActivity) {
+											// request WorkoutListActivity to
+											// finish too
+											Intent i = new Intent();
+											getActivity()
+													.setResult(
+															WorkoutListActivity.REQUEST_EXIT,
+															i);
+										}
+
+										// finish WorkoutListActivity
+										getActivity().finish();
+
+										startActivity(new Intent(getActivity(),
+												WorkoutListActivity.class));
+
+									}
 				});
 				builder.setNegativeButton(getString(R.string.cancel), new OnClickListener(){
 					@Override
