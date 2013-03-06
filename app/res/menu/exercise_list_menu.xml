@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_item_show_workout"
-          android:title="@string/show_workout"
-          android:showAsAction="ifRoom" android:icon="@drawable/icon_exercise"/>
-    
-    <item android:id="@+id/menu_item_search_settings"
-          android:title="@string/search"
-          android:showAsAction="ifRoom" android:icon="@drawable/icon_settings"/>    
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/exercise_search"
+        android:actionViewClass="com.actionbarsherlock.widget.SearchView"
+        android:icon="@drawable/icon_search"
+        android:showAsAction="always"
+        android:title="@string/search"/>
+    <item
+        android:id="@+id/menu_item_filter_settings"
+        android:icon="@drawable/icon_settings"
+        android:showAsAction="ifRoom"
+        android:title="@string/filter"/>
+    <item
+        android:id="@+id/menu_item_show_workout"
+        android:icon="@drawable/icon_exercise"
+        android:showAsAction="ifRoom"
+        android:title="@string/show_workout"/>
+
 </menu>

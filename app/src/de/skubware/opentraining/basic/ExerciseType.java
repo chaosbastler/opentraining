@@ -437,6 +437,17 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		}
 		return fExes;
 	}
+	
+	
+	/**
+	 * Creates and returns a set containing all the names of this exercise for
+	 * all languages.
+	 * 
+	 * @return A set containing the names of this exercise for all languages.
+	 */
+	public Set<String> getAlternativeNames(){
+		return new HashSet<String>(this.translationMap.values());
+	}
 
 
 	/*@Override

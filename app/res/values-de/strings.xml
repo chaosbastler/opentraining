@@ -22,8 +22,11 @@
     <string name="accept">Akzeptieren</string>
     <string name="not_accept">Nicht akzeptieren</string>    
     <string name="do_not_show_again">Nicht wieder anzeigen.</string>        
-    
 
+    <!-- Exercise List -->
+    <string name="search">Suche</string>
+    <string name="filter">Filtern</string>
+    
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">Übungsdetails</string>
     <string name="title_exercisetype_list">Übungen</string>

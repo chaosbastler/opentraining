@@ -20,13 +20,21 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
+import java.util.List;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
+import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
+
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Workout;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -53,10 +61,14 @@ import android.widget.Toast;
  * selections.
  */
 public class ExerciseTypeListActivity extends SherlockFragmentActivity implements ExerciseTypeListFragment.Callbacks,
-		ExerciseTypeDetailFragment.Callbacks {
+		ExerciseTypeDetailFragment.Callbacks{
 
 	/** Tag for logging */
 	public static final String TAG = ExerciseTypeListActivity.class.getName();
+	
+	/** Reference to the search view (for searching exercises) of this activity. */
+	private SearchView mSearchView;
+
 
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -91,8 +103,8 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 			((ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list)).setActivateOnItemClick(true);
 		}
 
-		// TODO: If exposing deep links into your app, handle intents here.
-	}
+
+    }
 	
 	/** Restores the state of this Activity, e.g. after screen orientation changed. */
 	@Override
@@ -122,7 +134,7 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 			showDialog();
 			break;
 			
-		case R.id.menu_item_search_settings:
+		case R.id.menu_item_filter_settings:
 			DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
 			dialog.show();
 
@@ -132,6 +144,7 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 
 		return super.onOptionsItemSelected(item);
 	}
+	
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -172,6 +185,11 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 	public boolean onCreateOptionsMenu(Menu menu){
 		MenuInflater infalter = getSupportMenuInflater();
 		infalter.inflate(R.menu.exercise_list_menu, menu);
+		
+		MenuItem searchItem = menu.findItem(R.id.exercise_search);
+		mSearchView = (SearchView) searchItem.getActionView();
+		setupSearchView(searchItem);
+		
 		return true;
 	}
 
@@ -223,5 +241,38 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 	public void onWorkoutChanged(Workout w) {
 		mWorkout = w;
 	}
+	
+	private void setupSearchView(MenuItem searchItem) {
+        /*if (isAlwaysExpanded()) {
+            mSearchView.setIconifiedByDefault(false);
+        } else {
+            searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                    | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        }
+ 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+ 
+            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+            for (SearchableInfo inf : searchables) {
+                if (inf.getSuggestAuthority() != null
+                        && inf.getSuggestAuthority().startsWith("applications")) {
+                    info = inf;
+                }
+            }
+            mSearchView.setSearchableInfo(info);
+        }*/
+ 
+        OnQueryTextListener listener = (ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list);
+
+        mSearchView.setOnQueryTextListener(listener);
+    }
+ 
+	 
+    protected boolean isAlwaysExpanded() {
+        return false;
+    }
+
 
 }

@@ -22,6 +22,10 @@
     <string name="not_accept">Do not accept</string>
     <string name="do_not_show_again">Do not show again.</string>
 
+    <!-- Exercise List -->
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">ExerciseType Detail</string>
     <string name="title_exercisetype_list">ExerciseTypes</string>
@@ -33,7 +37,7 @@
     <string name="show_workout">Show workout</string>
     <string name="workout_empty">The Workout is empty.</string>
 
-    <!-- DialogSearchExercise -->
+    <!-- DialogFilterMuscleAndEquipment -->
     <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="muscles">Muscles</string>
