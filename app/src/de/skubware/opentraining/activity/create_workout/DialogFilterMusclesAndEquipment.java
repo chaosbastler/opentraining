@@ -70,7 +70,7 @@ public class DialogFilterMusclesAndEquipment extends Dialog {
 		// create muscleTab
 		TabHost.TabSpec muscleTab = tabHost.newTabSpec("tab1");
 		muscleTab.setIndicator(mContext.getString(R.string.muscles),
-				mContext.getResources().getDrawable(R.drawable.logo_small));
+				mContext.getResources().getDrawable(R.drawable.icon_muscle));
 		muscleTab.setContent(R.id.listview_muscles);
 		tabHost.addTab(muscleTab);
 		
