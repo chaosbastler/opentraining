@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.util.List;
@@ -27,19 +26,17 @@ import java.util.Locale;
 /**
  * 
  */
-public class Muscle extends Translatable{
-	
+public class Muscle extends Translatable {
+
 	/** Default serialVersionUID */
-	private static final long serialVersionUID = 1L;	
-	
+	private static final long serialVersionUID = 1L;
+
 	/** Tag for logging */
 	@SuppressWarnings("unused")
 	private static final String TAG = "Muscle";
 
-	
 	public Muscle(Locale locale, List<String> nameList) {
 		super(locale, nameList);
 	}
-
 
 }

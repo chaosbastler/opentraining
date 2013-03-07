@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.exporter;
 
 import de.skubware.opentraining.basic.*;
@@ -36,30 +35,31 @@ import de.skubware.opentraining.basic.*;
  * @author Christian Skubich
  */
 public class WorkoutConstraint {
-	
-	public enum Reason{
+
+	public enum Reason {
 		TOO_SMALL, TOO_BIG;
 	}
-	
-	@SuppressWarnings("serial")
-	public class ValidationException extends RuntimeException{
 
-        /**
-         * Constructor for this Exception
-         * 
-         * @param field The field where the Exception occurred
-         * @param r     The Reason why the validation failed
-         */
-        public ValidationException(String field, Reason r){
-                super(field + ": " + r.toString());
-        }
-        
-        
-        @Override
-        public String toString(){
-                return "Validierung fehlgeschlagen: " + this.getMessage();
-        }	
-     }
+	@SuppressWarnings("serial")
+	public class ValidationException extends RuntimeException {
+
+		/**
+		 * Constructor for this Exception
+		 * 
+		 * @param field
+		 *            The field where the Exception occurred
+		 * @param r
+		 *            The Reason why the validation failed
+		 */
+		public ValidationException(String field, Reason r) {
+			super(field + ": " + r.toString());
+		}
+
+		@Override
+		public String toString() {
+			return "Validierung fehlgeschlagen: " + this.getMessage();
+		}
+	}
 
 	/** The maximum number of FitnessExercises */
 	private final Integer maxFExs;
@@ -161,17 +161,14 @@ public class WorkoutConstraint {
 	 *             if validation fails
 	 */
 	public void validateWithException(Workout w) {
-		if (this.minFExs != null
-				&& w.getFitnessExercises().size() < this.minFExs) {
+		if (this.minFExs != null && w.getFitnessExercises().size() < this.minFExs) {
 			throw new ValidationException("minFEx", Reason.TOO_SMALL);
 		}
-		if (this.maxFExs != null
-				&& w.getFitnessExercises().size() > this.maxFExs) {
+		if (this.maxFExs != null && w.getFitnessExercises().size() > this.maxFExs) {
 			throw new ValidationException("maxFex", Reason.TOO_BIG);
 		}
 		for (FitnessExercise fEx : w.getFitnessExercises()) {
-			if (this.maxSetCount != null
-					&& fEx.getFSetList().size() > this.maxSetCount) {
+			if (this.maxSetCount != null && fEx.getFSetList().size() > this.maxSetCount) {
 				throw new ValidationException("maxSetCount", Reason.TOO_BIG);
 			}
 		}

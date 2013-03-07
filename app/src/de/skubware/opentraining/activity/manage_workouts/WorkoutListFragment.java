@@ -54,7 +54,7 @@ public class WorkoutListFragment extends SherlockListFragment {
 
 	/** Tag for logging */
 	public static final String TAG = "WorkoutListFragment";
-	
+
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
 	 * activated item position. Only used on tablets.
@@ -72,9 +72,9 @@ public class WorkoutListFragment extends SherlockListFragment {
 	 */
 	private int mActivatedPosition = ListView.INVALID_POSITION;
 
-	/** Currently displayed {@link Workout}s*/
+	/** Currently displayed {@link Workout}s */
 	private List<Workout> mWorkoutList;
-	
+
 	/**
 	 * A callback interface that all activities containing this fragment must
 	 * implement. This mechanism allows activities to be notified of item
@@ -107,18 +107,18 @@ public class WorkoutListFragment extends SherlockListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		mWorkoutList = new ArrayList<Workout>(dataProvider.getWorkouts());
-		
-		setListAdapter(new ArrayAdapter<Workout>(getActivity(), android.R.layout.simple_list_item_single_choice,
-				android.R.id.text1, mWorkoutList));
-		
+
+		setListAdapter(new ArrayAdapter<Workout>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mWorkoutList));
+
 		// notify user if there are no workouts
-		if(mWorkoutList.isEmpty()){
+		if (mWorkoutList.isEmpty()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage(getString(R.string.no_workout));
-			builder.setPositiveButton(getString(R.string.ok), new OnClickListener(){
+			builder.setPositiveButton(getString(R.string.ok), new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
@@ -128,8 +128,7 @@ public class WorkoutListFragment extends SherlockListFragment {
 			builder.create().show();
 		}
 	}
-	
-	
+
 	/** @see WorkoutListActivity#onWorkoutChanged(Workout) */
 	@SuppressWarnings("unchecked")
 	public void onWorkoutChanged(Workout changedWorkout) {
@@ -148,8 +147,7 @@ public class WorkoutListFragment extends SherlockListFragment {
 			// if only the name was changed, the exercises still have to be the
 			// same
 			for (Workout w : mWorkoutList) {
-				if (w.getFitnessExercises().equals(
-						changedWorkout.getFitnessExercises())) {
+				if (w.getFitnessExercises().equals(changedWorkout.getFitnessExercises())) {
 					oldWorkout = w;
 					break;
 				}
@@ -158,16 +156,11 @@ public class WorkoutListFragment extends SherlockListFragment {
 		}
 
 		if (oldWorkout == null) {
-			Log.e(TAG,
-					"Changed Workout could not be found in WorkoutListActivity. changedWorkout: "
-							+ changedWorkout.toDebugString());
+			Log.e(TAG, "Changed Workout could not be found in WorkoutListActivity. changedWorkout: " + changedWorkout.toDebugString());
 			return;
 		}
 
-		Log.d(TAG,
-				"Workout has changed. Old Workout: "
-						+ oldWorkout.toDebugString() + "\n New Workout: "
-						+ changedWorkout.toDebugString());
+		Log.d(TAG, "Workout has changed. Old Workout: " + oldWorkout.toDebugString() + "\n New Workout: " + changedWorkout.toDebugString());
 
 		// replace Workout with changed one
 		int oldIdx = mWorkoutList.indexOf(oldWorkout);
@@ -215,7 +208,7 @@ public class WorkoutListFragment extends SherlockListFragment {
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(((Workout)listView.getAdapter().getItem(position)));
+		mCallbacks.onItemSelected(((Workout) listView.getAdapter().getItem(position)));
 	}
 
 	@Override

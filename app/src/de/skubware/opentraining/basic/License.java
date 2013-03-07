@@ -18,8 +18,6 @@
  * 
  */
 
-
-
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
@@ -29,37 +27,37 @@ import java.net.URL;
 import android.util.Log;
 
 /**
- * Class for representing the license of an image.
- * Currently not used, will be required in future(when there are more exercises with images from different authors).
+ * Class for representing the license of an image. Currently not used, will be
+ * required in future(when there are more exercises with images from different
+ * authors).
  * 
  * @author Christian Skubich
  */
-public class License implements Serializable{
+public class License implements Serializable {
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	
 	/** Tag for logging */
 	static final String TAG = "License";
-	
+
 	/**
-	 * Enumeration for the general type of the license.
-	 * Each license type contains an URL to the license text.
+	 * Enumeration for the general type of the license. Each license type
+	 * contains an URL to the license text.
 	 */
-	public enum LicenseType{
+	public enum LicenseType {
 		/** Similar to public domain */
 		CC0("http://creativecommons.org/publicdomain/zero/1.0/"),
 		/** Attribution to author required */
 		CC_BY_UNPORTED("http://creativecommons.org/licenses/by/3.0/");
-		
+
 		/** URL to the license */
 		URL urlToLicense;
-		
+
 		/**
 		 * 
 		 * @param url
 		 */
-		LicenseType(String url){
+		LicenseType(String url) {
 			try {
 				this.urlToLicense = new URL(url);
 			} catch (MalformedURLException e) {
@@ -67,49 +65,48 @@ public class License implements Serializable{
 			}
 		}
 	}
-	
+
 	/** The general type of this license */
 	private LicenseType type;
-	
+
 	/** The author */
 	private String author;
-	
+
 	/**
-	 * Default constructor without parameters.
-	 * LicenseType is set to {@link LicenseType#CC0}, author may remain empty.
+	 * Default constructor without parameters. LicenseType is set to
+	 * {@link LicenseType#CC0}, author may remain empty.
 	 */
-	public License(){
+	public License() {
 		this.type = LicenseType.CC0;
 	}
-	
+
 	/**
 	 * Constructor, requires a {@link #LicenseType}.
 	 * 
-	 * @param type the general type of license
+	 * @param type
+	 *            the general type of license
 	 */
-	public License(LicenseType type, String author){
+	public License(LicenseType type, String author) {
 		this.type = type;
 		this.author = author;
 	}
-	
+
 	/**
 	 * Getter for the license type.
 	 * 
 	 * @return the license type
 	 */
-	public LicenseType getLicenseType(){
+	public LicenseType getLicenseType() {
 		return this.type;
 	}
-	
+
 	/**
 	 * Getter for author.
 	 * 
 	 * @return the author
 	 */
-	public String getAuthor(){
+	public String getAuthor() {
 		return this.author;
 	}
-	
-	
 
 }

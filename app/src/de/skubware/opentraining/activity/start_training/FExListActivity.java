@@ -35,30 +35,28 @@ import android.util.Log;
  * An activity representing a list of Exercise. This activity has different
  * presentations for handset and tablet-size devices. On handsets, the activity
  * presents a list of items, which when touched, lead to a
- * {@link FExDetailActivity} representing item details. On tablets, the
- * activity presents the list of items and item details side-by-side using two
- * vertical panes.
+ * {@link FExDetailActivity} representing item details. On tablets, the activity
+ * presents the list of items and item details side-by-side using two vertical
+ * panes.
  * <p>
  * The activity makes heavy use of fragments. The list of items is a
  * {@link FExListFragment} and the item details (if present) is a
  * {@link FExDetailFragment}.
  * <p>
- * This activity also implements the required
- * {@link FExListFragment.Callbacks} interface to listen for item
- * selections.
+ * This activity also implements the required {@link FExListFragment.Callbacks}
+ * interface to listen for item selections.
  */
 public class FExListActivity extends SherlockFragmentActivity implements FExListFragment.Callbacks {
 
 	/** Tag for logging */
 	public static final String TAG = FExListActivity.class.getName();
-	
+
 	/** Constant for argument */
 	public static final String ARG_WORKOUT = "workout";
 	static final int RESULT_WORKOUT = 23;
 
 	private Workout mWorkout;
-	
-	
+
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
@@ -69,14 +67,12 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fex_list);
-		
+
 		// retrieve argument and pass it to fragment
 		mWorkout = (Workout) getIntent().getExtras().getSerializable(ARG_WORKOUT);
 		FExListFragment fragment = (FExListFragment) getSupportFragmentManager().findFragmentById(R.id.exercise_list);
 		fragment.setWorkout(mWorkout);
 
-
-		
 		// Show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -90,16 +86,14 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 			// In two-pane mode, list items should be given the
 			// 'activated' state when touched.
 			((FExListFragment) getSupportFragmentManager().findFragmentById(R.id.exercise_list)).setActivateOnItemClick(true);
-			
-		
+
 		}
 
 	}
 
-	
 	/** Saves the state of this Activity, e.g. when screen orientation changed. */
 	@Override
-	public void onSaveInstanceState (Bundle outState){
+	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(ARG_WORKOUT, mWorkout);
 	}
@@ -115,8 +109,8 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 	}
 
 	/**
-	 * Callback method from {@link FExListFragment.Callbacks} indicating
-	 * that the item with the given ID was selected.
+	 * Callback method from {@link FExListFragment.Callbacks} indicating that
+	 * the item with the given ID was selected.
 	 */
 	@Override
 	public void onItemSelected(FitnessExercise ex) {
@@ -140,7 +134,7 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 			startActivityForResult(detailIntent, FExListActivity.RESULT_WORKOUT);
 		}
 	}
-	
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.v(TAG, "onActivityResult()");
 		if (requestCode == RESULT_WORKOUT) {
@@ -148,14 +142,14 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 				// Workout has been changed, so update data
 				mWorkout = (Workout) data.getSerializableExtra(FExListActivity.ARG_WORKOUT);
 				Log.v(TAG, "updating Workout of FExListActivity:\n" + mWorkout.toDebugString());
-				
+
 				// update in fragment too
 				FExListFragment fragment = (FExListFragment) getSupportFragmentManager().findFragmentById(R.id.exercise_list);
-				if(fragment != null){
+				if (fragment != null) {
 					Log.d(TAG, "updating FExListFragment");
 					// either notify list fragment if it's there (on tablets)
 					fragment.setWorkout(mWorkout);
-				}else{
+				} else {
 					Log.e(TAG, "Did not find FExListFragment");
 				}
 			}

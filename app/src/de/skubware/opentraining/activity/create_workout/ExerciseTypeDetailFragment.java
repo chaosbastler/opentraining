@@ -99,16 +99,13 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 		this.getActivity().setTitle(mExercise.getLocalizedName());
 	}
 
-	
 	/** Saves the state of this Fragment, e.g. when screen orientation changed. */
 	@Override
-	public void onSaveInstanceState (Bundle outState){
+	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(ExerciseTypeDetailFragment.ARG_EXERCISE, mExercise);
 		outState.putSerializable(ExerciseTypeDetailFragment.ARG_WORKOUT, mWorkout);
 	}
-
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -164,22 +161,20 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 					return true;
 				}
 
-
 				// add exercise to workout or create a new one
 				if (mWorkout == null) {
 					mWorkout = new Workout("My Plan", new FitnessExercise(mExercise));
 				} else {
-					
-					// assert that there is not already such an exercise in the workout
-					for(FitnessExercise fEx:mWorkout.getFitnessExercises()){
-						if(fEx.getExType().equals(mExercise)){
-							Toast.makeText(getActivity(),
-									getString(R.string.exercise_already_in_workout),
-									Toast.LENGTH_LONG).show();
+
+					// assert that there is not already such an exercise in the
+					// workout
+					for (FitnessExercise fEx : mWorkout.getFitnessExercises()) {
+						if (fEx.getExType().equals(mExercise)) {
+							Toast.makeText(getActivity(), getString(R.string.exercise_already_in_workout), Toast.LENGTH_LONG).show();
 							return true;
 						}
 					}
-					
+
 					mWorkout.addFitnessExercise(new FitnessExercise(mExercise));
 				}
 
@@ -194,7 +189,7 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 					getActivity().setResult(Activity.RESULT_OK, i);
 					getActivity().finish();
 				}
-				
+
 				Toast.makeText(getActivity(),
 						getString(R.string.exercise) + " " + mExercise.getLocalizedName() + " " + getString(R.string.has_been_added),
 						Toast.LENGTH_SHORT).show();
@@ -203,8 +198,6 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 			}
 		});
 
-
 	}
-
 
 }

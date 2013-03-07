@@ -59,34 +59,31 @@ import de.skubware.opentraining.db.IDataProvider;
 
 /**
  * A fragment representing a single Exercise detail screen. This fragment is
- * either contained in a {@link FExListActivity} in two-pane mode (on
- * tablets) or a {@link FExDetailActivity} on handsets.
+ * either contained in a {@link FExListActivity} in two-pane mode (on tablets)
+ * or a {@link FExDetailActivity} on handsets.
  */
 public class FExDetailFragment extends SherlockFragment implements DialogFragmentAddEntry.Callbacks {
 	/** Tag for logging */
 	public static final String TAG = FExDetailFragment.class.getName();
-	
 
 	/**
 	 * The fragment argument representing the item ID that this fragment
 	 * represents.
 	 */
 	public static final String ARG_FEX = "f_ex";
-	
-	public static final String ARG_WORKOUT = "workout";
 
+	public static final String ARG_WORKOUT = "workout";
 
 	/**
 	 * The {@link FitnessExercise} this fragment is presenting.
 	 */
 	private FitnessExercise mExercise;
-	
+
 	/** Currently shown {@link Workout}. */
 	private Workout mWorkout;
-	
+
 	private GestureDetector mGestureScanner;
 
-	
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -97,9 +94,9 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		this.setHasOptionsMenu(true);
-		
+
 		mExercise = (FitnessExercise) getArguments().getSerializable(ARG_FEX);
 		mWorkout = (Workout) getArguments().getSerializable(ARG_WORKOUT);
 	}
@@ -110,7 +107,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 		// show the current exercise
 		ImageView imageview = (ImageView) rootView.findViewById(R.id.imageview);
-		
+
 		// set gesture detector
 		this.mGestureScanner = new GestureDetector(this.getActivity(), new ExerciseDetailOnGestureListener(this, imageview, mExercise));
 
@@ -136,25 +133,24 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 				return mGestureScanner.onTouchEvent(event);
 			}
 		});
-		
-		
+
 		EditText editText = (EditText) rootView.findViewById(R.id.edittext_current_entry);
-		editText.setOnClickListener(new OnClickListener(){
+		editText.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				List<TrainingSubEntry> subEntryList = mExercise.getTrainingEntryList().get(0).getSubEntryList();
 				// create new SubEntry if there is none
-				if(subEntryList.isEmpty()){
+				if (subEntryList.isEmpty()) {
 					showDialog();
 					return;
 				}
-				
+
 				// edit existing SubEntries if there are some
 				AlertDialog.Builder builder_subentry_chooser = new AlertDialog.Builder(getActivity());
 				builder_subentry_chooser.setTitle(getString(R.string.choose_subentry));
 
-				final ArrayAdapter<TrainingSubEntry> adapter = new ArrayAdapter<TrainingSubEntry>(getActivity(), android.R.layout.select_dialog_singlechoice,
-						subEntryList);
+				final ArrayAdapter<TrainingSubEntry> adapter = new ArrayAdapter<TrainingSubEntry>(getActivity(),
+						android.R.layout.select_dialog_singlechoice, subEntryList);
 
 				builder_subentry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int item) {
@@ -167,17 +163,16 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 			}
 		});
-		
+
 		return rootView;
 	}
-	
+
 	@Override
-	public void onStart(){
+	public void onStart() {
 		super.onStart();
-		updateTrainingEntries();	
-	}	
-	
-	
+		updateTrainingEntries();
+	}
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.fex_detail_menu, menu);
@@ -186,17 +181,17 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		MenuItem menu_item_add_entry = (MenuItem) menu.findItem(R.id.menu_item_add_entry);
 		menu_item_add_entry.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				showDialog();			
+				showDialog();
 				return true;
 			}
 		});
 	}
-	
+
 	/** Shows DialogFragmentAddEntry. */
 	private void showDialog() {
 		showDialog(null);
 	}
-	
+
 	/**
 	 * Shows DialogFragmentAddEntry with the given subEntry. If subEntry is null
 	 * a new SubEntry will be added to {@link mExercise}.
@@ -217,58 +212,56 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mExercise, subEntry);
 		newFragment.show(ft, "dialog");
 	}
-	
 
 	@Override
 	public void onEntryEdited(FitnessExercise fitnessExercise) {
 		Log.d(TAG, "onEntryEdited()");
-						
+
 		mWorkout.updateFitnessExercise(fitnessExercise);
 
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		dataProvider.saveWorkout(mWorkout);
-		
+
 		FExListFragment fragment = (FExListFragment) getFragmentManager().findFragmentById(R.id.exercise_list);
-		if(fragment != null){
+		if (fragment != null) {
 			Log.d(TAG, "updating FExListFragment");
 			// either notify list fragment if it's there (on tablets)
 			fragment.setWorkout(mWorkout);
-		}else{
+		} else {
 			Log.d(TAG, "setting Intent for FExListActivity");
-			// or return intent if list fragment is not visible (on small screens)
+			// or return intent if list fragment is not visible (on small
+			// screens)
 			Intent i = new Intent();
 			i.putExtra(FExListActivity.ARG_WORKOUT, mWorkout);
-			this.getActivity().setResult(Activity.RESULT_OK, i);		
+			this.getActivity().setResult(Activity.RESULT_OK, i);
 		}
-		
-		
+
 		mExercise = fitnessExercise;
 		updateTrainingEntries();
 	}
-	
+
 	/**
 	 * Updates the displayed {@link TrainingEntry}. That means the text of all
 	 * {@link TrainingSubEntrys} is updated.
 	 */
-	private void updateTrainingEntries(){
+	private void updateTrainingEntries() {
 		EditText editText = (EditText) this.getActivity().findViewById(R.id.edittext_current_entry);
 
 		List<TrainingSubEntry> subEntryList = mExercise.getTrainingEntryList().get(0).getSubEntryList();
-		if(subEntryList.isEmpty()){
+		if (subEntryList.isEmpty()) {
 			editText.setText(null);
 			return;
 		}
-		
+
 		StringBuilder content = new StringBuilder();
-		for(TrainingSubEntry entry:subEntryList){
+		for (TrainingSubEntry entry : subEntryList) {
 			content.append(entry.getContent());
 			content.append("\n");
 		}
 		// finally delete last "\n"
 		content.deleteCharAt(content.length() - 1);
 
-		
 		editText.setText(content.toString());
 	}
-	
+
 }

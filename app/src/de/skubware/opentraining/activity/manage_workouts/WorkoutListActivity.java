@@ -47,20 +47,18 @@ import android.util.Log;
  * {@link WorkoutListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class WorkoutListActivity extends SherlockFragmentActivity implements WorkoutListFragment.Callbacks {	
+public class WorkoutListActivity extends SherlockFragmentActivity implements WorkoutListFragment.Callbacks {
 	/** Tag for logging */
 	public static final String TAG = "WorkoutListActivity";
-	
 
 	/** Constant for result */
 	static final int RESULT_WORKOUT = 404;
-	
+
 	static final int REQUEST_EXIT = 99;
 
 	/** Constant for argument */
 	public static String ARG_WORKOUT = "workout";
 
-	
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
@@ -123,7 +121,6 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 			startActivityForResult(detailIntent, RESULT_WORKOUT);
 		}
 	}
-	
 
 	/**
 	 * Handles changed {@link Workout}s(e.g. name was changed in
@@ -136,8 +133,7 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 			Log.w(TAG, "RESULT_WORKOUT");
 
 			if (resultCode == RESULT_OK) {
-				Workout mWorkout = (Workout) data
-						.getSerializableExtra(WorkoutListActivity.ARG_WORKOUT);
+				Workout mWorkout = (Workout) data.getSerializableExtra(WorkoutListActivity.ARG_WORKOUT);
 				this.onWorkoutChanged(mWorkout);
 				return;
 			}
@@ -150,7 +146,7 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 
 		}
 	}
-	
+
 	/**
 	 * Called when a {@link Workout} (that is in the list of currently shown
 	 * Workouts) has changed. This will update the ListAdapter and thus the GUI.
@@ -158,8 +154,7 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 	 * @param changedWorkout
 	 *            The Workout that has changed.
 	 */
-	public void onWorkoutChanged(Workout changedWorkout){
+	public void onWorkoutChanged(Workout changedWorkout) {
 		((WorkoutListFragment) getSupportFragmentManager().findFragmentById(R.id.workout_list)).onWorkoutChanged(changedWorkout);
 	}
 }
-

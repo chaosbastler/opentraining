@@ -46,7 +46,7 @@ public class FExListFragment extends SherlockListFragment {
 
 	/** Tag for logging */
 	public static final String TAG = FExListFragment.class.getName();
-	
+
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
 	 * activated item position. Only used on tablets.
@@ -54,15 +54,14 @@ public class FExListFragment extends SherlockListFragment {
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
 	public static final String ARG_WORKOUT = "workout";
-	
+
 	private Workout mWorkout;
-	
-	
-	
+
 	/**
 	 * Create a new instance of MyDialogFragment, providing "num" as an
 	 * argument.
-	 * @param mWorkout 
+	 * 
+	 * @param mWorkout
 	 */
 	static FExListFragment newInstance(Workout mWorkout) {
 		FExListFragment f = new FExListFragment();
@@ -73,8 +72,7 @@ public class FExListFragment extends SherlockListFragment {
 
 		return f;
 	}
-	
-	
+
 	/**
 	 * The fragment's current callback object, which is notified of list item
 	 * clicks.
@@ -119,27 +117,24 @@ public class FExListFragment extends SherlockListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		
-		if(savedInstanceState != null ){
+		if (savedInstanceState != null) {
 			mWorkout = (Workout) savedInstanceState.getSerializable(ARG_WORKOUT);
 			setWorkout(mWorkout);
 		}
-		
+
 		String[] arr = {};
 		setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1, arr));
 	}
-	
-	public void setWorkout(Workout workout){
+
+	public void setWorkout(Workout workout) {
 		mWorkout = workout;
-		
+
 		List<FitnessExercise> list = mWorkout.getFitnessExercises();
-		FitnessExercise[] arr = list.toArray(new FitnessExercise[list.size()]);	
-		
+		FitnessExercise[] arr = list.toArray(new FitnessExercise[list.size()]);
+
 		setListAdapter(new ArrayAdapter<FitnessExercise>(getActivity(), android.R.layout.simple_list_item_single_choice,
 				android.R.id.text1, arr));
 	}
-
-
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -183,9 +178,9 @@ public class FExListFragment extends SherlockListFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		
+
 		outState.putSerializable(ARG_WORKOUT, mWorkout);
-		
+
 		if (mActivatedPosition != ListView.INVALID_POSITION) {
 			// Serialize and persist the activated item position.
 			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);

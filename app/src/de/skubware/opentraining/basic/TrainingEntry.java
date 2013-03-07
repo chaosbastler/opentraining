@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
@@ -34,13 +33,13 @@ import android.util.Log;
  * @author Christian Skubich
  * 
  */
-public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {	
+public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
 	/** Tag for logging */
 	static final String TAG = "TrainingEntry";
-	
+
 	/** The mDate to which this Entry refers to. May be null. */
 	private Date mDate;
 
@@ -50,7 +49,8 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	/**
 	 * This constructor should be used, if the {@link #mDate} is unknown.
 	 * 
-	 * @deprecated Should only be used for parsing .xml files, use {@link Workout#addTrainingEntry(java.util.Date)} instead.
+	 * @deprecated Should only be used for parsing .xml files, use
+	 *             {@link Workout#addTrainingEntry(java.util.Date)} instead.
 	 */
 	@Deprecated
 	TrainingEntry() {
@@ -62,8 +62,9 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	 * 
 	 * @param mDate
 	 *            The mDate.
-	 *            
-	 * @deprecated Should only be used for parsing .xml files, use {@link Workout#addTrainingEntry(java.util.Date)} instead.
+	 * 
+	 * @deprecated Should only be used for parsing .xml files, use
+	 *             {@link Workout#addTrainingEntry(java.util.Date)} instead.
 	 */
 	@Deprecated
 	public TrainingEntry(Date date) {
@@ -79,7 +80,7 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	 * @return The created {@link TrainingSubEntry}
 	 * 
 	 */
-	public TrainingSubEntry add(String content) {		
+	public TrainingSubEntry add(String content) {
 		Log.v(TAG, "Added TrainingSubEntry: " + content);
 		@SuppressWarnings("deprecation")
 		TrainingSubEntry entry = new TrainingSubEntry(content);
@@ -135,22 +136,20 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	}
 
 	/**
-	 * Returns a String that represents this object.
-	 * Should only be used for debugging.
+	 * Returns a String that represents this object. Should only be used for
+	 * debugging.
 	 * 
 	 * @return A String that represents this object.
 	 */
-	public String toDebugString(){
+	public String toDebugString() {
 		StringBuilder builder = new StringBuilder();
-		
+
 		builder.append("Date: " + mDate + "\n");
-		for(TrainingSubEntry entry:mSubEntryList){
+		for (TrainingSubEntry entry : mSubEntryList) {
 			builder.append("\n TrainingEntry: " + entry.toString());
 		}
 
-		
 		return builder.toString();
 	}
-
 
 }

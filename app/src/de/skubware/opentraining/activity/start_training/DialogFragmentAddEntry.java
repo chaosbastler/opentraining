@@ -51,16 +51,16 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 
 	/** Currently displayed {@link Workout}. */
 	private FitnessExercise mFex;
-	
-	/** Currently edited {@link TrainingEntry}*/
+
+	/** Currently edited {@link TrainingEntry} */
 	private TrainingEntry mLatestTrainingEntry;
-	
-	/** Currently edited {@link TrainingSubEntry}*/
+
+	/** Currently edited {@link TrainingSubEntry} */
 	private TrainingSubEntry mSubEntry;
-	
+
 	public static String ARG_ID_EXERCISE = "fex";
 	public static String ARG_ID_TRAINING_SUB_ENTRY = "subentry";
-	
+
 	public interface Callbacks {
 		/**
 		 * Callback for when an item has been changed.
@@ -88,17 +88,15 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		super.onCreate(savedInstanceState);
 		mFex = (FitnessExercise) getArguments().getSerializable(ARG_ID_EXERCISE);
 		mSubEntry = (TrainingSubEntry) getArguments().getSerializable(ARG_ID_TRAINING_SUB_ENTRY);
-		
-		
+
 		List<TrainingEntry> entryList = mFex.getTrainingEntryList();
-		TrainingEntry latestEntry = entryList.get(entryList.size()-1);
+		TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
 		mLatestTrainingEntry = latestEntry;
-		
-		
-		if(mSubEntry==null){
+
+		if (mSubEntry == null) {
 			mSubEntry = mLatestTrainingEntry.add("");
 		}
-		
+
 	}
 
 	@Override
@@ -106,26 +104,27 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
 		final View v = inflater.inflate(R.layout.fragment_dialog_add_entry, null);
 		final EditText edittext_training_entry = (EditText) v.findViewById(R.id.edittext_training_entry);
-		
-		if(this.mSubEntry != null){
+
+		if (this.mSubEntry != null) {
 			edittext_training_entry.setText(this.mSubEntry.getContent());
 		}
 
-		return new AlertDialog.Builder(getActivity()).setTitle(DateFormat.getInstance().format(mLatestTrainingEntry.getDate())).setView(v).setCancelable(true)
-				.setPositiveButton(getString(R.string.save_entry), new DialogInterface.OnClickListener() {
+		return new AlertDialog.Builder(getActivity()).setTitle(DateFormat.getInstance().format(mLatestTrainingEntry.getDate())).setView(v)
+				.setCancelable(true).setPositiveButton(getString(R.string.save_entry), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String content = edittext_training_entry.getText().toString();
-						
-						if(content.equals("")){
+
+						if (content.equals("")) {
 							mLatestTrainingEntry.remove(mSubEntry);
-						}else{
+						} else {
 							mSubEntry.setContent(content);
 						}
-						
-						FExDetailFragment fragment = (FExDetailFragment) getFragmentManager().findFragmentById(R.id.exercise_detail_container);
+
+						FExDetailFragment fragment = (FExDetailFragment) getFragmentManager().findFragmentById(
+								R.id.exercise_detail_container);
 						fragment.onEntryEdited(mFex);
-						
+
 						hideKeyboard(edittext_training_entry);
 						dialog.dismiss();
 					}
@@ -134,20 +133,21 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						String content = edittext_training_entry.getText().toString();
 
-						if(content.equals("")){
+						if (content.equals("")) {
 							mLatestTrainingEntry.remove(mSubEntry);
 						}
-						
+
 						hideKeyboard(edittext_training_entry);
 						dialog.dismiss();
 					}
 				}).create();
 	}
-	
+
 	/**
 	 * Hides the keyboard.
 	 * 
-	 * @param edittext_training_entry The EditText.
+	 * @param edittext_training_entry
+	 *            The EditText.
 	 */
 	private void hideKeyboard(EditText edittext_training_entry) {
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

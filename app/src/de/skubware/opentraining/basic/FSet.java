@@ -18,12 +18,10 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
 import java.util.*;
-
 
 /**
  * A class that represents a FSet.
@@ -36,7 +34,7 @@ public class FSet implements Serializable {
 
 	private List<Category> mCategoryList = new ArrayList<Category>();
 
-	public static abstract class Category{
+	public static abstract class Category {
 
 		protected int value;
 		public final String name;

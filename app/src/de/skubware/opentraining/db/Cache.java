@@ -21,38 +21,38 @@ import de.skubware.opentraining.basic.SportsEquipment;
  */
 public enum Cache {
 	INSTANCE;
-	
+
 	private List<ExerciseType> mExerciseList = null;
 	private List<Muscle> mMuscleList = null;
 	private List<SportsEquipment> mSportsEquipmentList = null;
-	
+
 	/**
 	 * Refreshes the cached data.
 	 * 
 	 * @param mContext
 	 */
-	public void updateCache(Context mContext){
+	public void updateCache(Context mContext) {
 		DataProvider dataProvider = new DataProvider(mContext);
 		mMuscleList = dataProvider.loadMuscles();
 		mSportsEquipmentList = dataProvider.loadEquipment();
 		mExerciseList = dataProvider.loadExercises();
 	}
-	
+
 	/**
 	 * Returns the cached {@link ExerciseType}s.
 	 * 
-	 * @return The cached  {@link ExerciseType}s or null.
+	 * @return The cached {@link ExerciseType}s or null.
 	 */
-	public List<ExerciseType> getExercises(){
+	public List<ExerciseType> getExercises() {
 		return mExerciseList;
 	}
-	
-	public List<Muscle> getMuscles(){
+
+	public List<Muscle> getMuscles() {
 		return mMuscleList;
 	}
-	
-	public List<SportsEquipment> getEquipment(){
+
+	public List<SportsEquipment> getEquipment() {
 		return mSportsEquipmentList;
 	}
-	
+
 }

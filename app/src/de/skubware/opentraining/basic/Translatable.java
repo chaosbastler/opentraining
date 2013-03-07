@@ -49,10 +49,10 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Map that stores the primary name and alternative names for each Locale. */
 	private Map<Locale, Set<String>> nameMap = new HashMap<Locale, Set<String>>();
-	
+
 	/** The (primary) name of the Muscle */
 	protected String name;
 
@@ -69,7 +69,7 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 		this.addNames(locale, nameList);
 		name = nameList.get(0);
 	}
-	
+
 	/**
 	 * Adds the names to the list of alternative names. First name will be the
 	 * primary name for this locale.
@@ -80,23 +80,23 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 	 *            The list with the primary name and the alternative names. The
 	 *            first name of the list will be the primary name.
 	 */
-	public void addNames(Locale locale, String ... names) {
-		if(nameMap.get(locale) == null){
+	public void addNames(Locale locale, String... names) {
+		if (nameMap.get(locale) == null) {
 			Set<String> nameSet = new HashSet<String>();
 			nameMap.put(locale, nameSet);
 		}
-		
+
 		Locale userLocale = Locale.getDefault();
-		if(locale.getLanguage().equals(userLocale.getLanguage())){
+		if (locale.getLanguage().equals(userLocale.getLanguage())) {
 			this.name = names[0];
 		}
-		
+
 		Set<String> nameSet = nameMap.get(locale);
-		for(String name:names){
+		for (String name : names) {
 			nameSet.add(name);
 			nameSet.add(name.toLowerCase(Locale.GERMANY));
 		}
-		
+
 	}
 
 	/**
@@ -107,12 +107,12 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 	}
 
 	public boolean isAlternativeName(String name) {
-		for(Locale locale:nameMap.keySet()){
-			if(nameMap.get(locale).contains(name))
+		for (Locale locale : nameMap.keySet()) {
+			if (nameMap.get(locale).contains(name))
 				return true;
-	
+
 		}
-		
+
 		return false;
 	}
 
@@ -127,23 +127,22 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 	}
 
 	/**
-	 * Returns a String that represents this object.
-	 * Should only be used for debugging.
+	 * Returns a String that represents this object. Should only be used for
+	 * debugging.
 	 * 
 	 * @return A String that represents this object.
 	 */
 	public String toDebugString() {
 		StringBuilder builder = new StringBuilder();
-		
-		builder.append("Primary name: " + name+ "\n");
-		for(Locale locale:nameMap.keySet()){
+
+		builder.append("Primary name: " + name + "\n");
+		for (Locale locale : nameMap.keySet()) {
 			builder.append("\n Locale/language: " + locale.getLanguage().toString());
-			for(String name:nameMap.get(locale)){
+			for (String name : nameMap.get(locale)) {
 				builder.append("\n  - " + name);
 			}
 		}
-	
-		
+
 		return builder.toString();
 	}
 
@@ -168,9 +167,9 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if (!( Translatable.class.isAssignableFrom(o.getClass())))
+		if (!(Translatable.class.isAssignableFrom(o.getClass())))
 			return false;
-	
+
 		return ((Translatable) o).toString().equals(this.toString());
 	}
 

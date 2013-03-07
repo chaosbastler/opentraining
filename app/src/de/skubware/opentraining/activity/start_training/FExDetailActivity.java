@@ -27,16 +27,15 @@ import android.os.Bundle;
 /**
  * An activity representing a single Exercise detail screen. This activity is
  * only used on handset devices. On tablet-size devices, item details are
- * presented side-by-side with a list of items in a {@link FExListActivity}
- * .
+ * presented side-by-side with a list of items in a {@link FExListActivity} .
  * <p>
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link FExDetailFragment}.
  */
-public class FExDetailActivity extends SherlockFragmentActivity{
+public class FExDetailActivity extends SherlockFragmentActivity {
 	/** Tag for logging */
 	public static final String TAG = "FExDetailActivity";
-		
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,7 +64,5 @@ public class FExDetailActivity extends SherlockFragmentActivity{
 			getSupportFragmentManager().beginTransaction().add(R.id.exercise_detail_container, fragment).commit();
 		}
 	}
-
-
 
 }

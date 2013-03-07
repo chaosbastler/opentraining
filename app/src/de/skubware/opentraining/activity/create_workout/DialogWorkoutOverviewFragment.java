@@ -47,7 +47,7 @@ import android.widget.ListView;
 public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "DialogWorkoutOverviewFragment";
-	
+
 	/** Currently displayed {@link Workout}. */
 	Workout mWorkout;
 
@@ -93,10 +93,10 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 				.setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						
+
 						showDialogSaveWorkoutFragment();
 						dialog.dismiss();
-						
+
 					}
 				}).setNeutralButton(getString(R.string.add_more_exercises), new DialogInterface.OnClickListener() {
 					@Override
@@ -115,11 +115,12 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 					}
 				}).create();
 	}
-	
+
 	/**
-	 * Finishes the Activities ExerciseTypeDetailActivity and ExerciseTypeListActivity .
+	 * Finishes the Activities ExerciseTypeDetailActivity and
+	 * ExerciseTypeListActivity .
 	 */
-	private void finishActivities(){
+	private void finishActivities() {
 		if (getActivity() instanceof ExerciseTypeDetailActivity) {
 			// finish ExerciseTypeDetailActivity AND
 			// ExerciseTypeListActivity
@@ -130,8 +131,7 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 			getActivity().finish();
 		}
 	}
-	
-	
+
 	/** Shows DialogSaveWorkoutFragment. */
 	void showDialogSaveWorkoutFragment() {
 
@@ -149,6 +149,5 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 		DialogFragment newFragment = DialogSaveWorkoutFragment.newInstance(mWorkout);
 		newFragment.show(ft, "dialog");
 	}
-
 
 }

@@ -33,11 +33,9 @@ import android.os.Bundle;
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link ExerciseTypeDetailFragment}.
  */
-public class ExerciseTypeDetailActivity extends SherlockFragmentActivity{
+public class ExerciseTypeDetailActivity extends SherlockFragmentActivity {
 	/** Tag for logging */
 	public static final String TAG = ExerciseTypeDetailActivity.class.getName();
-
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,27 +58,23 @@ public class ExerciseTypeDetailActivity extends SherlockFragmentActivity{
 			// Create the detail fragment and add it to the activity
 			// using a fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putSerializable(ExerciseTypeDetailFragment.ARG_EXERCISE, getIntent().getSerializableExtra(ExerciseTypeDetailFragment.ARG_EXERCISE));
-			arguments.putSerializable(ExerciseTypeDetailFragment.ARG_WORKOUT, getIntent().getSerializableExtra(ExerciseTypeDetailFragment.ARG_WORKOUT));
+			arguments.putSerializable(ExerciseTypeDetailFragment.ARG_EXERCISE,
+					getIntent().getSerializableExtra(ExerciseTypeDetailFragment.ARG_EXERCISE));
+			arguments.putSerializable(ExerciseTypeDetailFragment.ARG_WORKOUT,
+					getIntent().getSerializableExtra(ExerciseTypeDetailFragment.ARG_WORKOUT));
 
 			ExerciseTypeDetailFragment fragment = new ExerciseTypeDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction().add(R.id.exercisetype_detail_container, fragment).commit();
 		}
-		
 
 	}
-	
 
-	/*@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			NavUtils.navigateUpTo(this, new Intent(this, ExerciseTypeListActivity.class));
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
-
+	/*
+	 * @Override public boolean onOptionsItemSelected(MenuItem item) { switch
+	 * (item.getItemId()) { case android.R.id.home: NavUtils.navigateUpTo(this,
+	 * new Intent(this, ExerciseTypeListActivity.class)); return true; } return
+	 * super.onOptionsItemSelected(item); }
+	 */
 
 }

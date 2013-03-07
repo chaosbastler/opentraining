@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
@@ -39,7 +38,7 @@ import android.util.Log;
 public class Workout implements Iterable<FitnessExercise>, Serializable {
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Tag for logging */
 	static final String TAG = "Workout";
 
@@ -62,7 +61,7 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	 * 
 	 */
 	public Workout(String name, Collection<FitnessExercise> fExes) {
-		if (name == null || name.equals("") || fExes == null || fExes.isEmpty() || fExes.contains(null)) {
+		if (name == null || name.replaceAll(" ", "").equals("") || fExes == null || fExes.isEmpty() || fExes.contains(null)) {
 			throw new NullPointerException();
 		}
 
@@ -104,41 +103,38 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	public boolean contains(FitnessExercise fEx) {
 		return this.fitnessExercises.contains(fEx);
 	}
-	
+
 	/** Adds a new TrainingEntriy to each FitnessExercise in this Workout. */
-	public void addTrainingEntry(Date date){
-		for(FitnessExercise fEx:this.fitnessExercises){
+	public void addTrainingEntry(Date date) {
+		for (FitnessExercise fEx : this.fitnessExercises) {
 			fEx.addTrainingEntry(date);
 		}
 	}
-	
+
 	/**
 	 * Returns a set of dates, for which {@link TrainingEntry}s do exist.
 	 * 
 	 * @return A set of dates, for which training entries do exist.
 	 */
-	/*public Set<Date> getTrainingEntryDates(){
-		List<Date> dateList = new ArrayList<Date>();
-		for(FitnessExercise fEx:this.fitnessExercises){
-			for(TrainingEntry e:fEx.getTrainingEntryList()){
-				dateList.add(e.getDate());
-			}
-		}
-		
-		// assert that number dates is correct
-		Set<Date> dateSet = new HashSet<Date>(dateList);
-		if( dateList.size() != (dateSet.size() * this.fitnessExercises.size()) ){
-			throw new AssertionError("Incorrect number of TrainingEntries. This should not happen.");
-		}
-		return dateSet;		
-	}*/
-	
+	/*
+	 * public Set<Date> getTrainingEntryDates(){ List<Date> dateList = new
+	 * ArrayList<Date>(); for(FitnessExercise fEx:this.fitnessExercises){
+	 * for(TrainingEntry e:fEx.getTrainingEntryList()){
+	 * dateList.add(e.getDate()); } }
+	 * 
+	 * // assert that number dates is correct Set<Date> dateSet = new
+	 * HashSet<Date>(dateList); if( dateList.size() != (dateSet.size() *
+	 * this.fitnessExercises.size()) ){ throw new
+	 * AssertionError("Incorrect number of TrainingEntries. This should not happen."
+	 * ); } return dateSet; }
+	 */
+
 	/**
 	 * Checks if there are TrainingEntries for the FitnessExercises.
 	 * 
 	 * @return True if the FitnessExercises have at least one TrainingEntry
 	 */
-	public boolean hasTrainingEntries(){
+	public boolean hasTrainingEntries() {
 		return this.fitnessExercises.get(0).getTrainingEntryList().size() > 0;
 	}
 
@@ -175,16 +171,18 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	 * 
 	 * @param fEx
 	 *            The FitnessExercise to add
-	 *            
-	 * @throws IllegalArgumentException if there is already an FitnessExercise with the same ExerciseType           
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if there is already an FitnessExercise with the same
+	 *             ExerciseType
 	 */
 	public void addFitnessExercise(FitnessExercise fEx) {
 		ExerciseType exType = fEx.getExType();
-		for(FitnessExercise ex:this.getFitnessExercises()){
-			if(ex.getExType().equals(exType))
+		for (FitnessExercise ex : this.getFitnessExercises()) {
+			if (ex.getExType().equals(exType))
 				throw new IllegalArgumentException("There is already an Exercise with the ExerciseType: " + exType.toString());
 		}
-		
+
 		this.fitnessExercises.add(fEx);
 	}
 
@@ -197,7 +195,7 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	public void removeFitnessExercise(FitnessExercise fEx) {
 		this.fitnessExercises.remove(fEx);
 	}
-	
+
 	/**
 	 * Updates the {@link FitnessExercise}.
 	 * 
@@ -211,14 +209,15 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 		Log.d(TAG, "updateFitnessExercise(), changedFEx: " + changedFEx.toDebugString());
 		FitnessExercise oldFex = null;
 		for (FitnessExercise fEx : this.fitnessExercises) {
-			//this comparison relies on the fact that each Workout can only contain each ExerciseType once
-			if (fEx.getExType().equals(changedFEx.getExType())){
+			// this comparison relies on the fact that each Workout can only
+			// contain each ExerciseType once
+			if (fEx.getExType().equals(changedFEx.getExType())) {
 				oldFex = changedFEx;
 				int oldIndex = fitnessExercises.indexOf(fEx);
 				fitnessExercises.remove(oldIndex);
 				fitnessExercises.add(oldIndex, changedFEx);
 				break;
-			}	
+			}
 		}
 
 		if (oldFex == null) {
@@ -263,22 +262,22 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	public String toString() {
 		return this.name;
 	}
-	
+
 	/**
-	 * Returns a String that represents this object.
-	 * Should only be used for debugging.
+	 * Returns a String that represents this object. Should only be used for
+	 * debugging.
 	 * 
 	 * @return A String that represents this object.
 	 */
-	public String toDebugString(){
+	public String toDebugString() {
 		StringBuilder builder = new StringBuilder();
-		
+
 		builder.append("Name: " + name + "\n");
 		builder.append("Empty Rows: " + emptyRows + "\n");
-		for(FitnessExercise fEx:getFitnessExercises()){
+		for (FitnessExercise fEx : getFitnessExercises()) {
 			builder.append("\n" + fEx.toDebugString());
 		}
-		
+
 		return builder.toString();
 	}
 
@@ -293,7 +292,6 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 		Collections.swap(fitnessExercises, idxFirst, idxSecond);
 
 	}
-	
 
 	/**
 	 * Getter for emptyRows
@@ -318,7 +316,7 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 			this.emptyRows = emptyRows;
 		else
 			throw new IllegalArgumentException("There must be more than 0 empty rows");
-		
+
 		Log.d(TAG, "setEmptyRows() to " + this.emptyRows);
 	}
 

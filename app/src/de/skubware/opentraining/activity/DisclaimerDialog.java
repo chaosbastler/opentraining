@@ -42,10 +42,10 @@ import de.skubware.opentraining.R;
  * 
  */
 public class DisclaimerDialog extends AlertDialog {
-	
+
 	/** Static string for preferences. */
 	public static final String PREFERENCE_SHOW_DISCLAIMER = "show_disclaimer";
-	
+
 	/** Reference to original activity. */
 	private Activity mActivity;
 
@@ -65,13 +65,12 @@ public class DisclaimerDialog extends AlertDialog {
 		// set title and message
 		this.setTitle(activity.getString(R.string.license));
 		this.setMessage(s);
-		
-		
+
 		// CheckBox
-        LayoutInflater inflater = this.getLayoutInflater();
+		LayoutInflater inflater = this.getLayoutInflater();
 
 		View wrapper = inflater.inflate(R.layout.dialog_disclaimer_checkbox, null);
-		final CheckBox checkbox_dont_show_again = (CheckBox)wrapper.findViewById(R.id.checkbox_dont_show_again);
+		final CheckBox checkbox_dont_show_again = (CheckBox) wrapper.findViewById(R.id.checkbox_dont_show_again);
 		this.setView(wrapper);
 
 		// positive button
@@ -98,7 +97,6 @@ public class DisclaimerDialog extends AlertDialog {
 			}
 		});
 
-
 		// show the dialog
 		this.show();
 
@@ -108,11 +106,11 @@ public class DisclaimerDialog extends AlertDialog {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if ((keyCode == KeyEvent.KEYCODE_BACK)) {								
+		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 			mActivity.finish();
 			return true;
 		}
-		
+
 		return false;
 	}
 

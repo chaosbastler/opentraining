@@ -134,7 +134,7 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 						}
 						// check if name is empty
 						String workoutName = edittext_workout_name.getText().toString();
-						if(workoutName.equals("") || workoutName.replaceAll(" ", "").equals(""))
+						if (workoutName.equals("") || workoutName.replaceAll(" ", "").equals(""))
 							Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
 
 						mWorkout.setName(workoutName);

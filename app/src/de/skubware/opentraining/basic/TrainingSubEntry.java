@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
@@ -34,10 +33,10 @@ import android.util.Log;
 public class TrainingSubEntry implements Serializable {
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Tag for logging */
 	static final String TAG = "TrainingEntry";
-	
+
 	/** Stores the content of this TrainingSubEntry, is never null. */
 	String content;
 
@@ -47,9 +46,10 @@ public class TrainingSubEntry implements Serializable {
 	 * @param content
 	 *            The content of this TrainingSubEntry. Null arguments will be
 	 *            replaced by empty strings.
-	 *            
-	 * @deprecated Should only be used for parsing .xml files, use {@link TrainingEntry#add(String)} instead.
-	 *            
+	 * 
+	 * @deprecated Should only be used for parsing .xml files, use
+	 *             {@link TrainingEntry#add(String)} instead.
+	 * 
 	 */
 	@Deprecated
 	public TrainingSubEntry(String content) {
@@ -70,7 +70,7 @@ public class TrainingSubEntry implements Serializable {
 	 * 
 	 * @param content
 	 *            The new content of this TrainingSubEntry.
-	 *            
+	 * 
 	 */
 	public void setContent(String content) {
 		Log.v(TAG, "Set new TrainingSubEntry content: " + content);
@@ -81,9 +81,9 @@ public class TrainingSubEntry implements Serializable {
 
 		this.content = content;
 	}
-	
+
 	@Override
-	public String toString(){
+	public String toString() {
 		return getContent();
 	}
 

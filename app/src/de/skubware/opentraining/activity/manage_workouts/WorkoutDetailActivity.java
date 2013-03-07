@@ -62,7 +62,8 @@ public class WorkoutDetailActivity extends SherlockFragmentActivity {
 			// Create the detail fragment and add it to the activity
 			// using a fragment transaction.
 			Bundle arguments = new Bundle();
-			arguments.putSerializable(WorkoutDetailFragment.ARG_WORKOUT, getIntent().getSerializableExtra(WorkoutDetailFragment.ARG_WORKOUT));
+			arguments.putSerializable(WorkoutDetailFragment.ARG_WORKOUT, getIntent()
+					.getSerializableExtra(WorkoutDetailFragment.ARG_WORKOUT));
 			WorkoutDetailFragment fragment = new WorkoutDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction().add(R.id.workout_detail_container, fragment).commit();

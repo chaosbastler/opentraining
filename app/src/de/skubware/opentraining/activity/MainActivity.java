@@ -56,28 +56,24 @@ public class MainActivity extends SherlockFragmentActivity {
 		setContentView(R.layout.activity_main);
 
 		setUpList();
-		
-		
+
 		// load data/parse .xml files in background
 		final Context mContext = this;
-				new Thread() {
+		new Thread() {
 			@Override
 			public void run() {
-					Cache.INSTANCE.updateCache(mContext);		
+				Cache.INSTANCE.updateCache(mContext);
 			}
 		}.start();
 
-		
-		
 		// show disclaimer
 		SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
 		Boolean showDisclaimer = settings.getBoolean(DisclaimerDialog.PREFERENCE_SHOW_DISCLAIMER, true);
-		if(showDisclaimer){
+		if (showDisclaimer) {
 			new DisclaimerDialog(this);
 		}
-		
+
 	}
-	
 
 	/**
 	 * Configures the ListView for this activity.
@@ -85,7 +81,8 @@ public class MainActivity extends SherlockFragmentActivity {
 	private void setUpList() {
 		ListView listview = (ListView) this.findViewById(R.id.activity_main_listview);
 
-		String[] values = new String[] { getString(R.string.create_workout), getString(R.string.manage_workouts), getString(R.string.start_training) };
+		String[] values = new String[] { getString(R.string.create_workout), getString(R.string.manage_workouts),
+				getString(R.string.start_training) };
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
@@ -110,7 +107,7 @@ public class MainActivity extends SherlockFragmentActivity {
 			}
 		});
 	}
-	
+
 	/** Shows a dialog for choosing a {@link Workout} */
 	private void showSelectWorkoutDialog() {
 
@@ -135,17 +132,16 @@ public class MainActivity extends SherlockFragmentActivity {
 				// showing
 				// dialog, so make our own transaction and take care of that
 				// here.
-				/*FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-				Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
-				if (prev != null) {
-					ft.remove(prev);
-				}
-				ft.addToBackStack(null);
-
-				// Create and show the dialog.
-				DialogFragment newFragment = DialogStartTraining.newInstance(mWorkout);
-				newFragment.show(ft, "dialog");*/
-				
+				/*
+				 * FragmentTransaction ft =
+				 * getSupportFragmentManager().beginTransaction(); Fragment prev
+				 * = getSupportFragmentManager().findFragmentByTag("dialog"); if
+				 * (prev != null) { ft.remove(prev); } ft.addToBackStack(null);
+				 * 
+				 * // Create and show the dialog. DialogFragment newFragment =
+				 * DialogStartTraining.newInstance(mWorkout);
+				 * newFragment.show(ft, "dialog");
+				 */
 
 				// add arguments to intent
 				Intent intent = new Intent(MainActivity.this, FExListActivity.class);
@@ -165,17 +161,15 @@ public class MainActivity extends SherlockFragmentActivity {
 			Toast.makeText(MainActivity.this, "No workout found.", Toast.LENGTH_LONG).show();
 			break;
 		// no need to choose Workout if there is only one
-		/*case 1:
-		 	//TODO implement
-			this.showTrainingEntryDialog(workoutList.get(0));
-			break;*/
+		/*
+		 * case 1: //TODO implement
+		 * this.showTrainingEntryDialog(workoutList.get(0)); break;
+		 */
 		// choose Workout, if there is more than one Workout
 		default:
 			builder_workoutchooser.create().show();
 		}
 
 	}
-	
-
 
 }

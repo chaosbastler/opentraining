@@ -18,14 +18,12 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.io.File;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.*;
-
 
 import android.util.Log;
 
@@ -42,7 +40,6 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	
 	/** Tag for logging */
 	static final String TAG = ExerciseType.class.getName();
 
@@ -63,7 +60,6 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	private List<String> hints; // optional
 	private File iconPath; // optional
 
-	
 	/**
 	 * Inner builder class for creating new instances of {@link ExerciseType}.
 	 * 
@@ -225,12 +221,11 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		// this copy is necessary, because builder.neededTools may be a
 		// unmodifiable collection
 		TreeSet<SportsEquipment> tools = new TreeSet<SportsEquipment>(builder.neededTools);
-		/*if (tools.size() > 1) {
-			tools.remove(SportsEquipment.getByName("None"));
-		}
-		if (tools.size() == 0) {
-			tools.add(SportsEquipment.getByName("None"));
-		}*/
+		/*
+		 * if (tools.size() > 1) {
+		 * tools.remove(SportsEquipment.getByName("None")); } if (tools.size()
+		 * == 0) { tools.add(SportsEquipment.getByName("None")); }
+		 */
 		this.requiredEquipment = tools;
 
 		// activationMap and activatedMuscles must be in sync
@@ -253,8 +248,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getUnlocalizedName()
 	 */
 	@Override
@@ -262,7 +258,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return this.name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getLocalizedName()
 	 */
 	@Override
@@ -270,7 +268,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return localizedName;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getDescription()
 	 */
 	@Override
@@ -278,7 +278,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return this.description;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getImagePaths()
 	 */
 	@Override
@@ -286,7 +288,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableList(this.imagePaths);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getIconPath()
 	 */
 	@Override
@@ -294,7 +298,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return new File(this.iconPath.toString());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getImageLicenseMap()
 	 */
 	@Override
@@ -302,7 +308,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableMap(this.imageLicenseMap);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getImageWidth()
 	 */
 	@Override
@@ -310,7 +318,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return this.imageWidth;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getImageHeight()
 	 */
 	@Override
@@ -318,7 +328,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return this.imageHeight;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getRequiredEquipment()
 	 */
 	@Override
@@ -326,7 +338,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableSortedSet(requiredEquipment);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getActivatedMuscles()
 	 */
 	@Override
@@ -334,7 +348,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableSortedSet(activatedMuscles);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getActivationMap()
 	 */
 	@Override
@@ -345,7 +361,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableMap(activationMap);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getTags()
 	 */
 	@Override
@@ -353,7 +371,9 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableSortedSet(this.exerciseTag);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getURLs()
 	 */
 	@Override
@@ -361,15 +381,15 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return java.util.Collections.unmodifiableList(this.relatedURL);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.skubware.opentraining.basic.IExercise#getHints()
 	 */
 	@Override
 	public List<String> getHints() {
 		return java.util.Collections.unmodifiableList(this.hints);
 	}
-
-	
 
 	/**
 	 * Indicates whether some other object is "equal to" this one.
@@ -413,7 +433,6 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return this.getLocalizedName().compareTo(o.getLocalizedName());
 	}
 
-
 	/**
 	 * Generates a FitnessExercise.
 	 * 
@@ -437,89 +456,66 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		}
 		return fExes;
 	}
-	
-	
+
 	/**
 	 * Creates and returns a set containing all the names of this exercise for
 	 * all languages.
 	 * 
 	 * @return A set containing the names of this exercise for all languages.
 	 */
-	public Set<String> getAlternativeNames(){
+	public Set<String> getAlternativeNames() {
 		return new HashSet<String>(this.translationMap.values());
 	}
 
-
-	/*@Override
-	public int describeContents() {
-		return 0;
-	}
-
-
-    @Override
-    public void writeToParcel(Parcel out, int i) {
-
-    	private String name; // required
-    	private String localizedName; // optional
-
-    	private Map<Locale, String> translationMap; // optional
-    	private String description; // optional
-    	private List<File> imagePaths; // optional
-    	private Map<File, String> imageLicenseMap; // optional
-    	private int imageWidth; // optional
-    	private int imageHeight; // optional
-    	private SortedSet<SportsEquipment> requiredEquipment; // optional
-    	private SortedSet<Muscle> activatedMuscles; // optional
-    	private Map<Muscle, ActivationLevel> activationMap; // optional
-    	private SortedSet<ExerciseTag> exerciseTag; // optional
-    	private List<URL> relatedURL; // optional
-    	private List<String> hints; // optional
-    	private File iconPath; // optional
-    	
-    	out.writeString(name);
-    	out.writeString(localizedName);
-    	
-    	out.writeBundle(translationMap);
-    	out.writeString(description);
-    	out.writeList(imagePaths);
-    	out.writeBundle(imageLicenseMap);
-    	out.writeInt(imageWidth);
-    	out.writeInt(imageHeight);
-    	out.writeS
-    	
-        out.writeLong(mId);
-        out.writeLong(mServerReportId);
-        out.writeLong(mReportId);
-        out.writeLong(mServerId);
-        out.writeInt(mSyncState.ordinal());
-        out.writeLong(mDate);
-        out.writeLong(mCreatedAt);
-        out.writeLong(mUpdatedAt);
-        out.writeString(mText);
-    }
-
-    /** Required for all parcable classes*/
-    /*public static final Parcelable.Creator<ExerciseType> CREATOR = new Parcelable.Creator<ExerciseType>() {
-        public ExerciseType createFromParcel(Parcel in) {
-        	ExerciseType r = new ExerciseType();
-
-            r.setId(in.readLong());
-            r.setServerReportId(in.readLong());
-            r.setReportId(in.readLong());
-            r.setServerId(in.readLong());
-            r.setSyncState(SyncState.byValue(in.readInt()));
-            r.setDate(in.readLong());
-            r.setCreatedAt(in.readLong());
-            r.setUpdatedAt(in.readLong());
-            r.setText(in.readString());
-
-            return r;
-        }
-
-        public ReportEntry[] newArray(int size) {
-            return new ReportEntry[size];
-        }
-    };*/
-
+	/*
+	 * @Override public int describeContents() { return 0; }
+	 * 
+	 * 
+	 * @Override public void writeToParcel(Parcel out, int i) {
+	 * 
+	 * private String name; // required private String localizedName; //
+	 * optional
+	 * 
+	 * private Map<Locale, String> translationMap; // optional private String
+	 * description; // optional private List<File> imagePaths; // optional
+	 * private Map<File, String> imageLicenseMap; // optional private int
+	 * imageWidth; // optional private int imageHeight; // optional private
+	 * SortedSet<SportsEquipment> requiredEquipment; // optional private
+	 * SortedSet<Muscle> activatedMuscles; // optional private Map<Muscle,
+	 * ActivationLevel> activationMap; // optional private
+	 * SortedSet<ExerciseTag> exerciseTag; // optional private List<URL>
+	 * relatedURL; // optional private List<String> hints; // optional private
+	 * File iconPath; // optional
+	 * 
+	 * out.writeString(name); out.writeString(localizedName);
+	 * 
+	 * out.writeBundle(translationMap); out.writeString(description);
+	 * out.writeList(imagePaths); out.writeBundle(imageLicenseMap);
+	 * out.writeInt(imageWidth); out.writeInt(imageHeight); out.writeS
+	 * 
+	 * out.writeLong(mId); out.writeLong(mServerReportId);
+	 * out.writeLong(mReportId); out.writeLong(mServerId);
+	 * out.writeInt(mSyncState.ordinal()); out.writeLong(mDate);
+	 * out.writeLong(mCreatedAt); out.writeLong(mUpdatedAt);
+	 * out.writeString(mText); }
+	 * 
+	 * /** Required for all parcable classes
+	 */
+	/*
+	 * public static final Parcelable.Creator<ExerciseType> CREATOR = new
+	 * Parcelable.Creator<ExerciseType>() { public ExerciseType
+	 * createFromParcel(Parcel in) { ExerciseType r = new ExerciseType();
+	 * 
+	 * r.setId(in.readLong()); r.setServerReportId(in.readLong());
+	 * r.setReportId(in.readLong()); r.setServerId(in.readLong());
+	 * r.setSyncState(SyncState.byValue(in.readInt()));
+	 * r.setDate(in.readLong()); r.setCreatedAt(in.readLong());
+	 * r.setUpdatedAt(in.readLong()); r.setText(in.readString());
+	 * 
+	 * return r; }
+	 * 
+	 * public ReportEntry[] newArray(int size) { return new ReportEntry[size]; }
+	 * };
+	 */
 
 }

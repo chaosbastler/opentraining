@@ -47,7 +47,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 /**
  * A fragment representing a single Workout detail screen. This fragment is
  * either contained in a {@link WorkoutListActivity} in two-pane mode (on
@@ -89,9 +88,9 @@ public class WorkoutDetailFragment extends SherlockFragment {
 		// Show the dummy content as text in a TextView.
 		if (mWorkout != null) {
 			((TextView) rootView.findViewById(R.id.textview_workout_name)).setText(mWorkout.getName());
-			
+
 			ListView listview_exercises = (ListView) rootView.findViewById(R.id.listview_exercises);
-			FitnessExercise[] arr = mWorkout.getFitnessExercises().toArray(new FitnessExercise[ mWorkout.getFitnessExercises().size()]);
+			FitnessExercise[] arr = mWorkout.getFitnessExercises().toArray(new FitnessExercise[mWorkout.getFitnessExercises().size()]);
 			ArrayAdapter<FitnessExercise> adapter = new ArrayAdapter<FitnessExercise>(getActivity(), android.R.layout.simple_list_item_2,
 					android.R.id.text1, arr);
 
@@ -100,7 +99,7 @@ public class WorkoutDetailFragment extends SherlockFragment {
 
 		return rootView;
 	}
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.workout_detail_menu, menu);
@@ -109,7 +108,7 @@ public class WorkoutDetailFragment extends SherlockFragment {
 		MenuItem menu_item_rename_workout = (MenuItem) menu.findItem(R.id.menu_item_rename_workout);
 		menu_item_rename_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				
+
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				Fragment prev = getFragmentManager().findFragmentByTag("dialog");
 				if (prev != null) {
@@ -120,60 +119,49 @@ public class WorkoutDetailFragment extends SherlockFragment {
 				// Create and show the dialog.
 				DialogFragment newFragment = RenameWorkoutDialogFragment.newInstance(mWorkout);
 				newFragment.show(ft, "dialog");
-				
+
 				return true;
 			}
 		});
 
 		// configure menu_item_delete_workout
-		MenuItem menu_item_delete_workout = (MenuItem) menu
-				.findItem(R.id.menu_item_delete_workout);
-		menu_item_delete_workout
-				.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-					public boolean onMenuItemClick(MenuItem item) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(
-								getActivity());
+		MenuItem menu_item_delete_workout = (MenuItem) menu.findItem(R.id.menu_item_delete_workout);
+		menu_item_delete_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-						builder.setTitle("Really delete?");
-						builder.setMessage("Do you really want to delete this Workout? This cannot be undone.");
+				builder.setTitle("Really delete?");
+				builder.setMessage("Do you really want to delete this Workout? This cannot be undone.");
 
-						builder.setPositiveButton(
-								getString(R.string.delete_workout),
-								new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,
-											int wich) {
-										IDataProvider dataProvider = new DataProvider(
-												getActivity());
-										dataProvider.deleteWorkout(mWorkout);
+				builder.setPositiveButton(getString(R.string.delete_workout), new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int wich) {
+						IDataProvider dataProvider = new DataProvider(getActivity());
+						dataProvider.deleteWorkout(mWorkout);
 
-										if (getActivity() instanceof WorkoutDetailActivity) {
-											// request WorkoutListActivity to
-											// finish too
-											Intent i = new Intent();
-											getActivity()
-													.setResult(
-															WorkoutListActivity.REQUEST_EXIT,
-															i);
-										}
+						if (getActivity() instanceof WorkoutDetailActivity) {
+							// request WorkoutListActivity to
+							// finish too
+							Intent i = new Intent();
+							getActivity().setResult(WorkoutListActivity.REQUEST_EXIT, i);
+						}
 
-										// finish WorkoutListActivity
-										getActivity().finish();
+						// finish WorkoutListActivity
+						getActivity().finish();
 
-										startActivity(new Intent(getActivity(),
-												WorkoutListActivity.class));
+						startActivity(new Intent(getActivity(), WorkoutListActivity.class));
 
-									}
+					}
 				});
-				builder.setNegativeButton(getString(R.string.cancel), new OnClickListener(){
+				builder.setNegativeButton(getString(R.string.cancel), new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int wich) {
 						dialog.dismiss();
 					}
 				});
-				
+
 				builder.create().show();
-				
+
 				return true;
 			}
 		});

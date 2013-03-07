@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.exporter;
 
 import java.io.*;
@@ -49,8 +48,7 @@ public class LaTeXExporter extends WorkoutExporter {
 	 *             if the path could not be used
 	 */
 	public String exportWorkoutToString(Workout w) {
-		
-		
+
 		Settings settings = new Settings();
 
 		// public void create(Settings settings) throws FileNotFoundException{
@@ -61,9 +59,7 @@ public class LaTeXExporter extends WorkoutExporter {
 		int rowSize = 3;
 		int downFactor = settings.getDownFactor();
 		int columnWidth = settings.getColumnWidth();
-		System.out.println("Creating PDF " + w.getName()
-				+ " with the downFactor=" + downFactor + ", rowCount="
-				+ rowCount);
+		System.out.println("Creating PDF " + w.getName() + " with the downFactor=" + downFactor + ", rowCount=" + rowCount);
 
 		// build textfile
 		StringBuilder tex = new StringBuilder();
@@ -210,137 +206,139 @@ public class LaTeXExporter extends WorkoutExporter {
 		return tex.toString();
 	} // end create()
 
-	
-	
 	/**
 	 * A class for the BestandsDaten of the OSTS
 	 * 
 	 * @author Christian Skubich
 	 */
 	public class Settings {
-	        
-	        // PDF settings
-	        /** How many mm each column of the pdf should be */
-	        private int columnWidth = 33;
-	        /** The number of rows for the pdf file */
-	        private int rowCount = 10;
-	        /**The size of the empty cells */
-	        private int cellSize = 3;
-	        /** A factor to correct the centering of the table on the sheet */
-	        private int downFactor = 3;
-	        
-	        // other settings
-	        /** The maximum width of an image of the generated html pages */
-	        private int maxImageWidth = 450;
-	        
-	        /**
-	         * Constructor which fills the equipment map.
-	         */
-	        public Settings(){
-	        }
-	        
 
-	        // Getter and Setter
+		// PDF settings
+		/** How many mm each column of the pdf should be */
+		private int columnWidth = 33;
+		/** The number of rows for the pdf file */
+		private int rowCount = 10;
+		/** The size of the empty cells */
+		private int cellSize = 3;
+		/** A factor to correct the centering of the table on the sheet */
+		private int downFactor = 3;
 
-	        /**
-	         * Setter for columnWidth
-	         * 
-	         * @param columnWidth The columnWidth
-	         * 
-	         * @throws IllegalArgumentException if the argument is negative
-	         */
-	        public void setColumnWidth(int columnWidth) {
-	                if(columnWidth<0)
-	                        throw new IllegalArgumentException("No negative values allowed");
-	                this.columnWidth = columnWidth;
-	        }
+		// other settings
+		/** The maximum width of an image of the generated html pages */
+		private int maxImageWidth = 450;
 
-	        /**
-	         * Getter for columnWidth
-	         * 
-	         * @return The columnWidth
-	         */
-	        public int getColumnWidth() {
-	                return columnWidth;
-	        }
+		/**
+		 * Constructor which fills the equipment map.
+		 */
+		public Settings() {
+		}
 
-	        /**
-	         * Setter for rowCount
-	         * 
-	         * @param rowCount The rowCount
-	         * 
-	         * @throws IllegalArgumentException if the argument is negative
-	         */
-	        public void setRowCount(int rowCount) {
-	                if(rowCount<0)
-	                        throw new IllegalArgumentException("No negative values allowed");
-	                this.rowCount = rowCount;
-	        }
+		// Getter and Setter
 
-	        /**
-	         * Getter for rowCount
-	         * 
-	         * @return The rowCount
-	         */
-	        public int getRowCount() {
-	                return rowCount;
-	        }
+		/**
+		 * Setter for columnWidth
+		 * 
+		 * @param columnWidth
+		 *            The columnWidth
+		 * 
+		 * @throws IllegalArgumentException
+		 *             if the argument is negative
+		 */
+		public void setColumnWidth(int columnWidth) {
+			if (columnWidth < 0)
+				throw new IllegalArgumentException("No negative values allowed");
+			this.columnWidth = columnWidth;
+		}
 
+		/**
+		 * Getter for columnWidth
+		 * 
+		 * @return The columnWidth
+		 */
+		public int getColumnWidth() {
+			return columnWidth;
+		}
 
-	        /**
-	         * Setter for downFactor
-	         * 
-	         * @param downFactor The downFactor
-	         */
-	        public void setDownFactor(int downFactor) {
-	                this.downFactor = downFactor;
-	        }
-	        
-	        /**
-	         * Getter for downFactor
-	         * 
-	         * @return The downFactor
-	         */
-	        public int getDownFactor() {
-	                return this.downFactor;
-	        }
+		/**
+		 * Setter for rowCount
+		 * 
+		 * @param rowCount
+		 *            The rowCount
+		 * 
+		 * @throws IllegalArgumentException
+		 *             if the argument is negative
+		 */
+		public void setRowCount(int rowCount) {
+			if (rowCount < 0)
+				throw new IllegalArgumentException("No negative values allowed");
+			this.rowCount = rowCount;
+		}
 
-	        /**
-	         * Setter for cellSize
-	         * 
-	         * @param cellSize The cellSize
-	         */
-	        public void setCellSize(int cellSize){
-	                this.cellSize = cellSize;
-	        }
-	        
-	        /**
-	         * Getter for cellSize
-	         * 
-	         * @return The cellSize
-	         */
-	        public int getCellSize() {
-	                return this.cellSize;
-	        }
+		/**
+		 * Getter for rowCount
+		 * 
+		 * @return The rowCount
+		 */
+		public int getRowCount() {
+			return rowCount;
+		}
 
-	        /**
-	         * Setter for maxImageWidth
-	         * @param maxImageWidth the maxImageWidth to set
-	         */
-	        public void setMaxImageWidth(int maxImageWidth) {
-	                this.maxImageWidth = maxImageWidth;
-	        }
+		/**
+		 * Setter for downFactor
+		 * 
+		 * @param downFactor
+		 *            The downFactor
+		 */
+		public void setDownFactor(int downFactor) {
+			this.downFactor = downFactor;
+		}
 
-	        /**
-	         * Getter for maxImageWidth
-	         * @return the maxImageWidth
-	         */
-	        public int getMaxImageWidth() {
-	                return maxImageWidth;
-	        }
+		/**
+		 * Getter for downFactor
+		 * 
+		 * @return The downFactor
+		 */
+		public int getDownFactor() {
+			return this.downFactor;
+		}
 
-	        
-	        
+		/**
+		 * Setter for cellSize
+		 * 
+		 * @param cellSize
+		 *            The cellSize
+		 */
+		public void setCellSize(int cellSize) {
+			this.cellSize = cellSize;
+		}
+
+		/**
+		 * Getter for cellSize
+		 * 
+		 * @return The cellSize
+		 */
+		public int getCellSize() {
+			return this.cellSize;
+		}
+
+		/**
+		 * Setter for maxImageWidth
+		 * 
+		 * @param maxImageWidth
+		 *            the maxImageWidth to set
+		 */
+		public void setMaxImageWidth(int maxImageWidth) {
+			this.maxImageWidth = maxImageWidth;
+		}
+
+		/**
+		 * Getter for maxImageWidth
+		 * 
+		 * @return the maxImageWidth
+		 */
+		public int getMaxImageWidth() {
+			return maxImageWidth;
+		}
 
 	}
 }

@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.util.*;
@@ -26,15 +25,14 @@ import java.util.*;
 /**
  * 
  */
-public class SportsEquipment extends Translatable{
+public class SportsEquipment extends Translatable {
 
 	/** Default serialVersionUID */
-	private static final long serialVersionUID = 1L;	
-	
+	private static final long serialVersionUID = 1L;
+
 	/** Tag for logging */
 	@SuppressWarnings("unused")
 	private static final String TAG = "Muscle";
-	
 
 	public SportsEquipment(Locale locale, List<String> nameList) {
 		super(locale, nameList);

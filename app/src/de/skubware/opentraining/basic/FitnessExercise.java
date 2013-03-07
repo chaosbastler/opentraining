@@ -37,17 +37,16 @@ import java.util.*;
  * @author Christian Skubich
  * 
  */
-public class FitnessExercise implements IExercise, Serializable{
+public class FitnessExercise implements IExercise, Serializable {
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
-	
 	private ExerciseType mExerciseType;
 	private ArrayList<FSet> mFSetList = new ArrayList<FSet>();
 
 	/** The name the user assigned to this exercise */
 	private String mCustomName;
-	
+
 	/**
 	 * For each day there is one TrainingEntry saved in this list. The order of
 	 * the list should be according to the dates of the entries.
@@ -128,8 +127,8 @@ public class FitnessExercise implements IExercise, Serializable{
 	public List<FSet> getFSetList() {
 		return Collections.unmodifiableList(this.mFSetList);
 	}
-	
-	public void setFSetList(List<FSet> fsetList){
+
+	public void setFSetList(List<FSet> fsetList) {
 		this.mFSetList = new ArrayList<FSet>(fsetList);
 	}
 
@@ -143,26 +142,25 @@ public class FitnessExercise implements IExercise, Serializable{
 	public String toString() {
 		return mCustomName;
 	}
-	
+
 	/**
-	 * Returns a String that represents this object.
-	 * Should only be used for debugging.
+	 * Returns a String that represents this object. Should only be used for
+	 * debugging.
 	 * 
 	 * @return A String that represents this object.
 	 */
-	public String toDebugString(){
+	public String toDebugString() {
 		StringBuilder builder = new StringBuilder();
-		
+
 		builder.append("ExerciseType: " + mExerciseType + "\n");
 		builder.append("Custom name: " + mCustomName + "\n");
-		for(FSet set:mFSetList){
+		for (FSet set : mFSetList) {
 			builder.append("\n FSet: " + set.toString());
 		}
-		for(TrainingEntry entry:mTrainingEntryList){
+		for (TrainingEntry entry : mTrainingEntryList) {
 			builder.append("\n TrainingEntry: " + entry.toDebugString());
 		}
 
-		
 		return builder.toString();
 	}
 
@@ -299,6 +297,5 @@ public class FitnessExercise implements IExercise, Serializable{
 	public List<String> getHints() {
 		return this.mExerciseType.getHints();
 	}
-
 
 }

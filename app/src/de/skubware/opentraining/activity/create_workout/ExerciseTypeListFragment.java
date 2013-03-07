@@ -36,7 +36,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -52,19 +51,22 @@ import de.skubware.opentraining.db.IDataProvider;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ExerciseTypeListFragment extends SherlockListFragment implements OnQueryTextListener{
+public class ExerciseTypeListFragment extends SherlockListFragment implements OnQueryTextListener {
 	/** Tag for logging */
-	public static final String TAG = "ExerciseTypeListFragment";	
-	
+	public static final String TAG = "ExerciseTypeListFragment";
+
 	/** Currently display exercises */
 	private List<ExerciseType> mExericseList;
-	
+
 	/** Last query. */
 	private String mSearchQuery = "";
-	
+
+	/**
+	 * Reference for reacting to preference changes (list of exercises will be
+	 * updated if the preferences change)
+	 */
 	private OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
 
-	
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
 	 * activated item position. Only used on tablets.
@@ -111,7 +113,6 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 	public ExerciseTypeListFragment() {
 	}
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -119,18 +120,15 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		mExericseList = dataProvider.getExercises();
 
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
-				android.R.layout.simple_list_item_single_choice,
-				android.R.id.text1, mExericseList));
+		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mExericseList));
 
 		// register for changed settings
-		SharedPreferences sharedPrefs = PreferenceManager
-				.getDefaultSharedPreferences(getActivity());
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 		onSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
 			@Override
-			public void onSharedPreferenceChanged(SharedPreferences pref,
-					String key) {
+			public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
 				Log.v(TAG, "Preference changed, will update shown exercises");
 				filterExercisesForMusclesAndEquipment();
 			}
@@ -140,56 +138,52 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 
 		filterExercisesForMusclesAndEquipment();
 	}
-	
+
 	/**
 	 * Filters the list of exercises for muscles and equipment.
 	 */
-	private void filterExercisesForMusclesAndEquipment(){
+	private void filterExercisesForMusclesAndEquipment() {
 		IDataProvider dataProvider = new DataProvider(getActivity());
-		SharedPreferences sharedPrefs = PreferenceManager
-				.getDefaultSharedPreferences(getActivity());
-		
-		
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
 		List<Muscle> acceptedMuscles = new ArrayList<Muscle>();
-		for(Muscle m:dataProvider.getMuscles()){
-			if(sharedPrefs.getBoolean(m.toString(), true)){
+		for (Muscle m : dataProvider.getMuscles()) {
+			if (sharedPrefs.getBoolean(m.toString(), true)) {
 				acceptedMuscles.add(m);
 			}
 		}
-		
+
 		List<SportsEquipment> acceptedEquipment = new ArrayList<SportsEquipment>();
-		for(SportsEquipment e:dataProvider.getEquipment()){
-			if(sharedPrefs.getBoolean(e.toString(), true)){
+		for (SportsEquipment e : dataProvider.getEquipment()) {
+			if (sharedPrefs.getBoolean(e.toString(), true)) {
 				acceptedEquipment.add(e);
 			}
 		}
-		
+
 		mExericseList = dataProvider.getExercises();
-		for(ExerciseType ex:dataProvider.getExercises()){
+		for (ExerciseType ex : dataProvider.getExercises()) {
 			boolean accepted = false;
-			for(Muscle m:acceptedMuscles){
-				if(ex.getActivatedMuscles().contains(m))
+			for (Muscle m : acceptedMuscles) {
+				if (ex.getActivatedMuscles().contains(m))
 					accepted = true;
 			}
-			
-			if(!accepted){
+
+			if (!accepted) {
 				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Muscles do not fit.");
 				mExericseList.remove(ex);
 				continue;
 			}
-			
-			
-			if(!acceptedEquipment.containsAll(ex.getRequiredEquipment())){
+
+			if (!acceptedEquipment.containsAll(ex.getRequiredEquipment())) {
 				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Equipment does not fit");
 				mExericseList.remove(ex);
 				continue;
 			}
 		}
-		
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
-				android.R.layout.simple_list_item_single_choice,
-				android.R.id.text1, mExericseList));
-		((ArrayAdapter<?>) getListAdapter()).notifyDataSetChanged();		
+
+		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mExericseList));
+		((ArrayAdapter<?>) getListAdapter()).notifyDataSetChanged();
 
 	}
 
@@ -198,42 +192,39 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 	 * {@link #filterExercisesForMusclesAndEquipment()} will be called in this
 	 * method.
 	 * 
-	 * Currently the 
+	 * Currently the
 	 */
-	private void filterExercisesForSearchQuery(){
+	private void filterExercisesForSearchQuery() {
 		filterExercisesForMusclesAndEquipment();
-		
+
 		if (mSearchQuery == null)
 			mSearchQuery = "";
-		
-		// quit if the user did not search for anyting
-		if(mSearchQuery.equals(""))
+
+		// quit if the user did not search for anything
+		if (mSearchQuery.equals("") || mSearchQuery.replaceAll(" ", "").equals(""))
 			return;
-		
-		for(ExerciseType ex: new ArrayList<ExerciseType>(mExericseList)){
+
+		for (ExerciseType ex : new ArrayList<ExerciseType>(mExericseList)) {
 			boolean accepted = false;
-			
-			for(String name:ex.getAlternativeNames()){
+
+			for (String name : ex.getAlternativeNames()) {
 				name = name.toLowerCase(Locale.GERMANY);
-				if(name.contains(mSearchQuery.toLowerCase(Locale.GERMANY))){
+				if (name.contains(mSearchQuery.toLowerCase(Locale.GERMANY))) {
 					accepted = true;
 					continue;
 				}
 			}
-			
-			
-			if(!accepted){
+
+			if (!accepted) {
 				mExericseList.remove(ex);
 			}
 		}
-		
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(),
-				android.R.layout.simple_list_item_single_choice,
-				android.R.id.text1, mExericseList));
-		((ArrayAdapter<?>) getListAdapter()).notifyDataSetChanged();	
+
+		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mExericseList));
+		((ArrayAdapter<?>) getListAdapter()).notifyDataSetChanged();
 
 	}
-	
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -271,7 +262,7 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		ExerciseType exercise = (ExerciseType)listView.getAdapter().getItem(position);
+		ExerciseType exercise = (ExerciseType) listView.getAdapter().getItem(position);
 		mCallbacks.onItemSelected(exercise);
 	}
 
@@ -304,20 +295,17 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 		mActivatedPosition = position;
 	}
 
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		onQueryTextSubmit(newText);
+		return false;
+	}
 
 	@Override
-    public boolean onQueryTextChange(String newText) {
-    	//Toast.makeText(getActivity(), "Query = " + newText, Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
-	@Override
-    public boolean onQueryTextSubmit(String query) {
+	public boolean onQueryTextSubmit(String query) {
 		mSearchQuery = query;
 		filterExercisesForSearchQuery();
-    	Toast.makeText(getActivity(), "Query = " + query + " : submitted", Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
+		return false;
+	}
 
 }

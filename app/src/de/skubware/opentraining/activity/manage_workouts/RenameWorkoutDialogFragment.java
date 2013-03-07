@@ -62,7 +62,7 @@ import android.widget.Toast;
 public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
 	/** Tag for logging */
 	private static final String TAG = "RenameWorkoutDialogFragment";
-	
+
 	/** Currently displayed {@link Workout}. */
 	Workout mWorkout;
 
@@ -97,44 +97,41 @@ public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
 		// show old name
 		final EditText edittext_workout_name = (EditText) v.findViewById(R.id.edittext_workout_name);
 		edittext_workout_name.setText(mWorkout.getName());
-		
-		
+
 		return new AlertDialog.Builder(getActivity()).setTitle(mWorkout.getName()).setView(v).setCancelable(true)
 				.setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String enterendName = edittext_workout_name.getText().toString();
-						
+
 						// check if name is valid(not empty, not used)
-						if(enterendName.equals("")){
+						if (enterendName.equals("")) {
 							Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
 							return;
 						}
-						
-						if(fileAlreadyExists(enterendName)){
+
+						if (fileAlreadyExists(enterendName)) {
 							Toast.makeText(getActivity(), getString(R.string.workout_already_exists), Toast.LENGTH_LONG).show();
 							return;
 						}
-						
+
 						// delete old Workout
 						IDataProvider dataProvider = new DataProvider(getActivity());
 						dataProvider.deleteWorkout(mWorkout);
-						
+
 						mWorkout.setName(enterendName);
-						
+
 						// save new Workout
 						boolean success = dataProvider.saveWorkout(mWorkout);
-						if(!success){
+						if (!success) {
 							Log.wtf(TAG, "Error during saving workout. Old workout was lost. This should never happen.");
 							Toast.makeText(getActivity(), getString(R.string.error_during_saving), Toast.LENGTH_LONG).show();
 							return;
 						}
-						
-						
+
 						// finally update GUI
 						TextView textview_workout_name = (TextView) getActivity().findViewById(R.id.textview_workout_name);
 						textview_workout_name.setText(enterendName);
-
 
 						// update Workout in Activity
 						if (getActivity() instanceof WorkoutListActivity) {
@@ -146,9 +143,7 @@ public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
 							i.putExtra(WorkoutListActivity.ARG_WORKOUT, mWorkout);
 							getActivity().setResult(Activity.RESULT_OK, i);
 						}
-						
-						
-						
+
 						dialog.dismiss();
 					}
 				}).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -158,7 +153,7 @@ public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
 					}
 				}).create();
 	}
-	
+
 	/**
 	 * Checks if a Workout file with the same name already exists.
 	 * 
@@ -167,7 +162,7 @@ public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
 	 * 
 	 * @return true if there is already such a file
 	 */
-	private boolean fileAlreadyExists(String name){
+	private boolean fileAlreadyExists(String name) {
 		// list files in workout directory that end with ".xml"
 		String files[] = getActivity().getFilesDir().list(new FilenameFilter() {
 			@Override
@@ -179,12 +174,11 @@ public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
 			}
 		});
 		Set<String> workout_names = new HashSet<String>();
-		for(String s:files){
+		for (String s : files) {
 			workout_names.add(s.split(".xml")[0]);
 		}
-		
+
 		return workout_names.contains(name);
 	}
-
 
 }

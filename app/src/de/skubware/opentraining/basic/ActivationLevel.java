@@ -18,12 +18,11 @@
  * 
  */
 
-
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
 
-public enum ActivationLevel implements Serializable{
+public enum ActivationLevel implements Serializable {
 	LOW(1), MEDIUM(3), ENORMOUS(5);
 
 	private final int level;
@@ -52,11 +51,13 @@ public enum ActivationLevel implements Serializable{
 	/**
 	 * Gets an ActivationLevel by the int value of it's level.
 	 * 
-	 * @param level The level of the ActivationLevel
+	 * @param level
+	 *            The level of the ActivationLevel
 	 * 
 	 * @return The corresponding ActivationLevel
 	 * 
-	 * @throws IllegalArgumentException  if there is no such ActivationLevel
+	 * @throws IllegalArgumentException
+	 *             if there is no such ActivationLevel
 	 */
 	public static ActivationLevel getByLevel(int level) {
 		for (ActivationLevel a : ActivationLevel.values()) {
@@ -65,8 +66,7 @@ public enum ActivationLevel implements Serializable{
 			}
 		}
 
-		throw new IllegalArgumentException("An ActivationLevel with the level "
-				+ level + " does not exist");
+		throw new IllegalArgumentException("An ActivationLevel with the level " + level + " does not exist");
 	}
 
 }

@@ -69,9 +69,9 @@ public class DataProvider implements IDataProvider {
 
 	@Override
 	public List<ExerciseType> getExercises() {
-		if(Cache.INSTANCE.getExercises() == null)
+		if (Cache.INSTANCE.getExercises() == null)
 			Cache.INSTANCE.updateCache(mContext);
-		
+
 		return new ArrayList<ExerciseType>(Cache.INSTANCE.getExercises());
 	}
 
@@ -94,7 +94,7 @@ public class DataProvider implements IDataProvider {
 					list.add(ex);
 				}
 			}
-			
+
 			Collections.sort(list);
 		} catch (IOException ioEx) {
 			Log.e(TAG, "Error during parsing exercises.", ioEx);
@@ -122,21 +122,21 @@ public class DataProvider implements IDataProvider {
 	public boolean exerciseExists(String name) {
 		return getExerciseByName(name) != null;
 	}
-	
+
 	@Override
-	public List<Muscle> getMuscles(){
-		if(Cache.INSTANCE.getMuscles() == null)
+	public List<Muscle> getMuscles() {
+		if (Cache.INSTANCE.getMuscles() == null)
 			Cache.INSTANCE.updateCache(mContext);
-		
+
 		return new ArrayList<Muscle>(Cache.INSTANCE.getMuscles());
 	}
-	
+
 	/**
 	 * Loads the {@link Muscle}s from the filesytem.
 	 * 
 	 * @return The loaded {@link Muscle}s
 	 */
-	List<Muscle> loadMuscles(){
+	List<Muscle> loadMuscles() {
 		List<Muscle> list = new ArrayList<Muscle>();
 
 		try {
@@ -149,32 +149,31 @@ public class DataProvider implements IDataProvider {
 		return list;
 
 	}
-	
+
 	@Override
 	public Muscle getMuscleByName(String name) {
-		for(Muscle m:getMuscles()){
-			if(m.isAlternativeName(name))
+		for (Muscle m : getMuscles()) {
+			if (m.isAlternativeName(name))
 				return m;
 		}
 
 		return null;
 	}
-	
-	
+
 	@Override
-	public List<SportsEquipment> getEquipment(){
-		if(Cache.INSTANCE.getMuscles() == null)
+	public List<SportsEquipment> getEquipment() {
+		if (Cache.INSTANCE.getMuscles() == null)
 			Cache.INSTANCE.updateCache(mContext);
-		
+
 		return new ArrayList<SportsEquipment>(Cache.INSTANCE.getEquipment());
 	}
-	
+
 	/**
 	 * Loads the {@link Muscle}s from the filesytem.
 	 * 
 	 * @return The loaded {@link Muscle}s
 	 */
-	List<SportsEquipment> loadEquipment(){
+	List<SportsEquipment> loadEquipment() {
 		List<SportsEquipment> list = new ArrayList<SportsEquipment>();
 
 		try {
@@ -187,20 +186,16 @@ public class DataProvider implements IDataProvider {
 		return list;
 
 	}
-	
+
 	@Override
 	public SportsEquipment getEquipmentByName(String name) {
-		for(SportsEquipment m:getEquipment()){
-			if(m.isAlternativeName(name))
+		for (SportsEquipment m : getEquipment()) {
+			if (m.isAlternativeName(name))
 				return m;
 		}
 
 		return null;
 	}
-	
-	
-	
-	
 
 	@Override
 	public List<Workout> getWorkouts() {
@@ -221,7 +216,7 @@ public class DataProvider implements IDataProvider {
 		for (String file : files) {
 			Workout w = this.loadWorkout(mContext.getFilesDir().toString() + "/" + file);
 			workoutList.add(w);
-			
+
 			if (w == null)
 				Log.e(TAG, "Read Workout and parser returned null. This should not happen");
 		}
@@ -268,15 +263,14 @@ public class DataProvider implements IDataProvider {
 	public boolean saveWorkout(Workout w) {
 		return XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
 	}
-	
-	
+
 	@Override
 	public boolean deleteWorkout(Workout w) {
 		File directory = mContext.getFilesDir();
 		File workout_file = new File(directory.toString() + "/" + w.getName() + ".xml");
-		if(!workout_file.exists())
+		if (!workout_file.exists())
 			throw new IllegalArgumentException("The workout that should be deleted does not exist.");
-		
+
 		return workout_file.delete();
 	}
 
@@ -359,6 +353,5 @@ public class DataProvider implements IDataProvider {
 		// return the output stream as a String
 		return oS.toString();
 	}
-
 
 }
