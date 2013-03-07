@@ -95,9 +95,8 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 		arr[6] = getString(R.string.sunday);
 		arr[7] = getString(R.string.workout);
 
-		
-		//check for names that already have been used	
-		
+		// check for names that already have been used
+
 		for (int i = 0; i < arr.length; i++) {
 			for (int k = 1;; k++) {
 				if (!fileAlreadyExists(arr[i])) {
@@ -112,13 +111,11 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 			}
 
 		}
-		
-		
 
 		ListView listview = (ListView) v.findViewById(R.id.listview);
 		final EditText edittext_workout_name = (EditText) v.findViewById(R.id.edittext_workout_name);
 		listview.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, arr));
-		listview.setOnItemClickListener(new OnItemClickListener(){
+		listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View arg1, int position, long id) {
 				String suggestion = (String) parent.getItemAtPosition(position);
@@ -126,22 +123,26 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 			}
 		});
 
-		
 		return new AlertDialog.Builder(getActivity()).setTitle(mWorkout.getName()).setView(v).setCancelable(true)
 				.setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if(fileAlreadyExists(edittext_workout_name.getText().toString())){
+						// check if file already exists
+						if (fileAlreadyExists(edittext_workout_name.getText().toString())) {
 							Toast.makeText(getActivity(), getString(R.string.workout_already_exists), Toast.LENGTH_LONG).show();
 							return;
 						}
-						
-						mWorkout.setName(edittext_workout_name.getText().toString());
-						
+						// check if name is empty
+						String workoutName = edittext_workout_name.getText().toString();
+						if(workoutName.equals("") || workoutName.replaceAll(" ", "").equals(""))
+							Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
+
+						mWorkout.setName(workoutName);
+
 						// save Workout before exiting
 						IDataProvider dataProvider = new DataProvider(getActivity());
 						dataProvider.saveWorkout(mWorkout);
-						
+
 						finishActivities();
 					}
 				}).setNeutralButton(getString(R.string.add_more_exercises), new DialogInterface.OnClickListener() {
@@ -161,7 +162,7 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 					}
 				}).create();
 	}
-	
+
 	/**
 	 * Checks if a Workout file with the same name already exists.
 	 * 
@@ -170,7 +171,7 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 	 * 
 	 * @return true if there is already such a file
 	 */
-	private boolean fileAlreadyExists(String name){
+	private boolean fileAlreadyExists(String name) {
 		// list files in workout directory that end with ".xml"
 		String files[] = getActivity().getFilesDir().list(new FilenameFilter() {
 			@Override
@@ -182,17 +183,18 @@ public class DialogSaveWorkoutFragment extends SherlockDialogFragment {
 			}
 		});
 		Set<String> workout_names = new HashSet<String>();
-		for(String s:files){
+		for (String s : files) {
 			workout_names.add(s.split(".xml")[0]);
 		}
-		
+
 		return workout_names.contains(name);
 	}
-	
+
 	/**
-	 * Finishes the Activities ExerciseTypeDetailActivity and ExerciseTypeListActivity .
+	 * Finishes the Activities ExerciseTypeDetailActivity and
+	 * ExerciseTypeListActivity .
 	 */
-	private void finishActivities(){
+	private void finishActivities() {
 		if (getActivity() instanceof ExerciseTypeDetailActivity) {
 			// finish ExerciseTypeDetailActivity AND
 			// ExerciseTypeListActivity

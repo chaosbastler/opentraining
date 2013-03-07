@@ -62,7 +62,7 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	 * 
 	 */
 	public Workout(String name, Collection<FitnessExercise> fExes) {
-		if (name == null || fExes == null || fExes.isEmpty() || fExes.contains(null)) {
+		if (name == null || name.equals("") || fExes == null || fExes.isEmpty() || fExes.contains(null)) {
 			throw new NullPointerException();
 		}
 
