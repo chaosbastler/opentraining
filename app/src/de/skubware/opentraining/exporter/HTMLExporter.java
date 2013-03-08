@@ -20,123 +20,111 @@
 
 package de.skubware.opentraining.exporter;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 import android.content.Context;
-import android.webkit.WebView;
-
+import android.util.Log;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.DataProvider;
-import de.skubware.opentraining.db.IDataProvider;
+import de.skubware.opentraining.db.DataHelper;
 
+
+/**
+ * Implementation of {@link WorkoutExporter} that exports {@link Workout} to
+ * .html files.
+ * 
+ */
 public class HTMLExporter extends WorkoutExporter {
-	private WebView webview;
+	/** Tag for logging */
+	public static final String TAG = "HTMLExporter";
+	
+	/** The template .html file */
+	public final static String TEMPLATE_FILE = "trainingplan_template.html";
 
-	public HTMLExporter(Context context, WebView webview, Workout w) {
-		super(context);
-		this.webview = webview;
+	/** The (default) CSS file */
+	public final static String CSS_FILE = "trainingplan_green.css";
 
-		this.loadWorkout(w);
 
-	}
-
-	private void loadWorkout(Workout w) {
-		File f = new File(context.getFilesDir().toString() + "/trainingplan.html");
-		IDataProvider dataProvider = new DataProvider(this.context);
-
-		throw new IllegalStateException("Not implemented");
-		// ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w),
-		// "trainingplan.html", context, context.getFilesDir());
-
-		/*
-		 * try { webview.loadUrl(f.toURI().toURL().toString()); } catch
-		 * (MalformedURLException e) { e.printStackTrace(); }
-		 */
-	}
-
-	@Override
 	/**
-	 * Exports a workout and returns the generated file.
+	 * Default constructor.
 	 * 
-	 * @param w The workout to export
-	 * 
-	 * @return The File with the exported workout
-	 * 
-	 * @throws UnsupportedOperationException If not supported
+	 * @param context
+	 *            The current context.
 	 */
-	public File exportWorkoutToFile(Workout w) {
-		try {
-			throw new IllegalStateException("Not implemented");
-
-			// ContentProvider.INSTANCE.writeFile(this.exportWorkoutToString(w),
-			// "trainingplan.html", context, context.getFilesDir());
-
-			// return new File(context.getFilesDir().toString() + "/" +
-			// "trainingplan.html");
-		} catch (UnsupportedOperationException unsupported) {
-			// may happen when String export doesn't work
-			throw unsupported;
-		}
-
+	public HTMLExporter(Context context) {
+		super(context);
 	}
 
+
+
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * {@link FSet}s are currently ignored and will not be exported. 
+	 */
 	@Override
 	public String exportWorkoutToString(Workout w) {
-		// TODO FIX
-		throw new UnsupportedOperationException();
+		DataHelper dataHelper = new DataHelper(mContext);
 
-		/*
-		 * String data = "";
-		 * 
-		 * try { //data =
-		 * ContentProvider.INSTANCE.loadFileFromAssets("trainingplan_template.html"
-		 * , context); } catch (IOException e) { // TODO Auto-generated catch
-		 * block
-		 * 
-		 * }
-		 * 
-		 * data = data.replaceAll("<!--WORKOUT_NAME-->", w.getName());
-		 * 
-		 * // Exercises StringBuilder exes = new StringBuilder();
-		 * for(FitnessExercise fEx:w.getFitnessExercises()){
-		 * exes.append("\t\t <th>"); exes.append(fEx.toString());
-		 * exes.append("</th>\n"); } data = data.replaceAll("<!--EXERCISES-->",
-		 * exes.toString());
-		 * 
-		 * 
-		 * //TODO: FSETS
-		 * 
-		 * StringBuilder emptyRow = new StringBuilder();
-		 * emptyRow.append("\t<tr>\n"); // an empty row for(int i = 0;
-		 * i<=w.getFitnessExercises().size(); i++){
-		 * emptyRow.append("\t\t<td></td>\n"); } emptyRow.append("\t</tr>\n");
-		 * 
-		 * StringBuilder emptyRowOdd = new StringBuilder();
-		 * emptyRowOdd.append("\t<tr class=\"alt\">\n"); // an empty row for(int
-		 * i = 0; i<=w.getFitnessExercises().size(); i++){
-		 * emptyRowOdd.append("\t\t<td></td>\n"); }
-		 * emptyRowOdd.append("\t</tr>\n");
-		 * 
-		 * 
-		 * StringBuilder emptyCells = new StringBuilder(); boolean even = false;
-		 * for(int i = 0; i< w.getEmptyRows(); i++){ if(even)
-		 * emptyCells.append(emptyRowOdd.toString()); else
-		 * emptyCells.append(emptyRow.toString()); even=!even; }
-		 * 
-		 * data = data.replaceAll("<!--EMPTY_CELLS-->", emptyCells.toString() );
-		 * 
-		 * 
-		 * 
-		 * data = data.replaceAll("<!--CSS-->",
-		 * ContentProvider.INSTANCE.getCSSFileAsString(context));
-		 * 
-		 * 
-		 * 
-		 * return data;
-		 */
+		// StringBuilder would be more efficient, but does not support methods
+		// like replaceAll()
+		String data = "";
+
+		try {
+			data = dataHelper.loadFileFromAssets(TEMPLATE_FILE);
+		} catch (IOException e) {
+			Log.e(TAG, "Error loading template .html file", e);
+			return "";
+		}
+
+		data = data.replaceAll("<!--WORKOUT_NAME-->", w.getName());
+
+		// Exercises
+		StringBuilder exes = new StringBuilder();
+		for (FitnessExercise fEx : w.getFitnessExercises()) {
+			exes.append("\t\t <th>");
+			exes.append(fEx.toString());
+			exes.append("</th>\n");
+		}
+		data = data.replaceAll("<!--EXERCISES-->", exes.toString());
+
+		StringBuilder emptyRow = new StringBuilder();
+		emptyRow.append("\t<tr>\n"); // an empty row
+		for (int i = 0; i <= w.getFitnessExercises().size(); i++) {
+			emptyRow.append("\t\t<td></td>\n");
+		}
+		emptyRow.append("\t</tr>\n");
+
+		StringBuilder emptyRowOdd = new StringBuilder();
+		emptyRowOdd.append("\t<tr class=\"alt\">\n"); // an empty row
+		for (int i = 0; i <= w.getFitnessExercises().size(); i++) {
+			emptyRowOdd.append("\t\t<td></td>\n");
+		}
+		emptyRowOdd.append("\t</tr>\n");
+
+		StringBuilder emptyCells = new StringBuilder();
+		boolean even = false;
+		for (int i = 0; i < w.getEmptyRows(); i++) {
+			if (even)
+				emptyCells.append(emptyRowOdd.toString());
+			else
+				emptyCells.append(emptyRow.toString());
+			even = !even;
+		}
+
+		data = data.replaceAll("<!--EMPTY_CELLS-->", emptyCells.toString());
+
+		String cssFileAsString;
+		try {
+			cssFileAsString = dataHelper.loadFileFromAssets(CSS_FILE);
+		} catch (IOException e) {
+			Log.e(TAG, "Error loading template .html file", e);
+			return data;
+		}
+		data = data.replaceAll("<!--CSS-->", cssFileAsString);
+
+		return data;
 
 	}
 

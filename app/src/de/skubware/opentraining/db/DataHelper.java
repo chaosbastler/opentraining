@@ -1,10 +1,14 @@
 package de.skubware.opentraining.db;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -56,4 +60,85 @@ public class DataHelper {
 
 		return img;
 	}
+
+	/**
+	 * Loads a file from the raw folder.
+	 * 
+	 * @param fileName
+	 *            The name/path of the file
+	 * 
+	 * @return String with the content of the file
+	 * 
+	 * @throws IOException
+	 *             if loading file fails
+	 */
+	public String loadFileFromRaw(String fileName) throws IOException {
+		Resources resources = mContext.getResources();
+
+		// Create a InputStream to read the file into
+		int rID = resources.getIdentifier("de.skubware.opentraining:raw/" + fileName, null, null);
+
+		// get the file as a stream
+		InputStream is = resources.openRawResource(rID);
+
+		return loadFile(is);
+	}
+
+	/**
+	 * Loads a file from the assets folder.
+	 * 
+	 * @param fileName
+	 *            The name/path of the file
+	 * 
+	 * @return String with the content of the file
+	 * 
+	 * @throws IOException
+	 *             if loading file fails
+	 */
+	public String loadFileFromAssets(String fileName) throws IOException {
+		Resources resources = mContext.getResources();
+		InputStream is = resources.getAssets().open(fileName);
+		return loadFile(is);
+	}
+
+	/**
+	 * Loads a file from the assets folder.
+	 * 
+	 * @param fileName
+	 *            The name/path of the file
+	 * 
+	 * @return String with the content of the file
+	 * 
+	 * @throws IOException
+	 *             if loading file fails
+	 */
+	public String loadFileFromFileSystem(String fileName) throws IOException {
+		InputStream is = new FileInputStream(new File(fileName));
+		return loadFile(is);
+	}
+
+	/**
+	 * Loads the InputStream.
+	 * 
+	 * @param is
+	 *            The InputStream to read
+	 * 
+	 * @return String with the content of the file
+	 * 
+	 * @throws IOException
+	 *             if loading file fails
+	 */
+	public String loadFile(InputStream is) throws IOException {
+		// create a buffer that has the same size as the InputStream
+		byte[] buffer = new byte[is.available()];
+		is.read(buffer);
+		ByteArrayOutputStream oS = new ByteArrayOutputStream();
+		oS.write(buffer);
+		oS.close();
+		is.close();
+
+		// return the output stream as a String
+		return oS.toString();
+	}
+
 }

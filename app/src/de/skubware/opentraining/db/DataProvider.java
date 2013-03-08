@@ -20,16 +20,16 @@
 
 package de.skubware.opentraining.db;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import com.actionbarsherlock.widget.ShareActionProvider;
+
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
@@ -42,7 +42,6 @@ import de.skubware.opentraining.db.parser.SportsEquipmentJSONParser;
 import de.skubware.opentraining.db.parser.WorkoutXMLParser;
 import de.skubware.opentraining.db.parser.XMLSaver;
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 /**
@@ -205,7 +204,7 @@ public class DataProvider implements IDataProvider {
 		String files[] = mContext.getFilesDir().list(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String filename) {
-				if (filename.endsWith(".xml"))
+				if (filename.endsWith(".xml") && !filename.equals(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME))
 					return true;
 				else
 					return false;
@@ -237,7 +236,8 @@ public class DataProvider implements IDataProvider {
 	private Workout loadWorkout(String path) {
 		String xmlData;
 		try {
-			xmlData = loadFileFromFileSystem(path);
+			DataHelper helper = new DataHelper(mContext);
+			xmlData = helper.loadFileFromFileSystem(path);
 
 			// write file again ...
 			FileOutputStream fos = mContext.openFileOutput("my_xml", Context.MODE_PRIVATE);
@@ -274,84 +274,5 @@ public class DataProvider implements IDataProvider {
 		return workout_file.delete();
 	}
 
-	/**
-	 * Loads a file from the raw folder.
-	 * 
-	 * @param fileName
-	 *            The name/path of the file
-	 * 
-	 * @return String with the content of the file
-	 * 
-	 * @throws IOException
-	 *             if loading file fails
-	 */
-	private String loadFileFromRaw(String fileName) throws IOException {
-		Resources resources = mContext.getResources();
-
-		// Create a InputStream to read the file into
-
-		int rID = resources.getIdentifier("de.skubware.opentraining:raw/" + fileName, null, null);
-		// get the file as a stream
-		InputStream is = resources.openRawResource(rID);
-
-		return loadFile(is);
-	}
-
-	/**
-	 * Loads a file from the assets folder.
-	 * 
-	 * @param fileName
-	 *            The name/path of the file
-	 * 
-	 * @return String with the content of the file
-	 * 
-	 * @throws IOException
-	 *             if loading file fails
-	 */
-	private String loadFileFromAssets(String fileName) throws IOException {
-		Resources resources = mContext.getResources();
-		InputStream is = resources.getAssets().open(fileName);
-		return loadFile(is);
-	}
-
-	/**
-	 * Loads a file from the assets folder.
-	 * 
-	 * @param fileName
-	 *            The name/path of the file
-	 * 
-	 * @return String with the content of the file
-	 * 
-	 * @throws IOException
-	 *             if loading file fails
-	 */
-	private String loadFileFromFileSystem(String fileName) throws IOException {
-		InputStream is = new FileInputStream(new File(fileName));
-		return loadFile(is);
-	}
-
-	/**
-	 * Loads the InputStream.
-	 * 
-	 * @param is
-	 *            The InputStream to read
-	 * 
-	 * @return String with the content of the file
-	 * 
-	 * @throws IOException
-	 *             if loading file fails
-	 */
-	private String loadFile(InputStream is) throws IOException {
-		// create a buffer that has the same size as the InputStream
-		byte[] buffer = new byte[is.available()];
-		is.read(buffer);
-		ByteArrayOutputStream oS = new ByteArrayOutputStream();
-		oS.write(buffer);
-		oS.close();
-		is.close();
-
-		// return the output stream as a String
-		return oS.toString();
-	}
 
 }

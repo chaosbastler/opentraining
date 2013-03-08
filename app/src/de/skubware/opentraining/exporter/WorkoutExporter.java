@@ -21,8 +21,12 @@
 package de.skubware.opentraining.exporter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import android.content.Context;
+import android.util.Log;
 
 import de.skubware.opentraining.basic.Workout;
 
@@ -31,59 +35,64 @@ import de.skubware.opentraining.basic.Workout;
  * methods may throw an UnsupportedOperationExceptions. At least one export
  * method is guaranteed to work.
  * 
- * //TODO Add workoutconstraint
- * 
- * @author Christian Skubich
  * 
  */
-// Idea: http://code.google.com/p/droidtext/
 public abstract class WorkoutExporter {
-	protected Context context;
+	/** Tag for logging */
+	public static final String TAG = "WorkoutExporter";
+
+	/** Reference to the current context */
+	protected Context mContext;
 
 	/**
-	 * Constructor that requires the number of rows.
-	 * 
-	 * @param rowCount
-	 *            The number of rows.
+	 * Default constructor.
 	 */
 	public WorkoutExporter(Context context) {
-		this.context = context;
+		this.mContext = context;
 	}
 
 	/**
-	 * Exports a workout and returns the generated file.
+	 * Exports a {@link Workout} and returns the generated file.
 	 * 
 	 * @param w
-	 *            The workout to export
+	 *            The {@link Workout} to export
 	 * 
-	 * @return The File with the exported workout
+	 * @return The File with the exported {@link Workout}
 	 * 
 	 * @throws UnsupportedOperationException
 	 *             If not supported
 	 */
 	public File exportWorkoutToFile(Workout w) {
+		File cacheDir = mContext.getCacheDir();
+		File exportedWorkout = new File(cacheDir.toString() + "/" + w.getName());
+
+		FileOutputStream fos;
 		try {
-			throw new IllegalStateException("Not implemented");
-
-			// File f =
-			// ContentProvider.INSTANCE.writeFileToCache(this.exportWorkoutToString(w),
-			// w.getName(), context);
-
-			// assert(f!=null);
-
-			// return f;
-		} catch (UnsupportedOperationException unsupported) {
-			// may happen when String export doesn't work
-			throw unsupported;
+			fos = new FileOutputStream(exportedWorkout.toString());
+			fos.write(exportWorkoutToString(w).getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+			Log.e(TAG, "Could not write file to cache: " + exportedWorkout.toString() + "\n", e);
+			exportedWorkout = null;
+		} catch (IOException e) {
+			Log.e(TAG, "Could not write file to cache: " + exportedWorkout.toString() + "\n", e);
+			exportedWorkout = null;
 		}
+
+		assert (exportedWorkout != null);
+
+		return exportedWorkout;
+
 	}
 
 	/**
-	 * Exports a workout and returns the generated String.
+	 * Exports a {@link Workout} and returns the generated String.
 	 * 
 	 * @param w
-	 *            The workout to export
-	 * @return The string with the exported Workout
+	 *            The {@link Workout} to export
+	 * 
+	 * @return The string with the exported {@link Workout} or an empty string if export failed
+	 * 
 	 * @throws UnsupportedOperationException
 	 *             If not overwritten
 	 */
