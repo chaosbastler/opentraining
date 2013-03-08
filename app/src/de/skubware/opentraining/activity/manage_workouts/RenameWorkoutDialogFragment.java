@@ -28,11 +28,6 @@ import java.util.Set;
 import com.actionbarsherlock.app.SherlockDialogFragment;
 
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.R.id;
-import de.skubware.opentraining.R.layout;
-import de.skubware.opentraining.R.string;
-import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
-import de.skubware.opentraining.activity.create_workout.ExerciseTypeDetailFragment.Callbacks;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;

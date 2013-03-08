@@ -187,6 +187,7 @@ public class XMLSaver {
 	 * 
 	 * @return true, if writing was successful, false otherwise
 	 */
+	
 	// TODO before adding again: add support to save translations for different
 	// languages
 	/*

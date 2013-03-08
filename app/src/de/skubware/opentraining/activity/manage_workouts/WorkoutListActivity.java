@@ -84,7 +84,6 @@ public class WorkoutListActivity extends SherlockFragmentActivity implements Wor
 			((WorkoutListFragment) getSupportFragmentManager().findFragmentById(R.id.workout_list)).setActivateOnItemClick(true);
 		}
 
-		// TODO: If exposing deep links into your app, handle intents here.
 	}
 
 	@Override

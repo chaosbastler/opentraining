@@ -24,9 +24,6 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.R.id;
-import de.skubware.opentraining.R.layout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
