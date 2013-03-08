@@ -36,7 +36,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.R.string;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -118,7 +117,7 @@ public class WorkoutListFragment extends SherlockListFragment {
 		if (mWorkoutList.isEmpty()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage(getString(R.string.no_workout));
-			builder.setPositiveButton(getString(R.string.ok), new OnClickListener() {
+			builder.setPositiveButton(getString(android.R.string.ok), new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();

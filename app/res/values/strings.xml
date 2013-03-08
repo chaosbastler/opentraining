@@ -25,7 +25,7 @@
     <!-- Exercise List -->
     <string name="search">Search</string>
     <string name="filter">Filter</string>
-    
+
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">ExerciseType Detail</string>
     <string name="title_exercisetype_list">ExerciseTypes</string>
@@ -42,8 +42,7 @@
     <string name="search">Search</string>
     <string name="muscles">Muscles</string>
     <string name="equipment">Equipment</string>
-    
-    
+
     <!-- DialogWorkoutOverviewFragment -->
     <string name="save_workout">Save workout</string>
     <string name="add_more_exercises">Add more exercises</string>
@@ -75,21 +74,25 @@
     <string name="discard_entry">"Discard</string>
     <string name="title_workout_list">Workouts</string>
     <string name="title_workout_detail">Workout Detail</string>
-    
+
     <!-- WorkoutListFragment -->
     <string name="no_workout">Did not find a workout.</string>
-    <string name="ok">Ok</string>
-    
+
     <!-- WorkoutDetailFragment -->
     <string name="workout_name">Workout name</string>
     <string name="exercises">Exercises:</string>
     <string name="rename_workout">Rename</string>
     <string name="delete_workout">Delete</string>
-    
+    <string name="export_workout">Export to HTML</string>
+
     <!-- RenameWorkoutDialogFragment -->
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="workout_name_cannot_be_empty">Workout name cannot be empty</string>
     <string name="error_during_saving">The workout could not be saved.</string>
     
+    <!-- ShowWorkoutHTMLActivity -->
+    <string name="title_activity_show_workout_html">Show Workout HTML</string>
+    <string name="share">Share</string>
+
 </resources>

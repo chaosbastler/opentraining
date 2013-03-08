@@ -27,11 +27,11 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.ShowWorkoutHTMLActivity;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -165,6 +165,20 @@ public class WorkoutDetailFragment extends SherlockFragment {
 				return true;
 			}
 		});
+		
+		// configure menu_item_export_workout
+		MenuItem menu_item_export_workout = (MenuItem) menu.findItem(R.id.menu_item_export_workout);
+		menu_item_export_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				
+				Intent showHTMLIntent = new Intent(getActivity(), ShowWorkoutHTMLActivity.class);
+				showHTMLIntent.putExtra(ShowWorkoutHTMLActivity.ARG_WORKOUT, mWorkout);
+				startActivity(showHTMLIntent);
+
+				return true;
+			}
+		});
+
 	}
 
 }

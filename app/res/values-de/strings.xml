@@ -78,19 +78,25 @@
     
     <!-- WorkoutListFragment -->
     <string name="no_workout">Es wurde kein Workout gefunden.</string>
-    <string name="ok">Ok</string>
     
     
     <!-- WorkoutDetailFragment -->
     <string name="workout_name">Workoutname</string>
     <string name="exercises">Übungen:</string>
-    <string name="rename_workout">Umbennen</string>
+    <string name="rename_workout">Umbenennen</string>
     <string name="delete_workout">Löschen</string>
+    <string name="export_workout">HTML exportieren</string>
+    
     
     <!-- RenameWorkoutDialogFragment -->
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>    
     <string name="workout_name_cannot_be_empty">Workoutname darf nicht leer sein</string>
     <string name="error_during_saving">Das Workout konnte nicht gespeichert werden.</string>
+    
+        
+    <!-- ShowWorkoutHTMLActivity -->
+    <string name="title_activity_show_workout_html">Show Workout HTML</string>
+    <string name="share">Share</string>
     
     </resources>

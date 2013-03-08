@@ -8,5 +8,8 @@
     <item android:id="@+id/menu_item_delete_workout"
           android:title="@string/delete_workout"
           android:showAsAction="ifRoom|withText"/>
-        
+
+    <item android:id="@+id/menu_item_export_workout"
+          android:title="@string/export_workout"
+          android:showAsAction="ifRoom|withText"/>
 </menu>

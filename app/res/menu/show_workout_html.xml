@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/share"
+        android:actionProviderClass="com.actionbarsherlock.widget.ShareActionProvider"
+        android:enabled="true"
+        android:showAsAction="ifRoom"
+        android:visible="true" android:title="@string/share">
+    </item>
+
+</menu>
