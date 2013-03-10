@@ -107,6 +107,7 @@ public class WorkoutListFragment extends SherlockListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		mWorkoutList = new ArrayList<Workout>(dataProvider.getWorkouts());
 
@@ -127,7 +128,18 @@ public class WorkoutListFragment extends SherlockListFragment {
 			builder.create().show();
 		}
 	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		
+		IDataProvider dataProvider = new DataProvider(getActivity());
+		mWorkoutList = new ArrayList<Workout>(dataProvider.getWorkouts());
 
+		setListAdapter(new ArrayAdapter<Workout>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mWorkoutList));
+	}
+	
 	/** @see WorkoutListActivity#onWorkoutChanged(Workout) */
 	@SuppressWarnings("unchecked")
 	public void onWorkoutChanged(Workout changedWorkout) {
@@ -238,4 +250,6 @@ public class WorkoutListFragment extends SherlockListFragment {
 
 		mActivatedPosition = position;
 	}
+	
+	
 }

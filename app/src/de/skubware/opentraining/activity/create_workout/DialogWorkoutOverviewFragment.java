@@ -20,23 +20,31 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.actionbarsherlock.app.SherlockDialogFragment;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * Dialog Fragment that shows dialog when a {@link Workout} should be saved.
@@ -47,11 +55,16 @@ import android.widget.ListView;
 public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "DialogWorkoutOverviewFragment";
-
+	
+	/** Argument ID */
+	private static String ARG_ID_WORKOUT = "workout";
+	
 	/** Currently displayed {@link Workout}. */
 	Workout mWorkout;
 
-	private static String ARG_ID_WORKOUT = "workout";
+	/** EditText for the name of the {@link Workout}*/
+	private EditText mEditTextWorkoutName;
+
 
 	/**
 	 * Create a new instance of DialogWorkoutOverviewFragment.
@@ -70,13 +83,16 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mWorkout = (Workout) getArguments().getSerializable(ARG_ID_WORKOUT);
-
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
 		final View v = inflater.inflate(R.layout.fragment_dialog_workout_overview, null);
+		
+		mEditTextWorkoutName = (EditText) v.findViewById(R.id.edittext_workout_name);
+		mEditTextWorkoutName.setText(mWorkout.getName());
 
 		// add exercises to list adapter
 		IExercise[] arr = new IExercise[mWorkout.getFitnessExercises().size()];
@@ -93,61 +109,135 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 				.setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						// check if name is empty
+						final String workoutName = mEditTextWorkoutName.getText().toString();
+						if (workoutName.equals("") || workoutName.replaceAll(" ", "").equals("")){
+							Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
+							return;
+						}
+						
+						// check if file already exists
+						if (fileAlreadyExists(workoutName)) {
+							showOverrideDialog();	
+							return;
+						}
 
-						showDialogSaveWorkoutFragment();
-						dialog.dismiss();
-
+						
+						saveWorkout(getActivity());
 					}
 				}).setNeutralButton(getString(R.string.add_more_exercises), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						if (getActivity() instanceof ExerciseTypeDetailActivity) {
-							// close activity that contained the fragment with
-							// details
-							// to return the result to the list activity
-							getActivity().finish();
-						}
+						continueAddingExercises();
 					}
 				}).setNegativeButton(getString(R.string.discard), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						finishActivities();
+						finishActivities(getActivity());
 					}
 				}).create();
 	}
 
 	/**
+	 * Saves the Workout with the given name.
+	 * 
+	 * @param workoutName The name of the Workout.
+	 */
+	private void saveWorkout(Activity activity){
+		final String workoutName = mEditTextWorkoutName.getText().toString();
+		
+		mWorkout.setName(workoutName);
+
+		// save Workout before exiting
+		IDataProvider dataProvider = new DataProvider(activity);
+		dataProvider.saveWorkout(mWorkout);
+
+		finishActivities(activity);
+	}
+	
+		
+	/**
+	 * On small screens(only details are shown) the detail activity will be
+	 * closed.
+	 */
+	private void continueAddingExercises() {
+		if (getActivity() instanceof ExerciseTypeDetailActivity) {
+			// close activity that contained the fragment with
+			// details
+			// to return the result to the list activity
+			getActivity().finish();
+		}
+	}
+	
+	
+	/**
 	 * Finishes the Activities ExerciseTypeDetailActivity and
 	 * ExerciseTypeListActivity .
 	 */
-	private void finishActivities() {
-		if (getActivity() instanceof ExerciseTypeDetailActivity) {
+	private void finishActivities(Activity activity) {
+		if (activity instanceof ExerciseTypeDetailActivity) {
 			// finish ExerciseTypeDetailActivity AND
 			// ExerciseTypeListActivity
-			getActivity().finishActivityFromChild(getActivity(), ExerciseTypeListActivity.RESULT_WORKOUT);
-			getActivity().finish();
+			activity.finishActivityFromChild(getActivity(), ExerciseTypeListActivity.RESULT_WORKOUT);
+			activity.finish();
 		} else {
 			// finish ExerciseTypeListActivity
-			getActivity().finish();
+			activity.finish();
 		}
 	}
 
-	/** Shows DialogSaveWorkoutFragment. */
-	void showDialogSaveWorkoutFragment() {
 
-		// DialogFragment.show() will take care of adding the fragment
-		// in a transaction. We also want to remove any currently showing
-		// dialog, so make our own transaction and take care of that here.
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
-		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-		if (prev != null) {
-			ft.remove(prev);
-		}
-		ft.addToBackStack(null);
-
-		// Create and show the dialog.
-		DialogFragment newFragment = DialogSaveWorkoutFragment.newInstance(mWorkout);
-		newFragment.show(ft, "dialog");
+	/**
+	 * Shows a Dialog that asks the user if he really wants to override the
+	 * existing {@link Workout}.
+	 */
+	private void showOverrideDialog(){
+		final Activity activity = getActivity();
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(R.string.workout_already_exists);
+		builder.setPositiveButton(R.string.override, new OnClickListener(){
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				saveWorkout(activity);
+			}
+		});
+		builder.setNegativeButton(R.string.cancel, new OnClickListener(){
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				continueAddingExercises();
+			}
+		});
+		builder.show();
 	}
+
+	
+	/**
+	 * Checks if a {@link Workout} file with the same name already exists.
+	 * 
+	 * @param name
+	 *            The name to check
+	 * 
+	 * @return true if there is already such a file
+	 */
+	private boolean fileAlreadyExists(String name) {
+		// list files in workout directory that end with ".xml"
+		String files[] = getActivity().getFilesDir().list(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String filename) {
+				if (filename.endsWith(".xml"))
+					return true;
+				else
+					return false;
+			}
+		});
+		Set<String> workout_names = new HashSet<String>();
+		for (String s : files) {
+			workout_names.add(s.split(".xml")[0]);
+		}
+
+		return workout_names.contains(name);
+	}
+
+
 
 }

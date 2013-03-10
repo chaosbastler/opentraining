@@ -261,6 +261,7 @@ public class DataProvider implements IDataProvider {
 
 	@Override
 	public boolean saveWorkout(Workout w) {
+		Log.d(TAG, "w==null: " + (w==null) + "  mContext==null: " + (mContext==null));
 		return XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
 	}
 

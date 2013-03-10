@@ -12,4 +12,8 @@
     <item android:id="@+id/menu_item_export_workout"
           android:title="@string/export_workout"
           android:showAsAction="ifRoom|withText"/>
+    
+    <item android:id="@+id/menu_item_edit_workout"
+          android:title="@string/edit_workout"
+          android:showAsAction="ifRoom|withText"/>
 </menu>

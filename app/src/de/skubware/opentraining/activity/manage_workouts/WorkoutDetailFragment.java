@@ -28,6 +28,7 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.ShowWorkoutHTMLActivity;
+import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
@@ -174,6 +175,24 @@ public class WorkoutDetailFragment extends SherlockFragment {
 				Intent showHTMLIntent = new Intent(getActivity(), ShowWorkoutHTMLActivity.class);
 				showHTMLIntent.putExtra(ShowWorkoutHTMLActivity.ARG_WORKOUT, mWorkout);
 				startActivity(showHTMLIntent);
+
+				return true;
+			}
+		});
+		
+		// configure menu_item_edit_workout
+		MenuItem menu_item_edit_workout = (MenuItem) menu.findItem(R.id.menu_item_edit_workout);
+		menu_item_edit_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				
+				Intent editItent = new Intent(getActivity(), ExerciseTypeListActivity.class);
+				editItent.putExtra(ExerciseTypeListActivity.ARG_WORKOUT, mWorkout);
+				startActivity(editItent);
+				
+				// close the manage workout activities
+				if(getActivity() instanceof WorkoutDetailActivity)
+					getActivity().finishFromChild(getActivity());
+				getActivity().finish();
 
 				return true;
 			}

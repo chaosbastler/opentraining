@@ -49,6 +49,7 @@
     <string name="discard">"Discard workout</string>
     <string name="title_exercise_detail">Exercise Detail</string>
     <string name="title_exercise_list">Exercise</string>
+    <string name="override">Override</string>
 
     <!-- DialogSaveWorkoutFragment -->
     <string name="workout_name_hint">Enter workout name</string>
@@ -84,6 +85,7 @@
     <string name="rename_workout">Rename</string>
     <string name="delete_workout">Delete</string>
     <string name="export_workout">Export to HTML</string>
+    <string name="edit_workout">Edit workout</string>
 
     <!-- RenameWorkoutDialogFragment -->
     <string name="save">Save</string>

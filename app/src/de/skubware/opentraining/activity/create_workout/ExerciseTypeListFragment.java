@@ -136,6 +136,11 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 		};
 		sharedPrefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
+	}
+
+	@Override
+	public void onStart(){
+		super.onStart();
 		filterExercisesForMusclesAndEquipment();
 	}
 
@@ -167,6 +172,9 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 				if (ex.getActivatedMuscles().contains(m))
 					accepted = true;
 			}
+			
+			if(ex.getActivatedMuscles().isEmpty())
+				accepted = true;
 
 			if (!accepted) {
 				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Muscles do not fit.");
@@ -182,10 +190,7 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 		}
 
 		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));
-		((ArrayAdapter<?>) getListAdapter()).notifyDataSetChanged();
-
-	}
+				mExericseList));	}
 
 	/**
 	 * Filters the list of exercises for the search query. The method
@@ -195,6 +200,7 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 	 * Currently the
 	 */
 	private void filterExercisesForSearchQuery() {
+		Log.d(TAG, "filterExercisesForSearchQuery()");
 		filterExercisesForMusclesAndEquipment();
 
 		if (mSearchQuery == null)
@@ -221,10 +227,10 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 		}
 
 		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));
-		((ArrayAdapter<?>) getListAdapter()).notifyDataSetChanged();
-
+				mExericseList));	
 	}
+	
+
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -303,6 +309,7 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
+		Log.d(TAG, "onQueryTextSubmit(" + query + ")");
 		mSearchQuery = query;
 		filterExercisesForSearchQuery();
 		return false;

@@ -83,6 +83,11 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 		setContentView(R.layout.activity_exercisetype_list);
 		// Show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		Bundle args = getIntent().getExtras();
+		if(args != null && args.containsKey(ARG_WORKOUT)){
+			mWorkout = (Workout) args.getSerializable(ARG_WORKOUT);
+		}
 
 		if (findViewById(R.id.exercisetype_detail_container) != null) {
 			// The detail container view will be present only in the
@@ -235,7 +240,9 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 	private void setupSearchView(MenuItem searchItem) {
 
 		OnQueryTextListener listener = (ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list);
-
+		
+		mSearchView.setIconified(true); 
+		mSearchView.setQuery("", false);
 		mSearchView.setOnQueryTextListener(listener);
 	}
 

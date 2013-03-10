@@ -50,6 +50,8 @@
     <string name="discard">Workout verwerfen</string>
     <string name="title_exercise_detail">Übungsdetails</string>
     <string name="title_exercise_list">Übungen</string>
+    <string name="override">Überschreiben</string>
+    
     
     <!-- DialogSaveWorkoutFragment -->
     <string name="workout_name_hint">Workout Namen eingeben</string>
@@ -86,7 +88,7 @@
     <string name="rename_workout">Umbenennen</string>
     <string name="delete_workout">Löschen</string>
     <string name="export_workout">HTML exportieren</string>
-    
+    <string name="edit_workout">Workout bearbeiten</string>
     
     <!-- RenameWorkoutDialogFragment -->
     <string name="save">Speichern</string>
