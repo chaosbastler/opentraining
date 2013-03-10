@@ -10,7 +10,7 @@ do
 	
 	echo -e "\033[46;1;31m STARTING $NEWFILE \033[0m"
 
-	inkscape --without-gui --export-png=../../assets/opentraining-exercises/$NEWFILE --export-height=600  $f
+	inkscape --without-gui --export-png=../../assets/opentraining-exercises/$NEWFILE --export-height=450  $f
 	echo finished
 	
 	echo ""
@@ -18,9 +18,9 @@ do
 	
 	width=$(identify -format "%w" ../../assets/opentraining-exercises/$NEWFILE)
 
-	if [ width>1200 ]; then
+	if [ $width  -gt 1200 ]; then
 		echo "Exporting $NEWFILE again with smaller widht"
-		inkscape --without-gui --export-png=../../assets/opentraining-exercises/$NEWFILE--export-width=1200  $f
+		inkscape --without-gui --export-png=../../assets/opentraining-exercises/$NEWFILE --export-width=900  $f
 	fi
 	
 	echo ""
