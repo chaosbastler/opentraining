@@ -24,22 +24,53 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * A class that represents a FSet.
+ * There are several parameters that define how an exercise is executed:
  * 
- * @author Christian Skubich
+ * weight			-	which weight you should put on your barbell, dumbbell, ...
+ * repetitions		-	how often the exercise should be executed until you take a short break
+ * number of sets	-	a successional series of repetitions is called a set
+ * 						e.g. 3 sets / 12 repetitions do mean: 12 repetitions; short break; 12 repetitions; short break; 12 repetitions;
+ * 
+ * This class represents a single set.
  */
 public class FSet implements Serializable {
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
+	
+	/** List that contains the parameters that define the set  */
+	private List<SetParameter> mSetParameterList = new ArrayList<SetParameter>();
 
-	private List<Category> mCategoryList = new ArrayList<Category>();
+	/**
+	 * A SetParameter specifies what should be/has been done in a set, e.g. how
+	 * long({@link Duration}), how often({@link Repetition}) or how much(
+	 * {@link Weight}).
+	 * 
+	 * Each SetParameter has a name() and an integer value.
+	 * 
+	 */
+	public static abstract class SetParameter {
 
-	public static abstract class Category {
-
+		/** Positive number */
 		protected int value;
+		
+		/** The name of the SetParameter */
 		public final String name;
 
-		Category(String name, int value) {
+		/**
+		 * Default constructor.
+		 * 
+		 * @param name
+		 *            The name of the SetParameter
+		 * @param value
+		 *            A positive number
+		 * 
+		 * @throws IllegalArgumentException
+		 *             if value is below 1
+		 */
+		SetParameter(String name, int value) {
+			if(value <= 0)
+				throw new IllegalArgumentException("value must be > 0 , was: " + value);
+			
 			this.name = name;
 			this.value = value;
 		}
@@ -58,10 +89,10 @@ public class FSet implements Serializable {
 		}
 
 		// Classes
-		public static class Repetition extends Category {
+		public static class Repetition extends SetParameter {
 
 			public Repetition(int value) {
-				super("Wdh", value);
+				super("repetition", value);
 			}
 
 			@Override
@@ -70,10 +101,10 @@ public class FSet implements Serializable {
 			}
 		}
 
-		public static class Weight extends Category {
+		public static class Weight extends SetParameter {
 
 			public Weight(int value) {
-				super("Gewicht", value);
+				super("weight", value);
 			}
 
 			@Override
@@ -85,10 +116,10 @@ public class FSet implements Serializable {
 			}
 		}
 
-		public static class Duration extends Category {
+		public static class Duration extends SetParameter {
 
 			public Duration(int value) {
-				super("Dauer", value);
+				super("duration", value);
 			}
 
 			@Override
@@ -99,31 +130,32 @@ public class FSet implements Serializable {
 	}
 
 	/**
-	 * Constructor for FSet. Does only allow non-negative values.
+	 * Constructor for FSet.
 	 * 
-	 * @param repetitions
+	 * @param cats
 	 *            How often the exercise should be executed
-	 * @param weight
-	 *            The weight in gram
 	 * 
 	 * @throws IllegalArgumentException
-	 *             if an argument is below 0
+	 *             if cats is empty
 	 * @throws NullPointerException
 	 *             if any argument is null
 	 */
-	public FSet(Category... cats) {
-		for (Category c : cats) {
+	public FSet(SetParameter... cats) {
+		if(cats.length == 0)
+			throw new IllegalArgumentException("cats must not be empty");
+		
+		for (SetParameter c : cats) {
 			if (c == null) {
 				throw new NullPointerException();
 			}
 		}
-		java.util.Collections.addAll(this.mCategoryList, cats);
+		java.util.Collections.addAll(this.mSetParameterList, cats);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
-		for (Category c : mCategoryList) {
+		for (SetParameter c : mSetParameterList) {
 			b.append(c.toString());
 			b.append(" ");
 		}
@@ -131,9 +163,9 @@ public class FSet implements Serializable {
 	}
 
 	public int[] listValues() {
-		int[] arr = new int[mCategoryList.size()];
+		int[] arr = new int[mSetParameterList.size()];
 		int i = 0;
-		for (Category c : mCategoryList) {
+		for (SetParameter c : mSetParameterList) {
 			arr[i] = c.getValue();
 			i++;
 		}
@@ -142,9 +174,9 @@ public class FSet implements Serializable {
 	}
 
 	public String[] listFields() {
-		String[] arr = new String[mCategoryList.size()];
+		String[] arr = new String[mSetParameterList.size()];
 		int i = 0;
-		for (Category c : mCategoryList) {
+		for (SetParameter c : mSetParameterList) {
 			arr[i] = c.getName();
 			i++;
 		}
@@ -152,17 +184,17 @@ public class FSet implements Serializable {
 		return arr;
 	}
 
-	public int getValueNumber() {
-		return mCategoryList.size();
+	public int getNumberOfSetParameters() {
+		return mSetParameterList.size();
 	}
 
 	/**
-	 * Getter for categories
+	 * Getter for the {@link SetParameter}s
 	 * 
-	 * @return A list with the categories
+	 * @return A list with the {@link SetParameter}s
 	 */
-	public List<Category> getCategories() {
-		return Collections.unmodifiableList(this.mCategoryList);
+	public List<SetParameter> getSetParameters() {
+		return Collections.unmodifiableList(this.mSetParameterList);
 	}
 
 }

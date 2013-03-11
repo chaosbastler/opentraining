@@ -30,7 +30,7 @@ import android.content.Context;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
-import de.skubware.opentraining.basic.FSet.Category;
+import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
@@ -90,13 +90,13 @@ public class WorkoutXMLParser extends DefaultHandler {
 	/** List for the {@link FSet}s */
 	private List<FSet> fSets = new ArrayList<FSet>();
 
-	/** List of the {@link Category}s */
-	private List<Category> cat = new ArrayList<Category>();
+	/** List of the {@link SetParameter}s */
+	private List<SetParameter> cat = new ArrayList<SetParameter>();
 
-	/** Name of the last parsed {@link Category} */
+	/** Name of the last parsed {@link SetParameter} */
 	private String catName;
 
-	/** Value of the last parsed {@link Category} */
+	/** Value of the last parsed {@link SetParameter} */
 	private Integer catValue;
 
 	public WorkoutXMLParser() {
@@ -258,21 +258,21 @@ public class WorkoutXMLParser extends DefaultHandler {
 
 		}
 		if (qName.equals("FSet")) {
-			this.fSets.add(new FSet(this.cat.toArray(new Category[1])));
-			this.cat = new ArrayList<Category>();
+			this.fSets.add(new FSet(this.cat.toArray(new SetParameter[1])));
+			this.cat = new ArrayList<SetParameter>();
 		}
 		if (qName.equals("Category")) {
 			boolean created = false;
-			if (this.catName.equals(new Category.Weight(1).getName())) {
-				this.cat.add(new Category.Weight(this.catValue));
+			if (this.catName.equals(new SetParameter.Weight(1).getName())) {
+				this.cat.add(new SetParameter.Weight(this.catValue));
 				created = true;
 			}
-			if (this.catName.equals(new Category.Repetition(1).getName())) {
-				this.cat.add(new Category.Repetition(this.catValue));
+			if (this.catName.equals(new SetParameter.Repetition(1).getName())) {
+				this.cat.add(new SetParameter.Repetition(this.catValue));
 				created = true;
 			}
-			if (this.catName.equals(new Category.Duration(1).getName())) {
-				this.cat.add(new Category.Duration(this.catValue));
+			if (this.catName.equals(new SetParameter.Duration(1).getName())) {
+				this.cat.add(new SetParameter.Duration(this.catValue));
 				created = true;
 			}
 			if (!created) {

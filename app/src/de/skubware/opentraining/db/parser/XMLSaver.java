@@ -40,7 +40,7 @@ import org.w3c.dom.*;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
-import de.skubware.opentraining.basic.FSet.Category;
+import de.skubware.opentraining.basic.FSet.SetParameter;
 
 
 /**
@@ -104,7 +104,7 @@ public class XMLSaver {
 				for (FSet set : fEx.getFSetList()) {
 					Element fSetE = doc.createElement("FSet");
 
-					for (Category c : set.getCategories()) {
+					for (SetParameter c : set.getSetParameters()) {
 						Element catE = doc.createElement("Category");
 						catE.setAttribute("name", c.getName());
 						catE.setAttribute("value", Integer.toString(c.getValue()));
