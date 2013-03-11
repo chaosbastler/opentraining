@@ -17,7 +17,9 @@
             android:id="@+id/imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="40dp"
             android:src="@drawable/ic_launcher" />
+
     </LinearLayout>
 
     <RelativeLayout
