@@ -105,9 +105,13 @@ public class XMLSaver {
 					Element fSetE = doc.createElement("FSet");
 
 					for (SetParameter c : set.getSetParameters()) {
-						Element catE = doc.createElement("Category");
+						Element catE = doc.createElement("SetParameter");
 						catE.setAttribute("name", c.getName());
-						catE.setAttribute("value", Integer.toString(c.getValue()));
+						if(! (c instanceof FSet.SetParameter.FreeField) ){
+							catE.setAttribute("value", Integer.toString(c.getValue()));
+						}else{
+							catE.setAttribute("value",c.toString());
+						}
 						fSetE.appendChild(catE);
 					}
 
@@ -127,10 +131,16 @@ public class XMLSaver {
 					}
 
 
-					for (TrainingSubEntry subEntry : entry.getSubEntryList()) {
-						Element subEntryE = doc.createElement("TrainingSubEntry");
-						subEntryE.setAttribute("content", subEntry.getContent());
-						entryE.appendChild(subEntryE);
+					for (FSet set: entry.getFSetList()) {
+						Element fSetE = doc.createElement("FSet");
+						
+						for (SetParameter c : set.getSetParameters()) {
+							Element catE = doc.createElement("SetParameter");
+							catE.setAttribute("name", c.getName());
+							catE.setAttribute("value", Integer.toString(c.getValue()));
+							fSetE.appendChild(catE);
+						}
+
 					}
 
 					// append TrainingEntry

@@ -25,12 +25,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.util.Log;
-
 /**
- * A TrainingEnty is a collection of {@link TrainingSubEntry}s.
+ * A TrainingEnty is particularly a collection of {@link FSet}s and stores the
+ * training process ({@link FSet}s).
  * 
- * @author Christian Skubich
+ * A TrainingEntry refers to a {@link Date} that represents the day/time when
+ * the user trained. One {@code FitnessExercise} does refer to one ore more
+ * {@link TrainingEntry}s.
  * 
  */
 public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
@@ -43,8 +44,8 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	/** The mDate to which this Entry refers to. May be null. */
 	private Date mDate;
 
-	/** List with all {@link TrainingSubEntry}s. May be empty, but never null. */
-	private List<TrainingSubEntry> mSubEntryList = new ArrayList<TrainingSubEntry>();
+	/** List with all {@link FSet}s. May be empty, but never null. */
+	private List<FSet> mFSetList = new ArrayList<FSet>();
 
 	/**
 	 * This constructor should be used, if the {@link #mDate} is unknown.
@@ -72,42 +73,38 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	}
 
 	/**
-	 * Adds a TrainingSubEntry to this TrainingEntry.
+	 * Adds a FSet to this TrainingEntry.
 	 * 
-	 * @param content
-	 *            The content of the TrainingSubEntry to add (may be null)
-	 * 
-	 * @return The created {@link TrainingSubEntry}
+	 * @param set
+	 *            The FSet to add (may not be null)
 	 * 
 	 */
-	public TrainingSubEntry add(String content) {
-		Log.v(TAG, "Added TrainingSubEntry: " + content);
-		@SuppressWarnings("deprecation")
-		TrainingSubEntry entry = new TrainingSubEntry(content);
-		this.mSubEntryList.add(entry);
-
-		return entry;
+	public void add(FSet set) {
+		if(set == null)
+			throw new NullPointerException("FSet may not be null");
+		
+		this.mFSetList.add(set);
 	}
 
 	/**
-	 * Removes the given TrainingSubEntry if possible.
+	 * Removes the given FSet if possible.
 	 * 
-	 * @param entry
-	 *            The TrainingSubEntry to remove.
+	 * @param set
+	 *            The FSet to remove.
 	 * 
 	 * @return True if operation was successful
 	 */
-	public boolean remove(TrainingSubEntry entry) {
-		return this.mSubEntryList.remove(entry);
+	public boolean remove(FSet set) {
+		return mFSetList.remove(set);
 	}
 
 	/**
-	 * Getter for {@link #mSubEntryList}.
+	 * Getter for {@link #mFSetList}.
 	 * 
-	 * @return The {@link #mSubEntryList}
+	 * @return The {@link #mFSetList}
 	 */
-	public List<TrainingSubEntry> getSubEntryList() {
-		return mSubEntryList;
+	public List<FSet> getFSetList() {
+		return mFSetList;
 	}
 
 	/**
@@ -145,7 +142,7 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 		StringBuilder builder = new StringBuilder();
 
 		builder.append("Date: " + mDate + "\n");
-		for (TrainingSubEntry entry : mSubEntryList) {
+		for (FSet entry : mFSetList) {
 			builder.append("\n TrainingEntry: " + entry.toString());
 		}
 

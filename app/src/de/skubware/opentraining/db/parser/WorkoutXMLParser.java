@@ -54,11 +54,11 @@ public class WorkoutXMLParser extends DefaultHandler {
 
 	private SAXParser parser = null;
 
-	private Workout w;
+	private Workout mWorkout;
 
 	// Workout stuff
 	/** Name of the {@link Workout} */
-	private String wName;
+	private String mWorkoutName;
 
 	/** Integer for the number of rows of the workout. */
 	private Integer rowCount;
@@ -97,7 +97,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 	private String catName;
 
 	/** Value of the last parsed {@link SetParameter} */
-	private Integer catValue;
+	private String catValue;
 
 	public WorkoutXMLParser() {
 		// IParser instanziieren
@@ -123,7 +123,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 			// Dokument parsen
 			parser.parse(f, this);
 
-			return this.w;
+			return this.mWorkout;
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -150,7 +150,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 	public void startElement(String uri, String name, String qname, Attributes attributes) throws SAXException {
 		// Ausgeben des Elementnamens
 		if (qname.equals("Workout")) {
-			this.wName = attributes.getValue("name");
+			this.mWorkoutName = attributes.getValue("name");
 			String r = attributes.getValue("rows");
 			if (r != null) {
 				this.rowCount = Integer.parseInt(r);
@@ -167,9 +167,10 @@ public class WorkoutXMLParser extends DefaultHandler {
 				throw new NullPointerException("The exercise '" + exName + "' of the TrainingPlan couldn't be found in the database.");
 			}
 		}
-		if (qname.equals("Category")) {
+		// start of FSet can be ignored
+		if (qname.equals("SetParameter")) {
 			this.catName = attributes.getValue("name");
-			this.catValue = Integer.parseInt(attributes.getValue("value"));
+			this.catValue = attributes.getValue("value");
 		}
 		if (qname.equals("TrainingEntry")) {
 			String dateString = attributes.getValue("date");
@@ -187,14 +188,11 @@ public class WorkoutXMLParser extends DefaultHandler {
 					trainingEntryDate = null;
 				}
 			}
-			
+		
 			this.trainingEntry = new TrainingEntry(trainingEntryDate);
 
 		}
-		if (qname.equals("TrainingSubEntry")) {
-			String content = attributes.getValue("content");
-			this.trainingEntry.add(content);
-		}
+
 
 	}
 
@@ -220,9 +218,9 @@ public class WorkoutXMLParser extends DefaultHandler {
 	@Override
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("Workout")) {
-			this.w = new Workout(this.wName, this.fList.toArray(new FitnessExercise[0]));
+			this.mWorkout = new Workout(this.mWorkoutName, this.fList.toArray(new FitnessExercise[0]));
 			if (this.rowCount != null) {
-				this.w.setEmptyRows(this.rowCount);
+				this.mWorkout.setEmptyRows(this.rowCount);
 			} else {
 				Log.d(TAG, "No rows were set");
 			}
@@ -230,7 +228,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 			
 			
 			this.rowCount = null;
-			this.wName = null;
+			this.mWorkoutName = null;
 		}
 		if (qName.equals("FitnessExercise")) {
 			FitnessExercise fEx = new FitnessExercise(this.exType, this.fSets.toArray(new FSet[0]));
@@ -261,18 +259,22 @@ public class WorkoutXMLParser extends DefaultHandler {
 			this.fSets.add(new FSet(this.cat.toArray(new SetParameter[1])));
 			this.cat = new ArrayList<SetParameter>();
 		}
-		if (qName.equals("Category")) {
+		if (qName.equals("SetParameter")) {
 			boolean created = false;
 			if (this.catName.equals(new SetParameter.Weight(1).getName())) {
-				this.cat.add(new SetParameter.Weight(this.catValue));
+				this.cat.add(new SetParameter.Weight(Integer.parseInt(this.catValue)));
 				created = true;
 			}
 			if (this.catName.equals(new SetParameter.Repetition(1).getName())) {
-				this.cat.add(new SetParameter.Repetition(this.catValue));
+				this.cat.add(new SetParameter.Repetition(Integer.parseInt(this.catValue)));
 				created = true;
 			}
 			if (this.catName.equals(new SetParameter.Duration(1).getName())) {
-				this.cat.add(new SetParameter.Duration(this.catValue));
+				this.cat.add(new SetParameter.Duration(Integer.parseInt(this.catValue)));
+				created = true;
+			}
+			if (this.catName.equals(new SetParameter.FreeField(" ").getName())) {
+				this.cat.add(new SetParameter.FreeField(this.catValue));
 				created = true;
 			}
 			if (!created) {
@@ -282,8 +284,13 @@ public class WorkoutXMLParser extends DefaultHandler {
 			catValue = null;
 		}
 		if (qName.equals("TrainingEntry")){
+			for(FSet set:this.fSets){
+				trainingEntry.add(set);
+			}
+			
 			this.trainingEntryList.add(this.trainingEntry);
 			this.trainingEntry = null;
+			this.fSets = new ArrayList<FSet>();
 		}
 		if (qName.equals("TrainingSubEntry")){
 			// to nothing

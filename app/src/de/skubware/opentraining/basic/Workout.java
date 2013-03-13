@@ -254,7 +254,7 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
-		return this.name.hashCode() + this.fitnessExercises.hashCode();
+		return this.name.hashCode() + this.fitnessExercises.size();
 	}
 
 	/** {@inheritDoc} */

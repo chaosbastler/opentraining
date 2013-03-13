@@ -59,8 +59,12 @@ public class FSet implements Serializable {
 	 * Each SetParameter has a name() and an integer value.
 	 * 
 	 */
-	public static abstract class SetParameter {
-		/** Negative number */
+	public static abstract class SetParameter implements Serializable {
+		
+		/** Default serialVersionUID */
+		private static final long serialVersionUID = 1L;
+		
+		/** Not negative number */
 		protected int value;
 		
 		/** The name of the SetParameter */
