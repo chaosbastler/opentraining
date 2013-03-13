@@ -23,17 +23,28 @@ package de.skubware.opentraining.basic;
 import java.io.Serializable;
 import java.util.*;
 
+import android.util.Log;
+
 /**
- * There are several parameters that define how an exercise is executed:
+ * There are several parameters that define how an exercise is executed:<br><br>
  * 
- * weight			-	which weight you should put on your barbell, dumbbell, ...
- * repetitions		-	how often the exercise should be executed until you take a short break
- * number of sets	-	a successional series of repetitions is called a set
- * 						e.g. 3 sets / 12 repetitions do mean: 12 repetitions; short break; 12 repetitions; short break; 12 repetitions;
+ * weight - which weight you should put on your barbell, dumbbell, ...<br>
+ * repetitions - how often the exercise should be executed until you take a
+ * short break<br> 
+ * number of sets - a successional series of repetitions is called a
+ * set e.g. 3 sets / 12 repetitions do mean: 12 repetitions; short break; 12
+ * repetitions; short break; 12 repetitions;<br><br>
  * 
- * This class represents a single set.
+ * This class represents a single set. If it is part of a
+ * {@link FitnessExercise} it describes how the exercise should be done. If it
+ * is part of a {@link TrainingEntry} it indicates how the exercise has been
+ * done.
  */
 public class FSet implements Serializable {
+
+	/** Tag for logging */
+	public static final String TAG = "FSet";
+	
 	/** Default serialVersionUID */
 	private static final long serialVersionUID = 1L;
 	
@@ -49,8 +60,7 @@ public class FSet implements Serializable {
 	 * 
 	 */
 	public static abstract class SetParameter {
-
-		/** Positive number */
+		/** Negative number */
 		protected int value;
 		
 		/** The name of the SetParameter */
@@ -62,14 +72,14 @@ public class FSet implements Serializable {
 		 * @param name
 		 *            The name of the SetParameter
 		 * @param value
-		 *            A positive number
+		 *            A not negative number
 		 * 
 		 * @throws IllegalArgumentException
-		 *             if value is below 1
+		 *             if value is below 0
 		 */
 		SetParameter(String name, int value) {
-			if(value <= 0)
-				throw new IllegalArgumentException("value must be > 0 , was: " + value);
+			if(value < 0)
+				throw new IllegalArgumentException("value must be >= 0 , was: " + value);
 			
 			this.name = name;
 			this.value = value;
@@ -79,7 +89,7 @@ public class FSet implements Serializable {
 			return name;
 		}
 
-		public final int getValue() {
+		public int getValue() {
 			return value;
 		}
 
@@ -87,6 +97,30 @@ public class FSet implements Serializable {
 		public String toString() {
 			return name + " : " + value;
 		}
+		
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode() {
+			return this.name.hashCode();
+		}
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			SetParameter other = (SetParameter) obj;
+			return other.name.equals(this.name) && other.value == this.value;
+		}		
 
 		// Classes
 		public static class Repetition extends SetParameter {
@@ -103,6 +137,10 @@ public class FSet implements Serializable {
 
 		public static class Weight extends SetParameter {
 
+			/**
+			 * 
+			 * @param value The weight in gramm
+			 */
 			public Weight(int value) {
 				super("weight", value);
 			}
@@ -118,6 +156,10 @@ public class FSet implements Serializable {
 
 		public static class Duration extends SetParameter {
 
+			/**
+			 * 
+			 * @param value The time in secons
+			 */
 			public Duration(int value) {
 				super("duration", value);
 			}
@@ -126,6 +168,45 @@ public class FSet implements Serializable {
 			public String toString() {
 				return value + " s";
 			}
+		}
+		
+		public static class FreeField extends SetParameter {
+			private String mContent;
+			
+			public FreeField(String content){
+				super("freefield", 1);
+				this.value = -1;
+				
+				mContent = content;
+			}
+			
+			@Override
+			public String toString() {
+				return mContent;
+			}
+			
+			@Override
+			public int getValue(){
+				Log.e(TAG, "getVale() should not be used for instances of FreeField.");
+				return super.getValue();
+			}
+			
+
+			/* (non-Javadoc)
+			 * @see java.lang.Object#equals(java.lang.Object)
+			 */
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (!super.equals(obj))
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+				FreeField other = (FreeField) obj;
+				return other.name.equals(this.name) && other.mContent.equals(this.mContent);
+			}
+
 		}
 	}
 
@@ -195,6 +276,39 @@ public class FSet implements Serializable {
 	 */
 	public List<SetParameter> getSetParameters() {
 		return Collections.unmodifiableList(this.mSetParameterList);
+	}
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mSetParameterList == null) ? 0 : mSetParameterList.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FSet other = (FSet) obj;
+		if (mSetParameterList == null) {
+			if (other.mSetParameterList != null)
+				return false;
+		} else if (!mSetParameterList.equals(other.mSetParameterList))
+			return false;
+		return true;
 	}
 
 }
