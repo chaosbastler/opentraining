@@ -51,8 +51,9 @@ public class FExListActivity extends SherlockFragmentActivity implements FExList
 	/** Tag for logging */
 	public static final String TAG = FExListActivity.class.getName();
 
-	/** Constant for argument */
+	/** Constants for argument */
 	public static final String ARG_WORKOUT = "workout";
+
 	static final int RESULT_WORKOUT = 23;
 
 	private Workout mWorkout;

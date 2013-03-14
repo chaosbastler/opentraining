@@ -22,7 +22,11 @@
     <string name="accept">Akzeptieren</string>
     <string name="not_accept">Nicht akzeptieren</string>    
     <string name="do_not_show_again">Nicht wieder anzeigen.</string>        
-
+    
+    <!-- SelectWorkoutDialogFragment -->
+    <string name="start_new_training">Neues Training</string>
+    <string name="load_old_training">Altes Training laden</string>
+    
     <!-- Exercise List -->
     <string name="search">Suche</string>
     <string name="filter">Filtern</string>

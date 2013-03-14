@@ -20,24 +20,23 @@
 
 package de.skubware.opentraining.activity;
 
-import java.util.Calendar;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
-import de.skubware.opentraining.activity.start_training.FExListActivity;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +48,8 @@ import android.widget.Toast;
 //TODO AbstractWorkoutExporterFactory
 //TODO Edit Workouts: possibility to remove FitnessExercises
 //TODO saving existing TrainingEntries after editing Workout
+//TODO about dialog with licenses
+
 public class MainActivity extends SherlockFragmentActivity {
 	/** Tag for logging */
 	public static final String TAG = MainActivity.class.getName();
@@ -113,49 +114,10 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	/** Shows a dialog for choosing a {@link Workout} */
 	private void showSelectWorkoutDialog() {
-
-		AlertDialog.Builder builder_workoutchooser = new AlertDialog.Builder(MainActivity.this);
-		builder_workoutchooser.setTitle(getString(R.string.choose_workout));
-
 		IDataProvider dataProvider = new DataProvider(this);
 
-		// get all Workouts and add them to the adapter
+		// get all Workouts
 		final List<Workout> workoutList = dataProvider.getWorkouts();
-		final ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(MainActivity.this, android.R.layout.select_dialog_singlechoice,
-				workoutList);
-
-		builder_workoutchooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int item) {
-				// close dialog and show TrainingEntryDialog
-				dialog.dismiss();
-				Workout mWorkout = adapter.getItem(item);
-
-				// DialogFragment.show() will take care of adding the fragment
-				// in a transaction. We also want to remove any currently
-				// showing
-				// dialog, so make our own transaction and take care of that
-				// here.
-				/*
-				 * FragmentTransaction ft =
-				 * getSupportFragmentManager().beginTransaction(); Fragment prev
-				 * = getSupportFragmentManager().findFragmentByTag("dialog"); if
-				 * (prev != null) { ft.remove(prev); } ft.addToBackStack(null);
-				 * 
-				 * // Create and show the dialog. DialogFragment newFragment =
-				 * DialogStartTraining.newInstance(mWorkout);
-				 * newFragment.show(ft, "dialog");
-				 */
-
-				// add arguments to intent
-				Intent intent = new Intent(MainActivity.this, FExListActivity.class);
-				mWorkout.addTrainingEntry(Calendar.getInstance().getTime());
-				intent.putExtra(FExListActivity.ARG_WORKOUT, mWorkout);
-				// start activity
-				MainActivity.this.startActivity(intent);
-
-			}
-
-		});
 
 		Log.d(TAG, "Number of Workouts: " + workoutList.size());
 		switch (workoutList.size()) {
@@ -163,14 +125,18 @@ public class MainActivity extends SherlockFragmentActivity {
 		case 0:
 			Toast.makeText(MainActivity.this, "No workout found.", Toast.LENGTH_LONG).show();
 			break;
-		// no need to choose Workout if there is only one
-		/*
-		 * case 1: //TODO implement
-		 * this.showTrainingEntryDialog(workoutList.get(0)); break;
-		 */
-		// choose Workout, if there is more than one Workout
+		// choose Workout, if there is/are one or more Workout(s)
 		default:
-			builder_workoutchooser.create().show();
+			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+			Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+			if (prev != null) {
+				ft.remove(prev);
+			}
+			ft.addToBackStack(null);
+
+			// Create and show the dialog.
+			DialogFragment newFragment = SelectWorkoutDialogFragment.newInstance();
+			newFragment.show(ft, "dialog");
 		}
 
 	}
