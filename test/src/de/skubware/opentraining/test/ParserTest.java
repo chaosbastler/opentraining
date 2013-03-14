@@ -21,6 +21,7 @@
 package de.skubware.opentraining.test;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -110,7 +111,11 @@ public class ParserTest extends AndroidTestCase {
 
 		
 		Workout mWorkout = new Workout(WORKOUT_NAME, FEX_1, FEX_2, FEX_3);
-		
+		mWorkout.addTrainingEntry(Calendar.getInstance().getTime());
+		FEX_1.getTrainingEntryList().get(0).add(SET_2);
+		FEX_1.getTrainingEntryList().get(0).add(SET_2);
+		FEX_1.getTrainingEntryList().get(0).add(SET_2);
+
 		
 		DataProvider dataProvider = new DataProvider(getContext());
 		DataHelper dataHelper = new DataHelper(getContext());
@@ -123,19 +128,37 @@ public class ParserTest extends AndroidTestCase {
 			String xmlData = dataHelper.loadFileFromFileSystem(path);
 			Log.d(TAG, "Workout XML File: \n\n" + xmlData);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, "Error parsing xml", e);
 		}
 
 
 		// load again from filesystem
 		List<Workout> workoutList = dataProvider.getWorkouts();
 		
-		assertEquals(workoutList.get(0).toDebugString(), mWorkout.toDebugString());
+		boolean foundWorkout = false;
+		for(Workout w:workoutList){
+			if(w.getName().equals(mWorkout.getName())){
+				foundWorkout = true;
+				//TODO find bug in equals()
+				assertEquals(mWorkout.toDebugString(), w.toDebugString());
+				Log.d(TAG, "Expected: " + mWorkout.toDebugString());
+				Log.d(TAG, "Actual: " + w.toDebugString());
+				assertEquals(mWorkout, w);
+			}
+		}
+		assertTrue(foundWorkout);
 		
-		//TODO find Bug
-		// there seems to be a bug in equals() or the parser does not work correctly:
-		//assertEquals(mWorkout, workoutList.get(0)); will fail
+		/*if(!workoutList.contains(mWorkout)){
+			String msg = "Workout list does not contain Workout. WorkoutList: " ;
+			for(Workout w:workoutList){
+				msg += w.toDebugString();
+				msg += "\n\n";
+			}
+			msg += "\n\n\nexpected: \n\n" + mWorkout.toDebugString();
+			
+			fail(msg);
+		}*/
+
 		
 
 

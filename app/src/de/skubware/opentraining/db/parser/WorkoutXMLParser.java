@@ -18,7 +18,6 @@
  * 
  */
 
-
 package de.skubware.opentraining.db.parser;
 
 import javax.xml.parsers.*;
@@ -42,17 +41,18 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * An implementation of a SaxParser for parsing .xml files to a {@link Workout} object.
+ * An implementation of a SaxParser for parsing .xml files to a {@link Workout}
+ * object.
  * 
  * @author Christian Skubich
  */
 public class WorkoutXMLParser extends DefaultHandler {
 	/** Tag for logging */
 	static final String TAG = "WorkoutXMLParser";
-	
+
 	private Context mContext;
 
-	private SAXParser parser = null;
+	private SAXParser mParser = null;
 
 	private Workout mWorkout;
 
@@ -61,67 +61,60 @@ public class WorkoutXMLParser extends DefaultHandler {
 	private String mWorkoutName;
 
 	/** Integer for the number of rows of the workout. */
-	private Integer rowCount;
+	private Integer mRowCount;
 
 	// FitnessExercise stuff
 	/** List to store the {@link FitnessExercise}s */
-	private List<FitnessExercise> fList = new ArrayList<FitnessExercise>();
+	private List<FitnessExercise> mFExList = new ArrayList<FitnessExercise>();
 
 	/** The last {@link ExerciseType} that was parsed */
-	private ExerciseType exType;
+	private ExerciseType mExerciseType;
 
 	/** The custom name of the {@link FitnessExercise} */
-	private String customName;
+	private String mCustomName;
 
 	// TrainingEntry stuff
 	/** A Map for the TrainingEntrys of a FitnessExercise. */
-	private List<TrainingEntry> trainingEntryList = new ArrayList<TrainingEntry>();
+	private List<TrainingEntry> mTrainingEntryList = new ArrayList<TrainingEntry>();
 
 	/** Date for the last parsed {@link TrainingEntry} */
-	private TrainingEntry trainingEntry;
-
-	/** List for the {@link TrainingSubEntry}s */
-	//private List<String> trainingSubEntryContentList = new ArrayList<String>();
-
-	/** Content of the last parsed {@link TrainingSubEntry} */
-	//private String trainingSubEntryContent;
+	private TrainingEntry mTrainingEntry;
 
 	// FSet stuff
 	/** List for the {@link FSet}s */
-	private List<FSet> fSets = new ArrayList<FSet>();
+	private List<FSet> mFSetList = new ArrayList<FSet>();
+
+	/** List for the {@link FSet}s of the TrainingEntry */
+	private List<FSet> mTrainingEntryFSetList = new ArrayList<FSet>();
+
+	private boolean parsingTrainingEntry = false;
 
 	/** List of the {@link SetParameter}s */
-	private List<SetParameter> cat = new ArrayList<SetParameter>();
+	private List<SetParameter> mSetParameter = new ArrayList<SetParameter>();
 
 	/** Name of the last parsed {@link SetParameter} */
-	private String catName;
+	private String mSetParameterName;
 
 	/** Value of the last parsed {@link SetParameter} */
-	private String catValue;
+	private String mSetParameterValue;
 
 	public WorkoutXMLParser() {
 		// IParser instanziieren
 		try {
 			SAXParserFactory fac = SAXParserFactory.newInstance();
-			parser = fac.newSAXParser();
+			mParser = fac.newSAXParser();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	/**
-	 * Parsen einer XML-Datei
-	 * 
-	 * @param Einzulesende
-	 *            Datei
-	 */
 	public Workout read(File f, Context context) {
 		mContext = context;
-		
+
 		try {
 			// Dokument parsen
-			parser.parse(f, this);
+			mParser.parse(f, this);
 
 			return this.mWorkout;
 		} catch (SAXException e) {
@@ -133,52 +126,41 @@ public class WorkoutXMLParser extends DefaultHandler {
 		return null;
 	}
 
-	/**
-	 * Wird aufgerufen, wenn ein Element beginnt
-	 * 
-	 * @param uri
-	 *            Namensraum-Pr�fix
-	 * @param name
-	 *            Name des Elements
-	 * @param qname
-	 *            Voll qualifizierter Name mit uri und name
-	 * @param attributes
-	 *            Attribute
-	 * @throws SAXException
-	 */
-	@SuppressWarnings("deprecation") // because using constructor of TrainingEntry
+	@SuppressWarnings("deprecation")
+	// because using constructor of TrainingEntry
+	@Override
 	public void startElement(String uri, String name, String qname, Attributes attributes) throws SAXException {
-		// Ausgeben des Elementnamens
 		if (qname.equals("Workout")) {
-			this.mWorkoutName = attributes.getValue("name");
+			mWorkoutName = attributes.getValue("name");
 			String r = attributes.getValue("rows");
 			if (r != null) {
-				this.rowCount = Integer.parseInt(r);
+				this.mRowCount = Integer.parseInt(r);
 			}
 		}
 		if (qname.equals("FitnessExercise")) {
-			this.customName = attributes.getValue("customname");
+			this.mCustomName = attributes.getValue("customname");
 		}
 		if (qname.equals("ExerciseType")) {
 			String exName = attributes.getValue("name");
 			IDataProvider dataProvider = new DataProvider(mContext);
-			this.exType = dataProvider.getExerciseByName(exName);
-			if (exType == null) {
+			this.mExerciseType = dataProvider.getExerciseByName(exName);
+			if (mExerciseType == null) {
 				throw new NullPointerException("The exercise '" + exName + "' of the TrainingPlan couldn't be found in the database.");
 			}
 		}
 		// start of FSet can be ignored
 		if (qname.equals("SetParameter")) {
-			this.catName = attributes.getValue("name");
-			this.catValue = attributes.getValue("value");
+			this.mSetParameterName = attributes.getValue("name");
+			this.mSetParameterValue = attributes.getValue("value");
 		}
 		if (qname.equals("TrainingEntry")) {
+			parsingTrainingEntry = true;
 			String dateString = attributes.getValue("date");
-			
+
 			Date trainingEntryDate;
-			if(dateString == null || dateString.equals("") || dateString.equals("null")){
+			if (dateString == null || dateString.equals("") || dateString.equals("null")) {
 				trainingEntryDate = null;
-			}else{
+			} else {
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
 				try {
@@ -188,113 +170,99 @@ public class WorkoutXMLParser extends DefaultHandler {
 					trainingEntryDate = null;
 				}
 			}
-		
-			this.trainingEntry = new TrainingEntry(trainingEntryDate);
+
+			this.mTrainingEntry = new TrainingEntry(trainingEntryDate);
 
 		}
 
-
-	}
-
-
-	/**
-	 * Wird aufgerufen, wenn ein Text-Element behandelt wird
-	 * 
-	 * @param chars
-	 *            Komplettes Dokument
-	 * @param start
-	 *            Beginn des Textes
-	 * @param end
-	 *            Ende des Textes
-	 * @throws SAXException
-	 */
-	public void characters(char[] chars, int start, int end) throws SAXException {
-		// Text in String casten und f�hrende bzw. folgende
-		// Leerzeichen entfernen
-		// String text = new String(chars, start, end).trim();
-		// System.out.println("Found text: " + text);
 	}
 
 	@Override
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("Workout")) {
-			this.mWorkout = new Workout(this.mWorkoutName, this.fList.toArray(new FitnessExercise[0]));
-			if (this.rowCount != null) {
-				this.mWorkout.setEmptyRows(this.rowCount);
+			this.mWorkout = new Workout(this.mWorkoutName, this.mFExList.toArray(new FitnessExercise[0]));
+			if (this.mRowCount != null) {
+				this.mWorkout.setEmptyRows(this.mRowCount);
 			} else {
 				Log.d(TAG, "No rows were set");
 			}
 
-			
-			
-			this.rowCount = null;
+			this.mRowCount = null;
 			this.mWorkoutName = null;
 		}
 		if (qName.equals("FitnessExercise")) {
-			FitnessExercise fEx = new FitnessExercise(this.exType, this.fSets.toArray(new FSet[0]));
-			
+			FitnessExercise fEx = new FitnessExercise(this.mExerciseType, this.mFSetList.toArray(new FSet[0]));
+
 			// set custom name
-			if(this.customName != null){
-				fEx.setCustomName(customName);
-				Log.d(TAG, "customName=" + customName);
-			}else{
+			if (this.mCustomName != null) {
+				fEx.setCustomName(mCustomName);
+				Log.d(TAG, "customName=" + mCustomName);
+			} else {
 				Log.d(TAG, "No customName");
 			}
-			
-			
+
 			// now add TrainingEntrys
 			List<TrainingEntry> originalList = fEx.getTrainingEntryList();
-			originalList.addAll(this.trainingEntryList);
+			originalList.addAll(this.mTrainingEntryList);
 
-			
-			this.fList.add(fEx);
-			
-			this.customName = null;
-			this.exType = null;
-			this.fSets = new ArrayList<FSet>();
-			this.trainingEntryList = new ArrayList<TrainingEntry>();
+			this.mFExList.add(fEx);
+
+			this.mCustomName = null;
+			this.mExerciseType = null;
+			this.mFSetList = new ArrayList<FSet>();
+			this.mTrainingEntryList = new ArrayList<TrainingEntry>();
 
 		}
 		if (qName.equals("FSet")) {
-			this.fSets.add(new FSet(this.cat.toArray(new SetParameter[1])));
-			this.cat = new ArrayList<SetParameter>();
+			if (parsingTrainingEntry) {
+				if (!mSetParameter.isEmpty()) {
+					mTrainingEntryFSetList.add(new FSet(this.mSetParameter.toArray(new SetParameter[1])));
+				}
+			} else {
+				if (!mSetParameter.isEmpty()) {
+					mFSetList.add(new FSet(this.mSetParameter.toArray(new SetParameter[1])));
+				}
+			}
+
+			this.mSetParameter = new ArrayList<SetParameter>();
 		}
 		if (qName.equals("SetParameter")) {
 			boolean created = false;
-			if (this.catName.equals(new SetParameter.Weight(1).getName())) {
-				this.cat.add(new SetParameter.Weight(Integer.parseInt(this.catValue)));
+			if (this.mSetParameterName.equals(new SetParameter.Weight(1).getName())) {
+				this.mSetParameter.add(new SetParameter.Weight(Integer.parseInt(this.mSetParameterValue)));
 				created = true;
 			}
-			if (this.catName.equals(new SetParameter.Repetition(1).getName())) {
-				this.cat.add(new SetParameter.Repetition(Integer.parseInt(this.catValue)));
+			if (this.mSetParameterName.equals(new SetParameter.Repetition(1).getName())) {
+				this.mSetParameter.add(new SetParameter.Repetition(Integer.parseInt(this.mSetParameterValue)));
 				created = true;
 			}
-			if (this.catName.equals(new SetParameter.Duration(1).getName())) {
-				this.cat.add(new SetParameter.Duration(Integer.parseInt(this.catValue)));
+			if (this.mSetParameterName.equals(new SetParameter.Duration(1).getName())) {
+				this.mSetParameter.add(new SetParameter.Duration(Integer.parseInt(this.mSetParameterValue)));
 				created = true;
 			}
-			if (this.catName.equals(new SetParameter.FreeField(" ").getName())) {
-				this.cat.add(new SetParameter.FreeField(this.catValue));
+			if (this.mSetParameterName.equals(new SetParameter.FreeField(" ").getName())) {
+				this.mSetParameter.add(new SetParameter.FreeField(this.mSetParameterValue));
 				created = true;
 			}
 			if (!created) {
 				throw new IllegalStateException();
 			}
-			catName = null;
-			catValue = null;
+			mSetParameterName = null;
+			mSetParameterValue = null;
 		}
-		if (qName.equals("TrainingEntry")){
-			for(FSet set:this.fSets){
-				trainingEntry.add(set);
+		if (qName.equals("TrainingEntry")) {
+			for (FSet set : this.mTrainingEntryFSetList) {
+				mTrainingEntry.add(set);
 			}
-			
-			this.trainingEntryList.add(this.trainingEntry);
-			this.trainingEntry = null;
-			this.fSets = new ArrayList<FSet>();
+
+			this.mTrainingEntryList.add(this.mTrainingEntry);
+			this.mTrainingEntry = null;
+			this.mTrainingEntryFSetList = new ArrayList<FSet>();
+			parsingTrainingEntry = false;
 		}
-		if (qName.equals("TrainingSubEntry")){
+		if (qName.equals("TrainingSubEntry")) {
 			// to nothing
 		}
-		
+
 	}
 }

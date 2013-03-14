@@ -130,17 +130,22 @@ public class XMLSaver {
 						entryE.setAttribute("date", "null");
 					}
 
-
+					//TODO refactor
 					for (FSet set: entry.getFSetList()) {
 						Element fSetE = doc.createElement("FSet");
 						
 						for (SetParameter c : set.getSetParameters()) {
 							Element catE = doc.createElement("SetParameter");
 							catE.setAttribute("name", c.getName());
-							catE.setAttribute("value", Integer.toString(c.getValue()));
+							if(! (c instanceof FSet.SetParameter.FreeField) ){
+								catE.setAttribute("value", Integer.toString(c.getValue()));
+							}else{
+								catE.setAttribute("value",c.toString());
+							}
 							fSetE.appendChild(catE);
 						}
-
+						
+						entryE.appendChild(fSetE);
 					}
 
 					// append TrainingEntry
@@ -185,6 +190,8 @@ public class XMLSaver {
 
 		return success;
 	}
+	
+	
 
 	/**
 	 * Saves an ExerciseType to the given destination.

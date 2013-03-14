@@ -143,7 +143,7 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 
 		builder.append("Date: " + mDate + "\n");
 		for (FSet entry : mFSetList) {
-			builder.append("\n TrainingEntry: " + entry.toString());
+			builder.append("\n FSet: " + entry.toString());
 		}
 
 		return builder.toString();
