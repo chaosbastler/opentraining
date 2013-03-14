@@ -129,6 +129,11 @@ public class FSet implements Serializable {
 		// Classes
 		public static class Repetition extends SetParameter {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public Repetition(int value) {
 				super("repetition", value);
 			}
@@ -140,6 +145,11 @@ public class FSet implements Serializable {
 		}
 
 		public static class Weight extends SetParameter {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
 			/**
 			 * 
@@ -162,6 +172,11 @@ public class FSet implements Serializable {
 
 			/**
 			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			/**
+			 * 
 			 * @param value The time in secons
 			 */
 			public Duration(int value) {
@@ -175,6 +190,10 @@ public class FSet implements Serializable {
 		}
 		
 		public static class FreeField extends SetParameter {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			private String mContent;
 			
 			public FreeField(String content){

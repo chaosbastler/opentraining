@@ -69,6 +69,11 @@
     <string name="discard_entry">"Abbrechen</string>
     <string name="title_workout_list">Workouts</string>
     <string name="title_workout_detail">Workout Detail</string>
+    <string name="repetitions">Wiederholungen</string>
+    <string name="weight">Gewicht</string>
+    <string name="duration">Dauer</string>
+    <string name="add_entry">Eintrag hinzufügen</string>
+
     
     <!-- WorkoutListFragment -->
     <string name="no_workout">Es wurde kein Workout gefunden.</string>

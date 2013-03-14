@@ -20,6 +20,7 @@ package de.skubware.opentraining.activity.start_training;
  * 
  */
 
+import java.util.Collections;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -49,9 +50,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
+import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
-import de.skubware.opentraining.basic.TrainingSubEntry;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
@@ -64,7 +65,7 @@ import de.skubware.opentraining.db.IDataProvider;
  */
 public class FExDetailFragment extends SherlockFragment implements DialogFragmentAddEntry.Callbacks {
 	/** Tag for logging */
-	public static final String TAG = FExDetailFragment.class.getName();
+	public static final String TAG = "FExDetailFragment";
 
 	/**
 	 * The fragment argument representing the item ID that this fragment
@@ -138,9 +139,9 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		editText.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				List<TrainingSubEntry> subEntryList = mExercise.getTrainingEntryList().get(0).getSubEntryList();
+				List<FSet> fSetList = mExercise.getTrainingEntryList().get(0).getFSetList();
 				// create new SubEntry if there is none
-				if (subEntryList.isEmpty()) {
+				if (fSetList.isEmpty()) {
 					showDialog();
 					return;
 				}
@@ -149,12 +150,12 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 				AlertDialog.Builder builder_subentry_chooser = new AlertDialog.Builder(getActivity());
 				builder_subentry_chooser.setTitle(getString(R.string.choose_subentry));
 
-				final ArrayAdapter<TrainingSubEntry> adapter = new ArrayAdapter<TrainingSubEntry>(getActivity(),
-						android.R.layout.select_dialog_singlechoice, subEntryList);
+				final ArrayAdapter<FSet> adapter = new ArrayAdapter<FSet>(getActivity(),
+						android.R.layout.select_dialog_singlechoice, fSetList);
 
 				builder_subentry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int item) {
-						TrainingSubEntry choosenSubEntry = adapter.getItem(item);
+						FSet choosenSubEntry = adapter.getItem(item);
 						showDialog(choosenSubEntry);
 					}
 
@@ -196,7 +197,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	 * Shows DialogFragmentAddEntry with the given subEntry. If subEntry is null
 	 * a new SubEntry will be added to {@link mExercise}.
 	 */
-	private void showDialog(TrainingSubEntry subEntry) {
+	private void showDialog(FSet subEntry) {
 
 		// DialogFragment.show() will take care of adding the fragment
 		// in a transaction. We also want to remove any currently showing
@@ -247,15 +248,19 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	private void updateTrainingEntries() {
 		EditText editText = (EditText) this.getActivity().findViewById(R.id.edittext_current_entry);
 
-		List<TrainingSubEntry> subEntryList = mExercise.getTrainingEntryList().get(0).getSubEntryList();
-		if (subEntryList.isEmpty()) {
+		List<TrainingEntry> entryList = mExercise.getTrainingEntryList();
+		Collections.sort(entryList);
+		Log.d(TAG, "entryList.size()= " + entryList.size());
+		List<FSet> fSetList = entryList.get(entryList.size() - 1).getFSetList();
+		Log.d(TAG, "fSetList.size()= " + fSetList.size());
+		if (fSetList.isEmpty()) {
 			editText.setText(null);
 			return;
 		}
 
 		StringBuilder content = new StringBuilder();
-		for (TrainingSubEntry entry : subEntryList) {
-			content.append(entry.getContent());
+		for (FSet entry : fSetList) {
+			content.append(entry.toString());
 			content.append("\n");
 		}
 		// finally delete last "\n"

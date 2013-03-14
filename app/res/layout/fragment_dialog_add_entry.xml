@@ -1,17 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/edittext_training_entry"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:ems="10"
-        android:inputType="textMultiLine" >
+    <Spinner
+        android:id="@+id/spinner_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spinner_duration"
+        android:layout_toRightOf="@+id/checkbox_repetitions" />
 
-        <requestFocus />
-    </EditText>
+    <Spinner
+        android:id="@+id/spinner_repetitions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinner_weight"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spinner_weight" />
 
-</LinearLayout>
+    <CheckBox
+        android:id="@+id/checkbox_repetitions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinner_repetitions"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/spinner_repetitions"
+        android:text="@string/repetitions" />
+
+    <CheckBox
+        android:id="@+id/checkbox_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinner_weight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/spinner_weight"
+        android:layout_toLeftOf="@+id/spinner_weight"
+        android:text="@string/weight" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/add_entry"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <CheckBox
+        android:id="@+id/checkbox_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/checkbox_weight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/checkbox_weight"
+        android:layout_alignTop="@+id/spinner_duration"
+        android:text="@string/duration" />
+
+    <Spinner
+        android:id="@+id/spinner_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_toLeftOf="@+id/spinner_time_unit"
+        android:layout_toRightOf="@+id/checkbox_duration" />
+
+    <Spinner
+        android:id="@+id/spinner_time_unit"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spinner_weight"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:entries="@array/time_units" >
+    </Spinner>
+
+</RelativeLayout>
