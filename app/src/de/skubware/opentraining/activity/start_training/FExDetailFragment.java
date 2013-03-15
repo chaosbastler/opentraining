@@ -45,6 +45,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -163,6 +164,28 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 				builder_subentry_chooser.create().show();
 
 			}
+		});
+		
+		// configure button
+		Button showOldEntries= (Button) rootView.findViewById(R.id.button_view_old_entries);
+		showOldEntries.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				AlertDialog.Builder builder_entry_chooser = new AlertDialog.Builder(getActivity());
+				builder_entry_chooser.setTitle(getString(R.string.choose_training));
+
+				final ArrayAdapter<TrainingEntry> adapter = new ArrayAdapter<TrainingEntry>(getActivity(),
+						android.R.layout.select_dialog_singlechoice, mExercise.getTrainingEntryList());
+
+				builder_entry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int item) {
+						TrainingEntry choosenSubEntry = adapter.getItem(item);
+						
+						//showDialog(choosenSubEntry);
+					}
+
+				});
+				builder_entry_chooser.create().show();			}
 		});
 
 		return rootView;

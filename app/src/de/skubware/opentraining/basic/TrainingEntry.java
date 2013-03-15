@@ -132,6 +132,12 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 		return this.mDate.compareTo(another.mDate);
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public String toString(){
+		return mDate.toLocaleString();
+	}
+	
 	/**
 	 * Returns a String that represents this object. Should only be used for
 	 * debugging.
