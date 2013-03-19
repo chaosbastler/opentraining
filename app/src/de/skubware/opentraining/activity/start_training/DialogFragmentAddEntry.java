@@ -43,30 +43,36 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListAdapter;
 import android.widget.Spinner;
 
 /**
  * Dialog Fragment that adds or edits an {@link TrainingEntry}/ of an
  * {@link FitnessExercise}.
  * 
- * @author Christian Skubich
- * 
  */
 public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "FExDetailFragment";
 	
+	/** ID for argument ({@link FitnessExercise}) */
+	public static String ARG_ID_EXERCISE = "fex";
+	
+	/** ID for optional argument ({@link FSet}) */
+	public static String ARG_ID_FSET = "subentry";
+	
+	/** ID for optional argument ({@link TrainingEntry}) */
+	public static String ARG_ID_TRAINING_ENTRY = "trainingentry";
+	
 	/** Currently displayed {@link Workout}. */
 	private FitnessExercise mFex;
 
 	/** Currently edited {@link TrainingEntry} */
-	private TrainingEntry mLatestTrainingEntry;
+	private TrainingEntry mTrainingEntry;
 
 	/** Currently edited {@link FSet} */
 	private FSet mFSet;
 
-	public static String ARG_ID_EXERCISE = "fex";
-	public static String ARG_ID_FSET = "subentry";
 	
 	
 	Spinner spinner_duration;
@@ -83,12 +89,25 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		 */
 		public void onEntryEdited(FitnessExercise fitnessExercise);
 	}
+	
 
 	/**
-	 * Create a new instance of MyDialogFragment, providing "num" as an
-	 * argument.
+	 * Create a new instance of DialogFragmentAddEntry.
+	 * 
+	 * @param fEx
+	 *            The {@link FitnessExercise} that should be edited
+	 * @param set
+	 *            Optional parameter, the {@link FSet} that should be edited. If
+	 *            this is null a new FSet will be added to the
+	 *            {@link TrainingEntry}
+	 * @param trainingEntry
+	 *            Optional parameter, the {@link TrainingEntry} that should be
+	 *            edited. If this is null the latest TrainingEntry will be
+	 *            chosen.
+	 *            
+	 * @return The DialogFragment
 	 */
-	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set) {
+	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set, TrainingEntry trainingEntry) {
 		DialogFragmentAddEntry f = new DialogFragmentAddEntry();
 
 		Bundle args = new Bundle();
@@ -98,7 +117,13 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 
 		return f;
 	}
-
+	
+	/** @see #newInstance(FitnessExercise, FSet, TrainingEntry) */
+	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set) {
+		return newInstance(fEx, set, null);
+	}
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -107,11 +132,7 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 
 		List<TrainingEntry> entryList = mFex.getTrainingEntryList();
 		TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
-		mLatestTrainingEntry = latestEntry;
-
-		// if (mFSet == null) {
-		// mFSet = mLatestTrainingEntry.add("");
-		// }
+		mTrainingEntry = latestEntry;
 
 	}
 
@@ -130,53 +151,44 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		
 		
 		fillSpinners();
+		
+		setSpinners();
 
 
-		return new AlertDialog.Builder(getActivity()).setTitle(DateFormat.getInstance().format(mLatestTrainingEntry.getDate())).setView(v)
+		return new AlertDialog.Builder(getActivity()).setTitle(DateFormat.getInstance().format(mTrainingEntry.getDate())).setView(v)
 				.setCancelable(true).setPositiveButton(getString(R.string.save_entry), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						List<SetParameter> setParameters = new ArrayList<SetParameter>();
 						if (checkbox_duration.isChecked()) {
-							int val = Integer.parseInt((String) spinner_duration.getSelectedItem());
-							
-							switch (spinner_duration_unit.getSelectedItemPosition()) {
-							case 0: // seconds
-								break;
-							case 1:// minutes
-								val = 60 * val; // no break!
-							case 2: // hours
-								val = 60 * val;
-								break;
-							default:
-								Log.e(TAG, "Unknown choice.");
-							}
-							
-							SetParameter.Duration duration = new SetParameter.Duration(val);
+							SetParameter.Duration duration = new SetParameter.Duration(getDurationValue());
 							setParameters.add(duration);
 						}
 						if(checkbox_weight.isChecked()){
-							String str = ((String) spinner_weight.getSelectedItem());
-							str = str.substring(0, str.length() - 3);
-							str = str.replaceAll(",", ".");
-							float floatingNumber = Float.parseFloat(str);
-							floatingNumber *= 1000; // convert kg to g
-							int val = (int) floatingNumber;
-							SetParameter.Weight weight = new SetParameter.Weight(val);
+							SetParameter.Weight weight = new SetParameter.Weight(getWeightValue());
 							setParameters.add(weight);
 						}
 						if(checkbox_repetitions.isChecked()){
-							int val = (Integer) spinner_repetitions.getSelectedItemPosition() + 1;
-							SetParameter.Repetition repetition = new SetParameter.Repetition(val);
+							SetParameter.Repetition repetition = new SetParameter.Repetition(getRepetitionValue());
 							setParameters.add(repetition);
 						}
 						if(setParameters.isEmpty()){
 							dialog.dismiss();
 							return;
 						}
+						
+						if(mFSet == null){
+							// add new FSet
+							mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
+							mTrainingEntry.add(mFSet);
+						}else{
+							// replace old FSet
+							int oldIdx = mTrainingEntry.getFSetList().indexOf(mFSet);
+							mTrainingEntry.getFSetList().remove(oldIdx);
+							mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
+							mTrainingEntry.getFSetList().add(oldIdx, mFSet);
+						}
 
-						mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
-						mLatestTrainingEntry.add(mFSet);
 
 						FExDetailFragment fragment = (FExDetailFragment) getFragmentManager().findFragmentById(
 								R.id.exercise_detail_container);
@@ -191,7 +203,84 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 					}
 				}).create();
 	}
+	
+	private int getDurationValue(){
+		int val = Integer.parseInt((String) spinner_duration.getSelectedItem());
 
+		switch (spinner_duration_unit.getSelectedItemPosition()) {
+		case 0: // seconds
+			break;
+		case 2: // hours
+			val = 60 * val; // no break!
+		case 1: // minutes
+			val = 60 * val;
+			break;
+		default:
+			Log.e(TAG, "Unknown choice.");
+		}
+		return val;
+	}
+	
+	private void setDurationValue(int value){
+		spinner_duration_unit.setSelection(0);
+		
+		if(value>3600){
+			value = value/3600;
+			spinner_duration_unit.setSelection(2);
+		}
+		if(value>60){
+			value = value/60;
+			spinner_duration_unit.setSelection(1);
+		}
+		
+		spinner_duration.setSelection(value - 1);
+	}
+
+	private int getWeightValue() {
+		String str = ((String) spinner_weight.getSelectedItem());
+		str = str.substring(0, str.length() - 3);
+		str = str.replaceAll(",", ".");
+		float floatingNumber = Float.parseFloat(str);
+		floatingNumber *= 1000; // convert kg to g
+		int val = (int) floatingNumber;
+		return val;
+	}
+	
+	private void setWeightValue(int value){
+		
+		// this is not a very elegant solution but it should work
+		ListAdapter adapter = (ListAdapter) spinner_weight.getAdapter();
+		for(int i = 0; i<adapter.getCount() - 1; i++){
+			String str = ((String) spinner_weight.getItemAtPosition(i));
+			str = str.substring(0, str.length() - 3);
+			str = str.replaceAll(",", ".");
+			float floatingNumber = Float.parseFloat(str);
+			floatingNumber *= 1000; // convert kg to g
+			int val = (int) floatingNumber;
+			
+			
+			if(val == value){
+				spinner_weight.setSelection(i);	
+				return;
+			}
+		}
+		
+		Log.e(TAG, "Could not set weight value: " + value);
+
+	}
+	
+	private int getRepetitionValue() {
+		return (Integer) spinner_repetitions.getSelectedItemPosition() + 1;
+	}
+	
+	private void setRepetitionValue(int value){
+		spinner_repetitions.setSelection(value - 1);
+	}
+	
+	/**
+	 * Fills the spinners with entries, e.g. with "1 kg"(weight_spinner) or just
+	 * numbers.
+	 */
 	private void fillSpinners() {
 
 		List<String> durationList = new ArrayList<String>();
@@ -257,6 +346,58 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		checkbox_weight.setChecked(true);
 		checkbox_repetitions.setChecked(true);
 
+	}
+	
+	/**
+	 * If mFSet is not null it's settings will be loaded. Otherwise the last
+	 * used settings will be loaded.
+	 */
+	private void setSpinners(){
+		FSet setToSet = mFSet;
+		// only load last settings if no argument for mFSet has been passed(that
+		// means mFSet is null)
+		if(setToSet == null){
+			Log.v(TAG, "Trying to find old TrainingEntry for loading spinner settings.");
+
+			List<TrainingEntry> entryList = mFex.getTrainingEntryList();
+			TrainingEntry previousEntry;
+			for(int i = entryList.size() - 1; (i>=0) && (setToSet==null); i --){
+				previousEntry = entryList.get(i);
+				List<FSet> fsetList = previousEntry.getFSetList();
+				if(!fsetList.isEmpty()){
+					setToSet = fsetList.get(fsetList.size() - 1);
+				}	
+			}
+
+		}
+		
+		if(setToSet == null){
+			Log.w(TAG, "Did not find any old TrainingEntry for loading spinner settings.");
+			return;
+		}
+		
+		
+		checkbox_duration.setChecked(false);
+		checkbox_weight.setChecked(false);
+		checkbox_repetitions.setChecked(false);
+		
+		for(SetParameter param:setToSet.getSetParameters()){
+			int value = param.getValue();
+
+			if(param instanceof SetParameter.Duration){
+				checkbox_duration.setChecked(true);
+				setDurationValue(value);
+			}
+			if(param instanceof SetParameter.Repetition){
+				checkbox_repetitions.setChecked(true);
+				setRepetitionValue(value);
+			}
+			if(param instanceof SetParameter.Weight){
+				checkbox_weight.setChecked(true);
+				setWeightValue(value);
+			}
+		}
+		
 	}
 
 

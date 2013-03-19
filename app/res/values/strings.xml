@@ -63,6 +63,8 @@
     <string name="old_entries">View old entries</string>
     <string name="add_entry">Add entry</string>
     <string name="choose_subentry">Choose the entry you want to edit</string>
+    <string name="choose_training">Choose a training</string>
+    
 
     <!-- DialogFragmentAddEntry -->
     <string name="save_entry">Save</string>

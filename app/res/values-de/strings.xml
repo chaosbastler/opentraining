@@ -66,7 +66,8 @@
     <string name="old_entries">Alte Einträge anzeigen</string>
     <string name="add_entry">Eintrag hinzufügen</string>
     <string name="choose_subentry">Wähle den Eintrag, den du bearbeiten willst</string>
-    
+    <string name="choose_training">Wähle ein Training aus</string>
+
     
     <!-- DialogFragmentAddEntry  -->
     <string name="save_entry">Speichern</string>
