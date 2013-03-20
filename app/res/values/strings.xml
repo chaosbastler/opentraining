@@ -60,7 +60,7 @@
 
     <!-- FExDetailFragment -->
     <string name="no_entry_for_today">Click on \'+\' to add an entry</string>
-    <string name="old_entries">View old entries</string>
+    <string name="old_entries">Show different training</string>
     <string name="add_entry">Add entry</string>
     <string name="choose_subentry">Choose the entry you want to edit</string>
     <string name="choose_training">Choose a training</string>

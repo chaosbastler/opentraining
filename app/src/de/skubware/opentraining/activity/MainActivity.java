@@ -123,7 +123,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		switch (workoutList.size()) {
 		// show error message, if there is no Workout
 		case 0:
-			Toast.makeText(MainActivity.this, "No workout found.", Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this, getString(R.string.no_workout), Toast.LENGTH_LONG).show();
 			break;
 		// choose Workout, if there is/are one or more Workout(s)
 		default:

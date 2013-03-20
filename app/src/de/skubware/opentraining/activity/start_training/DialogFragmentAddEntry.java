@@ -54,16 +54,16 @@ import android.widget.Spinner;
 public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "FExDetailFragment";
-	
+
 	/** ID for argument ({@link FitnessExercise}) */
 	public static String ARG_ID_EXERCISE = "fex";
-	
+
 	/** ID for optional argument ({@link FSet}) */
 	public static String ARG_ID_FSET = "subentry";
-	
+
 	/** ID for optional argument ({@link TrainingEntry}) */
 	public static String ARG_ID_TRAINING_ENTRY = "trainingentry";
-	
+
 	/** Currently displayed {@link Workout}. */
 	private FitnessExercise mFex;
 
@@ -73,8 +73,6 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	/** Currently edited {@link FSet} */
 	private FSet mFSet;
 
-	
-	
 	Spinner spinner_duration;
 	Spinner spinner_duration_unit;
 	Spinner spinner_repetitions;
@@ -89,7 +87,6 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		 */
 		public void onEntryEdited(FitnessExercise fitnessExercise);
 	}
-	
 
 	/**
 	 * Create a new instance of DialogFragmentAddEntry.
@@ -104,7 +101,7 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	 *            Optional parameter, the {@link TrainingEntry} that should be
 	 *            edited. If this is null the latest TrainingEntry will be
 	 *            chosen.
-	 *            
+	 * 
 	 * @return The DialogFragment
 	 */
 	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set, TrainingEntry trainingEntry) {
@@ -113,26 +110,31 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		Bundle args = new Bundle();
 		args.putSerializable(ARG_ID_EXERCISE, fEx);
 		args.putSerializable(ARG_ID_FSET, set);
+		args.putSerializable(ARG_ID_TRAINING_ENTRY, trainingEntry);
+
 		f.setArguments(args);
 
 		return f;
 	}
-	
+
 	/** @see #newInstance(FitnessExercise, FSet, TrainingEntry) */
 	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set) {
 		return newInstance(fEx, set, null);
 	}
-	
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mFex = (FitnessExercise) getArguments().getSerializable(ARG_ID_EXERCISE);
 		mFSet = (FSet) getArguments().getSerializable(ARG_ID_FSET);
+		mTrainingEntry = (TrainingEntry) getArguments().getSerializable(ARG_ID_TRAINING_ENTRY);
 
-		List<TrainingEntry> entryList = mFex.getTrainingEntryList();
-		TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
-		mTrainingEntry = latestEntry;
+		// select latest TrainingEntry if argument was null
+		if(mTrainingEntry == null){
+			List<TrainingEntry> entryList = mFex.getTrainingEntryList();
+			TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
+			mTrainingEntry = latestEntry;
+		}
 
 	}
 
@@ -140,7 +142,7 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
 		final View v = inflater.inflate(R.layout.fragment_dialog_add_entry, null);
-		
+
 		spinner_duration = (Spinner) v.findViewById(R.id.spinner_duration);
 		spinner_duration_unit = (Spinner) v.findViewById(R.id.spinner_time_unit);
 		spinner_repetitions = (Spinner) v.findViewById(R.id.spinner_repetitions);
@@ -148,12 +150,10 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		checkbox_duration = (CheckBox) v.findViewById(R.id.checkbox_duration);
 		checkbox_weight = (CheckBox) v.findViewById(R.id.checkbox_weight);
 		checkbox_repetitions = (CheckBox) v.findViewById(R.id.checkbox_repetitions);
-		
-		
-		fillSpinners();
-		
-		setSpinners();
 
+		fillSpinners();
+
+		setSpinners();
 
 		return new AlertDialog.Builder(getActivity()).setTitle(DateFormat.getInstance().format(mTrainingEntry.getDate())).setView(v)
 				.setCancelable(true).setPositiveButton(getString(R.string.save_entry), new DialogInterface.OnClickListener() {
@@ -164,29 +164,43 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 							SetParameter.Duration duration = new SetParameter.Duration(getDurationValue());
 							setParameters.add(duration);
 						}
-						if(checkbox_weight.isChecked()){
+						if (checkbox_weight.isChecked()) {
 							SetParameter.Weight weight = new SetParameter.Weight(getWeightValue());
 							setParameters.add(weight);
 						}
-						if(checkbox_repetitions.isChecked()){
+						if (checkbox_repetitions.isChecked()) {
 							SetParameter.Repetition repetition = new SetParameter.Repetition(getRepetitionValue());
 							setParameters.add(repetition);
 						}
-						if(setParameters.isEmpty()){
-							dialog.dismiss();
-							return;
-						}
-						
-						if(mFSet == null){
-							// add new FSet
-							mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
-							mTrainingEntry.add(mFSet);
+
+						// if no SetParameter has been chosen, the FSet
+						// must not be created or even has to be deleted
+						if (setParameters.isEmpty()) {
+							if (mFSet != null) {
+								// delete existing FSet
+								boolean success = mTrainingEntry.getFSetList().remove(mFSet);
+								if(!success)
+									Log.e(TAG, "Could not delete FSet:\n " + mFSet.toString() + "\n in TrainingEntry:\n " + mTrainingEntry.toDebugString());
+							} else {
+								// do nothing
+								dialog.dismiss();
+								return;
+							}
 						}else{
-							// replace old FSet
-							int oldIdx = mTrainingEntry.getFSetList().indexOf(mFSet);
-							mTrainingEntry.getFSetList().remove(oldIdx);
-							mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
-							mTrainingEntry.getFSetList().add(oldIdx, mFSet);
+							// if SetParameters have been chosen, either the old
+							// FSet has to be updated or a new FSet has to be
+							// added
+							if (mFSet == null) {
+								// add new FSet
+								mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
+								mTrainingEntry.add(mFSet);
+							} else {
+								// replace old FSet
+								int oldIdx = mTrainingEntry.getFSetList().indexOf(mFSet);
+								mTrainingEntry.getFSetList().remove(oldIdx);
+								mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
+								mTrainingEntry.getFSetList().add(oldIdx, mFSet);
+							}
 						}
 
 
@@ -203,8 +217,8 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 					}
 				}).create();
 	}
-	
-	private int getDurationValue(){
+
+	private int getDurationValue() {
 		int val = Integer.parseInt((String) spinner_duration.getSelectedItem());
 
 		switch (spinner_duration_unit.getSelectedItemPosition()) {
@@ -220,19 +234,19 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		}
 		return val;
 	}
-	
-	private void setDurationValue(int value){
+
+	private void setDurationValue(int value) {
 		spinner_duration_unit.setSelection(0);
-		
-		if(value>3600){
-			value = value/3600;
+
+		if (value > 3600) {
+			value = value / 3600;
 			spinner_duration_unit.setSelection(2);
 		}
-		if(value>60){
-			value = value/60;
+		if (value > 60) {
+			value = value / 60;
 			spinner_duration_unit.setSelection(1);
 		}
-		
+
 		spinner_duration.setSelection(value - 1);
 	}
 
@@ -245,38 +259,37 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		int val = (int) floatingNumber;
 		return val;
 	}
-	
-	private void setWeightValue(int value){
-		
+
+	private void setWeightValue(int value) {
+
 		// this is not a very elegant solution but it should work
 		ListAdapter adapter = (ListAdapter) spinner_weight.getAdapter();
-		for(int i = 0; i<adapter.getCount() - 1; i++){
+		for (int i = 0; i < adapter.getCount() - 1; i++) {
 			String str = ((String) spinner_weight.getItemAtPosition(i));
 			str = str.substring(0, str.length() - 3);
 			str = str.replaceAll(",", ".");
 			float floatingNumber = Float.parseFloat(str);
 			floatingNumber *= 1000; // convert kg to g
 			int val = (int) floatingNumber;
-			
-			
-			if(val == value){
-				spinner_weight.setSelection(i);	
+
+			if (val == value) {
+				spinner_weight.setSelection(i);
 				return;
 			}
 		}
-		
+
 		Log.e(TAG, "Could not set weight value: " + value);
 
 	}
-	
+
 	private int getRepetitionValue() {
 		return (Integer) spinner_repetitions.getSelectedItemPosition() + 1;
 	}
-	
-	private void setRepetitionValue(int value){
+
+	private void setRepetitionValue(int value) {
 		spinner_repetitions.setSelection(value - 1);
 	}
-	
+
 	/**
 	 * Fills the spinners with entries, e.g. with "1 kg"(weight_spinner) or just
 	 * numbers.
@@ -316,11 +329,9 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 			weightList.add(i / 1000 + "," + i % 1000 + " kg");
 		}
 
-
 		ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, weightList);
 		weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_weight.setAdapter(weightAdapter);
-
 
 		checkbox_duration.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
@@ -347,58 +358,56 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		checkbox_repetitions.setChecked(true);
 
 	}
-	
+
 	/**
 	 * If mFSet is not null it's settings will be loaded. Otherwise the last
 	 * used settings will be loaded.
 	 */
-	private void setSpinners(){
+	private void setSpinners() {
 		FSet setToSet = mFSet;
 		// only load last settings if no argument for mFSet has been passed(that
 		// means mFSet is null)
-		if(setToSet == null){
+		if (setToSet == null) {
 			Log.v(TAG, "Trying to find old TrainingEntry for loading spinner settings.");
 
 			List<TrainingEntry> entryList = mFex.getTrainingEntryList();
 			TrainingEntry previousEntry;
-			for(int i = entryList.size() - 1; (i>=0) && (setToSet==null); i --){
+			for (int i = entryList.size() - 1; (i >= 0) && (setToSet == null); i--) {
 				previousEntry = entryList.get(i);
 				List<FSet> fsetList = previousEntry.getFSetList();
-				if(!fsetList.isEmpty()){
+				if (!fsetList.isEmpty()) {
 					setToSet = fsetList.get(fsetList.size() - 1);
-				}	
+				}
 			}
 
 		}
-		
-		if(setToSet == null){
+
+		if (setToSet == null) {
 			Log.w(TAG, "Did not find any old TrainingEntry for loading spinner settings.");
 			return;
 		}
-		
-		
+
 		checkbox_duration.setChecked(false);
 		checkbox_weight.setChecked(false);
 		checkbox_repetitions.setChecked(false);
-		
-		for(SetParameter param:setToSet.getSetParameters()){
+
+		for (SetParameter param : setToSet.getSetParameters()) {
 			int value = param.getValue();
 
-			if(param instanceof SetParameter.Duration){
+			if (param instanceof SetParameter.Duration) {
 				checkbox_duration.setChecked(true);
 				setDurationValue(value);
 			}
-			if(param instanceof SetParameter.Repetition){
+			if (param instanceof SetParameter.Repetition) {
 				checkbox_repetitions.setChecked(true);
 				setRepetitionValue(value);
 			}
-			if(param instanceof SetParameter.Weight){
+			if (param instanceof SetParameter.Weight) {
 				checkbox_weight.setChecked(true);
 				setWeightValue(value);
 			}
 		}
-		
-	}
 
+	}
 
 }

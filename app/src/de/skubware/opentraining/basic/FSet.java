@@ -245,7 +245,7 @@ public class FSet implements Serializable {
 	 *             if any argument is null
 	 */
 	public FSet(SetParameter... cats) {
-		if(cats.length == 0)
+		if(cats.length < 1)
 			throw new IllegalArgumentException("cats must not be empty");
 		
 		for (SetParameter c : cats) {

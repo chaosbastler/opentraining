@@ -80,6 +80,9 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	 * The {@link FitnessExercise} this fragment is presenting.
 	 */
 	private FitnessExercise mExercise;
+	
+	/** Currently edited TrainingEntry */
+	private TrainingEntry mTrainingEntry;
 
 	/** Currently shown {@link Workout}. */
 	private Workout mWorkout;
@@ -179,9 +182,9 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 				builder_entry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int item) {
-						TrainingEntry choosenSubEntry = adapter.getItem(item);
-						
-						//showDialog(choosenSubEntry);
+						TrainingEntry choosenEntry = adapter.getItem(item);
+						mTrainingEntry = choosenEntry;
+						updateTrainingEntries();
 					}
 
 				});
@@ -216,15 +219,19 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		showDialog(null);
 	}
 
-	/**
-	 * Shows DialogFragmentAddEntry with the given subEntry. If subEntry is null
-	 * a new SubEntry will be added to {@link mExercise}.
-	 */
-	private void showDialog(FSet subEntry) {
 
-		// DialogFragment.show() will take care of adding the fragment
-		// in a transaction. We also want to remove any currently showing
-		// dialog, so make our own transaction and take care of that here.
+	
+	/**
+	 * Shows DialogFragmentAddEntry with the given {@link FSet}.
+	 * 
+	 * @param set
+	 *            The FSet to edit. If it is null a new FSet will be added to
+	 *            the TrainingEntry.
+	 *            
+	 * @see DialogFragmentAddEntry#newInstance(FitnessExercise, FSet)           
+	 */
+	private void showDialog(FSet set) {
+
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
 		if (prev != null) {
@@ -233,9 +240,10 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		ft.addToBackStack(null);
 
 		// Create and show the dialog.
-		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mExercise, subEntry);
+		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mExercise, set, mTrainingEntry);
 		newFragment.show(ft, "dialog");
 	}
+	
 
 	@Override
 	public void onEntryEdited(FitnessExercise fitnessExercise) {
@@ -266,15 +274,20 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 	/**
 	 * Updates the displayed {@link TrainingEntry}. That means the text of all
-	 * {@link TrainingSubEntrys} is updated.
+	 * {@link FSet} is updated.
 	 */
 	private void updateTrainingEntries() {
 		EditText editText = (EditText) this.getActivity().findViewById(R.id.edittext_current_entry);
 
-		List<TrainingEntry> entryList = mExercise.getTrainingEntryList();
-		Collections.sort(entryList);
-		Log.d(TAG, "entryList.size()= " + entryList.size());
-		List<FSet> fSetList = entryList.get(entryList.size() - 1).getFSetList();
+		if(mTrainingEntry == null){
+			// select last TrainingEntry
+			List<TrainingEntry> entryList = mExercise.getTrainingEntryList();
+			Collections.sort(entryList);
+			Log.d(TAG, "entryList.size()= " + entryList.size());
+			mTrainingEntry = entryList.get(entryList.size() - 1);
+		}
+		
+		List<FSet> fSetList = mTrainingEntry.getFSetList();
 		Log.d(TAG, "fSetList.size()= " + fSetList.size());
 		if (fSetList.isEmpty()) {
 			editText.setText(null);

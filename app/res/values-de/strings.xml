@@ -63,7 +63,7 @@
     
     <!-- FExDetailFragment -->
     <string name="no_entry_for_today">Klicke auf \'+\' um einen Eintrag hinzuzufügen</string>
-    <string name="old_entries">Alte Einträge anzeigen</string>
+    <string name="old_entries">Anderes Training anzeigen</string>
     <string name="add_entry">Eintrag hinzufügen</string>
     <string name="choose_subentry">Wähle den Eintrag, den du bearbeiten willst</string>
     <string name="choose_training">Wähle ein Training aus</string>
