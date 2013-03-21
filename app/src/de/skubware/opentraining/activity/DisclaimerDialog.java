@@ -22,9 +22,9 @@ package de.skubware.opentraining.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -78,7 +78,7 @@ public class DisclaimerDialog extends AlertDialog {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (checkbox_dont_show_again.isChecked()) {
-					SharedPreferences settings = activity.getPreferences(Context.MODE_PRIVATE);
+					SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mActivity);
 					SharedPreferences.Editor editor = settings.edit();
 					editor.putBoolean(DisclaimerDialog.PREFERENCE_SHOW_DISCLAIMER, false);
 					editor.commit();

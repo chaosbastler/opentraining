@@ -1,0 +1,57 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/about_scroll_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/layout_root"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/text_view_actionbarsherlock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_below="@+id/textView2"
+            android:text="@string/license_text_action_bar_sherlock"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/text_view_actionbarsherlock"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="License of OpenTraining"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/released_button_background" />
+
+        <TextView
+            android:id="@+id/text_view_open_training_license"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/TextView01"
+            android:text="@string/disclaimer"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_view_open_training_license"
+            android:text="License of ActionBarSherlock"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/released_button_background" />
+
+    </RelativeLayout>
+
+</ScrollView>

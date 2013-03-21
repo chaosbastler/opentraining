@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--
+         A 'parent' preference, which enables/disables child preferences (below)
+         when checked/unchecked.
+    -->
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="show_disclaimer"
+        android:title="@string/show_disclaimer_dialog" />
+    <Preference android:title="Open Source Licenses" android:key="open_source"/>
+
+
+</PreferenceScreen>

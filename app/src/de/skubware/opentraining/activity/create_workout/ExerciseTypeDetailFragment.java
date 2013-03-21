@@ -28,7 +28,9 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -163,7 +165,10 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 
 				// add exercise to workout or create a new one
 				if (mWorkout == null) {
-					mWorkout = new Workout("My Plan", new FitnessExercise(mExercise));
+					SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+					String defaultWorkoutName =  settings.getString("default_workout_name", "Workout");
+
+					mWorkout = new Workout(defaultWorkoutName, new FitnessExercise(mExercise));
 				} else {
 
 					// assert that there is not already such an exercise in the

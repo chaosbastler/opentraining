@@ -23,9 +23,14 @@ package de.skubware.opentraining.activity;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
+
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
+import de.skubware.opentraining.activity.settings.SettingsActivity;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.DataProvider;
@@ -34,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -48,7 +54,6 @@ import android.widget.Toast;
 //TODO AbstractWorkoutExporterFactory
 //TODO Edit Workouts: possibility to remove FitnessExercises
 //TODO saving existing TrainingEntries after editing Workout
-//TODO about dialog with licenses
 
 public class MainActivity extends SherlockFragmentActivity {
 	/** Tag for logging */
@@ -71,12 +76,28 @@ public class MainActivity extends SherlockFragmentActivity {
 		}.start();
 
 		// show disclaimer
-		SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		Boolean showDisclaimer = settings.getBoolean(DisclaimerDialog.PREFERENCE_SHOW_DISCLAIMER, true);
 		if (showDisclaimer) {
 			new DisclaimerDialog(this);
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		this.getSupportMenuInflater().inflate(R.menu.main_menu, menu);
+		
+		// configure menu_item_settings
+		MenuItem menu_item_settings = (MenuItem) menu.findItem(R.id.menu_item_settings);
+		menu_item_settings.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+				return true;
+			}
+		});
+		
+		return true;
 	}
 
 	/**

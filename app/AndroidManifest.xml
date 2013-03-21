@@ -77,6 +77,10 @@
             android:name="de.skubware.opentraining.activity.manage_workouts.ShowWorkoutHTMLActivity"
             android:label="@string/title_activity_show_workout_html" >
         </activity>
+        <activity
+            android:name="de.skubware.opentraining.activity.settings.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>
