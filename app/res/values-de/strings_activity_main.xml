@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- MainActivity -->
+    <string name="create_workout">Create workout</string>
+    <string name="start_training">Start training</string>
+    <string name="manage_workouts">Manage workouts</string>
+    <string name="choose_workout">Choose a workout</string>
+
+    
+    <!-- Disclaimer Dialog -->
+    <string name="disclaimer">This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    Insbesondere sollte niemals ohne professionelle Unterstützung trainiert werden und stets ein Arzt vor dem Training konsultiert werden.</string>
+    <string name="license">Lizenz</string>
+    <string name="accept">Akzeptieren</string>
+    <string name="not_accept">Nicht akzeptieren</string>
+    <string name="do_not_show_again">Nicht wieder anzeigen.</string>
+    
+    
+    <!-- SelectWorkoutDialogFragment -->
+    <string name="start_new_training">Neues Training</string>
+    <string name="load_old_training">Altes Training laden</string>
+
+</resources>

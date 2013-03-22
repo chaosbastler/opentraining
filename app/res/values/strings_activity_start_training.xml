@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- FExDetailFragment -->
+    <string name="no_entry_for_today">Click on \'+\' to add an entry</string>
+    <string name="old_entries">Show different training</string>
+    <string name="add_entry">Add entry</string>
+    <string name="choose_subentry">Choose the entry you want to edit</string>
+    <string name="choose_training">Choose a training</string>
+    
+
+    <!-- DialogFragmentAddEntry -->
+    <string name="save_entry">Save</string>
+    <string name="discard_entry">"Discard</string>
+    <string name="title_workout_list">Workouts</string>
+    <string name="title_workout_detail">Workout Detail</string>
+    <string name="repetitions">Repetitions</string>
+    <string name="weight">Weight</string>
+    <string name="duration">Duration</string>
+    <string name="add_entry">Add entry</string>
+
+</resources>
