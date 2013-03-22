@@ -26,10 +26,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FitnessExercise;
-import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -41,6 +39,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -49,7 +49,6 @@ import android.widget.Toast;
 /**
  * Dialog Fragment that shows dialog when a {@link Workout} should be saved.
  * 
- * @author Christian Skubich
  * 
  */
 public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
@@ -59,23 +58,26 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 	/** Argument ID */
 	private static String ARG_ID_WORKOUT = "workout";
 	
+	
 	/** Currently displayed {@link Workout}. */
 	Workout mWorkout;
 
 	/** EditText for the name of the {@link Workout}*/
 	private EditText mEditTextWorkoutName;
 
+	/** ListView with the {@link FitnessExercise}s */
+	private ListView mListView;
 
 	/**
 	 * Create a new instance of DialogWorkoutOverviewFragment.
 	 */
-	static DialogWorkoutOverviewFragment newInstance(Workout workout) {
+	static DialogWorkoutOverviewFragment newInstance(Workout workout) {		
 		DialogWorkoutOverviewFragment f = new DialogWorkoutOverviewFragment();
 
 		Bundle args = new Bundle();
 		args.putSerializable(ARG_ID_WORKOUT, workout);
 		f.setArguments(args);
-
+		
 		return f;
 	}
 
@@ -94,17 +96,34 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 		mEditTextWorkoutName = (EditText) v.findViewById(R.id.edittext_workout_name);
 		mEditTextWorkoutName.setText(mWorkout.getName());
 
-		// add exercises to list adapter
-		IExercise[] arr = new IExercise[mWorkout.getFitnessExercises().size()];
-		int i = 0;
-		for (FitnessExercise ex : mWorkout.getFitnessExercises()) {
-			arr[i] = ex;
-			i++;
-		}
 
-		ListView listview = (ListView) v.findViewById(R.id.listview);
-		listview.setAdapter(new ArrayAdapter<IExercise>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, arr));
+		mListView = (ListView) v.findViewById(R.id.listview);
+		mListView.setAdapter(new ArrayAdapter<FitnessExercise>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1,
+				mWorkout.getFitnessExercises()));
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				final FitnessExercise fEx = (FitnessExercise) parent.getAdapter().getItem(position);
 
+				new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.are_you_sure))
+						.setMessage(getString(R.string.really_remove_exercise).replace("EXERCISE_NAME", fEx.toString()))
+						.setPositiveButton(getString(android.R.string.ok), new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								removeExerciseFromWorkout(fEx);
+								dialog.dismiss();
+							}
+
+						}).setNegativeButton(getString(R.string.cancel), new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						}).create().show();
+			}
+		});
+		
+		
 		return new AlertDialog.Builder(getActivity()).setTitle(mWorkout.getName()).setView(v).setCancelable(true)
 				.setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
 					@Override
@@ -137,6 +156,20 @@ public class DialogWorkoutOverviewFragment extends SherlockDialogFragment {
 					}
 				}).create();
 	}
+	
+
+	
+	/**
+	 * Removes the exercise from the Workout and updates GUI & activities.
+	 */
+	@SuppressWarnings("rawtypes")
+	private void removeExerciseFromWorkout(FitnessExercise fEx) {
+		mWorkout.removeFitnessExercise(fEx);
+		((ArrayAdapter) mListView.getAdapter()).notifyDataSetChanged();
+		((ExerciseTypeListActivity) getActivity()).onWorkoutChanged(mWorkout);
+	}
+	
+	
 
 	/**
 	 * Saves the Workout with the given name.

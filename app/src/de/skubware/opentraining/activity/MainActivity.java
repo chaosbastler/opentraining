@@ -52,8 +52,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 //TODO AbstractWorkoutExporterFactory
-//TODO Edit Workouts: possibility to remove FitnessExercises
-//TODO saving existing TrainingEntries after editing Workout
 
 public class MainActivity extends SherlockFragmentActivity {
 	/** Tag for logging */

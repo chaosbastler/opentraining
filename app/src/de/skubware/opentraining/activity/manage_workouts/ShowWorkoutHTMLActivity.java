@@ -29,9 +29,6 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.R.id;
-import de.skubware.opentraining.R.layout;
-import de.skubware.opentraining.R.menu;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.exporter.HTMLExporter;
 import de.skubware.opentraining.exporter.WorkoutExporter;
