@@ -32,12 +32,11 @@ import de.skubware.opentraining.db.IDataProvider;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.RadioButton;
+import android.widget.Button;
 
 /**
  * Dialog Fragment for choosing a {@link Workout} before starting training.
@@ -46,6 +45,11 @@ import android.widget.RadioButton;
 public class SelectWorkoutDialogFragment extends SherlockDialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "SelectWorkoutFragment";
+	
+	/** Currently selected Workout */
+	private Workout mWorkout;
+	
+	private AlertDialog mCreatedDialog;
 
 	/**
 	 * Create a new instance of SelectWorkoutFragment.
@@ -62,9 +66,6 @@ public class SelectWorkoutDialogFragment extends SherlockDialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		LayoutInflater inflater = LayoutInflater.from(getActivity());
-		final View v = inflater.inflate(R.layout.fragment_dialog_choose_workout, null);
-		final RadioButton radioButtonStartNewTraining = (RadioButton) v.findViewById(R.id.radiobutton_start_new_training);
 
 		// get Workouts
 		IDataProvider dataProvider = new DataProvider(getActivity());
@@ -76,28 +77,78 @@ public class SelectWorkoutDialogFragment extends SherlockDialogFragment {
 		final ArrayAdapter<Workout> adapter = new ArrayAdapter<Workout>(getActivity(), android.R.layout.select_dialog_singlechoice,
 				workoutList);
 
-		return builder_workoutchooser.setView(v).setAdapter(adapter, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int item) {
-				// close dialog and show TrainingEntryDialog
-				dialog.dismiss();
-				Workout mWorkout = adapter.getItem(item);
 
-				// add TrainingEntry(==start new training) if user choose this
-				// or it is necessary because there are no old training entries
-				if (radioButtonStartNewTraining.isChecked() || mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
-					mWorkout.addTrainingEntry(Calendar.getInstance().getTime());
+		mCreatedDialog =  builder_workoutchooser.setSingleChoiceItems(adapter, 0, new OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				mWorkout = adapter.getItem(which);
+
+				// disable button for loading old training
+				if (mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
+					disableButton();
+				}else{
+					enableButton();
 				}
-
-				// add arguments to intent
-				Intent intent = new Intent(getActivity(), FExListActivity.class);
-				intent.putExtra(FExListActivity.ARG_WORKOUT, mWorkout);
-				// start activity
-				getActivity().startActivity(intent);
-
 			}
-
+			
+		}).setPositiveButton(getString(R.string.start_new_training), new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				startTraining(true);
+			}
+		}).setNegativeButton(getString(R.string.load_old_training), new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				startTraining(false);
+			}
 		}).create();
+		
+
+		return mCreatedDialog;
 
 	}
+	
+	@Override
+	public void onStart(){
+		super.onStart();
+		
+		// disable button if necessary
+		IDataProvider dataProvider = new DataProvider(getActivity());
+		final List<Workout> workoutList = dataProvider.getWorkouts();
+		
+		mWorkout = workoutList.get(0);
+		if (mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
+			disableButton();
+		}
+		
+	}
 
+	private void startTraining(boolean startNewTraining) {
+		this.dismiss();
+		
+		// add TrainingEntry(==start new training) if user choose this
+		// or it is necessary because there are no old training entries
+		if (startNewTraining || mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
+			mWorkout.addTrainingEntry(Calendar.getInstance().getTime());
+		}
+
+		// add arguments to intent
+		Intent intent = new Intent(getActivity(), FExListActivity.class);
+		intent.putExtra(FExListActivity.ARG_WORKOUT, mWorkout);
+		// start activity
+		getActivity().startActivity(intent);
+		
+	}
+	
+	
+	private void disableButton() {
+		Button button = mCreatedDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+		button.setEnabled(false);		
+	}
+	
+	private void enableButton() {
+		Button button = mCreatedDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+		button.setEnabled(true);		
+	}
 }
