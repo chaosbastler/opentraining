@@ -23,10 +23,6 @@ package de.skubware.opentraining.activity;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
@@ -82,21 +78,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		this.getSupportMenuInflater().inflate(R.menu.main_menu, menu);
-		
-		// configure menu_item_settings
-		MenuItem menu_item_settings = (MenuItem) menu.findItem(R.id.menu_item_settings);
-		menu_item_settings.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-				return true;
-			}
-		});
-		
-		return true;
-	}
+
 
 	/**
 	 * Configures the ListView for this activity.
@@ -105,7 +87,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		ListView listview = (ListView) this.findViewById(R.id.activity_main_listview);
 
 		String[] values = new String[] { getString(R.string.create_workout), getString(R.string.manage_workouts),
-				getString(R.string.start_training) };
+				getString(R.string.start_training), getString(R.string.settings) };
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
@@ -123,6 +105,9 @@ public class MainActivity extends SherlockFragmentActivity {
 					break;
 				case 2:
 					showSelectWorkoutDialog();
+					break;
+				case 3:
+					startActivity(new Intent(MainActivity.this, SettingsActivity.class));
 					break;
 				default:
 					Log.wtf(TAG, "This item should not exist.");

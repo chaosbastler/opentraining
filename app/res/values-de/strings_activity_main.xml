@@ -1,11 +1,11 @@
 <resources>
-
+ 
     <!-- MainActivity -->
-    <string name="create_workout">Create workout</string>
-    <string name="start_training">Start training</string>
-    <string name="manage_workouts">Manage workouts</string>
-    <string name="choose_workout">Choose a workout</string>
-
+    <string name="create_workout">Workout erstellen</string>
+    <string name="start_training">Training starten</string>
+    <string name="manage_workouts">Workouts verwalten</string>
+    <string name="choose_workout">Workout wählen</string>
+    
     
     <!-- Disclaimer Dialog -->
     <string name="disclaimer">This program is distributed in the hope that it will be useful,
