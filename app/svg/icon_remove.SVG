@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="icon_remove.svg">
+   sodipodi:docname="icon_remove.SVG">
   <defs
      id="defs4">
     <linearGradient
@@ -60,7 +60,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.919596"
-     inkscape:cx="-30.15626"
+     inkscape:cx="-57.87232"
      inkscape:cy="13.303816"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -104,7 +104,7 @@
      transform="translate(-323.55293,-407.38755)">
     <g
        id="g3859"
-       style="stroke:#ffffff;stroke-opacity:1;fill:#b3b3b3">
+       style="stroke:#8f8f8f;stroke-opacity:1;fill:none">
       <rect
          transform="matrix(0,-1,1,0,0,0)"
          y="329.00162"
@@ -112,7 +112,7 @@
          height="13.28271"
          width="0.63251007"
          id="rect3013-0-8"
-         style="fill:#b3b3b3;stroke:#ffffff;stroke-width:2.86199999000000016;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+         style="fill:none;stroke:#8f8f8f;stroke-width:2.86199999000000016;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
   </g>
 </svg>

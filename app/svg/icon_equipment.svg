@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="icon_exercise.svg">
+   sodipodi:docname="icon_equipment.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -81,7 +81,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.2"
-     inkscape:cx="35.824384"
+     inkscape:cx="-3.3720443"
      inkscape:cy="10.884462"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -114,7 +114,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -125,7 +125,7 @@
      transform="translate(-323.55293,-407.38755)">
     <path
        inkscape:connector-curvature="0"
-       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       style="fill:#8f8f8f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        d="m 331.80377,416.33745 c 2.67487,1.19267 5.33725,2.39445 8.14501,3.49025 1.33889,-1.21805 2.7267,-2.29304 4.99178,-0.80204 2.15558,1.81203 1.73982,3.41288 1.32211,5.01358 -1.02164,1.84521 -2.37475,2.05865 -3.76619,2.08331 -2.64417,0.0146 -3.42862,-2.51193 -3.38394,-3.71712 -0.14114,-0.22685 -0.17203,-0.44176 -0.11981,-0.64768 -2.66977,-1.09086 -5.34736,-2.25196 -8.02876,-3.44742 -0.80467,1.46316 -2.43702,1.83137 -2.92362,1.63919 -3.05608,-0.37674 -3.38791,-2.18365 -3.37169,-3.75033 0.63424,-2.88561 2.62067,-4.08841 4.5335,-3.3473 2.42324,0.75514 2.34459,2.44672 2.60161,3.48556 z"
        id="path2661"
        sodipodi:nodetypes="cccccccccccc" />
