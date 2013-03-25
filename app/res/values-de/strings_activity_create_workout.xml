@@ -17,6 +17,8 @@
     <string name="has_been_added">wurde hinzugefügt</string>
     <string name="show_workout">Zeige Workout</string>
     <string name="workout_empty">Das Workout ist leer.</string>
+    <string name="license_info">Lizenzinformationen</string>
+    <string name="no_license_available">Es wurden keine Lizenzinformationen gefunden.</string>
 
     
     <!-- DialogFilterMuscleAndEquipment -->

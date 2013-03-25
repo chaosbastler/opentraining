@@ -6,6 +6,7 @@
     <string name="add_entry">Add entry</string>
     <string name="choose_subentry">Choose the entry you want to edit</string>
     <string name="choose_training">Choose a training</string>
+    <string name="no_other_training_entries">There are no other training entries to show</string>
     
 
     <!-- DialogFragmentAddEntry -->

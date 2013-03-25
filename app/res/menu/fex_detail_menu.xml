@@ -5,4 +5,8 @@
           android:title="@string/add_entry"
           android:showAsAction="ifRoom" android:icon="@drawable/icon_add"/>
     
+    <item android:id="@+id/menu_item_license_info"
+          android:title="@string/license_info"
+          android:showAsAction="ifRoom" android:icon="@drawable/icon_info"/>
+    
 </menu>

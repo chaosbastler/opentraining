@@ -68,15 +68,6 @@
 
             <requestFocus />
         </EditText>
-
-        <TextView
-            android:id="@+id/textview_image_license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/edittext_current_entry"
-            android:layout_alignParentLeft="true"
-            android:text="@string/license"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -21,6 +21,8 @@
 package de.skubware.opentraining.activity.start_training;
 
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,7 +51,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
 import de.skubware.opentraining.basic.FSet;
@@ -121,14 +123,6 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 			imageview.setImageResource(R.drawable.ic_launcher);
 		}
 
-		// Image license
-		TextView image_license = (TextView) rootView.findViewById(R.id.textview_image_license);
-		if (mExercise.getImageLicenseMap().values().iterator().hasNext()) {
-			image_license.setText(mExercise.getImageLicenseMap().values().iterator().next());
-		} else {
-			image_license.setText("Keine Lizenzinformationen vorhanden");
-		}
-
 		imageview.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -165,27 +159,48 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 			}
 		});
-		
+
 		// configure button
-		Button showOldEntries= (Button) rootView.findViewById(R.id.button_view_old_entries);
-		showOldEntries.setOnClickListener(new OnClickListener(){
+		Button showOldEntries = (Button) rootView.findViewById(R.id.button_view_old_entries);
+		showOldEntries.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				AlertDialog.Builder builder_entry_chooser = new AlertDialog.Builder(getActivity());
 				builder_entry_chooser.setTitle(getString(R.string.choose_training));
 
-				final ArrayAdapter<TrainingEntry> adapter = new ArrayAdapter<TrainingEntry>(getActivity(),
-						android.R.layout.select_dialog_singlechoice, mExercise.getTrainingEntryList());
+				final List<TrainingEntry> trainingEntryList = mExercise.getTrainingEntryList();
+				// don't show list if there are no other TrainingEntrys
+				if (trainingEntryList.size() < 2) {
+					Toast.makeText(getActivity(), getString(R.string.no_other_training_entries), Toast.LENGTH_LONG).show();
+					return;
+				}
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE,  dd.MM.yyyy");
+				// create a list with custom strings, otherwise the default
+				// toString() method of TrainingEntry would be used
+				List<String> trainingEntryStringList = new ArrayList<String>();
+				for (TrainingEntry entry : trainingEntryList) {
+					// don't show current entry
+					if (entry.equals(mTrainingEntry)) {
+						continue;
+					}
+					String dateString = dateFormat.format(entry.getDate());
+					trainingEntryStringList.add(dateString);
+				}
+
+				final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice,
+						trainingEntryStringList);
 
 				builder_entry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int item) {
-						TrainingEntry choosenEntry = adapter.getItem(item);
+						TrainingEntry choosenEntry = trainingEntryList.get(item);
 						mTrainingEntry = choosenEntry;
 						updateTrainingEntries();
 					}
 
 				});
-				builder_entry_chooser.create().show();			}
+				builder_entry_chooser.create().show();
+			}
 		});
 
 		return rootView;
@@ -206,6 +221,29 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		menu_item_add_entry.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				showDialog();
+				return true;
+			}
+		});
+		
+		
+		// configure menu_item_license_info
+		MenuItem menu_item_license_info = (MenuItem) menu.findItem(R.id.menu_item_license_info);
+		menu_item_license_info.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle(getString(R.string.license_info));
+				
+				String license = "";
+
+				if (mExercise.getImageLicenseMap().values().iterator().hasNext()) {
+					license = mExercise.getImageLicenseMap().values().iterator().next();
+				} else {
+					license = getString(R.string.no_license_available);
+				}
+				
+				builder.setMessage(license);
+				builder.create().show();
+
 				return true;
 			}
 		});

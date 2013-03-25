@@ -6,8 +6,8 @@
 
     <LinearLayout
         android:id="@+id/wrapper_image"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_width="275dp"
+        android:layout_height="match_parent"
         android:background="@drawable/background_white"
         android:orientation="vertical" >
 
@@ -21,36 +21,11 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_current_entry"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/wrapper_image"
-        android:padding="10dp" >
-
-        <EditText
-            android:id="@+id/edittext_current_entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/no_entry_for_today"
-            android:inputType="textMultiLine" >
-
-            <requestFocus />
-        </EditText>
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/layout_old_entries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/wrapper_image"
         android:padding="10dp" >
 
         <Button
@@ -66,5 +41,21 @@
             android:textSize="22sp" />
 
     </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edittext_current_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_old_entries"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/wrapper_image"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="@string/no_entry_for_today"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

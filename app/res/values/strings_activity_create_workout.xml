@@ -18,8 +18,10 @@
     <string name="has_been_added">has been added</string>
     <string name="show_workout">Show workout</string>
     <string name="workout_empty">The Workout is empty.</string>
+    <string name="license_info">License info</string>
+    <string name="no_license_available">No license available.</string>
 
-   
+    
     <!-- DialogFilterMuscleAndEquipment -->
     <string name="settings">Settings</string>
     <string name="muscles">Muscles</string>

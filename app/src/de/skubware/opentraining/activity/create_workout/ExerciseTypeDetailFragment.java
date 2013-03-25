@@ -27,6 +27,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,7 +39,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
@@ -128,13 +128,6 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 			imageview.setImageResource(R.drawable.ic_launcher);
 		}
 
-		// Image license
-		TextView image_license = (TextView) rootView.findViewById(R.id.textview_image_license);
-		if (mExercise.getImageLicenseMap().values().iterator().hasNext()) {
-			image_license.setText(mExercise.getImageLicenseMap().values().iterator().next());
-		} else {
-			image_license.setText("Keine Lizenzinformationen vorhanden");
-		}
 
 		rootView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -202,6 +195,31 @@ public class ExerciseTypeDetailFragment extends SherlockFragment {
 				return true;
 			}
 		});
+		
+		
+		
+		// configure menu_item_license_info
+		MenuItem menu_item_license_info = (MenuItem) menu.findItem(R.id.menu_item_license_info);
+		menu_item_license_info.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle(getString(R.string.license_info));
+				
+				String license = "";
+
+				if (mExercise.getImageLicenseMap().values().iterator().hasNext()) {
+					license = mExercise.getImageLicenseMap().values().iterator().next();
+				} else {
+					license = getString(R.string.no_license_available);
+				}
+				
+				builder.setMessage(license);
+				builder.create().show();
+
+				return true;
+			}
+		});
+
 
 	}
 

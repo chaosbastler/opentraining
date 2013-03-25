@@ -6,6 +6,7 @@
     <string name="add_entry">Eintrag hinzufügen</string>
     <string name="choose_subentry">Wähle den Eintrag, den du bearbeiten willst</string>
     <string name="choose_training">Wähle ein Training aus</string>
+    <string name="no_other_training_entries">Es gibt keine weiteren Trainingeinträge.</string>
 
     
     <!-- DialogFragmentAddEntry  -->

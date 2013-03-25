@@ -8,7 +8,6 @@
         android:id="@+id/wrapper_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textview_image_license"
         android:orientation="vertical" >
 
         <ImageView
@@ -20,17 +19,5 @@
             android:src="@drawable/ic_launcher"
             tools:ignore="ContentDescription" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textview_image_license"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:padding="16dp"
-        android:text="license"
-        tools:context=".ExerciseTypeDetailFragment"
-        tools:ignore="HardcodedText" />
 
 </RelativeLayout>
