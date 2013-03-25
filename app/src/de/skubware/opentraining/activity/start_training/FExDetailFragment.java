@@ -1,5 +1,3 @@
-package de.skubware.opentraining.activity.start_training;
-
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
@@ -19,6 +17,9 @@ package de.skubware.opentraining.activity.start_training;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+package de.skubware.opentraining.activity.start_training;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -68,10 +69,6 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	/** Tag for logging */
 	public static final String TAG = "FExDetailFragment";
 
-	/**
-	 * The fragment argument representing the item ID that this fragment
-	 * represents.
-	 */
 	public static final String ARG_FEX = "f_ex";
 
 	public static final String ARG_WORKOUT = "workout";
@@ -143,7 +140,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		editText.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				List<FSet> fSetList = mExercise.getTrainingEntryList().get(0).getFSetList();
+				List<FSet> fSetList = mTrainingEntry.getFSetList();
 				// create new SubEntry if there is none
 				if (fSetList.isEmpty()) {
 					showDialog();
