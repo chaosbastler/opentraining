@@ -1,0 +1,28 @@
+[ 
+ {
+   "de": { "name" : "Eigengewicht Übung", "description" : "Eine Übung, bei der nur das eigene Körpergewicht die Intensität bestimmt."},
+   "en": { "name" : "Own weight", "description" : "Only the own body weight defines the intensity of the exercise." }
+ },
+ 
+ {
+   "de": { "name" : "Einsteiger Übung", "description" : "Eine Übung für Anfänger."},
+   "en": { "name" : "Beginner exercise", "description" : "An exercise for beginners." }
+ },
+
+ {
+   "de": { "name" : "Fortgeschrittenen Übung", "description" : "Eine Übung für erfahrene Athleten."},
+   "en": { "name" : "Advanced exercise", "description" : "An exercise for experienced athletes." }
+ },
+    
+     
+ {
+   "de": { "name" : "Komplexe Übung", "description" : "Eine Übung, die mehrer Muskelgruppen anspricht."},
+   "en": { "name" : "Complex exercise", "description" : "An exercise for multiple muscles." }
+ },
+        
+ {
+   "de": { "name" : "Isolierte Übung", "description" : "Eine Übung, die gezielt eine einzelne Muskelgruppe anspricht." },
+   "en": { "name" : "Isolated exercise", "description" : "An exercise that addresses only one muscle."}
+ }
+ 
+]

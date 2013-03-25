@@ -57,6 +57,9 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	private SAXParser parser = null;
 	
 	private Context mContext;
+	
+	private IDataProvider mDataProvider;
+
 
 	private ExerciseType exType;
 	// required argument
@@ -77,6 +80,8 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 
 	public ExerciseTypeXMLParser(Context context) {
 		mContext = context;
+		mDataProvider = new DataProvider(mContext);
+		
 		// create parser
 		try {
 			SAXParserFactory fac = SAXParserFactory.newInstance();
@@ -169,8 +174,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 			this.translationMap.put(new Locale(language), translatedname);
 		}
 		if (qname.equals("SportsEquipment")) {
-			IDataProvider dataProvider = new DataProvider(mContext);
-			SportsEquipment eq = dataProvider.getEquipmentByName(attributes.getValue("name"));
+			SportsEquipment eq = mDataProvider.getEquipmentByName(attributes.getValue("name"));
 			if (eq == null) {
 				Log.e(TAG, "The SportsEquipment: " + attributes.getValue("name") + " couldn't be found.");
 			}
@@ -179,8 +183,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 		if (qname.equals("Muscle")) {
 			Muscle muscle = null;
 			try{
-				IDataProvider dataProvider = new DataProvider(mContext);
-				muscle = dataProvider.getMuscleByName(attributes.getValue("name"));
+				muscle = mDataProvider.getMuscleByName(attributes.getValue("name"));
 			}catch(IllegalArgumentException illEx){
 				Log.e(TAG, "The Muscle: " + attributes.getValue("name") + " couldn't be found. Ex: " + this.name);
 			}
@@ -218,7 +221,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 			}
 		}
 		if (qname.equals("Tag")) {
-			ExerciseTag tag = ExerciseTag.getTagByValue(attributes.getValue("name"));
+			ExerciseTag tag = mDataProvider.getExerciseTagByName(attributes.getValue("name"));
 			if (tag == null) {
 				Log.e(TAG, "The Tag: " + attributes.getValue("name") + " couldn't be found.");
 			}

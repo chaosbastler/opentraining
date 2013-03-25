@@ -27,14 +27,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import com.actionbarsherlock.widget.ShareActionProvider;
 
+import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.db.parser.ExerciseTagJSONParser;
 import de.skubware.opentraining.db.parser.ExerciseTypeXMLParser;
 import de.skubware.opentraining.db.parser.IParser;
 import de.skubware.opentraining.db.parser.MuscleJSONParser;
@@ -161,16 +164,16 @@ public class DataProvider implements IDataProvider {
 
 	@Override
 	public List<SportsEquipment> getEquipment() {
-		if (Cache.INSTANCE.getMuscles() == null)
+		if (Cache.INSTANCE.getEquipment() == null)
 			Cache.INSTANCE.updateCache(mContext);
 
 		return new ArrayList<SportsEquipment>(Cache.INSTANCE.getEquipment());
 	}
 
 	/**
-	 * Loads the {@link Muscle}s from the filesytem.
+	 * Loads the {@link SportsEquipment}s from the filesytem.
 	 * 
-	 * @return The loaded {@link Muscle}s
+	 * @return The loaded {@link SportsEquipment}s
 	 */
 	List<SportsEquipment> loadEquipment() {
 		List<SportsEquipment> list = new ArrayList<SportsEquipment>();
@@ -179,7 +182,7 @@ public class DataProvider implements IDataProvider {
 			IParser<List<SportsEquipment>> equipmentParser = new SportsEquipmentJSONParser();
 			list = equipmentParser.parse(mContext.getAssets().open(IDataProvider.EQUIPMENT_FILE));
 		} catch (IOException ioEx) {
-			Log.e(TAG, "Error during parsing muscles.", ioEx);
+			Log.e(TAG, "Error during parsing SportsEquipment.", ioEx);
 		}
 
 		return list;
@@ -194,6 +197,46 @@ public class DataProvider implements IDataProvider {
 		}
 
 		return null;
+	}
+	
+	@Override
+	public List<ExerciseTag> getExerciseTags() {
+		if (Cache.INSTANCE.getExerciseTags() == null)
+			Cache.INSTANCE.updateCache(mContext);
+
+		return new ArrayList<ExerciseTag>(Cache.INSTANCE.getExerciseTags());
+	}
+
+	/**
+	 * Loads the {@link ExerciseTag}s from the filesytem.
+	 * 
+	 * @return The loaded {@link ExerciseTag}s
+	 */
+	List<ExerciseTag> loadExerciseTags() {
+		List<ExerciseTag> list = new ArrayList<ExerciseTag>();
+
+		try {
+			IParser<List<ExerciseTag>> equipmentParser = new ExerciseTagJSONParser();
+			list = equipmentParser.parse(mContext.getAssets().open(IDataProvider.EXERCISE_TAG_FILE));
+		} catch (IOException ioEx) {
+			Log.e(TAG, "Error during parsing muscles.", ioEx);
+		}
+
+		return list;
+
+	}
+
+	@Override
+	public ExerciseTag getExerciseTagByName(String name) {
+		for (ExerciseTag m : getExerciseTags()) {
+			if (m.isAlternativeName(name))
+				return m;
+		}
+		
+		Log.w(TAG, "Did not find ExerciseTag: " + name + ".\n Will create new ExerciseTag.");
+		ArrayList<String> nameList = new ArrayList<String> ();
+		return new ExerciseTag(Locale.getDefault(), nameList, "");
+
 	}
 
 	@Override

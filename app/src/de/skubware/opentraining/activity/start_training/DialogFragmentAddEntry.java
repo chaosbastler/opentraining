@@ -315,7 +315,6 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		repetitionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_repetitions.setAdapter(repetitionAdapter);
 
-		// TODO add upper border limit to a settings menu
 		List<String> weightList = new ArrayList<String>();
 		for (int i = 250; i <= 1000; i += 250) {
 			weightList.add(i / 1000 + "," + i % 1000 + " kg");

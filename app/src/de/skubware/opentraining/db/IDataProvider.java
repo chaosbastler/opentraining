@@ -22,6 +22,7 @@ package de.skubware.opentraining.db;
 
 import java.util.List;
 
+import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
@@ -46,6 +47,9 @@ public interface IDataProvider {
 
 	/** The JSON file that contains the {@link SportsEquipment} */
 	static public final String EQUIPMENT_FILE = "equipment.json";
+	
+	/** The JSON file that contains the {@link ExerciseTag}s */
+	static public final String EXERCISE_TAG_FILE = "exercisetags.json";
 
 	/**
 	 * Lists all {@link ExerciseType}s
@@ -117,6 +121,23 @@ public interface IDataProvider {
 	 * @return All {@link SportsEquipment}s
 	 */
 	public List<SportsEquipment> getEquipment();
+	
+	/**
+	 * Tries to find and return the {@link ExerciseTag} with the name.
+	 * 
+	 * @param name
+	 *            The name of the {@link ExerciseTag} to look for
+	 * 
+	 * @return An {@link ExerciseTag} with the name or null.
+	 */
+	public ExerciseTag getExerciseTagByName(String name);
+
+	/**
+	 * Lists all {@link ExerciseTag}s
+	 * 
+	 * @return All {@link ExerciseTag}s
+	 */
+	public List<ExerciseTag> getExerciseTags();
 
 	/**
 	 * Lists all {@link Workout}s

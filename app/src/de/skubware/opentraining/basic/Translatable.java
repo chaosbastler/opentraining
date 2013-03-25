@@ -42,7 +42,6 @@ import java.util.Set;
  * projects, e.g. an iOS app or a web application. Therefore translations are in
  * XML or JSON format.
  * 
- * @author Christian Skubich
  * 
  */
 public abstract class Translatable implements Comparable<Translatable>, Serializable {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 
+import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -25,6 +26,7 @@ public enum Cache {
 	private List<ExerciseType> mExerciseList = null;
 	private List<Muscle> mMuscleList = null;
 	private List<SportsEquipment> mSportsEquipmentList = null;
+	private List<ExerciseTag> mExerciseTagList = null;
 
 	/**
 	 * Refreshes the cached data.
@@ -35,6 +37,8 @@ public enum Cache {
 		DataProvider dataProvider = new DataProvider(mContext);
 		mMuscleList = dataProvider.loadMuscles();
 		mSportsEquipmentList = dataProvider.loadEquipment();
+		mExerciseTagList = dataProvider.loadExerciseTags();
+		// important: ExerciseTypes have to be loaded last
 		mExerciseList = dataProvider.loadExercises();
 	}
 
@@ -53,6 +57,11 @@ public enum Cache {
 
 	public List<SportsEquipment> getEquipment() {
 		return mSportsEquipmentList;
+	}
+	
+
+	public List<ExerciseTag> getExerciseTags() {
+		return mExerciseTagList;
 	}
 
 }

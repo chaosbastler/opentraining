@@ -47,7 +47,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-//TODO AbstractWorkoutExporterFactory
 
 public class MainActivity extends SherlockFragmentActivity {
 	/** Tag for logging */
