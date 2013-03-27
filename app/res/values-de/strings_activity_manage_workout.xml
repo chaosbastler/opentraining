@@ -21,8 +21,8 @@
     
         
     <!-- ShowWorkoutHTMLActivity -->
-    <string name="title_activity_show_workout_html">Show Workout HTML</string>
-    <string name="share">Share</string>
+    <string name="title_activity_show_workout_html">HTML Export</string>
+    <string name="share">Teilen</string>
 
 
 </resources>
