@@ -6,6 +6,11 @@ Open Training is an Android app for planning your fitness training.
 More information:
 http://skubware.de/opentraining/
 
+There will be also a web application for editing the exercise database.
+The code of the website will be released under the AGPL. Here is a preview of the website: 
+
+http://www.trainingdb.de/
+
 Where can I download the app?
 -----------------------------
 Google Play Store: https://play.google.com/store/apps/details?id=de.skubware.opentraining
