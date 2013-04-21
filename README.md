@@ -33,25 +33,51 @@ Exercises are CC licensed(currently all CC-BY-SA)
 
 Translations
 ------------
-English, German.
+English, German. More wanted!
 
 
-Building Open Training
-======================
+Building Instruction
+====================
 
 Requirements
 ------------
   * Git
-  * Eclipse with Android-SDK
-  
+  * Android-SDK v17
+
+Building with ant
+-----------------
+
+### 1. Clone the respository
+
+    $ git clone git://github.com/chaosbastler/opentraining.git
+
+#### 2. Update project properties
+
+    NOTE: You must have git, ant/bin, android/tools in your enviroment PATH
+
+    On *nix based systems:
+
+    $ ./setup_env.sh
+
+    On windows open the `setup_env.bat`
+
+#### 4. Build the project
+    $ ant debug
+
+#### 5. Install it
+    $ ant installd
+
 Building with Eclipse
 --------------------- 
 
-#### 1. Clone repository
+#### 1. Clone the repository
 
-#### 2. Add submodule
-    * git submodule init
-    * git submodule update
+    $ git clone git://github.com/chaosbastler/opentraining.git
+
+#### 2. Checkout dependencies
+    $ git submodule init
+
+    $ git submodule update
 
 #### 3. Change Eclipse workspace
 
