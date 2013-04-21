@@ -1,4 +1,4 @@
-Open Training
+Open Training [![Build Status](https://travis-ci.org/chaosbastler/opentraining.png)](https://travis-ci.org/chaosbastler/opentraining)
 =============
 
 Open Training is an Android app for planning your fitness training.
@@ -75,6 +75,7 @@ Building with Eclipse
     $ git clone git://github.com/chaosbastler/opentraining.git
 
 #### 2. Checkout dependencies
+
     $ git submodule init
 
     $ git submodule update
@@ -90,3 +91,13 @@ Building with Eclipse
 
 #### 6. Disable Lint für ActionBarSherlock
     *Click right on project 'library' -> Properties -> Android Lint Preferences -> Ignore all
+
+
+Building with maven
+---------------------
+
+#### 1. Connect your phone with USB
+
+#### 2. Build & Install
+
+    $  cd app && mvn clean install android:deploy android:run -Dandroid.device=usb -DskipTests
