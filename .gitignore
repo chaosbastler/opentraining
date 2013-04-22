@@ -9,3 +9,7 @@ test/gen/
 app/svg/old/
 
 app/svg/.SVG
+
+# maven
+app/target/
+test/target/
