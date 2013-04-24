@@ -33,7 +33,7 @@ Exercises are CC licensed(currently all CC-BY-SA)
 
 Translations
 ------------
-English, German. More wanted!
+English, German. More wanted! Help here: http://crowdin.net/project/opentraining
 
 
 Building Instruction
