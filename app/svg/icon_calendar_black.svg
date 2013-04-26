@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24.068909"
+   height="24.068909"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="icon_calendar_black.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3759">
+      <stop
+         style="stop-color:#808080;stop-opacity:1;"
+         offset="0"
+         id="stop3761" />
+      <stop
+         style="stop-color:#808080;stop-opacity:0;"
+         offset="1"
+         id="stop3763" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient5252">
+      <stop
+         style="stop-color:#ff6600;stop-opacity:1;"
+         offset="0"
+         id="stop5254" />
+      <stop
+         style="stop-color:#366600;stop-opacity:0;"
+         offset="1"
+         id="stop5256" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759"
+       id="radialGradient3781"
+       cx="18.392857"
+       cy="-4.2054815"
+       fx="18.392857"
+       fy="-4.2054815"
+       r="10.322499"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       id="filter3856"
+       x="-0.15266331"
+       width="1.3053266"
+       y="-0.15636302"
+       height="1.312726">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.3751867"
+         id="feGaussianBlur3858" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="16"
+     inkscape:cx="20.872945"
+     inkscape:cy="8.0694103"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-global="false"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3756"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       originx="-323.55293px"
+       originy="-620.90573px" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-323.55293,-407.38755)">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.92618155;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1"
+       d="m 346.44569,409.08921 0.007,15.01759 c -2.1465,2.13859 -4.74864,4.59481 -6.51984,6.07876 l -13.63822,0 c -0.80944,0 -1.46107,-0.72141 -1.46107,-1.61754 l 0,-19.49006 z"
+       id="rect2985"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccsscc" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect3765"
+       width="53.790623"
+       height="47.350899"
+       x="-52.527931"
+       y="-21.514225"
+       transform="translate(323.55293,407.38755)" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="rect3755"
+       width="22.541178"
+       height="5.9188743"
+       x="324.32962"
+       y="408.17346"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/matze/Haus Neustadt/Verein/flyer 2013/bilder/kalender.png"
+       inkscape:export-xdpi="200.02162"
+       inkscape:export-ydpi="200.02162" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.95733166px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="321.39935"
+       y="434.30667"
+       id="text3051"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0184181,0.98191501)"><tspan
+         sodipodi:role="line"
+         id="tspan3053"
+         x="321.39935"
+         y="434.30667"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto">31</tspan></text>
+  </g>
+</svg>
