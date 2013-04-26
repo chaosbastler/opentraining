@@ -9,4 +9,7 @@
           android:title="@string/license_info"
           android:showAsAction="ifRoom" android:icon="@drawable/icon_info"/>
     
+    <item android:id="@+id/menu_item_other_training_entry"
+          android:title="@string/load_other_training_entry"
+          android:showAsAction="never" android:icon="@drawable/icon_calendar"/>    
 </menu>

@@ -32,6 +32,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -48,7 +49,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -161,48 +161,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 			}
 		});
 
-		// configure buttons
-		Button showOldEntries = (Button) rootView.findViewById(R.id.button_view_old_entries);
-		showOldEntries.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				AlertDialog.Builder builder_entry_chooser = new AlertDialog.Builder(getActivity());
-				builder_entry_chooser.setTitle(getString(R.string.choose_training));
-
-				final List<TrainingEntry> trainingEntryList = mExercise.getTrainingEntryList();
-				// don't show list if there are no other TrainingEntrys
-				if (trainingEntryList.size() < 2) {
-					Toast.makeText(getActivity(), getString(R.string.no_other_training_entries), Toast.LENGTH_LONG).show();
-					return;
-				}
-
-				SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE,  dd.MM.yyyy");
-				// create a list with custom strings, otherwise the default
-				// toString() method of TrainingEntry would be used
-				List<String> trainingEntryStringList = new ArrayList<String>();
-				for (TrainingEntry entry : trainingEntryList) {
-					// don't show current entry
-					if (entry.equals(mTrainingEntry)) {
-						continue;
-					}
-					String dateString = dateFormat.format(entry.getDate());
-					trainingEntryStringList.add(dateString);
-				}
-
-				final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice,
-						trainingEntryStringList);
-
-				builder_entry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
-						TrainingEntry choosenEntry = trainingEntryList.get(item);
-						mTrainingEntry = choosenEntry;
-						updateTrainingEntries();
-					}
-
-				});
-				builder_entry_chooser.create().show();
-			}
-		});
+		
 		
 		ImageButton buttonTrainingEntryTable = (ImageButton) rootView
 				.findViewById(R.id.button_training_entry_table);
@@ -270,6 +229,52 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 				return true;
 			}
 		});
+		
+		// configure menu_item_other_training_entry
+		MenuItem menu_item_other_training_entry = (MenuItem) menu.findItem(R.id.menu_item_other_training_entry);
+		menu_item_other_training_entry.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@SuppressLint("SimpleDateFormat")
+			public boolean onMenuItemClick(MenuItem item) {
+				AlertDialog.Builder builder_entry_chooser = new AlertDialog.Builder(getActivity());
+				builder_entry_chooser.setTitle(getString(R.string.choose_training));
+
+				final List<TrainingEntry> trainingEntryList = mExercise.getTrainingEntryList();
+				// don't show list if there are no other TrainingEntrys
+				if (trainingEntryList.size() < 2) {
+					Toast.makeText(getActivity(), getString(R.string.no_other_training_entries), Toast.LENGTH_LONG).show();
+					return true;
+				}
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE,  dd.MM.yyyy");
+				// create a list with custom strings, otherwise the default
+				// toString() method of TrainingEntry would be used
+				List<String> trainingEntryStringList = new ArrayList<String>();
+				for (TrainingEntry entry : trainingEntryList) {
+					// don't show current entry
+					if (entry.equals(mTrainingEntry)) {
+						continue;
+					}
+					String dateString = dateFormat.format(entry.getDate());
+					trainingEntryStringList.add(dateString);
+				}
+
+				final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice,
+						trainingEntryStringList);
+
+				builder_entry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int item) {
+						TrainingEntry choosenEntry = trainingEntryList.get(item);
+						mTrainingEntry = choosenEntry;
+						updateTrainingEntries();
+					}
+
+				});
+				builder_entry_chooser.create().show();
+				return true;
+			}
+		});
+		
+		
 	}
 
 	/** Shows DialogFragmentAddEntry. */

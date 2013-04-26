@@ -21,24 +21,12 @@
 
     <ImageButton
         android:id="@+id/button_training_entry_table"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/row_layout_0"
         android:src="@drawable/icon_history_black" />
-
-    <Button
-        android:id="@+id/button_view_old_entries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/button_training_entry_table"
-        android:background="@drawable/row_layout_0"
-        android:text="@string/old_entries"
-        android:textColor="@color/text_color_table"
-        android:textSize="18sp" />
 
     <RelativeLayout
         android:id="@+id/layout_current_entry"

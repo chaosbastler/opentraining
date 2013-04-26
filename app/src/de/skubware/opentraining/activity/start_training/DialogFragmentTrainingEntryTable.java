@@ -23,7 +23,6 @@ package de.skubware.opentraining.activity.start_training;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
-import java.util.Locale;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 
@@ -32,9 +31,11 @@ import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,7 @@ public class DialogFragmentTrainingEntryTable extends SherlockDialogFragment {
 	private FitnessExercise mFex;
 
 	/**
-	 * Create a new instance of DialogFragmentAddEntry.
+	 * Create a new instance of DialogFragmentTrainingEntryTable.
 	 * 
 	 * @param fEx
 	 *            The {@link FitnessExercise} that should be displayed
@@ -79,7 +80,6 @@ public class DialogFragmentTrainingEntryTable extends SherlockDialogFragment {
 	}
 
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,6 +87,7 @@ public class DialogFragmentTrainingEntryTable extends SherlockDialogFragment {
 				.getSerializable(ARG_ID_EXERCISE);
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -97,6 +98,7 @@ public class DialogFragmentTrainingEntryTable extends SherlockDialogFragment {
 		boolean odd = false;
 
 		Iterator<TrainingEntry> it = mFex.getTrainingEntryList().iterator();
+		int entry_count = 0;
 		
 		while(it.hasNext()){
 			TrainingEntry entry = it.next();
@@ -132,7 +134,7 @@ public class DialogFragmentTrainingEntryTable extends SherlockDialogFragment {
 					}
 				}
 
-
+				entry_count++;
 				
 				table.addView(row);
 			}
@@ -144,6 +146,18 @@ public class DialogFragmentTrainingEntryTable extends SherlockDialogFragment {
 			}
 		}
 		
+		if(entry_count ==0 ){
+			return new AlertDialog.Builder(getActivity())
+			.setMessage(getString(R.string.no_other_training_entries))
+			.setPositiveButton(getString(android.R.string.ok), new OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}				
+			})
+			.setCancelable(true)
+			.create();
+		}
 		
 		return new AlertDialog.Builder(getActivity())
 				.setView(v)
