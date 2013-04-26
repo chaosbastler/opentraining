@@ -53,7 +53,7 @@ import android.widget.Spinner;
  */
 public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	/** Tag for logging */
-	public static final String TAG = "FExDetailFragment";
+	public static final String TAG = "DialogFragmentAddEntry";
 
 	/** ID for argument ({@link FitnessExercise}) */
 	public static String ARG_ID_EXERCISE = "fex";
@@ -64,7 +64,7 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	/** ID for optional argument ({@link TrainingEntry}) */
 	public static String ARG_ID_TRAINING_ENTRY = "trainingentry";
 
-	/** Currently displayed {@link Workout}. */
+	/** Currently displayed {@link FitnessExercise}. */
 	private FitnessExercise mFex;
 
 	/** Currently edited {@link TrainingEntry} */

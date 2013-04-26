@@ -50,6 +50,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
@@ -160,7 +161,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 			}
 		});
 
-		// configure button
+		// configure buttons
 		Button showOldEntries = (Button) rootView.findViewById(R.id.button_view_old_entries);
 		showOldEntries.setOnClickListener(new OnClickListener() {
 			@Override
@@ -200,6 +201,28 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 				});
 				builder_entry_chooser.create().show();
+			}
+		});
+		
+		ImageButton buttonTrainingEntryTable = (ImageButton) rootView
+				.findViewById(R.id.button_training_entry_table);
+		buttonTrainingEntryTable.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+
+				FragmentTransaction ft = getFragmentManager()
+						.beginTransaction();
+				Fragment prev = getFragmentManager()
+						.findFragmentByTag("dialog");
+				if (prev != null) {
+					ft.remove(prev);
+				}
+				ft.addToBackStack(null);
+
+				// Create and show the dialog.
+				DialogFragment newFragment = DialogFragmentTrainingEntryTable
+						.newInstance(mExercise);
+				newFragment.show(ft, "dialog");
 			}
 		});
 

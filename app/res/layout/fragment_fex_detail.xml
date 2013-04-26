@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/wrapper_image"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@drawable/background_white"
         android:orientation="vertical" >
 
@@ -17,13 +17,35 @@
             android:layout_height="match_parent"
             android:padding="20dp"
             android:src="@drawable/ic_launcher" />
-
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/button_training_entry_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/row_layout_0"
+        android:src="@drawable/icon_history_black" />
+
+    <Button
+        android:id="@+id/button_view_old_entries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/button_training_entry_table"
+        android:background="@drawable/row_layout_0"
+        android:text="@string/old_entries"
+        android:textColor="@color/text_color_table"
+        android:textSize="18sp" />
 
     <RelativeLayout
         android:id="@+id/layout_current_entry"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_above="@+id/button_training_entry_table"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/wrapper_image"
         android:padding="10dp" >
 
@@ -40,31 +62,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:hint="@string/no_entry_for_today"
-            android:inputType="textMultiLine" >
-
-            <requestFocus />
-        </EditText>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/layout_old_entries"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="10dp" >
-
-        <Button
-            android:id="@+id/button_view_old_entries"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/button_selector"
-            android:text="@string/old_entries"
-            android:textColor="@color/button_color"
-            android:textSize="22sp" />
-
+            android:inputType="textMultiLine" />
     </RelativeLayout>
 
 </RelativeLayout>

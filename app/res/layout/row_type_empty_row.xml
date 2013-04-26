@@ -1,0 +1,15 @@
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableRow03"
+    android:layout_width="match_parent"
+    android:layout_height="10dp"
+    android:background="@color/text_color_table"
+    android:padding="1dp" >
+
+    <TextView
+        android:id="@+id/TextView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="0sp" />
+
+</TableRow>
