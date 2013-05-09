@@ -2,55 +2,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_fex_detail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
 
     <LinearLayout
         android:id="@+id/wrapper_image"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:background="@drawable/background_white"
-        android:orientation="vertical" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:padding="14dp" >
 
-        <ImageView
-            android:id="@+id/imageview"
+        <LinearLayout
+            android:id="@+id/wrapper2_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp"
-            android:src="@drawable/ic_launcher" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2.82" > 
+
+            <ImageView
+                android:id="@+id/imageview"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="#FFFFFF"
+                android:padding="20dp"
+                android:src="@drawable/ic_launcher" />
+
+        </LinearLayout>
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/button_training_entry_table"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/row_layout_0"
-        android:src="@drawable/icon_history_black" />
-
-    <RelativeLayout
-        android:id="@+id/layout_current_entry"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_above="@+id/button_training_entry_table"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/wrapper_image"
-        android:padding="10dp" >
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" >
 
-        <EditText
-            android:id="@+id/edittext_current_entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:clickable="false"
-            android:cursorVisible="false"
-            android:ems="10"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:hint="@string/no_entry_for_today"
-            android:inputType="textMultiLine" />
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@color/text_color_table"
+            android:divider="@color/text_color_table"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:listSelector="@drawable/listview_element_selector"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
+        </ListView>
     </RelativeLayout>
 
 </RelativeLayout>

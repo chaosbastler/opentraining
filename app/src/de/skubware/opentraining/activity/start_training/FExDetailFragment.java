@@ -21,9 +21,11 @@
 package de.skubware.opentraining.activity.start_training;
 
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -52,6 +54,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
@@ -59,6 +65,7 @@ import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -130,9 +137,63 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 				return mGestureScanner.onTouchEvent(event);
 			}
 		});
+		
+		
+		ListView list = (ListView) rootView.findViewById(R.id.list);
+		
+		// Getting adapter by passing xml data ArrayList
+		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter(getActivity());
+		list.setAdapter(adapter);
+		
+		
+		
+		/*TableLayout table = (TableLayout) rootView.findViewById(R.id.table_training_entry);
+		boolean odd = false;
+		
+		TrainingEntry lastTrainingEntry = mExercise.getTrainingEntryList().get(mExercise.getTrainingEntryList().size()-1);
 
-		EditText editText = (EditText) rootView.findViewById(R.id.edittext_current_entry);
-		editText.setOnClickListener(new OnClickListener() {
+			
+		for (FSet set : lastTrainingEntry.getFSetList()) {
+			TableRow row;
+			if (odd) {
+				row = (TableRow) inflater.inflate(R.layout.row_type_3, null);
+			} else {
+				row = (TableRow) inflater.inflate(R.layout.row_type_4, null);
+			}
+			odd = !odd;
+
+
+			for (SetParameter parameter : set.getSetParameters()) {
+				TextView text_view_duration = (TextView) row
+						.findViewById(R.id.text_view_duration);
+				TextView text_view_rep = (TextView) row
+						.findViewById(R.id.text_view_rep);
+				TextView text_view_weigh = (TextView) row
+						.findViewById(R.id.text_view_weigh);
+
+				if (parameter instanceof SetParameter.Duration) {
+					text_view_duration.setText(parameter.toString());
+				}
+
+				if (parameter instanceof SetParameter.Repetition) {
+					text_view_rep.setText(parameter.toString());
+				}
+
+				if (parameter instanceof SetParameter.Weight) {
+					text_view_weigh.setText(parameter.toString());
+				}
+			}
+
+			table.addView(row);
+		}
+
+	
+		
+		
+		
+		
+		//EditText editText = (EditText) rootView.findViewById(R.id.edittext_current_entry);
+		table.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				List<FSet> fSetList = mTrainingEntry.getFSetList();
@@ -159,11 +220,11 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 				builder_subentry_chooser.create().show();
 
 			}
-		});
+		});*/
 
 		
 		
-		ImageButton buttonTrainingEntryTable = (ImageButton) rootView
+		/*ImageButton buttonTrainingEntryTable = (ImageButton) rootView
 				.findViewById(R.id.button_training_entry_table);
 		buttonTrainingEntryTable.setOnClickListener(new OnClickListener() {
 			@Override
@@ -183,7 +244,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 						.newInstance(mExercise);
 				newFragment.show(ft, "dialog");
 			}
-		});
+		});*/
 
 		return rootView;
 	}
@@ -340,32 +401,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	 * {@link FSet} is updated.
 	 */
 	private void updateTrainingEntries() {
-		EditText editText = (EditText) this.getActivity().findViewById(R.id.edittext_current_entry);
-
-		if(mTrainingEntry == null){
-			// select last TrainingEntry
-			List<TrainingEntry> entryList = mExercise.getTrainingEntryList();
-			Collections.sort(entryList);
-			Log.d(TAG, "entryList.size()= " + entryList.size());
-			mTrainingEntry = entryList.get(entryList.size() - 1);
-		}
 		
-		List<FSet> fSetList = mTrainingEntry.getFSetList();
-		Log.d(TAG, "fSetList.size()= " + fSetList.size());
-		if (fSetList.isEmpty()) {
-			editText.setText(null);
-			return;
-		}
-
-		StringBuilder content = new StringBuilder();
-		for (FSet entry : fSetList) {
-			content.append(entry.toString());
-			content.append("\n");
-		}
-		// finally delete last "\n"
-		content.deleteCharAt(content.length() - 1);
-
-		editText.setText(content.toString());
 	}
 
 }
