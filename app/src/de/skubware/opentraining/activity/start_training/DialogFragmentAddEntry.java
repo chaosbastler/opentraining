@@ -31,7 +31,6 @@ import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
-import de.skubware.opentraining.basic.Workout;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;

@@ -14,6 +14,7 @@
         android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/wrapper_weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -27,16 +28,17 @@
                 android:src="@drawable/icon_weight_black" />
 
             <TextView
-                android:id="@+id/TextView03"
+                android:id="@+id/textview_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="10kg"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/text_color_table" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wrapper_rep"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -50,16 +52,17 @@
                 android:src="@drawable/icon_repetition_black" />
 
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/textview_rep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="10kg"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/text_color_table" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wrapper_duration"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -73,11 +76,11 @@
                 android:src="@drawable/icon_time_black" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/textview_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="10kg"
+                android:text="-"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/text_color_table" />
         </LinearLayout>
@@ -115,7 +118,7 @@
             android:layout_height="match_parent" >
 
             <ImageButton
-                android:id="@+id/ImageButton01"
+                android:id="@+id/imagebutton_check"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:adjustViewBounds="false"
@@ -126,18 +129,7 @@
                 android:src="@drawable/icon_check_white" />
 
             <ImageButton
-                android:id="@+id/ImageButton03"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_black_selector"
-                android:cropToPadding="false"
-                android:padding="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/icon_check_white" />
-
-            <ImageButton
-                android:id="@+id/ImageButton02"
+                android:id="@+id/imagebutton_notcheck"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_alignParentBottom="true"

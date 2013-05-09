@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -111,6 +112,15 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 		mExercise = (FitnessExercise) getArguments().getSerializable(ARG_FEX);
 		mWorkout = (Workout) getArguments().getSerializable(ARG_WORKOUT);
+		
+		
+		// select latest TrainingEntry
+		if(mTrainingEntry == null){
+			List<TrainingEntry> entryList = mExercise.getTrainingEntryList();
+			TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
+			mTrainingEntry = latestEntry;
+		}
+		
 	}
 
 	@Override
@@ -139,112 +149,16 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		});
 		
 		
+		// set adapter
 		ListView list = (ListView) rootView.findViewById(R.id.list);
-		
-		// Getting adapter by passing xml data ArrayList
-		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter(getActivity());
+		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter((SherlockFragmentActivity) getActivity(), mExercise,  mTrainingEntry);
 		list.setAdapter(adapter);
 		
 		
+
 		
-		/*TableLayout table = (TableLayout) rootView.findViewById(R.id.table_training_entry);
-		boolean odd = false;
 		
-		TrainingEntry lastTrainingEntry = mExercise.getTrainingEntryList().get(mExercise.getTrainingEntryList().size()-1);
-
-			
-		for (FSet set : lastTrainingEntry.getFSetList()) {
-			TableRow row;
-			if (odd) {
-				row = (TableRow) inflater.inflate(R.layout.row_type_3, null);
-			} else {
-				row = (TableRow) inflater.inflate(R.layout.row_type_4, null);
-			}
-			odd = !odd;
-
-
-			for (SetParameter parameter : set.getSetParameters()) {
-				TextView text_view_duration = (TextView) row
-						.findViewById(R.id.text_view_duration);
-				TextView text_view_rep = (TextView) row
-						.findViewById(R.id.text_view_rep);
-				TextView text_view_weigh = (TextView) row
-						.findViewById(R.id.text_view_weigh);
-
-				if (parameter instanceof SetParameter.Duration) {
-					text_view_duration.setText(parameter.toString());
-				}
-
-				if (parameter instanceof SetParameter.Repetition) {
-					text_view_rep.setText(parameter.toString());
-				}
-
-				if (parameter instanceof SetParameter.Weight) {
-					text_view_weigh.setText(parameter.toString());
-				}
-			}
-
-			table.addView(row);
-		}
-
 	
-		
-		
-		
-		
-		//EditText editText = (EditText) rootView.findViewById(R.id.edittext_current_entry);
-		table.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				List<FSet> fSetList = mTrainingEntry.getFSetList();
-				// create new SubEntry if there is none
-				if (fSetList.isEmpty()) {
-					showDialog();
-					return;
-				}
-
-				// edit existing SubEntries if there are some
-				AlertDialog.Builder builder_subentry_chooser = new AlertDialog.Builder(getActivity());
-				builder_subentry_chooser.setTitle(getString(R.string.choose_subentry));
-
-				final ArrayAdapter<FSet> adapter = new ArrayAdapter<FSet>(getActivity(),
-						android.R.layout.select_dialog_singlechoice, fSetList);
-
-				builder_subentry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
-						FSet choosenSubEntry = adapter.getItem(item);
-						showDialog(choosenSubEntry);
-					}
-
-				});
-				builder_subentry_chooser.create().show();
-
-			}
-		});*/
-
-		
-		
-		/*ImageButton buttonTrainingEntryTable = (ImageButton) rootView
-				.findViewById(R.id.button_training_entry_table);
-		buttonTrainingEntryTable.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-
-				FragmentTransaction ft = getFragmentManager()
-						.beginTransaction();
-				Fragment prev = getFragmentManager()
-						.findFragmentByTag("dialog");
-				if (prev != null) {
-					ft.remove(prev);
-				}
-				ft.addToBackStack(null);
-
-				// Create and show the dialog.
-				DialogFragment newFragment = DialogFragmentTrainingEntryTable
-						.newInstance(mExercise);
-				newFragment.show(ft, "dialog");
-			}
-		});*/
 
 		return rootView;
 	}
@@ -335,6 +249,28 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 			}
 		});
 		
+		// configure menu_item_license_info
+		MenuItem menu_item_history = (MenuItem) menu.findItem(R.id.menu_item_history);
+		menu_item_history.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				FragmentTransaction ft = getFragmentManager()
+						.beginTransaction();
+				Fragment prev = getFragmentManager()
+						.findFragmentByTag("dialog");
+				if (prev != null) {
+					ft.remove(prev);
+				}
+				ft.addToBackStack(null);
+
+				// Create and show the dialog.
+				DialogFragment newFragment = DialogFragmentTrainingEntryTable
+						.newInstance(mExercise);
+				newFragment.show(ft, "dialog");
+
+				return true;
+			}
+		});
+		
 		
 	}
 
@@ -401,7 +337,18 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	 * {@link FSet} is updated.
 	 */
 	private void updateTrainingEntries() {
+		if(mTrainingEntry == null){
+			// select last TrainingEntry
+			List<TrainingEntry> entryList = mExercise.getTrainingEntryList();
+			Collections.sort(entryList);
+			Log.d(TAG, "entryList.size()= " + entryList.size());
+			mTrainingEntry = entryList.get(entryList.size() - 1);
+		}
+
 		
+		ListView list = (ListView) getActivity().findViewById(R.id.list);
+		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter((SherlockFragmentActivity) getActivity(), mExercise,  mTrainingEntry);
+		list.setAdapter(adapter);
 	}
 
 }

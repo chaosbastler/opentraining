@@ -21,64 +21,182 @@
 package de.skubware.opentraining.activity.start_training;
 
 
-import de.skubware.opentraining.R;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+import de.skubware.opentraining.R;
+import de.skubware.opentraining.basic.FSet;
+import de.skubware.opentraining.basic.FSet.SetParameter;
+import de.skubware.opentraining.basic.FitnessExercise;
+import de.skubware.opentraining.basic.TrainingEntry;
+
 import android.content.Context;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class TrainingEntryListAdapter extends BaseAdapter{
 
-	    private Activity activity;
-	    private static LayoutInflater inflater=null;
+	    private SherlockFragmentActivity mActivity;
+	    private static LayoutInflater mInflater = null;
+	    
+	    private FitnessExercise mFEx;
+	    private TrainingEntry mTrainingEntry;
+	    //private List<FSet> mGoalFSetList;
 	 
-	    public TrainingEntryListAdapter(Activity a) {
-	        activity = a;
-	        inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    
+	    public TrainingEntryListAdapter(SherlockFragmentActivity activity,/*List<FSet> goalFSetList,*/ FitnessExercise fEx, TrainingEntry trainingEntry) {
+	        mActivity = activity;
+	        mInflater = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	        
+	        //mGoalFSetList = goalFSetList;
+	        //if(mGoalFSetList== null)
+	        //	mGoalFSetList = new ArrayList<FSet>();
+	        
+	        mTrainingEntry = trainingEntry;
+	        mFEx = fEx;
 	    }
 	 
 	    public int getCount() {
-	        return 4;
+	        return mTrainingEntry.getFSetList().size() + 1;
 	    }
 	 
 	    public Object getItem(int position) {
-	        return position;
+	    	if(position>mTrainingEntry.getFSetList().size()-1)
+	    		return null;
+	    	
+	        return mTrainingEntry.getFSetList().get(position);
 	    }
 	 
 	    public long getItemId(int position) {
 	        return position;
 	    }
-	 
-	    public View getView(int position, View convertView, ViewGroup parent) {
-	        View vi=convertView;
 
-	    	// last element is an empty row
-	    	if(position==getCount()-1){
-		        if(convertView==null)
-		            vi = inflater.inflate(R.layout.list_row_empty, null);
-		        return vi;
-	    	}
-	    	
-	        if(convertView==null)
-	            vi = inflater.inflate(R.layout.list_row, null);
-	 
-	        /*TextView title = (TextView)vi.findViewById(R.id.title); // title
-	        TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
-	        TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
-	        ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
-	 
-	        HashMap<String, String> song = new HashMap<String, String>();
-	        song = data.get(position);
-	 
-	        // Setting all values in listview
-	        title.setText(song.get(CustomizedListView.KEY_TITLE));
-	        artist.setText(song.get(CustomizedListView.KEY_ARTIST));
-	        duration.setText(song.get(CustomizedListView.KEY_DURATION));
-	        imageLoader.DisplayImage(song.get(CustomizedListView.KEY_THUMB_URL), thumb_image);*/
-	        return vi;
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View vi = convertView;
+
+		// last element is an empty row
+		if (position == getCount() - 1) {
+			vi = mInflater.inflate(R.layout.list_row_empty, null);
+
+			// add listener
+			vi.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					showDialog(null);
+				}
+			});
+
+			return vi;
+		}
+
+		vi = mInflater.inflate(R.layout.list_row, null);
+		final FSet set = (FSet) getItem(position);
+
+		// set values
+		TextView textview_weight = (TextView) vi
+				.findViewById(R.id.textview_weight);
+		TextView textview_rep = (TextView) vi.findViewById(R.id.textview_rep);
+		TextView textview_duration = (TextView) vi
+				.findViewById(R.id.textview_duration);
+
+		for (SetParameter para : set.getSetParameters()) {
+			if (para instanceof SetParameter.Weight) {
+				textview_weight.setText(para.toString());
+			}
+			if (para instanceof SetParameter.Duration) {
+				textview_duration.setText(para.toString());
+			}
+			if (para instanceof SetParameter.Repetition) {
+				textview_rep.setText(para.toString());
+			}
+		}
+
+		// add button listener
+		final ImageButton imagebutton_check = (ImageButton) vi
+				.findViewById(R.id.imagebutton_check);
+		final ImageButton imagebutton_notcheck = (ImageButton) vi
+				.findViewById(R.id.imagebutton_notcheck);
+
+		imagebutton_check.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				// TODO s set
+				imagebutton_check.setImageResource(R.drawable.icon_check_green);
+				imagebutton_notcheck
+						.setImageResource(R.drawable.icon_cross_white);
+			}
+		});
+
+		imagebutton_notcheck.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				imagebutton_check.setImageResource(R.drawable.icon_check_white);
+				imagebutton_notcheck
+						.setImageResource(R.drawable.icon_cross_red);
+				deleteSet(set);
+			}
+		});
+
+		// add lister for changing values
+		final View wrapper_duration = (View) vi
+				.findViewById(R.id.wrapper_duration);
+		final View wrapper_rep = (View) vi.findViewById(R.id.wrapper_rep);
+		final View wrapper_weight = (View) vi.findViewById(R.id.wrapper_weight);
+
+		OnClickListener changeSetValuesListener = new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				showDialog(set);
+			}
+		};
+		wrapper_duration.setOnClickListener(changeSetValuesListener);
+		wrapper_rep.setOnClickListener(changeSetValuesListener);
+		wrapper_weight.setOnClickListener(changeSetValuesListener);
+
+		return vi;
+	}
+
+	    private void deleteSet(FSet set){
+	    	mTrainingEntry.getFSetList().remove(set);
+
+			FExDetailFragment fragment = (FExDetailFragment) mActivity.getSupportFragmentManager().findFragmentById(R.id.exercise_detail_container);
+			fragment.onEntryEdited(this.mFEx);
 	    }
+	    
+	    
+	    
+	    
+		/**
+		 * Shows DialogFragmentAddEntry with the given {@link FSet}.
+		 * 
+		 * @param set
+		 *            The FSet to edit. If it is null a new FSet will be added to
+		 *            the TrainingEntry.
+		 *            
+		 * @see DialogFragmentAddEntry#newInstance(FitnessExercise, FSet)           
+		 */
+		private void showDialog(FSet set) {			
+			FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
+			Fragment prev = mActivity.getSupportFragmentManager().findFragmentByTag("dialog");
+			if (prev != null) {
+				ft.remove(prev);
+			}
+			ft.addToBackStack(null);
+
+			// Create and show the dialog.
+			DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mFEx, set, mTrainingEntry);
+			newFragment.show(ft, "dialog");
+		}
 
 }
