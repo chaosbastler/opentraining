@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +50,8 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	/** List with all {@link FSet}s. May be empty, but never null. */
 	private List<FSet> mFSetList = new ArrayList<FSet>();
 
-	/** Saves wheter a FSet has been done or not. Default value is true. */
-	private Map<FSet,Boolean> mSetBeenDoneMap = new HashMap<FSet,Boolean>();
+	/** Saves whether a FSet has been done or not. Default value is true. */
+	private IdentityHashMap<FSet,Boolean> mSetBeenDoneMap = new IdentityHashMap<FSet,Boolean>();
 	
 	
 	/**

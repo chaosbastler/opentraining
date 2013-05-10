@@ -297,5 +297,27 @@ public class FitnessExercise implements IExercise, Serializable {
 	public List<String> getHints() {
 		return this.mExerciseType.getHints();
 	}
+	
+	/**
+	 * Checks if a Training has been finished. That means that all FSets of the
+	 * TrainingEntry have been set to the status done.
+	 * 
+	 * 
+	 * @param entry
+	 *            The {@link TrainingEntry} to check
+	 * 
+	 * @return true if all FSets of the TrainingEntry have been set to the
+	 *         status done
+	 */
+	public boolean isTrainingEntryFinished(TrainingEntry entry){
+		if(!mTrainingEntryList.contains(entry))
+				throw new IllegalArgumentException("Entry not contained.");
+		for(FSet set:entry.getFSetList()){
+			if(!entry.hasBeenDone(set))
+				return false;
+		}
+		
+		return true;
+	}
 
 }
