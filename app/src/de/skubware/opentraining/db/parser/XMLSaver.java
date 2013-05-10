@@ -133,7 +133,7 @@ public class XMLSaver {
 					//TODO refactor
 					for (FSet set: entry.getFSetList()) {
 						Element fSetE = doc.createElement("FSet");
-						
+						fSetE.setAttribute("hasBeenDone", Boolean.toString(entry.hasBeenDone(set)) );
 						for (SetParameter c : set.getSetParameters()) {
 							Element catE = doc.createElement("SetParameter");
 							catE.setAttribute("name", c.getName());

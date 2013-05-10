@@ -38,7 +38,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * An implementation of a SaxParser for parsing .xml files to a {@link Workout}
@@ -87,6 +89,12 @@ public class WorkoutXMLParser extends DefaultHandler {
 	/** List for the {@link FSet}s of the TrainingEntry */
 	private List<FSet> mTrainingEntryFSetList = new ArrayList<FSet>();
 
+	/** Map for the status of the FSets. */
+	private Map<FSet,Boolean> mSetHasBeenDoneMap = new HashMap<FSet,Boolean>();
+	
+	/** The status of the FSet */
+	private boolean mSetHasBeenDone = true;
+	
 	private boolean parsingTrainingEntry = false;
 
 	/** List of the {@link SetParameter}s */
@@ -147,6 +155,10 @@ public class WorkoutXMLParser extends DefaultHandler {
 			if (mExerciseType == null) {
 				throw new NullPointerException("The exercise '" + exName + "' of the TrainingPlan couldn't be found in the database.");
 			}
+		}
+		if(qname.equals("FSet")){
+			if(attributes.getValue("hasBeenDone") != null)
+				mSetHasBeenDone = Boolean.parseBoolean(attributes.getValue("hasBeenDone"));
 		}
 		// start of FSet can be ignored
 		if (qname.equals("SetParameter")) {
@@ -214,16 +226,19 @@ public class WorkoutXMLParser extends DefaultHandler {
 
 		}
 		if (qName.equals("FSet")) {
+			FSet createdFSet = new FSet(this.mSetParameter.toArray(new SetParameter[1]));
 			if (parsingTrainingEntry) {
 				if (!mSetParameter.isEmpty()) {
-					mTrainingEntryFSetList.add(new FSet(this.mSetParameter.toArray(new SetParameter[1])));
+					mTrainingEntryFSetList.add(createdFSet);
 				}
 			} else {
 				if (!mSetParameter.isEmpty()) {
-					mFSetList.add(new FSet(this.mSetParameter.toArray(new SetParameter[1])));
+					mFSetList.add(createdFSet);
 				}
 			}
 
+			this.mSetHasBeenDoneMap.put(createdFSet, mSetHasBeenDone);
+			this.mSetHasBeenDone = true;
 			this.mSetParameter = new ArrayList<SetParameter>();
 		}
 		if (qName.equals("SetParameter")) {
@@ -253,11 +268,13 @@ public class WorkoutXMLParser extends DefaultHandler {
 		if (qName.equals("TrainingEntry")) {
 			for (FSet set : this.mTrainingEntryFSetList) {
 				mTrainingEntry.add(set);
+				mTrainingEntry.setHasBeenDone(set, mSetHasBeenDoneMap.get(set));
 			}
 
 			this.mTrainingEntryList.add(this.mTrainingEntry);
 			this.mTrainingEntry = null;
 			this.mTrainingEntryFSetList = new ArrayList<FSet>();
+			this.mSetHasBeenDoneMap = new HashMap<FSet,Boolean>();
 			parsingTrainingEntry = false;
 		}
 		if (qName.equals("TrainingSubEntry")) {

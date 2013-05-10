@@ -33,6 +33,7 @@ import de.skubware.opentraining.basic.FSet.SetParameter.*;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
+import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
@@ -112,10 +113,14 @@ public class ParserTest extends AndroidTestCase {
 		
 		Workout mWorkout = new Workout(WORKOUT_NAME, FEX_1, FEX_2, FEX_3);
 		mWorkout.addTrainingEntry(Calendar.getInstance().getTime());
-		FEX_1.getTrainingEntryList().get(0).add(SET_2);
-		FEX_1.getTrainingEntryList().get(0).add(SET_2);
-		FEX_1.getTrainingEntryList().get(0).add(SET_2);
+		
+		TrainingEntry firstTrainingEntry = FEX_1.getTrainingEntryList().get(0);
+		firstTrainingEntry.add(SET_2);
+		firstTrainingEntry.add(SET_2);
+		firstTrainingEntry.add(SET_2);
 
+		FSet firstSet = firstTrainingEntry.getFSetList().get(0);
+		firstTrainingEntry.setHasBeenDone(firstSet, false);
 		
 		DataProvider dataProvider = new DataProvider(getContext());
 		DataHelper dataHelper = new DataHelper(getContext());

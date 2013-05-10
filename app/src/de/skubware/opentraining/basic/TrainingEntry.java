@@ -23,7 +23,9 @@ package de.skubware.opentraining.basic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A TrainingEnty is particularly a collection of {@link FSet}s and stores the
@@ -47,6 +49,10 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	/** List with all {@link FSet}s. May be empty, but never null. */
 	private List<FSet> mFSetList = new ArrayList<FSet>();
 
+	/** Saves wheter a FSet has been done or not. Default value is true. */
+	private Map<FSet,Boolean> mSetBeenDoneMap = new HashMap<FSet,Boolean>();
+	
+	
 	/**
 	 * This constructor should be used, if the {@link #mDate} is unknown.
 	 * 
@@ -83,7 +89,8 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 		if(set == null)
 			throw new NullPointerException("FSet may not be null");
 		
-		this.mFSetList.add(set);
+		mFSetList.add(set);
+		mSetBeenDoneMap.put(set, true);
 	}
 
 	/**
@@ -95,6 +102,8 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 	 * @return True if operation was successful
 	 */
 	public boolean remove(FSet set) {
+		mSetBeenDoneMap.remove(set);
+
 		return mFSetList.remove(set);
 	}
 
@@ -149,10 +158,78 @@ public class TrainingEntry implements Comparable<TrainingEntry>, Serializable {
 
 		builder.append("Date: " + mDate + "\n");
 		for (FSet entry : mFSetList) {
-			builder.append("\n FSet: " + entry.toString());
+			builder.append("\n FSet: " + entry.toString() + " , hasBeenDone=" + mSetBeenDoneMap.get(entry));
 		}
 
 		return builder.toString();
+	}
+
+	/**
+	 * Returns whether the FSet has been done or not.
+	 * 
+	 * @param set The set that should be checked
+	 * 
+	 * @return true, if the set has been done
+	 * 
+	 * @throws NullPointerException if the set is not part of this TrainingEntry
+	 */
+	public boolean hasBeenDone(FSet set){
+		if(!mFSetList.contains(set))
+			throw new NullPointerException("No such key: " + set.toString());
+				
+		return mSetBeenDoneMap.get(set);
+	}
+	
+	/**
+	 * Sets whether the FSet has been done or not.
+	 * 
+	 * @param set The FSet to set
+	 * 
+	 * @param status The value to set
+	 */
+	public void setHasBeenDone(FSet set, boolean status){
+		mSetBeenDoneMap.put(set, status);
+	}
+
+	/** Auto-generated hashCode() implementation. */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mDate == null) ? 0 : mDate.hashCode());
+		result = prime * result
+				+ ((mFSetList == null) ? 0 : mFSetList.hashCode());
+		result = prime * result
+				+ ((mSetBeenDoneMap == null) ? 0 : mSetBeenDoneMap.hashCode());
+		return result;
+	}
+
+	/** Auto-generated equals() implementation. */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TrainingEntry other = (TrainingEntry) obj;
+		if (mDate == null) {
+			if (other.mDate != null)
+				return false;
+		} else if (!mDate.equals(other.mDate))
+			return false;
+		if (mFSetList == null) {
+			if (other.mFSetList != null)
+				return false;
+		} else if (!mFSetList.equals(other.mFSetList))
+			return false;
+		if (mSetBeenDoneMap == null) {
+			if (other.mSetBeenDoneMap != null)
+				return false;
+		} else if (!mSetBeenDoneMap.equals(other.mSetBeenDoneMap))
+			return false;
+		return true;
 	}
 
 }
