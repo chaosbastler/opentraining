@@ -66,5 +66,33 @@ public class FSetTest extends AndroidTestCase {
 
 		
 	}
+	
+	public void testClone(){
+		// first test "cloning" of SetParameters via constructor
+		Repetition REP_1 = new Repetition(1);
+		Duration DUR_1 = new Duration(30);
+		Weight WEIGHT_1 = new Weight(15);
+		FreeField FREE_FIELD_1 = new FreeField("6t5");
+		
+		Repetition REP_2 = new Repetition(REP_1);
+		Duration DUR_2 = new Duration(DUR_1);
+		Weight WEIGHT_2 = new Weight(WEIGHT_1);
+		FreeField FREE_FIELD_2 = new FreeField(FREE_FIELD_1);
+		
+		assertFalse(REP_1 == REP_2);
+		assertEquals(REP_1, REP_2);
+		assertFalse(DUR_1 == DUR_2);
+		assertEquals(DUR_1, DUR_2);
+		assertFalse(WEIGHT_1 == WEIGHT_2);
+		assertEquals(WEIGHT_1, WEIGHT_2);
+		assertFalse(FREE_FIELD_1 == FREE_FIELD_2);
+		assertEquals(FREE_FIELD_1, FREE_FIELD_2);
+		
+		FSet SET1 = new FSet(REP_1, DUR_1, WEIGHT_1, FREE_FIELD_1);
+		FSet SET2 = new FSet(REP_2, DUR_2, WEIGHT_2, FREE_FIELD_2);
+		assertEquals(SET1, SET2);
+
+		
+	}
 
 }

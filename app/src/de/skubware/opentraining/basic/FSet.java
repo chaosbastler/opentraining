@@ -88,6 +88,12 @@ public class FSet implements Serializable {
 			this.name = name;
 			this.value = value;
 		}
+		
+		SetParameter(SetParameter parameter){
+			this.name = parameter.name;
+			this.value = parameter.value;
+		}
+		
 
 		public final String getName() {
 			return name;
@@ -126,6 +132,8 @@ public class FSet implements Serializable {
 			return other.name.equals(this.name) && other.value == this.value;
 		}		
 
+		
+
 		// Classes
 		public static class Repetition extends SetParameter {
 
@@ -141,6 +149,10 @@ public class FSet implements Serializable {
 			@Override
 			public String toString() {
 				return value + " x";
+			}
+			
+			public Repetition(Repetition parameter){
+				this(parameter.value);
 			}
 		}
 
@@ -166,6 +178,10 @@ public class FSet implements Serializable {
 
 				return weight + " kg";
 			}
+			
+			public Weight(Weight parameter){
+				this(parameter.value);
+			}
 		}
 
 		public static class Duration extends SetParameter {
@@ -175,7 +191,7 @@ public class FSet implements Serializable {
 			 */
 			private static final long serialVersionUID = 1L;
 
-			/**
+			/**Object
 			 * 
 			 * @param value The time in secons
 			 */
@@ -186,6 +202,10 @@ public class FSet implements Serializable {
 			@Override
 			public String toString() {
 				return value + " s";
+			}
+			
+			public Duration(Duration parameter){
+				this(parameter.value);
 			}
 		}
 		
@@ -229,8 +249,15 @@ public class FSet implements Serializable {
 				FreeField other = (FreeField) obj;
 				return other.name.equals(this.name) && other.mContent.equals(this.mContent);
 			}
+			
+			public FreeField(FreeField parameter){
+				this(parameter.mContent);
+			}
+
 
 		}
+		
+		
 	}
 
 	/**
@@ -273,7 +300,7 @@ public class FSet implements Serializable {
 			arr[i] = c.getValue();
 			i++;
 		}
-
+		
 		return arr;
 	}
 
@@ -332,6 +359,35 @@ public class FSet implements Serializable {
 		} else if (!mSetParameterList.equals(other.mSetParameterList))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public Object clone(){
+		try{
+			FSet cloned = (FSet) super.clone();
+			cloned.mSetParameterList = new ArrayList<SetParameter>();
+			
+			for(SetParameter para:mSetParameterList){
+				SetParameter newPara = null;
+				if(para instanceof SetParameter.Weight){
+					newPara = new SetParameter.Weight((SetParameter.Weight) para);
+				}
+				if(para instanceof SetParameter.Duration){
+					newPara = new SetParameter.Duration((SetParameter.Duration) para);
+				}
+				if(para instanceof SetParameter.Repetition){
+					newPara = new SetParameter.Repetition((SetParameter.Repetition) para);
+				}
+				if(para instanceof SetParameter.FreeField){
+					newPara = new SetParameter.FreeField((SetParameter.FreeField) para);
+				}
+				mSetParameterList.add(newPara);
+			}
+			
+			return cloned;
+		} catch(CloneNotSupportedException e){
+			throw new AssertionError("Clone not supported: " + e.toString());
+		}
 	}
 
 }
