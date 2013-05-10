@@ -22,6 +22,7 @@ package de.skubware.opentraining.test.datamodel;
 
 import android.test.AndroidTestCase;
 import de.skubware.opentraining.basic.FSet;
+import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FSet.SetParameter.*;
 
 /**
@@ -74,6 +75,7 @@ public class FSetTest extends AndroidTestCase {
 		Weight WEIGHT_1 = new Weight(15);
 		FreeField FREE_FIELD_1 = new FreeField("6t5");
 		
+		
 		Repetition REP_2 = new Repetition(REP_1);
 		Duration DUR_2 = new Duration(DUR_1);
 		Weight WEIGHT_2 = new Weight(WEIGHT_1);
@@ -91,6 +93,15 @@ public class FSetTest extends AndroidTestCase {
 		FSet SET1 = new FSet(REP_1, DUR_1, WEIGHT_1, FREE_FIELD_1);
 		FSet SET2 = new FSet(REP_2, DUR_2, WEIGHT_2, FREE_FIELD_2);
 		assertEquals(SET1, SET2);
+		
+		FSet SET2_CLONE = (FSet) SET2.clone();
+		assertEquals(SET2_CLONE, SET2);
+		assertFalse(SET2_CLONE == SET2);
+		for(SetParameter para:SET2_CLONE.getSetParameters()){
+			for(SetParameter para2:SET2.getSetParameters()){
+				assertFalse(para == para2);
+			}
+		}
 
 		
 	}

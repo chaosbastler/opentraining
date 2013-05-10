@@ -21,7 +21,9 @@
 package de.skubware.opentraining.basic;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import android.util.Log;
 
@@ -40,7 +42,7 @@ import android.util.Log;
  * is part of a {@link TrainingEntry} it indicates how the exercise has been
  * done.
  */
-public class FSet implements Serializable {
+public class FSet implements Serializable, Cloneable {
 
 	/** Tag for logging */
 	public static final String TAG = "FSet";
@@ -381,11 +383,12 @@ public class FSet implements Serializable {
 				if(para instanceof SetParameter.FreeField){
 					newPara = new SetParameter.FreeField((SetParameter.FreeField) para);
 				}
-				mSetParameterList.add(newPara);
+				cloned.mSetParameterList.add(newPara);
 			}
 			
 			return cloned;
 		} catch(CloneNotSupportedException e){
+			e.printStackTrace();
 			throw new AssertionError("Clone not supported: " + e.toString());
 		}
 	}
