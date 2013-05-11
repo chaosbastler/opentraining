@@ -1,5 +1,7 @@
 <resources>
-
+    <!-- FExListAdapter -->
+    <string name="remaining_sets">Remaining Sets:</string>
+    
     <!-- FExDetailFragment -->
     <string name="no_entry_for_today">Click on \'+\' to add an entry</string>
     <string name="old_entries">Show different training</string>
@@ -8,8 +10,9 @@
     <string name="choose_training">Choose a training</string>
     <string name="no_other_training_entries">There are no other training entries to show</string>
     <string name="load_other_training_entry">Show other training entry</string>
-    
+    <string name="history">History</string>
 
+    
     <!-- DialogFragmentAddEntry -->
     <string name="save_entry">Save</string>
     <string name="discard_entry">"Discard</string>

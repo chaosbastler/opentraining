@@ -309,7 +309,7 @@ public class FitnessExercise implements IExercise, Serializable {
 		
 		return mTrainingEntryList.get(mTrainingEntryList.size() -1);
 	}
-	
+		
 	/**
 	 * Checks if a Training has been finished. That means that all FSets of the
 	 * TrainingEntry have been set to the status done. Will also return false if
@@ -325,7 +325,7 @@ public class FitnessExercise implements IExercise, Serializable {
 	public boolean isTrainingEntryFinished(TrainingEntry entry){
 		if(!mTrainingEntryList.contains(entry))
 				throw new IllegalArgumentException("Entry not contained.");
-		if(mTrainingEntryList.isEmpty())
+		if(entry.getFSetList().isEmpty())
 			return false;
 		
 		for(FSet set:entry.getFSetList()){

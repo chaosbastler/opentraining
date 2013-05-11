@@ -97,7 +97,11 @@ public class FExListAdapter extends BaseAdapter {
 		if(fEx.isTrainingEntryFinished(fEx.getLastTrainingEntry())){
 			vi = mInflater.inflate(R.layout.list_row_fex_done, null);
 		}else{
-			vi = mInflater.inflate(R.layout.list_row_fex, null);		
+			vi = mInflater.inflate(R.layout.list_row_fex, null);	
+			int unfinished = calculateUnfinishedTrainingEntries(fEx);
+			
+			TextView textview_remaining_sets =(TextView) vi.findViewById(R.id.textview_remaining_sets);
+			textview_remaining_sets.setText(mActivity.getString(R.string.remaining_sets) + unfinished);
 		}
 		
 		final ImageView imageview_ex_image = (ImageView) vi.findViewById(R.id.imageview_ex_image);
@@ -115,5 +119,14 @@ public class FExListAdapter extends BaseAdapter {
 		return vi;
 	}
 
+	private int calculateUnfinishedTrainingEntries(FitnessExercise fEx){
+		int unfinished = 0;
+		TrainingEntry lastEntry = fEx.getLastTrainingEntry();
+		for(FSet set:lastEntry.getFSetList()){
+			if(!lastEntry.hasBeenDone(set))
+				unfinished++;
+		}
+		return unfinished;
+	}
 
 }

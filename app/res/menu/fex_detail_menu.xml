@@ -12,7 +12,7 @@
           android:showAsAction="ifRoom" android:icon="@drawable/icon_arrow_right"/>    
     
     <item android:id="@+id/menu_item_history"
-          android:title="@string/load_other_training_entry"
+          android:title="@string/history"
           android:showAsAction="ifRoom" android:icon="@drawable/icon_history"/>    
      
         
