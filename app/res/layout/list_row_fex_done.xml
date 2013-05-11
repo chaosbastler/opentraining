@@ -9,7 +9,7 @@
         android:id="@+id/wrapper_weight"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:background="@drawable/icon_square_green"
+        android:background="@drawable/icon_square_white"
         android:gravity="left"
         android:orientation="vertical"
         android:padding="7dp" >
@@ -40,7 +40,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:text="Exercise finished"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#109000" />
 
         <TextView
             android:id="@+id/textview_exercise_name"

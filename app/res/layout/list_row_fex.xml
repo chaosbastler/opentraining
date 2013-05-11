@@ -9,7 +9,7 @@
         android:id="@+id/wrapper_weight"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:background="@drawable/icon_square_blue"
+        android:background="@drawable/icon_square_white"
         android:gravity="left"
         android:orientation="vertical"
         android:padding="7dp" >
