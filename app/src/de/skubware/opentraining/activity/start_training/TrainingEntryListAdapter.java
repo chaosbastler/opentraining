@@ -20,10 +20,6 @@
 
 package de.skubware.opentraining.activity.start_training;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import de.skubware.opentraining.R;
@@ -36,7 +32,6 @@ import android.content.Context;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,42 +40,38 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class TrainingEntryListAdapter extends BaseAdapter{
+public class TrainingEntryListAdapter extends BaseAdapter {
 
-	    private SherlockFragmentActivity mActivity;
-	    private static LayoutInflater mInflater = null;
-	    
-	    private FitnessExercise mFEx;
-	    private TrainingEntry mTrainingEntry;
-	    //private List<FSet> mGoalFSetList;
-	 
-	    
-	    public TrainingEntryListAdapter(SherlockFragmentActivity activity,/*List<FSet> goalFSetList,*/ FitnessExercise fEx, TrainingEntry trainingEntry) {
-	        mActivity = activity;
-	        mInflater = (LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	        
-	        //mGoalFSetList = goalFSetList;
-	        //if(mGoalFSetList== null)
-	        //	mGoalFSetList = new ArrayList<FSet>();
-	        
-	        mTrainingEntry = trainingEntry;
-	        mFEx = fEx;
-	    }
-	 
-	    public int getCount() {
-	        return mTrainingEntry.getFSetList().size() + 1;
-	    }
-	 
-	    public Object getItem(int position) {
-	    	if(position>mTrainingEntry.getFSetList().size()-1)
-	    		return null;
-	    	
-	        return mTrainingEntry.getFSetList().get(position);
-	    }
-	 
-	    public long getItemId(int position) {
-	        return position;
-	    }
+	private SherlockFragmentActivity mActivity;
+	private static LayoutInflater mInflater = null;
+
+	private FitnessExercise mFEx;
+	private TrainingEntry mTrainingEntry;
+
+
+	public TrainingEntryListAdapter(SherlockFragmentActivity activity, FitnessExercise fEx, TrainingEntry trainingEntry) {
+		mActivity = activity;
+		mInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+		mTrainingEntry = trainingEntry;
+		mFEx = fEx;
+	}
+
+	public int getCount() {
+		return mTrainingEntry.getFSetList().size() + 1;
+	}
+
+	public Object getItem(int position) {
+		if (position > mTrainingEntry.getFSetList().size() - 1)
+			return null;
+
+		return mTrainingEntry.getFSetList().get(position);
+	}
+
+	public long getItemId(int position) {
+		return position;
+	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
@@ -104,11 +95,9 @@ public class TrainingEntryListAdapter extends BaseAdapter{
 		final FSet set = (FSet) getItem(position);
 
 		// set values
-		TextView textview_weight = (TextView) vi
-				.findViewById(R.id.textview_weight);
+		TextView textview_weight = (TextView) vi.findViewById(R.id.textview_weight);
 		TextView textview_rep = (TextView) vi.findViewById(R.id.textview_rep);
-		TextView textview_duration = (TextView) vi
-				.findViewById(R.id.textview_duration);
+		TextView textview_duration = (TextView) vi.findViewById(R.id.textview_duration);
 
 		for (SetParameter para : set.getSetParameters()) {
 			if (para instanceof SetParameter.Weight) {
@@ -121,20 +110,26 @@ public class TrainingEntryListAdapter extends BaseAdapter{
 				textview_rep.setText(para.toString());
 			}
 		}
+		
+		// set button icons
+		final ImageButton imagebutton_check = (ImageButton) vi.findViewById(R.id.imagebutton_check);
+		final ImageButton imagebutton_notcheck = (ImageButton) vi.findViewById(R.id.imagebutton_notcheck);
+		if(mTrainingEntry.hasBeenDone(set)){
+			imagebutton_check.setImageResource(R.drawable.icon_check_green);
+		}else{
+			imagebutton_check.setImageResource(R.drawable.icon_check_white);
+		}
+		
 
 		// add button listener
-		final ImageButton imagebutton_check = (ImageButton) vi
-				.findViewById(R.id.imagebutton_check);
-		final ImageButton imagebutton_notcheck = (ImageButton) vi
-				.findViewById(R.id.imagebutton_notcheck);
 
 		imagebutton_check.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				// TODO s set
 				imagebutton_check.setImageResource(R.drawable.icon_check_green);
-				imagebutton_notcheck
-						.setImageResource(R.drawable.icon_cross_white);
+				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_white);
+				mTrainingEntry.setHasBeenDone(set, true);
+				trainingEntryEdited();
 			}
 		});
 
@@ -142,15 +137,14 @@ public class TrainingEntryListAdapter extends BaseAdapter{
 			@Override
 			public void onClick(View view) {
 				imagebutton_check.setImageResource(R.drawable.icon_check_white);
-				imagebutton_notcheck
-						.setImageResource(R.drawable.icon_cross_red);
+				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_red);
 				deleteSet(set);
 			}
 		});
+		
 
 		// add lister for changing values
-		final View wrapper_duration = (View) vi
-				.findViewById(R.id.wrapper_duration);
+		final View wrapper_duration = (View) vi.findViewById(R.id.wrapper_duration);
 		final View wrapper_rep = (View) vi.findViewById(R.id.wrapper_rep);
 		final View wrapper_weight = (View) vi.findViewById(R.id.wrapper_weight);
 
@@ -167,36 +161,36 @@ public class TrainingEntryListAdapter extends BaseAdapter{
 		return vi;
 	}
 
-	    private void deleteSet(FSet set){
-	    	mTrainingEntry.getFSetList().remove(set);
+	private void deleteSet(FSet set) {
+		mTrainingEntry.getFSetList().remove(set);
+		trainingEntryEdited();
+	}
+	
+	private void trainingEntryEdited(){
+		FExDetailFragment fragment = (FExDetailFragment) mActivity.getSupportFragmentManager().findFragmentById(R.id.exercise_detail_container);
+		fragment.onEntryEdited(this.mFEx);
+	}
 
-			FExDetailFragment fragment = (FExDetailFragment) mActivity.getSupportFragmentManager().findFragmentById(R.id.exercise_detail_container);
-			fragment.onEntryEdited(this.mFEx);
-	    }
-	    
-	    
-	    
-	    
-		/**
-		 * Shows DialogFragmentAddEntry with the given {@link FSet}.
-		 * 
-		 * @param set
-		 *            The FSet to edit. If it is null a new FSet will be added to
-		 *            the TrainingEntry.
-		 *            
-		 * @see DialogFragmentAddEntry#newInstance(FitnessExercise, FSet)           
-		 */
-		private void showDialog(FSet set) {			
-			FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
-			Fragment prev = mActivity.getSupportFragmentManager().findFragmentByTag("dialog");
-			if (prev != null) {
-				ft.remove(prev);
-			}
-			ft.addToBackStack(null);
-
-			// Create and show the dialog.
-			DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mFEx, set, mTrainingEntry);
-			newFragment.show(ft, "dialog");
+	/**
+	 * Shows DialogFragmentAddEntry with the given {@link FSet}.
+	 * 
+	 * @param set
+	 *            The FSet to edit. If it is null a new FSet will be added to
+	 *            the TrainingEntry.
+	 * 
+	 * @see DialogFragmentAddEntry#newInstance(FitnessExercise, FSet)
+	 */
+	private void showDialog(FSet set) {
+		FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
+		Fragment prev = mActivity.getSupportFragmentManager().findFragmentByTag("dialog");
+		if (prev != null) {
+			ft.remove(prev);
 		}
+		ft.addToBackStack(null);
+
+		// Create and show the dialog.
+		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mFEx, set, mTrainingEntry);
+		newFragment.show(ft, "dialog");
+	}
 
 }

@@ -22,16 +22,28 @@ package de.skubware.opentraining.activity.start_training;
 
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.SherlockListFragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.db.DataHelper;
 
 /**
  * A list fragment representing a list of Exercise. This fragment also supports
@@ -72,6 +84,7 @@ public class FExListFragment extends SherlockListFragment {
 
 		return f;
 	}
+	
 
 	/**
 	 * The fragment's current callback object, which is notified of list item
@@ -122,19 +135,28 @@ public class FExListFragment extends SherlockListFragment {
 			setWorkout(mWorkout);
 		}
 
-		String[] arr = {};
-		setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1, arr));
 	}
 
 	public void setWorkout(Workout workout) {
 		mWorkout = workout;
 
-		List<FitnessExercise> list = mWorkout.getFitnessExercises();
-		FitnessExercise[] arr = list.toArray(new FitnessExercise[list.size()]);
+		FExListAdapter adapter = new FExListAdapter((SherlockFragmentActivity) getActivity(), mWorkout);
 
-		setListAdapter(new ArrayAdapter<FitnessExercise>(getActivity(), android.R.layout.simple_list_item_single_choice,
-				android.R.id.text1, arr));
+		setListAdapter(adapter);
+		
+
+		
 	}
+	
+	@Override
+	public void onListItemClick(ListView listView, View view, int position, long id) {
+		super.onListItemClick(listView, view, position, id);
+ 
+		// Notify the active callbacks interface (the activity, if the
+		// fragment is attached to one) that an item has been selected.
+		mCallbacks.onItemSelected((FitnessExercise) listView.getAdapter().getItem(position));
+	}
+ 
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -166,14 +188,7 @@ public class FExListFragment extends SherlockListFragment {
 		mCallbacks = sDummyCallbacks;
 	}
 
-	@Override
-	public void onListItemClick(ListView listView, View view, int position, long id) {
-		super.onListItemClick(listView, view, position, id);
 
-		// Notify the active callbacks interface (the activity, if the
-		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected((FitnessExercise) listView.getAdapter().getItem(position));
-	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -206,4 +221,5 @@ public class FExListFragment extends SherlockListFragment {
 
 		mActivatedPosition = position;
 	}
+
 }

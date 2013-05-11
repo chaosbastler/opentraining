@@ -26,6 +26,9 @@ import com.actionbarsherlock.app.SherlockDialogFragment;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.start_training.FExListActivity;
+import de.skubware.opentraining.basic.FSet;
+import de.skubware.opentraining.basic.FitnessExercise;
+import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -87,7 +90,7 @@ public class SelectWorkoutDialogFragment extends SherlockDialogFragment {
 				// disable button for loading old training
 				if (mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
 					disableButton();
-				}else{
+				} else {
 					enableButton();
 				}
 			}
@@ -131,6 +134,28 @@ public class SelectWorkoutDialogFragment extends SherlockDialogFragment {
 		// or it is necessary because there are no old training entries
 		if (startNewTraining || mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
 			mWorkout.addTrainingEntry(Calendar.getInstance().getTime());
+			
+			// add the FSets the user probably wants to do
+			// but set them to notDone
+			for(FitnessExercise fEx:mWorkout.getFitnessExercises()){
+				TrainingEntry latestEntry = fEx.getTrainingEntryList().get(fEx.getTrainingEntryList().size() -1);
+				if(fEx.getFSetList() != null && !fEx.getFSetList().isEmpty()){
+					for(FSet set: fEx.getFSetList()){
+						FSet newSet = (FSet) set.clone();
+						latestEntry.add(newSet);
+						latestEntry.setHasBeenDone(newSet, false);
+					}
+				}else{
+					if(fEx.getTrainingEntryList().size() != 1){
+						TrainingEntry prevEntry = fEx.getTrainingEntryList().get(fEx.getTrainingEntryList().size() -2);
+						for(FSet set:prevEntry.getFSetList()){
+							FSet newSet = (FSet) set.clone();
+							latestEntry.add(newSet);
+							latestEntry.setHasBeenDone(newSet, false);
+						}
+					}
+				}
+			}
 		}
 
 		// add arguments to intent

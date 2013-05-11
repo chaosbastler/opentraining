@@ -200,6 +200,8 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 								mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
 								mTrainingEntry.getFSetList().add(oldIdx, mFSet);
 							}
+							mTrainingEntry.setHasBeenDone(mFSet, false);
+
 						}
 
 
