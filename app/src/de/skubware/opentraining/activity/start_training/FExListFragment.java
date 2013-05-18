@@ -20,30 +20,17 @@ package de.skubware.opentraining.activity.start_training;
  * 
  */
 
-import java.util.List;
-
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.SherlockListFragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import de.skubware.opentraining.R;
-import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.DataHelper;
 
 /**
  * A list fragment representing a list of Exercise. This fragment also supports
@@ -141,10 +128,15 @@ public class FExListFragment extends SherlockListFragment {
 		mWorkout = workout;
 
 		FExListAdapter adapter = new FExListAdapter((SherlockFragmentActivity) getActivity(), mWorkout);
-
 		setListAdapter(adapter);
 		
-
+		boolean finished = true;
+		for(FitnessExercise fEx:mWorkout.getFitnessExercises()){
+			finished &=fEx.isTrainingEntryFinished(fEx.getLastTrainingEntry());
+		}
+		if(finished){
+			Toast.makeText(getActivity(), "The Workout is finished :)", Toast.LENGTH_LONG).show();
+		}
 		
 	}
 	
