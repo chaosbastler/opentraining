@@ -23,12 +23,16 @@ package de.skubware.opentraining.activity.start_training;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
 import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -130,6 +134,10 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_white);
 				mTrainingEntry.setHasBeenDone(set, true);
 				trainingEntryEdited();
+				
+				if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
+					showNextFExDialog();
+				}
 			}
 		});
 
@@ -192,5 +200,24 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mFEx, set, mTrainingEntry);
 		newFragment.show(ft, "dialog");
 	}
+	
+	private void showNextFExDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+		builder.setTitle(mActivity.getString(R.string.exercise_finished));
+		builder.setPositiveButton(mActivity.getString(android.R.string.ok), new DialogInterface.OnClickListener(){
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if(mActivity instanceof FExDetailActivity){
+					mActivity.finish();
+				}else{
+					//TODO switch to next exercise?
+					//((FExListActivity)mActivity).showNextExercise();
+				}
+			}
+		});
+
+		
+		builder.create().show();
+	}	
 
 }

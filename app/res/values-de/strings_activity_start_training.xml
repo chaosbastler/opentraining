@@ -11,6 +11,7 @@
     <string name="no_other_training_entries">Es gibt keine weiteren Trainingeinträge.</string>
     <string name="load_other_training_entry">Anderen Trainingseintrag anzeigen</string>
     <string name="history">Trainingsverlauf</string>
+    <string name="exercise_finished">Übung vollständig</string>
 
     
     <!-- DialogFragmentAddEntry  -->
