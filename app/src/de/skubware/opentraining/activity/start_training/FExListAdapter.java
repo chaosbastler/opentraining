@@ -101,7 +101,7 @@ public class FExListAdapter extends BaseAdapter {
 			int unfinished = calculateUnfinishedTrainingEntries(fEx);
 			
 			TextView textview_remaining_sets =(TextView) vi.findViewById(R.id.textview_remaining_sets);
-			textview_remaining_sets.setText(mActivity.getString(R.string.remaining_sets) + unfinished);
+			textview_remaining_sets.setText(mActivity.getString(R.string.remaining_sets) + " "+ unfinished);
 		}
 		
 		final ImageView imageview_ex_image = (ImageView) vi.findViewById(R.id.imageview_ex_image);

@@ -136,7 +136,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 				trainingEntryEdited();
 				
 				if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
-					showNextFExDialog();
+					showExerciseFinishedDialog();
 				}
 			}
 		});
@@ -147,6 +147,10 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 				imagebutton_check.setImageResource(R.drawable.icon_check_white);
 				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_red);
 				deleteSet(set);
+				
+				if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
+					showExerciseFinishedDialog();
+				}
 			}
 		});
 		
@@ -201,7 +205,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		newFragment.show(ft, "dialog");
 	}
 	
-	private void showNextFExDialog(){
+	private void showExerciseFinishedDialog(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
 		builder.setTitle(mActivity.getString(R.string.exercise_finished));
 		builder.setPositiveButton(mActivity.getString(android.R.string.ok), new DialogInterface.OnClickListener(){
