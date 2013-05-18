@@ -5,54 +5,62 @@
     android:layout_height="wrap_content"
     android:padding="5dp" >
 
-    <LinearLayout
-        android:id="@+id/wrapper_weight"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="@drawable/icon_square_white"
-        android:gravity="left"
-        android:orientation="vertical"
-        android:padding="7dp" >
-
-        <ImageView
-            android:id="@+id/imageview_ex_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_equipment" />
-
-    </LinearLayout>
-
     <RelativeLayout
-        android:id="@+id/wrapper_exercise_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/wrapper_sub_root"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/wrapper_weight"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/wrapper_weight"
-        android:layout_toRightOf="@+id/wrapper_weight"
-        android:paddingLeft="10dp" >
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" >
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/wrapper_icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/icon_square_white"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:padding="7dp" >
+
+            <ImageView
+                android:id="@+id/imageview_ex_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/icon_equipment" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/wrapper_exercise_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@+id/wrapper_icon"
+            android:paddingLeft="10dp" >
+
+            <TextView
+                android:id="@+id/textview_exercise_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="Large TextLarge TextLarge TextLarge TextLarge Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+ 	<TextView
             android:id="@+id/textview_remaining_sets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/wrapper_exercise_name"
             android:text="Exercise finished"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#109000" />
-
-        <TextView
-            android:id="@+id/textview_exercise_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
-
     </RelativeLayout>
 
 </RelativeLayout>
+
+       
