@@ -75,6 +75,10 @@ public class MainActivity extends SherlockFragmentActivity {
 			new DisclaimerDialog(this);
 		}
 
+		
+		// just for testing
+		SelectMuscleDialog muscleDialog = new SelectMuscleDialog(this);
+		muscleDialog.show();
 	}
 
 

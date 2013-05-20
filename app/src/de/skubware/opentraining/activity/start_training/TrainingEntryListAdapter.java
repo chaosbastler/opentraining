@@ -117,7 +117,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		
 		// set button icons
 		final ImageButton imagebutton_check = (ImageButton) vi.findViewById(R.id.imagebutton_check);
-		final ImageButton imagebutton_notcheck = (ImageButton) vi.findViewById(R.id.imagebutton_notcheck);
+		final ImageButton imagebutton_notcheck = (ImageButton) vi.findViewById(R.id.imagebutton_check);
 		if(mTrainingEntry.hasBeenDone(set)){
 			imagebutton_check.setImageResource(R.drawable.icon_check_green);
 		}else{
