@@ -51,15 +51,19 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 	/** The ImageView (hidden) with the hotspot map */
 	private ImageView mHotSpotImageview;
 
+	Bitmap mHotspots;	
 	
 	public final static HashMap<Integer, Integer> sColorMap = new HashMap<Integer, Integer>();
 	static {
-		//sColorMap.put(Color.rgb(0x00, 0xff, 0xff), R.drawable.muscle_lower_leg);
-		//sColorMap.put(0xff6600, R.drawable.muscle_tigh);
 		sColorMap.put(0Xff00ff, R.drawable.muscle_triceps);
 		sColorMap.put(0Xff0000, R.drawable.muscle_shoulder);
 		sColorMap.put(0X808000, R.drawable.muscle_biceps);
 		sColorMap.put(0X0000ff, R.drawable.muscle_abdominal);
+		sColorMap.put(0X00ff00, R.drawable.muscle_back);
+		sColorMap.put(0X00ffff, R.drawable.muscle_chest);
+		sColorMap.put(0Xff6600, R.drawable.muscle_derriere);
+		sColorMap.put(0Xffff00, R.drawable.muscle_tigh);
+		sColorMap.put(0X008000, R.drawable.muscle_lower_leg);
 	}
 	
 	/** A map for caching the drawables. */
@@ -160,10 +164,13 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 	 * Gets the color from the hotspot image at point x-y.
 	 */
 	public int getHotspotColor(int hotspotId, int x, int y) {
-		mHotSpotImageview.setDrawingCacheEnabled(true);
-		Bitmap hotspots = Bitmap.createBitmap(mHotSpotImageview.getDrawingCache());
-		mHotSpotImageview.setDrawingCacheEnabled(false);
-		return hotspots.getPixel(x, y);
+		if(mHotspots == null){
+			mHotSpotImageview.setDrawingCacheEnabled(true);
+			mHotspots = Bitmap.createBitmap(mHotSpotImageview.getDrawingCache());
+			mHotSpotImageview.setDrawingCacheEnabled(false);
+		}
+		
+		return mHotspots.getPixel(x, y);
 	}
 
 	@Override
@@ -189,7 +196,6 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 	 */
 	public boolean colorMatch(int color1, int color2) {
 		int tolerance = 25;
-
 		
 		if ((int) Math.abs(Color.red(color1) - Color.red(color2)) > tolerance)
 			return false;
