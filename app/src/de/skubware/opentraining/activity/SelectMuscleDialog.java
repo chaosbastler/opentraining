@@ -23,6 +23,7 @@ package de.skubware.opentraining.activity;
 import java.util.HashMap;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -34,6 +35,9 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 
 /**
  * A dialog for selecting a muscle.
@@ -44,6 +48,9 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 
 	/** Reference to original activity. */
 	private Activity mActivity;
+	
+	/** The chosen muscle. */
+	private Muscle mMuscle;
 	
 	/** The ImageView with the displayed image */
 	private ImageView mImageView;
@@ -69,8 +76,9 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 	/** A map for caching the drawables. */
 	public HashMap<Integer, Drawable> mColorMap = new HashMap<Integer, Drawable>();
 	
-
 	
+	public HashMap<Integer, Muscle> mMuscleMap = new HashMap<Integer, Muscle>();
+
 	
 	/**
 	 * Constructor.
@@ -95,8 +103,20 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 		}
 		
 		
-		/*// positive button
-		this.setButton(BUTTON_POSITIVE, activity.getString(R.string.accept), new OnClickListener() {
+		IDataProvider prov = new DataProvider(mActivity);
+		mMuscleMap.put(R.drawable.muscle_triceps, prov.getMuscleByName("Triceps"));
+		mMuscleMap.put(R.drawable.muscle_shoulder, prov.getMuscleByName("Shoulder"));
+		mMuscleMap.put(R.drawable.muscle_biceps, prov.getMuscleByName("Biceps"));
+		mMuscleMap.put(R.drawable.muscle_abdominal, prov.getMuscleByName("Abdominal"));
+		mMuscleMap.put(R.drawable.muscle_back, prov.getMuscleByName("Bacl"));
+		mMuscleMap.put(R.drawable.muscle_chest, prov.getMuscleByName("Chest"));
+		mMuscleMap.put(R.drawable.muscle_derriere, prov.getMuscleByName("Derriere"));
+		mMuscleMap.put(R.drawable.muscle_tigh, prov.getMuscleByName("Tigh"));
+		mMuscleMap.put(R.drawable.muscle_lower_leg, prov.getMuscleByName("Lower leg"));
+		
+				
+		// positive button
+		this.setButton(BUTTON_POSITIVE, activity.getString(android.R.string.ok), new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
@@ -104,15 +124,7 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 			}
 		});
 
-		// negative button
-		this.setButton(BUTTON_NEGATIVE, activity.getString(R.string.not_accept), new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				activity.finish();
-			}
-		});
-		 */
+		 
 
 	}
 	
@@ -147,6 +159,10 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 				if (colorMatch(color, touchColor)){
 					mImageView.setImageDrawable(mColorMap.get(color));
 					Log.v(TAG, "Image set!");
+					
+					// set current muscle
+					mMuscle = mMuscleMap.get(sColorMap.get(color));
+					
 					return true;
 				}
 				Log.v(TAG, "No color match: " + color + ", " + touchColor );
