@@ -15,6 +15,7 @@
 
     
     <!-- DialogFragmentAddEntry  -->
+    <string name="edit_entry">Eintrag bearbeiten</string>    
     <string name="save_entry">Speichern</string>
     <string name="discard_entry">"Abbrechen</string>
     <string name="title_workout_list">Workouts</string>

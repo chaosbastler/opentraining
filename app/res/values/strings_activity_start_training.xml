@@ -15,6 +15,7 @@
     
     
     <!-- DialogFragmentAddEntry -->
+    <string name="edit_entry">Edit entry</string>
     <string name="save_entry">Save</string>
     <string name="discard_entry">"Discard</string>
     <string name="title_workout_list">Workouts</string>
@@ -22,5 +23,5 @@
     <string name="repetitions">Repetitions</string>
     <string name="weight">Weight</string>
     <string name="duration">Duration</string>
-
+    
 </resources>

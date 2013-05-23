@@ -40,7 +40,7 @@
         android:text="@string/weight" />
 
     <TextView
-        android:id="@+id/textview_duration"
+        android:id="@+id/textview_entryaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -62,7 +62,7 @@
         android:id="@+id/spinner_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_duration"
+        android:layout_below="@+id/textview_entryaction"
         android:layout_toLeftOf="@+id/spinner_time_unit"
         android:layout_toRightOf="@+id/checkbox_duration" />
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/spinner_weight"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textview_duration"
+        android:layout_below="@+id/textview_entryaction"
         android:entries="@array/time_units" >
     </Spinner>
 

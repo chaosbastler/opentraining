@@ -44,6 +44,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Dialog Fragment that adds or edits an {@link TrainingEntry}/ of an
@@ -72,13 +73,18 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	/** Currently edited {@link FSet} */
 	private FSet mFSet;
 
-	Spinner spinner_duration;
-	Spinner spinner_duration_unit;
-	Spinner spinner_repetitions;
-	Spinner spinner_weight;
-	CheckBox checkbox_duration;
-	CheckBox checkbox_weight;
-	CheckBox checkbox_repetitions;
+	private Spinner spinner_duration;
+	private Spinner spinner_duration_unit;
+	private Spinner spinner_repetitions;
+	private Spinner spinner_weight;
+	private CheckBox checkbox_duration;
+	private CheckBox checkbox_weight;
+	private CheckBox checkbox_repetitions;
+	
+	enum EntryAction{
+		CREATING_ENTRY, EDITING_ENTRY;
+	}
+	private EntryAction mState;
 
 	public interface Callbacks {
 		/**
@@ -133,6 +139,9 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 			List<TrainingEntry> entryList = mFex.getTrainingEntryList();
 			TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
 			mTrainingEntry = latestEntry;
+			mState = EntryAction.CREATING_ENTRY;
+		}else{
+			mState = EntryAction.EDITING_ENTRY;
 		}
 
 	}
@@ -154,6 +163,13 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 
 		setSpinners();
 
+		
+		// show different text, if an entry is edited(not created)
+		if(mState == EntryAction.EDITING_ENTRY){
+			((TextView)v.findViewById(R.id.textview_entryaction)).setText(getActivity().getString(R.string.edit_entry));
+		}
+
+		
 		return new AlertDialog.Builder(getActivity()).setTitle(DateFormat.getInstance().format(mTrainingEntry.getDate())).setView(v)
 				.setCancelable(true).setPositiveButton(getString(R.string.save_entry), new DialogInterface.OnClickListener() {
 					@Override
