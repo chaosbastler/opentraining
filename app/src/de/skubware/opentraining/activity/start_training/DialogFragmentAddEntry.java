@@ -140,7 +140,13 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 			TrainingEntry latestEntry = entryList.get(entryList.size() - 1);
 			mTrainingEntry = latestEntry;
 			mState = EntryAction.CREATING_ENTRY;
+		}
+		
+		if(mFSet==null){
+			Log.v(TAG, "Argument for mFSet was null.");
+			mState = EntryAction.CREATING_ENTRY;
 		}else{
+			Log.v(TAG, "Argument for mFSet was: " + mTrainingEntry.toDebugString());
 			mState = EntryAction.EDITING_ENTRY;
 		}
 
@@ -165,8 +171,11 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 
 		
 		// show different text, if an entry is edited(not created)
+		TextView tw = (TextView)v.findViewById(R.id.textview_entryaction);
 		if(mState == EntryAction.EDITING_ENTRY){
-			((TextView)v.findViewById(R.id.textview_entryaction)).setText(getActivity().getString(R.string.edit_entry));
+			tw.setText(getActivity().getString(R.string.edit_entry));
+		}else{
+			tw.setText(getActivity().getString(R.string.add_entry));
 		}
 
 		
