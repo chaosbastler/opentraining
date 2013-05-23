@@ -196,49 +196,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 			}
 		});
 		
-		// configure menu_item_other_training_entry
-		MenuItem menu_item_other_training_entry = (MenuItem) menu.findItem(R.id.menu_item_other_training_entry);
-		menu_item_other_training_entry.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@SuppressLint("SimpleDateFormat")
-			public boolean onMenuItemClick(MenuItem item) {
-				AlertDialog.Builder builder_entry_chooser = new AlertDialog.Builder(getActivity());
-				builder_entry_chooser.setTitle(getString(R.string.choose_training));
 
-				final List<TrainingEntry> trainingEntryList = mExercise.getTrainingEntryList();
-				// don't show list if there are no other TrainingEntrys
-				if (trainingEntryList.size() < 2) {
-					Toast.makeText(getActivity(), getString(R.string.no_other_training_entries), Toast.LENGTH_LONG).show();
-					return true;
-				}
-
-				SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEEEEEEE,  dd.MM.yyyy");
-				// create a list with custom strings, otherwise the default
-				// toString() method of TrainingEntry would be used
-				List<String> trainingEntryStringList = new ArrayList<String>();
-				for (TrainingEntry entry : trainingEntryList) {
-					// don't show current entry
-					if (entry.equals(mTrainingEntry)) {
-						continue;
-					}
-					String dateString = dateFormat.format(entry.getDate());
-					trainingEntryStringList.add(dateString);
-				}
-
-				final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice,
-						trainingEntryStringList);
-
-				builder_entry_chooser.setAdapter(adapter, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int item) {
-						TrainingEntry choosenEntry = trainingEntryList.get(item);
-						mTrainingEntry = choosenEntry;
-						updateTrainingEntries();
-					}
-
-				});
-				builder_entry_chooser.create().show();
-				return true;
-			}
-		});
 		
 		// configure menu_item_license_info
 		MenuItem menu_item_history = (MenuItem) menu.findItem(R.id.menu_item_history);
