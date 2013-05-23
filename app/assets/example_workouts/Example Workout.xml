@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><Workout name="Example Workout" rows="8">
+<FitnessExercise customname="Benchpress">
+<ExerciseType name="Bankdrücken"/>
+<TrainingEntry date="2013-01-01T12:00:00Z">
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="15000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="15000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="15000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+</TrainingEntry>
+</FitnessExercise>
+<FitnessExercise customname="Squats">
+<ExerciseType name="Kniebeuge"/>
+<TrainingEntry date="2013-05-23T07:08:44Z">
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="20"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="20"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="20"/>
+</FSet>
+</TrainingEntry>
+</FitnessExercise>
+<FitnessExercise customname="Gironda Sternum Chins">
+<ExerciseType name="Klimmzug"/>
+<TrainingEntry date="2013-05-23T07:08:44Z">
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="8"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="5"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="5"/>
+</FSet>
+</TrainingEntry>
+</FitnessExercise>
+<FitnessExercise customname="Curl (barbell)">
+<ExerciseType name="Curl (Langhantel)"/>
+<TrainingEntry date="2013-05-23T07:08:44Z">
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="15000"/>
+<SetParameter name="repetition" value="12"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="15000"/>
+<SetParameter name="repetition" value="11"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="15000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+</TrainingEntry>
+</FitnessExercise>
+<FitnessExercise customname="Crunch">
+<ExerciseType name="Crunch"/>
+<TrainingEntry date="2013-05-23T07:08:44Z">
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="20"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="20"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="repetition" value="20"/>
+</FSet>
+</TrainingEntry>
+</FitnessExercise>
+<FitnessExercise customname="Shoulder press (one arm)">
+<ExerciseType name="Schulterpresse (einarmig)"/>
+<TrainingEntry date="2013-05-23T07:08:44Z">
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="5000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="5000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+<FSet hasBeenDone="false">
+<SetParameter name="weight" value="5000"/>
+<SetParameter name="repetition" value="10"/>
+</FSet>
+</TrainingEntry>
+</FitnessExercise>
+</Workout>
