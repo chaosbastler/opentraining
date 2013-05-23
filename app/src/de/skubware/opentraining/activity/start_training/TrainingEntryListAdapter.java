@@ -77,7 +77,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		return position;
 	}
 
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 
 		// last element is an empty row
@@ -146,7 +146,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 			public void onClick(View view) {
 				imagebutton_check.setImageResource(R.drawable.icon_check_white);
 				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_red);
-				deleteSet(set);
+				deleteSet(position);
 				
 				if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
 					showExerciseFinishedDialog();
@@ -173,8 +173,8 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		return vi;
 	}
 
-	private void deleteSet(FSet set) {
-		mTrainingEntry.getFSetList().remove(set);
+	private void deleteSet(int setNumber) {
+		mTrainingEntry.getFSetList().remove(setNumber);
 		trainingEntryEdited();
 	}
 	

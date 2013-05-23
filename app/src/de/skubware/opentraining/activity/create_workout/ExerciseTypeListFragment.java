@@ -138,8 +138,8 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 
 
 		
-		SelectMuscleDialog muscleDialog = new SelectMuscleDialog(getActivity());
-		muscleDialog.show();
+		//SelectMuscleDialog muscleDialog = new SelectMuscleDialog(getActivity());
+		//muscleDialog.show();
 	}
 
 	@Override
