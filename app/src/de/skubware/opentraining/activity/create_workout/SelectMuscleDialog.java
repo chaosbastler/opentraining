@@ -18,15 +18,18 @@
  * 
  */
 
-package de.skubware.opentraining.activity;
+package de.skubware.opentraining.activity.create_workout;
 
 import java.util.HashMap;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -163,6 +166,7 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 					// set current muscle
 					mMuscle = mMuscleMap.get(sColorMap.get(color));
 					
+					updateMusclePreference();
 					return true;
 				}
 				Log.v(TAG, "No color match: " + color + ", " + touchColor );
@@ -174,6 +178,20 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 			return false;
 		}
 
+	}
+	
+	private void updateMusclePreference(){
+		final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
+		IDataProvider provider = new DataProvider(mActivity);
+
+		Editor editor = sharedPrefs.edit();
+		for(Muscle m:provider.getMuscles()){
+			editor.putBoolean(m.toString(), true);
+		}
+		
+		
+		editor.putBoolean(mMuscle.toString(), true);
+		editor.commit();
 	}
 
 	/**

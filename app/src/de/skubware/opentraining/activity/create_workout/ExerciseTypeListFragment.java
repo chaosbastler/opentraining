@@ -136,6 +136,10 @@ public class ExerciseTypeListFragment extends SherlockListFragment implements On
 		};
 		sharedPrefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
+
+		
+		SelectMuscleDialog muscleDialog = new SelectMuscleDialog(getActivity());
+		muscleDialog.show();
 	}
 
 	@Override
