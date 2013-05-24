@@ -126,9 +126,9 @@ public class WorkoutXMLParser extends DefaultHandler {
 
 			return this.mWorkout;
 		} catch (SAXException e) {
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing Workout.", e);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing Workout.", e);
 		}
 
 		return null;

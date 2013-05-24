@@ -87,7 +87,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 			vi.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					showDialog(null);
+					showDialog(null, -1);
 				}
 			});
 
@@ -162,7 +162,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		OnClickListener changeSetValuesListener = new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				showDialog(set);
+				showDialog(set, position);
 			}
 		};
 		imageview_weight.setOnClickListener(changeSetValuesListener);
@@ -192,7 +192,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 	 * 
 	 * @see DialogFragmentAddEntry#newInstance(FitnessExercise, FSet)
 	 */
-	private void showDialog(FSet set) {
+	private void showDialog(FSet set, int setPosition) {
 		FragmentTransaction ft = mActivity.getSupportFragmentManager().beginTransaction();
 		Fragment prev = mActivity.getSupportFragmentManager().findFragmentByTag("dialog");
 		if (prev != null) {
@@ -201,7 +201,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		ft.addToBackStack(null);
 
 		// Create and show the dialog.
-		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mFEx, set, mTrainingEntry);
+		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mFEx, set, setPosition, mTrainingEntry);
 		newFragment.show(ft, "dialog");
 	}
 	

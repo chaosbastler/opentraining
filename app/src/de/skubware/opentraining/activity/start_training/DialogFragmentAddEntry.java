@@ -59,8 +59,11 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	public static String ARG_ID_EXERCISE = "fex";
 
 	/** ID for optional argument ({@link FSet}) */
-	public static String ARG_ID_FSET = "subentry";
+	public static String ARG_ID_FSET = "fset";
 
+	/** ID for argument (position of the FSet in the list) */
+	public static String ARG_ID_FSET_POSITION = "fset_position";
+	
 	/** ID for optional argument ({@link TrainingEntry}) */
 	public static String ARG_ID_TRAINING_ENTRY = "trainingentry";
 
@@ -72,6 +75,9 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 
 	/** Currently edited {@link FSet} */
 	private FSet mFSet;
+	
+	/** The position of {@link #mFSet} in {@link #mTrainingEntry} */
+	private int mFSetPosition;
 
 	private Spinner spinner_duration;
 	private Spinner spinner_duration_unit;
@@ -102,6 +108,8 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	 *            Optional parameter, the {@link FSet} that should be edited. If
 	 *            this is null a new FSet will be added to the
 	 *            {@link TrainingEntry}
+ 	 * @param setPosition
+	 *			  The position of FSet in the TrainingEntry. Will only be used, if the set is edited
 	 * @param trainingEntry
 	 *            Optional parameter, the {@link TrainingEntry} that should be
 	 *            edited. If this is null the latest TrainingEntry will be
@@ -109,12 +117,13 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	 * 
 	 * @return The DialogFragment
 	 */
-	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set, TrainingEntry trainingEntry) {
+	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set, int setPosition, TrainingEntry trainingEntry) {
 		DialogFragmentAddEntry f = new DialogFragmentAddEntry();
 
 		Bundle args = new Bundle();
 		args.putSerializable(ARG_ID_EXERCISE, fEx);
 		args.putSerializable(ARG_ID_FSET, set);
+		args.putInt(ARG_ID_FSET_POSITION, setPosition);
 		args.putSerializable(ARG_ID_TRAINING_ENTRY, trainingEntry);
 
 		f.setArguments(args);
@@ -123,8 +132,8 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 	}
 
 	/** @see #newInstance(FitnessExercise, FSet, TrainingEntry) */
-	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set) {
-		return newInstance(fEx, set, null);
+	static DialogFragmentAddEntry newInstance(FitnessExercise fEx, FSet set, int setPosition) {
+		return newInstance(fEx, set, setPosition, null);
 	}
 
 	@Override
@@ -132,6 +141,7 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 		super.onCreate(savedInstanceState);
 		mFex = (FitnessExercise) getArguments().getSerializable(ARG_ID_EXERCISE);
 		mFSet = (FSet) getArguments().getSerializable(ARG_ID_FSET);
+		mFSetPosition = getArguments().getInt(ARG_ID_FSET_POSITION);
 		mTrainingEntry = (TrainingEntry) getArguments().getSerializable(ARG_ID_TRAINING_ENTRY);
 
 		// select latest TrainingEntry if argument was null
@@ -220,10 +230,8 @@ public class DialogFragmentAddEntry extends SherlockDialogFragment {
 								mTrainingEntry.add(mFSet);
 							} else {
 								// replace old FSet
-								int oldIdx = mTrainingEntry.getFSetList().indexOf(mFSet);
-								mTrainingEntry.getFSetList().remove(oldIdx);
 								mFSet = new FSet(setParameters.toArray(new SetParameter[setParameters.size()]));
-								mTrainingEntry.getFSetList().add(oldIdx, mFSet);
+								mTrainingEntry.getFSetList().set(mFSetPosition, mFSet);
 							}
 							mTrainingEntry.setHasBeenDone(mFSet, false);
 

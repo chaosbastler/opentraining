@@ -234,7 +234,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 	/** Shows DialogFragmentAddEntry. */
 	private void showDialog() {
-		showDialog(null);
+		showDialog(null, -1);
 	}
 
 
@@ -248,7 +248,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 	 *            
 	 * @see DialogFragmentAddEntry#newInstance(FitnessExercise, FSet)           
 	 */
-	private void showDialog(FSet set) {
+	private void showDialog(FSet set, int setPosition) {
 
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		Fragment prev = getFragmentManager().findFragmentByTag("dialog");
@@ -258,7 +258,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		ft.addToBackStack(null);
 
 		// Create and show the dialog.
-		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mExercise, set, mTrainingEntry);
+		DialogFragment newFragment = DialogFragmentAddEntry.newInstance(mExercise, set, setPosition, mTrainingEntry);
 		newFragment.show(ft, "dialog");
 	}
 	
