@@ -51,14 +51,15 @@
         </RelativeLayout>
 
  	<TextView
-            android:id="@+id/textview_remaining_sets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/wrapper_exercise_name"
-            android:text="Exercise finished"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#109000" />
+ 	    android:id="@+id/textview_remaining_sets"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignParentRight="true"
+ 	    android:layout_below="@+id/wrapper_exercise_name"
+ 	    android:text="@string/exercise_finished"
+ 	    android:textAppearance="?android:attr/textAppearanceSmall"
+ 	    android:textColor="#109000" />
+
     </RelativeLayout>
 
 </RelativeLayout>

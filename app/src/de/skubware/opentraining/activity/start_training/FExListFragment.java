@@ -135,7 +135,7 @@ public class FExListFragment extends SherlockListFragment {
 			finished &=fEx.isTrainingEntryFinished(fEx.getLastTrainingEntry());
 		}
 		if(finished){
-			Toast.makeText(getActivity(), "The Workout is finished :)", Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), getString(de.skubware.opentraining.R.string.workout_finished), Toast.LENGTH_LONG).show();
 		}
 		
 	}

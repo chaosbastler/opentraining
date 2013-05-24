@@ -1,7 +1,9 @@
 <resources>
     <!-- FExListAdapter -->
     <string name="remaining_sets">Remaining Sets:</string>
-    
+    <string name="exercise_finished">Exercise finished</string>
+    <string name="workout_finished">Workout finished :)</string>
+
     <!-- FExDetailFragment -->
     <string name="no_entry_for_today">Click on \'+\' to add an entry</string>
     <string name="old_entries">Show different training</string>
