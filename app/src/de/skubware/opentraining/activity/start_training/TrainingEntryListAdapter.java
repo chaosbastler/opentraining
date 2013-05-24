@@ -116,7 +116,6 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		
 		// set button icons
 		final ImageButton imagebutton_check = (ImageButton) vi.findViewById(R.id.imagebutton_check);
-		final ImageButton imagebutton_notcheck = (ImageButton) vi.findViewById(R.id.imagebutton_notcheck);
 		if(mTrainingEntry.hasBeenDone(set)){
 			imagebutton_check.setImageResource(R.drawable.icon_check_green);
 		}else{
@@ -130,7 +129,6 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View view) {
 				imagebutton_check.setImageResource(R.drawable.icon_check_green);
-				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_white);
 				mTrainingEntry.setHasBeenDone(set, true);
 				trainingEntryEdited();
 				
@@ -140,19 +138,8 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 			}
 		});
 
-		imagebutton_notcheck.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				imagebutton_check.setImageResource(R.drawable.icon_check_white);
-				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_red);
-				remove(position);
-				
-				if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
-					showExerciseFinishedDialog();
-				}
-			}
-		});
-		
+
+
 
 		// add lister for changing values
 		final ImageView imageview_weight = (ImageView) vi.findViewById(R.id.imageview_weight);
@@ -175,6 +162,10 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 	public void remove(int position) {
 		mTrainingEntry.getFSetList().remove(position);
 		trainingEntryEdited();
+		
+		if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
+			showExerciseFinishedDialog();
+		}
 	}	
 	
 	

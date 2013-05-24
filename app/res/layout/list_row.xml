@@ -119,27 +119,16 @@
 
             <ImageButton
                 android:id="@+id/imagebutton_check"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:adjustViewBounds="false"
                 android:background="@drawable/button_black_selector"
                 android:cropToPadding="false"
                 android:padding="5dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/icon_check_white" />
-
-            <ImageButton
-                android:id="@+id/imagebutton_notcheck"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_black_selector"
-                android:cropToPadding="false"
-                android:padding="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/icon_cross2_white" />
 
         </RelativeLayout>
     </LinearLayout>
