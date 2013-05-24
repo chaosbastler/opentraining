@@ -23,7 +23,6 @@ package de.skubware.opentraining.activity.start_training;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
 import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FitnessExercise;
@@ -32,7 +31,6 @@ import de.skubware.opentraining.basic.TrainingEntry;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -42,6 +40,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TrainingEntryListAdapter extends BaseAdapter {
@@ -146,7 +145,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 			public void onClick(View view) {
 				imagebutton_check.setImageResource(R.drawable.icon_check_white);
 				imagebutton_notcheck.setImageResource(R.drawable.icon_cross_red);
-				deleteSet(position);
+				remove(position);
 				
 				if(mFEx.isTrainingEntryFinished(mTrainingEntry)){
 					showExerciseFinishedDialog();
@@ -156,9 +155,9 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 		
 
 		// add lister for changing values
-		final View wrapper_duration = (View) vi.findViewById(R.id.wrapper_duration);
-		final View wrapper_rep = (View) vi.findViewById(R.id.wrapper_rep);
-		final View wrapper_weight = (View) vi.findViewById(R.id.wrapper_weight);
+		final ImageView imageview_weight = (ImageView) vi.findViewById(R.id.imageview_weight);
+		final ImageView imageview_rep = (ImageView) vi.findViewById(R.id.imageview_rep);
+		final ImageView imageview_duration = (ImageView) vi.findViewById(R.id.imageview_duration);
 
 		OnClickListener changeSetValuesListener = new OnClickListener() {
 			@Override
@@ -166,17 +165,18 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 				showDialog(set);
 			}
 		};
-		wrapper_duration.setOnClickListener(changeSetValuesListener);
-		wrapper_rep.setOnClickListener(changeSetValuesListener);
-		wrapper_weight.setOnClickListener(changeSetValuesListener);
+		imageview_weight.setOnClickListener(changeSetValuesListener);
+		imageview_rep.setOnClickListener(changeSetValuesListener);
+		imageview_duration.setOnClickListener(changeSetValuesListener);
 
 		return vi;
 	}
 
-	private void deleteSet(int setNumber) {
-		mTrainingEntry.getFSetList().remove(setNumber);
+	public void remove(int position) {
+		mTrainingEntry.getFSetList().remove(position);
 		trainingEntryEdited();
-	}
+	}	
+	
 	
 	private void trainingEntryEdited(){
 		FExDetailFragment fragment = (FExDetailFragment) mActivity.getSupportFragmentManager().findFragmentById(R.id.exercise_detail_container);
@@ -222,6 +222,7 @@ public class TrainingEntryListAdapter extends BaseAdapter {
 
 		
 		builder.create().show();
-	}	
+	}
+
 
 }

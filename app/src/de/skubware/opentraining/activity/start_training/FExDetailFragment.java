@@ -21,8 +21,6 @@
 package de.skubware.opentraining.activity.start_training;
 
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,10 +31,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -48,10 +44,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
 import de.skubware.opentraining.basic.FSet;
@@ -112,6 +106,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 			mTrainingEntry = latestEntry;
 		}
 		
+		
 	}
 
 	@Override
@@ -141,14 +136,28 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		
 		
 		// set adapter
-		ListView list = (ListView) rootView.findViewById(R.id.list);
-		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter((SherlockFragmentActivity) getActivity(), mExercise,  mTrainingEntry);
-		list.setAdapter(adapter);
+		ListView listView = (ListView) rootView.findViewById(R.id.list);
+		final TrainingEntryListAdapter mAdapter = new TrainingEntryListAdapter((SherlockFragmentActivity) getActivity(), mExercise,  mTrainingEntry);
+		listView.setAdapter(mAdapter);
 		
 		
-
-		
-		
+		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
+				listView,
+				new SwipeDismissListViewTouchListener.OnDismissCallback() {
+					@Override
+					public void onDismiss(ListView listView,
+							int[] reverseSortedPositions) {
+						for (int position : reverseSortedPositions) {
+							mAdapter.remove(position);
+						}
+						mAdapter.notifyDataSetChanged();
+					}
+				});
+		listView.setOnTouchListener(touchListener);
+		// Setting this scroll listener is required to ensure that during
+		// ListView scrolling,
+		// we don't look for swipes.
+		listView.setOnScrollListener(touchListener.makeScrollListener());
 	
 
 		return rootView;

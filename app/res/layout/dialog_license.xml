@@ -41,6 +41,21 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
+            android:id="@+id/text_view_license_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="License of Swipe To Dismiss"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/released_button_background" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/license_text_swipe_to_dismiss"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
             android:id="@+id/text_view_license_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
