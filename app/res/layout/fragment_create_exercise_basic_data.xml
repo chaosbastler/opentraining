@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_fex_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    
+            <RelativeLayout
+            android:id="@+id/wrapper_muscle_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="20dp" >
+
+            <ImageView
+                android:id="@+id/imageview_exercise_image"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
+                android:src="@drawable/dummy_image" />
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/wrapper_muscle_selector"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp" >
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercise name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/released_button_background" />
+
+        <EditText
+            android:id="@+id/edittext_ex_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TextView01"
+            android:layout_below="@+id/TextView01"
+            android:ems="10"
+            android:hint="English name" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/edittext_ex_name"
+            android:background="@color/text_color_table"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/EditText01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/LinearLayout01"
+            android:layout_below="@+id/TextView01"
+            android:layout_marginTop="34dp"
+            android:ems="10"
+            android:hint="German name" >
+
+            <requestFocus />
+        </EditText>
+
+    </RelativeLayout>
+
+</RelativeLayout>
