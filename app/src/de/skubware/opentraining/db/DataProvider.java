@@ -245,6 +245,14 @@ public class DataProvider implements IDataProvider {
 
 	@Override
 	public List<Workout> getWorkouts() {
+		if (Cache.INSTANCE.getWorkouts() == null)
+			Cache.INSTANCE.updateCache(mContext);
+
+		return new ArrayList<Workout>(Cache.INSTANCE.getWorkouts());
+	}
+	
+
+	public List<Workout> loadWorkouts() {
 		List<Workout> workoutList = new ArrayList<Workout>();
 
 		// list files in directory that end with ".xml"
@@ -354,7 +362,17 @@ public class DataProvider implements IDataProvider {
 	@Override
 	public boolean saveWorkout(Workout w) {
 		Log.d(TAG, "w==null: " + (w==null) + "  mContext==null: " + (mContext==null));
-		return XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
+		boolean succ = XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
+		
+		// update Cache, as Workout has changed
+		new Thread() {
+			@Override
+			public void run() {
+				Cache.INSTANCE.updateWorkoutCache(mContext);
+			}
+		}.start();
+
+		return succ;
 	}
 	
 	/**
@@ -383,7 +401,18 @@ public class DataProvider implements IDataProvider {
 		if (!workout_file.exists())
 			throw new IllegalArgumentException("The workout that should be deleted does not exist.");
 
-		return workout_file.delete();
+		boolean succ = workout_file.delete();
+		
+		// update Cache, as Workout has changed
+		new Thread() {
+			@Override
+			public void run() {
+				Cache.INSTANCE.updateWorkoutCache(mContext);
+			}
+		}.start();
+
+		return succ;
+		
 	}
 
 
