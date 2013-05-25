@@ -267,10 +267,12 @@ public class DataProvider implements IDataProvider {
 		// parse each file
 		for (String file : files) {
 			Workout w = this.loadWorkout(mContext.getFilesDir().toString() + "/" + file);
-			workoutList.add(w);
-
-			if (w == null)
-				Log.e(TAG, "Read Workout and parser returned null. This should not happen");
+			
+			if(w != null){
+				workoutList.add(w);
+			}else{
+				Log.e(TAG, "Read Workout and parser returned null. This should not happen. Either the Workout XML-Parser or the XML-Saver is buggy.");
+			}	
 		}
 
 		Log.v(TAG, "Read " + files.length + " Workouts. workoutList.size()= " + workoutList.size());
@@ -353,6 +355,25 @@ public class DataProvider implements IDataProvider {
 	public boolean saveWorkout(Workout w) {
 		Log.d(TAG, "w==null: " + (w==null) + "  mContext==null: " + (mContext==null));
 		return XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
+	}
+	
+	/**
+	 * Does the same as #saveWorkout(Workout), but the task is executed in a new
+	 * Thread.
+	 * 
+	 * @param w
+	 *            The {@link Workout} to save
+	 */
+	public void saveWorkoutAsync(final Workout w){
+		new Thread() {
+			@Override
+			public void run() {
+				boolean succ = saveWorkout(w);
+				
+				if(!succ)
+					Log.e(TAG, "Could not save Workout: " + w.toDebugString());
+			}
+		}.start();
 	}
 
 	@Override

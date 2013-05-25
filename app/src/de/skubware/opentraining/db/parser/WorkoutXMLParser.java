@@ -126,7 +126,21 @@ public class WorkoutXMLParser extends DefaultHandler {
 
 			return this.mWorkout;
 		} catch (SAXException e) {
-			Log.e(TAG, "Error during parsing Workout.", e);
+			String workoutString = "";
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(f));
+				String line;
+				StringBuilder sb = new StringBuilder();
+				
+				while((line=br.readLine())!= null){
+				    sb.append(line.trim());
+				}
+				workoutString = sb.toString();
+			} catch (IOException ioEx) {
+				Log.e(TAG, "Error during reading Workout file.", ioEx);
+			}
+			
+			Log.e(TAG, "Error during parsing Workout. Workout file: \n " + workoutString, e);
 		} catch (Exception e) {
 			Log.e(TAG, "Error during parsing Workout.", e);
 		}

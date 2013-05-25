@@ -269,8 +269,8 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 		mWorkout.updateFitnessExercise(fitnessExercise);
 
-		IDataProvider dataProvider = new DataProvider(getActivity());
-		dataProvider.saveWorkout(mWorkout);
+		DataProvider dataProvider = new DataProvider(getActivity());
+		dataProvider.saveWorkoutAsync(mWorkout);
 
 		FExListFragment fragment = (FExListFragment) getFragmentManager().findFragmentById(R.id.exercise_list);
 		if (fragment != null) {
