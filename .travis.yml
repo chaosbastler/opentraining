@@ -11,11 +11,15 @@ before_install:
   # Install base Android SDK
   - sudo apt-get update -qq
   - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
-  - wget http://dl.google.com/android/android-sdk_r22-linux.tgz
-  - tar xzf android-sdk_r22-linux.tgz
-  - wget http://dl-ssl.google.com/android/repository/platform-tools_r17-linux.zip
-  - unzip platform-tools_r17-linux.zip
-  - mv platform-tools android-sdk-linux
+  - wget http://dl.google.com/android/android-sdk_r21-linux.tgz
+  - tar xzf android-sdk_r21-linux.tgz
+  #- mv platform-tools android-sdk-linux
+  # TODO currently a bug in maven-android
+  #- wget http://dl.google.com/android/android-sdk_r22-linux.tgz
+  #- tar xzf android-sdk_r22-linux.tgz
+  #- wget http://dl-ssl.google.com/android/repository/platform-tools_r17-linux.zip
+  #- unzip platform-tools_r17-linux.zip
+  #- mv platform-tools android-sdk-linux
   - export ANDROID_HOME=$PWD/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
@@ -24,7 +28,8 @@ before_install:
   # Note that sysimg-16 downloads the ARM, x86 and MIPS images (we should optimize this).
   # Other relevant API's:
   # addon-google_apis-google-16
-  - echo y | android update sdk --filter android-17,extra-android-support,$ANDROID_SDKS --no-ui --force
+  #- echo y | android update sdk --filter android-17,extra-android-support,$ANDROID_SDKS --no-ui --force >/dev/null
+  - android update sdk --filter platform-tools,android-17,extra-android-support,$ANDROID_SDKS --no-ui --force
 
   # Create and start emulator
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
