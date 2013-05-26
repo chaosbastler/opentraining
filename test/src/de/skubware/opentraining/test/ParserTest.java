@@ -22,7 +22,13 @@ package de.skubware.opentraining.test;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 
 import android.test.AndroidTestCase;
@@ -38,6 +44,7 @@ import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
+import de.skubware.opentraining.db.parser.ExerciseTypeXMLParser;
 
 /**
  * Tests for the Parsers for {@link Muscle}, {@link SportsEquipment}, {@link ExerciseType} and {@link Workout}.
@@ -164,9 +171,59 @@ public class ParserTest extends AndroidTestCase {
 			fail(msg);
 		}*/
 
+
+	}
+	
+	public void testSaveAndLoadExerciseType(){
+		IDataProvider dataProvider = new DataProvider(getContext());
+
 		
-
-
+		ExerciseType.Builder builder = new ExerciseType.Builder("NAME_1");
+		
+		Map<Locale, String> translationMap = new HashMap<Locale, String>();
+		translationMap.put(Locale.GERMAN, "NAME_1");
+		translationMap.put(Locale.ENGLISH, "English name");
+		builder.translationMap(translationMap);
+		
+		builder.description("Some description text ..!");
+		
+		// muscles
+		SortedSet<Muscle> muscles = new TreeSet<Muscle>();
+		muscles.add(dataProvider.getMuscles().get(0));
+		muscles.add(dataProvider.getMuscles().get(1));
+		builder.activatedMuscles(muscles);
+		
+		// equipment
+		SortedSet<SportsEquipment> equipment = new TreeSet<SportsEquipment>();
+		equipment.add(dataProvider.getEquipment().get(2));
+		equipment.add(dataProvider.getEquipment().get(4));
+		builder.neededTools(equipment);
+		
+		ExerciseType exerciseBefore = builder.build();
+		
+		// save ex
+		dataProvider.saveExercise(exerciseBefore);
+		
+		// load ex, check fields		
+		ExerciseType exerciseAfter = dataProvider.getExerciseByName(exerciseBefore.getUnlocalizedName());
+		// equals check is not enough(it only checks the name)
+		assertEquals(exerciseAfter.getDescription(), exerciseBefore.getDescription());
+		assertEquals(exerciseAfter.getImageHeight(), exerciseBefore.getImageHeight());
+		assertEquals(exerciseAfter.getImageWidth(), exerciseBefore.getImageWidth());
+		assertEquals(exerciseAfter.getLocalizedName(), exerciseBefore.getLocalizedName());
+		assertEquals(exerciseAfter.getUnlocalizedName(), exerciseBefore.getUnlocalizedName());
+		assertEquals(exerciseAfter.getActivatedMuscles(), exerciseBefore.getActivatedMuscles());
+		assertEquals(exerciseAfter.getActivationMap(), exerciseBefore.getActivationMap());
+		assertEquals(exerciseAfter.getAlternativeNames(), exerciseBefore.getAlternativeNames());
+		assertEquals(exerciseAfter.getHints(), exerciseBefore.getHints());
+		assertEquals(exerciseAfter.getIconPath(), exerciseBefore.getIconPath());
+		assertEquals(exerciseAfter.getImageLicenseMap(), exerciseBefore.getImageLicenseMap());
+		assertEquals(exerciseAfter.getImagePaths(), exerciseBefore.getImagePaths());
+		assertEquals(exerciseAfter.getRequiredEquipment(), exerciseBefore.getRequiredEquipment());
+		assertEquals(exerciseAfter.getTags(), exerciseBefore.getTags());
+		assertEquals(exerciseAfter.getURLs(), exerciseBefore.getURLs());
+		
+		
 	}
 
 }
