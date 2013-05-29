@@ -207,10 +207,6 @@ public class XMLSaver {
 	 * 
 	 * @return true, if writing was successful, false otherwise
 	 */
-	
-	// TODO before adding again: add support to save translations for different
-	// languages
-	
 	public static boolean writeExerciseType(ExerciseType ex, File destination) {
 
 		boolean success = true; // write the tp to an xml file with DOM
@@ -268,9 +264,7 @@ public class XMLSaver {
 			for (ExerciseTag t : ex.getTags()) {
 				Element tagE = doc.createElement("Tag");
 			
-				//TODO
-				//tagE.setAttribute("name", t.getName());
-				//tagE.setAttribute("description", t..getDescription());
+				tagE.setAttribute("name", t.toString());
 				exE.appendChild(tagE);
 			}
 			for (URL url : ex.getURLs()) {

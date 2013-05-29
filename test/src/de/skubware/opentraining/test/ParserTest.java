@@ -22,7 +22,6 @@ package de.skubware.opentraining.test;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -36,6 +35,7 @@ import android.util.Log;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter.*;
+import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -44,13 +44,12 @@ import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
-import de.skubware.opentraining.db.parser.ExerciseTypeXMLParser;
 
 /**
- * Tests for the Parsers for {@link Muscle}, {@link SportsEquipment}, {@link ExerciseType} and {@link Workout}.
- *
- * @author Christian Skubich
- *
+ * Tests for the Parsers for {@link Muscle}, {@link SportsEquipment},
+ * {@link ExerciseType} and {@link Workout}.
+ * 
+ * 
  */
 public class ParserTest extends AndroidTestCase {
 	/** Tag for logging */
@@ -199,6 +198,12 @@ public class ParserTest extends AndroidTestCase {
 		equipment.add(dataProvider.getEquipment().get(4));
 		builder.neededTools(equipment);
 		
+		// tags
+		SortedSet<ExerciseTag> tags = new TreeSet<ExerciseTag>();
+		tags.add(dataProvider.getExerciseTags().get(2));
+		tags.add(dataProvider.getExerciseTags().get(4));
+		builder.exerciseTags(tags);
+		
 		ExerciseType exerciseBefore = builder.build();
 		
 		// save ex
@@ -207,21 +212,21 @@ public class ParserTest extends AndroidTestCase {
 		// load ex, check fields		
 		ExerciseType exerciseAfter = dataProvider.getExerciseByName(exerciseBefore.getUnlocalizedName());
 		// equals check is not enough(it only checks the name)
-		assertEquals(exerciseAfter.getDescription(), exerciseBefore.getDescription());
-		assertEquals(exerciseAfter.getImageHeight(), exerciseBefore.getImageHeight());
-		assertEquals(exerciseAfter.getImageWidth(), exerciseBefore.getImageWidth());
-		assertEquals(exerciseAfter.getLocalizedName(), exerciseBefore.getLocalizedName());
-		//assertEquals(exerciseAfter.getUnlocalizedName(), exerciseBefore.getUnlocalizedName()); may fail!
-		assertEquals(exerciseAfter.getActivatedMuscles(), exerciseBefore.getActivatedMuscles());
-		assertEquals(exerciseAfter.getActivationMap(), exerciseBefore.getActivationMap());
-		assertEquals(exerciseAfter.getAlternativeNames(), exerciseBefore.getAlternativeNames());
-		assertEquals(exerciseAfter.getHints(), exerciseBefore.getHints());
-		assertEquals(exerciseAfter.getIconPath(), exerciseBefore.getIconPath());
-		assertEquals(exerciseAfter.getImageLicenseMap(), exerciseBefore.getImageLicenseMap());
-		assertEquals(exerciseAfter.getImagePaths(), exerciseBefore.getImagePaths());
-		assertEquals(exerciseAfter.getRequiredEquipment(), exerciseBefore.getRequiredEquipment());
-		assertEquals(exerciseAfter.getTags(), exerciseBefore.getTags());
-		assertEquals(exerciseAfter.getURLs(), exerciseBefore.getURLs());
+		assertEquals(exerciseBefore.getDescription(), exerciseAfter.getDescription());
+		assertEquals(exerciseBefore.getImageHeight(), exerciseAfter.getImageHeight());
+		assertEquals(exerciseBefore.getImageWidth(), exerciseAfter.getImageWidth());
+		assertEquals(exerciseBefore.getLocalizedName(), exerciseAfter.getLocalizedName());
+		//assertEquals(exerciseBefore.getUnlocalizedName(), exerciseAfter.getUnlocalizedName()); may fail!
+		assertEquals(exerciseBefore.getActivatedMuscles(), exerciseAfter.getActivatedMuscles());
+		assertEquals(exerciseBefore.getActivationMap(), exerciseAfter.getActivationMap());
+		assertEquals(exerciseBefore.getAlternativeNames(), exerciseAfter.getAlternativeNames());
+		assertEquals(exerciseBefore.getHints(), exerciseAfter.getHints());
+		assertEquals(exerciseBefore.getIconPath(), exerciseAfter.getIconPath());
+		assertEquals(exerciseBefore.getImageLicenseMap(), exerciseAfter.getImageLicenseMap());
+		assertEquals(exerciseBefore.getImagePaths(), exerciseAfter.getImagePaths());
+		assertEquals(exerciseBefore.getRequiredEquipment(), exerciseAfter.getRequiredEquipment());
+		assertEquals(exerciseBefore.getTags(), exerciseAfter.getTags());
+		assertEquals(exerciseBefore.getURLs(), exerciseAfter.getURLs());
 		
 		
 	}
