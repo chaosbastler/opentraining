@@ -84,9 +84,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:paddingBottom="3dp"
                 android:text="@string/equipment"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/released_button_background" />
+
         </RelativeLayout>
 
     </LinearLayout>

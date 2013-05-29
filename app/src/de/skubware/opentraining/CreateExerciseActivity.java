@@ -21,6 +21,11 @@
 package de.skubware.opentraining;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.actionbarsherlock.app.ActionBar;
 import android.support.v4.app.FragmentTransaction;
@@ -28,7 +33,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,19 +41,16 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-import de.skubware.opentraining.activity.manage_workouts.RenameWorkoutDialogFragment;
+import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.DataProvider;
@@ -62,6 +63,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * An activity for creating new {@link ExerciseType}s.
+ * 
+ */
 public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		ActionBar.TabListener {
 	/** Tag for logging*/
@@ -142,9 +147,8 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		menu_create_exercise_info.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(CreateExerciseActivity.this);
-				builder.setTitle("About creating exercises");
-				String msg = "You have to provide an exercise name, everything else is optional. If you want to you can even publish your exercise.";
-				builder.setMessage(msg);
+				builder.setTitle(getString(R.string.title_about_creating_exercise));
+				builder.setMessage(getString(R.string.text_about_creating_exercise));
 				
 				builder.create().show();
 
@@ -155,8 +159,8 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		
 		// configure menu_item_rename_workout
 		MenuItem menuitem_save_exercise = (MenuItem) menu.findItem(R.id.menuitem_save_exercise);
-		menu_create_exercise_info.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
+		menuitem_save_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {				
 				saveExercise();
 				return true;
 			}
@@ -183,7 +187,48 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 	/** Saves the created exercise. */
 	private void saveExercise(){
+		BasicDataFragment basicDataFragment = (BasicDataFragment) mSectionsPagerAdapter.getItem(0);
+		ExtendedDataFragment extendedDataFragment = (ExtendedDataFragment) mSectionsPagerAdapter.getItem(1);
+
+		// handle names
+		String ex_name_english = basicDataFragment.getExerciseNameEnglish();
+		String ex_name_german = basicDataFragment.getExerciseNameGerman();
+		if(ex_name_english.equals("") && ex_name_german.equals("")){
+			Log.v(TAG, "User did not enter an exercise name.");
+			Toast.makeText(this, getString(R.string.provide_name), Toast.LENGTH_LONG).show();
+			
+			return;
+		}
 		
+		Map<Locale, String> translationMap = new HashMap<Locale, String>();
+		translationMap.put(Locale.GERMAN, ex_name_german);
+		translationMap.put(Locale.ENGLISH, ex_name_english);
+		
+		// handle muscle
+		SortedSet<Muscle> muscleList = new TreeSet<Muscle>();
+		Muscle muscle = extendedDataFragment.getMuscle();
+		if(muscle != null){
+			muscleList.add(muscle);
+		}
+		
+		// handle equipment
+		SportsEquipment equipment= extendedDataFragment.getSportsEquipment();
+		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>();
+		if(equipment != null){
+			equipmentList.add(equipment);
+		}
+		
+		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(ex_name_german).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList);
+		ExerciseType ex = exerciseBuilder.build();
+		
+		DataProvider dataProvider = new DataProvider(this);
+		boolean succ = dataProvider.saveExercise(ex);
+		
+		if(!succ){
+			Toast.makeText(this, getString(R.string.could_not_save_exercise), Toast.LENGTH_LONG).show();
+		}else{
+			Toast.makeText(this, getString(R.string.exercise_saved), Toast.LENGTH_LONG).show();
+		}
 	}
 
 
@@ -195,6 +240,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		
+		BasicDataFragment basicDataFragment = new BasicDataFragment();
+		ExtendedDataFragment extendedDataFragment = new ExtendedDataFragment();
+
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -204,9 +252,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 			switch (position) {
 			case 0:
-				return new BasicDataFragment();
+				return basicDataFragment;
 			case 1:
-				return new ExtendedDataFragment();
+				return extendedDataFragment;
 			case 2:
 				return new PublishFragment();
 			}
@@ -223,11 +271,11 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case 0:
-				return "Basic data";//getString(R.string.title_section1).toUpperCase();
+				return getString(R.string.title_basic_data_fragment).toUpperCase();
 			case 1:
-				return "Extended data";//getString(R.string.title_section2).toUpperCase();
+				return getString(R.string.title_more_data_fragment).toUpperCase();
 			case 2:
-				return "Publish";
+				return getString(R.string.title_publish_fragment).toUpperCase();
 			}	
 			return null;
 		}
@@ -236,11 +284,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 	
 	
-	
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
+
 	public static class BasicDataFragment extends Fragment {
 		/** Tag for logging*/
 		private final String TAG = "BasicDataFragment";
@@ -250,6 +294,10 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		
 		/** Uri of the image that is returned by the Intent */
 		private Uri mTempImageUri;
+		
+		private TextView mTextViewExerciseNameEnglish;
+		private TextView mTextViewExerciseNameGerman;
+
 		
 		public BasicDataFragment() {
 		}
@@ -267,6 +315,8 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 				}
 			});
 			
+			mTextViewExerciseNameEnglish = (TextView) layout.findViewById(R.id.edittext_exercise_name_english);
+			mTextViewExerciseNameGerman = (TextView) layout.findViewById(R.id.edittext_exercise_name_german);
 			
 			return layout;
 		}
@@ -310,21 +360,31 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 						Log.e(TAG, e.toString(), e);
 					}
 				}else{
-					Toast.makeText(getActivity(), "You did not provide an image.",
+					Toast.makeText(getActivity(), getString(R.string.did_not_provide_image),
 							Toast.LENGTH_SHORT).show();
 				}
 			}
 		}
 		
+		public String getExerciseNameEnglish(){
+			return mTextViewExerciseNameEnglish.getText().toString();
+		}
+		
+		public String getExerciseNameGerman(){
+			return mTextViewExerciseNameGerman.getText().toString();
+		}
 		
 	}
 	
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
+
+
 	public static class ExtendedDataFragment extends Fragment {
 
+		private Spinner mMuscleSpinner;
+		private Spinner mEquipmentSpinner;
+		
+		private boolean selectedMuscle = false;
+		private boolean selectedEquipment = false;
 
 		public ExtendedDataFragment() {
 		}
@@ -336,16 +396,31 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 			IDataProvider dataProvider = new DataProvider(getActivity());
 			
-			Spinner spinner_muscle = (Spinner) layout.findViewById(R.id.spinner_muscle);
+			mMuscleSpinner = (Spinner) layout.findViewById(R.id.spinner_muscle);
 			ArrayAdapter<Muscle> madapter = new ArrayAdapter<Muscle>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, dataProvider.getMuscles());
-			spinner_muscle.setAdapter(madapter);
+			mMuscleSpinner.setAdapter(madapter);
 			
-			Spinner spinner_equipment = (Spinner) layout.findViewById(R.id.spinner_equipment);
+			mEquipmentSpinner = (Spinner) layout.findViewById(R.id.spinner_equipment);
 			ArrayAdapter<SportsEquipment> eqadapter = new ArrayAdapter<SportsEquipment>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, dataProvider.getEquipment());
-			spinner_equipment.setAdapter(eqadapter);
+			mEquipmentSpinner.setAdapter(eqadapter);
 			
 			return layout;
 		}
+		
+		public Muscle getMuscle(){
+			if(!selectedMuscle)
+				return null;
+			
+			return (Muscle) mMuscleSpinner.getSelectedItem();
+		}
+		
+		public SportsEquipment getSportsEquipment(){
+			if(!selectedEquipment)
+				return null;
+			
+			return (SportsEquipment) mEquipmentSpinner.getSelectedItem();
+		}
+				
 	}
 	
 

@@ -34,12 +34,13 @@
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
             android:text="Exercise name"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/released_button_background" />
 
         <EditText
-            android:id="@+id/edittext_ex_name"
+            android:id="@+id/edittext_exercise_name_english"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/TextView01"
@@ -47,21 +48,10 @@
             android:ems="10"
             android:hint="English name" />
 
-        <LinearLayout
-            android:id="@+id/LinearLayout01"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/edittext_ex_name"
-            android:background="@color/text_color_table"
-            android:orientation="vertical" >
-        </LinearLayout>
-
         <EditText
-            android:id="@+id/EditText01"
+            android:id="@+id/edittext_exercise_name_german"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/LinearLayout01"
             android:layout_below="@+id/TextView01"
             android:layout_marginTop="34dp"
             android:ems="10"
@@ -70,6 +60,16 @@
             <requestFocus />
         </EditText>
 
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@+id/TextView01"
+            android:layout_alignParentLeft="true"
+            android:background="@color/text_color_table"
+            android:orientation="vertical" >
+
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>
