@@ -179,16 +179,16 @@ public class XMLSaver {
 
 		} catch (ParserConfigurationException e1) {
 			success = false;
-			e1.printStackTrace();
+			Log.e(TAG, "Error during parsing Workout xml file.",e1);
 		} catch (TransformerConfigurationException e) {
 			success = false;
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing Workout xml file.",e);
 		} catch (IOException e) {
 			success = false;
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing Workout xml file.",e);
 		} catch (TransformerException e) {
 			success = false;
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing Workout xml file.",e);
 		}
 
 		return success;
@@ -238,7 +238,7 @@ public class XMLSaver {
 			for(Locale locale:translationMap.keySet()){
 				if(locale.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage()))
 					continue;
-				
+
 				Element localeE = doc.createElement("Locale");
 				localeE.setAttribute("language", locale.getDisplayLanguage().toString());
 				localeE.setAttribute("name", translationMap.get(locale));
@@ -303,16 +303,16 @@ public class XMLSaver {
 
 		} catch (ParserConfigurationException e1) {
 			success = false;
-			e1.printStackTrace();
+			Log.e(TAG, "Error during parsing ExerciseType xml file.",e1);
 		} catch (TransformerConfigurationException e) {
 			success = false;
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing ExerciseType xml file.",e);
 		} catch (IOException e) {
 			success = false;
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing ExerciseType xml file.",e);
 		} catch (TransformerException e) {
 			success = false;
-			e.printStackTrace();
+			Log.e(TAG, "Error during parsing ExerciseType xml file.",e);
 		}
 		return success;
 	}

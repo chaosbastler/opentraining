@@ -22,8 +22,6 @@ package de.skubware.opentraining.db;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +35,6 @@ import com.actionbarsherlock.widget.ShareActionProvider;
 
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
@@ -146,8 +143,17 @@ public class DataProvider implements IDataProvider {
 			public void run() {
 				Cache.INSTANCE.updateExerciseCache(mContext);
 			}
-		}.start();
+		}.run();
 
+		// ugly workaround for multi-threading problems:
+		// updateExerciseCache must at least be started
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			Log.e(TAG, "Thread was interrupted.");
+		}
+
+		
 		return succ;
 	}
 
@@ -158,6 +164,7 @@ public class DataProvider implements IDataProvider {
 				return ex;
 		}
 
+		Log.w(TAG, "Could not find the requested exercise: " + name);
 		return null;
 	}
 
@@ -408,6 +415,16 @@ public class DataProvider implements IDataProvider {
 				Cache.INSTANCE.updateWorkoutCache(mContext);
 			}
 		}.start();
+		
+
+		// ugly workaround for multi-threading problems:
+		// updateWorkoutCache must at least be started
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			Log.e(TAG, "Thread was interrupted.");
+		}
+
 
 		return succ;
 	}
