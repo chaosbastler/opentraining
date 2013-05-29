@@ -23,10 +23,8 @@ package de.skubware.opentraining.basic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A TrainingEnty is particularly a collection of {@link FSet}s and stores the

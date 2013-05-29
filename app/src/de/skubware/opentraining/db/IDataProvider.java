@@ -24,7 +24,6 @@ import java.util.List;
 
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.IExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;

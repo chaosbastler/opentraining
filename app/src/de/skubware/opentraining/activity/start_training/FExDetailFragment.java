@@ -54,7 +54,6 @@ import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
-import de.skubware.opentraining.db.IDataProvider;
 
 /**
  * A fragment representing a single Exercise detail screen. This fragment is

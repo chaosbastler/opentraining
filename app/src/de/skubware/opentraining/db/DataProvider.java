@@ -137,22 +137,23 @@ public class DataProvider implements IDataProvider {
 
 		boolean succ = XMLSaver.writeExerciseType(ex, destination);
 
-		// update Cache, as an Exercise has changed
-		new Thread() {
-			@Override
-			public void run() {
-				Cache.INSTANCE.updateExerciseCache(mContext);
+		if (succ) {
+			// update Cache, as an Exercise has changed
+			new Thread() {
+				@Override
+				public void run() {
+					Cache.INSTANCE.updateExerciseCache(mContext);
+				}
+			}.run();
+
+			// ugly workaround for multi-threading problems:
+			// updateExerciseCache must at least be started
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				Log.e(TAG, "Thread was interrupted.");
 			}
-		}.run();
-
-		// ugly workaround for multi-threading problems:
-		// updateExerciseCache must at least be started
-		try {
-			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			Log.e(TAG, "Thread was interrupted.");
 		}
-
 		
 		return succ;
 	}

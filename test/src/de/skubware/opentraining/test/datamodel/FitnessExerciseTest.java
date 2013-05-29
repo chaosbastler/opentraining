@@ -29,7 +29,6 @@ import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.basic.FSet.SetParameter.*;
 
 /**
  * Tests for {@link FitnessExercise}.

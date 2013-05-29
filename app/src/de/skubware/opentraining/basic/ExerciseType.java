@@ -429,7 +429,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 
 	/** {@inheritDoc} */
 	public int compareTo(ExerciseType o) {
-		return this.getLocalizedName().compareTo(o.getLocalizedName());
+		return this.getLocalizedName().toLowerCase(Locale.GERMANY).compareTo(o.getLocalizedName().toLowerCase(Locale.GERMANY));
 	}
 
 	/**

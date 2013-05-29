@@ -27,25 +27,16 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FSet;
-import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 
 import android.content.Context;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
