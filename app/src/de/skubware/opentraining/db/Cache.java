@@ -75,7 +75,7 @@ public enum Cache {
 	 * 
 	 * @return The cached {@link ExerciseType}s or null.
 	 */
-	public List<ExerciseType> getExercises() {
+	public synchronized List<ExerciseType> getExercises() {
 		return mExerciseList;
 	}
 
@@ -106,6 +106,18 @@ public enum Cache {
 		Log.d(TAG, "updating Workout cache");
 		DataProvider dataProvider = new DataProvider(mContext);
 		mWorkoutList = dataProvider.loadWorkouts();
+	}
+	
+	/**
+	 * Updates the cached exercises. Should be callend when the exercises have
+	 * changed.
+	 * 
+	 * @param mContext
+	 */
+	public synchronized void updateExerciseCache(Context mContext){
+		Log.d(TAG, "updating Exercise cache");
+		DataProvider dataProvider = new DataProvider(mContext);
+		mExerciseList = dataProvider.loadExercises();
 	}
 	
 }

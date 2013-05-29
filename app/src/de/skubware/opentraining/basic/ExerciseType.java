@@ -32,7 +32,6 @@ import android.util.Log;
  * <p>
  * 
  * 
- * @author Christian Skubich
  * 
  */
 
@@ -467,55 +466,14 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return new HashSet<String>(this.translationMap.values());
 	}
 
-	/*
-	 * @Override public int describeContents() { return 0; }
+	/**
+	 * Returns the map that contains the translations.
 	 * 
-	 * 
-	 * @Override public void writeToParcel(Parcel out, int i) {
-	 * 
-	 * private String name; // required private String localizedName; //
-	 * optional
-	 * 
-	 * private Map<Locale, String> translationMap; // optional private String
-	 * description; // optional private List<File> imagePaths; // optional
-	 * private Map<File, String> imageLicenseMap; // optional private int
-	 * imageWidth; // optional private int imageHeight; // optional private
-	 * SortedSet<SportsEquipment> requiredEquipment; // optional private
-	 * SortedSet<Muscle> activatedMuscles; // optional private Map<Muscle,
-	 * ActivationLevel> activationMap; // optional private
-	 * SortedSet<ExerciseTag> exerciseTag; // optional private List<URL>
-	 * relatedURL; // optional private List<String> hints; // optional private
-	 * File iconPath; // optional
-	 * 
-	 * out.writeString(name); out.writeString(localizedName);
-	 * 
-	 * out.writeBundle(translationMap); out.writeString(description);
-	 * out.writeList(imagePaths); out.writeBundle(imageLicenseMap);
-	 * out.writeInt(imageWidth); out.writeInt(imageHeight); out.writeS
-	 * 
-	 * out.writeLong(mId); out.writeLong(mServerReportId);
-	 * out.writeLong(mReportId); out.writeLong(mServerId);
-	 * out.writeInt(mSyncState.ordinal()); out.writeLong(mDate);
-	 * out.writeLong(mCreatedAt); out.writeLong(mUpdatedAt);
-	 * out.writeString(mText); }
-	 * 
-	 * /** Required for all parcable classes
+	 * @return {@link #translationMap}
 	 */
-	/*
-	 * public static final Parcelable.Creator<ExerciseType> CREATOR = new
-	 * Parcelable.Creator<ExerciseType>() { public ExerciseType
-	 * createFromParcel(Parcel in) { ExerciseType r = new ExerciseType();
-	 * 
-	 * r.setId(in.readLong()); r.setServerReportId(in.readLong());
-	 * r.setReportId(in.readLong()); r.setServerId(in.readLong());
-	 * r.setSyncState(SyncState.byValue(in.readInt()));
-	 * r.setDate(in.readLong()); r.setCreatedAt(in.readLong());
-	 * r.setUpdatedAt(in.readLong()); r.setText(in.readString());
-	 * 
-	 * return r; }
-	 * 
-	 * public ReportEntry[] newArray(int size) { return new ReportEntry[size]; }
-	 * };
-	 */
+	public Map<Locale, String> getTranslationMap(){
+		return new HashMap<Locale, String>(translationMap);
+	}
+
 
 }

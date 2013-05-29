@@ -22,6 +22,8 @@ package de.skubware.opentraining.db;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,8 +72,6 @@ public class DataProvider implements IDataProvider {
 		mContext = context;
 	}
 
-	
-	
 
 	@Override
 	public List<ExerciseType> getExercises() {
@@ -88,6 +88,8 @@ public class DataProvider implements IDataProvider {
 	 * 
 	 */
 	List<ExerciseType> loadExercises() {
+		
+		Log.v(TAG, "Loading provided exercises");
 		List<ExerciseType> list = new ArrayList<ExerciseType>();
 
 		try {
@@ -106,18 +108,49 @@ public class DataProvider implements IDataProvider {
 			Log.e(TAG, "Error during parsing exercises.", ioEx);
 		}
 
+		Log.v(TAG, "Loading custom exercises");
+
+		File customExerciseFolder = new File(mContext.getFilesDir().toString() + "/"
+				+ IDataProvider.CUSTOM_EXERCISE_FOLDER);
+		
+		String[] files = customExerciseFolder.list();
+
+		for (String f : files) {
+			if (f.endsWith(".xml")) {
+				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
+				ExerciseType ex = parser.read(new File(customExerciseFolder + "/" + f));
+				list.add(ex);
+			}
+		}
+
+		Collections.sort(list);
+		
 		return list;
 	}
 
 	@Override
-	public boolean saveExercise(IExercise ex) {
-		throw new UnsupportedOperationException();
+	public boolean saveExercise(ExerciseType ex) {
+		Log.d(TAG, "Trying to save exercise: " + ex.toString());
+		File destination = new File(mContext.getFilesDir().toString() + "/"
+				+ IDataProvider.CUSTOM_EXERCISE_FOLDER);
+
+		boolean succ = XMLSaver.writeExerciseType(ex, destination);
+
+		// update Cache, as an Exercise has changed
+		new Thread() {
+			@Override
+			public void run() {
+				Cache.INSTANCE.updateExerciseCache(mContext);
+			}
+		}.start();
+
+		return succ;
 	}
 
 	@Override
 	public ExerciseType getExerciseByName(String name) {
 		for (ExerciseType ex : this.getExercises()) {
-			if (name.equals(ex.getUnlocalizedName()) || name.equals(ex.getLocalizedName()))
+			if(ex.getAlternativeNames().contains(name))
 				return ex;
 		}
 

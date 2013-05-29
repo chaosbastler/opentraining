@@ -38,7 +38,10 @@ import de.skubware.opentraining.basic.Workout;
 public interface IDataProvider {
 	/** The name of the folder that contains exercises .xml files and images */
 	static public final String EXERCISE_FOLDER = "opentraining-exercises";
-
+	
+	/** The name of the folder that contains user-created exercises .xml files and images. */
+	static public final String CUSTOM_EXERCISE_FOLDER = "user_exercises";
+	
 	/** The name of the folder that contains exercises the example {@link Workout}s */
 	static public final String EXAMPLE_WORKOUT_FOLDER = "example_workouts";
 	
@@ -62,14 +65,14 @@ public interface IDataProvider {
 	public List<ExerciseType> getExercises();
 
 	/**
-	 * Saves the exercise.
+	 * Saves the (user-generated) exercise.
 	 * 
 	 * @param ex
 	 *            The {@link ExerciseType} to save.
 	 * 
 	 * @return true if successful
 	 */
-	public boolean saveExercise(IExercise ex);
+	public boolean saveExercise(ExerciseType ex);
 
 	/**
 	 * Tries to find and return the exercise with the name.

@@ -24,7 +24,10 @@ package de.skubware.opentraining.db.parser;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.OutputKeys;
@@ -207,67 +210,117 @@ public class XMLSaver {
 	
 	// TODO before adding again: add support to save translations for different
 	// languages
-	/*
-	 * public static boolean writeExerciseType(ExerciseType ex, File
-	 * destination) {
-	 * 
-	 * boolean success = true; // write the tp to an xml file with DOM
-	 * DocumentBuilder docBuilder;
-	 * 
-	 * try { docBuilder =
-	 * DocumentBuilderFactory.newInstance().newDocumentBuilder(); Document doc;
-	 * 
-	 * doc = docBuilder.newDocument();
-	 * 
-	 * // create root element Element exE = doc.createElement("ExerciseType");
-	 * exE.setAttribute("name", ex.getUnlocalizedName());
-	 * 
-	 * // add root element doc.appendChild(exE);
-	 * 
-	 * Element desE = doc.createElement("Description");
-	 * desE.setAttribute("text", ex.getDescription()); exE.appendChild(desE);
-	 * 
-	 * for (SportsEquipment eq : ex.getRequiredEquipment()) { Element wE =
-	 * doc.createElement("SportsEquipment"); wE.setAttribute("name",
-	 * eq.toString()); exE.appendChild(wE); }
-	 * 
-	 * for (Muscle m : ex.getActivatedMuscles()) { Element mE =
-	 * doc.createElement("Muscle"); mE.setAttribute("name", m.toString());
-	 * mE.setAttribute("level",
-	 * Integer.toString(ex.getActivationMap().get(m).getLevel()));
-	 * exE.appendChild(mE); }
-	 * 
-	 * for (ExerciseTag t : ex.getTags()) { Element tagE =
-	 * doc.createElement("Tag"); tagE.setAttribute("name", t.getName());
-	 * tagE.setAttribute("description", t.getDescription());
-	 * exE.appendChild(tagE); } for (URL url : ex.getURLs()) { Element urlE =
-	 * doc.createElement("URL"); urlE.setAttribute("url", url.toString());
-	 * exE.appendChild(urlE); }
-	 * 
-	 * for(File im:ex.getImagePaths()){ Element imgE =
-	 * doc.createElement("Image"); imgE.setAttribute("path", im.toString());
-	 * imgE.setAttribute("imageLicenseText", ex.getImageLicenseMap().get(im));
-	 * exE.appendChild(imgE); }
-	 * 
-	 * // save TransformerFactory tf = TransformerFactory.newInstance();
-	 * 
-	 * //tf.setAttribute("indent-number", 3); Transformer t =
-	 * tf.newTransformer();
-	 * 
-	 * // set parameters t.setOutputProperty(OutputKeys.INDENT, "yes"); //
-	 * t.setOutputProperty(OutputKeys.METHOD, "xml"); //
-	 * t.setOutputProperty(OutputKeys.MEDIA_TYPE, "text/xml"); // encoding
-	 * t.setOutputProperty(OutputKeys.ENCODING, "utf8");
-	 * 
-	 * FileWriter fw = new FileWriter(destination.toString() + "/" +
-	 * ex.getUnlocalizedName() + ".xml");
-	 * 
-	 * t.transform(new DOMSource(doc), new StreamResult(fw));
-	 * 
-	 * } catch (ParserConfigurationException e1) { success = false;
-	 * e1.printStackTrace(); } catch (TransformerConfigurationException e) {
-	 * success = false; e.printStackTrace(); } catch (IOException e) { success =
-	 * false; e.printStackTrace(); } catch (TransformerException e) { success =
-	 * false; e.printStackTrace(); } return success; }
-	 */
+	
+	public static boolean writeExerciseType(ExerciseType ex, File destination) {
+
+		boolean success = true; // write the tp to an xml file with DOM
+		DocumentBuilder docBuilder;
+
+		try {
+			docBuilder = DocumentBuilderFactory.newInstance()
+					.newDocumentBuilder();
+			Document doc;
+
+			doc = docBuilder.newDocument();
+
+			
+			// create root element 
+			Element	exE = doc.createElement("ExerciseType");
+			exE.setAttribute("name", ex.getLocalizedName());
+			exE.setAttribute("language", Locale.getDefault().getDisplayLanguage());
+			
+			// add root element 
+			doc.appendChild(exE);
+
+			// add description
+			Element desE = doc.createElement("Description");
+			desE.setAttribute("text", ex.getDescription());
+			exE.appendChild(desE);
+
+			// add translated names
+			Map<Locale, String> translationMap = ex.getTranslationMap();
+			for(Locale locale:translationMap.keySet()){
+				if(locale.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage()))
+					continue;
+				
+				Element localeE = doc.createElement("Locale");
+				localeE.setAttribute("language", locale.getDisplayLanguage().toString());
+				localeE.setAttribute("name", translationMap.get(locale));
+				exE.appendChild(localeE);
+			}
+			
+			for (SportsEquipment eq : ex.getRequiredEquipment()) {
+				Element wE = doc.createElement("SportsEquipment");
+				wE.setAttribute("name", eq.toString());
+				exE.appendChild(wE);
+			}
+
+			for (Muscle m : ex.getActivatedMuscles()) {
+				Element mE = doc.createElement("Muscle");
+				mE.setAttribute("name", m.toString());
+				mE.setAttribute(
+						"level",
+						Integer.toString(ex.getActivationMap().get(m)
+								.getLevel()));
+				exE.appendChild(mE);
+			}
+
+			for (ExerciseTag t : ex.getTags()) {
+				Element tagE = doc.createElement("Tag");
+			
+				//TODO
+				//tagE.setAttribute("name", t.getName());
+				//tagE.setAttribute("description", t..getDescription());
+				exE.appendChild(tagE);
+			}
+			for (URL url : ex.getURLs()) {
+				Element urlE = doc.createElement("URL");
+				urlE.setAttribute("url", url.toString());
+				exE.appendChild(urlE);
+			}
+
+			for (File im : ex.getImagePaths()) {
+				Element imgE = doc.createElement("Image");
+				imgE.setAttribute("path", im.toString());
+				imgE.setAttribute("imageLicenseText", ex.getImageLicenseMap()
+						.get(im));
+				exE.appendChild(imgE);
+			}
+
+			// save 
+			TransformerFactory 
+			tf = TransformerFactory.newInstance();
+
+			// tf.setAttribute("indent-number", 3); 
+			Transformer t =	tf.newTransformer();
+
+			// set parameters t.setOutputProperty(OutputKeys.INDENT, "yes"); //
+			t.setOutputProperty(OutputKeys.METHOD, "xml"); //
+			t.setOutputProperty(OutputKeys.MEDIA_TYPE, "text/xml"); // encoding
+			t.setOutputProperty(OutputKeys.ENCODING, "utf8");
+
+			// create parent folder if necessary
+			destination.mkdirs();
+
+			FileWriter fw = new FileWriter(destination.toString() + "/"
+					+ ex.getUnlocalizedName() + ".xml");
+
+			t.transform(new DOMSource(doc), new StreamResult(fw));
+
+		} catch (ParserConfigurationException e1) {
+			success = false;
+			e1.printStackTrace();
+		} catch (TransformerConfigurationException e) {
+			success = false;
+			e.printStackTrace();
+		} catch (IOException e) {
+			success = false;
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			success = false;
+			e.printStackTrace();
+		}
+		return success;
+	}
+	 
 }
