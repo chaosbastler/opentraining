@@ -112,6 +112,10 @@ public class DataProvider implements IDataProvider {
 
 		File customExerciseFolder = new File(mContext.getFilesDir().toString() + "/"
 				+ IDataProvider.CUSTOM_EXERCISE_FOLDER);
+		if(!customExerciseFolder.exists()){
+			customExerciseFolder.mkdirs();
+			Log.d(TAG, "Folder for custom exercises does not exist, will create it now.");
+		}
 		
 		String[] files = customExerciseFolder.list();
 
