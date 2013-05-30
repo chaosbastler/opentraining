@@ -31,7 +31,7 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/spinner_muscle"
+                android:id="@+id/spinner_equipment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/layout_stroke1"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:text="@string/muscles"
+                android:text="@string/equipment"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/released_button_background" />
 
@@ -70,14 +70,6 @@
                 android:orientation="vertical" >
             </LinearLayout>
 
-            <Spinner
-                android:id="@+id/spinner_equipment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/LinearLayout01"
-                android:layout_below="@+id/LinearLayout01"
-                android:padding="10dp" />
-
             <TextView
                 android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
@@ -85,9 +77,18 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:paddingBottom="3dp"
-                android:text="@string/equipment"
+                android:text="@string/chosen_muscles"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/released_button_background" />
+
+            <ListView
+                android:id="@+id/listview_ex_equipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/LinearLayout01"
+                android:paddingTop="5dp" >
+
+            </ListView>
 
         </RelativeLayout>
 

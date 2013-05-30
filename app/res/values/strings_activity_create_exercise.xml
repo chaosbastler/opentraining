@@ -17,11 +17,16 @@
     <string name="did_not_provide_image">You did not provide an image.</string>
     
     
-    <!-- MoreDataFragment -->
-    <string name="title_more_data_fragment">More data</string>
+    <!-- MuscleDataFragment -->
+    <string name="title_muscle_data_fragment">Muscles</string>
+    <string name="chosen_muscles">Chosen muscles</string>    
+    <string name="swipe_to_dismiss_advise">If you want to remove a list item, just swipe it away</string>
+    <string name="muscle_already_in_list">The chosen muscle has already been added.</string>
 
 
-    <!-- MoreDataFragment -->
-    <string name="title_publish_fragment">Publish</string>
+    <!-- EquipmentDataFragment -->
+    <string name="title_equipment_data_fragment">Equipment</string>
+    <string name="chosen_equipment">Chosen equipment</string>    
+    <string name="equipment_already_in_list">The chosen equipment has already been added.</string>
 
 </resources>

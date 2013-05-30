@@ -17,11 +17,16 @@
     <string name="did_not_provide_image">Es wurde kein Bild hinzugefügt.</string>  
     
 
-    <!-- MoreDataFragment -->
-    <string name="title_more_data_fragment">Weitere Daten</string>
+    <!-- MuscleDataFragment -->
+    <string name="title_muscle_data_fragment">Muskeln</string>
+    <string name="chosen_muscles">Gewählte Muskeln</string>
+    <string name="swipe_to_dismiss_advise">Listenelemente können durch swipen entfernt werden</string>
+    <string name="muscle_already_in_list">Der gewählte Muskel wurde bereits hinzugefügt</string>
 
-
-    <!-- MoreDataFragment -->
-    <string name="title_publish_fragment">Veröffentlichen</string>
-
+    
+    <!-- EquipmentDataFragment -->
+    <string name="title_equipment_data_fragment">Equipment</string>
+    <string name="chosen_equipment">Gewähltes Equipment</string>    
+    <string name="equipment_already_in_list">Das gewählte Equipment wurde bereits hinzugefügt</string>
+    
 </resources>

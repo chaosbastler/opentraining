@@ -21,7 +21,9 @@
 package de.skubware.opentraining;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
@@ -33,10 +35,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -50,6 +55,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
+import de.skubware.opentraining.activity.start_training.SwipeDismissListViewTouchListener;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -57,8 +63,11 @@ import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +80,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		ActionBar.TabListener {
 	/** Tag for logging*/
 	private final String TAG = "CreateExerciseActivity";
+	
+	/** Static String for preferences. */
+	public final static String PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE = "SHOW_SWIPE_TO_DISMISS_ADVISE";
 
 	
 	/**
@@ -188,7 +200,8 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	/** Saves the created exercise. */
 	private void saveExercise(){
 		BasicDataFragment basicDataFragment = (BasicDataFragment) mSectionsPagerAdapter.getItem(0);
-		ExtendedDataFragment extendedDataFragment = (ExtendedDataFragment) mSectionsPagerAdapter.getItem(1);
+		MuscleDataFragment muscleDataFragment = (MuscleDataFragment) mSectionsPagerAdapter.getItem(1);
+		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(2);
 
 		// handle names
 		String ex_name_english = basicDataFragment.getExerciseNameEnglish();
@@ -205,19 +218,11 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		translationMap.put(Locale.ENGLISH, ex_name_english);
 		
 		// handle muscle
-		SortedSet<Muscle> muscleList = new TreeSet<Muscle>();
-		Muscle muscle = extendedDataFragment.getMuscle();
-		if(muscle != null){
-			muscleList.add(muscle);
-		}
-		
+		SortedSet<Muscle> muscleList = new TreeSet<Muscle>(muscleDataFragment.getMuscles());
+
 		// handle equipment
-		SportsEquipment equipment= extendedDataFragment.getSportsEquipment();
-		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>();
-		if(equipment != null){
-			equipmentList.add(equipment);
-		}
-		
+		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getSportsEquipment());
+
 		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(ex_name_german).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList);
 		ExerciseType ex = exerciseBuilder.build();
 		
@@ -240,8 +245,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		
-		BasicDataFragment basicDataFragment = new BasicDataFragment();
-		ExtendedDataFragment extendedDataFragment = new ExtendedDataFragment();
+		BasicDataFragment mBasicDataFragment = new BasicDataFragment();
+		MuscleDataFragment mMuscleDataFragment = new MuscleDataFragment();
+		EquipmentDataFragment mEquipmentDataFragment = new EquipmentDataFragment();
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -252,11 +258,11 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 			switch (position) {
 			case 0:
-				return basicDataFragment;
+				return mBasicDataFragment;
 			case 1:
-				return extendedDataFragment;
+				return mMuscleDataFragment;
 			case 2:
-				return new PublishFragment();
+				return mEquipmentDataFragment;
 			}
 			
 			throw new IllegalStateException("No fragment for position: " + position);
@@ -271,11 +277,11 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case 0:
-				return getString(R.string.title_basic_data_fragment).toUpperCase();
+				return getString(R.string.title_basic_data_fragment).toUpperCase(Locale.GERMANY);
 			case 1:
-				return getString(R.string.title_more_data_fragment).toUpperCase();
+				return getString(R.string.title_muscle_data_fragment).toUpperCase(Locale.GERMANY);
 			case 2:
-				return getString(R.string.title_publish_fragment).toUpperCase();
+				return getString(R.string.title_equipment_data_fragment).toUpperCase(Locale.GERMANY);
 			}	
 			return null;
 		}
@@ -378,63 +384,179 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	
 
 
-	public static class ExtendedDataFragment extends Fragment {
-
+	public static class MuscleDataFragment extends Fragment implements OnItemSelectedListener{
 		private Spinner mMuscleSpinner;
-		private Spinner mEquipmentSpinner;
 		
-		private boolean selectedMuscle = false;
-		private boolean selectedEquipment = false;
+		private ListView mMuscleListView;
+		private ArrayAdapter<Muscle> mListAdapter;
+		private List<Muscle> mMuscleList = new ArrayList<Muscle>();
 
-		public ExtendedDataFragment() {
+
+		public MuscleDataFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View layout = inflater.inflate(R.layout.fragment_create_exercise_extended_data, container, false);
+			View layout = inflater.inflate(R.layout.fragment_create_exercise_muscle_data, container, false);
 
 			IDataProvider dataProvider = new DataProvider(getActivity());
 			
 			mMuscleSpinner = (Spinner) layout.findViewById(R.id.spinner_muscle);
 			ArrayAdapter<Muscle> madapter = new ArrayAdapter<Muscle>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, dataProvider.getMuscles());
 			mMuscleSpinner.setAdapter(madapter);
+			// if you dont post a runnable, the first item will be added to the mListAdapter on activity start
+			mMuscleSpinner.post(new Runnable() {
+				public void run() {
+					mMuscleSpinner
+							.setOnItemSelectedListener(MuscleDataFragment.this);
+					;
+				}
+			});
 			
-			mEquipmentSpinner = (Spinner) layout.findViewById(R.id.spinner_equipment);
-			ArrayAdapter<SportsEquipment> eqadapter = new ArrayAdapter<SportsEquipment>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, dataProvider.getEquipment());
-			mEquipmentSpinner.setAdapter(eqadapter);
+			mMuscleListView = (ListView) layout.findViewById(R.id.listview_ex_muscle);
+			mListAdapter = new ArrayAdapter<Muscle>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, mMuscleList);
+			mMuscleListView.setAdapter(mListAdapter);
+			
+			
+			SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
+					mMuscleListView,
+					new SwipeDismissListViewTouchListener.OnDismissCallback() {
+						@Override
+						public void onDismiss(ListView listView,
+								int[] reverseSortedPositions) {
+							for (int position : reverseSortedPositions) {
+								mListAdapter.remove((Muscle)(mListAdapter.getItem(position)));
+							}
+							mListAdapter.notifyDataSetChanged();
+						}
+					});
+			mMuscleListView.setOnTouchListener(touchListener);			
 			
 			return layout;
 		}
 		
-		public Muscle getMuscle(){
-			if(!selectedMuscle)
-				return null;
-			
-			return (Muscle) mMuscleSpinner.getSelectedItem();
+		public List<Muscle> getMuscles(){
+			return mMuscleList;
 		}
-		
-		public SportsEquipment getSportsEquipment(){
-			if(!selectedEquipment)
-				return null;
+
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			Muscle selectedItem = (Muscle) mMuscleSpinner.getItemAtPosition(position);
+			if(mMuscleList.contains(selectedItem)){
+				Toast.makeText(getActivity(), getString(R.string.muscle_already_in_list), Toast.LENGTH_LONG).show();
+				return;
+			}
 			
-			return (SportsEquipment) mEquipmentSpinner.getSelectedItem();
+			
+			mListAdapter.add(selectedItem);
+			((CreateExerciseActivity) getActivity()).swipeToDismissAdvise();
 		}
-				
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			
+		}		
 	}
 	
 
-	public static class PublishFragment extends Fragment {
 
-		public PublishFragment() {
+	public static class EquipmentDataFragment extends Fragment implements OnItemSelectedListener{
+		private Spinner mEquipmentSpinner;
+	
+		private ListView mEquipmentListView;
+		private ArrayAdapter<SportsEquipment> mListAdapter;
+		private List<SportsEquipment> mEquipmentList = new ArrayList<SportsEquipment>();
+		
+		public EquipmentDataFragment() {
 		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View layout = inflater.inflate(R.layout.fragment_create_exercise_publish, container, false);
+			View layout = inflater.inflate(R.layout.fragment_create_exercise_equipment_data, container, false);
+			
+			IDataProvider dataProvider = new DataProvider(getActivity());
 
+			mEquipmentSpinner = (Spinner) layout.findViewById(R.id.spinner_equipment);
+			ArrayAdapter<SportsEquipment> eqadapter = new ArrayAdapter<SportsEquipment>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, dataProvider.getEquipment());
+			mEquipmentSpinner.setAdapter(eqadapter);
+			// if you dont post a runnable, the first item will be added to the mListAdapter on activity start
+			mEquipmentSpinner.post(new Runnable() {
+				public void run() {
+					mEquipmentSpinner
+							.setOnItemSelectedListener(EquipmentDataFragment.this);
+					;
+				}
+			});
+			
+			mEquipmentListView = (ListView) layout.findViewById(R.id.listview_ex_equipment);
+			mListAdapter = new ArrayAdapter<SportsEquipment>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, mEquipmentList);
+			mEquipmentListView.setAdapter(mListAdapter);
+			
+			
+			SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
+					mEquipmentListView,
+					new SwipeDismissListViewTouchListener.OnDismissCallback() {
+						@Override
+						public void onDismiss(ListView listView,
+								int[] reverseSortedPositions) {
+							for (int position : reverseSortedPositions) {
+								mListAdapter.remove((SportsEquipment)(mListAdapter.getItem(position)));
+							}
+							mListAdapter.notifyDataSetChanged();
+						}
+					});
+			mEquipmentListView.setOnTouchListener(touchListener);			
+			
+			
 			return layout;
 		}
+		
+		
+		public List<SportsEquipment> getSportsEquipment(){
+			return mEquipmentList;
+		}
+
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			SportsEquipment selectedItem = (SportsEquipment) mEquipmentSpinner.getItemAtPosition(position);
+			if(mEquipmentList.contains(selectedItem)){
+				Toast.makeText(getActivity(), getString(R.string.equipment_already_in_list), Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			mListAdapter.add(selectedItem);
+			((CreateExerciseActivity) getActivity()).swipeToDismissAdvise();
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			
+		}
 	}
+	
+	/**
+	 * Shows a toast message that explains "swipe-to-dismiss".
+	 * Will only be shown once.
+	 */
+	public void swipeToDismissAdvise(){
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean showAdvise = sharedPrefs.getBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, true);
+		if(!showAdvise){
+			Log.v(TAG, "Will not show swipe-to-dismiss-advise");
+			return;
+		}
+			
+		Toast.makeText(this, getString(R.string.swipe_to_dismiss_advise), Toast.LENGTH_LONG).show();
+		
+		Log.v(TAG, "Show swipe-to-dismiss-advise has been shown once, will not be shown again.");
+
+		Editor editor = sharedPrefs.edit();
+		editor.putBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, false);
+		editor.commit();
+	}
+	
 }
