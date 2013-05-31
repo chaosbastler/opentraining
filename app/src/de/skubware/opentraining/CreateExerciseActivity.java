@@ -207,8 +207,10 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(2);
 
 		// handle names
+		Map<Locale, String> translationMap = new HashMap<Locale, String>();
 		String ex_name_english = basicDataFragment.getExerciseNameEnglish();
 		String ex_name_german = basicDataFragment.getExerciseNameGerman();
+		
 		if(ex_name_english.equals("") && ex_name_german.equals("")){
 			Log.v(TAG, "User did not enter an exercise name.");
 			Toast.makeText(this, getString(R.string.provide_name), Toast.LENGTH_LONG).show();
@@ -216,9 +218,11 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 			return;
 		}
 		
-		Map<Locale, String> translationMap = new HashMap<Locale, String>();
-		translationMap.put(Locale.GERMAN, ex_name_german);
-		translationMap.put(Locale.ENGLISH, ex_name_english);
+		if(!ex_name_english.equals(""))
+			translationMap.put(Locale.ENGLISH, ex_name_english);
+
+		if(!ex_name_german.equals(""))
+			translationMap.put(Locale.GERMAN, ex_name_german);
 		
 		// handle muscle
 		SortedSet<Muscle> muscleList = new TreeSet<Muscle>(muscleDataFragment.getMuscles());
@@ -238,7 +242,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 		
 		
-		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(ex_name_german).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList);//.imagePath(imageList);
+		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next()).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList);
 		ExerciseType ex = exerciseBuilder.build();
 		
 		// save exercise

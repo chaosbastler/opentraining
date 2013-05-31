@@ -276,8 +276,12 @@ public class XMLSaver {
 			for (File im : ex.getImagePaths()) {
 				Element imgE = doc.createElement("Image");
 				imgE.setAttribute("path", im.toString());
-				imgE.setAttribute("imageLicenseText", ex.getImageLicenseMap()
+				if(ex.getImageLicenseMap().containsKey(im)){
+					imgE.setAttribute("imageLicenseText", ex.getImageLicenseMap()
 						.get(im));
+				}else{
+					imgE.setAttribute("imageLicenseText", "Unknown");
+				}
 				exE.appendChild(imgE);
 			}
 
