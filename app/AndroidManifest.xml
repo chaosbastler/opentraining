@@ -83,7 +83,7 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
-            android:name="de.skubware.opentraining.CreateExerciseActivity"
+            android:name="de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity"
             android:label="@string/create_exercise_activity_title" android:theme="@style/Theme.Sherlock.Light">
         </activity>
     </application>

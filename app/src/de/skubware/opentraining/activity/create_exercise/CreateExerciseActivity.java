@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining;
+package de.skubware.opentraining.activity.create_exercise;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,6 +59,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
+import de.skubware.opentraining.R;
+import de.skubware.opentraining.R.id;
+import de.skubware.opentraining.R.layout;
+import de.skubware.opentraining.R.menu;
+import de.skubware.opentraining.R.string;
 import de.skubware.opentraining.activity.start_training.SwipeDismissListViewTouchListener;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;

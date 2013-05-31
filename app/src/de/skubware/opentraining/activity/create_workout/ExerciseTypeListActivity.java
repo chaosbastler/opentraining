@@ -24,10 +24,12 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 import com.actionbarsherlock.widget.SearchView;
 import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Workout;
 import android.content.Intent;
@@ -188,6 +190,16 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 		MenuItem searchItem = menu.findItem(R.id.exercise_search);
 		mSearchView = (SearchView) searchItem.getActionView();
 		setupSearchView(searchItem);
+		
+		
+		// configure menu_item_license_info
+		MenuItem menu_item_create_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_exercise);
+		menu_item_create_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
+				return true;
+			}
+		});
 
 		return true;
 	}
