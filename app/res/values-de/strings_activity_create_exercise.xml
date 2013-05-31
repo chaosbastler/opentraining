@@ -5,8 +5,9 @@
     <string name="could_not_save_exercise">Die Übung konnte nicht gespeichert werden.</string>
     <string name="exercise_saved">Die Übung wurde gespeichert.</string>
     <string name="provide_name">Du musst einen Namen eingeben.</string>
-    
+    <string name="name_already_used">Der Name wird bereits für einer andere Übung verwendet. Bitte wähle einen anderen Namen.</string>
 
+    
     <!-- Menu of CreateExerciseActivity -->
     <string name="text_about_creating_exercise">Es muss mindestens ein Name eingegeben werden, alle weiteren Angaben sind optional.</string>
     <string name="title_about_creating_exercise">Über Übungen erstellen</string>

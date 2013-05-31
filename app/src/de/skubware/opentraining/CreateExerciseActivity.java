@@ -51,6 +51,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import com.actionbarsherlock.view.Menu;
@@ -69,6 +71,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -206,6 +209,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		MuscleDataFragment muscleDataFragment = (MuscleDataFragment) mSectionsPagerAdapter.getItem(1);
 		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(2);
 
+		DataProvider dataProvider = new DataProvider(this);
+
+		
 		// handle names
 		Map<Locale, String> translationMap = new HashMap<Locale, String>();
 		String ex_name_english = basicDataFragment.getExerciseNameEnglish();
@@ -218,12 +224,26 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 			return;
 		}
 		
-		if(!ex_name_english.equals(""))
-			translationMap.put(Locale.ENGLISH, ex_name_english);
-
-		if(!ex_name_german.equals(""))
-			translationMap.put(Locale.GERMAN, ex_name_german);
 		
+		
+		if(!ex_name_english.equals("")){
+			if(dataProvider.getExerciseByName(ex_name_english) != null){
+				Toast.makeText(this, getString(R.string.name_already_used), Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			translationMap.put(Locale.ENGLISH, ex_name_english);
+		}
+			
+		if(!ex_name_german.equals("")){
+			if(dataProvider.getExerciseByName(ex_name_german) != null){
+				Toast.makeText(this, getString(R.string.name_already_used), Toast.LENGTH_LONG).show();
+				return;
+			}
+			
+			translationMap.put(Locale.GERMAN, ex_name_german);
+		}
+			
 		// handle muscle
 		SortedSet<Muscle> muscleList = new TreeSet<Muscle>(muscleDataFragment.getMuscles());
 
@@ -246,7 +266,6 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		ExerciseType ex = exerciseBuilder.build();
 		
 		// save exercise
-		DataProvider dataProvider = new DataProvider(this);
 		boolean succ = dataProvider.saveExercise(ex);
 		
 
@@ -314,7 +333,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	
 	
 
-	public static class BasicDataFragment extends Fragment {
+	public static class BasicDataFragment extends Fragment{
 		/** Tag for logging*/
 		private final String TAG = "BasicDataFragment";
 		
@@ -324,8 +343,8 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		/** Uri of the image that is returned by the Intent */
 		private Uri mTempImageUri = null;
 		
-		private TextView mTextViewExerciseNameEnglish;
-		private TextView mTextViewExerciseNameGerman;
+		private EditText mEditTextExerciseNameEnglish;
+		private EditText mEditTextExerciseNameGerman;
 
 		
 		public BasicDataFragment() {
@@ -344,8 +363,12 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 				}
 			});
 			
-			mTextViewExerciseNameEnglish = (TextView) layout.findViewById(R.id.edittext_exercise_name_english);
-			mTextViewExerciseNameGerman = (TextView) layout.findViewById(R.id.edittext_exercise_name_german);
+			mEditTextExerciseNameEnglish = (EditText) layout.findViewById(R.id.edittext_exercise_name_english);
+			mEditTextExerciseNameGerman = (EditText) layout.findViewById(R.id.edittext_exercise_name_german);
+			
+			mEditTextExerciseNameGerman.addTextChangedListener(new ExerciseNameTextWatcher(mEditTextExerciseNameGerman));
+			mEditTextExerciseNameEnglish.addTextChangedListener(new ExerciseNameTextWatcher(mEditTextExerciseNameEnglish));
+
 			
 			return layout;
 		}
@@ -396,15 +419,36 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		}
 		
 		public String getExerciseNameEnglish(){
-			return mTextViewExerciseNameEnglish.getText().toString();
+			return mEditTextExerciseNameEnglish.getText().toString();
 		}
 		
 		public String getExerciseNameGerman(){
-			return mTextViewExerciseNameGerman.getText().toString();
+			return mEditTextExerciseNameGerman.getText().toString();
 		}
 		
 		public Uri getImage(){
 			return mTempImageUri;
+		}
+
+
+		
+		private class ExerciseNameTextWatcher implements TextWatcher {
+		    private EditText mEditText;
+			IDataProvider mDataProvider = new DataProvider(getActivity());
+
+		    
+		    public ExerciseNameTextWatcher(EditText e) { 
+		        mEditText = e;
+		    }
+
+		    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+		    public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if(mDataProvider.getExerciseByName(s.toString()) != null )
+					mEditText.setError(getString(R.string.name_already_used));	
+		    }
+
+		    public void afterTextChanged(Editable s) { }
 		}
 	}
 	
