@@ -38,8 +38,11 @@ public interface IDataProvider {
 	/** The name of the folder that contains exercises .xml files and images */
 	static public final String EXERCISE_FOLDER = "opentraining-exercises";
 	
-	/** The name of the folder that contains user-created exercises .xml files and images. */
+	/** The name of the folder that contains user-created exercises .xml files */
 	static public final String CUSTOM_EXERCISE_FOLDER = "user_exercises";
+	
+	/** The name of the folder that contains user-created */
+	static public final String CUSTOM_IMAGES_FOLDER = "user_images";
 	
 	/** The name of the folder that contains exercises the example {@link Workout}s */
 	static public final String EXAMPLE_WORKOUT_FOLDER = "example_workouts";

@@ -120,7 +120,11 @@ public class DataProvider implements IDataProvider {
 			if (f.endsWith(".xml")) {
 				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
 				ExerciseType ex = parser.read(new File(customExerciseFolder + "/" + f));
-				list.add(ex);
+				if(ex != null){
+					list.add(ex);
+				}else{
+					Log.e(TAG, "Exercise parser returned null");
+				}
 			}
 		}
 

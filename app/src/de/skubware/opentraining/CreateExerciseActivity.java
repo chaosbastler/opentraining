@@ -21,6 +21,8 @@
 package de.skubware.opentraining;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +61,7 @@ import de.skubware.opentraining.activity.start_training.SwipeDismissListViewTouc
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
+import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 import android.view.View;
@@ -223,11 +226,27 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		// handle equipment
 		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getSportsEquipment());
 
-		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(ex_name_german).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList);
+		// save image
+		Uri image = basicDataFragment.getImage();
+		List<File> imageList = new ArrayList<File>();
+
+		if(image != null){
+			DataHelper dataHelper = new DataHelper(this);
+			String image_name = dataHelper.copyImageToCustomImageFolder(image);
+			imageList.add(new File(image_name));
+		}
+
+		
+		
+		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(ex_name_german).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList);//.imagePath(imageList);
 		ExerciseType ex = exerciseBuilder.build();
 		
+		// save exercise
 		DataProvider dataProvider = new DataProvider(this);
 		boolean succ = dataProvider.saveExercise(ex);
+		
+
+    
 		
 		if(!succ){
 			Toast.makeText(this, getString(R.string.could_not_save_exercise), Toast.LENGTH_LONG).show();
@@ -299,7 +318,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		private ImageView mImageView;
 		
 		/** Uri of the image that is returned by the Intent */
-		private Uri mTempImageUri;
+		private Uri mTempImageUri = null;
 		
 		private TextView mTextViewExerciseNameEnglish;
 		private TextView mTextViewExerciseNameGerman;
@@ -380,6 +399,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 			return mTextViewExerciseNameGerman.getText().toString();
 		}
 		
+		public Uri getImage(){
+			return mTempImageUri;
+		}
 	}
 	
 

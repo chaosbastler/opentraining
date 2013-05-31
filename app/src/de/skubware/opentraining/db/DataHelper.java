@@ -4,19 +4,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.List;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 
 /**
  * A class to handle I/O stuff that is not related to database or parsing .xml
  * files.
- * 
- * @author Christian Skubich
  * 
  */
 public class DataHelper {
@@ -38,7 +42,7 @@ public class DataHelper {
 
 	/**
 	 * Returns a {@code Drawable} when an image with such a name is there (in
-	 * assets folder).
+	 * assets folder or the custom exercise folder).
 	 * 
 	 * @param name
 	 *            The name of the image
@@ -57,9 +61,67 @@ public class DataHelper {
 		} catch (IOException e) {
 			Log.e(TAG, "Could not find drawable: " + name + "\n", e);
 		}
+		
+		if(img == null){
+			Log.d(TAG, "Could not find drawable: " + name + " in assets folder. Will try to find image in custom image folder.");
+			img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.CUSTOM_IMAGES_FOLDER + "/" + name);
+		}
 
+		if(img == null){
+			Log.e(TAG, "Could not find drawable in custom image folder: " + name + "\n");
+		}
+		
 		return img;
 	}
+	
+	/**
+	 * Copies the image with the Uri to the custom images folder.
+	 * 
+	 * @param source
+	 *            The Uri of the image to copy
+	 * 
+	 * @return The name of the created image
+	 */
+	public String copyImageToCustomImageFolder(Uri source) {
+		File destinationFolder = new File(mContext.getFilesDir().toString() + "/" + IDataProvider.CUSTOM_IMAGES_FOLDER);
+		destinationFolder.mkdirs();
+		
+		String image_base_name = "img_";
+		String image_name = image_base_name + "0.jpg";
+		List<String> files = Arrays.asList(destinationFolder.list());
+		for(Integer i = 0; files.contains(image_name); i++){
+			image_name = image_base_name + i + ".jpg";
+		}
+		
+		File destination  = new File(destinationFolder.toString() + "/"+ image_name);
+		
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+
+		try {
+			ContentResolver content = mContext.getContentResolver();
+			inputStream = content.openInputStream(source);
+
+			outputStream = new FileOutputStream(destination);
+			if (outputStream != null) {
+				Log.e(TAG, "Output Stream Opened successfully");
+			}
+
+			byte[] buffer = new byte[1000];
+			int bytesRead = 0;
+			while ((bytesRead = inputStream.read(buffer, 0, buffer.length)) >= 0) {
+				outputStream.write(buffer, 0, buffer.length);
+			}
+		} catch (Exception e) {
+			Log.e(TAG, "Exception occurred during saving.", e);
+			return null;
+		}
+		
+		Log.d(TAG, "Copied image to " + destination.toString());
+		
+		return image_name;
+	}
+	
 
 	/**
 	 * Loads a file from the raw folder.
