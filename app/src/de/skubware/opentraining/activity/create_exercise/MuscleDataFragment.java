@@ -65,7 +65,7 @@ public class MuscleDataFragment extends Fragment implements OnItemSelectedListen
 		mMuscleSpinner.post(new Runnable() {
 			public void run() {
 				mMuscleSpinner
-						.setOnItemSelectedListener(createExerciseActivity);
+						.setOnItemSelectedListener(MuscleDataFragment.this);
 				;
 			}
 		});

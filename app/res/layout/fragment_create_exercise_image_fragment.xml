@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_fex_detail_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    
+            <RelativeLayout
+            android:id="@+id/wrapper_muscle_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="20dp" >
+
+            <ImageView
+                android:id="@+id/imageview_exercise_image"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
+                android:src="@drawable/dummy_image" />
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/wrapper_muscle_selector"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp" >
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:text="Images"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/released_button_background" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignBottom="@+id/TextView01"
+            android:layout_alignParentLeft="true"
+            android:background="@color/text_color_table"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listview_exercise_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextView01" >
+
+        </ListView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

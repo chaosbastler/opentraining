@@ -15,9 +15,16 @@
 
     <!-- BasicDataFragment -->
     <string name="title_basic_data_fragment">Basisdaten</string>
+    <string name="exercise_name">Name der Übung</string>
+    <string name="name_english">Übungsname (Englisch)</string>
+    <string name="name_german">Übungsname (Deutsch)</string>
+    <string name="description">Beschreibung</string>
+    <string name="the_exercise_description">Eine Beschreibung der Übung</string>
+        
+    <!-- ImageFragment -->
+    <string name="title_image_fragment">Bilder</string>
     <string name="did_not_provide_image">Es wurde kein Bild hinzugefügt.</string>  
     
-
     <!-- MuscleDataFragment -->
     <string name="title_muscle_data_fragment">Muskeln</string>
     <string name="chosen_muscles">Gewählte Muskeln</string>

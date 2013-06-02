@@ -4,72 +4,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    
-            <RelativeLayout
+    <LinearLayout
+        android:id="@+id/wrapper_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
             android:id="@+id/wrapper_muscle_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="20dp" >
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp" >
 
-            <ImageView
-                android:id="@+id/imageview_exercise_image"
+            <LinearLayout
+                android:id="@+id/layout_stroke1"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="1dp"
+                android:layout_below="@+id/textView1"
                 android:layout_centerHorizontal="true"
-                android:padding="5dp"
-                android:src="@drawable/dummy_image" />
+                android:background="@color/text_color_table"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/exercise_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/released_button_background" />
+
+            <EditText
+                android:id="@+id/edittext_exercise_name_english"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/layout_stroke1"
+                android:layout_alignRight="@+id/layout_stroke1"
+                android:layout_below="@+id/layout_stroke1"
+                android:ems="10"
+                android:hint="@string/name_english" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/edittext_exercise_name_german"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/edittext_exercise_name_english"
+                android:layout_alignRight="@+id/edittext_exercise_name_english"
+                android:layout_below="@+id/edittext_exercise_name_english"
+                android:ems="10"
+                android:hint="@string/name_german" />
 
         </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/wrapper_muscle_selector"
-        android:paddingLeft="14dp"
-        android:paddingRight="14dp" >
-
-        <TextView
-            android:id="@+id/TextView01"
+        <RelativeLayout
+            android:id="@+id/RelativeLayout01"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="3dp"
-            android:text="Exercise name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/released_button_background" />
+            android:layout_height="120dp"
+            android:gravity="center_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp" >
 
-        <EditText
-            android:id="@+id/edittext_exercise_name_english"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/TextView01"
-            android:layout_below="@+id/TextView01"
-            android:ems="10"
-            android:hint="English name" />
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/TextView01"
+                android:layout_centerHorizontal="true"
+                android:background="@color/text_color_table"
+                android:orientation="vertical" >
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/edittext_exercise_name_german"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TextView01"
-            android:layout_marginTop="34dp"
-            android:ems="10"
-            android:hint="German name" >
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:paddingBottom="3dp"
+                android:text="@string/description"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/released_button_background" />
 
-            <requestFocus />
-        </EditText>
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/LinearLayout01"
+                android:layout_alignRight="@+id/LinearLayout01"
+                android:layout_below="@+id/TextView01"
+                android:ems="10"
+                android:hint="@string/the_exercise_description"
+                android:inputType="textMultiLine" />
 
-        <LinearLayout
-            android:id="@+id/LinearLayout01"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignBottom="@+id/TextView01"
-            android:layout_alignParentLeft="true"
-            android:background="@color/text_color_table"
-            android:orientation="vertical" >
+        </RelativeLayout>
 
-        </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

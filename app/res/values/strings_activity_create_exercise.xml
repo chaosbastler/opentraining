@@ -15,9 +15,17 @@
     
     <!-- BasicDataFragment -->
     <string name="title_basic_data_fragment">Basic data</string>
+    <string name="exercise_name">Exercise name</string>
+    <string name="name_english">English name</string>
+    <string name="name_german">German name</string>
+    <string name="description">Description</string>
+    <string name="the_exercise_description">A description of the exercise</string>
+    
+    
+    <!-- ImageFragment -->
+    <string name="title_image_fragment">Images</string>
     <string name="did_not_provide_image">You did not provide an image.</string>
-    
-    
+
     <!-- MuscleDataFragment -->
     <string name="title_muscle_data_fragment">Muscles</string>
     <string name="chosen_muscles">Chosen muscles</string>    

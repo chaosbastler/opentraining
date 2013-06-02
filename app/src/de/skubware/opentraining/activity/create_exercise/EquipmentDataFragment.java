@@ -64,7 +64,7 @@ public class EquipmentDataFragment extends Fragment implements OnItemSelectedLis
 		mEquipmentSpinner.post(new Runnable() {
 			public void run() {
 				mEquipmentSpinner
-						.setOnItemSelectedListener(createExerciseActivity);
+						.setOnItemSelectedListener(EquipmentDataFragment.this);
 				;
 			}
 		});

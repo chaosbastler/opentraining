@@ -184,8 +184,9 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	/** Saves the created exercise. */
 	private void saveExercise(){
 		BasicDataFragment basicDataFragment = (BasicDataFragment) mSectionsPagerAdapter.getItem(0);
-		MuscleDataFragment muscleDataFragment = (MuscleDataFragment) mSectionsPagerAdapter.getItem(1);
-		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(2);
+		ImageFragment imageFragment = (ImageFragment) mSectionsPagerAdapter.getItem(1);
+		MuscleDataFragment muscleDataFragment = (MuscleDataFragment) mSectionsPagerAdapter.getItem(2);
+		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(3);
 
 		DataProvider dataProvider = new DataProvider(this);
 
@@ -229,7 +230,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getSportsEquipment());
 
 		// save image
-		Uri image = basicDataFragment.getImage();
+		Uri image = imageFragment.getImage();
 		List<File> imageList = new ArrayList<File>();
 
 		if(image != null){
@@ -266,6 +267,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		
 		BasicDataFragment mBasicDataFragment = new BasicDataFragment();
+		ImageFragment mImageFragment= new ImageFragment();
 		MuscleDataFragment mMuscleDataFragment = new MuscleDataFragment();
 		EquipmentDataFragment mEquipmentDataFragment = new EquipmentDataFragment();
 
@@ -280,8 +282,10 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 			case 0:
 				return mBasicDataFragment;
 			case 1:
+				return mImageFragment;
+			case 2:	
 				return mMuscleDataFragment;
-			case 2:
+			case 3:
 				return mEquipmentDataFragment;
 			}
 			
@@ -290,7 +294,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 
 		@Override
 		public int getCount() {
-			return 3;
+			return 4;
 		}
 
 		@Override
@@ -299,8 +303,10 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 			case 0:
 				return getString(R.string.title_basic_data_fragment).toUpperCase(Locale.GERMANY);
 			case 1:
+				return getString(R.string.title_image_fragment).toUpperCase(Locale.GERMANY);
+			case 2:	
 				return getString(R.string.title_muscle_data_fragment).toUpperCase(Locale.GERMANY);
-			case 2:
+			case 3:
 				return getString(R.string.title_equipment_data_fragment).toUpperCase(Locale.GERMANY);
 			}	
 			return null;
