@@ -57,7 +57,7 @@ public class ImageFragment extends Fragment{
 
 	private ListView mImageListView;
 	private ExerciseImageListAdapter mListAdapter;
-	private Map<String,Bitmap> mNameImageMap= new HashMap<String,Bitmap>();
+	private List<Bitmap> mImageList= new ArrayList<Bitmap>();
 	
 	public ImageFragment() {
 	}
@@ -77,7 +77,7 @@ public class ImageFragment extends Fragment{
 
 
 		mImageListView = (ListView) layout.findViewById(R.id.listview_exercise_images);
-		mListAdapter = new ExerciseImageListAdapter(getActivity(), mNameImageMap);
+		//TODO mListAdapter = new ExerciseImageListAdapter(getActivity(), mNameImageMap);
 		mImageListView.setAdapter(mListAdapter);
 		
 		
@@ -131,7 +131,7 @@ public class ImageFragment extends Fragment{
 
 					mImageView.setImageBitmap(bitmap);
 					
-					mNameImageMap.put("Image " + mNameImageMap.keySet().size() + 1, bitmap);
+					mImageList.add(bitmap);
 					mListAdapter.notifyDataSetChanged();
 					
 					Toast.makeText(getActivity(), selectedImage.toString(),
