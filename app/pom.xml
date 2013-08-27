@@ -22,17 +22,15 @@
 	<dependency>
 		<groupId>android.support</groupId>
 		<artifactId>compatibility-v4</artifactId>
-		<version>r18</version>
+		<version>18</version>
 	</dependency>
-    
 
 	<dependency>
 		<groupId>android.support</groupId>
-		<artifactId>compatibility-v</artifactId>
-		<version>r18</version>
-	</dependency>
-    
-	
+		<artifactId>compatibility-v13</artifactId>
+		<version>18</version>
+	</dependency> 
+      
 	 <dependency>
         <groupId>com.nineoldandroids</groupId>
         <artifactId>library</artifactId>
