@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.actionbarsherlock.app.ActionBar;
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
@@ -38,15 +37,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
@@ -60,7 +61,7 @@ import android.widget.Toast;
  * An activity for creating new {@link ExerciseType}s.
  * 
  */
-public class CreateExerciseActivity extends SherlockFragmentActivity implements
+public class CreateExerciseActivity extends ActionBarActivity implements
 		ActionBar.TabListener {
 	/** Tag for logging*/
 	private final String TAG = "CreateExerciseActivity";
@@ -135,7 +136,7 @@ public class CreateExerciseActivity extends SherlockFragmentActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.activity_create_exercise, menu);
+		getMenuInflater().inflate(R.menu.activity_create_exercise, menu);
 		
 
 		// configure menu_item_rename_workout

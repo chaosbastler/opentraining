@@ -25,8 +25,6 @@ import java.io.FilenameFilter;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataProvider;
@@ -37,6 +35,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +53,7 @@ import android.widget.Toast;
  * @author Christian Skubich
  * 
  */
-public class RenameWorkoutDialogFragment extends SherlockDialogFragment {
+public class RenameWorkoutDialogFragment extends DialogFragment {
 	/** Tag for logging */
 	private static final String TAG = "RenameWorkoutDialogFragment";
 

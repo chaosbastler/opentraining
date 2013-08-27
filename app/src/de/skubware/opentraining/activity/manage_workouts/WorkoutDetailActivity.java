@@ -20,13 +20,12 @@
 
 package de.skubware.opentraining.activity.manage_workouts;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
-
 import de.skubware.opentraining.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 /**
  * An activity representing a single Workout detail screen. This activity is
@@ -36,7 +35,7 @@ import android.support.v4.app.NavUtils;
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link WorkoutDetailFragment}.
  */
-public class WorkoutDetailActivity extends SherlockFragmentActivity {
+public class WorkoutDetailActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

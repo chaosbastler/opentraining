@@ -13,7 +13,6 @@
     <string name="no_other_training_entries">There are no other training entries to show</string>
     <string name="load_other_training_entry">Show other training entry</string>
     <string name="history">History</string>
-    <string name="exercise_finished">Exercise finished</string>
     
     
     <!-- DialogFragmentAddEntry -->

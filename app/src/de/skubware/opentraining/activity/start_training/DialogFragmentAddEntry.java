@@ -24,8 +24,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter;
@@ -35,6 +33,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +50,7 @@ import android.widget.TextView;
  * {@link FitnessExercise}.
  * 
  */
-public class DialogFragmentAddEntry extends SherlockDialogFragment {
+public class DialogFragmentAddEntry extends DialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "DialogFragmentAddEntry";
 

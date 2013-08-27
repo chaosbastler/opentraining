@@ -20,9 +20,9 @@
 
 package de.skubware.opentraining.activity.start_training;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import de.skubware.opentraining.R;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 /**
  * An activity representing a single Exercise detail screen. This activity is
@@ -32,7 +32,7 @@ import android.os.Bundle;
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link FExDetailFragment}.
  */
-public class FExDetailActivity extends SherlockFragmentActivity {
+public class FExDetailActivity extends 	ActionBarActivity  {
 	/** Tag for logging */
 	public static final String TAG = "FExDetailActivity";
 

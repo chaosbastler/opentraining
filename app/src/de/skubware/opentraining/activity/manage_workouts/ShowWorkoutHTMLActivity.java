@@ -23,10 +23,6 @@ package de.skubware.opentraining.activity.manage_workouts;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.ShareActionProvider;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.Workout;
@@ -34,7 +30,12 @@ import de.skubware.opentraining.exporter.HTMLExporter;
 import de.skubware.opentraining.exporter.WorkoutExporter;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.Toast;
 import android.content.Intent;
@@ -42,7 +43,7 @@ import android.content.Intent;
 /**
  * Activity that displays the exported {@link Workout} HTML in a {@link WebView}
  */
-public class ShowWorkoutHTMLActivity extends SherlockActivity {
+public class ShowWorkoutHTMLActivity extends ActionBarActivity {
 	/** Tag for logging */
 	public static final String TAG = "ShowWorkoutHTMLActivity";
 
@@ -89,11 +90,11 @@ public class ShowWorkoutHTMLActivity extends SherlockActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.show_workout_html, menu);
+		getMenuInflater().inflate(R.menu.show_workout_html, menu);
 
 		// Set file with share history to the provider and set the share intent
 		MenuItem actionItem = menu.findItem(R.id.share);
-		ShareActionProvider actionProvider = (ShareActionProvider) actionItem.getActionProvider();
+		ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(actionItem);
 		actionProvider.setShareHistoryFileName(ShareActionProvider.DEFAULT_SHARE_HISTORY_FILE_NAME);
 
 		actionProvider.setShareIntent(createShareIntent());

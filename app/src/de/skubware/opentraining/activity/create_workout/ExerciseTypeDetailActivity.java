@@ -20,9 +20,9 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import de.skubware.opentraining.R;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 /**
  * An activity representing a single ExerciseType detail screen. This activity
@@ -33,7 +33,7 @@ import android.os.Bundle;
  * This activity is mostly just a 'shell' activity containing nothing more than
  * a {@link ExerciseTypeDetailFragment}.
  */
-public class ExerciseTypeDetailActivity extends SherlockFragmentActivity {
+public class ExerciseTypeDetailActivity extends ActionBarActivity {
 	/** Tag for logging */
 	public static final String TAG = ExerciseTypeDetailActivity.class.getName();
 

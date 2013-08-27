@@ -20,16 +20,16 @@
 
 package de.skubware.opentraining.activity.manage_workouts;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.Workout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 
 /**
  * An activity representing a list of Workouts. This activity has different
@@ -47,7 +47,7 @@ import android.util.Log;
  * {@link WorkoutListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class WorkoutListActivity extends SherlockFragmentActivity implements WorkoutListFragment.Callbacks {
+public class WorkoutListActivity extends ActionBarActivity implements WorkoutListFragment.Callbacks {
 	/** Tag for logging */
 	public static final String TAG = "WorkoutListActivity";
 

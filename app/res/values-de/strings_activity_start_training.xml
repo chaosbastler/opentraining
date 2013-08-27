@@ -1,7 +1,7 @@
 <resources>
     <!-- FExListAdapter -->
     <string name="remaining_sets">Fehlende Sätze:</string>
-    <string name="exercise_finished">Übung  beendet</string>
+    <string name="exercise_finished">Übung beendet</string>
     <string name="workout_finished">Workout beendet :)</string>
 
     <!-- FExDetailFragment -->
@@ -13,7 +13,6 @@
     <string name="no_other_training_entries">Es gibt keine weiteren Trainingeinträge.</string>
     <string name="load_other_training_entry">Anderen Trainingseintrag anzeigen</string>
     <string name="history">Trainingsverlauf</string>
-    <string name="exercise_finished">Übung vollständig</string>
 
     
     <!-- DialogFragmentAddEntry  -->

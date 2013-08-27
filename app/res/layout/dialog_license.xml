@@ -18,27 +18,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/released_button_background" />
 
-        <TextView
-            android:id="@+id/text_view_actionbarsherlock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/license_text_action_bar_sherlock"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/text_view_license_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="License of ActionBarSherlock"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/released_button_background" />
-
-        <TextView
-            android:id="@+id/text_view_open_training_license"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/disclaimer"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/text_view_license_4"

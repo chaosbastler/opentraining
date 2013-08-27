@@ -24,14 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ListFragment;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -51,7 +50,7 @@ import de.skubware.opentraining.db.IDataProvider;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ExerciseTypeListFragment extends SherlockListFragment implements OnQueryTextListener {
+public class ExerciseTypeListFragment extends ListFragment implements OnQueryTextListener {
 	/** Tag for logging */
 	public static final String TAG = "ExerciseTypeListFragment";
 

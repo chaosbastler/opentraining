@@ -20,11 +20,6 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,9 +27,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +51,7 @@ import de.skubware.opentraining.db.DataHelper;
  * either contained in a {@link ExerciseTypeListActivity} in two-pane mode (on
  * tablets) or a {@link ExerciseTypeDetailActivity} on handsets.
  */
-public class ExerciseTypeDetailFragment extends SherlockFragment {
+public class ExerciseTypeDetailFragment extends Fragment {
 	/** Tag for logging */
 	public static final String TAG = ExerciseTypeDetailFragment.class.getName();
 

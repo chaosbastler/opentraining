@@ -22,7 +22,6 @@ package de.skubware.opentraining.activity;
 
 import java.util.Calendar;
 import java.util.List;
-import com.actionbarsherlock.app.SherlockDialogFragment;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.start_training.FExListActivity;
@@ -38,6 +37,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -45,7 +45,7 @@ import android.widget.Button;
  * Dialog Fragment for choosing a {@link Workout} before starting training.
  * 
  */
-public class SelectWorkoutDialogFragment extends SherlockDialogFragment {
+public class SelectWorkoutDialogFragment extends DialogFragment {
 	/** Tag for logging */
 	public static final String TAG = "SelectWorkoutFragment";
 	

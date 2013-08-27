@@ -20,11 +20,10 @@ package de.skubware.opentraining.activity.start_training;
  * 
  */
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.SherlockListFragment;
-
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,7 +40,7 @@ import de.skubware.opentraining.basic.Workout;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class FExListFragment extends SherlockListFragment {
+public class FExListFragment extends ListFragment {
 
 	/** Tag for logging */
 	public static final String TAG = FExListFragment.class.getName();
@@ -127,7 +126,7 @@ public class FExListFragment extends SherlockListFragment {
 	public void setWorkout(Workout workout) {
 		mWorkout = workout;
 
-		FExListAdapter adapter = new FExListAdapter((SherlockFragmentActivity) getActivity(), mWorkout);
+		FExListAdapter adapter = new FExListAdapter((FragmentActivity) getActivity(), mWorkout);
 		setListAdapter(adapter);
 		
 		boolean finished = true;

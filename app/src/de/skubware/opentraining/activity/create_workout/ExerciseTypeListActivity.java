@@ -20,13 +20,7 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
+
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity;
@@ -36,9 +30,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Toast;
 
 /**
@@ -57,7 +60,7 @@ import android.widget.Toast;
  * {@link ExerciseTypeListFragment.Callbacks} interface to listen for item
  * selections.
  */
-public class ExerciseTypeListActivity extends SherlockFragmentActivity implements ExerciseTypeListFragment.Callbacks,
+public class ExerciseTypeListActivity extends ActionBarActivity implements ExerciseTypeListFragment.Callbacks,
 		ExerciseTypeDetailFragment.Callbacks {
 
 	/** Tag for logging */
@@ -124,24 +127,16 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-
-		case android.R.id.home:
+		if (item.getItemId() == android.R.id.home) {
 			if (mWorkout != null)
 				showDialog();
 			else
 				finish();
-			break;
-		case R.id.menu_item_show_workout:
+		} else if (item.getItemId() == R.id.menu_item_show_workout) {
 			showDialog();
-			break;
-
-		case R.id.menu_item_filter_settings:
+		} else if (item.getItemId() == R.id.menu_item_filter_settings) {
 			DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
 			dialog.show();
-
-			break;
-
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -184,11 +179,11 @@ public class ExerciseTypeListActivity extends SherlockFragmentActivity implement
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater infalter = getSupportMenuInflater();
+		MenuInflater infalter = getMenuInflater();
 		infalter.inflate(R.menu.exercise_list_menu, menu);
 
 		MenuItem searchItem = menu.findItem(R.id.exercise_search);
-		mSearchView = (SearchView) searchItem.getActionView();
+		mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 		setupSearchView(searchItem);
 		
 		

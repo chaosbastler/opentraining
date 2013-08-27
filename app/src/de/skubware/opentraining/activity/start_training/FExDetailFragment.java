@@ -24,23 +24,21 @@ package de.skubware.opentraining.activity.start_training;
 import java.util.Collections;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +58,7 @@ import de.skubware.opentraining.db.DataProvider;
  * either contained in a {@link FExListActivity} in two-pane mode (on tablets)
  * or a {@link FExDetailActivity} on handsets.
  */
-public class FExDetailFragment extends SherlockFragment implements DialogFragmentAddEntry.Callbacks {
+public class FExDetailFragment extends Fragment implements DialogFragmentAddEntry.Callbacks {
 	/** Tag for logging */
 	public static final String TAG = "FExDetailFragment";
 
@@ -136,7 +134,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 		
 		// set adapter
 		ListView listView = (ListView) rootView.findViewById(R.id.list);
-		final TrainingEntryListAdapter mAdapter = new TrainingEntryListAdapter((SherlockFragmentActivity) getActivity(), mExercise,  mTrainingEntry);
+		final TrainingEntryListAdapter mAdapter = new TrainingEntryListAdapter((FragmentActivity) getActivity(), mExercise,  mTrainingEntry);
 		listView.setAdapter(mAdapter);
 		
 		
@@ -304,7 +302,7 @@ public class FExDetailFragment extends SherlockFragment implements DialogFragmen
 
 		
 		ListView list = (ListView) getActivity().findViewById(R.id.list);
-		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter((SherlockFragmentActivity) getActivity(), mExercise,  mTrainingEntry);
+		TrainingEntryListAdapter adapter = new TrainingEntryListAdapter((FragmentActivity) getActivity(), mExercise,  mTrainingEntry);
 		list.setAdapter(adapter);
 	}
 

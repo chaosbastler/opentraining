@@ -20,8 +20,6 @@ package de.skubware.opentraining.activity.start_training;
  * 
  */
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FitnessExercise;
@@ -29,7 +27,9 @@ import de.skubware.opentraining.basic.Workout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 
 /**
  * An activity representing a list of Exercise. This activity has different
@@ -46,7 +46,7 @@ import android.util.Log;
  * This activity also implements the required {@link FExListFragment.Callbacks}
  * interface to listen for item selections.
  */
-public class FExListActivity extends SherlockFragmentActivity implements FExListFragment.Callbacks {
+public class FExListActivity extends ActionBarActivity implements FExListFragment.Callbacks {
 
 	/** Tag for logging */
 	public static final String TAG = FExListActivity.class.getName();

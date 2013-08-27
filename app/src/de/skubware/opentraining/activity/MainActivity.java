@@ -22,7 +22,6 @@ package de.skubware.opentraining.activity;
 
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
@@ -38,6 +37,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +48,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-public class MainActivity extends SherlockFragmentActivity {
+public class MainActivity extends FragmentActivity {
 	/** Tag for logging */
 	public static final String TAG = MainActivity.class.getName();
 

@@ -31,8 +31,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import com.actionbarsherlock.widget.ShareActionProvider;
-
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
@@ -46,6 +44,7 @@ import de.skubware.opentraining.db.parser.SportsEquipmentJSONParser;
 import de.skubware.opentraining.db.parser.WorkoutXMLParser;
 import de.skubware.opentraining.db.parser.XMLSaver;
 import android.content.Context;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 
 /**

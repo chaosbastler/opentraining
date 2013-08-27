@@ -23,7 +23,6 @@ package de.skubware.opentraining.activity.start_training;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FSet;
@@ -33,6 +32,7 @@ import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +43,14 @@ import android.widget.TextView.BufferType;
 
 public class FExListAdapter extends BaseAdapter {
 
-	private SherlockFragmentActivity mActivity;
+	private FragmentActivity mActivity;
 	private static LayoutInflater mInflater = null;
 
 	private List<FitnessExercise> mFitnessExerciseList;
 	private List<TrainingEntry> mTrainingEntryList;
 
 
-	public FExListAdapter(SherlockFragmentActivity activity, Workout workout) {
+	public FExListAdapter(FragmentActivity activity, Workout workout) {
 		mActivity = activity;
 		mInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

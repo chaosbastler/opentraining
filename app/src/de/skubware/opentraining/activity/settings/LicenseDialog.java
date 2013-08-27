@@ -54,15 +54,6 @@ public class LicenseDialog extends AlertDialog {
 		SpannableString ot = new SpannableString(activity.getString(R.string.disclaimer) + "\n\n http://www.gnu.org/licenses/gpl-3.0.html");
 		Linkify.addLinks(ot, Linkify.ALL);
 
-		TextView text_view_open_training_license = (TextView) rootView.findViewById(R.id.text_view_open_training_license);
-		text_view_open_training_license.setText(ot);
-
-		// create linkified message for text_view_actionbarsherlock
-		SpannableString abs = new SpannableString(activity.getString(R.string.license_text_action_bar_sherlock));
-		Linkify.addLinks(abs, Linkify.ALL);
-
-		TextView text_view_actionbarsherlock = (TextView) rootView.findViewById(R.id.text_view_actionbarsherlock);
-		text_view_actionbarsherlock.setText(abs);
 
 		// positive button
 		this.setButton(BUTTON_POSITIVE, activity.getString(android.R.string.ok), new OnClickListener() {
@@ -74,10 +65,6 @@ public class LicenseDialog extends AlertDialog {
 
 		// show the dialog
 		this.show();
-
-		// make textviews clickable, must be called after show()
-		((TextView) this.findViewById(R.id.text_view_open_training_license)).setMovementMethod(LinkMovementMethod.getInstance());
-		((TextView) this.findViewById(R.id.text_view_actionbarsherlock)).setMovementMethod(LinkMovementMethod.getInstance());
 
 	}
 

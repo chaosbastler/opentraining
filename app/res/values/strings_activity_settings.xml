@@ -14,15 +14,6 @@
     <string name="pref_header_licenses">Licenses</string>
     <string name="show_disclaimer_dialog">Show disclaimer dialog</string>
     <string name="open_source_licenses">Open Source licenses</string>
-    <string name="license_text_action_bar_sherlock">Copyright 2013 Jake Wharton \n\n
-        
-        Licensed under the Apache License, Version 2.0 (the \"License\"); 
-        you may not use this file except in compliance with the License. 
-        You may obtain a copy of the License at \n\n
-
-       http://www.apache.org/licenses/LICENSE-2.0 \n\n
-
-   Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
     <string name="license_text_images" translatable="false">
 The file bg.png by Subtle Patterns is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.\n
 The exercises images by Everkinetic are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.\n\n

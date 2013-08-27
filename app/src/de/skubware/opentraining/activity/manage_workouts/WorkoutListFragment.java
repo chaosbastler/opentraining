@@ -23,13 +23,12 @@ package de.skubware.opentraining.activity.manage_workouts;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -49,7 +48,7 @@ import de.skubware.opentraining.db.IDataProvider;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class WorkoutListFragment extends SherlockListFragment {
+public class WorkoutListFragment extends ListFragment {
 
 	/** Tag for logging */
 	public static final String TAG = "WorkoutListFragment";

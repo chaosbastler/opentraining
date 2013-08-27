@@ -20,8 +20,6 @@
 
 package de.skubware.opentraining.activity.start_training;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter;
@@ -33,6 +31,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,14 +44,14 @@ import android.widget.TextView;
 
 public class TrainingEntryListAdapter extends BaseAdapter {
 
-	private SherlockFragmentActivity mActivity;
+	private FragmentActivity mActivity;
 	private static LayoutInflater mInflater = null;
 
 	private FitnessExercise mFEx;
 	private TrainingEntry mTrainingEntry;
 
 
-	public TrainingEntryListAdapter(SherlockFragmentActivity activity, FitnessExercise fEx, TrainingEntry trainingEntry) {
+	public TrainingEntryListAdapter(FragmentActivity activity, FitnessExercise fEx, TrainingEntry trainingEntry) {
 		mActivity = activity;
 		mInflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
