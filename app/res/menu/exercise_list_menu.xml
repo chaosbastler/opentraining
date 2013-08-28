@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+   
+    
+    <item android:id="@+id/action_search"
+         android:title="@string/search"
+         android:icon="@drawable/icon_search"
+         yourapp:showAsAction="ifRoom|collapseActionView"
+         yourapp:actionViewClass="android.support.v7.widget.SearchView" />
 
-    <item
-        android:id="@+id/exercise_search"
-        android:actionViewClass="android.widget.SearchView"
-        android:icon="@drawable/icon_search"
-        android:showAsAction="always"
-        android:title="@string/search"/>
     <item
         android:id="@+id/menu_item_filter_settings"
         android:icon="@drawable/icon_settings"

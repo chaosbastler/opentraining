@@ -30,7 +30,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -39,7 +38,6 @@ import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Toast;
@@ -179,12 +177,16 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater infalter = getMenuInflater();
-		infalter.inflate(R.menu.exercise_list_menu, menu);
 
-		MenuItem searchItem = menu.findItem(R.id.exercise_search);
+		getMenuInflater().inflate(R.menu.exercise_list_menu, menu);
+
+		MenuItem searchItem = menu.findItem(R.id.action_search);
+		
+		if(mSearchView == null) Log.e(TAG, "MenuItem searchItem is null.");
 		mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-		setupSearchView(searchItem);
+		if(mSearchView == null) Log.e(TAG, "SearchView is null");
+		setupSearchView(mSearchView);	    
+		
 		
 		
 		// configure menu_item_license_info
@@ -196,7 +198,7 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 			}
 		});
 
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	/**
@@ -244,12 +246,13 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		mWorkout = w;
 	}
 
-	private void setupSearchView(MenuItem searchItem) {
+	private void setupSearchView(SearchView searchItem) {
 
 		OnQueryTextListener listener = (ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list);
 		
 		mSearchView.setIconified(true); 
 		mSearchView.setQuery("", false);
+	    mSearchView.setQueryHint("Some Hint");
 		mSearchView.setOnQueryTextListener(listener);
 	}
 
