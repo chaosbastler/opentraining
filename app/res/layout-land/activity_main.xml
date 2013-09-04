@@ -19,6 +19,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/activity_main_listview"
-        android:src="@drawable/logo_small" />
+        android:src="@drawable/icon_barbell_black" />
 
 </RelativeLayout>
