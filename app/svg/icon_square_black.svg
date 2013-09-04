@@ -7,16 +7,15 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="94.25"
-   height="83.75"
+   width="98.5625"
+   height="96.6875"
    id="svg2184"
    sodipodi:version="0.32"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="icon_square_gray.svg"
+   sodipodi:docname="icon_square_black.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="C:\joanna\Gfx\drawings_vector\admin\Steren_Futurist_shape_1.png"
    inkscape:export-xdpi="32.915989"
@@ -34,9 +33,9 @@
      pagecolor="#ffffff"
      id="base"
      showgrid="false"
-     inkscape:zoom="2.9258656"
-     inkscape:cx="-2.0951231"
-     inkscape:cy="60.894931"
+     inkscape:zoom="4.1377988"
+     inkscape:cx="-51.631893"
+     inkscape:cy="53.879713"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:current-layer="svg2184"
@@ -54,29 +53,6 @@
        inkscape:vp_z="743.71155 : 49.03194 : 1"
        inkscape:persp3d-origin="371.85577 : 32.68796 : 1"
        id="perspective24" />
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient5249">
-      <stop
-         style="stop-color:#e3e3e3;stop-opacity:1;"
-         offset="0"
-         id="stop5251" />
-      <stop
-         style="stop-color:#e3e3e3;stop-opacity:0;"
-         offset="1"
-         id="stop5253" />
-    </linearGradient>
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient5249"
-       id="radialGradient5255"
-       cx="398.1105"
-       cy="287.50052"
-       fx="398.1105"
-       fy="287.50052"
-       r="209.56604"
-       gradientTransform="matrix(1,0,0,0.91819829,-19.285714,-7.9105395)"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <metadata
      id="metadata7">
@@ -93,7 +69,7 @@
             <dc:title>Open Clip Art Library</dc:title>
           </cc:Agent>
         </dc:publisher>
-        <dc:title></dc:title>
+        <dc:title />
         <dc:date>2009-03-11T09:38:21</dc:date>
         <dc:description />
         <dc:source>http://openclipart.org/detail/22196/futurist-shape-1-by-steren-22196</dc:source>
@@ -132,12 +108,10 @@
     </rdf:RDF>
   </metadata>
   <rect
-     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-     id="rect3821-4"
-     width="92.246742"
-     height="81.764168"
-     x="1"
-     y="1"
-     rx="3.2531121"
-     ry="3.2531121" />
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect2983"
+     width="96.55262"
+     height="94.672836"
+     x="1.0126688"
+     y="1.0059347" />
 </svg>
