@@ -128,8 +128,8 @@ public class WorkoutDetailFragment extends Fragment {
 			public boolean onMenuItemClick(MenuItem item) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-				builder.setTitle("Really delete?");
-				builder.setMessage("Do you really want to delete this Workout? This cannot be undone.");
+				builder.setTitle(getString(R.string.really_delete));
+				builder.setMessage(getString(R.string.really_delete_long));
 
 				builder.setPositiveButton(getString(R.string.delete_workout), new OnClickListener() {
 					@Override

@@ -11,6 +11,8 @@
     <string name="delete_workout">Delete</string>
     <string name="export_workout">Export to HTML</string>
     <string name="edit_workout">Edit workout</string>
+    <string name="really_delete">Really delete?</string>
+    <string name="really_delete_long">Do you really want to delete this Workout? This cannot be undone.</string>
 
     
     <!-- RenameWorkoutDialogFragment -->

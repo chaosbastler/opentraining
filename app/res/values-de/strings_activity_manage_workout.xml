@@ -11,6 +11,8 @@
     <string name="delete_workout">Löschen</string>
     <string name="export_workout">HTML exportieren</string>
     <string name="edit_workout">Workout bearbeiten</string>
+    <string name="really_delete">Wirklich löschen?</string>
+    <string name="really_delete_long">Soll das Workout wirklich gelöscht werden? Dieser Vorgang kann nicht rückgängig gemacht werden.</string>
     
     
     <!-- RenameWorkoutDialogFragment -->
