@@ -1,11 +1,13 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:enabled="true"
-        android:showAsAction="ifRoom"
-        android:visible="true" android:title="@string/share">
+        yourapp:showAsAction="ifRoom"
+        android:title="@string/share"
+        android:visible="true">
     </item>
 
 </menu>

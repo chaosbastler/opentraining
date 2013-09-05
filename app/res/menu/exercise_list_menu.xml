@@ -12,18 +12,18 @@
     <item
         android:id="@+id/menu_item_filter_settings"
         android:icon="@drawable/icon_settings"
-        android:showAsAction="ifRoom"
+        yourapp:showAsAction="ifRoom"
         android:title="@string/filter"/>
     <item
         android:id="@+id/menu_item_show_workout"
         android:icon="@drawable/icon_exercise"
-        android:showAsAction="ifRoom"
+        yourapp:showAsAction="ifRoom"
         android:title="@string/show_workout"/>
     
     <item
         android:id="@+id/menu_item_create_exercise"
         android:icon="@drawable/icon_add"
-        android:showAsAction="ifRoom"
+        yourapp:showAsAction="ifRoom"
         android:title="@string/create_exercise_activity_title"/>
     
 </menu>

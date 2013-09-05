@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <item android:id="@+id/menu_item_rename_workout"
-          android:title="@string/rename_workout"
-          android:showAsAction="ifRoom|withText"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
 
-    <item android:id="@+id/menu_item_delete_workout"
-          android:title="@string/delete_workout"
-          android:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/menu_item_rename_workout"
+        yourapp:showAsAction="ifRoom|withText"
+        android:title="@string/rename_workout"/>
+    <item
+        android:id="@+id/menu_item_delete_workout"
+        yourapp:showAsAction="ifRoom|withText"
+        android:title="@string/delete_workout"/>
+    <item
+        android:id="@+id/menu_item_export_workout"
+        yourapp:showAsAction="ifRoom|withText"
+        android:title="@string/export_workout"/>
+    <item
+        android:id="@+id/menu_item_edit_workout"
+        yourapp:showAsAction="ifRoom|withText"
+        android:title="@string/edit_workout"/>
 
-    <item android:id="@+id/menu_item_export_workout"
-          android:title="@string/export_workout"
-          android:showAsAction="ifRoom|withText"/>
-    
-    <item android:id="@+id/menu_item_edit_workout"
-          android:title="@string/edit_workout"
-          android:showAsAction="ifRoom|withText"/>
 </menu>

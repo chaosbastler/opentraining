@@ -1,16 +1,17 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+
     <item
         android:id="@+id/menuitem_create_exercise_info"
         android:icon="@drawable/icon_about"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="Info"/>
+        android:title="Info"
+        yourapp:showAsAction="always"/>
     <item
         android:id="@+id/menuitem_save_exercise"
         android:icon="@drawable/icon_save"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="Save exercise"/>
+        android:title="Save exercise"
+        yourapp:showAsAction="always"/>
 
 </menu>

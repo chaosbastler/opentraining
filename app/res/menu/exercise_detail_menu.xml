@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <item android:id="@+id/menu_item_add_exercise"
-          android:title="@string/add_exercise"
-          android:showAsAction="always" android:icon="@drawable/icon_add"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
 
-    <item android:id="@+id/menu_item_license_info"
-          android:title="@string/license_info"
-          android:showAsAction="ifRoom" android:icon="@drawable/icon_info"/>
+    <item
+        android:id="@+id/menu_item_add_exercise"
+        android:icon="@drawable/icon_add"
+        android:title="@string/add_exercise"
+        yourapp:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_item_license_info"
+        android:icon="@drawable/icon_info"
+        android:title="@string/license_info"
+        yourapp:showAsAction="ifRoom"/>
+
 </menu>
