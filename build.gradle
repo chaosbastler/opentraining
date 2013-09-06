@@ -1,0 +1,55 @@
+// lives in the project directory
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.5.6'
+  }
+}
+
+apply plugin: 'android'
+
+repositories {
+  mavenCentral()
+}
+
+android {
+  compileSdkVersion 18
+  buildToolsVersion "18.0.1"
+
+  sourceSets {
+    main {
+      manifest {
+        srcFile 'app/AndroidManifest.xml'
+      }
+      java {
+        srcDir 'app/src'
+      }
+      res {
+        srcDir 'app/res'
+      }
+      assets {
+        srcDir 'app/assets'
+      }
+      resources {
+        srcDir 'app/src'
+      }
+    }
+    instrumentTest.setRoot('test')
+    instrumentTest {
+      java.srcDirs = ['test/src']
+      res.srcDirs = ['test/res']
+      assets.srcDirs = ['test/assets']
+      resources.srcDirs = ['test/src']
+    }
+  }
+}
+
+dependencies {
+  compile 'com.android.support:support-v4:18.0.0'
+  compile 'com.android.support:appcompat-v7:18.0.+'
+  compile fileTree(dir: 'app/libs',  include: '*.jar')
+  instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:4.2'
+}
