@@ -39,31 +39,10 @@ Building Instruction
 
 Requirements
 ------------
+
   * Git
-  * Android-SDK v17
-
-Building with ant
------------------
-
-### 1. Clone the respository
-
-    $ git clone git://github.com/chaosbastler/opentraining.git
-
-#### 2. Update project properties
-
-    NOTE: You must have git, ant/bin, android/tools in your enviroment PATH
-
-    On *nix based systems:
-
-    $ ./setup_env.sh
-
-    On windows open the `setup_env.bat`
-
-#### 4. Build the project
-    $ ant debug
-
-#### 5. Install it
-    $ ant installd
+  * Android-SDK v18
+  * Android Support Repository
 
 Building with Eclipse
 --------------------- 
@@ -91,11 +70,11 @@ Building with Eclipse
     *Click right on project 'library' -> Properties -> Android Lint Preferences -> Ignore all
 
 
-Building with maven
----------------------
+Building with gradle
+--------------------
 
 #### 1. Connect your phone with USB
 
 #### 2. Build & Install
 
-    $  cd app && mvn clean install android:deploy android:run -Dandroid.device=usb -DskipTests
+    $ gradle installDebug
