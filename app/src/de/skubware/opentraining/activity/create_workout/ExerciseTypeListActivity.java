@@ -252,7 +252,6 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		
 		mSearchView.setIconified(true); 
 		mSearchView.setQuery("", false);
-	    mSearchView.setQueryHint("Some Hint");
 		mSearchView.setOnQueryTextListener(listener);
 	}
 

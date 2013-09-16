@@ -8,6 +8,11 @@
         android:title="@string/add_exercise"
         yourapp:showAsAction="always"/>
     <item
+        android:id="@+id/menu_item_description"
+        android:icon="@drawable/icon_description"
+        android:title="@string/description"
+        yourapp:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/menu_item_license_info"
         android:icon="@drawable/icon_info"
         android:title="@string/license_info"
