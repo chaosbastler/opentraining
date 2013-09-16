@@ -17,5 +17,10 @@
         android:icon="@drawable/icon_add"
         android:title="@string/add_entry"
         yourapp:showAsAction="ifRoom"/>
-
+    <item
+        android:id="@+id/menu_item_description"
+        android:icon="@drawable/icon_description"
+        android:title="@string/description"
+        yourapp:showAsAction="ifRoom"/>
+    
 </menu>

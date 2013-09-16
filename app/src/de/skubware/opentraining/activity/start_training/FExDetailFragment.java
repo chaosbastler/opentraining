@@ -227,6 +227,20 @@ public class FExDetailFragment extends Fragment implements DialogFragmentAddEntr
 		});
 		
 		
+		// configure menu_item_description
+		MenuItem menu_item_description = (MenuItem) menu.findItem(R.id.menu_item_description);
+		menu_item_description.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setTitle(getString(R.string.description));
+				
+				
+				builder.setMessage(mExercise.getDescription());
+				builder.create().show();
+
+				return true;
+			}
+		});
 	}
 
 	/** Shows DialogFragmentAddEntry. */
