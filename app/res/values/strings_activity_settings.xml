@@ -15,7 +15,6 @@
     <string name="show_disclaimer_dialog">Show disclaimer dialog</string>
     <string name="open_source_licenses">Open Source licenses</string>
     <string name="license_text_images" translatable="false">
-The file bg.png by Subtle Patterns is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.\n
 The exercises images by Everkinetic are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.\n\n
         
 The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/.

@@ -18,6 +18,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/released_button_background" />
 
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/text_view_license_4"

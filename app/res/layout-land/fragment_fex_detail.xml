@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_fex_detail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg" >
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/wrapper_image"
@@ -17,7 +16,9 @@
         <LinearLayout
             android:id="@+id/wrapper2_image"
             android:layout_width="250dp"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:padding="3dp" >
 
             <ImageView
                 android:id="@+id/imageview"

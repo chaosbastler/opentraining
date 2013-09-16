@@ -3,7 +3,7 @@
     android:id="@+id/fragment_fex_detail_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg" >
+    android:background="#FFFFFF" >
 
     <LinearLayout
         android:id="@+id/wrapper_image"
@@ -17,7 +17,9 @@
             android:id="@+id/wrapper2_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2.82" > 
+            android:layout_weight="2.82"
+            android:background="#000000"
+            android:padding="3dp" >
 
             <ImageView
                 android:id="@+id/imageview"
