@@ -164,19 +164,7 @@ public class WorkoutDetailFragment extends Fragment {
 			}
 		});
 		
-		// configure menu_item_export_workout
-		MenuItem menu_item_export_workout = (MenuItem) menu.findItem(R.id.menu_item_export_workout);
-		menu_item_export_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				
-				Intent showHTMLIntent = new Intent(getActivity(), ShowWorkoutHTMLActivity.class);
-				showHTMLIntent.putExtra(ShowWorkoutHTMLActivity.ARG_WORKOUT, mWorkout);
-				startActivity(showHTMLIntent);
 
-				return true;
-			}
-		});
-		
 		// configure menu_item_edit_workout
 		MenuItem menu_item_edit_workout = (MenuItem) menu.findItem(R.id.menu_item_edit_workout);
 		menu_item_edit_workout.setOnMenuItemClickListener(new OnMenuItemClickListener() {
