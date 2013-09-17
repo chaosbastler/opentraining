@@ -6,7 +6,10 @@
         android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
     <header
-        android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$LicensePreferenceFragment"
         android:title="@string/pref_header_licenses" />
-
+    <header
+        android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$SyncPreferenceFragment"
+        android:title="@string/pref_header_sync_settings" />
+    
 </preference-headers>

@@ -34,8 +34,12 @@ The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/
  limitations under the License.
 	</string>	
     
-    
+    <!-- Sync settings -->
+    <string name="pref_header_sync_settings">Sync settings</string>
+    <string translatable="false" name="pref_default_exercise_sync_url">http://wger.de/api/v1/</string>
+    <string name="sync_wlan_only">Sync WIFI only</string>
+    <string name="pref_title_exercise_download_url">Sync URL</string>
+    <string name="start_sync">Start sync</string>
+    <string name="about_wger_sync">About sync with wger</string>
 
- 
-    
 </resources>

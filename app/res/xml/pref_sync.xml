@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_exercise_sync_url"
+        android:inputType="textUri"
+        android:key="exercise_sync_url"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_exercise_download_url" />
+
+     <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="sync_wlan_only"
+        android:title="@string/sync_wlan_only" />
+        
+    <Preference android:title="@string/start_sync" android:key="start_sync"/>
+    <Preference android:title="@string/about_wger_sync" android:key="about_wger_sync"/>
+
+</PreferenceScreen>

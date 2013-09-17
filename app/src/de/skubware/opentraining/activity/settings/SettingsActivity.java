@@ -20,11 +20,14 @@
 
 package de.skubware.opentraining.activity.settings;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -46,7 +49,7 @@ import de.skubware.opentraining.R;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity  implements MySyncResultReceiver.Receiver {
 	/**
 	 * Determines whether to always show the simplified settings UI, where
 	 * settings are presented in a single list. When false, settings are shown
@@ -55,6 +58,17 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+	/** Handles syncing with wger */
+    public MySyncResultReceiver mReceiver;
+
+    public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+        mReceiver = new MySyncResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
+    }
+
+    
+    
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -85,7 +99,7 @@ public class SettingsActivity extends PreferenceActivity {
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_licenses);
 
-		// add dialog 
+		// add dialog for showing license info
 		Preference open_source = this.findPreference("open_source");
 		open_source.setOnPreferenceClickListener(new OnPreferenceClickListener(){
 			@Override
@@ -95,10 +109,31 @@ public class SettingsActivity extends PreferenceActivity {
 			}
 		});
 		
+		
+		// Add 'exercise download' preferences
+		PreferenceCategory fakeHeaderExerciseDownload = new PreferenceCategory(this);
+		fakeHeaderExerciseDownload.setTitle(R.string.pref_header_sync_settings);
+		getPreferenceScreen().addPreference(fakeHeaderExerciseDownload);
+		addPreferencesFromResource(R.xml.pref_sync);
+
+		
+		// add dialog for downloading exercises
+		Preference start_sync = this.findPreference("start_sync");
+		start_sync.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+			@Override
+			public boolean onPreferenceClick(Preference arg0) {
+				startExerciseDownload();
+				return false;
+			}
+		});
+		
+		
 		// Bind the summaries of EditText preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
 		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
+		bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
+
 	}
 
 	/** {@inheritDoc} */
@@ -186,11 +221,11 @@ public class SettingsActivity extends PreferenceActivity {
 	}
 
 	/**
-	 * This fragment shows notification preferences only. It is used when the
+	 * This fragment shows license preferences only. It is used when the
 	 * activity is showing a two-pane settings UI.
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class NotificationPreferenceFragment extends PreferenceFragment {
+	public static class LicensePreferenceFragment extends PreferenceFragment {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -207,6 +242,76 @@ public class SettingsActivity extends PreferenceActivity {
 			});
 
 		}
+	}
+	
+	/**
+	 * This fragment shows sync preferences only. It is used when the
+	 * activity is showing a two-pane settings UI.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public static class SyncPreferenceFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.pref_sync);
+			
+			// add dialog 
+			Preference start_sync = this.findPreference("start_sync");
+			start_sync.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+				@Override
+				public boolean onPreferenceClick(Preference arg0) {
+					((SettingsActivity) getActivity()).startExerciseDownload();
+					return false;
+				}
+			});
+			
+			bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
+
+
+		}
+	}
+	
+	
+	// Handling exercise download comes here
+	// will be moved to an own class somewhen
+
+	
+
+	@Override
+    public void onPause() {
+    	super.onPause();
+        mReceiver.setReceiver(null); // clear receiver so no leaks.
+    }
+
+	@Override
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+        case QueryService.STATUS_RUNNING:
+            //show progress
+            break;
+        case QueryService.STATUS_FINISHED:
+            List results = resultData.getParcelableArrayList("results");
+            // do something interesting
+            // hide progress
+            break;
+        case QueryService.STATUS_ERROR:
+            // handle the error;
+            break;
+        }     
+    }
+	
+	
+
+	
+	
+	@SuppressLint("NewApi")
+	public void startExerciseDownload(){
+		
+	    final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, QueryService.class);
+	    intent.putExtra("receiver", mReceiver);
+	    intent.putExtra("command", "query");
+	    startService(intent);
+
 	}
 
 
