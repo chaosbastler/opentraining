@@ -15,7 +15,7 @@
      <CheckBoxPreference
         android:defaultValue="true"
         android:key="sync_wlan_only"
-        android:title="@string/sync_wlan_only" />
+        android:title="@string/sync_wlan_only" android:enabled="false"/>
         
     <Preference android:title="@string/start_sync" android:key="start_sync"/>
     <Preference android:title="@string/about_wger_sync" android:key="about_wger_sync"/>

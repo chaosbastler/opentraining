@@ -21,5 +21,6 @@
     <string name="pref_title_exercise_download_url">Synchronisations URL</string>
     <string name="start_sync">Synchronisation starten</string>
     <string name="about_wger_sync">Über Synchronisation mit wger</string>
-        
+    <string name="about_wger_sync_fulltext">Zur Zeit können nur neue Übungen heruntergeladen werden. In Zukunft können eventuell auch Trainingspläne mit wger synchronisert werden. Sämtliche Daten werden nur (SSL-)verschlüsselt übertragen.</string>
+
 </resources>

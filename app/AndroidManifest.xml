@@ -90,6 +90,9 @@
             android:name="de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity"
             android:label="@string/create_exercise_activity_title">
         </activity>
+        
+        <service android:enabled="true" android:name="de.skubware.opentraining.activity.settings.OpenTrainingSyncService" />
+        
     </application>
 
 </manifest>

@@ -21,34 +21,74 @@
 package de.skubware.opentraining.activity.settings;
 
 
+import java.io.IOException;
+import java.util.List;
+
+import de.skubware.opentraining.basic.ExerciseType;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 
-public class QueryService extends IntentService {
+public class OpenTrainingSyncService extends IntentService {
+	/** Indicates that the query is running */
 	public static final int STATUS_RUNNING = 1;
+	/** Indicates that the query is finished*/
 	public static final int STATUS_FINISHED = 2;
+	/** Indicates that the query could not be executed properly */
 	public static final int STATUS_ERROR = 3;
 	
-	private static final String TAG = "QueryService";
+	
+	public static final String EXTRA_VERSION_CODE = "version";
+	public static final String EXTRA_HOST = "host";
+	
+	public static final int DEFAULT_PORT = 80;
+	
+	/** The used {@link RestClient}. */
+	private RestClient mClient;
+	
+	private String host;
+	private int version;
+	private int port;
+
+	/** Tag for logging */
+	private static final String TAG = "OpenTrainingSyncService";
 
 	
-	public QueryService(String name) {
-		super(name);
+	
+	public OpenTrainingSyncService() {
+		super(TAG);
+		Log.d(TAG, "OpenTrainingSyncService created");
+		
+
+		//TODO get Port from preferences
 	}
 
 	protected void onHandleIntent(Intent intent) {
+		Log.d(TAG, "onHandleIntent()");
+
+		version = intent.getIntExtra(EXTRA_VERSION_CODE, -1);
+		host = intent.getStringExtra(EXTRA_HOST);
+		port = 443;
+
+		
         final ResultReceiver receiver = intent.getParcelableExtra("receiver");
         String command = intent.getStringExtra("command");
         Bundle b = new Bundle();
         if(command.equals("query")) {
             receiver.send(STATUS_RUNNING, Bundle.EMPTY);
             try {
-                // get some data or something           
-            	//TODO add real data
-                b.putParcelableArrayList("results", null);
+            	
+            	// set up REST-Client
+            	mClient = new RestClient(host, port, "https", version);
+
+            	
+            	String exercises = getExercisesAsJSON();
+                b.putString("exercises", exercises);
+
                 receiver.send(STATUS_FINISHED, b);
             } catch(Exception e) {
                 b.putString(Intent.EXTRA_TEXT, e.toString());
@@ -57,4 +97,14 @@ public class QueryService extends IntentService {
         }
         this.stopSelf();
     }
+	
+	private String getExercisesAsJSON() throws IOException{
+		Log.d(TAG, "getExercisesAsJSON()");
+    	return mClient.get("/api/v1/exercise/");
+	}
+	
+	private List<ExerciseType> parseJSONExercises(){
+		return null;
+	}
+
 }

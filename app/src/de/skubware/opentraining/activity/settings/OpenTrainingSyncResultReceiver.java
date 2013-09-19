@@ -25,10 +25,10 @@ import android.os.Handler;
 import android.os.ResultReceiver;
 
 
-public class MySyncResultReceiver extends ResultReceiver {
+public class OpenTrainingSyncResultReceiver extends ResultReceiver {
     private Receiver mReceiver;
 
-    public MySyncResultReceiver(Handler handler) {
+    public OpenTrainingSyncResultReceiver(Handler handler) {
         super(handler);
     }
 

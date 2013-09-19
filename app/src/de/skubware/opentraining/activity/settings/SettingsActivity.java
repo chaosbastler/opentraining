@@ -20,10 +20,12 @@
 
 package de.skubware.opentraining.activity.settings;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +36,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.List;
 
 import de.skubware.opentraining.R;
@@ -49,7 +54,7 @@ import de.skubware.opentraining.R;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends PreferenceActivity  implements MySyncResultReceiver.Receiver {
+public class SettingsActivity extends PreferenceActivity  implements OpenTrainingSyncResultReceiver.Receiver {
 	/**
 	 * Determines whether to always show the simplified settings UI, where
 	 * settings are presented in a single list. When false, settings are shown
@@ -58,12 +63,15 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
 
+	/** Tag for logging */
+	public static final String TAG = "SettingsActivity";
+	
 	/** Handles syncing with wger */
-    public MySyncResultReceiver mReceiver;
+    public OpenTrainingSyncResultReceiver mReceiver;
 
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
-        mReceiver = new MySyncResultReceiver(new Handler());
+        mReceiver = new OpenTrainingSyncResultReceiver(new Handler());
         mReceiver.setReceiver(this);
     }
 
@@ -117,7 +125,7 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 		addPreferencesFromResource(R.xml.pref_sync);
 
 		
-		// add dialog for downloading exercises
+		// add sync action
 		Preference start_sync = this.findPreference("start_sync");
 		start_sync.setOnPreferenceClickListener(new OnPreferenceClickListener(){
 			@Override
@@ -127,6 +135,16 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 			}
 		});
 		
+		
+		// add dialog with information about syncing with wger
+		Preference about_wger_sync = this.findPreference("about_wger_sync");
+		about_wger_sync.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+			@Override
+			public boolean onPreferenceClick(Preference arg0) {
+				showInfoAboutSyncing();					
+				return false;
+			}
+		});
 		
 		// Bind the summaries of EditText preferences to
 		// their values. When their values change, their summaries are updated
@@ -255,7 +273,7 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_sync);
 			
-			// add dialog 
+			// add sync action 
 			Preference start_sync = this.findPreference("start_sync");
 			start_sync.setOnPreferenceClickListener(new OnPreferenceClickListener(){
 				@Override
@@ -265,6 +283,17 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 				}
 			});
 			
+			// add dialog with information about syncing with wger
+			Preference about_wger_sync = this.findPreference("about_wger_sync");
+			about_wger_sync.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+				@Override
+				public boolean onPreferenceClick(Preference arg0) {
+					((SettingsActivity) getActivity()).showInfoAboutSyncing();					
+					return false;
+				}
+			});
+			
+			
 			bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
 
 
@@ -272,6 +301,16 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 	}
 	
 	
+	/**
+	 * Shows a dialog with information about syncing with wger.
+	 */
+	private void showInfoAboutSyncing() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(getString(R.string.about_wger_sync));
+		builder.setMessage(getString(R.string.about_wger_sync_fulltext));
+		builder.create().show();
+	}
+
 	// Handling exercise download comes here
 	// will be moved to an own class somewhen
 
@@ -286,15 +325,20 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 	@Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
-        case QueryService.STATUS_RUNNING:
+        case OpenTrainingSyncService.STATUS_RUNNING:
+            Toast.makeText(this, "onReceiveResult: Running!", Toast.LENGTH_SHORT).show();
             //show progress
             break;
-        case QueryService.STATUS_FINISHED:
-            List results = resultData.getParcelableArrayList("results");
+        case OpenTrainingSyncService.STATUS_FINISHED:
+            String exercises = resultData.getString("exercises");
+            Log.d(TAG, "Exercises: " + exercises);
+            Toast.makeText(this, "onReceiveResult: Finished!", Toast.LENGTH_LONG).show();
             // do something interesting
             // hide progress
             break;
-        case QueryService.STATUS_ERROR:
+        case OpenTrainingSyncService.STATUS_ERROR:
+            Toast.makeText(this, "onReceiveResult: Error!", Toast.LENGTH_LONG).show();
+            Log.e(TAG, resultData.getString(Intent.EXTRA_TEXT));
             // handle the error;
             break;
         }     
@@ -302,14 +346,35 @@ public class SettingsActivity extends PreferenceActivity  implements MySyncResul
 	
 	
 
-	
-	
-	@SuppressLint("NewApi")
 	public void startExerciseDownload(){
+		Log.d(TAG, "startExerciseDownload()");
 		
-	    final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, QueryService.class);
+		// get version from context
+		int version = -1;
+		try {
+			version = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+		} catch (NameNotFoundException e) {
+			Log.wtf(TAG, "Could not get VersionCode.", e);
+		}
+
+		// get host from preferences
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		if(!settings.contains("exercise_sync_url"))
+			Log.e(TAG, "Could not find preference 'string exercise_sync_url'");
+		String host = settings.getString("exercise_sync_url", getApplicationContext().getString(R.string.pref_default_exercise_sync_url));
+				
+		
+		
+		
+		
+		
+	    final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, OpenTrainingSyncService.class);
 	    intent.putExtra("receiver", mReceiver);
 	    intent.putExtra("command", "query");
+	    intent.putExtra("host", host);
+	    intent.putExtra("version", version);
+	    intent.putExtra("port", 80);
+	    
 	    startService(intent);
 
 	}

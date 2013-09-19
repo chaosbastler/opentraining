@@ -20,47 +20,53 @@
 
 package de.skubware.opentraining.test.sync;
 
-import java.net.URL;
-
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.test.AndroidTestCase;
-import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.FSet;
-import de.skubware.opentraining.basic.FitnessExercise;
-import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.basic.FSet.SetParameter.*;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.test.ServiceTestCase;
+import de.skubware.opentraining.activity.settings.OpenTrainingSyncResultReceiver;
+import de.skubware.opentraining.activity.settings.OpenTrainingSyncService;
 
 /**
  * Tests downloading exercises from wger.
  *
  */
-public class DownloadExercisesTest extends AndroidTestCase {
+public class DownloadExercisesTest extends ServiceTestCase<OpenTrainingSyncService>  implements OpenTrainingSyncResultReceiver.Receiver{
+
 	/** Tag for logging */
 	public static final String TAG = "DownloadExercisesTest";
 
-	final String WGER_URL = "http://wger.de";
+	boolean finished = false;
 	
-	final String EXERCISE_NAME_1 = "Curl";
-	final String EXERCISE_NAME_2 = "Crunch";
-	final String EXERCISE_NAME_3 = "Benchpress";
-	
-	public void testAvailability() {
-		boolean online = false;
-		ConnectivityManager cm = (ConnectivityManager) getContext()
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-			online = true;
-		}
-		
-		assertTrue("No internet connection available, tests can't run.", online);
+	public DownloadExercisesTest() {
+		super(OpenTrainingSyncService.class);
 	}
 
-	public void testDownload(){
+	
+	static final String WGER_URL = "http://wger.de";
 
 
+	public void testDownload() throws InterruptedException{
+		OpenTrainingSyncResultReceiver mReceiver = new OpenTrainingSyncResultReceiver(new Handler());
+	    mReceiver.setReceiver(this);
+		
+		
+		final Intent intent = new Intent(Intent.ACTION_SYNC, null, getContext(), OpenTrainingSyncService.class);
+		intent.putExtra("receiver", mReceiver);
+		intent.putExtra("command", "query");
+		startService(intent);
+
+		Thread.sleep(5000); 
+
+		assertTrue(finished);
+		
+	}
+
+
+	@Override
+	public void onReceiveResult(int resultCode, Bundle resultData) {
+		//TODO check result
+		finished = true;
 	}
 
 }
