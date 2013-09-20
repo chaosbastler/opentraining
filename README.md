@@ -61,13 +61,14 @@ Building with Eclipse
 
 #### 4. Import 'app'
     * File -> Import -> Existing Projects into Workspace
+#### 5. Import 'test'
+    * File -> Import -> Existing Projects into Workspace
 
-#### 5. Import ActionBarSherlock
-    *File -> New -> Other -> Android Project from Existing Code
-    *Root Directory: choose ActionBarSherlock/library
+#### 6. Import support library
+    * Instructions: http://developer.android.com/tools/support-library/setup.html#add-library; 'Adding libraries with resources', step 1 to 4 should be enough
 
-#### 6. Disable Lint für ActionBarSherlock
-    *Click right on project 'library' -> Properties -> Android Lint Preferences -> Ignore all
+#### 6. Disable Lint für support library
+    *Click right on project 'android-support-v7-appcompat' -> Properties -> Android Lint Preferences -> Ignore all
 
 
 Building with gradle
