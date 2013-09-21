@@ -331,7 +331,6 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
             break;
         case OpenTrainingSyncService.STATUS_FINISHED:
             String exercises = resultData.getString("exercises");
-            Log.d(TAG, "Exercises: " + exercises);
             Toast.makeText(this, "onReceiveResult: Finished!", Toast.LENGTH_LONG).show();
             // do something interesting
             // hide progress

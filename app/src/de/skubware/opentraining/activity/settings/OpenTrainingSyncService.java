@@ -20,11 +20,12 @@
 
 package de.skubware.opentraining.activity.settings;
 
-
 import java.io.IOException;
-import java.util.List;
+import org.json.JSONException;
 
-import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.activity.settings.sync.WgerJSONParser;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -32,7 +33,10 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 
-
+/**
+ * A service for syncing OpenTraining with wger.
+ *
+ */
 public class OpenTrainingSyncService extends IntentService {
 	/** Indicates that the query is running */
 	public static final int STATUS_RUNNING = 1;
@@ -41,14 +45,21 @@ public class OpenTrainingSyncService extends IntentService {
 	/** Indicates that the query could not be executed properly */
 	public static final int STATUS_ERROR = 3;
 	
-	
+	/** Key for intent extra (version of Open Training) */
 	public static final String EXTRA_VERSION_CODE = "version";
+	/** Key for intent extra (host) */
 	public static final String EXTRA_HOST = "host";
 	
-	public static final int DEFAULT_PORT = 80;
+	/** The path for getting the exercises as JSON */
+	public static final String EXERCISE_REQUEST_PATH = "/api/v1/exercise/?limit=1000";
+	/** The path for getting the languages as JSON */
+	public static final String LANGUAGE_REQUEST_PATH = "/api/v1/language/";
+	/** The path for getting the muscles as JSON */
+	public static final String MUSCLE_REQUEST_PATH = "/api/v1/muscle/";
 	
 	/** The used {@link RestClient}. */
 	private RestClient mClient;
+	
 	
 	private String host;
 	private int version;
@@ -72,7 +83,6 @@ public class OpenTrainingSyncService extends IntentService {
 
 		version = intent.getIntExtra(EXTRA_VERSION_CODE, -1);
 		host = intent.getStringExtra(EXTRA_HOST);
-		port = 443;
 
 		
         final ResultReceiver receiver = intent.getParcelableExtra("receiver");
@@ -91,6 +101,7 @@ public class OpenTrainingSyncService extends IntentService {
 
                 receiver.send(STATUS_FINISHED, b);
             } catch(Exception e) {
+            	Log.e(TAG, "Error, could not get exercises from server: " + e.toString(), e);
                 b.putString(Intent.EXTRA_TEXT, e.toString());
                 receiver.send(STATUS_ERROR, b);
             }    
@@ -98,13 +109,30 @@ public class OpenTrainingSyncService extends IntentService {
         this.stopSelf();
     }
 	
-	private String getExercisesAsJSON() throws IOException{
+	private String getExercisesAsJSON() throws IOException, JSONException{
 		Log.d(TAG, "getExercisesAsJSON()");
-    	return mClient.get("/api/v1/exercise/");
+		IDataProvider dataProvider = new DataProvider(this.getApplicationContext());
+		
+		// get exercises from server
+		String exercisesAsJSON = mClient.get(EXERCISE_REQUEST_PATH);
+		Log.v(TAG, "exercisesAsJSON: " + exercisesAsJSON);
+		
+		// get languages from server
+		String languagesAsJSON = mClient.get(LANGUAGE_REQUEST_PATH);
+		Log.v(TAG, "languagesAsJSON: " + languagesAsJSON);
+
+		// get muscles from server
+		String musclesAsJSON = mClient.get(MUSCLE_REQUEST_PATH);
+		Log.v(TAG, "musclesAsJSON: " + musclesAsJSON);
+
+		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON , dataProvider);
+		wgerParser.getNewExerciseList();
+		
+		
+    	return exercisesAsJSON;
 	}
+
 	
-	private List<ExerciseType> parseJSONExercises(){
-		return null;
-	}
+
 
 }

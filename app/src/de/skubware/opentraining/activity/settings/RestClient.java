@@ -90,7 +90,7 @@ class RestClient {
 	 * @param hostname
 	 *            The host name of the server
 	 * @param port
-	 *            The TCP port of the server that should be adressed
+	 *            The TCP port of the server that should be addressed
 	 * @param scheme
 	 *            The used protocol scheme
 	 * @param versionCode
