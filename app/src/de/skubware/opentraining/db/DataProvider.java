@@ -174,7 +174,12 @@ public class DataProvider implements IDataProvider {
 
 	@Override
 	public boolean exerciseExists(String name) {
-		return getExerciseByName(name) != null;
+		for (ExerciseType ex : this.getExercises()) {
+			if(ex.getAlternativeNames().contains(name))
+				return true;
+		}
+		
+		return false;
 	}
 
 	@Override

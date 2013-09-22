@@ -21,6 +21,7 @@
 package de.skubware.opentraining.activity.settings.sync;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -45,11 +46,15 @@ public class WgerJSONParser {
 	
 	private List<ExerciseType> mNewExerciseList = new ArrayList<ExerciseType>();
 	
+	private IDataProvider mDataProvider;
+	
 	/** Tag for logging */
 	private static final String TAG = "ExerciseJSONParser";
 	
 	
 	public WgerJSONParser(String exerciseJSONString, String languageJSONString, String muscleJSONString, IDataProvider dataProvider) throws JSONException{
+		mDataProvider = dataProvider;
+		
 		// parse languages
 		SparseArray<Locale> localeSparseArray = parseLanguages(languageJSONString);
 		// parse muscles
@@ -70,6 +75,14 @@ public class WgerJSONParser {
 			if(dataProvider.exerciseExists(name))
 				continue;
 
+			// status - used for sorting out not authorized/refused exercises
+			// (1: not authorized, means that a user suggested it but it hasn't been
+			// checked by the admin yet; 3: refused)
+			Integer status = jsonExercise.getInt("status");
+			if(status == 1 || status == 3)
+				continue;
+			
+			
 			ExerciseType.Builder builder = new ExerciseType.Builder(name);
 			
 			// category (unused)
@@ -102,11 +115,7 @@ public class WgerJSONParser {
 			// resource_uri (unused)
 			//String resource_uri = jsonExercise.getString("resource_uri");
 			
-			// status - used for sorting out not authorized exercises
-			// (not authorized means that a user suggested it but it hasn't been
-			// checked by the admin yet)
-			String status = jsonExercise.getString("status");
-			
+
 			// muscles
 			JSONArray muscleArray = jsonExercise.getJSONArray("muscles");
 			for (int l = 0; l < muscleArray.length(); l++) {
@@ -120,7 +129,7 @@ public class WgerJSONParser {
 	
 	private SparseArray<Locale> parseLanguages(String languagesJSONString) throws JSONException{
 		JSONObject mainObject = new JSONObject(languagesJSONString);
-		Log.d(TAG, mainObject.toString());
+		Log.d(TAG, "language JSON: " + mainObject.toString());
 		JSONArray languageArray = mainObject.getJSONArray("objects");
 
 		SparseArray<Locale> languageSparseArray = new SparseArray<Locale>();
@@ -137,11 +146,46 @@ public class WgerJSONParser {
 			languageSparseArray.put(id, locale);
 			Log.v(TAG, "parsed language, full_name" + full_name + ",short_name: " + short_name + ", id: " + id + ", Locale: " + locale.toString());
 		}
+		
 		return languageSparseArray;
 	}
 	
-	private SparseArray<Muscle> parseMuscles(String muscles){
-		return null;
+	/**
+	 * Example for muscle JSON:
+	 * 
+	 * {"meta": 
+	 * {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 15}, 
+	 * "objects": 
+	 * [{"id": 2, "is_front": true, "name": "Anterior deltoid", "resource_uri": "/api/v1/muscle/2/"}]}
+	 * 
+	 * @param musclesJSONString
+	 * @return
+	 */
+	private SparseArray<Muscle> parseMuscles(String musclesJSONString) throws JSONException{
+		JSONObject mainObject = new JSONObject(musclesJSONString);
+		Log.d(TAG, "muscle JSON: " + mainObject.toString());
+		JSONArray muscleArray = mainObject.getJSONArray("objects");
+
+		SparseArray<Muscle> muscleSparseArray = new SparseArray<Muscle>();
+		
+		// parse each exercise of the JSON Array
+		for (int i = 0; i < muscleArray.length(); i++) {
+			JSONObject languageObject = muscleArray.getJSONObject(i);
+			String name = languageObject.getString("name");
+			// unused
+			// Boolean is_front = languageObject.getBoolean("is_front");
+			// unused
+			// String resource_uri = languageObject.getString("resource_uri");
+			Integer id = languageObject.getInt("id");
+			
+			Muscle muscle = mDataProvider.getMuscleByName(name);
+			if(muscle == null)
+				Log.e(TAG, "Could not find muscle: " + name);
+			
+			muscleSparseArray.put(id, muscle);
+		}
+		
+		return muscleSparseArray;
 	}
 
 	

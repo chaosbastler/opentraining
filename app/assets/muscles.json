@@ -1,48 +1,52 @@
 [ 
  {
-   "de": { "name" : "Bauchmuskeln", "alternative_names": ["Bauchmuskel", "Bauch"] },
+   "de": { "name" : "Bauchmuskeln", "alternative_names": ["Bauchmuskel", "Bauch", "Obliquus externus abdominis", "Rectus abdominis"] },
    "en": { "name" : "Abdominal muscle" }
  },
   
  {
-   "de": { "name" : "Rückenmuskeln", "alternative_names": ["Rückenmuskel", "Rücken"] },
+   "de": { "name" : "Rückenmuskeln", "alternative_names": ["Rückenmuskel", "Rücken", "Latissimus dorsi"] },
    "en": { "name" : "Back muscle", "alternative_names": ["Back"]  }
  },
  
  {
-   "de": { "name" : "Bizeps" },
+   "de": { "name" : "Bizeps", "alternative_names": ["Biceps brachii", "Biceps femoris"] },
    "en": { "name" : "Biceps" }
  },
     
  {
-   "de": { "name" : "Brustmuskel" },
+   "de": { "name" : "Brustmuskel", "alternative_names": ["Pectoralis major"] },
    "en": { "name" : "Chest" }
  },
  
-     
  {
-   "de": { "name" : "Po" },
+   "de": { "name" : "Po", "alternative_names": ["Gluteus maximus"] },
    "en": { "name" : "Derriere" }
  },
  
  {
-   "de": { "name" : "Unterschenkelmuskel" },
+   "de": { "name" : "Unterschenkelmuskel", "alternative_names": ["Unterschenkel", "Gastrocnemius", "Soleus"] },
    "en": { "name" : "Lower leg" }
  },
     
  {
-   "de": { "name" : "Schulter" },
+   "de": { "name" : "Schulter", "alternative_names": ["Anterior deltoid", "Serratus anterior", "Trapezius"] },
    "en": { "name" : "Shoulder" }
  }, 
  
  {
-   "de": { "name" : "Oberschenkelmuskel" },
+   "de": { "name" : "Oberschenkelmuskel", "alternative_names": ["Quadriceps femoris"] },
    "en": { "name" : "Thigh" }
  },   
  
  {
-   "de": { "name" : "Trizeps" },
+   "de": { "name" : "Trizeps", "alternative_names": ["Triceps brachii"] },
    "en": { "name" : "Triceps", "alternative_names": ["Triceps muscle"]  }
+ },
+ 
+ {
+   "de":{ "name" : "Oberarm", "alternative_names": ["Musculus brachialis", "Brachialis"] },
+   "en": { "name" : "upper arm" }
  }
     
 ]
