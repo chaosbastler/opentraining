@@ -17,10 +17,27 @@
     
     <!-- Sync settings -->
     <string name="pref_header_sync_settings">Synchronisation</string>
-    <string name="sync_wlan_only">Nur bei WLAN synchronisieren</string>
     <string name="pref_title_exercise_download_url">Synchronisations URL</string>
     <string name="start_sync">Synchronisation starten</string>
     <string name="about_wger_sync">Über Synchronisation mit wger</string>
     <string name="about_wger_sync_fulltext">Zur Zeit können nur neue Übungen heruntergeladen werden. In Zukunft können eventuell auch Trainingspläne mit wger synchronisert werden. Sämtliche Daten werden nur (SSL-)verschlüsselt übertragen.</string>
-
-</resources>
+    <string name="sync_only_my_language">Nur deutschsprachige Übungen</string>
+    <string name="sync_only_my_language_summary">Nur lokalisierte Übungen synchronisieren</string>
+    <string name="sync_only_exercises_with_images">Nur Übungen mit Bildern</string>
+    <string name="sync_only_exercises_with_images_summary">Übungen ohne Bilder nicht synchronisieren</string>
+    
+    <!-- Sync progess -->
+    <string name="no_internet_connection">Synchronisierung kann nicht gestartet werden: Keine Internetverbindung vorhanden</string> 
+    <string name="sync_canceled">Synchronisation abgebrochen</string>
+	<string name="sync_in_progess">Synchronisiere &#8230;</string>
+	<string name="downloading_exercises">Übungen werden heruntergeladen</string>
+	<string name="downloading_language_files">Sprachdaten herunterladen language files</string>
+	<string name="downloading_muscle_files">Muskeldaten herunterladen</string>
+	<string name="verifying_exercises">Übungen überprüfen</string>
+	<string name="sync_finished">Synchronisation beendet</string>
+	<string name="sync_finished_msg">Gesamtzahl exercises:  %1$d \n Lokalisierte Übungen:  %2$d \n Übungen mit Bildern:  %2$d \n Hinzugefügte Übungen:  %3$d</string>
+	<string name="sync_error">Fehler bei der Synchronisation</string>
+	<string name="sync_error_msg">Es ist ein Fehler währen der Synchronisation aufgetreten.</string>
+	<string name="show_more_information_about_error">Weitere Informationen über den Fehler.</string>
+	
+	</resources>

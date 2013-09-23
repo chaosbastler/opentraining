@@ -22,11 +22,17 @@ package de.skubware.opentraining.activity.settings;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -68,6 +74,10 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	
 	/** Handles syncing with wger */
     public OpenTrainingSyncResultReceiver mReceiver;
+
+    /** Shows sync progress */
+	ProgressDialog mProgressDialog;
+
 
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
@@ -325,21 +335,64 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	@Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
-        case OpenTrainingSyncService.STATUS_RUNNING:
-            Toast.makeText(this, "onReceiveResult: Running!", Toast.LENGTH_SHORT).show();
-            //show progress
+        case OpenTrainingSyncService.STATUS_RUNNING_DOWNLOAD_EXERCISES:
+        	Log.v(TAG, "Sync status: STATUS_RUNNING_DOWNLOAD_EXERCISES");		
             break;
+        case OpenTrainingSyncService.STATUS_RUNNING_DOWNLOAD_LANGUAGE_FILES:
+        	Log.v(TAG, "Sync status: STATUS_RUNNING_DOWNLOAD_LANGUAGE_FILES");
+    		mProgressDialog.setMessage(getString(R.string.downloading_language_files));
+            break;      
+        case OpenTrainingSyncService.STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES:
+        	Log.v(TAG, "Sync status: STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES");
+    		mProgressDialog.setMessage(getString(R.string.downloading_muscle_files));
+            break;                  
+        case OpenTrainingSyncService.STATUS_RUNNING_CHECKING_EXERCISES:
+        	Log.v(TAG, "Sync status: STATUS_RUNNING_CHECKING_EXERCISES");
+    		mProgressDialog.setMessage(getString(R.string.verifying_exercises));
+            break;
+            
         case OpenTrainingSyncService.STATUS_FINISHED:
+        	Log.v(TAG, "Sync status: STATUS_FINISHED");
+
             String exercises = resultData.getString("exercises");
             Toast.makeText(this, "onReceiveResult: Finished!", Toast.LENGTH_LONG).show();
+            
+            // make sure to dismiss progress dialog
+			mProgressDialog.dismiss();
+			// show sync-finished dialog instead
+        	AlertDialog.Builder finishedDialogBuilder = new AlertDialog.Builder(this);
+        	finishedDialogBuilder.setTitle(getString(R.string.sync_finished));
+        	finishedDialogBuilder.setMessage(getString(R.string.sync_finished_msg, 5 ,3,0,0));
+        	finishedDialogBuilder.create().show();
             // do something interesting
             // hide progress
             break;
         case OpenTrainingSyncService.STATUS_ERROR:
-            Toast.makeText(this, "onReceiveResult: Error!", Toast.LENGTH_LONG).show();
-            Log.e(TAG, resultData.getString(Intent.EXTRA_TEXT));
-            // handle the error;
-            break;
+        	Log.v(TAG, "Sync status: STATUS_ERROR");
+
+            // make sure to dismiss progress dialog
+			mProgressDialog.dismiss();
+			// show error dialog
+			final String errorMsg = resultData.getString(Intent.EXTRA_TEXT);
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					this);
+			alertDialogBuilder.setTitle(getString(R.string.sync_error));
+			alertDialogBuilder.setMessage(getString(R.string.sync_error_msg));
+			alertDialogBuilder.setNeutralButton(
+					getString(R.string.show_more_information_about_error),
+					new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							(new AlertDialog.Builder(SettingsActivity.this))
+									.setTitle(
+											SettingsActivity.this
+													.getString(R.string.sync_error))
+									.setMessage(errorMsg).create().show();
+						}
+					});
+			alertDialogBuilder.create().show();
+			break;
         }     
     }
 	
@@ -347,6 +400,13 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 
 	public void startExerciseDownload(){
 		Log.d(TAG, "startExerciseDownload()");
+		
+		// check for Internet connection
+		if(!isOnline()){
+			// show toast an cancel syncing
+			Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+			return;
+		}	
 		
 		// get version from context
 		int version = -1;
@@ -364,7 +424,24 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 				
 		
 		
-		
+		// declare the dialog as a member field of your activity
+
+		// instantiate it within the onCreate method
+		mProgressDialog = new ProgressDialog(this);
+		mProgressDialog.setTitle(getString(R.string.sync_in_progess));
+		mProgressDialog.setMessage(getString(R.string.downloading_exercises));
+		mProgressDialog.setIndeterminate(true);
+		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		mProgressDialog.setCancelable(true);
+		mProgressDialog.setOnCancelListener(new OnCancelListener(){
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// stop sync service on cancel
+                stopService(new Intent(SettingsActivity.this,OpenTrainingSyncService.class));
+    			Toast.makeText(SettingsActivity.this, SettingsActivity.this.getString(R.string.sync_canceled), Toast.LENGTH_LONG).show();
+			}
+		});
+		mProgressDialog.show();
 		
 		
 	    final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, OpenTrainingSyncService.class);
@@ -372,10 +449,26 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	    intent.putExtra("command", "query");
 	    intent.putExtra("host", host);
 	    intent.putExtra("version", version);
-	    intent.putExtra("port", 80);
 	    
 	    startService(intent);
 
+	    
+	}
+	
+	/**
+	 * Checks if phone is connected to a WIFI network (or 3G, ...).
+	 * Does not check if there's a working Internet connection!
+	 * 
+	 * @return true if phone is online
+	 */
+	private boolean isOnline() {
+	    ConnectivityManager cm =
+	        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
 	}
 
 

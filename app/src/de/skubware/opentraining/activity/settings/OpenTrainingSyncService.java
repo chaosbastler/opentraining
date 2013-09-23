@@ -39,11 +39,17 @@ import android.util.Log;
  */
 public class OpenTrainingSyncService extends IntentService {
 	/** Indicates that the query is running */
-	public static final int STATUS_RUNNING = 1;
+	public static final int STATUS_RUNNING_DOWNLOAD_EXERCISES = 1;
+	/** Indicates that the query is running */
+	public static final int STATUS_RUNNING_DOWNLOAD_LANGUAGE_FILES = 2;
+	/** Indicates that the query is running */
+	public static final int STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES = 3;	
+	/** Indicates that the query is running */
+	public static final int STATUS_RUNNING_CHECKING_EXERCISES = 8;
 	/** Indicates that the query is finished*/
-	public static final int STATUS_FINISHED = 2;
+	public static final int STATUS_FINISHED = 10;
 	/** Indicates that the query could not be executed properly */
-	public static final int STATUS_ERROR = 3;
+	public static final int STATUS_ERROR = 66;
 	
 	/** Key for intent extra (version of Open Training) */
 	public static final String EXTRA_VERSION_CODE = "version";
@@ -60,7 +66,9 @@ public class OpenTrainingSyncService extends IntentService {
 	/** The used {@link RestClient}. */
 	private RestClient mClient;
 	
-	
+	/** Class that receives the results of this service */
+    private ResultReceiver mReceiver;
+    
 	private String host;
 	private int version;
 	private int port;
@@ -74,8 +82,6 @@ public class OpenTrainingSyncService extends IntentService {
 		super(TAG);
 		Log.d(TAG, "OpenTrainingSyncService created");
 		
-
-		//TODO get Port from preferences
 	}
 
 	protected void onHandleIntent(Intent intent) {
@@ -85,11 +91,10 @@ public class OpenTrainingSyncService extends IntentService {
 		host = intent.getStringExtra(EXTRA_HOST);
 
 		
-        final ResultReceiver receiver = intent.getParcelableExtra("receiver");
+		mReceiver = intent.getParcelableExtra("receiver");
         String command = intent.getStringExtra("command");
         Bundle b = new Bundle();
         if(command.equals("query")) {
-            receiver.send(STATUS_RUNNING, Bundle.EMPTY);
             try {
             	
             	// set up REST-Client
@@ -99,11 +104,11 @@ public class OpenTrainingSyncService extends IntentService {
             	String exercises = getExercisesAsJSON();
                 b.putString("exercises", exercises);
 
-                receiver.send(STATUS_FINISHED, b);
+                mReceiver.send(STATUS_FINISHED, b);
             } catch(Exception e) {
             	Log.e(TAG, "Error, could not get exercises from server: " + e.toString(), e);
                 b.putString(Intent.EXTRA_TEXT, e.toString());
-                receiver.send(STATUS_ERROR, b);
+                mReceiver.send(STATUS_ERROR, b);
             }    
         }
         this.stopSelf();
@@ -112,19 +117,24 @@ public class OpenTrainingSyncService extends IntentService {
 	private String getExercisesAsJSON() throws IOException, JSONException{
 		Log.d(TAG, "getExercisesAsJSON()");
 		IDataProvider dataProvider = new DataProvider(this.getApplicationContext());
-		
+
 		// get exercises from server
+		mReceiver.send(STATUS_RUNNING_DOWNLOAD_EXERCISES, Bundle.EMPTY);
 		String exercisesAsJSON = mClient.get(EXERCISE_REQUEST_PATH);
 		Log.v(TAG, "exercisesAsJSON: " + exercisesAsJSON);
 		
 		// get languages from server
+		mReceiver.send(STATUS_RUNNING_DOWNLOAD_LANGUAGE_FILES, Bundle.EMPTY);
 		String languagesAsJSON = mClient.get(LANGUAGE_REQUEST_PATH);
 		Log.v(TAG, "languagesAsJSON: " + languagesAsJSON);
 
 		// get muscles from server
+		mReceiver.send(STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES, Bundle.EMPTY);
 		String musclesAsJSON = mClient.get(MUSCLE_REQUEST_PATH);
 		Log.v(TAG, "musclesAsJSON: " + musclesAsJSON);
 
+		// finally parse exercises, languages and muscles
+		mReceiver.send(STATUS_RUNNING_CHECKING_EXERCISES, Bundle.EMPTY);
 		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON , dataProvider);
 		wgerParser.getNewExerciseList();
 		

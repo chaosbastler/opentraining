@@ -14,8 +14,13 @@
 
      <CheckBoxPreference
         android:defaultValue="true"
-        android:key="sync_wlan_only"
-        android:title="@string/sync_wlan_only" android:enabled="false"/>
+        android:key="sync_only_exercises_with_images"
+        android:title="@string/sync_only_exercises_with_images" android:summary="@string/sync_only_exercises_with_images_summary" android:enabled="true"/>    
+
+     <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="sync_only_my_language"
+        android:title="@string/sync_only_my_language" android:summary="@string/sync_only_my_language_summary" android:enabled="true"/>     
         
     <Preference android:title="@string/start_sync" android:key="start_sync"/>
     <Preference android:title="@string/about_wger_sync" android:key="about_wger_sync"/>
