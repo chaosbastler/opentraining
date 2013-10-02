@@ -39,6 +39,9 @@ The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/
     <string translatable="false" name="pref_default_exercise_sync_url">wger.de</string>
     <string name="pref_title_exercise_download_url">Sync URL</string>
     <string name="start_sync">Start sync</string>
+    <string name="more_sync_settings">More sync settings</string>
+    <string name="wipe_synced_exercises">Delete synchronized exercises</string>
+    <string name="wipe_synced_exercises_summary">Default exercises of OpenTraining won"'"t be deleted.</string>
     <string name="about_wger_sync">About sync with wger</string>
     <string name="about_wger_sync_fulltext">Currently only new exercises will be downloaded. In future you may be able to sync your workouts with wger. SSL encryption will always be used to protect your privacy.</string>
     <string name="sync_only_my_language">Only localized exercises</string>
@@ -55,7 +58,11 @@ The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/
 	<string name="downloading_muscle_files">Downloading muscle files</string>
 	<string name="verifying_exercises">Verifying exercises</string>
 	<string name="sync_finished">Synchronisation finished</string>
-	<string name="sync_finished_msg">Total exercises:  %1$d \n Localized exercises:  %2$d \n Exercises with images:  %2$d \n Added exercises:  %3$d</string>
+	<string name="sync_finished_msg"><![CDATA[
+<p>Total: <b>%1$d</b> new exercises</p>
+Without images: <b>%2$d</b> exercises
+<p>Added:  <b>%3$d</b> exercises</p>
+]]></string>
 	<string name="sync_error">Error during synchronisation</string>
 	<string name="sync_error_msg">A problem occurred during synchronisation.</string>
 	<string name="show_more_information_about_error">More information about the error</string>

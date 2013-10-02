@@ -21,16 +21,21 @@
 package de.skubware.opentraining.activity.settings;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import org.json.JSONException;
 
 import de.skubware.opentraining.activity.settings.sync.WgerJSONParser;
+import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -99,10 +104,26 @@ public class OpenTrainingSyncService extends IntentService {
             	
             	// set up REST-Client
             	mClient = new RestClient(host, port, "https", version);
-
             	
-            	String exercises = getExercisesAsJSON();
-                b.putString("exercises", exercises);
+            	// download and parse the exercises
+            	WgerJSONParser wgerParser = downloadAndParseExercises();
+        		
+            	// check settings: which exercises should be added?
+        		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        		boolean sync_only_exercises_with_images = settings.getBoolean("sync_only_exercises_with_images", true);
+        		boolean sync_only_my_language = settings.getBoolean("sync_only_my_language", true);
+
+        		ArrayList<ExerciseType> syncedExercises = wgerParser.getNewExercises(sync_only_exercises_with_images, sync_only_my_language);
+        		ArrayList<ExerciseType> withImagesExercises = wgerParser.getNewExercises(sync_only_exercises_with_images, false);
+        		ArrayList<ExerciseType> allExercises = wgerParser.getNewExercises(false, false);
+
+        		// add data to bundle
+        		b.putSerializable("synced_exercises", syncedExercises);
+        		b.putSerializable("with_images_exercises", withImagesExercises);
+        		b.putSerializable("all_exercises", allExercises);
+
+        		
+
 
                 mReceiver.send(STATUS_FINISHED, b);
             } catch(Exception e) {
@@ -114,7 +135,16 @@ public class OpenTrainingSyncService extends IntentService {
         this.stopSelf();
     }
 	
-	private String getExercisesAsJSON() throws IOException, JSONException{
+	
+	/**
+	 * Downloads the JSON-files from wger and parses them.
+	 * 
+	 * @return the {@link WgerJSONParser} 
+	 * 
+	 * @throws IOException
+	 * @throws JSONException
+	 */
+	private WgerJSONParser downloadAndParseExercises() throws IOException, JSONException{
 		Log.d(TAG, "getExercisesAsJSON()");
 		IDataProvider dataProvider = new DataProvider(this.getApplicationContext());
 
@@ -133,13 +163,13 @@ public class OpenTrainingSyncService extends IntentService {
 		String musclesAsJSON = mClient.get(MUSCLE_REQUEST_PATH);
 		Log.v(TAG, "musclesAsJSON: " + musclesAsJSON);
 
+
 		// finally parse exercises, languages and muscles
 		mReceiver.send(STATUS_RUNNING_CHECKING_EXERCISES, Bundle.EMPTY);
 		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON , dataProvider);
-		wgerParser.getNewExerciseList();
 		
 		
-    	return exercisesAsJSON;
+    	return wgerParser;
 	}
 
 	

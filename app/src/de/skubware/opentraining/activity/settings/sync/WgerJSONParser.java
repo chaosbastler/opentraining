@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +34,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import android.util.SparseArray;
+import android.widget.Toast;
 
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
@@ -87,11 +90,12 @@ public class WgerJSONParser {
 			// category (unused)
 			// String category = jsonExercise.getString("category");
 			
-			// comments
-			JSONArray commentArray = jsonExercise.getJSONArray("comments");
-			for (int k = 0; k < commentArray.length(); k++) {
-				String comment = commentArray.getString(k);
-			}			
+			// comments (unused)
+			// JSONArray commentArray = jsonExercise.getJSONArray("comments");
+			// for (int k = 0; k < commentArray.length(); k++) {
+			//	String comment = commentArray.getString(k);
+			//}
+			
 			// description
 			String description = jsonExercise.getString("description");
 			builder.description(description);
@@ -104,9 +108,8 @@ public class WgerJSONParser {
 			// '/api/v1/language/1/'
 			// only the number at the end is required
 			String language = jsonExercise.getString("language");
-			String[] languageSplit = language.split("/");
-			int languageNumber = Integer
-					.parseInt(languageSplit[languageSplit.length - 1]);
+			int languageNumber = getLastNumberOfJson(language);
+			
 			Map<Locale, String> translationMap = new HashMap<Locale, String>();
 			translationMap.put(localeSparseArray.get(languageNumber), name);
 			builder.translationMap(translationMap);
@@ -116,16 +119,44 @@ public class WgerJSONParser {
 			
 
 			// muscles
+			SortedSet<Muscle> muscleSet = new TreeSet<Muscle>();
 			JSONArray muscleArray = jsonExercise.getJSONArray("muscles");
 			for (int l = 0; l < muscleArray.length(); l++) {
-				String m = muscleArray.getString(l);
+				String muscleString = muscleArray.getString(l);
+				Muscle muscle = muscleSparseArray.get(getLastNumberOfJson(muscleString));
+				muscleSet.add(muscle);
 			}
+			builder.activatedMuscles(muscleSet);
+
 			
 			mNewExerciseList.add(builder.build());
 		}
 
 	}
 	
+	/**
+	 * Returns the last number of a JSON-String.
+	 * 
+	 * E.g.: for '/api/v1/something/1/' '1' will be returned.
+	 * 
+	 * @param jsonString
+	 * 
+	 * @return the last number of a JSON-String
+	 */
+	private int getLastNumberOfJson(String jsonString){
+		String[] split = jsonString.split("/");
+		return Integer.parseInt(split[split.length - 1]);
+	}
+	
+	/**
+	 * Parses the JSON-language(locale)-String and returns an SparseArray that maps the
+	 * muscle numbers to {@link Locale} objects
+	 * 
+	 * @param languagesJSONString
+	 * @return
+	 * 
+	 * @throws JSONException
+	 */
 	private SparseArray<Locale> parseLanguages(String languagesJSONString) throws JSONException{
 		JSONObject mainObject = new JSONObject(languagesJSONString);
 		Log.d(TAG, "language JSON: " + mainObject.toString());
@@ -150,12 +181,14 @@ public class WgerJSONParser {
 	}
 	
 	/**
+	 * Parses the JSON-muscle-String and returns an SparseArray that maps the
+	 * muscle numbers to {@link Muscle} objects
+	 * 
 	 * Example for muscle JSON:
 	 * 
-	 * {"meta": 
-	 * {"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 15}, 
-	 * "objects": 
-	 * [{"id": 2, "is_front": true, "name": "Anterior deltoid", "resource_uri": "/api/v1/muscle/2/"}]}
+	 * {"meta": {"limit": 20, "next": null, "offset": 0, "previous": null,
+	 * "total_count": 15}, "objects": [{"id": 2, "is_front": true, "name":
+	 * "Anterior deltoid", "resource_uri": "/api/v1/muscle/2/"}]}
 	 * 
 	 * @param musclesJSONString
 	 * @return
@@ -188,8 +221,39 @@ public class WgerJSONParser {
 	}
 
 	
-	public List<ExerciseType> getNewExerciseList(){
-		return new ArrayList<ExerciseType>(mNewExerciseList);
+	/**
+	 * Returns the list with the new exercises.
+	 * 
+	 * 
+	 * @param withImagesOnly
+	 *            only exercises with images will be returned
+	 * @param localizedOnly
+	 *            only exercises that are localized (that means there's a
+	 *            translation for the Locale returned by Locale.getDefault())
+	 * 
+	 * @return A list containing the specified new exercises.
+	 */
+	public ArrayList<ExerciseType> getNewExercises(boolean withImagesOnly, boolean localizedOnly){
+		ArrayList<ExerciseType> filteredExerciseList =  new ArrayList<ExerciseType>(mNewExerciseList);
+		
+		for(ExerciseType exercise:mNewExerciseList){
+			// remove exercises without images
+			if(withImagesOnly && exercise.getImagePaths().isEmpty()){
+				filteredExerciseList.remove(exercise);
+				continue;
+			}
+			
+			// remove unlocalized exercises
+			if(localizedOnly && !exercise.getTranslationMap().keySet().contains(Locale.getDefault())){
+				filteredExerciseList.remove(exercise);
+				continue;
+			}
+		}
+		
+		
+		return filteredExerciseList;
 	}
+	
+	
 	
 }

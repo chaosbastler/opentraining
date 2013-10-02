@@ -2,27 +2,44 @@
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <EditTextPreference
-        android:capitalize="words"
-        android:defaultValue="@string/pref_default_exercise_sync_url"
-        android:inputType="textUri"
-        android:key="exercise_sync_url"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/pref_title_exercise_download_url" />
 
-     <CheckBoxPreference
+    <Preference
+        android:key="start_sync"
+        android:title="@string/start_sync" />
+
+    <CheckBoxPreference
         android:defaultValue="true"
+        android:enabled="true"
         android:key="sync_only_exercises_with_images"
-        android:title="@string/sync_only_exercises_with_images" android:summary="@string/sync_only_exercises_with_images_summary" android:enabled="true"/>    
-
-     <CheckBoxPreference
+        android:summary="@string/sync_only_exercises_with_images_summary"
+        android:title="@string/sync_only_exercises_with_images" />
+    <CheckBoxPreference
         android:defaultValue="true"
+        android:enabled="true"
         android:key="sync_only_my_language"
-        android:title="@string/sync_only_my_language" android:summary="@string/sync_only_my_language_summary" android:enabled="true"/>     
-        
-    <Preference android:title="@string/start_sync" android:key="start_sync"/>
-    <Preference android:title="@string/about_wger_sync" android:key="about_wger_sync"/>
+        android:summary="@string/sync_only_my_language_summary"
+        android:title="@string/sync_only_my_language" />
+
+    <PreferenceScreen
+        android:persistent="false"
+        android:title="@string/more_sync_settings" >
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_exercise_sync_url"
+            android:inputType="textUri"
+            android:key="exercise_sync_url"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_title_exercise_download_url" />
+
+        <Preference
+            android:key="wipe_synced_exercises"
+            android:summary="@string/wipe_synced_exercises_summary"
+            android:title="@string/wipe_synced_exercises" />
+        <Preference
+            android:key="about_wger_sync"
+            android:title="@string/about_wger_sync" />
+    </PreferenceScreen>
 
 </PreferenceScreen>

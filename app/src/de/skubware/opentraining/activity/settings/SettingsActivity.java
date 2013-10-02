@@ -42,12 +42,15 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.basic.ExerciseType;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -155,6 +158,17 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 				return false;
 			}
 		});
+		
+		// add delete-synced-exercises button
+		Preference wipe_synced_exercises = this.findPreference("wipe_synced_exercises");
+		wipe_synced_exercises.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+			@Override
+			public boolean onPreferenceClick(Preference arg0) {
+				deleteSyncedExercises();					
+				return false;
+			}
+		});
+		
 		
 		// Bind the summaries of EditText preferences to
 		// their values. When their values change, their summaries are updated
@@ -303,6 +317,18 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 				}
 			});
 			
+			// add delete-synced-exercises button
+			Preference wipe_synced_exercises = this.findPreference("wipe_synced_exercises");
+			wipe_synced_exercises.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+				@Override
+				public boolean onPreferenceClick(Preference arg0) {
+					((SettingsActivity) getActivity()).deleteSyncedExercises();					
+					return false;
+				}
+			});
+			
+						
+			
 			
 			bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
 
@@ -332,6 +358,7 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
         mReceiver.setReceiver(null); // clear receiver so no leaks.
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
     public void onReceiveResult(int resultCode, Bundle resultData) {
         switch (resultCode) {
@@ -353,16 +380,24 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
             
         case OpenTrainingSyncService.STATUS_FINISHED:
         	Log.v(TAG, "Sync status: STATUS_FINISHED");
+            
 
-            String exercises = resultData.getString("exercises");
-            Toast.makeText(this, "onReceiveResult: Finished!", Toast.LENGTH_LONG).show();
+            ArrayList<ExerciseType> syncedExercises = (ArrayList<ExerciseType>) resultData.getSerializable("synced_exercises");
+            ArrayList<ExerciseType> allExercises = (ArrayList<ExerciseType>) resultData.getSerializable("all_exercises");
+            ArrayList<ExerciseType> withImagesExercises = (ArrayList<ExerciseType>) resultData.getSerializable("with_images_exercises");
+            
+            // calculate the number of exercises
+    		int totalNewExercisesCount = allExercises.size();
+    		int syncedExercisesCount = syncedExercises.size();         	
+            int withoutImagesCount = allExercises.size() - withImagesExercises.size();
+
             
             // make sure to dismiss progress dialog
 			mProgressDialog.dismiss();
 			// show sync-finished dialog instead
         	AlertDialog.Builder finishedDialogBuilder = new AlertDialog.Builder(this);
         	finishedDialogBuilder.setTitle(getString(R.string.sync_finished));
-        	finishedDialogBuilder.setMessage(getString(R.string.sync_finished_msg, 5 ,3,0,0));
+        	finishedDialogBuilder.setMessage(Html.fromHtml(getString(R.string.sync_finished_msg, totalNewExercisesCount , withoutImagesCount, syncedExercisesCount)));
         	finishedDialogBuilder.create().show();
             // do something interesting
             // hide progress
@@ -453,6 +488,10 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	    startService(intent);
 
 	    
+	}
+	
+	private void deleteSyncedExercises(){
+		Toast.makeText(this, "Not implemented", Toast.LENGTH_LONG).show();
 	}
 	
 	/**
