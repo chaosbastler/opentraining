@@ -207,7 +207,7 @@ public class ParserTest extends AndroidTestCase {
 		ExerciseType exerciseBefore = builder.build();
 		
 		// save ex
-		dataProvider.saveExercise(exerciseBefore);
+		dataProvider.saveCustomExercise(exerciseBefore);
 		
 		// load ex, check fields		
 		ExerciseType exerciseAfter = dataProvider.getExerciseByName(exerciseBefore.getUnlocalizedName());

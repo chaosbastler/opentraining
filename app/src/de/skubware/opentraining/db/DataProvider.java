@@ -85,7 +85,7 @@ public class DataProvider implements IDataProvider {
 	 */
 	List<ExerciseType> loadExercises() {
 		
-		Log.v(TAG, "Loading provided exercises");
+		Log.v(TAG, "Loading provided default exercises");
 		List<ExerciseType> list = new ArrayList<ExerciseType>();
 
 		try {
@@ -104,6 +104,24 @@ public class DataProvider implements IDataProvider {
 			Log.e(TAG, "Error during parsing exercises.", ioEx);
 		}
 
+		// handle custom exercises in #IDataProvider.CUSTOM_EXERCISE_FOLDER
+		list.addAll(loadCustomExercises());
+		
+		// handle synced exercises in #IDataProvider.SYNCED_EXERCISE_FOLDER
+		list.addAll(loadSyncedExercises());
+		
+
+		Collections.sort(list);
+		
+		return list;
+	}
+	
+	/**
+	 * Loads the custom exercises.
+	 */
+	private List<ExerciseType> loadCustomExercises() {
+		List<ExerciseType> list = new ArrayList<ExerciseType>();
+
 		Log.v(TAG, "Loading custom exercises");
 
 		File customExerciseFolder = new File(mContext.getFilesDir().toString() + "/"
@@ -113,9 +131,9 @@ public class DataProvider implements IDataProvider {
 			Log.d(TAG, "Folder for custom exercises does not exist, will create it now.");
 		}
 		
-		String[] files = customExerciseFolder.list();
+		String[] customFiles = customExerciseFolder.list();
 
-		for (String f : files) {
+		for (String f : customFiles) {
 			if (f.endsWith(".xml")) {
 				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
 				ExerciseType ex = parser.read(new File(customExerciseFolder + "/" + f));
@@ -126,14 +144,85 @@ public class DataProvider implements IDataProvider {
 				}
 			}
 		}
-
-		Collections.sort(list);
-		
 		return list;
 	}
+	
+	/**
+	 * Loads the synced exercises.
+	 */
+	public List<ExerciseType> loadSyncedExercises(){
+		List<ExerciseType> list = new ArrayList<ExerciseType>();
 
+		Log.v(TAG, "Loading synced exercises");
+
+		File syncedExerciseFolder = new File(mContext.getFilesDir().toString() + "/"
+				+ IDataProvider.SYNCED_EXERCISE_FOLDER);
+		if(!syncedExerciseFolder.exists()){
+			syncedExerciseFolder.mkdirs();
+			Log.d(TAG, "Folder for synced exercises does not exist, will create it now.");
+		}
+		
+		String[] syncedFiles = syncedExerciseFolder.list();
+
+		for (String f : syncedFiles) {
+			if (f.endsWith(".xml")) {
+				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
+				ExerciseType ex = parser.read(new File(syncedExerciseFolder + "/" + f));
+				if(ex != null){
+					list.add(ex);
+				}else{
+					Log.e(TAG, "Exercise parser returned null");
+				}
+			}
+		}
+		return list;
+	}
+	
+	
+	
 	@Override
-	public boolean saveExercise(ExerciseType ex) {
+	public List<ExerciseType> saveSyncedExercises(
+			List<ExerciseType> exerciseList) {		
+		List<ExerciseType> unsavedExercises = new ArrayList<ExerciseType>();
+
+		if(exerciseList.isEmpty())
+			return unsavedExercises;
+		
+		for (ExerciseType exercise : exerciseList) {
+			Log.d(TAG, "Trying to save exercise: " + exercise.toString());
+			File destination = new File(mContext.getFilesDir().toString() + "/"
+					+ IDataProvider.SYNCED_EXERCISE_FOLDER);
+
+			boolean succ = XMLSaver.writeExerciseType(exercise, destination);
+
+			if (!succ) {
+				Log.e(TAG, "The exercise " + exercise.toString() + " could not be saved.");
+				unsavedExercises.add(exercise);
+			}
+
+		}
+
+		// update Cache, as an Exercise has changed
+		new Thread() {
+			@Override
+			public void run() {
+				Cache.INSTANCE.updateExerciseCache(mContext);
+			}
+		}.run();
+
+		// ugly workaround for multi-threading problems:
+		// updateExerciseCache must at least be started
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			Log.e(TAG, "Thread was interrupted.");
+		}
+
+		return unsavedExercises;
+	}
+	
+	@Override
+	public boolean saveCustomExercise(ExerciseType ex) {
 		Log.d(TAG, "Trying to save exercise: " + ex.toString());
 		File destination = new File(mContext.getFilesDir().toString() + "/"
 				+ IDataProvider.CUSTOM_EXERCISE_FOLDER);

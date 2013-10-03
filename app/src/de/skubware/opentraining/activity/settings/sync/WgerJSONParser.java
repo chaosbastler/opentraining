@@ -53,7 +53,18 @@ public class WgerJSONParser {
 	/** Tag for logging */
 	private static final String TAG = "ExerciseJSONParser";
 	
-	
+	/**
+	 * Constructor. Will start download immediately.
+	 * 
+	 * @param exerciseJSONString
+	 *            The exercises as JSON-String
+	 * @param languageJSONString
+	 *            The languages as JSON-String
+	 * @param muscleJSONString
+	 *            The muscles as JSON-String
+	 * @param dataProvider
+	 * @throws JSONException
+	 */
 	public WgerJSONParser(String exerciseJSONString, String languageJSONString, String muscleJSONString, IDataProvider dataProvider) throws JSONException{
 		mDataProvider = dataProvider;
 		
@@ -159,7 +170,7 @@ public class WgerJSONParser {
 	 */
 	private SparseArray<Locale> parseLanguages(String languagesJSONString) throws JSONException{
 		JSONObject mainObject = new JSONObject(languagesJSONString);
-		Log.d(TAG, "language JSON: " + mainObject.toString());
+		Log.d(TAG, "language JSON: " + languagesJSONString);
 		JSONArray languageArray = mainObject.getJSONArray("objects");
 
 		SparseArray<Locale> languageSparseArray = new SparseArray<Locale>();

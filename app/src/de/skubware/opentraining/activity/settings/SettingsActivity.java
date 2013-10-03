@@ -46,11 +46,14 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.db.Cache;
+import de.skubware.opentraining.db.IDataProvider;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -377,7 +380,10 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
         	Log.v(TAG, "Sync status: STATUS_RUNNING_CHECKING_EXERCISES");
     		mProgressDialog.setMessage(getString(R.string.verifying_exercises));
             break;
-            
+        case OpenTrainingSyncService.STATUS_RUNNING_SAVING_EXERCISES:
+        	Log.v(TAG, "Sync status: STATUS_RUNNING_CHECKING_EXERCISES");
+    		mProgressDialog.setMessage(getString(R.string.saving_exercises));
+            break;            
         case OpenTrainingSyncService.STATUS_FINISHED:
         	Log.v(TAG, "Sync status: STATUS_FINISHED");
             
@@ -397,7 +403,12 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 			// show sync-finished dialog instead
         	AlertDialog.Builder finishedDialogBuilder = new AlertDialog.Builder(this);
         	finishedDialogBuilder.setTitle(getString(R.string.sync_finished));
-        	finishedDialogBuilder.setMessage(Html.fromHtml(getString(R.string.sync_finished_msg, totalNewExercisesCount , withoutImagesCount, syncedExercisesCount)));
+        	if(totalNewExercisesCount > 0){
+            	finishedDialogBuilder.setMessage(Html.fromHtml(getString(R.string.sync_finished_msg, totalNewExercisesCount , withoutImagesCount, syncedExercisesCount)));
+        	}else{
+            	finishedDialogBuilder.setMessage(getString(R.string.sync_finished_no_new_exercises));
+        	}
+        		
         	finishedDialogBuilder.create().show();
             // do something interesting
             // hide progress
@@ -490,8 +501,23 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	    
 	}
 	
-	private void deleteSyncedExercises(){
-		Toast.makeText(this, "Not implemented", Toast.LENGTH_LONG).show();
+	/**
+	 * Deletes all files in {@link IDataProvider#SYNCED_EXERCISE_FOLDER}.
+	 */
+	private void deleteSyncedExercises() {
+		File syncedExerciseFolder = new File(getFilesDir().toString() + "/"
+				+ IDataProvider.SYNCED_EXERCISE_FOLDER);
+
+		File[] files = syncedExerciseFolder.listFiles();
+		if (files != null) {
+			for (File f : files) {
+				f.delete();
+			}
+		}
+
+		Cache.INSTANCE.updateExerciseCache(this);
+		
+		Toast.makeText(this, "Synced files have been deleted", Toast.LENGTH_LONG).show();
 	}
 	
 	/**

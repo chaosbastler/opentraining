@@ -37,13 +37,16 @@
 	<string name="downloading_language_files">Sprachdaten herunterladen language files</string>
 	<string name="downloading_muscle_files">Muskeldaten herunterladen</string>
 	<string name="verifying_exercises">Übungen überprüfen</string>
+	<string name="saving_exercises">Übungen speichern</string>	
 	<string name="sync_finished">Synchronisation beendet</string>
 	<string name="sync_finished_msg"><![CDATA[
 <p>Insgesamt: <b>%1$d</b> neue Übungen</p>
 Übungen ohne Bilder: <b>%1$d</b> Übungen
 <p>Hinzugefügt:  <b>%3$d</b> Übungen</p>
 ]]>
-	</string>	<string name="sync_error">Fehler bei der Synchronisation</string>
+	</string>	
+	<string name="sync_finished_no_new_exercises">Es wurden keine neuen Übungen gefunden</string>	
+	<string name="sync_error">Fehler bei der Synchronisation</string>
 	<string name="sync_error_msg">Es ist ein Fehler währen der Synchronisation aufgetreten.</string>
 	<string name="show_more_information_about_error">Weitere Informationen über den Fehler.</string>
 	

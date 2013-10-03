@@ -301,7 +301,6 @@ public class XMLSaver {
 			FileWriter fw = new FileWriter(destination.toString() + "/"
 					+ ex.getUnlocalizedName() + ".xml");
 
-			Log.e(TAG, "doc==null:" + (doc==null) + ", fw==null:" + (fw==null));
 			t.transform(new DOMSource(doc), new StreamResult(fw));
 
 		} catch (ParserConfigurationException e1) {

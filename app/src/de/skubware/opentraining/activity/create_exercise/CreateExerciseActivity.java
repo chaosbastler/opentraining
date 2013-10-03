@@ -246,7 +246,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		ExerciseType ex = exerciseBuilder.build();
 		
 		// save exercise
-		boolean succ = dataProvider.saveExercise(ex);
+		boolean succ = dataProvider.saveCustomExercise(ex);
 		
 
     

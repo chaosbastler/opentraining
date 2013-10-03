@@ -41,6 +41,9 @@ public interface IDataProvider {
 	/** The name of the folder that contains user-created exercises .xml files */
 	static public final String CUSTOM_EXERCISE_FOLDER = "user_exercises";
 	
+	/** The name of the folder that contains user-created exercises .xml files */
+	static public final String SYNCED_EXERCISE_FOLDER = "synced_exercises";
+
 	/** The name of the folder that contains user-created */
 	static public final String CUSTOM_IMAGES_FOLDER = "user_images";
 	
@@ -67,15 +70,25 @@ public interface IDataProvider {
 	public List<ExerciseType> getExercises();
 
 	/**
-	 * Saves the (user-generated) exercise.
+	 * Saves the (user-generated) exercise to {@link CUSTOM_EXERCISE_FOLDER}.
 	 * 
 	 * @param ex
 	 *            The {@link ExerciseType} to save.
 	 * 
 	 * @return true if successful
 	 */
-	public boolean saveExercise(ExerciseType ex);
+	public boolean saveCustomExercise(ExerciseType ex);
 
+	/**
+	 * Saves the (synced) exercises to {@link SYNCED_EXERCISE_FOLDER}.
+	 * 
+	 * @param ex
+	 *            The {@link ExerciseType}s to save.
+	 * 
+	 * @return all exercises that could not be saved
+	 */
+	public List<ExerciseType> saveSyncedExercises(List<ExerciseType> exerciseList);	
+	
 	/**
 	 * Tries to find and return the exercise with the name.
 	 * 

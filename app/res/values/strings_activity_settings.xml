@@ -57,12 +57,14 @@ The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/
 	<string name="downloading_language_files">Downloading language files</string>
 	<string name="downloading_muscle_files">Downloading muscle files</string>
 	<string name="verifying_exercises">Verifying exercises</string>
+	<string name="saving_exercises">Saving exercises</string>
 	<string name="sync_finished">Synchronisation finished</string>
 	<string name="sync_finished_msg"><![CDATA[
 <p>Total: <b>%1$d</b> new exercises</p>
 Without images: <b>%2$d</b> exercises
 <p>Added:  <b>%3$d</b> exercises</p>
 ]]></string>
+	<string name="sync_finished_no_new_exercises">No new exercises found</string>
 	<string name="sync_error">Error during synchronisation</string>
 	<string name="sync_error_msg">A problem occurred during synchronisation.</string>
 	<string name="show_more_information_about_error">More information about the error</string>
