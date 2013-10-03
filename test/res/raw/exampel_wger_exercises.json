@@ -1,0 +1,18 @@
+{"meta": 
+{"limit": 20, "next": "/api/v1/exercise/?offset=20&limit=20&format=json", "offset": 0, "previous": null, "total_count": 181}, 
+"objects": [
+
+{"category": "/api/v1/exercisecategory/9/", 
+"comments": [], "creation_date": "2013-07-19", 
+"description": "<ul>\n<li> Irgendeine Beschreibung </li>\n</ul>", 
+"id": 174, 
+"language": "/api/v1/language/1/", 
+"muscles": ["/api/v1/muscle/8/", "/api/v1/muscle/6/"], 
+"name": "Übung Nummer 1", 
+"resource_uri": "/api/v1/exercise/174/", 
+"status": "2"}, 
+
+{"category": "/api/v1/exercisecategory/8/", "comments": [], "creation_date": null, "description": "some description 2", "id": 135, "language": "/api/v1/language/1/", "muscles": ["/api/v1/muscle/5/"], "name": "Übung Nummer 2", "resource_uri": "/api/v1/exercise/135/", "status": "5"}, 
+
+{"category": "/api/v1/exercisecategory/9/", "comments": [], "creation_date": null, "description": "some description 3", "id": 5, "language": "/api/v1/language/1/", "muscles": ["/api/v1/muscle/8/", "/api/v1/muscle/10/"], "name": "Übung Nummer 3", "resource_uri": "/api/v1/exercise/5/", "status": "5"}
+]}
