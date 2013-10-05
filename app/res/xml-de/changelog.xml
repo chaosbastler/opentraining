@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release version="0.5" versioncode="16" summary="Design und neue Übungen" date="12/10/2013">
+        <change>Design zu Holo-Style geändert</change>
+        <change>Es können neue Übungen erstellt werden (Create Workout->Menu->Create new Exercise)</change>
+        <change>Download new exercises from wger.de (currently only exercises without images are available)</change>
+        <change>Changelog hinzugefügt (kann auch unter '"'Einstellungen'"' aufgerufen werden)</change>
+    </release>
+    <release version="0.4.1" versioncode="13" summary="Beispiel Workout" date="05/24/2013">
+        <change>Training UI verbessert</change>
+        <change>Beispiel Workout hinzugefügt</change>
+    </release>
+</changelog>

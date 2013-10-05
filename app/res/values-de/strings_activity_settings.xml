@@ -50,4 +50,10 @@
 	<string name="sync_error_msg">Es ist ein Fehler währen der Synchronisation aufgetreten.</string>
 	<string name="show_more_information_about_error">Weitere Informationen über den Fehler.</string>
 	
-	</resources>
+	<!-- Miscellaneous settings -->
+    <string name="pref_header_Miscellaneous_settings">Sonstiges</string>
+    <string name="miscellaneous">Sonstiges</string>
+    <string name="view_changelog">Changelog</string>
+    
+    
+</resources>
