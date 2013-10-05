@@ -23,6 +23,11 @@
     <!-- SelectWorkoutDialogFragment -->
     <string name="start_new_training">New training</string>
     <string name="load_old_training">Load old training</string>
+
+
+    <!-- Changelog -->
+    <string name="title_changelog">Changelog</string>
+    <string name="changelog_close">Close</string>
     
 
 </resources>

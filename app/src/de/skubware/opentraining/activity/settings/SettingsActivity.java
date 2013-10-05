@@ -51,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.ChangeLogDialog;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.IDataProvider;
@@ -122,7 +123,7 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		fakeHeader.setTitle(R.string.pref_header_licenses);
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_licenses);
-
+		
 		// add dialog for showing license info
 		Preference open_source = this.findPreference("open_source");
 		open_source.setOnPreferenceClickListener(new OnPreferenceClickListener(){
@@ -172,6 +173,24 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 			}
 		});
 		
+		
+		// Add 'miscellaneous' preferences, and a corresponding header.
+		PreferenceCategory changelogFakeHeader = new PreferenceCategory(this);
+		changelogFakeHeader.setTitle(R.string.miscellaneous);
+		getPreferenceScreen().addPreference(changelogFakeHeader);
+		addPreferencesFromResource(R.xml.pref_miscellaneous);
+
+		// add changelog button
+		Preference changelog = this.findPreference("view_changelog");
+		changelog.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+			@Override
+			public boolean onPreferenceClick(Preference arg0) {
+				//Launch change log dialog
+				ChangeLogDialog  changelogDialog = new ChangeLogDialog(SettingsActivity.this);
+				changelogDialog.show();  
+				return false;
+			}
+		});
 		
 		// Bind the summaries of EditText preferences to
 		// their values. When their values change, their summaries are updated
@@ -330,11 +349,37 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 				}
 			});
 			
-						
-			
-			
 			bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
 
+
+		}
+	}
+	
+	
+	/**
+	 * This fragment shows sync preferences only. It is used when the
+	 * activity is showing a two-pane settings UI.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public static class MiscellaneousPreferenceFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.pref_miscellaneous);
+			
+			
+			// add changelog button
+			Preference changelog = this.findPreference("view_changelog");
+			changelog.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+						@Override
+						public boolean onPreferenceClick(Preference arg0) {
+							// Launch change log dialog
+							ChangeLogDialog changelogDialog = new ChangeLogDialog(
+									getActivity());
+							changelogDialog.show();
+							return false;
+						}
+					});
 
 		}
 	}

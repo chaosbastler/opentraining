@@ -68,6 +68,11 @@ public class MainActivity extends FragmentActivity {
 			}
 		}.start();
 
+		
+		//Launch what's new dialog
+		final WhatsNewDialog whatsNewDialog = new WhatsNewDialog(this);
+		whatsNewDialog.show(); // (will only be shown if started the first time since last change)
+		
 		// show disclaimer
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		Boolean showDisclaimer = settings.getBoolean(DisclaimerDialog.PREFERENCE_SHOW_DISCLAIMER, true);
@@ -75,6 +80,7 @@ public class MainActivity extends FragmentActivity {
 			new DisclaimerDialog(this);
 		}
 
+		
 	}
 
 
