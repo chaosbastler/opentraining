@@ -166,8 +166,13 @@ public class WorkoutXMLParser extends DefaultHandler {
 			String exName = attributes.getValue("name");
 			IDataProvider dataProvider = new DataProvider(mContext);
 			this.mExerciseType = dataProvider.getExerciseByName(exName);
+			
+			// if exercise can't be found, create and save it
+			// this may happen if a custom(or synced) exercise has been deleted
 			if (mExerciseType == null) {
-				throw new NullPointerException("The exercise '" + exName + "' of the TrainingPlan couldn't be found in the database.");
+				Log.e(TAG, "Could not find exercise, will create new custom exercise with the name " + exName, new NullPointerException("The exercise '" + exName + "' of the TrainingPlan couldn't be found in the database."));
+				mExerciseType = (new ExerciseType.Builder(exName)).build();
+				dataProvider.saveCustomExercise(mExerciseType);
 			}
 		}
 		if(qname.equals("FSet")){

@@ -97,9 +97,16 @@ public class FExListAdapter extends BaseAdapter {
 		
 		final ImageView imageview_ex_image = (ImageView) vi.findViewById(R.id.imageview_ex_image);
 		DataHelper data = new DataHelper(mActivity);
-		String icon = fEx.getImagePaths().get(0).toString();
-		icon = icon.replace(".", "_icon.");
-		imageview_ex_image.setImageDrawable(data.getDrawable(icon));
+		// Images
+		if (!fEx.getImagePaths().isEmpty()) {		
+			String icon = fEx.getImagePaths().get(0).toString();
+			icon = icon.replace(".", "_icon.");
+			imageview_ex_image.setImageDrawable(data.getDrawable(icon));
+		} else {
+			// set default image if no image can be found
+			imageview_ex_image.setImageResource(R.drawable.ic_launcher);
+		}
+		
 		
 		TextView textview_exercise_name = (TextView) vi.findViewById(R.id.textview_exercise_name);
 		
