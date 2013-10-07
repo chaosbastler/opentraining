@@ -18,14 +18,13 @@
  * 
  */
 
-package de.skubware.opentraining.activity.settings;
+package de.skubware.opentraining.activity.settings.sync;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.json.JSONException;
 
-import de.skubware.opentraining.activity.settings.sync.WgerJSONParser;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;

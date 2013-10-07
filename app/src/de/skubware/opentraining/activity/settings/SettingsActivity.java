@@ -52,6 +52,8 @@ import java.util.List;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.ChangeLogDialog;
+import de.skubware.opentraining.activity.settings.sync.OpenTrainingSyncResultReceiver;
+import de.skubware.opentraining.activity.settings.sync.OpenTrainingSyncService;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.IDataProvider;

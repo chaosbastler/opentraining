@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining.activity.settings;
+package de.skubware.opentraining.activity.settings.sync;
 
 import java.io.*;
 import java.net.URI;

@@ -18,7 +18,7 @@
  * 
  */
 
-package de.skubware.opentraining.activity.settings;
+package de.skubware.opentraining.activity.settings.sync;
 
 import android.os.Bundle;
 import android.os.Handler;
