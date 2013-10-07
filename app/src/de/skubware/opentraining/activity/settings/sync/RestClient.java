@@ -31,6 +31,7 @@ import org.apache.http.*;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.RedirectHandler;
 import org.apache.http.client.methods.*;
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -39,6 +40,7 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
@@ -118,14 +120,14 @@ class RestClient {
 		// issue is not too serious as no user data is exchanged at the moment
 		Log.w(TAG, "OpenTraining will accept all SSL-certificates. This issue has to be fixed before exchanging real user data.");
 		HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-		
+     
 		DefaultHttpClient client = new DefaultHttpClient();
 
 		SchemeRegistry registry = new SchemeRegistry();
 		SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
 		socketFactory.setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
 		registry.register(new Scheme("https", socketFactory, 443));
-		SingleClientConnManager mgr = new SingleClientConnManager(client.getParams(), registry);
+		ClientConnectionManager mgr = new ThreadSafeClientConnManager(client.getParams(), registry);
 		mClient = new DefaultHttpClient(mgr, client.getParams());
 
 		

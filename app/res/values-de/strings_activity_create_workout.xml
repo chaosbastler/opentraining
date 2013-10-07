@@ -9,7 +9,8 @@
     <string name="title_exercisetype_detail">Übungsdetails</string>
     <string name="title_exercisetype_list">Übungen</string>
     <string name="exercise_already_in_workout">Du hast diese Übung bereits zum Workout hinzugefügt.</string>
-    
+    <string name="no_description_available">Es ist keine Beschreibung verfügbar.</string>
+
     
     <!-- Exercise Detail Menu -->
     <string name="add_exercise">Übung hinzufügen</string>

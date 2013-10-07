@@ -34,7 +34,6 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import android.util.SparseArray;
-import android.widget.Toast;
 
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;

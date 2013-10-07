@@ -64,15 +64,13 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	 * 
 	 */
 	public static class Builder {
-		// default values
-		private static final String DEFAULT_DESCRIPTION = "No description available";
 
 		// Required parameters
 		private final String name;
 
 		// Optional parameters - initialized to default values
 		private Map<Locale, String> translationMap = new HashMap<Locale, String>(); // optional
-		private String description = DEFAULT_DESCRIPTION; // optional
+		private String description = ""; // optional
 		private List<File> imagePaths = new ArrayList<File>(); // optional
 		private Map<File, String> imageLicenseMap = new HashMap<File, String>(); // optional
 		private int imageWidth = 214;

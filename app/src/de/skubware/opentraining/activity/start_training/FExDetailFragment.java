@@ -32,6 +32,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.ExerciseDetailOnGestureListener;
 import de.skubware.opentraining.basic.FSet;
@@ -231,11 +233,16 @@ public class FExDetailFragment extends Fragment implements DialogFragmentAddEntr
 		MenuItem menu_item_description = (MenuItem) menu.findItem(R.id.menu_item_description);
 		menu_item_description.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
+				if(mExercise.getDescription() == null || mExercise.getDescription().equals("")){
+					Toast.makeText(getActivity(), getString(R.string.no_description_available), Toast.LENGTH_LONG).show();
+					return true;
+				}
+				
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 				builder.setTitle(getString(R.string.description));
 				
 				
-				builder.setMessage(mExercise.getDescription());
+				builder.setMessage(Html.fromHtml(mExercise.getDescription()));
 				builder.create().show();
 
 				return true;

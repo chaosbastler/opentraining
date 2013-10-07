@@ -27,7 +27,7 @@ public interface IExercise {
 	/**
 	 * Getter for the description of the exercise.
 	 * 
-	 * @return the description
+	 * @return the description, may be null or empty
 	 */
 	public abstract String getDescription();
 
