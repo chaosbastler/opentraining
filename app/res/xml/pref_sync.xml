@@ -7,18 +7,6 @@
         android:key="start_sync"
         android:title="@string/start_sync" />
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:enabled="true"
-        android:key="sync_only_exercises_with_images"
-        android:summary="@string/sync_only_exercises_with_images_summary"
-        android:title="@string/sync_only_exercises_with_images" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:enabled="true"
-        android:key="sync_only_my_language"
-        android:summary="@string/sync_only_my_language_summary"
-        android:title="@string/sync_only_my_language" />
 
     <PreferenceScreen
         android:persistent="false"

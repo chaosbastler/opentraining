@@ -42,7 +42,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -54,6 +53,7 @@ import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.ChangeLogDialog;
 import de.skubware.opentraining.activity.settings.sync.OpenTrainingSyncResultReceiver;
 import de.skubware.opentraining.activity.settings.sync.OpenTrainingSyncService;
+import de.skubware.opentraining.activity.settings.sync.SyncFinishedDialog;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.IDataProvider;
@@ -426,39 +426,28 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
         case OpenTrainingSyncService.STATUS_RUNNING_CHECKING_EXERCISES:
         	Log.v(TAG, "Sync status: STATUS_RUNNING_CHECKING_EXERCISES");
     		mProgressDialog.setMessage(getString(R.string.verifying_exercises));
-            break;
-        case OpenTrainingSyncService.STATUS_RUNNING_SAVING_EXERCISES:
-        	Log.v(TAG, "Sync status: STATUS_RUNNING_CHECKING_EXERCISES");
-    		mProgressDialog.setMessage(getString(R.string.saving_exercises));
-            break;            
+            break;    
         case OpenTrainingSyncService.STATUS_FINISHED:
         	Log.v(TAG, "Sync status: STATUS_FINISHED");
             
-
-            ArrayList<ExerciseType> syncedExercises = (ArrayList<ExerciseType>) resultData.getSerializable("synced_exercises");
             ArrayList<ExerciseType> allExercises = (ArrayList<ExerciseType>) resultData.getSerializable("all_exercises");
-            ArrayList<ExerciseType> withImagesExercises = (ArrayList<ExerciseType>) resultData.getSerializable("with_images_exercises");
-            
-            // calculate the number of exercises
-    		int totalNewExercisesCount = allExercises.size();
-    		int syncedExercisesCount = syncedExercises.size();         	
-            int withoutImagesCount = allExercises.size() - withImagesExercises.size();
-
             
             // make sure to dismiss progress dialog
 			mProgressDialog.dismiss();
-			// show sync-finished dialog instead
-        	AlertDialog.Builder finishedDialogBuilder = new AlertDialog.Builder(this);
-        	finishedDialogBuilder.setTitle(getString(R.string.sync_finished));
-        	if(totalNewExercisesCount > 0){
-            	finishedDialogBuilder.setMessage(Html.fromHtml(getString(R.string.sync_finished_msg, totalNewExercisesCount , withoutImagesCount, syncedExercisesCount)));
-        	}else{
+			
+        	if(allExercises.size() <= 0){
+        		// show notification: no new exercises
+            	AlertDialog.Builder finishedDialogBuilder = new AlertDialog.Builder(this);
+            	finishedDialogBuilder.setTitle(getString(R.string.sync_finished));
             	finishedDialogBuilder.setMessage(getString(R.string.sync_finished_no_new_exercises));
-        	}
+            	finishedDialogBuilder.create().show();
+        	}else{
+        		// let user choose which exercises should be saved
+    			AlertDialog.Builder dialogBuilder = new SyncFinishedDialog(this, allExercises);
+    			dialogBuilder.create().show();
+    	    }
+
         		
-        	finishedDialogBuilder.create().show();
-            // do something interesting
-            // hide progress
             break;
         case OpenTrainingSyncService.STATUS_ERROR:
         	Log.v(TAG, "Sync status: STATUS_ERROR");
@@ -491,16 +480,17 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	
 	
 
-	public void startExerciseDownload(){
+	public void startExerciseDownload() {
 		Log.d(TAG, "startExerciseDownload()");
-		
+
 		// check for Internet connection
-		if(!isOnline()){
+		if (!isOnline()) {
 			// show toast an cancel syncing
-			Toast.makeText(this, getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.no_internet_connection),
+					Toast.LENGTH_LONG).show();
 			return;
-		}	
-		
+		}
+
 		// get version from context
 		int version = -1;
 		try {
@@ -510,13 +500,15 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		}
 
 		// get host from preferences
-		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-		if(!settings.contains("exercise_sync_url"))
+		SharedPreferences settings = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		if (!settings.contains("exercise_sync_url"))
 			Log.e(TAG, "Could not find preference 'string exercise_sync_url'");
-		String host = settings.getString("exercise_sync_url", getApplicationContext().getString(R.string.pref_default_exercise_sync_url));
-				
-		
-		
+		String host = settings.getString(
+				"exercise_sync_url",
+				getApplicationContext().getString(
+						R.string.pref_default_exercise_sync_url));
+
 		// declare the dialog as a member field of your activity
 
 		// instantiate it within the onCreate method
@@ -526,26 +518,28 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		mProgressDialog.setIndeterminate(true);
 		mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		mProgressDialog.setCancelable(true);
-		mProgressDialog.setOnCancelListener(new OnCancelListener(){
+		mProgressDialog.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {
 				// stop sync service on cancel
-                stopService(new Intent(SettingsActivity.this,OpenTrainingSyncService.class));
-    			Toast.makeText(SettingsActivity.this, SettingsActivity.this.getString(R.string.sync_canceled), Toast.LENGTH_LONG).show();
+				stopService(new Intent(SettingsActivity.this,
+						OpenTrainingSyncService.class));
+				Toast.makeText(
+						SettingsActivity.this,
+						SettingsActivity.this.getString(R.string.sync_canceled),
+						Toast.LENGTH_LONG).show();
 			}
 		});
 		mProgressDialog.show();
-		
-		
-	    final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, OpenTrainingSyncService.class);
-	    intent.putExtra("receiver", mReceiver);
-	    intent.putExtra("command", "query");
-	    intent.putExtra("host", host);
-	    intent.putExtra("version", version);
-	    
-	    startService(intent);
 
-	    
+		final Intent intent = new Intent(Intent.ACTION_SYNC, null, this,
+				OpenTrainingSyncService.class);
+		intent.putExtra("receiver", mReceiver);
+		intent.putExtra("command", "query");
+		intent.putExtra("host", host);
+		intent.putExtra("version", version);
+
+		startService(intent);
 	}
 	
 	/**

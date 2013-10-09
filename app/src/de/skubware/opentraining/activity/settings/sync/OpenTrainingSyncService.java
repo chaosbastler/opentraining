@@ -50,8 +50,6 @@ public class OpenTrainingSyncService extends IntentService {
 	public static final int STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES = 3;	
 	/** Indicates that the query is running and exercises are parsed */
 	public static final int STATUS_RUNNING_CHECKING_EXERCISES = 8;
-	/** Indicates that the query is running and exercises are saved to the filesystem */
-	public static final int STATUS_RUNNING_SAVING_EXERCISES = 9;
 	/** Indicates that the query is finished*/
 	public static final int STATUS_FINISHED = 10;
 	/** Indicates that the query could not be executed properly */
@@ -108,26 +106,11 @@ public class OpenTrainingSyncService extends IntentService {
             	
             	// download and parse the exercises
             	WgerJSONParser wgerParser = downloadAndParseExercises();
-        		
-            	// check settings: which exercises should be added?
-        		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        		boolean sync_only_exercises_with_images = settings.getBoolean("sync_only_exercises_with_images", true);
-        		boolean sync_only_my_language = settings.getBoolean("sync_only_my_language", true);
 
-        		ArrayList<ExerciseType> syncedExercises = wgerParser.getNewExercises(sync_only_exercises_with_images, sync_only_my_language);
-        		ArrayList<ExerciseType> withImagesExercises = wgerParser.getNewExercises(sync_only_exercises_with_images, false);
-        		ArrayList<ExerciseType> allExercises = wgerParser.getNewExercises(false, false);
+        		ArrayList<ExerciseType> allExercises = wgerParser.getNewExercises();
 
         		// add data to bundle
-        		b.putSerializable("synced_exercises", syncedExercises);
-        		b.putSerializable("with_images_exercises", withImagesExercises);
         		b.putSerializable("all_exercises", allExercises);
-
-                mReceiver.send(STATUS_RUNNING_SAVING_EXERCISES, Bundle.EMPTY);
-        		// finally save the exercises
-    			IDataProvider dataProvider = new DataProvider(getApplicationContext());
-        		dataProvider.saveSyncedExercises(syncedExercises);
-        		
 
 
                 mReceiver.send(STATUS_FINISHED, b);

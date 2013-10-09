@@ -235,33 +235,10 @@ public class WgerJSONParser {
 	 * Returns the list with the new exercises.
 	 * 
 	 * 
-	 * @param withImagesOnly
-	 *            only exercises with images will be returned
-	 * @param localizedOnly
-	 *            only exercises that are localized (that means there's a
-	 *            translation for the Locale returned by Locale.getDefault())
-	 * 
-	 * @return A list containing the specified new exercises.
+	 * @return A list containing all new exercises.
 	 */
-	public ArrayList<ExerciseType> getNewExercises(boolean withImagesOnly, boolean localizedOnly){
-		ArrayList<ExerciseType> filteredExerciseList =  new ArrayList<ExerciseType>(mNewExerciseList);
-		
-		for(ExerciseType exercise:mNewExerciseList){
-			// remove exercises without images
-			if(withImagesOnly && exercise.getImagePaths().isEmpty()){
-				filteredExerciseList.remove(exercise);
-				continue;
-			}
-			
-			// remove unlocalized exercises
-			if(localizedOnly && !exercise.getTranslationMap().keySet().contains(Locale.getDefault())){
-				filteredExerciseList.remove(exercise);
-				continue;
-			}
-		}
-		
-		
-		return filteredExerciseList;
+	public ArrayList<ExerciseType> getNewExercises(){		
+		return new ArrayList<ExerciseType>(mNewExerciseList);
 	}
 	
 	

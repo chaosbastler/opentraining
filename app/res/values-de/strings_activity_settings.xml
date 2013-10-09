@@ -24,10 +24,10 @@
     <string name="wipe_synced_exercises_summary">Die Standard OpenTraining Übungen sind davon nicht betroffen.</string>
     <string name="about_wger_sync">Über Synchronisation mit wger</string>
     <string name="about_wger_sync_fulltext">Zur Zeit können nur neue Übungen heruntergeladen werden. In Zukunft können eventuell auch Trainingspläne mit wger synchronisert werden. Sämtliche Daten werden nur (SSL-)verschlüsselt übertragen.</string>
-    <string name="sync_only_my_language">Nur deutschsprachige Übungen</string>
-    <string name="sync_only_my_language_summary">Nur lokalisierte Übungen synchronisieren</string>
+    <string name="sync_only_exercises_with_description">Nur Übungen mit Beschreibung</string>
     <string name="sync_only_exercises_with_images">Nur Übungen mit Bildern</string>
-    <string name="sync_only_exercises_with_images_summary">Übungen ohne Bilder nicht synchronisieren</string>
+    <string name="languages">Sprachen</string>
+
     
     <!-- Sync progess -->
     <string name="no_internet_connection">Synchronisierung kann nicht gestartet werden: Keine Internetverbindung vorhanden</string> 
@@ -51,7 +51,7 @@
 	<string name="show_more_information_about_error">Weitere Informationen über den Fehler.</string>
 	
 	<!-- Miscellaneous settings -->
-    <string name="pref_header_Miscellaneous_settings">Sonstiges</string>
+    <string name="pref_header_miscellaneous_settings">Sonstiges</string>
     <string name="miscellaneous">Sonstiges</string>
     <string name="view_changelog">Changelog</string>
     

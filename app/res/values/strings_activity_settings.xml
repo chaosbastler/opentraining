@@ -61,10 +61,10 @@ limitations under the License.
     <string name="wipe_synced_exercises_summary">Default exercises of OpenTraining won"'"t be deleted.</string>
     <string name="about_wger_sync">About sync with wger</string>
     <string name="about_wger_sync_fulltext">Currently only new exercises will be downloaded. In future you may be able to sync your workouts with wger. SSL encryption will always be used to protect your privacy.</string>
-    <string name="sync_only_my_language">Only localized exercises</string>
-    <string name="sync_only_my_language_summary">Sync only exercises that have been localized</string>
+    <string name="sync_only_exercises_with_description">Only exercises with description</string>
     <string name="sync_only_exercises_with_images">Only exercises with images</string>
-    <string name="sync_only_exercises_with_images_summary">Don"'"t sync exercises without images</string>
+    <string name="languages">Languages</string>
+    
     
     <!-- Sync progess -->
     <string name="no_internet_connection">Can"'"t start sync: no internet connection</string>

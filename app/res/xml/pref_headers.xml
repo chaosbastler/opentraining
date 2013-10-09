@@ -11,5 +11,8 @@
     <header
         android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$SyncPreferenceFragment"
         android:title="@string/pref_header_sync_settings" />
-    
+    <header
+        android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$MiscellaneousPreferenceFragment"
+        android:title="@string/pref_header_miscellaneous_settings" />
+
 </preference-headers>
