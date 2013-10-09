@@ -90,8 +90,6 @@ public class SelectMuscleDialog extends AlertDialog implements OnTouchListener {
 		super(activity);
 		this.mActivity = activity;
 
-		// set title and message
-		this.setTitle("Choose a muscle");
 
 		// CheckBox
 		LayoutInflater inflater = this.getLayoutInflater();

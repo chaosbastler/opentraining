@@ -108,10 +108,10 @@ public class DataHelper {
 			}
 
 			byte[] buffer = new byte[1000];
-			int bytesRead = 0;
-			while ((bytesRead = inputStream.read(buffer, 0, buffer.length)) >= 0) {
+			while ( inputStream.read(buffer, 0, buffer.length) >= 0) {
 				outputStream.write(buffer, 0, buffer.length);
 			}
+			outputStream.close();
 		} catch (Exception e) {
 			Log.e(TAG, "Exception occurred during saving.", e);
 			return null;

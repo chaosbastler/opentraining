@@ -24,11 +24,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import de.skubware.opentraining.R;
 
 /**
