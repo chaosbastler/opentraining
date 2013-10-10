@@ -21,37 +21,22 @@
 package de.skubware.opentraining.test;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.json.JSONException;
 
 
-import android.test.AndroidTestCase;
 import android.test.InstrumentationTestCase;
 import android.util.Log;
 import de.skubware.opentraining.activity.settings.sync.WgerJSONParser;
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.FSet;
-import de.skubware.opentraining.basic.FSet.SetParameter.*;
-import de.skubware.opentraining.basic.ExerciseTag;
-import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
-import de.skubware.opentraining.basic.TrainingEntry;
 import de.skubware.opentraining.basic.Workout;
-import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
@@ -93,7 +78,7 @@ public class WgerJSONParserTest extends InstrumentationTestCase {
 		ExerciseType EXERCISE_TWO_PARSED = null;
 		ExerciseType EXERCISE_THREE_PARSED = null;
 		
-		ArrayList<ExerciseType> exerciseList = parser.getNewExercises(false, false);
+		ArrayList<ExerciseType> exerciseList = parser.getNewExercises();
 		for(ExerciseType ex:exerciseList){
 			Log.d(TAG, "WgerJSONParser returned exercise: " + ex.toString());
 			if(ex.getUnlocalizedName().equals(EXERCISE_NAME_1)){

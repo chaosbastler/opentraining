@@ -11,6 +11,7 @@
     <PreferenceScreen
         android:persistent="false"
         android:title="@string/more_sync_settings" >
+        
         <EditTextPreference
             android:capitalize="words"
             android:defaultValue="@string/pref_default_exercise_sync_url"
@@ -25,6 +26,7 @@
             android:key="wipe_synced_exercises"
             android:summary="@string/wipe_synced_exercises_summary"
             android:title="@string/wipe_synced_exercises" />
+        
         <Preference
             android:key="about_wger_sync"
             android:title="@string/about_wger_sync" />

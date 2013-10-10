@@ -49,8 +49,11 @@
 	<string name="sync_error">Fehler bei der Synchronisation</string>
 	<string name="sync_error_msg">Es ist ein Fehler währen der Synchronisation aufgetreten.</string>
 	<string name="show_more_information_about_error">Weitere Informationen über den Fehler.</string>
+	<string name="summary">Zusammenfassung</string>
+	<string name="exercises_to_save">Zu speichernde Übungen:&#160;</string>
 	
-	<!-- Miscellaneous settings -->
+	
+		<!-- Miscellaneous settings -->
     <string name="pref_header_miscellaneous_settings">Sonstiges</string>
     <string name="miscellaneous">Sonstiges</string>
     <string name="view_changelog">Changelog</string>

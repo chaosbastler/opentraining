@@ -1,156 +1,128 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroller"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/text_color_table"
-        android:focusable="true"
-        android:paddingBottom="1dp" >
-
-        <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@color/button_color"
-            android:src="@drawable/icon_about" />
-
-        <RelativeLayout
-            android:id="@+id/wrapper_language_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/imageButton1"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/imageButton1"
-            android:background="#FFFFBB33" >
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="29dp"
-                android:text="@string/languages"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <ListView
-        android:id="@+id/new_exercise_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/text_color_table"
-        android:focusable="true"
-        android:paddingBottom="1dp" >
-
-        <ImageButton
-            android:id="@+id/ImageButton01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@color/button_color"
-            android:src="@drawable/icon_about" />
-
-        <RelativeLayout
-            android:id="@+id/RelativeLayout01"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/ImageButton01"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/ImageButton01"
-            android:background="#3399FF" >
-
-            <TextView
-                android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="29dp"
-                android:text="@string/miscellaneous"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <CheckBox
-        android:id="@+id/checkbox_only_with_images"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sync_only_exercises_with_images" />
-
-    <CheckBox
-        android:id="@+id/checkbox_only_with_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nur mit Beschreibung" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/text_color_table"
-        android:focusable="true"
-        android:paddingBottom="1dp" >
-
-        <ImageButton
-            android:id="@+id/ImageButton02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@color/button_color"
-            android:src="@drawable/icon_about" />
+        android:orientation="vertical" >
 
         <RelativeLayout
-            android:id="@+id/RelativeLayout02"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/ImageButton02"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/ImageButton02"
-            android:background="#999999" >
+            android:background="@color/text_color_table"
+            android:focusable="true"
+            android:paddingBottom="1dp" >
+
+            <RelativeLayout
+                android:id="@+id/wrapper_language_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="#FFFFBB33" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="29dp"
+                    android:text="@string/languages"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/new_exercise_list"
+            android:layout_width="match_parent"
+            android:layout_height="116dp" >
+        </ListView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/text_color_table"
+            android:focusable="true"
+            android:paddingBottom="1dp" >
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="#3399FF" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="29dp"
+                    android:text="@string/miscellaneous"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/checkbox_only_with_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sync_only_exercises_with_images" />
+
+        <CheckBox
+            android:id="@+id/checkbox_only_with_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nur mit Beschreibung" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/text_color_table"
+            android:focusable="true"
+            android:paddingBottom="1dp" >
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout02"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="#999999" >
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="29dp"
+                    android:text="Zusammenfassung"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/wrapper_textview_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/TextView02"
+                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="29dp"
-                android:text="Zusammenfassung"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text="Exercises to save: " />
+
+            <TextView
+                android:id="@+id/textview_exercise_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/textView1"
+                android:text="0" />
         </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/wrapper_textview_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exercises to save: " />
-
-        <TextView
-            android:id="@+id/textview_exercise_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView1"
-            android:text="0" />
-
-    </RelativeLayout>
-
-</LinearLayout>
+</ScrollView>

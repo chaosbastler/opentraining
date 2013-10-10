@@ -64,8 +64,10 @@ public class SyncFinishedDialog extends AlertDialog.Builder {
 	private ArrayList<ExerciseType> mExerciseToSaveList;
 	private TextView mExerciseCountTextView;
 
-	/** */
+	/** Indicates whether only exercises with images should be saved. */
 	private boolean withImagesOnly = false;
+	/** Indicates whether only exercises with images should be saved. */
+
 	private boolean withDescriptionOnly = false;
 	/** Exercises with one of this Locale will be saved. */
 	private Set<Locale> localesToSave = new HashSet<Locale>();
