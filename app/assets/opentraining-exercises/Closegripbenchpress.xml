@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType language="en" name="Benchpress (close grip)">
+	<Locale language="de" name="Bankdrücken (enger Griff)"/>
+	<Muscle name="Chest" level="3"/>
+	<SportsEquipment name="Bench"/>	 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Close-grip-bench-press-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Close-grip-bench-press-2.png"/> 
+</ExerciseType> 

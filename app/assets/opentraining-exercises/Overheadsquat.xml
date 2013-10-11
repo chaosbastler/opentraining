@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType language="en" name="Squat (overhead)">
+	<Locale language="de" name="Kniebeuge (über Kopf)"/>
+	<Muscle name="Thigh" level="3"/>
+	<Muscle name="Derriere" level="3"/>
+	<SportsEquipment name="Barbell"/>		
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Overhead-squat-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Overhead-squat-2.png"/> 
+</ExerciseType> 

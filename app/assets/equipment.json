@@ -21,7 +21,7 @@
     
  {
    "de": { "name" : "Curlpult"},
-   "en": { "name" : "Arm Curl Pad" }
+   "en": { "name" : "Arm Curl Pad", "alternative_names": ["Curl Pad"] }
  },
      
  {
@@ -36,7 +36,7 @@
  
  {
    "de": { "name" : "Klimmzugsstange", "alternative_names": ["Klimmzugs Stange", "Klimmzug Stange"] },
-   "en": { "name" : "Pull-Up Bar"}
+   "en": { "name" : "Pull-Up Bar", "alternative_names": ["Chin-Up Bar"] }
  },
      
  {
@@ -76,7 +76,7 @@
   
  {
    "de": { "name" : "Kabelzug", "alternative_names": ["Lat"]},
-   "en": { "name" : "Latissimus" }
+   "en": { "name" : "Cable" }
  },
  
  {
@@ -87,7 +87,16 @@
  {
    "de": { "name" : "Rückenstrecker", "alternative_names": ["Hyperextension Bank"]  },
    "en": { "name" : "Hyperextension Bench", "alternative_names": ["Hyperextensions Bench"] }
- }
+ },
  
+ {
+   "de": { "name" : "Bizeps-Maschine" },
+   "en": { "name" : "Biceps Machine"}
+ },
+ 
+  {
+   "de": { "name" : "Langhantel-Maschine" },
+   "en": { "name" : "Barbell Machine"}
+  }
  
 ]

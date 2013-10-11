@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType language="en" name="Leglift (at wall)">
+	<Locale language="de" name="Beinheben (an Wand)"/>
+	<Muscle name="Lower leg" level="3"/>
+	<SportsEquipment name="None"/>		
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Leg-lift-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Leg-lift-2.png"/> 
+</ExerciseType> 

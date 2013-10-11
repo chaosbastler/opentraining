@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType language="en" name="Cable Internal Rotation ">
+	<Locale language="de" name="Innere Kabelzug-Rotation"/>
+	<Muscle name="Shoulder" level="3"/>
+	<SportsEquipment name="Kabelzug"/>	
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Cable-internal-rotation-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Cable-internal-rotation-2.png"/> 
+</ExerciseType> 

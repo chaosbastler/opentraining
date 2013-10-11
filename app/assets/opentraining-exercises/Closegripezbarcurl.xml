@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType language="en" name="Curl (close grip, S-Z Bar)">
+	<Locale language="de" name="Curl (enger Griff, mit SZ-Stange)"/>
+	<Muscle name="Biceps" level="3"/>
+	<SportsEquipment name="S-Z Curl Bar"/>	 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Close-grip-ez-bar-curl-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Close-grip-ez-bar-curl-2.png"/> 
+</ExerciseType> 

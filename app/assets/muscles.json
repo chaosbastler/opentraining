@@ -6,7 +6,7 @@
   
  {
    "de": { "name" : "Rückenmuskeln", "alternative_names": ["Rückenmuskel", "Rücken", "Latissimus dorsi"] },
-   "en": { "name" : "Back muscle", "alternative_names": ["Back"]  }
+   "en": { "name" : "Back muscle", "alternative_names": ["Back", "Latissimus"]  }
  },
  
  {
@@ -31,7 +31,7 @@
     
  {
    "de": { "name" : "Schulter", "alternative_names": ["Anterior deltoid", "Serratus anterior", "Trapezius"] },
-   "en": { "name" : "Shoulder" }
+   "en": { "name" : "Shoulder", "alternative_names": ["Shoulders"] }
  }, 
  
  {

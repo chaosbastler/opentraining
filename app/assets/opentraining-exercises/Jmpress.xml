@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<ExerciseType language="en" name="JM Press">
+	<Locale language="de" name="JM Presse"/>
+	<Muscle name="Triceps" level="3"/>
+	<SportsEquipment name="Barbell"/>
+	<SportsEquipment name="Bench"/>		
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Jm-press-1.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Jm-press-2.png"/> 
+	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Jm-press-3.png"/> 
+</ExerciseType> 
