@@ -64,7 +64,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	 * Reference for reacting to preference changes (list of exercises will be
 	 * updated if the preferences change)
 	 */
-	private OnSharedPreferenceChangeListener onSharedPreferenceChangeListener;
+	private OnSharedPreferenceChangeListener mOnSharedPreferenceChangeListener;
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
@@ -122,18 +122,6 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
 				mExericseList));
 
-		// register for changed settings
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-		onSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
-			@Override
-			public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
-				Log.v(TAG, "Preference changed, will update shown exercises");
-				filterExercisesForMusclesAndEquipment();
-			}
-
-		};
-		sharedPrefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
 
 		
@@ -144,9 +132,33 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	@Override
 	public void onStart(){
 		super.onStart();
+		
+		// register for changed settings
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+		mOnSharedPreferenceChangeListener = new OnSharedPreferenceChangeListener() {
+			@Override
+			public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
+				Log.v(TAG, "Preference changed, will update shown exercises");
+				filterExercisesForMusclesAndEquipment();
+			}
+
+		};
+		sharedPrefs.registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+
+		
 		filterExercisesForMusclesAndEquipment();
 	}
 
+	@Override
+	public void onStop(){
+		super.onStop();
+		// unregister shared preference listener
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		sharedPrefs.unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
+	}
+	
+	
 	/**
 	 * Filters the list of exercises for muscles and equipment.
 	 */

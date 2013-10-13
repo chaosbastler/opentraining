@@ -84,7 +84,7 @@ limitations under the License.
 	<string name="exercises_to_save">Exercises to save:&#160;</string>
 
 			<!-- Miscellaneous settings -->
-    <string name="pref_header_Miscellaneous_settings">Miscellaneous</string>
+    <string name="pref_header_miscellaneous_settings">Miscellaneous</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="view_changelog">Changelog</string>
     
