@@ -107,10 +107,15 @@ public class SyncFinishedDialog extends AlertDialog.Builder {
 			localeSet.addAll(ex.getTranslationMap().keySet());
 		}
 		final List<Locale> localeList = new ArrayList<Locale>(localeSet);
+		// create String list with the full language-String(e.g. not 'en' but'English')
+		final List<String> localeStringList = new ArrayList<String>();
+		for(Locale locale:localeList){
+			localeStringList.add(locale.getDisplayLanguage(locale));
+		}
 		
-		final ArrayAdapter<Locale> listAdapter = new ArrayAdapter<Locale>(
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
 				context, android.R.layout.simple_list_item_multiple_choice,
-				localeList);
+				localeStringList);
 		exerciseListView.setAdapter(listAdapter);
 		exerciseListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		

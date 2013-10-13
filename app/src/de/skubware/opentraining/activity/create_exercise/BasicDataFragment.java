@@ -39,6 +39,8 @@ public class BasicDataFragment extends Fragment{
 	private EditText mEditTextExerciseNameEnglish;
 	private EditText mEditTextExerciseNameGerman;
 
+	private EditText mEditTextExerciseDescription;
+
 	
 	public BasicDataFragment() {
 	}
@@ -48,7 +50,7 @@ public class BasicDataFragment extends Fragment{
 			Bundle savedInstanceState) {
 		View layout = inflater.inflate(R.layout.fragment_create_exercise_basic_data, container, false);
 
-		
+		mEditTextExerciseDescription = (EditText) layout.findViewById(R.id.edittext_description);
 		mEditTextExerciseNameEnglish = (EditText) layout.findViewById(R.id.edittext_exercise_name_english);
 		mEditTextExerciseNameGerman = (EditText) layout.findViewById(R.id.edittext_exercise_name_german);
 		
@@ -69,6 +71,9 @@ public class BasicDataFragment extends Fragment{
 		return mEditTextExerciseNameGerman.getText().toString();
 	}
 
+	public String getExerciseDescription(){
+		return mEditTextExerciseDescription.getText().toString();
+	}
 
 	
 	private class ExerciseNameTextWatcher implements TextWatcher {

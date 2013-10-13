@@ -97,7 +97,7 @@
                 android:textColor="@color/released_button_background" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/edittext_description"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignLeft="@+id/LinearLayout01"

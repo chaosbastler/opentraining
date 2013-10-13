@@ -20,10 +20,10 @@
         yourapp:showAsAction="ifRoom"
         android:title="@string/show_workout"/>
     
-    <item
+    <!-- <item
         android:id="@+id/menu_item_create_exercise"
         android:icon="@drawable/icon_add"
         yourapp:showAsAction="ifRoom"
-        android:title="@string/create_exercise_activity_title"/>
+        android:title="@string/create_exercise_activity_title"/> -->
     
 </menu>

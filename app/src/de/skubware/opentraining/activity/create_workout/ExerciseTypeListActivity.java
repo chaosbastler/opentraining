@@ -189,14 +189,14 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		
 		
 		
-		// configure menu_item_license_info
-		MenuItem menu_item_create_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_exercise);
+		// configure menu_item_create_exercise
+		/*MenuItem menu_item_create_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_exercise);
 		menu_item_create_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
 				return true;
 			}
-		});
+		});*/
 
 		return super.onCreateOptionsMenu(menu);
 	}

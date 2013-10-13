@@ -139,7 +139,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		getMenuInflater().inflate(R.menu.activity_create_exercise, menu);
 		
 
-		// configure menu_item_rename_workout
+		// configure menu_create_exercise_info
 		MenuItem menu_create_exercise_info = (MenuItem) menu.findItem(R.id.menuitem_create_exercise_info);
 		menu_create_exercise_info.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
@@ -154,7 +154,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			}
 		});
 		
-		// configure menu_item_rename_workout
+		// configure menuitem_save_exercise
 		MenuItem menuitem_save_exercise = (MenuItem) menu.findItem(R.id.menuitem_save_exercise);
 		menuitem_save_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {				
@@ -223,6 +223,9 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			
 			translationMap.put(Locale.GERMAN, ex_name_german);
 		}
+		
+		// handle description
+		String description = basicDataFragment.getExerciseDescription();
 			
 		// handle muscle
 		SortedSet<Muscle> muscleList = new TreeSet<Muscle>(muscleDataFragment.getMuscles());
@@ -242,7 +245,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 		
 		
-		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next()).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList);
+		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next()).description(description).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList);
 		ExerciseType ex = exerciseBuilder.build();
 		
 		// save exercise
