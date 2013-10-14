@@ -40,7 +40,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	private static final long serialVersionUID = 1L;
 
 	/** Tag for logging */
-	static final String TAG = ExerciseType.class.getName();
+	static final String TAG = "ExerciseType";
 
 	private String name; // required
 	private String localizedName; // optional
@@ -212,7 +212,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 			Log.i(TAG, "Found no localized name for: " + currentLocale.toString() + ". Using unlocalized exercise name:" + this.name);
 		} else {
 			localizedName = this.translationMap.get(currentLocale);
-			Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
+			// Log.v(TAG, "Localized " + this.name + " to language " + currentLocale + ": " + localizedName);
 		}
 
 		// this copy is necessary, because builder.neededTools may be a

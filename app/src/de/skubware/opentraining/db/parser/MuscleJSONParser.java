@@ -103,7 +103,7 @@ public class MuscleJSONParser extends AbstractJSONParser<List<Muscle>> {
 					}
 				}
 				
-				Log.d(TAG, "Finished parsing Muscle: \n" + m.toDebugString());
+				// Log.d(TAG, "Finished parsing Muscle: \n" + m.toDebugString());
 				muscleList.add(m);
 
 			}

@@ -34,7 +34,7 @@ import de.skubware.opentraining.basic.ExerciseTag;
 
 public class ExerciseTagJSONParser extends AbstractJSONParser<List<ExerciseTag>> {
 	/** Tag for logging */
-	public static final String TAG = "SportsEquipmentJSONParser<>";
+	public static final String TAG = "ExerciseTagJSONParser";
 	
 	// JSON Node names
 	private static final String TAG_NAME = "name";
@@ -95,7 +95,7 @@ public class ExerciseTagJSONParser extends AbstractJSONParser<List<ExerciseTag>>
 					}
 				}
 				
-				Log.d(TAG, "Finished parsing ExerciseTag: \n" + exerciseTag.toDebugString());
+				// Log.d(TAG, "Finished parsing ExerciseTag: \n" + exerciseTag.toDebugString());
 				exerciseTagList.add(exerciseTag);
 
 			}

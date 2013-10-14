@@ -103,7 +103,7 @@ public class SportsEquipmentJSONParser extends AbstractJSONParser<List<SportsEqu
 					}
 				}
 				
-				Log.d(TAG, "Finished parsing SportsEquipment: \n" + m.toDebugString());
+				// Log.d(TAG, "Finished parsing SportsEquipment: \n" + m.toDebugString());
 				sportsEquipmentList.add(m);
 
 			}
