@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-    <release version="0.5" versioncode="17" summary="Neue Übungen und Design Änderung" date="13/10/2013">
+    <release version="0.5" versioncode="17" summary="Neue Übungen und Design Änderung" date="10/16/2013">
         <change>33 neue Übungen hinzugefügt</change>
         <change>Design zu Holo-Style geändert</change>
         <change>Download von neuen Übungen von wger.de (bisher nur Übungen ohne Bilder verfügbar)</change>

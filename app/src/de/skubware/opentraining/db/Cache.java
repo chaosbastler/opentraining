@@ -60,6 +60,7 @@ public enum Cache {
 	 * @param mContext
 	 */
 	public void updateCache(Context mContext) {
+		Log.d(TAG, "updateCache()");
 		DataProvider dataProvider = new DataProvider(mContext);
 		mMuscleList = dataProvider.loadMuscles();
 		mSportsEquipmentList = dataProvider.loadEquipment();

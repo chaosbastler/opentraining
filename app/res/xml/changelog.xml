@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-    <release version="0.5" versioncode="17" summary="New exercises and design changes" date="13/10/2013">
+    <release version="0.5" versioncode="17" summary="New exercises and design changes" date="10/16/2013">
         <change>Added 33 new exercises</change>
         <change>Changed design to Holo-style</change>
         <change>Download new exercises from wger.de (currently only exercises without images are available)</change>
