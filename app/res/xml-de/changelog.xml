@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-    <release version="0.5" versioncode="17" summary="Neue Übungen und Design Änderung" date="13/10/2013">
+    <release version="0.5.1" versioncode="19" summary="Gewählte Übungen hervorheben und Bugfixes" date="20/10/2013">
+        <change>Wenn ein neues Workout erstellt wird, werden die gewählten Übungen nun hervorgehoben.</change>
+        <change>Die App speichert jetzt, wie weit in der Liste mit Übungen gescrollt wurde (wenn man beim Workout erstellen von der Übungs-Detail-Ansicht zurückkehrt)</change>
+        <change>Fehlende Übersetzungen hinzugefügt</change>
+    </release> 
+    <release version="0.5" versioncode="18" summary="Neue Übungen und Design Änderung" date="13/10/2013">
         <change>33 neue Übungen hinzugefügt</change>
         <change>Design zu Holo-Style geändert</change>
         <change>Download von neuen Übungen von wger.de (bisher nur Übungen ohne Bilder verfügbar)</change>
