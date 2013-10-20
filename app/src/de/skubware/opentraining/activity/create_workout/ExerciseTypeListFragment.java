@@ -60,6 +60,19 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	/** Last query. */
 	private String mSearchQuery = "";
 
+	private Integer mScrollIndex = null;
+	private Integer mScrollTop = null;
+	/** 
+	 * The serialization (saved instance state) Bundle key representing the
+	 * scroll index (for restoring scroll position)
+	 */	
+	private static final String STATE_SCROLL_INDEX = "state_scroll_index";
+	/** 
+	 * The serialization (saved instance state) Bundle key representing the
+	 * scroll top (for restoring scroll position)
+	 */	
+	private static final String STATE_SCROLL_TOP = "state_scroll_top";
+	
 	/**
 	 * Reference for reacting to preference changes (list of exercises will be
 	 * updated if the preferences change)
@@ -121,8 +134,6 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 
 		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
 				mExericseList));
-
-
 
 		
 		//SelectMuscleDialog muscleDialog = new SelectMuscleDialog(getActivity());
@@ -251,9 +262,19 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		// Restore the previously serialized activated item position.
-		if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-			setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+		// Restore the previously serialized values
+		if (savedInstanceState != null) {
+			// restore activated item position
+			if(savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
+				setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+
+			// restore scroll state
+			if(savedInstanceState.containsKey(STATE_SCROLL_INDEX) && savedInstanceState.containsKey(STATE_SCROLL_TOP)){
+				mScrollIndex = savedInstanceState.getInt(STATE_SCROLL_INDEX);
+				mScrollTop = savedInstanceState.getInt(STATE_SCROLL_TOP);
+				restoreScrollState();
+			}
+
 		}
 	}
 
@@ -292,9 +313,47 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 		super.onSaveInstanceState(outState);
 		if (mActivatedPosition != ListView.INVALID_POSITION) {
 			// Serialize and persist the activated item position.
-			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
+			outState.putInt(STATE_ACTIVATED_POSITION, mScrollIndex);
 		}
+		
+		saveScrollState();
+		outState.putInt(STATE_SCROLL_INDEX, mScrollIndex);
+		outState.putInt(STATE_SCROLL_TOP, mScrollTop);
 	}
+
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		saveScrollState();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		restoreScrollState();
+	}
+	
+	/**
+	 * Saves the 'scroll state' (which items of the ListView are visible).
+	 */
+	private void saveScrollState(){
+		// save index and top position to be able to 
+		// restore it later
+		mScrollIndex = getListView().getFirstVisiblePosition();
+		View v =  getListView().getChildAt(0);
+		mScrollTop = (v == null) ? 0 : v.getTop();
+	}
+	
+	/**
+	 * Restores the 'scroll state' (which items of the ListView are visible).
+	 */
+	private void restoreScrollState(){
+		// restore selection if possible
+		if(mScrollIndex != null && mScrollTop != null)
+			getListView().setSelectionFromTop(mScrollIndex, mScrollTop);
+	}
+	
 
 	/**
 	 * Turns on activate-on-click mode. When this mode is on, list items will be
