@@ -37,6 +37,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -167,6 +168,7 @@ public class DialogWorkoutOverviewFragment extends DialogFragment {
 		mWorkout.removeFitnessExercise(fEx);
 		((ArrayAdapter) mListView.getAdapter()).notifyDataSetChanged();
 		((ExerciseTypeListActivity) getActivity()).onWorkoutChanged(mWorkout);
+
 	}
 	
 	
@@ -177,6 +179,12 @@ public class DialogWorkoutOverviewFragment extends DialogFragment {
 	 * @param workoutName The name of the Workout.
 	 */
 	private void saveWorkout(Activity activity){
+		if(mWorkout.getFitnessExercises().isEmpty()){
+			Log.w(TAG, "User tried to save an empty Workout. Will skip saving.");
+			finishActivities(activity);
+			return;
+		}
+		
 		final String workoutName = mEditTextWorkoutName.getText().toString();
 		
 		mWorkout.setName(workoutName);

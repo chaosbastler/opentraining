@@ -100,7 +100,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="29dp"
-                    android:text="Zusammenfassung"
+                    android:text="@string/summary"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </RelativeLayout>
         </RelativeLayout>
@@ -114,7 +114,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exercises to save: " />
+                android:text="@string/exercises_to_save" />
 
             <TextView
                 android:id="@+id/textview_exercise_count"

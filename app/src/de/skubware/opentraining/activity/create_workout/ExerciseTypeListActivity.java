@@ -244,8 +244,19 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 	@Override
 	public void onWorkoutChanged(Workout w) {
 		mWorkout = w;
+		// notify ExerciseTypeListAdapter
+		((ExerciseTypeListAdapter)((ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list)).getListAdapter()).notifyDataSetChanged();
 	}
 
+	/**
+	 * Getter for {@link #mWorkout}. Used by {@code ExerciseTypeListAdapter} to
+	 * disable already selected exercises.
+	 */
+	protected Workout getWorkout(){
+		return mWorkout;
+	}
+	
+	
 	private void setupSearchView(SearchView searchItem) {
 
 		OnQueryTextListener listener = (ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list);
