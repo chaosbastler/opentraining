@@ -199,7 +199,8 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		// to reflect the new value, per the Android Design guidelines.
 		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
 		bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
-
+		bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
+		bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
 	}
 
 	/** {@inheritDoc} */
@@ -382,6 +383,9 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 							return false;
 						}
 					});
+			
+			bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
+			bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
 
 		}
 	}

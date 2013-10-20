@@ -83,9 +83,18 @@ limitations under the License.
 	<string name="summary">Summary</string>
 	<string name="exercises_to_save">Exercises to save:&#160;</string>
 
-			<!-- Miscellaneous settings -->
+	<!-- Miscellaneous settings -->
     <string name="pref_header_miscellaneous_settings">Miscellaneous</string>
     <string name="miscellaneous">Miscellaneous</string>
     <string name="view_changelog">Changelog</string>
+	
+	<!-- Training Timer -->
+    <string name="title_training_timer">Training-Timer</string>		
+    <string name="summary_training_timer">Notification when you should continue your training</string>		
+    <string name="title_training_timer_exercise_time">Time between 2 exercises</string>
+    <string name="title_training_timer_set_time">Time between 2 sets</string>
+    <string name="pref_default_training_timer_exercise_time">180</string>
+    <string name="pref_default_training_timer_set_time">30</string>
+    
     
 </resources>
