@@ -33,8 +33,9 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AbsListView;
 import android.widget.ListView;
+import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -59,6 +60,12 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 
 	/** Last query. */
 	private String mSearchQuery = "";
+	/** 
+	 * The serialization (saved instance state) Bundle key representing the
+	 * last query
+	 */	
+	private static final String STATE_QUERY = "state_query";
+	
 
 	private Integer mScrollIndex = null;
 	private Integer mScrollTop = null;
@@ -132,7 +139,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		mExericseList = dataProvider.getExercises();
 
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
 				mExericseList));
 
 		
@@ -215,18 +222,18 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			}
 		}
 
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));	}
+		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mExericseList));	
+	}
 
 	/**
 	 * Filters the list of exercises for the search query. The method
 	 * {@link #filterExercisesForMusclesAndEquipment()} will be called in this
 	 * method.
 	 * 
-	 * Currently the
 	 */
 	private void filterExercisesForSearchQuery() {
-		Log.d(TAG, "filterExercisesForSearchQuery()");
+		Log.d(TAG, "filterExercisesForSearchQuery() mSearchEquery=" + mSearchQuery);
 		filterExercisesForMusclesAndEquipment();
 
 		if (mSearchQuery == null)
@@ -252,7 +259,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			}
 		}
 
-		setListAdapter(new ArrayAdapter<ExerciseType>(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
 				mExericseList));	
 	}
 	
@@ -268,6 +275,13 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			if(savedInstanceState.containsKey(STATE_ACTIVATED_POSITION))
 				setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
 
+			// restore search query
+			if(savedInstanceState.containsKey(STATE_QUERY)){
+				mSearchQuery = savedInstanceState.getString(STATE_QUERY);
+				
+				filterExercisesForSearchQuery();
+			}
+			
 			// restore scroll state
 			if(savedInstanceState.containsKey(STATE_SCROLL_INDEX) && savedInstanceState.containsKey(STATE_SCROLL_TOP)){
 				mScrollIndex = savedInstanceState.getInt(STATE_SCROLL_INDEX);
@@ -276,6 +290,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			}
 
 		}
+		
 	}
 
 	@Override
@@ -316,6 +331,10 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			outState.putInt(STATE_ACTIVATED_POSITION, mScrollIndex);
 		}
 		
+		// save search query
+		outState.putString(STATE_QUERY, mSearchQuery);
+		
+		// save scroll state
 		saveScrollState();
 		outState.putInt(STATE_SCROLL_INDEX, mScrollIndex);
 		outState.putInt(STATE_SCROLL_TOP, mScrollTop);
@@ -331,6 +350,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	@Override
 	public void onResume(){
 		super.onResume();
+		filterExercisesForSearchQuery();
 		restoreScrollState();
 	}
 	
