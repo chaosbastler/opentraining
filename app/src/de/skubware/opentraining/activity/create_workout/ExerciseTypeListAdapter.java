@@ -20,10 +20,13 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.skubware.opentraining.basic.ExerciseType;
-import android.content.Context;
+import de.skubware.opentraining.basic.FitnessExercise;
+import de.skubware.opentraining.basic.Workout;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,11 +38,14 @@ import android.widget.ArrayAdapter;
  * can see which exercises have been selected).
  * 
  */
-public class ExerciseTypeListAdapter extends ArrayAdapter<ExerciseType> {
+public class ExerciseTypeListAdapter extends ArrayAdapter<ExerciseType>{
+	private Workout mWorkout;
+	private List<ExerciseType> mExercisesInWorkoutList = new ArrayList<ExerciseType>();
 	
-	public ExerciseTypeListAdapter(Context context, int resource, int textViewResourceId,
+	public ExerciseTypeListAdapter(Activity context, int resource, int textViewResourceId,
 			List<ExerciseType> exerciseList) {
 		super(context, resource, textViewResourceId, exerciseList);
+		updateWorkout();
 	}
 	
 	@Override
@@ -58,9 +64,34 @@ public class ExerciseTypeListAdapter extends ArrayAdapter<ExerciseType> {
 		return true;
 	}
 
+	
+	
 	@Override
 	public boolean isEnabled(int position) {
-		//TODO set false, if already added to workout
+		// return false, if already added to workout
+		if(mExercisesInWorkoutList.contains(getItem(position)))
+			return false;
 		return true;	
 	}
+
+	
+	public void updateWorkout() {
+		mWorkout = ((ExerciseTypeListActivity) getContext()).getWorkout();
+		
+		mExercisesInWorkoutList = new ArrayList<ExerciseType>();
+		
+		if(mWorkout != null){
+			for(FitnessExercise fEx: mWorkout.getFitnessExercises()){
+				mExercisesInWorkoutList.add(fEx.getExType());
+			}
+		}
+	}
+	
+	@Override
+	public void notifyDataSetChanged(){
+		updateWorkout();
+		super.notifyDataSetChanged();
+	}
+	
+
 }

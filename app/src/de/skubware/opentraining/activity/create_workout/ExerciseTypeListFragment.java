@@ -278,7 +278,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			// restore search query
 			if(savedInstanceState.containsKey(STATE_QUERY)){
 				mSearchQuery = savedInstanceState.getString(STATE_QUERY);
-				
+				filterExercisesForMusclesAndEquipment();
 				filterExercisesForSearchQuery();
 			}
 			
@@ -350,6 +350,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	@Override
 	public void onResume(){
 		super.onResume();
+		filterExercisesForMusclesAndEquipment();
 		filterExercisesForSearchQuery();
 		restoreScrollState();
 	}
