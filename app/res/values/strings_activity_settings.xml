@@ -16,8 +16,11 @@
     <string name="open_source_licenses">Open Source licenses</string>
     <string name="license_text_images" translatable="false">
 The exercises images by Everkinetic are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.\n\n
-        
-The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/.
+The license text can be found at: http://creativecommons.org/licenses/by-sa/3.0/. \n\n
+
+
+The app icon has been designed by Olli Wiegner (http://www.olliwiegner.de) and is released under the CC-BY 3.0 Unported License \n\n
+The license text can be found at: http://creativecommons.org/licenses/by/3.0/
 	</string>
     <string name="license_text_swipe_to_dismiss" translatable="false">
  Copyright 2012 Roman Nurik
