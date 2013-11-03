@@ -17,6 +17,7 @@
         android:id="@+id/imageview_logo"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/icon_barbell_black" />
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_dumbbell_large" />
 
 </RelativeLayout>

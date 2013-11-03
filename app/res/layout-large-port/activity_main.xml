@@ -20,6 +20,7 @@
         android:layout_height="600dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/icon_barbell_black" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_dumbbell_large" />
 
 </RelativeLayout>
