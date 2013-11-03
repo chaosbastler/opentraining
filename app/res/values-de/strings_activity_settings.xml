@@ -47,10 +47,15 @@
 	<string name="exercises_to_save">Zu speichernde Übungen:&#160;</string>
 	
 	
-		<!-- Miscellaneous settings -->	
+	<!-- Miscellaneous settings -->	
     <string name="pref_header_miscellaneous_settings">Sonstiges</string>
     <string name="miscellaneous">Sonstiges</string>
     <string name="view_changelog">Changelog</string>
     
+	<!-- Training Timer -->
+    <string name="title_training_timer">Training-Timer</string>		
+    <string name="summary_training_timer">Benachrichtigung wann das Training fortgesetzt werden soll</string>	
+    <string name="title_training_timer_exercise_time">Zeit zwischen 2 Übungen</string>
+    <string name="title_training_timer_set_time">Zeit zwischen 2 Sätzen</string>
     
 </resources>
