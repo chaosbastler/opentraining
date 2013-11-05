@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.5.2" versioncode="20" summary="New icon" date="5/11/2013">
+        <change>The app got a new icon. Hope you like it.</change>
+    </release>
     <release version="0.5.1" versioncode="19" summary="Highlight selected exercises and bugfixes" date="20/10/2013">
         <change>When a new workout is created, the selected exercises will now be highlighted.</change>
         <change>The app will now save its 'scroll state' (which exercises are visible?) when you return to the list with exercises.</change>

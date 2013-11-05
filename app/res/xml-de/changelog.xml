@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.5.2" versioncode="20" summary="Neues Icon" date="5/11/2013">
+        <change>Die App hat ein neues Icon bekommen.</change>
+    </release>    
     <release version="0.5.1" versioncode="19" summary="Gewählte Übungen hervorheben und Bugfixes" date="20/10/2013">
         <change>Wenn ein neues Workout erstellt wird, werden die gewählten Übungen nun hervorgehoben.</change>
         <change>Die App speichert jetzt, wie weit in der Liste mit Übungen gescrollt wurde (wenn man beim Workout erstellen von der Übungs-Detail-Ansicht zurückkehrt)</change>
