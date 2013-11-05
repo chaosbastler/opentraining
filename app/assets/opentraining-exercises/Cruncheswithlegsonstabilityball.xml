@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType language="de" name="Crunch (mit Swissball">
+<ExerciseType language="de" name="Crunch (mit Swissball)">
 	<Locale language="en" name="Crunch (legs on swiss ball)"/>						
 	<Muscle name="Bauchmuskeln" level="3"/>
 	<SportsEquipment name="Swiss Ball"/>
