@@ -46,10 +46,14 @@ public class DataHelper {
 	 * 
 	 * @param name
 	 *            The name of the image
-	 * @return The generated Drawable
+	 * @return The generated Drawable or null if the image could not be found
 	 */
 	public Drawable getDrawable(String name) {
 		Log.v(TAG, "Trying to get drawable " + name);
+		if(!drawableExist(name)){
+			return null;
+		}
+		
 		InputStream is = null;
 		Drawable img = null;
 		try {
@@ -66,13 +70,49 @@ public class DataHelper {
 			Log.d(TAG, "Could not find drawable: " + name + " in assets folder. Will try to find image in custom image folder.");
 			img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.CUSTOM_IMAGES_FOLDER + "/" + name);
 		}
+		
+		if(img == null){
+			Log.d(TAG, "Could not find drawable: " + name + " in assets or custom image folder. Will try to find image in synced image folder.");
+			img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.SYNCED_IMAGES_FOLDER + "/" + name);
+		}
+
 
 		if(img == null){
-			Log.e(TAG, "Could not find drawable in custom image folder: " + name + "\n");
+			Log.w(TAG, "Could not find drawable in custom image folder or in synced image folder: " + name + "\n");
 		}
 		
 		return img;
 	}
+	
+	public boolean drawableExist(String name){
+		// check default exercises
+		boolean imageInDefaultFolderExists = false;
+		try{
+			// assets have to be treated special
+			// e.g. there are only lower case filenames
+			String[] defaultImages = mContext.getAssets().list(DataProvider.EXERCISE_FOLDER);
+			if(java.util.Arrays.asList(defaultImages).contains(name)){
+				imageInDefaultFolderExists = true;
+			}	
+		}catch (IOException e) {
+			Log.e(TAG, "IOException during searching for drawable: " + name + "\n", e);
+		}
+		
+		// check custom and synced images
+		File imgInCustomFolder = new File(mContext.getFilesDir().toString() + "/" + DataProvider.CUSTOM_IMAGES_FOLDER + "/" + name);
+		File imgInSyncedFolder = new File(mContext.getFilesDir().toString() + "/" + DataProvider.SYNCED_IMAGES_FOLDER + "/" + name);
+		
+		boolean exactlyOneExists = imageInDefaultFolderExists ^ imgInCustomFolder.exists() ^ imgInSyncedFolder.exists();
+		boolean atLeastOneExists =  imageInDefaultFolderExists || imgInCustomFolder.exists() || imgInSyncedFolder.exists();
+		if(atLeastOneExists && !exactlyOneExists){
+			Log.wtf(TAG, "There seems to be more than one image with the name: " + name + ". This should not happen.");
+		}
+		if(!atLeastOneExists){
+			Log.v(TAG, "Drawable " + name + " does not exist (yet).");
+		}
+		return atLeastOneExists;
+	}
+	
 	
 	/**
 	 * Copies the image with the Uri to the custom images folder.

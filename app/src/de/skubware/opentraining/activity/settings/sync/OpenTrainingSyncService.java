@@ -22,19 +22,15 @@ package de.skubware.opentraining.activity.settings.sync;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.json.JSONException;
-
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 /**
@@ -48,8 +44,12 @@ public class OpenTrainingSyncService extends IntentService {
 	public static final int STATUS_RUNNING_DOWNLOAD_LANGUAGE_FILES = 2;
 	/** Indicates that the query is running */
 	public static final int STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES = 3;	
+	/** Indicates that the query is running */
+	public static final int STATUS_RUNNING_DOWNLOAD_EQUIPMENT_FILES = 4;
 	/** Indicates that the query is running and exercises are parsed */
 	public static final int STATUS_RUNNING_CHECKING_EXERCISES = 8;
+	/** Indicates that the query is running and images are downloaded */
+	public static final int STATUS_RUNNING_DOWNLOADING_IMAGES = 9;	
 	/** Indicates that the query is finished*/
 	public static final int STATUS_FINISHED = 10;
 	/** Indicates that the query could not be executed properly */
@@ -66,6 +66,8 @@ public class OpenTrainingSyncService extends IntentService {
 	public static final String LANGUAGE_REQUEST_PATH = "/api/v1/language/";
 	/** The path for getting the muscles as JSON */
 	public static final String MUSCLE_REQUEST_PATH = "/api/v1/muscle/";
+	/** The path for getting the equipment as JSON */
+	public static final String EQUIPMENT_REQUEST_PATH = "/api/v1/equipment/";
 	
 	/** The used {@link RestClient}. */
 	private RestClient mClient;
@@ -105,9 +107,7 @@ public class OpenTrainingSyncService extends IntentService {
             	mClient = new RestClient(host, port, "https", version);
             	
             	// download and parse the exercises
-            	WgerJSONParser wgerParser = downloadAndParseExercises();
-
-        		ArrayList<ExerciseType> allExercises = wgerParser.getNewExercises();
+        		ArrayList<ExerciseType> allExercises = downloadAndParseExercises();
 
         		// add data to bundle
         		b.putSerializable("all_exercises", allExercises);
@@ -132,7 +132,7 @@ public class OpenTrainingSyncService extends IntentService {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	private WgerJSONParser downloadAndParseExercises() throws IOException, JSONException{
+	private ArrayList<ExerciseType> downloadAndParseExercises() throws IOException, JSONException{
 		Log.d(TAG, "getExercisesAsJSON()");
 		IDataProvider dataProvider = new DataProvider(this.getApplicationContext());
 
@@ -152,13 +152,27 @@ public class OpenTrainingSyncService extends IntentService {
 		Log.v(TAG, "musclesAsJSON: " + musclesAsJSON);
 
 
-		// finally parse exercises, languages and muscles
+		// get equipment from server
+		mReceiver.send(STATUS_RUNNING_DOWNLOAD_EQUIPMENT_FILES, Bundle.EMPTY);
+		String equipmentAsJSON = mClient.get(EQUIPMENT_REQUEST_PATH);
+		Log.v(TAG, "equipmentAsJSON: " + equipmentAsJSON);
+
+
+		// parse exercises, languages and muscles
 		mReceiver.send(STATUS_RUNNING_CHECKING_EXERCISES, Bundle.EMPTY);
-		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON , dataProvider);
+		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON, equipmentAsJSON,  dataProvider);
 		
+		ArrayList<ExerciseType.Builder> exerciseBuilderList = wgerParser.getNewExercisesBuilder();
+
+		// get images from server
+		mReceiver.send(STATUS_RUNNING_DOWNLOADING_IMAGES, Bundle.EMPTY);
+		WgerImageDownloader imageDownloader = new WgerImageDownloader(getApplicationContext(), mClient);
+		ArrayList<ExerciseType> newExerciseList = imageDownloader.downloadImages(exerciseBuilderList);
+
 		
-    	return wgerParser;
+    	return newExerciseList;
 	}
+
 
 	
 

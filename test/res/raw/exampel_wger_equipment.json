@@ -1,0 +1,10 @@
+{"meta": 
+{"limit": 20, "next": null, "offset": 0, "previous": null, "total_count": 7}, 
+"objects": 
+[{"id": 1, "name": "Barbell", "resource_uri": "/api/v1/equipment/1/"}, 
+{"id": 3, "name": "Dumbbell", "resource_uri": "/api/v1/equipment/3/"}, 
+{"id": 4, "name": "Gym mat", "resource_uri": "/api/v1/equipment/4/"}, 
+{"id": 7, "name": "none (bodyweight exercise)", "resource_uri": "/api/v1/equipment/7/"}, 
+{"id": 6, "name": "Pull-up bar", "resource_uri": "/api/v1/equipment/6/"}, 
+{"id": 5, "name": "Swiss Ball", "resource_uri": "/api/v1/equipment/5/"}, 
+{"id": 2, "name": "SZ-Bar", "resource_uri": "/api/v1/equipment/2/"}]}

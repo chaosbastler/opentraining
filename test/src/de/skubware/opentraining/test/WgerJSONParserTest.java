@@ -71,7 +71,7 @@ public class WgerJSONParserTest extends InstrumentationTestCase {
 	
 	public void testParseExerciseTypeXML() throws JSONException, IOException{		
 		IDataProvider dataProvider = new DataProvider(getInstrumentation().getTargetContext());
-		WgerJSONParser parser = new WgerJSONParser(readFile(R.raw.exampel_wger_exercises), readFile(R.raw.exampel_wger_languages), readFile(R.raw.exampel_wger_muscles), dataProvider); 
+		WgerJSONParser parser = new WgerJSONParser(readFile(R.raw.exampel_wger_exercises), readFile(R.raw.exampel_wger_languages), readFile(R.raw.exampel_wger_muscles), readFile(R.raw.exampel_wger_equipment), dataProvider); 
 		
 		// the parser should return three exercises
 		ExerciseType EXERCISE_ONE_PARSED = null;

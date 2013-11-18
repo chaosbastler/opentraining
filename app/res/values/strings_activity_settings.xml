@@ -55,15 +55,16 @@ limitations under the License.
 </string>	
 
     <!-- Sync settings -->
-    <string name="pref_header_sync_settings">Sync settings</string>
+    <string name="pref_header_sync_settings">Synchronization</string>
     <string translatable="false" name="pref_default_exercise_sync_url">wger.de</string>
     <string name="pref_title_exercise_download_url">Sync URL</string>
-    <string name="start_sync">Start sync</string>
+    <string name="start_sync">Start exercise download</string>
     <string name="more_sync_settings">More sync settings</string>
-    <string name="wipe_synced_exercises">Delete synchronized exercises</string>
-    <string name="wipe_synced_exercises_summary">Default exercises of OpenTraining won"'"t be deleted.</string>
+    <string name="wipe_synced_exercises">Delete downloaded exercises</string>
+    <string name="wipe_synced_exercises_summary">Downloaded images will be deleted too. Default exercises of OpenTraining won"'"t be deleted.</string>
+    <string name="synced_files_deleted_msg">Downloaded exercises have been deleted</string>
     <string name="about_wger_sync">About sync with wger</string>
-    <string name="about_wger_sync_fulltext">Currently only new exercises will be downloaded. In future you may be able to sync your workouts with wger. SSL encryption will always be used to protect your privacy.</string>
+    <string name="about_wger_sync_fulltext">Currently only new exercises can be downloaded. In future you may be able to sync your workouts with wger. SSL encryption will always be used to protect your privacy.</string>
     <string name="sync_only_exercises_with_description">Only exercises with description</string>
     <string name="sync_only_exercises_with_images">Only exercises with images</string>
     <string name="languages">Languages</string>
@@ -76,6 +77,7 @@ limitations under the License.
 	<string name="downloading_exercises">Downloading exercises</string>
 	<string name="downloading_language_files">Downloading language files</string>
 	<string name="downloading_muscle_files">Downloading muscle files</string>
+	<string name="downloading_images">Downloading images (this may take some minutes)</string>	
 	<string name="verifying_exercises">Verifying exercises</string>
 	<string name="saving_exercises">Saving exercises</string>
 	<string name="sync_finished">Synchronisation finished</string>

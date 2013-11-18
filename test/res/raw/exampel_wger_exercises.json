@@ -10,9 +10,20 @@
 "muscles": ["/api/v1/muscle/8/", "/api/v1/muscle/6/"], 
 "name": "Übung Nummer 1", 
 "resource_uri": "/api/v1/exercise/174/", 
-"status": "2"}, 
+"status": "2",
+"images": ["/api/v1/exerciseimage/33/", "/api/v1/exerciseimage/34/"]
+}, 
 
-{"category": "/api/v1/exercisecategory/8/", "comments": [], "creation_date": null, "description": "some description 2", "id": 135, "language": "/api/v1/language/1/", "muscles": ["/api/v1/muscle/5/"], "name": "Übung Nummer 2", "resource_uri": "/api/v1/exercise/135/", "status": "5"}, 
+{"category": "/api/v1/exercisecategory/8/", 
+"comments": [], "creation_date": null, 
+"description": "some description 2", 
+"id": 135, "language": 
+"/api/v1/language/1/", 
+"muscles": ["/api/v1/muscle/5/"], 
+"name": "Übung Nummer 2", 
+"resource_uri": "/api/v1/exercise/135/", 
+"status": "5",
+"images": [] }, 
 
-{"category": "/api/v1/exercisecategory/9/", "comments": [], "creation_date": null, "description": "some description 3", "id": 5, "language": "/api/v1/language/1/", "muscles": ["/api/v1/muscle/8/", "/api/v1/muscle/10/"], "name": "Übung Nummer 3", "resource_uri": "/api/v1/exercise/5/", "status": "5"}
+{"category": "/api/v1/exercisecategory/9/", "comments": [], "creation_date": null, "description": "some description 3", "id": 5, "language": "/api/v1/language/1/", "muscles": ["/api/v1/muscle/8/", "/api/v1/muscle/10/"], "name": "Übung Nummer 3", "resource_uri": "/api/v1/exercise/5/", "status": "5", "images": []}
 ]}
