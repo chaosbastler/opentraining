@@ -41,11 +41,14 @@ public interface IDataProvider {
 	/** The name of the folder that contains user-created exercises .xml files */
 	static public final String CUSTOM_EXERCISE_FOLDER = "user_exercises";
 	
-	/** The name of the folder that contains user-created exercises .xml files */
+	/** The name of the folder that contains synced exercise .xml files */
 	static public final String SYNCED_EXERCISE_FOLDER = "synced_exercises";
 
-	/** The name of the folder that contains user-created */
+	/** The name of the folder that contains user-created images */
 	static public final String CUSTOM_IMAGES_FOLDER = "user_images";
+
+	/** The name of the folder that contains synced (downloaded) images */
+	static public final String SYNCED_IMAGES_FOLDER = "synced_images";
 	
 	/** The name of the folder that contains exercises the example {@link Workout}s */
 	static public final String EXAMPLE_WORKOUT_FOLDER = "example_workouts";

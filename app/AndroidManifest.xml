@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.skubware.opentraining"
-    android:versionCode="19"
-    android:versionName="0.5.1"
+    android:versionCode="20"
+    android:versionName="0.5.2"
     android:installLocation="auto" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="10"
+        android:targetSdkVersion="19" />
     
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- <uses-permission android:name="android.permission.VIBRATE" />  -->
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,7 @@
         android:theme="@style/Theme.AppCompat.Light" >
         <activity
             android:name="de.skubware.opentraining.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +32,8 @@
         <activity
             android:name="de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity"
             android:label="@string/title_exercisetype_list"
-            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
+            android:parentActivityName="de.skubware.opentraining.activity.MainActivity"
+            android:icon="@drawable/icon_dumbbell" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.skubware.opentraining.activity.MainActivity" />
@@ -39,7 +41,8 @@
         <activity
             android:name="de.skubware.opentraining.activity.create_workout.ExerciseTypeDetailActivity"
             android:label="@string/title_exercisetype_detail"
-            android:parentActivityName=".ExerciseTypeListActivity" >
+            android:parentActivityName=".ExerciseTypeListActivity" 
+            android:icon="@drawable/icon_dumbbell" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ExerciseTypeListActivity" />
@@ -48,7 +51,8 @@
             android:name="de.skubware.opentraining.activity.start_training.FExListActivity"
             android:label="@string/title_exercise_list"
             android:parentActivityName="de.skubware.opentraining.activity.MainActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" 
+            android:icon="@drawable/icon_dumbbell" >>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.skubware.opentraining.activity.MainActivity" />
@@ -57,7 +61,8 @@
             android:name="de.skubware.opentraining.activity.start_training.FExDetailActivity"
             android:label="@string/title_exercise_detail"
             android:parentActivityName=".ExerciseListActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden" 
+            android:icon="@drawable/icon_dumbbell" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ExerciseListActivity" />
@@ -65,7 +70,8 @@
         <activity
             android:name="de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity"
             android:label="@string/title_workout_list"
-            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" >
+            android:parentActivityName="de.skubware.opentraining.activity.MainActivity" 
+            android:icon="@drawable/icon_dumbbell" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.skubware.opentraining.activity.MainActivity" />
@@ -73,18 +79,21 @@
         <activity
             android:name="de.skubware.opentraining.activity.manage_workouts.WorkoutDetailActivity"
             android:label="@string/title_workout_detail"
-            android:parentActivityName="de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity" >
+            android:parentActivityName="de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity" 
+            android:icon="@drawable/icon_dumbbell" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WorkoutListActivity" />
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.settings.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:icon="@drawable/icon_dumbbell" >
         </activity>
         <activity
             android:name="de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity"
-            android:label="@string/create_exercise_activity_title">
+            android:label="@string/create_exercise_activity_title"
+            android:icon="@drawable/icon_dumbbell" >
         </activity>
         
         <service android:enabled="true" android:name="de.skubware.opentraining.activity.settings.sync.OpenTrainingSyncService" />

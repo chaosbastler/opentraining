@@ -199,7 +199,8 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		// to reflect the new value, per the Android Design guidelines.
 		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
 		bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
-
+		bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
+		bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
 	}
 
 	/** {@inheritDoc} */
@@ -382,6 +383,9 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 							return false;
 						}
 					});
+			
+			bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
+			bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
 
 		}
 	}
@@ -426,6 +430,10 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
         case OpenTrainingSyncService.STATUS_RUNNING_CHECKING_EXERCISES:
         	Log.v(TAG, "Sync status: STATUS_RUNNING_CHECKING_EXERCISES");
     		mProgressDialog.setMessage(getString(R.string.verifying_exercises));
+            break;
+        case OpenTrainingSyncService.STATUS_RUNNING_DOWNLOADING_IMAGES:
+        	Log.v(TAG, "Sync status: STATUS_RUNNING_DOWNLOADING_IMAGES");
+    		mProgressDialog.setMessage(getString(R.string.downloading_images));
             break;    
         case OpenTrainingSyncService.STATUS_FINISHED:
         	Log.v(TAG, "Sync status: STATUS_FINISHED");
@@ -548,17 +556,28 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 	private void deleteSyncedExercises() {
 		File syncedExerciseFolder = new File(getFilesDir().toString() + "/"
 				+ IDataProvider.SYNCED_EXERCISE_FOLDER);
-
-		File[] files = syncedExerciseFolder.listFiles();
-		if (files != null) {
-			for (File f : files) {
+		File syncedImagesFolder = new File(getFilesDir().toString() + "/"
+				+ IDataProvider.SYNCED_IMAGES_FOLDER);
+		
+		// delete exercises
+		File[] exerciseFiles = syncedExerciseFolder.listFiles();
+		if (exerciseFiles != null) {
+			for (File f : exerciseFiles) {
 				f.delete();
 			}
 		}
+		// delete images
+		File[] imageFiles = syncedImagesFolder.listFiles();
+		if (imageFiles != null) {
+			for (File f : imageFiles) {
+				f.delete();
+			}
+		}
+		
 
 		Cache.INSTANCE.updateExerciseCache(this);
 		
-		Toast.makeText(this, "Synced files have been deleted", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, getString(R.string.synced_files_deleted_msg), Toast.LENGTH_LONG).show();
 	}
 	
 	/**
