@@ -360,7 +360,15 @@ public class DialogFragmentAddEntry extends DialogFragment {
 		for (int i = 6000; i <= 200000; i += 1000) {
 			weightList.add(i / 1000 + "," + i % 1000 + " kg");
 		}
+		
+		for (int i = 205000; i <= 400000; i += 5000) {
+			weightList.add(i / 1000 + "," + i % 1000 + " kg");
+		}
 
+		for (int i = 410000; i <= 500000; i += 10000) {
+			weightList.add(i / 1000 + "," + i % 1000 + " kg");
+		}
+		
 		ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, weightList);
 		weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner_weight.setAdapter(weightAdapter);
