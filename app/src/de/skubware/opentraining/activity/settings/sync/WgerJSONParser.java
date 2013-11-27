@@ -93,14 +93,6 @@ public class WgerJSONParser {
 			String name = jsonExercise.getString("name");
 			if(dataProvider.exerciseExists(name))
 				continue;
-
-			// status - used for sorting out not authorized/refused exercises
-			// (1: not authorized, means that a user suggested it but it hasn't been
-			// checked by the admin yet; 3: refused)
-			Integer status = jsonExercise.getInt("status");
-			if(status == 1 || status == 3)
-				continue;
-			
 			
 			ExerciseType.Builder builder = new ExerciseType.Builder(name);
 			
