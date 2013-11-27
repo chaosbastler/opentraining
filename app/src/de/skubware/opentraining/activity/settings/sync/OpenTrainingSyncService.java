@@ -61,7 +61,7 @@ public class OpenTrainingSyncService extends IntentService {
 	public static final String EXTRA_HOST = "host";
 	
 	/** The path for getting the exercises as JSON */
-	public static final String EXERCISE_REQUEST_PATH = "/api/v1/exercise/?limit=1000";
+	public static final String EXERCISE_REQUEST_PATH = "/api/v1/exercise/?status__in=2,4,5&limit=0";
 	/** The path for getting the languages as JSON */
 	public static final String LANGUAGE_REQUEST_PATH = "/api/v1/language/";
 	/** The path for getting the muscles as JSON */
