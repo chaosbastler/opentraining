@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Curl (einarmig, auf Pult, Kurzhantel)">
-	<Locale language="en" name="Preacher curl(one arm, biased)"/>																										
-	<SportsEquipment name="Curlpult"/>
-	<SportsEquipment name="Swiss Ball"/>
-	<SportsEquipment name="Kurzhantel"/>
-	<Muscle name="Bizeps" level="3"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-preacher-curl-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-preacher-curl-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Preacher curl(one arm, biased)"/>
+  <Locale language="it" name="Trazioni (un braccio, storto, preacher)"/>
+  <SportsEquipment name="Curlpult"/>
+  <SportsEquipment name="Swiss Ball"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Muscle name="Bizeps" level="3"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-preacher-curl-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-preacher-curl-2.png"/>
+</ExerciseType>

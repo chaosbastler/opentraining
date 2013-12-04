@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Frontheben (Langhantel, eng)">
-	<Locale language="en" name="Barbell upright rows"/>
-	<Muscle name="Schulter" level="3"/>
-	<SportsEquipment name="Langhantel"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-upright-rows-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-upright-rows-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Barbell upright rows"/>
+  <Locale language="it" name="Sbarra alzata frontale (eng)"/>
+  <Muscle name="Schulter" level="3"/>
+  <SportsEquipment name="Langhantel"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-upright-rows-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-upright-rows-2.png"/>
+</ExerciseType>

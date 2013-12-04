@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Trizepsdrücken über Kopf (liegend, 90°)">
-	<Locale language="en" name="Triceps press to chin (lying, close grip)"/>																				
-	<Muscle name="Trizeps" level="3"/>
-	<SportsEquipment name="Langhantel"/>
-	<SportsEquipment name="Trainingsbank"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-close-grip-triceps-press-to-chin-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-close-grip-triceps-press-to-chin-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Triceps press to chin (lying, close grip)"/>
+  <Locale language="it" name="Tricipiti premuti al mento (sdraiato, presa ridotta)"/>
+  <Muscle name="Trizeps" level="3"/>
+  <SportsEquipment name="Langhantel"/>
+  <SportsEquipment name="Trainingsbank"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-close-grip-triceps-press-to-chin-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-close-grip-triceps-press-to-chin-2.png"/>
+</ExerciseType>

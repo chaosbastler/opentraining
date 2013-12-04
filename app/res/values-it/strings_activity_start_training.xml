@@ -1,0 +1,28 @@
+<resources>
+    <!-- FExListAdapter -->
+    <string name="remaining_sets">Set rimanenti:</string>
+    <string name="exercise_finished">Esercizio finito</string>
+    <string name="workout_finished">Workout finito :)</string>
+
+    <!-- FExDetailFragment -->
+    <string name="no_entry_for_today">Premi \'+\' per aggiungere un elemento</string>
+    <string name="old_entries">Mostra altri allenamenti</string>
+    <string name="add_entry">Aggiungi elemento</string>
+    <string name="choose_subentry">Seleziona l\'elemento che vuoi modificare</string>
+    <string name="choose_training">Seleziona un allenamento</string>
+    <string name="no_other_training_entries">Non ci sono altri allenamenti da mostrare</string>
+    <string name="load_other_training_entry">Mostra altri allenamenti</string>
+    <string name="history">Storia</string>
+
+
+    <!-- DialogFragmentAddEntry -->
+    <string name="edit_entry">Modifica elemento</string>
+    <string name="save_entry">Salva</string>
+    <string name="discard_entry">"Cancella</string>
+    <string name="title_workout_list">Workouts</string>
+    <string name="title_workout_detail">Dettagli Workout</string>
+    <string name="repetitions">Ripetizioni</string>
+    <string name="weight">Peso</string>
+    <string name="duration">Durata</string>
+
+</resources>

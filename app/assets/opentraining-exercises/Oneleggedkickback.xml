@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Kickback (one legged)">
-	<Locale language="de" name="Kickback (einbeinig)"/>
-	<Muscle name="Derriere" level="3"/>
-	<SportsEquipment name="Cable"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-legged-kickback-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-legged-kickback-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Kickback (einbeinig)"/>
+  <Locale language="it" name="Calcio all'indietro (una gamba)"/>
+  <Muscle name="Derriere" level="3"/>
+  <SportsEquipment name="Cable"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-legged-kickback-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-legged-kickback-2.png"/>
+</ExerciseType>

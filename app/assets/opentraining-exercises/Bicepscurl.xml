@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Curl">
-	<Locale language="en" name="Curl"/>					
-	<Muscle name="Bizeps" level="3"/>
-	<SportsEquipment name="Kurzhantel"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Biceps-curl-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Biceps-curl-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Curl"/>
+  <Locale language="it" name="Trazioni"/>
+  <Muscle name="Bizeps" level="3"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Biceps-curl-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Biceps-curl-2.png"/>
+</ExerciseType>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Seitheben (beidseitig)">
-	<Locale language="en" name="Dumbbell lateral raise"/>									
-	<SportsEquipment name="Kurzhantel"/>
-	<Muscle name="Schulter" level="3"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Dumbbell lateral raise"/>
+  <Locale language="it" name="Sollevamento Laterale (manubri) "/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Muscle name="Schulter" level="3"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-2.png"/>
+</ExerciseType>

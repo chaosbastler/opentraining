@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType language="de" name="Superman"> 
-	<Locale language="en" name="Superman"/>	
-	<SportsEquipment name="Keine"/>
-	<Muscle name="Rückenmuskeln" level="3"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Supermans-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Supermans-2.png"/> 
-</ExerciseType> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<ExerciseType language="de" name="Superman">
+  <Locale language="en" name="Superman"/>
+  <Locale language="it" name="Superman"/>
+  <SportsEquipment name="Keine"/>
+  <Muscle name="Rückenmuskeln" level="3"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Supermans-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Supermans-2.png"/>
+</ExerciseType>

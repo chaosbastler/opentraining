@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Trizepsdrücken über Kopf (liegend, 180°)">
-	<Locale language="en" name="Bent arm pullover"/>	
-	<Muscle name="Trizeps" level="3"/>
-	<SportsEquipment name="Langhantel"/>
-	<SportsEquipment name="Trainingsbank"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bent-arm-pullover-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bent-arm-pullover-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Bent arm pullover"/>
+  <Locale language="it" name="Pullover a braccio piegato"/>
+  <Muscle name="Trizeps" level="3"/>
+  <SportsEquipment name="Langhantel"/>
+  <SportsEquipment name="Trainingsbank"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bent-arm-pullover-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bent-arm-pullover-2.png"/>
+</ExerciseType>

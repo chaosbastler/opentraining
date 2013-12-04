@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Pushdown (incline)">
-	<Locale language="de" name="Pushdown (geneigt)"/>
-	<Muscle name="Latissimus" level="3"/>
-	<SportsEquipment name="Kabelzug"/>
-	<SportsEquipment name="Bench"/>	
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-pushdown-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-pushdown-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Pushdown (geneigt)"/>
+  <Locale language="it" name="Pushdown (inclinato)"/>
+  <Muscle name="Latissimus" level="3"/>
+  <SportsEquipment name="Kabelzug"/>
+  <SportsEquipment name="Bench"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-pushdown-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-pushdown-2.png"/>
+</ExerciseType>

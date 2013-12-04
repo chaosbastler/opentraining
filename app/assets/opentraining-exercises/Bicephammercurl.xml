@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Hammer-Curl">
-	<Locale language="en" name="Bicep hammer curl"/>				
-	<Muscle name="Bizeps" level="3"/>
-	<SportsEquipment name="Kurzhantel"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-hammer-curl-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-hammer-curl-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Bicep hammer curl"/>
+  <Locale language="it" name="Trazioni a martello con bicipiti"/>
+  <Muscle name="Bizeps" level="3"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-hammer-curl-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-hammer-curl-2.png"/>
+</ExerciseType>
