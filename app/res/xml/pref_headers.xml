@@ -6,6 +6,9 @@
         android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
     <header
+        android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$TrainingTimerPreferenceFragment"
+        android:title="@string/pref_header_training_timer" />    
+    <header
         android:fragment="de.skubware.opentraining.activity.settings.SettingsActivity$LicensePreferenceFragment"
         android:title="@string/pref_header_licenses" />
     <header

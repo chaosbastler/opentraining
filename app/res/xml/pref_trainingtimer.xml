@@ -1,0 +1,53 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+	<CheckBoxPreference
+	android:defaultValue="true"
+	android:key="training_timer_enabled"
+	android:summary="@string/summary_training_timer"
+	android:title="@string/title_training_timer" />
+
+    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/more_settings" android:dependency="training_timer_enabled">
+    
+    <PreferenceCategory android:title="@string/notification">
+   
+ 	<CheckBoxPreference
+        android:defaultValue="true"
+        android:dependency="training_timer_enabled"
+        android:key="training_timer_sound_enabled"
+        android:title="@string/title_training_timer_sound_enabled" />
+        
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:dependency="training_timer_enabled"
+        android:key="training_timer_sound_enabled"
+        android:title="@string/title_training_timer_vibration_enabled" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/recovery_time">
+    <EditTextPreference
+        android:defaultValue="180"
+        android:dependency="training_timer_enabled"
+        android:inputType="number"
+        android:key="training_timer_exercise_recovery_time"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:numeric="integer"
+        android:title="@string/title_training_timer_exercise_time" />
+    <EditTextPreference
+        android:defaultValue="30"
+        android:dependency="training_timer_enabled"
+        android:inputType="number"
+        android:key="training_timer_set_recovery_time"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:numeric="integer"
+        android:title="@string/title_training_timer_set_time" />
+    </PreferenceCategory>
+    
+	</PreferenceScreen>
+
+</PreferenceScreen>

@@ -94,12 +94,15 @@ limitations under the License.
     <string name="view_changelog">Changelog</string>
 	
 	<!-- Training Timer -->
-    <string name="title_training_timer">Training-Timer</string>		
-    <string name="summary_training_timer">Notification when you should continue your training</string>		
-    <string name="title_training_timer_exercise_time">Time between 2 exercises</string>
-    <string name="title_training_timer_set_time">Time between 2 sets</string>
-    <string name="pref_default_training_timer_exercise_time">180</string>
-    <string name="pref_default_training_timer_set_time">30</string>
-    
-    
+    <string name="pref_header_training_timer">Training-Timer</string>
+    <string name="more_settings">More settings</string>		
+    <string name="title_training_timer">Training-Timer</string>
+    <string name="notification">Notification</string>
+    <string name="summary_training_timer">Notification when you should continue your training</string>
+    <string name="title_training_timer_sound_enabled">Notification sound</string>
+    <string name="title_training_timer_vibration_enabled">Notification vibration</string>
+    <string name="recovery_time">Recovery time</string>
+    <string name="title_training_timer_exercise_time">Between exercises</string>
+    <string name="title_training_timer_set_time">Between sets</string>
+
 </resources>

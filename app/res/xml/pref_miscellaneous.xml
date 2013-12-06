@@ -7,33 +7,4 @@
         android:key="view_changelog"
         android:title="@string/view_changelog" />
 
-    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="Coming soon: TrainingTimer" android:enabled="false">
-    
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="enable_training_timer"
-        android:summary="@string/summary_training_timer"
-        android:title="@string/title_training_timer" />
-
-    <EditTextPreference
-        android:defaultValue="@string/pref_default_training_timer_exercise_time"
-        android:dependency="enable_training_timer"
-        android:inputType="number"
-        android:key="training_timer_exercise_time"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/title_training_timer_exercise_time" />
-    <EditTextPreference
-        android:defaultValue="@string/pref_default_training_timer_set_time"
-        android:dependency="enable_training_timer"
-        android:inputType="number"
-        android:key="training_timer_set_time"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/title_training_timer_set_time" />
-	</PreferenceScreen>
-
-
 </PreferenceScreen>

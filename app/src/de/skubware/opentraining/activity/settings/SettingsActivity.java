@@ -194,13 +194,20 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 			}
 		});
 		
+		// Add 'training-timer' preferences, and a corresponding header.
+		PreferenceCategory trainingTimerFakeHeader = new PreferenceCategory(this);
+		trainingTimerFakeHeader.setTitle(R.string.title_training_timer);
+		getPreferenceScreen().addPreference(trainingTimerFakeHeader);
+		addPreferencesFromResource(R.xml.pref_trainingtimer);
+		
+		
 		// Bind the summaries of EditText preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
 		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
 		bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
-		bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
-		bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
+		bindPreferenceSummaryToValue(findPreference("training_timer_exercise_recovery_time"));
+		bindPreferenceSummaryToValue(findPreference("training_timer_set_recovery_time"));
 	}
 
 	/** {@inheritDoc} */
@@ -383,12 +390,27 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 							return false;
 						}
 					});
-			
-			bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
-			bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
 
 		}
 	}
+	
+	/**
+	 * This fragment shows training-timer preferences only. It is used when the
+	 * activity is showing a two-pane settings UI.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public static class TrainingTimerPreferenceFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.pref_trainingtimer);
+			
+			bindPreferenceSummaryToValue(findPreference("training_timer_exercise_recovery_time"));
+			bindPreferenceSummaryToValue(findPreference("training_timer_set_recovery_time"));
+
+		}
+	}
+	
 	
 	
 	/**
