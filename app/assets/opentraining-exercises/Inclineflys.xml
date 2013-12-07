@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Butterflies (incline)">
-	<Locale language="de" name="Butterfly (geneigt)"/>
-	<Muscle name="Chest" level="3"/>
-	<SportsEquipment name="Bench"/>
-	<SportsEquipment name="Dumbbell"/>			
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Butterfly (geneigt)"/>
+  <Locale language="it" name="Farfalla (inclinato)"/>
+  <Muscle name="Chest" level="3"/>
+  <SportsEquipment name="Bench"/>
+  <SportsEquipment name="Dumbbell"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-2.png"/>
+</ExerciseType>

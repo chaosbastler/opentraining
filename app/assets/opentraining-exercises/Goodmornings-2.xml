@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Good Mornings (with machine)">
-	<Locale language="de" name="Good Morning (mit Gerät)"/>
-	<Muscle name="Back" level="3"/>
-	<SportsEquipment name="Barbell Machine"/>		
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Good-mornings-2-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Good-mornings-2-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Good Morning (mit Gerät)"/>
+  <Locale language="it" name="Buona Giornata (macchina)"/>
+  <Muscle name="Back" level="3"/>
+  <SportsEquipment name="Barbell Machine"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Good-mornings-2-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Good-mornings-2-2.png"/>
+</ExerciseType>

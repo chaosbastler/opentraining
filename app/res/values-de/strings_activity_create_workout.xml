@@ -1,17 +1,17 @@
 <resources>
-    
+
     <!-- Exercise List -->
     <string name="search">Suche</string>
     <string name="filter">Filtern</string>
-    
-    
+
+
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">Übungsdetails</string>
     <string name="title_exercisetype_list">Übungen</string>
     <string name="exercise_already_in_workout">Du hast diese Übung bereits zum Workout hinzugefügt.</string>
     <string name="no_description_available">Es ist keine Beschreibung verfügbar.</string>
 
-    
+
     <!-- Exercise Detail Menu -->
     <string name="add_exercise">Übung hinzufügen</string>
     <string name="exercise">Übung</string>
@@ -21,13 +21,13 @@
     <string name="license_info">Lizenzinformationen</string>
     <string name="no_license_available">Es wurden keine Lizenzinformationen gefunden.</string>
 
-    
+
     <!-- DialogFilterMuscleAndEquipment -->
     <string name="settings">Einstellungen</string>
     <string name="muscles">Muskeln</string>
     <string name="equipment">Equipment</string>
-    
-    
+
+
     <!-- DialogWorkoutOverviewFragment -->
     <string name="save_workout">Workout speichern</string>
     <string name="add_more_exercises">Mehr Übungen hinzufügen</string>
@@ -38,10 +38,10 @@
     <string name="are_you_sure">Sind sie sicher?</string>
     <string name="really_remove_exercise">Wollen sie wirklich die Übung EXERCISE_NAME aus dem Workout entfernen?</string>
 
-    
+
     <!-- DialogSaveWorkoutFragment -->
-    <string name="workout_name_hint">Workout Namen eingeben</string>    
+    <string name="workout_name_hint">Workout Namen eingeben</string>
     <string name="workout_already_exists">Es gibt bereits ein Workout mit diesem Namen.</string>
-    
+
 
 </resources>

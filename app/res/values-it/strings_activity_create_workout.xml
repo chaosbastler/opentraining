@@ -1,0 +1,50 @@
+<resources>
+
+
+
+    <!-- Exercise List -->
+    <string name="search">Ricerca</string>
+    <string name="filter">Filtra</string>
+
+
+    <!-- Exercise Detail -->
+    <string name="title_exercisetype_detail">Dettagli sul Tipo di Esercizio</string>
+    <string name="title_exercisetype_list">Esercizi</string>
+    <string name="exercise_already_in_workout">Hai già aggiunto questo esercizio al Workout.</string>
+    <string name="no_description_available">Descrizione non disponibile.</string>
+
+
+    <!-- Exercise Detail Menu -->
+    <string name="add_exercise">Aggiungi esercizio</string>
+    <string name="exercise">L\'esercizio</string>
+    <string name="has_been_added">è stato aggiunto</string>
+    <string name="show_workout">Mostra Workout</string>
+    <string name="workout_empty">Il Workout è vuoto.</string>
+    <string name="license_info">Info licenze</string>
+    <string name="no_license_available">Nessuna licenza disponibile.</string>
+
+
+    <!-- DialogFilterMuscleAndEquipment -->
+    <string name="settings">Impostazioni</string>
+    <string name="muscles">Muscoli</string>
+    <string name="equipment">Attrezzi</string>
+
+
+    <!-- DialogWorkoutOverviewFragment -->
+    <string name="save_workout">Salva workout</string>
+    <string name="add_more_exercises">Aggiungi altri esercizi</string>
+    <string name="discard">"Elimina workout</string>
+    <string name="title_exercise_detail">Dettagli Esercizio</string>
+    <string name="title_exercise_list">Esercizio</string>
+    <string name="override">Sovrascrivere</string>
+    <string name="are_you_sure">Sei sicuro?</string>
+    <string name="really_remove_exercise">Sei sicuro di voler rimuovere l\'esercizio EXERCISE_NAME dal Workout?</string>
+
+
+    <!-- DialogSaveWorkoutFragment -->
+    <string name="workout_name_hint">Inserisci il nome del Workout</string>
+    <string name="workout_already_exists">C\'è già un Workout con questo nome.</string>
+
+
+
+</resources>

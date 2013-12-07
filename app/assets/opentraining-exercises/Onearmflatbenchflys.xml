@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Butterfly (one arm, flat bench)">
-	<Locale language="de" name="Butterflies (einarmig, Flachbank)"/>
-	<Muscle name="Biceps" level="3"/>
-	<Muscle name="Chest" level="3"/>	
-	<SportsEquipment name="Bench"/>
-	<SportsEquipment name="Dumbbell"/>				
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-flat-bench-flys-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-flat-bench-flys-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Butterflies (einarmig, Flachbank)"/>
+  <Locale language="it" name="Farfalla (un braccio, panca piana)"/>
+  <Muscle name="Biceps" level="3"/>
+  <Muscle name="Chest" level="3"/>
+  <SportsEquipment name="Bench"/>
+  <SportsEquipment name="Dumbbell"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-flat-bench-flys-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-flat-bench-flys-2.png"/>
+</ExerciseType>

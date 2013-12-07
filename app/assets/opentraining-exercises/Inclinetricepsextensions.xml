@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Trizepsstrecken (schräg liegend)">
-	<Locale language="en" name="Incline triceps extensions"/>													
-	<SportsEquipment name="Kurzhantel"/>
-	<SportsEquipment name="Trainingsbank"/>
-	<Muscle name="Trizeps" level="3"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-triceps-extensions-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-triceps-extensions-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Incline triceps extensions"/>
+  <Locale language="it" name="Estensione tricipiti (inclinato)"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <SportsEquipment name="Trainingsbank"/>
+  <Muscle name="Trizeps" level="3"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-triceps-extensions-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-triceps-extensions-2.png"/>
+</ExerciseType>

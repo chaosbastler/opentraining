@@ -1,0 +1,41 @@
+<resources>
+
+    <!-- CreateExerciseActivity -->
+    <string name="create_exercise_activity_title">Crea esercizio</string>
+    <string name="could_not_save_exercise">Non posso salvare l\'esercizio.</string>
+    <string name="exercise_saved">L\'esercizio è stato salvato.</string>
+    <string name="provide_name">Devi dargli un nome.</string>
+    <string name="name_already_used">Il nome è già in uso per un altro esercizio. Scegline un altro.</string>
+
+
+    <!-- Menu of CreateExerciseActivity -->
+    <string name="text_about_creating_exercise">Devi inserire un nome per l\'esercizio, tutto il resto è opzionale</string>
+    <string name="title_about_creating_exercise">Come creare un esercizio.</string>
+
+
+    <!-- BasicDataFragment -->
+    <string name="title_basic_data_fragment">Informazioni base</string>
+    <string name="exercise_name">Nome dell\'esercizio</string>
+    <string name="name_english">Nome inglese</string>
+    <string name="name_german">Nome tedesco</string>
+    <string name="description">Descrizione</string>
+    <string name="the_exercise_description">Una descrizione dell\'esercizio</string>
+
+
+    <!-- ImageFragment -->
+    <string name="title_image_fragment">Immagini</string>
+    <string name="did_not_provide_image">Non hai inserito un\'immagine.</string>
+
+    <!-- MuscleDataFragment -->
+    <string name="title_muscle_data_fragment">Muscoli</string>
+    <string name="chosen_muscles">Muscoli selezionati</string>
+    <string name="swipe_to_dismiss_advise">Se vuoi rimuovere un elemento della lista, trascinalo via.</string>
+    <string name="muscle_already_in_list">Il muscolo selezionato era già stato selezionato.</string>
+
+
+    <!-- EquipmentDataFragment -->
+    <string name="title_equipment_data_fragment">Attrezzo</string>
+    <string name="chosen_equipment">Seleziona attrezzo</string>
+    <string name="equipment_already_in_list">L\'attrezzo selezionato era già stato aggiunto.</string>
+    
+</resources>

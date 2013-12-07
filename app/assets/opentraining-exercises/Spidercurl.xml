@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Spidercurl">
-	<Locale language="en" name="Spidercurl"/>		
-	<Muscle name="Bizeps" level="3"/>
-	<SportsEquipment name="Langhantel"/>
-	<SportsEquipment name="Curlpult"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Spider-curl-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Spider-curl-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Spidercurl"/>
+  <Locale language="it" name="Spidercurl"/>
+  <Muscle name="Bizeps" level="3"/>
+  <SportsEquipment name="Langhantel"/>
+  <SportsEquipment name="Curlpult"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Spider-curl-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Spider-curl-2.png"/>
+</ExerciseType>

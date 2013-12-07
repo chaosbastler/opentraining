@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Crunch (geneigt)">
-	<Locale language="en" name="Crunch (declined)"/>							
-	<Muscle name="Bauchmuskeln" level="3"/>
-	<SportsEquipment name="Sit Up Bank"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Decline-crunch-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Decline-crunch-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Crunch (declined)"/>
+  <Locale language="it" name="Addominali (inclinato)"/>
+  <Muscle name="Bauchmuskeln" level="3"/>
+  <SportsEquipment name="Sit Up Bank"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Decline-crunch-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Decline-crunch-2.png"/>
+</ExerciseType>

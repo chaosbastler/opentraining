@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-<ExerciseType language="de" name="Liegestütze (einarmig, auf Medizinball)">	
-	<Locale language="en" name="Push up (one arm, biased)"/>																										
-	<Muscle name="Brustmuskel" level="3"/>
-	<SportsEquipment name="Medizinball"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-armed-biased-push-up-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-armed-biased-push-up-2.png"/> 
-</ExerciseType> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<ExerciseType language="de" name="Liegestütze (einarmig, auf Medizinball)">
+  <Locale language="en" name="Push up (one arm, biased)"/>
+  <Locale language="it" name="Flessioni (un braccio, storto)"/>
+  <Muscle name="Brustmuskel" level="3"/>
+  <SportsEquipment name="Medizinball"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-armed-biased-push-up-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-armed-biased-push-up-2.png"/>
+</ExerciseType>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Hyperextensions">
-	<Locale language="en" name="Hyperextensions"/>												
-	<Muscle name="Rückenmuskeln" level="3"/>
-	<SportsEquipment name="Rückenstrecker"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Hyperextensions-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Hyperextensions-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Hyperextensions"/>
+  <Locale language="it" name="Iperestensioni"/>
+  <Muscle name="Rückenmuskeln" level="3"/>
+  <SportsEquipment name="Rückenstrecker"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Hyperextensions-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Hyperextensions-2.png"/>
+</ExerciseType>

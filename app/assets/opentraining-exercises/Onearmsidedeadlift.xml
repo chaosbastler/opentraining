@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Deadlift (one arm side)">
-	<Locale language="de" name="Kreuzheben (einarmig)"/>
-	<Muscle name="Thigh" level="3"/>
-	<SportsEquipment name="Barbell"/>	
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-side-deadlift-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-side-deadlift-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Kreuzheben (einarmig)"/>
+  <Locale language="it" name="Stacco da terra (un braccio, deadlift)"/>
+  <Muscle name="Thigh" level="3"/>
+  <SportsEquipment name="Barbell"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-side-deadlift-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-side-deadlift-2.png"/>
+</ExerciseType>

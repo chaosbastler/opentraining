@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Klimmzug">
-	<Locale language="en" name="Gironda Sternum Chins"/>										
-	<Muscle name="Rückenmuskeln" level="3"/>
-	<SportsEquipment name="Klimmzug Stange"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Gironda-sternum-chins-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Gironda-sternum-chins-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Gironda Sternum Chins"/>
+  <Locale language="it" name="Sollevamento Sterno (Gironda)"/>
+  <Muscle name="Rückenmuskeln" level="3"/>
+  <SportsEquipment name="Klimmzug Stange"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Gironda-sternum-chins-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Gironda-sternum-chins-2.png"/>
+</ExerciseType>
