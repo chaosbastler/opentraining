@@ -23,7 +23,7 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:dependency="training_timer_enabled"
-        android:key="training_timer_sound_enabled"
+        android:key="training_timer_vibration_enabled"
         android:title="@string/title_training_timer_vibration_enabled" />
     </PreferenceCategory>
 

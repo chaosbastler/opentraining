@@ -116,7 +116,7 @@ public enum RecoveryTimerManager {
 		
 		// update user settings/preferences
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		mVibrationEnabled = prefs.getBoolean("training_timer_sound_enabled", true);
+		mVibrationEnabled = prefs.getBoolean("training_timer_vibration_enabled", true);
 		mNotificationSoundEnabled = prefs.getBoolean("training_timer_sound_enabled", true);
 
 		RecoveryTimerKind.EXERCISE_RECOVERY_TIMER.timerDurationInSec = Integer.valueOf(prefs.getString("training_timer_exercise_recovery_time", "180"));
