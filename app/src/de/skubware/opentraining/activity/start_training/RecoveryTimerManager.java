@@ -200,9 +200,15 @@ public enum RecoveryTimerManager {
 	 * 
 	 * Will do nothing if there's no set recovery timer running.
 	 */
-	private synchronized void stopRecoveryTimer(){
+	public synchronized void stopRecoveryTimer(Context context){
+		setUp(context);
+		stopRecoveryTimer();
+	}
+	
+	/** @see #stopRecoveryTimer(Context) */
+	private synchronized void stopRecoveryTimer(){		
 		mSetTimer.cancel();
 		mNotifyManager.cancel(RECOVERY_TIMER_NOTIFICATION_ID);
 	}
-	
+		
 }
