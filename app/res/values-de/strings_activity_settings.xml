@@ -54,9 +54,15 @@
     <string name="view_changelog">Changelog</string>
     
 	<!-- Training Timer -->
-    <string name="title_training_timer">Training-Timer</string>		
-    <string name="summary_training_timer">Benachrichtigung wann das Training fortgesetzt werden soll</string>	
-    <string name="title_training_timer_exercise_time">Zeit zwischen 2 Übungen</string>
-    <string name="title_training_timer_set_time">Zeit zwischen 2 Sätzen</string>
+    <string name="pref_header_training_timer">Training-Timer</string>
+    <string name="more_settings">Weitere Einstellungen</string>
+    <string name="title_training_timer">Training-Timer</string>
+    <string name="notification">Benachrichtigung</string>	
+    <string name="summary_training_timer">Benachrichtigung wann das Training fortgesetzt werden soll</string>
+    <string name="title_training_timer_sound_enabled">Sound bei Benachrichtigung</string>
+    <string name="title_training_timer_vibration_enabled">Vibration bei Benachrichtigung</string>
+    <string name="recovery_time">Erholungszeit</string>
+    <string name="title_training_timer_exercise_time">Zwischen Übungen</string>
+    <string name="title_training_timer_set_time">Zwischen Sätzen</string>
     
 </resources>

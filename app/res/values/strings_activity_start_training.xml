@@ -25,4 +25,15 @@
     <string name="weight">Weight</string>
     <string name="duration">Duration</string>
     
+    <!-- RecoveryTimerManager -->
+    <string name="exercise_recover_timer_content_title_finished">Recovery phase finished</string>
+    <string name="exercise_recover_timer_content_title_running">Recovery phase ...</string>
+    <string name="exercise_recover_timer_ticker_finished">Finished recovery phase</string>
+    <string name="exercise_recover_timer_ticker_running">Recovery phase ...</string>
+    
+    <string name="set_recover_timer_content_title_finished">Recovery phase finished</string>
+    <string name="set_recover_timer_content_title_running">Recovery phase ...</string>
+    <string name="set_recover_timer_ticker_finished">Finished recovery phase</string>
+    <string name="set_recover_timer_ticker_running">Recovery phase ...</string>
+	
 </resources>

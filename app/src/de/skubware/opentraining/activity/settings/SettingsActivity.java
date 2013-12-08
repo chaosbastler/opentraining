@@ -117,8 +117,17 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		// In the simplified UI, fragments are not used at all and we instead
 		// use the older PreferenceActivity APIs.
 
-		// Add 'general' preferences.
-		addPreferencesFromResource(R.xml.pref_general);
+		
+		// Add 'training-timer' preferences, and a corresponding header.
+		addPreferencesFromResource(R.xml.pref_trainingtimer);
+		
+		
+		// Bind the summaries of EditText preferences to
+		// their values. When their values change, their summaries are updated
+		// to reflect the new value, per the Android Design guidelines.
+		bindPreferenceSummaryToValue(findPreference("training_timer_exercise_recovery_time"));
+		bindPreferenceSummaryToValue(findPreference("training_timer_set_recovery_time"));
+
 
 		// Add 'licenses' preferences, and a corresponding header.
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
@@ -194,13 +203,13 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 			}
 		});
 		
+
+		
 		// Bind the summaries of EditText preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
 		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
 		bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
-		bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
-		bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
 	}
 
 	/** {@inheritDoc} */
@@ -268,24 +277,7 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 				PreferenceManager.getDefaultSharedPreferences(preference.getContext()).getString(preference.getKey(), ""));
 	}
 
-	/**
-	 * This fragment shows general preferences only. It is used when the
-	 * activity is showing a two-pane settings UI.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public static class GeneralPreferenceFragment extends PreferenceFragment {
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			addPreferencesFromResource(R.xml.pref_general);
 
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("default_workout_name"));
-		}
-	}
 
 	/**
 	 * This fragment shows license preferences only. It is used when the
@@ -383,12 +375,30 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 							return false;
 						}
 					});
-			
-			bindPreferenceSummaryToValue(findPreference("training_timer_exercise_time"));
-			bindPreferenceSummaryToValue(findPreference("training_timer_set_time"));
+
+		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
+
 
 		}
 	}
+	
+	/**
+	 * This fragment shows training-timer preferences only. It is used when the
+	 * activity is showing a two-pane settings UI.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public static class TrainingTimerPreferenceFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.pref_trainingtimer);
+			
+			bindPreferenceSummaryToValue(findPreference("training_timer_exercise_recovery_time"));
+			bindPreferenceSummaryToValue(findPreference("training_timer_set_recovery_time"));
+
+		}
+	}
+	
 	
 	
 	/**
