@@ -1,5 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
+    
+    <PreferenceCategory android:title="@string/pref_header_training_timer">
+    
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
 	<CheckBoxPreference
@@ -49,5 +51,5 @@
     </PreferenceCategory>
     
 	</PreferenceScreen>
-
+	</PreferenceCategory>
 </PreferenceScreen>
