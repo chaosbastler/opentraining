@@ -68,9 +68,15 @@ public class FExListActivity extends ActionBarActivity implements FExListFragmen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fex_list);
-
-		// retrieve argument and pass it to fragment
-		mWorkout = (Workout) getIntent().getExtras().getSerializable(ARG_WORKOUT);
+		
+		
+		if(savedInstanceState != null){
+			mWorkout = (Workout) savedInstanceState.getSerializable(ARG_WORKOUT);
+		}else{
+			// retrieve argument and pass it to fragment
+			mWorkout = (Workout) getIntent().getExtras().getSerializable(ARG_WORKOUT);
+		}
+		
 		FExListFragment fragment = (FExListFragment) getSupportFragmentManager().findFragmentById(R.id.exercise_list);
 		fragment.setWorkout(mWorkout);
 

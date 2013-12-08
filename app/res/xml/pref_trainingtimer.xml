@@ -29,7 +29,7 @@
 
     <PreferenceCategory android:title="@string/recovery_time">
     <EditTextPreference
-        android:defaultValue="180"
+        android:defaultValue="150"
         android:dependency="training_timer_enabled"
         android:inputType="number"
         android:key="training_timer_exercise_recovery_time"
@@ -39,7 +39,7 @@
         android:numeric="integer"
         android:title="@string/title_training_timer_exercise_time" />
     <EditTextPreference
-        android:defaultValue="30"
+        android:defaultValue="60"
         android:dependency="training_timer_enabled"
         android:inputType="number"
         android:key="training_timer_set_recovery_time"
