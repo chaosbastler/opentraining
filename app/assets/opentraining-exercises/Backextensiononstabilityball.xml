@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Rückenstrecken auf Ball">
-	<Locale language="en" name="Back extensions on swiss ball"/>
-	<Muscle name="Rückenmuskeln" level="3"/>
-	<SportsEquipment name="Swiss Ball"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Back-extension-on-stability-ball-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Back-extension-on-stability-ball-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Back extensions on swiss ball"/>
+  <Locale language="it" name="Estensioni gluteo su swiss ball"/>
+  <Muscle name="Rückenmuskeln" level="3"/>
+  <SportsEquipment name="Swiss Ball"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Back-extension-on-stability-ball-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Back-extension-on-stability-ball-2.png"/>
+</ExerciseType>

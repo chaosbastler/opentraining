@@ -40,7 +40,7 @@ public class SportsEquipmentJSONParser extends AbstractJSONParser<List<SportsEqu
 	private static final String TAG_NAME = "name";
 	private static final String TAG_ALTERNATIVE_NAMES = "alternative_names";
 	
-	private static final String[] TAG_LOCALES = {"de", "en"};
+	private static final String[] TAG_LOCALES = {"de", "en", "it"};
 	 
 	/**
 	 * Parses the JSON-String to a list of {@link SportsEquipment}s.

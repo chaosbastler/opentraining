@@ -1,0 +1,30 @@
+<resources>
+
+
+    <!-- WorkoutListFragment -->
+    <string name="no_workout">Nessun workout.</string>
+
+
+    <!-- WorkoutDetailFragment -->
+    <string name="workout_name">Nome del workout</string>
+    <string name="rename_workout">Rinomina</string>
+    <string name="delete_workout">Elimina</string>
+    <string name="export_workout">Esporta a HTML</string>
+    <string name="edit_workout">Modifica workout</string>
+    <string name="really_delete">Cancella veramente?</string>
+    <string name="really_delete_long">Vuoi veramente cancellare questo workout? Non puoi tornare indietro.</string>
+
+
+    <!-- RenameWorkoutDialogFragment -->
+    <string name="save">Salva</string>
+    <string name="cancel">Cancella</string>
+    <string name="workout_name_cannot_be_empty">Il nome del workout non può essere vuoto</string>
+    <string name="error_during_saving">Il workout non può essere salvato.</string>
+
+
+    <!-- ShowWorkoutHTMLActivity -->
+    <string name="title_activity_show_workout_html">Esporta HTML</string>
+    <string name="share">Condividi</string>
+
+
+</resources>

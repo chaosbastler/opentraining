@@ -1,0 +1,64 @@
+<resources>
+
+    <string name="title_activity_settings">Impostazioni</string>
+
+    <!-- Strings related to Settings -->
+
+
+    <!-- General settings -->
+    <string name="pref_header_general">Generali</string>
+    <string name="pref_title_default_workout_name">Default Workout name</string>
+    <string name="pref_default_workout_name">Workout</string>
+
+    <!-- Settings for Licenses -->
+    <string name="pref_header_licenses">Licenza</string>
+    <string name="show_disclaimer_dialog">Mostra disclaimer</string>
+    <string name="open_source_licenses">Licenze Open Source</string>
+
+    <!-- Sync settings -->
+    <string name="pref_header_sync_settings">Sincronizzazione</string>
+    <string name="pref_title_exercise_download_url">Sincronizza URL</string>
+    <string name="start_sync">Comincia a scaricare esercizi</string>
+    <string name="more_sync_settings">Più opzioni di sincronizzazione</string>
+    <string name="wipe_synced_exercises">Cancella gli esercizi scaricati</string>
+    <string name="wipe_synced_exercises_summary">Le immagini scaricate verranno anche cancellate. Gli esercizi di default di OpenTraining non possono essere cancellati.</string>
+    <string name="synced_files_deleted_msg">Gli esercizi scaricati sono stati cancellati</string>
+    <string name="about_wger_sync">A proposito della sincronizzazione con wger</string>
+    <string name="about_wger_sync_fulltext">Ora solo esercizi nuovi possono essere scaricati. In futuro potrebbe essere possibile sincronizzare i tuoi workout su wger. SSL sarà sempre attivo per proteggere la tua privacy.</string>
+    <string name="sync_only_exercises_with_description">Solo esercizi con descrizione</string>
+    <string name="sync_only_exercises_with_images">Solo esercizi con immagini</string>
+    <string name="languages">Linguaggi</string>
+
+
+    <!-- Sync progess -->
+    <string name="no_internet_connection">Non è possibilie cominciare la sincronizzazione: connettività assente</string>
+    <string name="sync_canceled">Sincronizzazione cancellata</string>
+    <string name="sync_in_progess">Sincronizzazione &#8230;</string>
+    <string name="downloading_exercises">Esercizi in download</string>
+    <string name="downloading_language_files">File di linguaggio in download</string>
+    <string name="downloading_muscle_files">File dei muscoli in download</string>
+    <string name="downloading_images">Immagini in download (può impiegarci qualche minuto)</string>
+    <string name="verifying_exercises">Esercizi in verifica</string>
+    <string name="saving_exercises">Esercizi in salvataggio</string>
+    <string name="sync_finished">Sincronizzazione terminata</string>
+    <string name="sync_finished_no_new_exercises">Nessun nuovo esercizio trovato</string>
+    <string name="sync_error">Errore durante la sincronizzazione</string>
+    <string name="sync_error_msg">Si è verificato un problema durante la sincronizzazione.</string>
+    <string name="show_more_information_about_error">Più informazioni sull\'errore</string>
+    <string name="summary">Sommario</string>
+    <string name="exercises_to_save">Eserciziz da salvare:&#160;</string>
+
+    <!-- Miscellaneous settings -->
+    <string name="pref_header_miscellaneous_settings">Varie</string>
+    <string name="miscellaneous">Varie</string>
+    <string name="view_changelog">Revisioni</string>
+
+    <!-- Training Timer -->
+    <string name="title_training_timer">Training-Timer</string>
+    <string name="summary_training_timer">Notifica quando dovresti continuare il tuo allenamento</string>
+    <string name="title_training_timer_exercise_time">Tempo tra 2 esercizi</string>
+    <string name="title_training_timer_set_time">Tempo tra 2 set</string>
+    <string name="pref_default_training_timer_exercise_time">180</string>
+    <string name="pref_default_training_timer_set_time">30</string>
+
+</resources>

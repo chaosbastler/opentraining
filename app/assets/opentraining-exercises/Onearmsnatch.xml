@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Snatch (one arm)">
-	<Locale language="de" name="Langhantel-Reißen (einarmig)"/>
-	<SportsEquipment name="Barbell"/>	
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-snatch-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-snatch-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Langhantel-Reißen (einarmig)"/>
+  <Locale language="it" name="Stacco da terra (un braccio)"/>
+  <SportsEquipment name="Barbell"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-snatch-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-snatch-2.png"/>
+</ExerciseType>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Hammer-Curl (alternate)">
-	<Locale language="de" name="Hammer-Curl (alternativ)"/>
-	<Muscle name="Bizeps" level="3"/>
-	<SportsEquipment name="Kurzhantel"/>		
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Alternate-hammer-curl-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Alternate-hammer-curl-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Hammer-Curl (alternativ)"/>
+  <Locale language="it" name="Trazioni a Martello (alternativo)"/>
+  <Muscle name="Bizeps" level="3"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Alternate-hammer-curl-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Alternate-hammer-curl-2.png"/>
+</ExerciseType>

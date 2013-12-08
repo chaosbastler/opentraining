@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Rudern (mit T-Bar Rudergerät)">
-	<Locale language="en" name="T-Bar row"/>		
-	<Muscle name="Schulter" level="3"/>
-	<SportsEquipment name="Rudergerät"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="T-bar-row-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="T-bar-row-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="T-Bar row"/>
+  <Locale language="it" name="Vogata (con T-Bar)"/>
+  <Muscle name="Schulter" level="3"/>
+  <SportsEquipment name="Rudergerät"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="T-bar-row-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="T-bar-row-2.png"/>
+</ExerciseType>

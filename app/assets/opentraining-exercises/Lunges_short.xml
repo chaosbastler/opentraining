@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Ausfallschritt (Kurzhantel)">
-	<Locale language="en" name="Lunges (dumbbell)"/>																		
-	<SportsEquipment name="Kurzhantel"/>
-	<Muscle name="Po" level="3"/>
-	<Muscle name="Oberschenkelmuskel" level="3"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lunges-2-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lunges-2-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Lunges (dumbbell)"/>
+  <Locale language="it" name="Affondi (manubri)"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Muscle name="Po" level="3"/>
+  <Muscle name="Oberschenkelmuskel" level="3"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lunges-2-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lunges-2-2.png"/>
+</ExerciseType>

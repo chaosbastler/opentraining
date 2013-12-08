@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Butterfly (auf Hantelbank, einarmig)">
-	<Locale language="en" name="Rear lateral raise (lying, one arm)"/>																					
-	<Muscle name="Schulter" level="3"/>
-	<SportsEquipment name="Kurzhantel"/>
-	<SportsEquipment name="Trainingsbank"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-one-arm-rear-lateral-raise-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-one-arm-rear-lateral-raise-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Rear lateral raise (lying, one arm)"/>
+  <Locale language="it" name="Sollevamenti posteriore/laterale (supino, un braccio)"/>
+  <Muscle name="Schulter" level="3"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <SportsEquipment name="Trainingsbank"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-one-arm-rear-lateral-raise-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-one-arm-rear-lateral-raise-2.png"/>
+</ExerciseType>

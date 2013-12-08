@@ -40,7 +40,7 @@ public class ExerciseTagJSONParser extends AbstractJSONParser<List<ExerciseTag>>
 	private static final String TAG_NAME = "name";
 	private static final String TAG_DESCRIPTION = "description";
 	
-	private static final String[] TAG_LOCALES = {"de", "en"};
+	private static final String[] TAG_LOCALES = {"de", "en", "it"};
 	 
 	/**
 	 * Parses the JSON-String to a list of {@link ExerciseTag}s.

@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Dips (mit Dip Barren)">
-	<Locale language="en" name="Dips (with dip stands)"/>		
-	<Muscle name="Trizeps" level="3"/>
-	<SportsEquipment name="Dip Barren"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-1.gif"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2-1.gif"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2-2.gif"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2.gif"/> 
-</ExerciseType> 
+  <Locale language="en" name="Dips (with dip stands)"/>
+  <Locale language="it" name="Dips (con dip station)"/>
+  <Muscle name="Trizeps" level="3"/>
+  <SportsEquipment name="Dip Barren"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-1.gif"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2-1.gif"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2-2.gif"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2.gif"/>
+</ExerciseType>

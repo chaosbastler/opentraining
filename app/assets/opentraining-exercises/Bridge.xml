@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Brücke">
-	<Locale language="en" name="Bridge"/>						
-	<Muscle name="Bauchmuskeln" level="3"/>
-	<SportsEquipment name="Keine"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bridge-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bridge-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Bridge"/>
+  <Locale language="it" name="Ponte"/>
+  <Muscle name="Bauchmuskeln" level="3"/>
+  <SportsEquipment name="Keine"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bridge-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bridge-2.png"/>
+</ExerciseType>

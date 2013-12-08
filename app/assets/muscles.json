@@ -1,51 +1,61 @@
 [ 
  {
    "de": { "name" : "Bauchmuskeln", "alternative_names": ["Bauchmuskel", "Bauch", "Obliquus externus abdominis", "Rectus abdominis"] },
+   "it": { "name" : "Addominali" },
    "en": { "name" : "Abdominal muscle" }
  },
   
  {
    "de": { "name" : "Rückenmuskeln", "alternative_names": ["Rückenmuskel", "Rücken", "Latissimus dorsi"] },
+   "it": { "name" : "Dorsali", "alternative_names": ["Schina", "Latissimus"]  },
    "en": { "name" : "Back muscle", "alternative_names": ["Back", "Latissimus"]  }
  },
  
  {
    "de": { "name" : "Bizeps", "alternative_names": ["Biceps brachii", "Biceps femoris"] },
+   "it": { "name" : "Bicipiti" },
    "en": { "name" : "Biceps" }
  },
     
  {
    "de": { "name" : "Brustmuskel", "alternative_names": ["Pectoralis major"] },
+   "it": { "name" : "Petto" },
    "en": { "name" : "Chest" }
  },
  
  {
    "de": { "name" : "Po", "alternative_names": ["Gluteus maximus"] },
+   "it": { "name" : "Grande Gluteo", "alternative_names": ["Sedere"] },
    "en": { "name" : "Derriere" }
  },
  
  {
    "de": { "name" : "Unterschenkelmuskel", "alternative_names": ["Unterschenkel", "Gastrocnemius", "Soleus"] },
+   "it": { "name" : "Polpacci"},
    "en": { "name" : "Lower leg" }
  },
     
  {
    "de": { "name" : "Schulter", "alternative_names": ["Anterior deltoid", "Serratus anterior", "Trapezius"] },
+   "it": { "name" : "Spalle", "alternative_names": ["Spalle"] },
    "en": { "name" : "Shoulder", "alternative_names": ["Shoulders"] }
  }, 
  
  {
    "de": { "name" : "Oberschenkelmuskel", "alternative_names": ["Quadriceps femoris"] },
+   "it": { "name" : "Quadricipiti"},
    "en": { "name" : "Thigh" }
  },   
  
  {
    "de": { "name" : "Trizeps", "alternative_names": ["Triceps brachii"] },
+   "it": { "name" : "Tricipiti"},
    "en": { "name" : "Triceps", "alternative_names": ["Triceps muscle"]  }
  },
  
  {
    "de":{ "name" : "Oberarm", "alternative_names": ["Musculus brachialis", "Brachialis"] },
+   "it": { "name" : "Brachiali" },
    "en": { "name" : "upper arm" }
  }
     

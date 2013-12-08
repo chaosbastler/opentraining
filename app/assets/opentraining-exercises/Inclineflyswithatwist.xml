@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Butterflies with a twist (incline)">
-	<Locale language="de" name="Butterfly gedreht (geneigt, gedreht)"/>
-	<Muscle name="Chest" level="3"/>
-	<SportsEquipment name="Bench"/>
-	<SportsEquipment name="Dumbbell"/>		
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-with-a-twist-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-with-a-twist-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Butterfly gedreht (geneigt, gedreht)"/>
+  <Locale language="it" name="Rotazione farfalla (inclinata)"/>
+  <Muscle name="Chest" level="3"/>
+  <SportsEquipment name="Bench"/>
+  <SportsEquipment name="Dumbbell"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-with-a-twist-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Incline-flys-with-a-twist-2.png"/>
+</ExerciseType>

@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Butterfly (auf Hantelbank)">
-	<Locale language="en" name="Rear lateral raise (lying)"/>														
-	<Muscle name="Brustmuskel" level="3"/>
-	<Muscle name="Schulter" level="3"/>
-	<SportsEquipment name="Trainingsbank"/>
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-rear-lateral-raise-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-rear-lateral-raise-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Rear lateral raise (lying)"/>
+  <Locale language="it" name="Sollevamento posteriore/laterale (supino)"/>
+  <Muscle name="Brustmuskel" level="3"/>
+  <Muscle name="Schulter" level="3"/>
+  <SportsEquipment name="Trainingsbank"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-rear-lateral-raise-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lying-rear-lateral-raise-2.png"/>
+</ExerciseType>

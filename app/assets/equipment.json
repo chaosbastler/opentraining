@@ -1,101 +1,121 @@
 [ 
  {
    "de": { "name" : "Keine"},
+   "it": { "name" : "Nessuno"},
    "en": { "name" : "None" }
  },
  
  {
    "de": { "name" : "Langhantel"},
+   "it": { "name" : "Bilanciere"},
    "en": { "name" : "Barbell" }
  },
 
  {
    "de": { "name" : "Kurzhantel"},
+   "it": { "name" : "Manubrio"},
    "en": { "name" : "Dumbbell" }
  },
     
  {
    "de": { "name" : "SZ Stange"},
+   "it": { "name" : "Bilanaciere Obliquo SZ"},
    "en": { "name" : "S-Z Curl Bar" }
  },
     
  {
    "de": { "name" : "Curlpult"},
+   "it": { "name" : "Panca Per I Bicipiti", "alternative_names": ["Panca Scott"] },
    "en": { "name" : "Arm Curl Pad", "alternative_names": ["Curl Pad"] }
  },
      
  {
    "de": { "name" : "Übungsmatte", "alternative_names": ["Gymnastikmatte"] },
+   "it": { "name" : "Tappetino", "alternative_names": ["Tappeto Per Esercizi"] },
    "en": { "name" : "Exercise Mat" }
  },
         
  {
    "de": { "name" : "Swissball" },
+   "it": { "name" : "Swiss Ball", "alternative_names": ["Palla Da Ginnastica"] },
    "en": { "name" : "Swiss Ball"}
  },
  
  {
    "de": { "name" : "Klimmzugsstange", "alternative_names": ["Klimmzugs Stange", "Klimmzug Stange"] },
+   "it": { "name" : "Spalliera" },
    "en": { "name" : "Pull-Up Bar", "alternative_names": ["Chin-Up Bar"] }
  },
      
  {
    "de": { "name" : "Hantelscheibe", "alternative_names": ["Gewichtsscheibe"] },
-   "en": { "name" : "Plate", "alternative_names": ["Plates"] }
+   "en": { "name" : "Plate", "alternative_names": ["Plates"] },
+   "it": { "name" : "Peso", "alternative_names": ["Pesi", "Dischi"] }
  },
  
  {
    "de": { "name" : "Trainingsbank", "alternative_names": ["Hantelbank"] },
+   "it": { "name" : "Panca Orizzontale", "alternative_names": ["Panca Piana"] },   
    "en": { "name" : "Bench" }
  },
  
  {
    "de": { "name" : "Sit-Up Bank", "alternative_names": ["Sit Up Bank"] },
+   "it": { "name" : "Panca Inclinata" },
    "en": { "name" : "Sit Up Bench" }
  },
  
  {
    "de": { "name" : "Beinpresse"},
+   "it": { "name" : "Pressa A Gambe"},
    "en": { "name" : "Leg Press" }
  },
   
  {
    "de": { "name" : "Fingertrainer" },
+   "it": { "name" : "Esercitatore Per Mani", "alternative_names": ["Stringimano"]},
    "en": { "name" : "Hand Strengtheners" }
  },
 
  {
    "de": { "name" : "Dip Barren" },
+   "it": { "name" : "Dip Station" },
    "en": { "name" : "Dip Stands" }
  },
  
  {
    "de": { "name" : "Rudergerät" },
+   "it": { "name" : "Vogatore" },
    "en": { "name" : "Rowing Machine" }
  },
   
  {
    "de": { "name" : "Kabelzug", "alternative_names": ["Lat"]},
+   "it": { "name" : "Cavo" },
    "en": { "name" : "Cable" }
  },
  
  {
    "de": { "name" : "Medizinball"},
+   "it": { "name" : "Palla Medica"},
    "en": { "name" : "Medicine Ball" }
  },
  
  {
    "de": { "name" : "Rückenstrecker", "alternative_names": ["Hyperextension Bank"]  },
+   "it": { "name" : "Panca Romana" },
    "en": { "name" : "Hyperextension Bench", "alternative_names": ["Hyperextensions Bench"] }
  },
  
  {
    "de": { "name" : "Bizeps-Maschine" },
+   "it": { "name" : "Macchina Per Bicipiti"},
    "en": { "name" : "Biceps Machine"}
  },
  
   {
    "de": { "name" : "Langhantel-Maschine" },
+   "it": { "name" : "Smith Machine", "alternative_names": [ "Multipower" ]},
    "en": { "name" : "Barbell Machine"}
   }
  

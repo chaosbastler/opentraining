@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="de" name="Rudern (einarmig, stehend)">
-	<Locale language="en" name="Row (one arm, upright)"/>																												
-	<Muscle name="Trizeps" level="3"/> 
-	<SportsEquipment name="Kurzhantel"/>  
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-upright-row-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-upright-row-2.png"/> 
-</ExerciseType> 
+  <Locale language="en" name="Row (one arm, upright)"/>
+  <Locale language="it" name="Vogata (un braccio, verticale)"/>
+  <Muscle name="Trizeps" level="3"/>
+  <SportsEquipment name="Kurzhantel"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-upright-row-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-upright-row-2.png"/>
+</ExerciseType>

@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <ExerciseType language="en" name="Curl (overhead)">
-	<Locale language="de" name="Curl (über Kopf)"/>
-	<Muscle name="Biceps" level="3"/>	
-	<SportsEquipment name="Cable"/>		
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Overhead-curl-1.png"/> 
-	<Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Overhead-curl-2.png"/> 
-</ExerciseType> 
+  <Locale language="de" name="Curl (über Kopf)"/>
+  <Locale language="it" name="Trazioni (supra la testa)"/>
+  <Muscle name="Biceps" level="3"/>
+  <SportsEquipment name="Cable"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Overhead-curl-1.png"/>
+  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Overhead-curl-2.png"/>
+</ExerciseType>
