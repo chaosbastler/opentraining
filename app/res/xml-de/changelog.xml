@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.6" versioncode="22" summary="Training-Timer und italienische Übersetzung" date="8/12/2013">
+        <change>Training-Timer hinzugefügt. Der Timer benachrichtigt den Nutzer, wenn die Erholungsphase vorbei ist und das Training fortgesetzt werden soll. In den Einstellungen kann man u.A. die Erholungszeit ändern oder dieses Feature deaktiviert.</change>
+        <change>Italienische Übersetzung hinzugefügt. Dank dafür an Andrea Brancaleoni (https://github.com/thypon).</change>
+        <change>Bugfix: die App hat zuvor beim Drehen des Bildschirmes manchmal den Übungsfortschritt vergessen.</change>        
+    </release>    
     <release version="0.5.2" versioncode="20" summary="Neues Icon" date="5/11/2013">
         <change>Die App hat ein neues Icon bekommen.</change>
     </release>    

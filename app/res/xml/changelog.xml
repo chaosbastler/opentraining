@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.6" versioncode="22" summary="Training-Timer and Italian translation" date="8/12/2013">
+        <change>Added a Training-Timer. It will notify you when you should continue your training. You can change the recovery time and more in the application settings.</change>
+        <change>The app and exercises have been translated to Italian. Thanks to Andrea Brancaleoni (https://github.com/thypon) for this translation.</change>
+        <change>Bugfix: the app could loose the current training progress after screen rotation.</change>        
+    </release>
     <release version="0.5.2" versioncode="20" summary="New icon" date="5/11/2013">
         <change>The app got a new icon. Hope you like it.</change>
     </release>

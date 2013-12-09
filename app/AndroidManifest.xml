@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.skubware.opentraining"
-    android:versionCode="20"
-    android:versionName="0.5.2"
+    android:versionCode="22"
+    android:versionName="0.6"
     android:installLocation="auto" >
 
     <uses-sdk
@@ -51,8 +51,8 @@
             android:name="de.skubware.opentraining.activity.start_training.FExListActivity"
             android:label="@string/title_exercise_list"
             android:parentActivityName="de.skubware.opentraining.activity.MainActivity"
-            android:windowSoftInputMode="stateHidden" 
-            android:icon="@drawable/icon_dumbbell" >>
+            android:windowSoftInputMode="stateHidden"
+            android:icon="@drawable/icon_dumbbell" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.skubware.opentraining.activity.MainActivity" />

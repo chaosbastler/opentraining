@@ -21,6 +21,7 @@ package de.skubware.opentraining.activity.start_training;
  */
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
@@ -134,6 +135,8 @@ public class FExListFragment extends ListFragment {
 			finished &=fEx.isTrainingEntryFinished(fEx.getLastTrainingEntry());
 		}
 		if(finished){
+			// stop recovery timer if the exercise was the last one
+			RecoveryTimerManager.INSTANCE.stopRecoveryTimer(getActivity());
 			Toast.makeText(getActivity(), getString(de.skubware.opentraining.R.string.workout_finished), Toast.LENGTH_LONG).show();
 		}
 		
@@ -192,6 +195,7 @@ public class FExListFragment extends ListFragment {
 			outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
 		}
 	}
+
 
 	/**
 	 * Turns on activate-on-click mode. When this mode is on, list items will be

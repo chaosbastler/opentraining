@@ -13,7 +13,7 @@
     <!-- Settings for Licenses -->
     <string name="pref_header_licenses">Lizenzen</string>
     <string name="show_disclaimer_dialog">Disclaimer Dialog anzeigen</string>
-    <string name="open_source_licenses">Open Source Lizenzen</string>
+    <string name="open_source_licenses">Lizenzen und Danksagungen</string>
     
     <!-- Sync settings -->
     <string name="pref_header_sync_settings">Synchronisation</string>
