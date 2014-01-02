@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import at.technikum.mti.fancycoverflow.FancyCoverFlow;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -55,10 +56,10 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_navigation_layout);
 		getSupportActionBar().setIcon(R.drawable.icon_dumbbell);
 		
-		setUpList();
+		setUpNavigation();
 
 		// load data/parse .xml files in background
 		final Context mContext = this;
@@ -83,13 +84,25 @@ public class MainActivity extends ActionBarActivity {
 
 		
 	}
+	
+	private void setUpNavigation(){
+		FancyCoverFlow mFancyCoverFlow = (FancyCoverFlow) this.findViewById(R.id.fancyCoverFlow);
+
+		mFancyCoverFlow.setAdapter(new NavigationGalleryAdapter(this));
+		mFancyCoverFlow.setUnselectedAlpha(0.5f);
+		mFancyCoverFlow.setUnselectedSaturation(0.0f);
+		mFancyCoverFlow.setUnselectedScale(0.2f);
+		mFancyCoverFlow.setMaxRotation(35);
+		mFancyCoverFlow.setScaleDownGravity(0.0f);
+		mFancyCoverFlow.setActionDistance(FancyCoverFlow.ACTION_DISTANCE_AUTO);
+	}
 
 
 
 	/**
 	 * Configures the ListView for this activity.
 	 */
-	private void setUpList() {
+	/*private void setUpList() {
 		ListView listview = (ListView) this.findViewById(R.id.activity_main_listview);
 
 		String[] values = new String[] { getString(R.string.create_workout), getString(R.string.manage_workouts),
@@ -120,7 +133,7 @@ public class MainActivity extends ActionBarActivity {
 				}
 			}
 		});
-	}
+	}*/
 
 	/** Shows a dialog for choosing a {@link Workout} */
 	private void showSelectWorkoutDialog() {
