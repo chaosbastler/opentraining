@@ -27,6 +27,7 @@ import de.skubware.opentraining.R;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -72,7 +73,8 @@ public class NavigationGalleryAdapter extends FancyCoverFlowAdapter {
 	public View getCoverFlowItem(int i, View reuseableView, ViewGroup viewGroup) {
 		TextView textView = new TextView(viewGroup.getContext());
 		textView.setText(mNameList.get(i));
-		textView.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, 25.0f);
+		textView.setTextColor(Color.WHITE);
+		textView.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, 35.0f);
 		textView.setLayoutParams(getLayoutParams());
 
 		return textView;
