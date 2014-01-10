@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg4820"
+   viewBox="0 0 1026.8437 776.59373"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   width="100%"
+   height="100%"
+   sodipodi:docname="navigation_bg.svg"
+   inkscape:export-filename="/home/christian/Dokumente/Code/opentraining/app/res/drawable/navigation_bg.png"
+   inkscape:export-xdpi="104"
+   inkscape:export-ydpi="104">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1028"
+     id="namedview21"
+     showgrid="false"
+     inkscape:zoom="0.86903893"
+     inkscape:cx="751.15632"
+     inkscape:cy="201.36634"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4820"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs4822">
+    <linearGradient
+       id="linearGradient4867"
+       x1="-176.32001"
+       gradientUnits="userSpaceOnUse"
+       y1="465.04999"
+       gradientTransform="matrix(0.98986,0,0,0.9755,-6.5278,16.115)"
+       x2="-452.5"
+       y2="1371.3">
+      <stop
+         id="stop4863"
+         stop-color="#203850"
+         offset="0"
+         style="stop-color:#414142;stop-opacity:1;" />
+      <stop
+         id="stop4903"
+         stop-color="#3d556d"
+         offset="0.21105"
+         style="stop-color:#474747;stop-opacity:1;" />
+      <stop
+         id="stop4901"
+         stop-color="#5b7083"
+         offset=".41491" />
+      <stop
+         id="stop4899"
+         stop-color="#959a9e"
+         offset=".55582" />
+      <stop
+         id="stop4897"
+         stop-color="#a9aaa4"
+         offset=".68419" />
+      <stop
+         id="stop4895"
+         stop-color="#efe1c3"
+         offset="0.77986002"
+         style="stop-color:#b7a57c;stop-opacity:1;" />
+      <stop
+         id="stop4893"
+         stop-color="#f9e896"
+         offset="0.90060002"
+         style="stop-color:#9d9d9d;stop-opacity:1;" />
+      <stop
+         id="stop4865"
+         stop-color="#f0a956"
+         offset="1"
+         style="stop-color:#9c948a;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4912"
+       y2="1323.5"
+       gradientUnits="userSpaceOnUse"
+       y1="638.31"
+       x2="-899.56"
+       x1="-625.28003">
+      <stop
+         id="stop4908"
+         stop-color="#1f241c"
+         offset="0" />
+      <stop
+         id="stop4910"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4867"
+       id="linearGradient3002"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.98986,0,0,0.93436478,1046.3722,-534.32051)"
+       x1="-176.32001"
+       y1="465.04999"
+       x2="-452.5"
+       y2="1371.3" />
+    <filter
+       id="filter3004"
+       inkscape:label="Desaturate"
+       x="0"
+       y="0"
+       width="1"
+       height="1"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Render in shades of gray by reducing saturation to zero"
+       color-interpolation-filters="sRGB">
+      <feColorMatrix
+         id="feColorMatrix3006"
+         type="saturate"
+         values="0" />
+    </filter>
+  </defs>
+  <rect
+     style="fill:url(#linearGradient3002);fill-rule:evenodd;filter:url(#filter3004)"
+     x="-2.4414063e-05"
+     y="0.48002198"
+     width="1023.8"
+     height="720.79706"
+     id="rect4859"
+     transform="matrix(1,0,0,1.0670497,2.8437506,1.0190229)" />
+  <rect
+     style="opacity:0.51999996;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:7.96297789;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect3814"
+     width="1018.89"
+     height="768.63086"
+     x="3.9766984"
+     y="3.995836"
+     inkscape:export-filename="/home/christian/Dokumente/Code/opentraining/app/res/drawable/navigation_bg.png"
+     inkscape:export-xdpi="104"
+     inkscape:export-ydpi="104" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#1a1a1a"
+     d="m 3.1684017,736.29928 0,-40.95948 c 11.9710693,-3.88841 9.6084653,-4.84409 12.8729553,-6.56202 3.871448,-2.44952 25.337929,5.86061 30.319308,4.47627 36.229485,-0.80979 373.907595,15.9057 401.351045,3.25372 33.67079,-3.33853 46.75983,-6.01184 64.96463,-1.14863 33.73357,10.7947 65.30225,-1.89734 80.55699,-1.14798 13.71928,-1.19431 42.17509,0.53831 56.015,-0.72229 77.64071,-0.71918 213.32986,-51.3199 360.74897,-15.25145 1.2631,0.79846 2.9399,0.93106 4.8347,0.38212 1.5955,-0.46219 4.5466,-0.72153 6.5581,-0.57637 2.6739,0.19303 3.5692,-0.23312 4.3459,-1.58528 l 0,100.8935 -1022.4999983,0 0,-40.95948 z"
+     sodipodi:nodetypes="cccccccccccccccc"
+     id="path22" />
+  <metadata
+     id="metadata19">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title></dc:title>
+        <dc:date>2011-12-22T19:46:47</dc:date>
+        <dc:description>Vector trace of a sunset landscape</dc:description>
+        <dc:source>http://openclipart.org/detail/166402/winter-sunset-in-royal-park-by-kattekrab</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>kattekrab</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Gradient</rdf:li>
+            <rdf:li>Landscape</rdf:li>
+            <rdf:li>Park</rdf:li>
+            <rdf:li>Silhouette</rdf:li>
+            <rdf:li>Sunset</rdf:li>
+            <rdf:li>Tree</rdf:li>
+            <rdf:li>Winter</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="matrix(1.1903056,0,0,1.1903056,140.22171,-131.50325)"
+     id="layer1"
+     style="fill:#333333">
+    <path
+       d="m 248.70408,583.85488 1.66479,3.829 3.16306,2.9966 3.66248,0.49943 c 0,0 2.16421,-3.829 2.33066,-4.49488 0.16648,-0.66594 0.99885,-4.16197 1.16537,-5.49379 0.16648,-1.33182 3.99545,-8.98975 4.66139,-9.98847 0.66595,-0.99884 6.49264,-9.65556 6.49264,-9.65556 0,0 3.829,-5.99321 3.99545,-6.82554 0.16648,-0.8324 3.66249,-3.829 3.66249,-3.829 l 7.49135,-8.82297 c 0,0 0.83239,5.49372 0.99884,6.82554 0.16648,1.33182 0.66595,6.15966 0.99885,8.15716 0.33295,1.99769 0.16648,5.66024 0,6.65876 -0.16648,0.99885 -1.49827,8.82297 -1.49827,8.82297 0,0 -2.49718,1.83131 -1.83124,3.829 0.66594,1.99776 -0.16647,17.3137 -0.16647,17.97951 0,0.66594 -2.49719,8.49072 -2.49719,8.49072 l -2.49718,10.65428 c 0,0 -1.49827,7.32523 -1.16536,8.32394 0.33295,0.99892 0.66594,10.98785 0.66594,10.98785 l 1.83124,9.65556 c 0,0 1.16536,2.83009 2.49718,2.33066 1.33182,-0.49941 6.82554,0.16646 7.15845,-0.99884 0.33296,-1.16537 1.83124,-4.32843 2.16421,-4.99437 0.33295,-0.66587 4.32842,-7.49135 4.32842,-7.49135 l 1.49827,-6.82554 c 0,0 -0.49943,-3.99545 0,-4.66133 0.49943,-0.66594 2.99661,-6.99232 2.99661,-6.99232 l 0.8324,-1.99776 v 6.32618 l 0.16647,5.99315 -1.16536,8.15716 c 0,0 0,4.82785 0.49943,5.82669 0.49944,0.99892 1.49827,3.829 1.33182,4.49495 -0.16648,0.66587 -1.16537,2.9966 -1.33182,3.82893 -0.16648,0.83239 -1.16537,5.16082 -0.99885,5.99321 0.16648,0.8324 1.16537,4.32843 1.33182,4.99437 0.16648,0.66587 1.66479,14.48367 1.66479,14.48367 l 0.49943,10.32138 -1.66479,4.66139 1.16537,6.32619 c 0,0 -0.8324,0.99884 0.16647,0.99884 0.99888,0 7.32523,1.33182 7.32523,1.33182 l 3.49603,-1.49834 -0.33296,-2.66363 c 0,0 -2.33066,-3.82894 -2.83015,-4.66133 -0.49943,-0.8324 -1.49827,-1.66479 -1.49827,-2.83015 0,-1.1653 0.49943,-8.49007 0.49943,-8.49007 l 2.99661,-13.81787 1.49827,-9.32265 -0.33295,-6.65942 -1.16537,-4.99437 -1.83124,-4.66139 1.66479,-7.49135 5.99321,-13.15206 4.6614,-13.98399 c 0,0 2.9966,-17.81338 2.66363,-18.47919 -0.33295,-0.66594 -2.49718,-7.49135 -2.49718,-7.49135 0,0 -1.33182,-3.99552 -1.33182,-4.6614 0,-0.66594 0.16647,-6.32618 0.16647,-7.32522 0,-0.99885 1.49827,-8.65685 1.49827,-8.65685 l 2.33067,-8.98976 1.99776,-4.99436 10.48815,7.65813 c 0,0 5.8267,2.33067 6.49264,2.99661 0.66594,0.66587 12.65237,4.66133 12.65237,4.66133 l 2.83015,0.49942 -2.99661,0.49949 1.83125,3.32951 c 0,0 1.49827,0 0.99884,-0.66587 -0.49943,-0.66595 -0.99884,-0.99892 -0.33296,-1.66479 0.66595,-0.66594 2.83016,-2.33067 2.83016,-2.33067 l 1.83124,-1.8313 0.66594,-3.32952 c 0,0 2.33067,-2.66363 1.33182,-2.66363 -0.99885,0 -6.49264,1.33182 -6.49264,1.33182 0,0 -4.9943,0.83239 -5.99321,0.16645 -0.99885,-0.66588 -5.66024,-2.83009 -5.66024,-3.829 0,-0.99885 -9.65557,-9.32266 -9.65557,-9.32266 l -4.32842,-2.66364 c 0,0 -0.16648,-6.65941 -1.33182,-7.32522 -1.16536,-0.66588 -5.16082,-2.83009 -6.32611,-2.66364 -1.16537,0.16645 -3.49603,-0.66594 -3.49603,-0.66594 l -6.15967,-4.66133 0.49943,-3.49603 c 0,0 0.66594,-0.66594 1.83124,-1.16537 1.16537,-0.49942 2.49718,-3.16305 2.66364,-3.829 0.16648,-0.66587 -0.49943,-4.49487 -0.66595,-5.16081 -0.16647,-0.66588 -1.99775,-5.49373 -2.83015,-6.65942 -0.83239,-1.1653 -2.49718,-2.83009 -3.99545,-3.32951 -1.49827,-0.49949 -2.49719,-0.8324 -3.829,-1.16537 -1.33182,-0.33297 -1.83124,-0.83239 -4.16191,0 -2.33066,0.83239 -4.32842,0.99885 -4.49488,1.83124 l -0.49943,2.49718 c -0.16647,0.8324 -0.16647,1.83125 -0.33295,2.66364 -0.16648,0.83239 -0.33296,2.33066 -0.66594,3.49603 -0.33296,1.16537 -0.16648,1.16537 -0.33296,2.49718 -0.16647,1.33182 -0.16647,1.9977 0.16648,3.82894 0.33295,1.8313 0,2.83015 0.8324,3.829 0.83239,0.99891 1.33181,0.49942 0.99884,2.16421 -0.33295,1.66479 -0.49943,2.49718 -1.16536,2.66364 -0.66594,0.16651 -4.32843,-0.33291 -4.32843,-0.33291 l -2.9966,1.99769 c 0,0 -2.33067,2.99661 -3.49603,2.99661 -1.16537,0 -2.33067,-0.33297 -4.82785,0.49942 -2.49718,0.8324 -7.49135,7.99104 -7.82426,8.65685 -0.33295,0.66588 -3.829,5.16082 -3.829,5.16082 0,0 -1.99769,1.66479 -1.99769,3.49603 0,1.83124 -0.16648,3.829 -0.99885,3.99545 -0.83236,0.16646 -5.66024,7.99104 -5.66024,7.99104 0,0 -3.32958,3.99546 -3.66248,4.6614 -0.33295,0.66587 -3.16306,6.99232 -3.16306,6.99232 l -4.82785,11.65365 -1.33181,3.66249 -5.49379,4.49487 z"
+       id="path7112"
+       inkscape:connector-curvature="0"
+       style="fill:#333333" />
+  </g>
+</svg>
