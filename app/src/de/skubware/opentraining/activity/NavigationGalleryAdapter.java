@@ -73,7 +73,7 @@ public class NavigationGalleryAdapter extends FancyCoverFlowAdapter {
 	public View getCoverFlowItem(int i, View reuseableView, ViewGroup viewGroup) {
 		TextView textView = new TextView(viewGroup.getContext());
 		textView.setText(mNameList.get(i));
-		textView.setTextColor(Color.WHITE);
+		textView.setTextColor(Color.DKGRAY);
 		textView.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, 35.0f);
 		textView.setLayoutParams(getLayoutParams());
 

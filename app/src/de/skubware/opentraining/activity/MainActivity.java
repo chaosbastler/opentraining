@@ -95,6 +95,28 @@ public class MainActivity extends ActionBarActivity {
 		mFancyCoverFlow.setMaxRotation(35);
 		mFancyCoverFlow.setScaleDownGravity(0.0f);
 		mFancyCoverFlow.setActionDistance(FancyCoverFlow.ACTION_DISTANCE_AUTO);
+		
+		mFancyCoverFlow.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				switch (position) {
+				case 0:
+					showSelectWorkoutDialog();
+					break;
+				case 1:
+					startActivity(new Intent(MainActivity.this, ExerciseTypeListActivity.class));
+					break;
+				case 2:
+					startActivity(new Intent(MainActivity.this, WorkoutListActivity.class));
+					break;
+				case 3:
+					startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+					break;
+				default:
+					Log.wtf(TAG, "This item should not exist.");
+				}
+			}
+		});
 	}
 
 

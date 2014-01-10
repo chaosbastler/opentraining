@@ -22,7 +22,6 @@
        android:layout_marginTop="41dp"
        android:gravity="center_vertical|center_horizontal"
        android:text="Open Training"
-       android:textColor="#FFFFFF"
        android:textSize="35sp"
        android:textStyle="bold" />
 

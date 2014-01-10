@@ -6,4 +6,6 @@
     <color name="button_color">#FFFFFF</color>
     
     <color name="text_color_table">#111111</color>
+    <color name="actionbar_text">#EFEFEF</color>
+    
 </resources>    
