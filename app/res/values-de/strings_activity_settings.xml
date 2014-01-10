@@ -35,8 +35,9 @@
     <string name="sync_canceled">Synchronisation abgebrochen</string>
 	<string name="sync_in_progess">Synchronisiere &#8230;</string>
 	<string name="downloading_exercises">Übungen werden heruntergeladen</string>
-	<string name="downloading_language_files">Sprachdaten herunterladen language files</string>
+	<string name="downloading_language_files">Sprachdaten herunterladen</string>
 	<string name="downloading_muscle_files">Muskeldaten herunterladen</string>
+	<string name="downloading_images">Bilder herunterladen (dies kann einige Minuten dauern)</string>		
 	<string name="verifying_exercises">Übungen überprüfen</string>
 	<string name="saving_exercises">Übungen speichern</string>	
 	<string name="sync_finished">Synchronisation beendet</string>

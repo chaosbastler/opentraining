@@ -58,14 +58,22 @@ public class WgerImageDownloader {
 		mClient = client;
 	}
 
+	/**
+	 * Download the missing images from wger. If an image already exists Open
+	 * Training assumes that the exercise is duplicate and will remove it from
+	 * the download list.
+	 */
 	public ArrayList<ExerciseType> downloadImages(List<ExerciseType.Builder> exerciseBuilderList) throws IOException, JSONException {
 		ArrayList<ExerciseType> newExerciseList = new ArrayList<ExerciseType>();
 
+		// add label to be able to break/continue from inner loop
+		outerloop:
 		for (ExerciseType.Builder exBuilder : exerciseBuilderList) {
 			List<File> newImagePathList = new ArrayList<File>();
 			Map<File, String> newImageLicenseMap = new HashMap<File, String>();
 
-			for (File img : exBuilder.build().getImagePaths()) {
+			ExerciseType ex = exBuilder.build();
+			for (File img : ex.getImagePaths()) {
 				String imageAsJSON = mClient.get(img.getPath() + "/");
 				// parse JSON and get name
 				JSONObject imageJSONObject = new JSONObject(imageAsJSON);
@@ -84,11 +92,12 @@ public class WgerImageDownloader {
 				String licenseText = "License: " + license + ", Author: " + author;
 
 				
-				// skip image if there's already one with the same name
+				// skip exercise (and image download) if there's already one with the same name
 				DataHelper dataHelper = new DataHelper(mContext);
 				String imageName = (new File(imageDownloadPath)).getName();
 				if(dataHelper.drawableExist(imageName)){
-					Log.w(TAG, "There's already an image with the same name as: " + imageDownloadPath + ". Download will be skipped.");
+					Log.d(TAG, "There's already an image with the same name as: " + imageDownloadPath + ". The exercise: " + ex.getLocalizedName() + " is propably duplicate, it will not be added.");
+					continue outerloop;
 				}else{
 					// only download image if its name is unique
 					imageName = downloadImageToSyncedImagesFolder(imageDownloadPath); // imageName may change!
