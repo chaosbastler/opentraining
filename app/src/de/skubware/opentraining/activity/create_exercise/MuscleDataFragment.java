@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,42 +20,38 @@
 
 package de.skubware.opentraining.activity.create_exercise;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.activity.start_training.SwipeDismissListViewTouchListener;
 import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.DataProvider;
-import de.skubware.opentraining.db.IDataProvider;
+import android.content.Context;
+import android.widget.AdapterView.OnItemSelectedListener;
 
-public class MuscleDataFragment extends Fragment implements OnItemSelectedListener{
-	private Spinner mMuscleSpinner;
+public class MuscleDataFragment extends SpinnerDataFragment<Muscle>{
 	
+	public MuscleDataFragment(){
+		super(R.layout.fragment_create_exercise_muscle_data);
+		mSpinnerDataList = (new DataProvider(getActivity())).getMuscles();
+	}
+}
+
+/*
+
+public class SimpleDataFragment extends Fragment {
+
 	private ListView mMuscleListView;
 	private ArrayAdapter<Muscle> mListAdapter;
 	private List<Muscle> mMuscleList = new ArrayList<Muscle>();
 
-
-	public MuscleDataFragment() {
+	public SimpleDataFragment() {
+		super();
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout = inflater.inflate(R.layout.fragment_create_exercise_muscle_data, container, false);
-
+	
 		IDataProvider dataProvider = new DataProvider(getActivity());
 		
 		mMuscleSpinner = (Spinner) layout.findViewById(R.id.spinner_muscle);
@@ -70,7 +66,7 @@ public class MuscleDataFragment extends Fragment implements OnItemSelectedListen
 			}
 		});
 		
-		mMuscleListView = (ListView) layout.findViewById(R.id.listview_ex_muscle);
+		mMuscleListView = (ListView) layout.findViewById(R.id.listview_ex_names);
 		mListAdapter = new ArrayAdapter<Muscle>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, mMuscleList);
 		mMuscleListView.setAdapter(mListAdapter);
 		
@@ -91,14 +87,13 @@ public class MuscleDataFragment extends Fragment implements OnItemSelectedListen
 		
 		return layout;
 	}
-	
-	public List<Muscle> getMuscles(){
+
+	public List<Muscle> getMuscles() {
 		return mMuscleList;
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
-			long arg3) {
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
 		Muscle selectedItem = (Muscle) mMuscleSpinner.getItemAtPosition(position);
 		if(mMuscleList.contains(selectedItem)){
 			Toast.makeText(getActivity(), getString(R.string.muscle_already_in_list), Toast.LENGTH_LONG).show();
@@ -113,5 +108,6 @@ public class MuscleDataFragment extends Fragment implements OnItemSelectedListen
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
-	}		
-}
+	}
+
+}*/

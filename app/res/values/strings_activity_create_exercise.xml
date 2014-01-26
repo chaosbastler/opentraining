@@ -13,11 +13,12 @@
     <string name="title_about_creating_exercise">About creating exercises</string>
 
     
-    <!-- BasicDataFragment -->
-    <string name="title_basic_data_fragment">Basic data</string>
-    <string name="exercise_name">Exercise name</string>
-    <string name="name_english">English name</string>
-    <string name="name_german">German name</string>
+    <!-- NameFragment -->
+    <string name="title_name_fragment">Name</string>
+    <string name="exercisename">Exercisename</string>
+    <string name="exercisenames">Exercisenames</string>
+    
+    <!-- DescriptionFragment --> 
     <string name="description">Description</string>
     <string name="the_exercise_description">A description of the exercise</string>
     
@@ -26,11 +27,14 @@
     <string name="title_image_fragment">Images</string>
     <string name="did_not_provide_image">You did not provide an image.</string>
 
+    <!-- SpinnerDataFragment -->    
+    <string name="swipe_to_dismiss_advise">If you want to remove a list item, just swipe it away</string>
+    <string name="object_already_in_list">%s has already been added.</string>
+    
     <!-- MuscleDataFragment -->
     <string name="title_muscle_data_fragment">Muscles</string>
-    <string name="chosen_muscles">Chosen muscles</string>    
-    <string name="swipe_to_dismiss_advise">If you want to remove a list item, just swipe it away</string>
-    <string name="muscle_already_in_list">The chosen muscle has already been added.</string>
+    <string name="chosen_muscles">Chosen muscles</string>
+
 
 
     <!-- EquipmentDataFragment -->
