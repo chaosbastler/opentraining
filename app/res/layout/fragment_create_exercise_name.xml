@@ -36,39 +36,55 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:text="@string/exercise_name"
+                android:text="@string/exercise"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/released_button_background" />
 
-            <EditText
-                android:id="@+id/edittext_exercise_name_english"
+            <RelativeLayout
+                android:id="@+id/wrapper_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/layout_stroke1"
                 android:layout_alignRight="@+id/layout_stroke1"
-                android:layout_below="@+id/layout_stroke1"
-                android:ems="10"
-                android:hint="@string/name_english" >
+                android:layout_below="@+id/layout_stroke1" >
 
-                <requestFocus />
-            </EditText>
+                <EditText
+                    android:id="@+id/edittext_exercise_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:ems="10"
+                    android:hint="@string/exercisename" >
 
-            <EditText
-                android:id="@+id/edittext_exercise_name_german"
+                    <requestFocus />
+                </EditText>
+
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/edittext_exercise_name_english"
-                android:layout_alignRight="@+id/edittext_exercise_name_english"
-                android:layout_below="@+id/edittext_exercise_name_english"
-                android:ems="10"
-                android:hint="@string/name_german" />
+                android:layout_alignLeft="@+id/wrapper_name"
+                android:layout_below="@+id/wrapper_name"
+                android:layout_toLeftOf="@+id/button_add_name" />
+
+            <ImageButton
+                android:id="@+id/button_add_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/wrapper_name"
+                android:layout_below="@+id/wrapper_name"
+                android:src="@drawable/icon_add" />
 
         </RelativeLayout>
-
-        <RelativeLayout
+        
+        
+              <RelativeLayout
             android:id="@+id/RelativeLayout01"
             android:layout_width="wrap_content"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingBottom="5dp"
             android:paddingLeft="20dp"
@@ -92,23 +108,20 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:paddingBottom="3dp"
-                android:text="@string/description"
+                android:text="@string/exercisenames"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/released_button_background" />
 
-            <EditText
-                android:id="@+id/edittext_description"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/LinearLayout01"
-                android:layout_alignRight="@+id/LinearLayout01"
-                android:layout_below="@+id/TextView01"
-                android:ems="10"
-                android:hint="@string/the_exercise_description"
-                android:inputType="textMultiLine" />
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/LinearLayout01"
+                android:paddingTop="5dp" >
+
+            </ListView>
 
         </RelativeLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

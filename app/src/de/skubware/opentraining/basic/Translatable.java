@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 	/** Map that stores the primary name and alternative names for each Locale. */
 	private Map<Locale, Set<String>> nameMap = new HashMap<Locale, Set<String>>();
 
-	/** The (primary) name of the Muscle */
+	/** The (primary) name of the Translatable */
 	protected String name;
 
 	/**

@@ -184,20 +184,28 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 	/** Saves the created exercise. */
 	private void saveExercise(){
-		BasicDataFragment basicDataFragment = (BasicDataFragment) mSectionsPagerAdapter.getItem(0);
-		ImageFragment imageFragment = (ImageFragment) mSectionsPagerAdapter.getItem(1);
-		MuscleDataFragment muscleDataFragment = (MuscleDataFragment) mSectionsPagerAdapter.getItem(2);
-		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(3);
+		NameFragment nameFragment = (NameFragment) mSectionsPagerAdapter.getItem(0);
+		DescriptionFragment descriptionFragment = (DescriptionFragment) mSectionsPagerAdapter.getItem(1);
+		ImageFragment imageFragment = (ImageFragment) mSectionsPagerAdapter.getItem(2);
+		SimpleDataFragment<Muscle> muscleDataFragment = (SpinnerDataFragment) mSectionsPagerAdapter.getItem(3);
+		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(4);
 
 		DataProvider dataProvider = new DataProvider(this);
 
 		
 		// handle names
-		Map<Locale, String> translationMap = new HashMap<Locale, String>();
-		String ex_name_english = basicDataFragment.getExerciseNameEnglish();
-		String ex_name_german = basicDataFragment.getExerciseNameGerman();
+		Map<Locale, String> translationMap = nameFragment.getTranslationMap();
+		//String ex_name_english = basicDataFragment.getExerciseNameEnglish();
+		//String ex_name_german = basicDataFragment.getExerciseNameGerman();
 		
-		if(ex_name_english.equals("") && ex_name_german.equals("")){
+		if(translationMap.isEmpty()){
+			Log.v(TAG, "User did not enter an exercise name.");
+			Toast.makeText(this, getString(R.string.provide_name), Toast.LENGTH_LONG).show();
+			
+			return;
+		}
+		
+		/*if(ex_name_english.equals("") && ex_name_german.equals("")){
 			Log.v(TAG, "User did not enter an exercise name.");
 			Toast.makeText(this, getString(R.string.provide_name), Toast.LENGTH_LONG).show();
 			
@@ -222,16 +230,16 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			}
 			
 			translationMap.put(Locale.GERMAN, ex_name_german);
-		}
+		}*/
 		
 		// handle description
-		String description = basicDataFragment.getExerciseDescription();
+		String description = descriptionFragment.getExerciseDescription();
 			
 		// handle muscle
-		SortedSet<Muscle> muscleList = new TreeSet<Muscle>(muscleDataFragment.getMuscles());
+		SortedSet<Muscle> muscleList = new TreeSet<Muscle>(muscleDataFragment.getChosenObjects());
 
 		// handle equipment
-		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getSportsEquipment());
+		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getChosenObjects());
 
 		// save image
 		Uri image = imageFragment.getImage();
@@ -270,7 +278,8 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		
-		BasicDataFragment mBasicDataFragment = new BasicDataFragment();
+		NameFragment mNameFragment = new NameFragment();
+		DescriptionFragment mDescriptionFragment = new DescriptionFragment();
 		ImageFragment mImageFragment= new ImageFragment();
 		MuscleDataFragment mMuscleDataFragment = new MuscleDataFragment();
 		EquipmentDataFragment mEquipmentDataFragment = new EquipmentDataFragment();
@@ -284,12 +293,14 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 			switch (position) {
 			case 0:
-				return mBasicDataFragment;
+				return mNameFragment;
 			case 1:
-				return mImageFragment;
+				return mDescriptionFragment;
 			case 2:	
+				return mImageFragment;
+			case 3:	
 				return mMuscleDataFragment;
-			case 3:
+			case 4:
 				return mEquipmentDataFragment;
 			}
 			
@@ -298,19 +309,21 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 		@Override
 		public int getCount() {
-			return 4;
+			return 5;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			switch (position) {
 			case 0:
-				return getString(R.string.title_basic_data_fragment).toUpperCase(Locale.GERMANY);
+				return getString(R.string.title_name_fragment).toUpperCase(Locale.GERMANY);
 			case 1:
-				return getString(R.string.title_image_fragment).toUpperCase(Locale.GERMANY);
+				return getString(R.string.title_description_fragment).toUpperCase(Locale.GERMANY);
 			case 2:	
+				return getString(R.string.title_image_fragment).toUpperCase(Locale.GERMANY);
+			case 3:	
 				return getString(R.string.title_muscle_data_fragment).toUpperCase(Locale.GERMANY);
-			case 3:
+			case 4:
 				return getString(R.string.title_equipment_data_fragment).toUpperCase(Locale.GERMANY);
 			}	
 			return null;
@@ -324,11 +337,11 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 	 */
 	public void swipeToDismissAdvise(){
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		boolean showAdvise = sharedPrefs.getBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, true);
+		/*boolean showAdvise = sharedPrefs.getBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, true);
 		if(!showAdvise){
 			Log.v(TAG, "Will not show swipe-to-dismiss-advise");
 			return;
-		}
+		}*/
 			
 		Toast.makeText(this, getString(R.string.swipe_to_dismiss_advise), Toast.LENGTH_LONG).show();
 		

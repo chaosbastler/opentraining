@@ -49,7 +49,7 @@ public abstract class SpinnerDataFragment<T extends Translatable> extends Simple
 	protected ArrayAdapter<T> mSpinnerAdapter;
 	protected Spinner mSpinner;
 	
-	protected List<T> mSpinnerDataList;
+	protected List mSpinnerDataList;
 	
 	protected int mLayoutID;
 
@@ -99,7 +99,7 @@ public abstract class SpinnerDataFragment<T extends Translatable> extends Simple
 
 	@Override
 	protected String checkObjectConstraints(int position) {
-		T selectedItem = (T) mSpinner.getItemAtPosition(position);
+		Object selectedItem = mSpinner.getItemAtPosition(position);
 		if(mObjectList.contains(selectedItem)){
 			return getActivity().getString(R.string.object_already_in_list, selectedItem.toString());
 		}

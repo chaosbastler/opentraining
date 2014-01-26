@@ -15,13 +15,14 @@
     
     <!-- NameFragment -->
     <string name="title_name_fragment">Name</string>
-    <string name="exercisename">Exercisename</string>
-    <string name="exercisenames">Exercisenames</string>
+    <string name="exercisename">Exercise name</string>
+    <string name="exercisenames">Exercise names</string>
+    <string name="exercise_name_empty">You have to enter an exercise name</string>
     
     <!-- DescriptionFragment --> 
+    <string name="title_description_fragment">Description</string>    
     <string name="description">Description</string>
     <string name="the_exercise_description">A description of the exercise</string>
-    
     
     <!-- ImageFragment -->
     <string name="title_image_fragment">Images</string>
@@ -34,8 +35,6 @@
     <!-- MuscleDataFragment -->
     <string name="title_muscle_data_fragment">Muscles</string>
     <string name="chosen_muscles">Chosen muscles</string>
-
-
 
     <!-- EquipmentDataFragment -->
     <string name="title_equipment_data_fragment">Equipment</string>
