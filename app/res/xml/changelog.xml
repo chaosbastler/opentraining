@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-    <release version="0.6" versioncode="22" summary="Training-Timer and Italian translation" date="8/12/2013">
+    <release version="0.6.1" versioncode="24" summary="Spanish translation" date="01/30/2013">
+        <change>The app has been translated to Spanish. Thanks to Sebastián Di Luise for this translation.</change>
+        <change>New design for navigation/start activity. Please send feedback if you experience any design or performance problems.</change>
+        <change>Not finished in time for this update, but included in the next update: creating new exercises</change>
+    </release>
+    <release version="0.6" versioncode="22" summary="Training-Timer and Italian translation" date="12/8/2013">
         <change>Added a Training-Timer. It will notify you when you should continue your training. You can change the recovery time and more in the application settings.</change>
         <change>The app and exercises have been translated to Italian. Thanks to Andrea Brancaleoni (https://github.com/thypon) for this translation.</change>
         <change>Bugfix: the app could loose the current training progress after screen rotation.</change>        
     </release>
-    <release version="0.5.2" versioncode="20" summary="New icon" date="5/11/2013">
+    <release version="0.5.2" versioncode="20" summary="New icon" date="11/5/2013">
         <change>The app got a new icon. Hope you like it.</change>
     </release>
-    <release version="0.5.1" versioncode="19" summary="Highlight selected exercises and bugfixes" date="20/10/2013">
+    <release version="0.5.1" versioncode="19" summary="Highlight selected exercises and bugfixes" date="10/20/2013">
         <change>When a new workout is created, the selected exercises will now be highlighted.</change>
         <change>The app will now save its 'scroll state' (which exercises are visible?) when you return to the list with exercises.</change>
         <change>Fixed a missing translation</change>
     </release>
-    <release version="0.5" versioncode="18" summary="New exercises and design changes" date="13/10/2013">
+    <release version="0.5" versioncode="18" summary="New exercises and design changes" date="10/13/2013">
         <change>Added 33 new exercises</change>
         <change>Changed design to Holo-style</change>
         <change>Download new exercises from wger.de (currently only exercises without images are available)</change>
         <change>Added changelog</change>
     </release>
-    <release version="0.4.1" versioncode="13" summary="Example workout" date="05/24/2013">
+    <release version="0.4.1" versioncode="13" summary="Example workout" date="24/05/2013">
         <change>Improved workout user interface</change>
         <change>Added example workout</change>
     </release>

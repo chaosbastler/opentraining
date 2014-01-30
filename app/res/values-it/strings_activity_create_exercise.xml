@@ -14,10 +14,7 @@
 
 
     <!-- BasicDataFragment -->
-    <string name="title_basic_data_fragment">Informazioni base</string>
-    <string name="exercise_name">Nome dell\'esercizio</string>
-    <string name="name_english">Nome inglese</string>
-    <string name="name_german">Nome tedesco</string>
+    <string name="exercisename">Nome dell\'esercizio</string>
     <string name="description">Descrizione</string>
     <string name="the_exercise_description">Una descrizione dell\'esercizio</string>
 
@@ -30,7 +27,6 @@
     <string name="title_muscle_data_fragment">Muscoli</string>
     <string name="chosen_muscles">Muscoli selezionati</string>
     <string name="swipe_to_dismiss_advise">Se vuoi rimuovere un elemento della lista, trascinalo via.</string>
-    <string name="muscle_already_in_list">Il muscolo selezionato era già stato selezionato.</string>
 
 
     <!-- EquipmentDataFragment -->

@@ -108,7 +108,8 @@ class FancyCoverFlowItemWrapper extends ViewGroup {
     // Getters / Setters
     // =============================================================================
 
-    void setReflectionEnabled(boolean hasReflection) {
+    @SuppressLint("NewApi")
+	void setReflectionEnabled(boolean hasReflection) {
         if (hasReflection != this.isReflectionEnabled) {
             this.isReflectionEnabled = hasReflection;
 

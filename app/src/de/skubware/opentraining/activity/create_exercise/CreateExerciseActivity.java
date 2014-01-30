@@ -345,11 +345,11 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			
 		Toast.makeText(this, getString(R.string.swipe_to_dismiss_advise), Toast.LENGTH_LONG).show();
 		
-		Log.v(TAG, "Show swipe-to-dismiss-advise has been shown once, will not be shown again.");
+		/*Log.v(TAG, "Show swipe-to-dismiss-advise has been shown once, will not be shown again.");
 
 		Editor editor = sharedPrefs.edit();
 		editor.putBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, false);
-		editor.commit();
+		editor.commit();*/
 	}
 	
 }

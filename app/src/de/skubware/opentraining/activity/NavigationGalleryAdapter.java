@@ -74,7 +74,7 @@ public class NavigationGalleryAdapter extends FancyCoverFlowAdapter {
 		TextView textView = new TextView(viewGroup.getContext());
 		textView.setText(mNameList.get(i));
 		textView.setTextColor(Color.DKGRAY);
-		textView.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, 35.0f);
+		textView.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, 25.0f);
 		textView.setLayoutParams(getLayoutParams());
 
 		return textView;
@@ -97,7 +97,7 @@ public class NavigationGalleryAdapter extends FancyCoverFlowAdapter {
 		    (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) ==  
 		    Configuration.SCREENLAYOUT_SIZE_LARGE) {
 		    // xlarge screens: at least 960dp x 720dp
-			Log.e(TAG, "XLARGE or LARGE screen");
+			Log.v(TAG, "XLARGE or LARGE screen");
 			width = (displayWidth * 1/4);
 			height = (displayHeight * 1/4);
 			
@@ -106,7 +106,7 @@ public class NavigationGalleryAdapter extends FancyCoverFlowAdapter {
 		    (config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) ==  
 			    Configuration.SCREENLAYOUT_SIZE_SMALL) {
 		    // small screens: at least 426dp x 320dp
-			Log.e(TAG, "NORMAL or SMALL screen");
+			Log.v(TAG, "NORMAL or SMALL screen");
 			width = (displayWidth * 1/2);
 			height = (displayHeight * 1/4);
 		}
