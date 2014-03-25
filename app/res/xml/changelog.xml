@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.6.2" versioncode="25" summary="Bugfix for Android 2.x" date="03/25/2013">
+        <change>Bugfix for a crash on older Android devices (Version 2.x). Another update with some fixes will probably follow within the next two weeks.</change>
+    </release>    
     <release version="0.6.1" versioncode="24" summary="Spanish translation" date="01/30/2013">
         <change>The app has been translated to Spanish. Thanks to Sebastián Di Luise for this translation.</change>
         <change>New design for navigation/start activity. Please send feedback if you experience any design or performance problems.</change>
