@@ -24,8 +24,11 @@ package de.skubware.opentraining.activity.start_training;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
@@ -158,6 +161,7 @@ public enum RecoveryTimerManager {
 					mNotificationBuilder.setProgress(max, counter, false);
 					mNotificationBuilder.setUsesChronometer(true);
 					// Displays the progress bar for the first time.
+					mNotificationBuilder.setContentIntent(PendingIntent.getActivity(mContext.getApplicationContext(), 0, new Intent(), 0));
 					mNotifyManager.notify(0, mNotificationBuilder.build());
 
 					counter++;
@@ -180,6 +184,10 @@ public enum RecoveryTimerManager {
 						mNotificationBuilder.setSound(defaultSound);
 					}
 					mNotificationBuilder.setAutoCancel(true);
+					
+					mNotificationBuilder.setContentIntent(PendingIntent.getActivity(mContext.getApplicationContext(), 0, new Intent(), 0));
+
+
 					mNotifyManager.notify(RECOVERY_TIMER_NOTIFICATION_ID, mNotificationBuilder.build());
 					mSetTimer.cancel();
 
