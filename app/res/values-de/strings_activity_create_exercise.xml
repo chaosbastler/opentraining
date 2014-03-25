@@ -7,34 +7,38 @@
     <string name="provide_name">Du musst einen Namen eingeben.</string>
     <string name="name_already_used">Der Name wird bereits für einer andere Übung verwendet. Bitte wähle einen anderen Namen.</string>
 
-    
+        
     <!-- Menu of CreateExerciseActivity -->
     <string name="text_about_creating_exercise">Es muss mindestens ein Name eingegeben werden, alle weiteren Angaben sind optional.</string>
     <string name="title_about_creating_exercise">Über Übungen erstellen</string>
-    
 
-    <!-- BasicDataFragment -->
-    <string name="title_basic_data_fragment">Basisdaten</string>
-    <string name="exercise_name">Name der Übung</string>
-    <string name="name_english">Übungsname (Englisch)</string>
-    <string name="name_german">Übungsname (Deutsch)</string>
+    
+    <!-- NameFragment -->
+    <string name="title_name_fragment">Name</string>
+    <string name="exercisename">Übungname</string>
+    <string name="exercisenames">Übungsnamen</string>
+    <string name="exercise_name_empty">Du musst einen Übungsnamen eingeben</string>
+    
+    <!-- DescriptionFragment -->
+    <string name="title_description_fragment">Beschreibung</string>        
     <string name="description">Beschreibung</string>
     <string name="the_exercise_description">Eine Beschreibung der Übung</string>
-        
+    
     <!-- ImageFragment -->
     <string name="title_image_fragment">Bilder</string>
-    <string name="did_not_provide_image">Es wurde kein Bild hinzugefügt.</string>  
+    <string name="did_not_provide_image">Es wurde kein Bild hinzugefügt.</string> 
+
+    <!-- SpinnerDataFragment -->    
+    <string name="swipe_to_dismiss_advise">Listenelemente können durch swipen entfernt werden</string>
+    <string name="object_already_in_list">%s wurde bereits hinzugefügt</string>
     
-    <!-- MuscleDataFragment -->
+	<!-- MuscleDataFragment -->
     <string name="title_muscle_data_fragment">Muskeln</string>
     <string name="chosen_muscles">Gewählte Muskeln</string>
-    <string name="swipe_to_dismiss_advise">Listenelemente können durch swipen entfernt werden</string>
-    <string name="muscle_already_in_list">Der gewählte Muskel wurde bereits hinzugefügt</string>
-
     
     <!-- EquipmentDataFragment -->
     <string name="title_equipment_data_fragment">Equipment</string>
     <string name="chosen_equipment">Gewähltes Equipment</string>    
-    <string name="equipment_already_in_list">Das gewählte Equipment wurde bereits hinzugefügt</string>
-    
+    <string name="equipment_already_in_list">Das gewählte Equipment wurde bereits hinzugefügt</string>        
+
 </resources>

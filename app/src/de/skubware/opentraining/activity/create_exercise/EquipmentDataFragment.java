@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,11 +36,20 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.start_training.SwipeDismissListViewTouchListener;
+import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
-public class EquipmentDataFragment extends Fragment implements OnItemSelectedListener{
+public class EquipmentDataFragment extends SpinnerDataFragment<SportsEquipment>{
+	
+	public EquipmentDataFragment(){
+		super(R.layout.fragment_create_exercise_equipment_data);
+		mSpinnerDataList = (new DataProvider(getActivity()).getEquipment());
+	}
+}
+
+/*public class EquipmentDataFragment extends Fragment implements OnItemSelectedListener{
 	private Spinner mEquipmentSpinner;
 
 	private ListView mEquipmentListView;
@@ -114,4 +123,4 @@ public class EquipmentDataFragment extends Fragment implements OnItemSelectedLis
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
 	}
-}
+}*/

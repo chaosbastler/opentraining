@@ -20,6 +20,16 @@
 
 package de.skubware.opentraining.activity.create_exercise;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -27,71 +37,39 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
-public class BasicDataFragment extends Fragment{
+public class DescriptionFragment extends Fragment{
 	/** Tag for logging*/
-	private final String TAG = "BasicDataFragment";
+	private final String TAG = "DescriptionFragment";
 
-	private EditText mEditTextExerciseNameEnglish;
-	private EditText mEditTextExerciseNameGerman;
 
 	private EditText mEditTextExerciseDescription;
-
 	
-	public BasicDataFragment() {
+	public DescriptionFragment() {
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View layout = inflater.inflate(R.layout.fragment_create_exercise_basic_data, container, false);
+		View layout = inflater.inflate(R.layout.fragment_create_exercise_description, container, false);
 
 		mEditTextExerciseDescription = (EditText) layout.findViewById(R.id.edittext_description);
-		mEditTextExerciseNameEnglish = (EditText) layout.findViewById(R.id.edittext_exercise_name_english);
-		mEditTextExerciseNameGerman = (EditText) layout.findViewById(R.id.edittext_exercise_name_german);
-		
-		mEditTextExerciseNameGerman.addTextChangedListener(new ExerciseNameTextWatcher(mEditTextExerciseNameGerman));
-		mEditTextExerciseNameEnglish.addTextChangedListener(new ExerciseNameTextWatcher(mEditTextExerciseNameEnglish));
 
+		
 		
 		return layout;
 	}
-	
-	
-	
-	public String getExerciseNameEnglish(){
-		return mEditTextExerciseNameEnglish.getText().toString();
-	}
-	
-	public String getExerciseNameGerman(){
-		return mEditTextExerciseNameGerman.getText().toString();
-	}
 
+	
 	public String getExerciseDescription(){
 		return mEditTextExerciseDescription.getText().toString();
 	}
 
-	
-	private class ExerciseNameTextWatcher implements TextWatcher {
-	    private EditText mEditText;
-		IDataProvider mDataProvider = new DataProvider(getActivity());
 
-	    
-	    public ExerciseNameTextWatcher(EditText e) { 
-	        mEditText = e;
-	    }
-
-	    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-	    public void onTextChanged(CharSequence s, int start, int before, int count) {
-			if(mDataProvider.getExerciseByName(s.toString()) != null )
-				mEditText.setError(getString(R.string.name_already_used));	
-	    }
-
-	    public void afterTextChanged(Editable s) { }
-	}
 }

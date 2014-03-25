@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-    <release version="0.6" versioncode="22" summary="Training-Timer und italienische Übersetzung" date="8/12/2013">
+    <release version="0.6.1" versioncode="24" summary="Spanische Übersetzung" date="01/30/2013">
+        <change>Spanische Übersetzung der App hinzugefügt. Dank dafür an Sebastián Di Luise.</change>
+        <change>Neues Design für Navigations-Activity</change>
+        <change>Nicht mehr rechtzeitig für dieses Update fertig geworden, aber beim nächsten Update dabei: eigene Übungen erstellen</change>
+    </release>
+    <release version="0.6" versioncode="22" summary="Training-Timer und italienische Übersetzung" date="12/8/2013">
         <change>Training-Timer hinzugefügt. Der Timer benachrichtigt den Nutzer, wenn die Erholungsphase vorbei ist und das Training fortgesetzt werden soll. In den Einstellungen kann man u.A. die Erholungszeit ändern oder dieses Feature deaktiviert.</change>
         <change>Italienische Übersetzung hinzugefügt. Dank dafür an Andrea Brancaleoni (https://github.com/thypon).</change>
         <change>Bugfix: die App hat zuvor beim Drehen des Bildschirmes manchmal den Übungsfortschritt vergessen.</change>        
     </release>    
-    <release version="0.5.2" versioncode="20" summary="Neues Icon" date="5/11/2013">
+    <release version="0.5.2" versioncode="20" summary="Neues Icon" date="11/5/2013">
         <change>Die App hat ein neues Icon bekommen.</change>
     </release>    
-    <release version="0.5.1" versioncode="19" summary="Gewählte Übungen hervorheben und Bugfixes" date="20/10/2013">
+    <release version="0.5.1" versioncode="19" summary="Gewählte Übungen hervorheben und Bugfixes" date="10/20/2013">
         <change>Wenn ein neues Workout erstellt wird, werden die gewählten Übungen nun hervorgehoben.</change>
         <change>Die App speichert jetzt, wie weit in der Liste mit Übungen gescrollt wurde (wenn man beim Workout erstellen von der Übungs-Detail-Ansicht zurückkehrt)</change>
         <change>Fehlende Übersetzungen hinzugefügt</change>
     </release> 
-    <release version="0.5" versioncode="18" summary="Neue Übungen und Design Änderung" date="13/10/2013">
+    <release version="0.5" versioncode="18" summary="Neue Übungen und Design Änderung" date="10/13/2013">
         <change>33 neue Übungen hinzugefügt</change>
         <change>Design zu Holo-Style geändert</change>
         <change>Download von neuen Übungen von wger.de (bisher nur Übungen ohne Bilder verfügbar)</change>

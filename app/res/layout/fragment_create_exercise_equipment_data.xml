@@ -31,10 +31,11 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/spinner_equipment"
+                android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/layout_stroke1"
+                android:layout_alignRight="@+id/layout_stroke1"
                 android:layout_below="@+id/layout_stroke1"
                 android:padding="10dp" />
 
@@ -82,7 +83,7 @@
                 android:textColor="@color/released_button_background" />
 
             <ListView
-                android:id="@+id/listview_ex_equipment"
+                android:id="@+id/listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/LinearLayout01"
