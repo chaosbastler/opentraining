@@ -46,6 +46,8 @@ public class OpenTrainingSyncService extends IntentService {
 	public static final int STATUS_RUNNING_DOWNLOAD_MUSCLE_FILES = 3;	
 	/** Indicates that the query is running */
 	public static final int STATUS_RUNNING_DOWNLOAD_EQUIPMENT_FILES = 4;
+	/** Indicates that the query is running */
+	public static final int STATUS_RUNNING_DOWNLOAD_LICENSE_FILES = 5;	
 	/** Indicates that the query is running and exercises are parsed */
 	public static final int STATUS_RUNNING_CHECKING_EXERCISES = 8;
 	/** Indicates that the query is running and images are downloaded */
@@ -68,6 +70,9 @@ public class OpenTrainingSyncService extends IntentService {
 	public static final String MUSCLE_REQUEST_PATH = "/api/v1/muscle/";
 	/** The path for getting the equipment as JSON */
 	public static final String EQUIPMENT_REQUEST_PATH = "/api/v1/equipment/";
+	/** The path for getting the licenses as JSON */
+	public static final String LICENSE_REQUEST_PATH = "/api/v1/license/";	
+	
 	
 	/** The used {@link RestClient}. */
 	private RestClient mClient;
@@ -151,7 +156,12 @@ public class OpenTrainingSyncService extends IntentService {
 		String musclesAsJSON = mClient.get(MUSCLE_REQUEST_PATH);
 		Log.v(TAG, "musclesAsJSON: " + musclesAsJSON);
 
-
+		// get licenses from server
+		mReceiver.send(STATUS_RUNNING_DOWNLOAD_LICENSE_FILES, Bundle.EMPTY);
+		String licenseAsJSON = mClient.get(LICENSE_REQUEST_PATH);
+		Log.v(TAG, "licenseAsJSON: " + licenseAsJSON);
+		
+		
 		// get equipment from server
 		mReceiver.send(STATUS_RUNNING_DOWNLOAD_EQUIPMENT_FILES, Bundle.EMPTY);
 		String equipmentAsJSON = mClient.get(EQUIPMENT_REQUEST_PATH);
@@ -160,7 +170,7 @@ public class OpenTrainingSyncService extends IntentService {
 
 		// parse exercises, languages and muscles
 		mReceiver.send(STATUS_RUNNING_CHECKING_EXERCISES, Bundle.EMPTY);
-		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON, equipmentAsJSON,  dataProvider);
+		WgerJSONParser wgerParser = new WgerJSONParser(exercisesAsJSON, languagesAsJSON, musclesAsJSON, equipmentAsJSON, licenseAsJSON, dataProvider);
 		
 		ArrayList<ExerciseType.Builder> exerciseBuilderList = wgerParser.getNewExercisesBuilder();
 

@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ public class WgerJSONParser {
 	private IDataProvider mDataProvider;
 	
 	/** Tag for logging */
-	private static final String TAG = "ExerciseJSONParser";
+	private static final String TAG = "WgerJSONParser";
 	
 	/**
 	 * Constructor. Will start download immediately.
@@ -69,13 +69,16 @@ public class WgerJSONParser {
 	 * @param dataProvider
 	 * @throws JSONException
 	 */
-	public WgerJSONParser(String exerciseJSONString, String languageJSONString, String muscleJSONString, String equipmentJSONString, IDataProvider dataProvider) throws JSONException{
+	public WgerJSONParser(String exerciseJSONString, String languageJSONString, String muscleJSONString, String equipmentJSONString, String licenseJSONString, IDataProvider dataProvider) throws JSONException{
 		mDataProvider = dataProvider;
 		
 		// parse languages
 		SparseArray<Locale> localeSparseArray = parseLanguages(languageJSONString);
 		// parse muscles
 		SparseArray<Muscle> muscleSparseArray = parseMuscles(muscleJSONString);
+		// parse licenses
+		SparseArray<String> licenseSparseArray = parseLicenses(licenseJSONString);
+
 		// parse equipment (not required until REST-API supports this)
 		// SparseArray<SportsEquipment> equipmentSparseArray = parseEquipment(equipmentJSONString);
 		
@@ -136,6 +139,16 @@ public class WgerJSONParser {
 				muscleSet.add(muscle);
 			}
 			builder.activatedMuscles(muscleSet);
+			
+			// licenses
+			// the json-language String might look like this:
+			// '/api/v1/license/1/'
+			// only the number at the end is required
+			int licenseNumber = getLastNumberOfJson(jsonExercise.getString("license"));
+			String license = licenseSparseArray.get(licenseNumber);
+			String license_author = jsonExercise.getString("license_author");
+			Log.v(TAG, "license=" + license + " license_author=" + license_author);
+			//TODO: add license + license_author to exercise data model
 			
 			// equipment
 			// not yet supported by REST-API
@@ -202,6 +215,10 @@ public class WgerJSONParser {
 		return parse(musclesJSONString, Muscle.class);
 	}
 	
+	private SparseArray<String> parseLicenses(String licenseJSONString) throws JSONException{
+		return parse(licenseJSONString, String.class);
+	}
+	
 	private SparseArray<SportsEquipment> parseEquipment(String equipmentJSONString) throws JSONException{
 		return parse(equipmentJSONString, SportsEquipment.class);
 	}
@@ -245,8 +262,16 @@ public class WgerJSONParser {
 				String short_name = singleObject.getString("short_name");
 				parsedObject = new Locale(short_name);	
 				
-				if(parsedObject == null)
-					Log.e(TAG, "Could not find Locale.class: " + short_name);
+				if(short_name == null || short_name.equals(""))
+					Log.e(TAG, "Error, no short_name=" + short_name);
+				
+			}else if(c.equals(String.class)){
+				// handle licenses
+				String short_name = singleObject.getString("short_name");
+				parsedObject = short_name;	
+				
+				if(short_name == null || short_name.equals(""))
+					Log.e(TAG, "Error, no short_name=" + short_name);
 				
 			}else{
 				throw new IllegalStateException("parse(String, Class<T>) cannot be applied for class: " + c.toString());

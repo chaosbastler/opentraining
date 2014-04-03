@@ -81,13 +81,15 @@ public class WgerImageDownloader {
 				
 				
 				// parse JSON and get license
-				int licenseID = imageJSONObject.getInt("license");
+				//String licensePath = imageJSONObject.getString("license");
+				
 				String license = "Unknown";
-				if (licenseID == 1) {
-					license = "CC-BY-SA 3.0";
-				}
+				//if (licenseID == 1) {
+				//	license = "CC-BY-SA 3.0";
+				//}
 				// missing in api: get license like:
 				// String license = mClient.get(licenseResource);
+				
 				String author = imageJSONObject.getString("license_author");
 				String licenseText = "License: " + license + ", Author: " + author;
 
