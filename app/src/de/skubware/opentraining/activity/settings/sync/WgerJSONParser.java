@@ -51,8 +51,9 @@ public class WgerJSONParser {
 	/* The exercise builder objects, for modifying the exercises after parsing (e.g. changing image) */
 	private List<ExerciseType.Builder> mNewExerciseBuilderList = new ArrayList<ExerciseType.Builder>();
 
-	
-	private IDataProvider mDataProvider;
+	//TODO Find better solution, remove static methods and fields
+	// add new class that parses licenses
+	private static IDataProvider mDataProvider;
 	
 	/** Tag for logging */
 	private static final String TAG = "WgerJSONParser";
@@ -187,7 +188,7 @@ public class WgerJSONParser {
 	 * 
 	 * @return the last number of a JSON-String
 	 */
-	private int getLastNumberOfJson(String jsonString){
+	public static int getLastNumberOfJson(String jsonString){
 		String[] split = jsonString.split("/");
 		return Integer.parseInt(split[split.length - 1]);
 	}
@@ -215,7 +216,7 @@ public class WgerJSONParser {
 		return parse(musclesJSONString, Muscle.class);
 	}
 	
-	private SparseArray<String> parseLicenses(String licenseJSONString) throws JSONException{
+	public static SparseArray<String> parseLicenses(String licenseJSONString) throws JSONException{
 		return parse(licenseJSONString, String.class);
 	}
 	
@@ -226,7 +227,7 @@ public class WgerJSONParser {
 	/**
 	 * A generic parsing method for parsing JSON to SportsEquipment, Muscle or Locale.
 	 */
-	private <T> SparseArray<T> parse(String jsonString, Class<T> c) throws JSONException{
+	private static <T> SparseArray<T> parse(String jsonString, Class<T> c) throws JSONException{
 		JSONObject mainObject = new JSONObject(jsonString);
 		Log.d(TAG, "jsonString: " + mainObject.toString());
 		JSONArray mainArray = mainObject.getJSONArray("objects");

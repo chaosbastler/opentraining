@@ -176,7 +176,7 @@ public class OpenTrainingSyncService extends IntentService {
 
 		// get images from server
 		mReceiver.send(STATUS_RUNNING_DOWNLOADING_IMAGES, Bundle.EMPTY);
-		WgerImageDownloader imageDownloader = new WgerImageDownloader(getApplicationContext(), mClient);
+		WgerImageDownloader imageDownloader = new WgerImageDownloader(licenseAsJSON, getApplicationContext(), mClient);
 		ArrayList<ExerciseType> newExerciseList = imageDownloader.downloadImages(exerciseBuilderList);
 
 		
