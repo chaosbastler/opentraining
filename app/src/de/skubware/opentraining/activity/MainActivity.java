@@ -23,6 +23,7 @@ package de.skubware.opentraining.activity;
 import java.util.List;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity;
 import de.skubware.opentraining.activity.create_workout.ExerciseTypeListActivity;
 import de.skubware.opentraining.activity.manage_workouts.WorkoutListActivity;
 import de.skubware.opentraining.activity.settings.SettingsActivity;
@@ -80,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
 			new DisclaimerDialog(this);
 		}
 
+		startActivity(new Intent(MainActivity.this, CreateExerciseActivity.class));
 		
 	}
 	

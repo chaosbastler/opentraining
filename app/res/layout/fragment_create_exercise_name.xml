@@ -62,7 +62,7 @@
 
             </RelativeLayout>
 
-            <Spinner
+            <de.skubware.opentraining.activity.create_exercise.CustomSpinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
