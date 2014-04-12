@@ -145,11 +145,15 @@ public class WgerJSONParser {
 			// the json-language String might look like this:
 			// '/api/v1/license/1/'
 			// only the number at the end is required
-			int licenseNumber = getLastNumberOfJson(jsonExercise.getString("license"));
-			String license = licenseSparseArray.get(licenseNumber);
-			String license_author = jsonExercise.getString("license_author");
-			Log.v(TAG, "license=" + license + " license_author=" + license_author);
-			//TODO: add license + license_author to exercise data model
+			
+			if(jsonExercise.has("license")){
+				int licenseNumber = getLastNumberOfJson(jsonExercise.getString("license"));
+				String license = licenseSparseArray.get(licenseNumber);
+				String license_author = jsonExercise.getString("license_author");
+				Log.v(TAG, "license=" + license + " license_author=" + license_author);
+				//TODO: add license + license_author to exercise data model
+			}
+			
 			
 			// equipment
 			// not yet supported by REST-API
