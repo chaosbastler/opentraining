@@ -5,13 +5,13 @@
         android:id="@+id/menuitem_create_exercise_info"
         android:icon="@drawable/icon_about"
         android:orderInCategory="100"
-        android:title="Info"
-        yourapp:showAsAction="always"/>
+        android:title="@string/info"
+        android:showAsAction="never"/>
     <item
         android:id="@+id/menuitem_save_exercise"
         android:icon="@drawable/icon_save"
         android:orderInCategory="100"
-        android:title="Save exercise"
-        yourapp:showAsAction="always"/>
+        android:title="@string/save_exercise"
+        android:showAsAction="always"/>
 
 </menu>

@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 package de.skubware.opentraining.activity.create_exercise;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 import de.skubware.opentraining.R;
@@ -28,10 +29,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ExerciseImageListAdapter extends BaseAdapter {
+public class ExerciseImageListAdapter extends BaseAdapter{
 
 	private Context mContext;
 	private static LayoutInflater mInflater = null;
@@ -43,7 +49,6 @@ public class ExerciseImageListAdapter extends BaseAdapter {
 		mContext = context;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-
 		mNameImageMap = nameImageMap;
 	}
 
@@ -51,11 +56,13 @@ public class ExerciseImageListAdapter extends BaseAdapter {
 		return mNameImageMap.values().size();
 	}
 
+	@Override
 	public Object getItem(int position) {
-		if (position > mNameImageMap.size() - 1)
-			return null;
-
-		return mNameImageMap.get(position);
+		return mNameImageMap.get(getImageName(position));
+	}
+	
+	public Bitmap getBitmap(int position){
+		return (Bitmap) getItem(position);
 	}
 
 	public long getItemId(int position) {
@@ -67,9 +74,18 @@ public class ExerciseImageListAdapter extends BaseAdapter {
 	}
 
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		View vi = convertView;
+		//View vi = convertView;
+		View vi = mInflater.inflate(de.skubware.opentraining.R.layout.exercise_image_list_row, null);
+		
+		ImageView imageView = (ImageView) vi.findViewById(R.id.exercise_image);
+		imageView.setImageBitmap(getBitmap(position));
+		imageView.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				ShowImageDialog.showImageDialog(getBitmap(position), mContext);
+			}
+		});
 
-		vi = mInflater.inflate(R.layout.exercise_image_list_row, null);
 
 		return vi;
 
@@ -82,6 +98,6 @@ public class ExerciseImageListAdapter extends BaseAdapter {
 	public void remove(int position){
 		mNameImageMap.remove(getImageName(position));
 	}
-	
+
 	
 }

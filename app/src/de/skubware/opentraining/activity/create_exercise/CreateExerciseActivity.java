@@ -22,7 +22,6 @@ package de.skubware.opentraining.activity.create_exercise;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,7 +31,6 @@ import java.util.TreeSet;
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -90,6 +88,8 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 	/** Static int for onActivityResult */
 	static final int TAKE_PICTURE = 447;
 	
+	/** Static int for onActivityResult */
+	static final int CHOSE_PICTURE = 555;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

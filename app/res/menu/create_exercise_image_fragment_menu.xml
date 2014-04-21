@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/menu_item_take_photo"
+        android:icon="@drawable/ic_action_camera"
+        android:title="@string/take_photo"
+        yourapp:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_item_chose_photo"
+        android:icon="@drawable/ic_action_picture"
+        android:title="@string/chose_photo"
+        yourapp:showAsAction="always"/>
+
+</menu>

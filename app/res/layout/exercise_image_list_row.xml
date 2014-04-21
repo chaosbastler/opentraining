@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/wrapper"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/row_layout_0" >
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:id="@+id/exercise_image"

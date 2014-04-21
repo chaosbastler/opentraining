@@ -11,7 +11,9 @@
     <!-- Menu of CreateExerciseActivity -->
     <string name="text_about_creating_exercise">You have to provide an exercise name, everything else is optional.</string>
     <string name="title_about_creating_exercise">About creating exercises</string>
-
+    <string name="info">Info</string>
+    <string name="save_exercise">Save exercise</string>
+    
     
     <!-- NameFragment -->
     <string name="title_name_fragment">Name</string>
@@ -26,8 +28,13 @@
     
     <!-- ImageFragment -->
     <string name="title_image_fragment">Images</string>
+    <string name="images">Images</string>
     <string name="did_not_provide_image">You did not provide an image.</string>
-
+    <string name="take_photo">Take photo</string>
+    <string name="chose_photo">Chose photo</string>
+    <string name="no_images_there">There are no images</string>
+    <string name="error_did_not_return_image">Error, no image has been returend</string>
+    
     <!-- SpinnerDataFragment -->    
     <string name="swipe_to_dismiss_advise">If you want to remove a list item, just swipe it away</string>
     <string name="object_already_in_list">%s has already been added.</string>
