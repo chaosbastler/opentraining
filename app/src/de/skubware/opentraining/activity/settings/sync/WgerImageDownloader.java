@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.IDataProvider;
@@ -50,10 +51,12 @@ public class WgerImageDownloader {
 	/** Tag for logging */
 	private static final String TAG = "WgerImageDownloader";
 
+	private String mLicenseJSONString;
 	private Context mContext;
 	private RestClient mClient;
 
-	public WgerImageDownloader(Context context, RestClient client) {
+	public WgerImageDownloader(String licenseJSONString, Context context, RestClient client) {
+		mLicenseJSONString = licenseJSONString;
 		mContext = context;
 		mClient = client;
 	}
@@ -75,22 +78,23 @@ public class WgerImageDownloader {
 			ExerciseType ex = exBuilder.build();
 			for (File img : ex.getImagePaths()) {
 				String imageAsJSON = mClient.get(img.getPath() + "/");
-				// parse JSON and get name
+				
+				// get image name
 				JSONObject imageJSONObject = new JSONObject(imageAsJSON);
 				String imageDownloadPath = imageJSONObject.getString("image");
 				
 				
 				// parse JSON and get license
-				int licenseID = imageJSONObject.getInt("license");
-				String license = "Unknown";
-				if (licenseID == 1) {
-					license = "CC-BY-SA 3.0";
-				}
-				// missing in api: get license like:
-				// String license = mClient.get(licenseResource);
-				String author = imageJSONObject.getString("license_author");
-				String licenseText = "License: " + license + ", Author: " + author;
+				SparseArray<String> licenseSparseArray = WgerJSONParser.parseLicenses(mLicenseJSONString);
 
+				int licenseNumber = WgerJSONParser.getLastNumberOfJson(imageJSONObject.getString("license"));
+				String license = licenseSparseArray.get(licenseNumber);
+				String author = imageJSONObject.getString("license_author");
+				Log.v(TAG, "license=" + license + " license_author=" + author);
+				
+				//String licensePath = imageJSONObject.getString("license");
+
+				String licenseText = "License: " + license + ", Author: " + author;
 				
 				// skip exercise (and image download) if there's already one with the same name
 				DataHelper dataHelper = new DataHelper(mContext);

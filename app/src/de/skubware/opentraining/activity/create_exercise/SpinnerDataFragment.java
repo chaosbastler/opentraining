@@ -30,7 +30,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.Translatable;
@@ -47,7 +46,7 @@ import de.skubware.opentraining.basic.Translatable;
 public abstract class SpinnerDataFragment<T extends Translatable> extends SimpleDataFragment<T> implements OnItemSelectedListener{
 
 	protected ArrayAdapter<T> mSpinnerAdapter;
-	protected Spinner mSpinner;
+	protected CustomSpinner mSpinner;
 	
 	protected List mSpinnerDataList;
 	
@@ -65,6 +64,8 @@ public abstract class SpinnerDataFragment<T extends Translatable> extends Simple
 		mLayoutID = layoutID;
 	}
 
+	
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout = inflater.inflate(mLayoutID, container, false);
@@ -75,15 +76,16 @@ public abstract class SpinnerDataFragment<T extends Translatable> extends Simple
 		ArrayAdapter<T> mSpinnerAdapter = new ArrayAdapter<T>(getActivity(), android.R.layout.simple_spinner_dropdown_item, android.R.id.text1, mSpinnerDataList);
 	
 		
-		mSpinner = (Spinner) layout.findViewById(R.id.spinner);
+		mSpinner = (CustomSpinner) layout.findViewById(R.id.spinner);
 		mSpinner.setAdapter(mSpinnerAdapter);
+
 		// if you dont post a runnable, the first item will be added to the mListAdapter on activity start
 		mSpinner.post(new Runnable() {
 			public void run() {
-				mSpinner.setOnItemSelectedListener(SpinnerDataFragment.this);
+				mSpinner.setOnItemSelectedEvenIfUnchangedListener(SpinnerDataFragment.this);
 			}
 		});
-		
+
 		
 		return layout;
 	}
