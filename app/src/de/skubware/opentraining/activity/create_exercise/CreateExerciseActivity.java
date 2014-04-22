@@ -31,6 +31,7 @@ import java.util.TreeSet;
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -242,13 +243,11 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getChosenObjects());
 
 		// save image
-		Uri image = imageFragment.getImage();
+		Map<String,Bitmap> imageMap = imageFragment.getImages();
 		List<File> imageList = new ArrayList<File>();
-
-		if(image != null){
-			DataHelper dataHelper = new DataHelper(this);
-			String image_name = dataHelper.copyImageToCustomImageFolder(image);
-			imageList.add(new File(image_name));
+		
+		for(String imgName:imageMap.keySet()){
+			imageList.add(new File(imgName));
 		}
 
 		

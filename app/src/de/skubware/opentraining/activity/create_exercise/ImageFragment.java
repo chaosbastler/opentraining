@@ -231,6 +231,14 @@ public class ImageFragment extends Fragment{
 		           
 		        break;
 		case CreateExerciseActivity.TAKE_PICTURE:
+			if(mTempImageUri == null){
+				Toast.makeText(getActivity(), getString(R.string.error_did_not_return_image),
+						Toast.LENGTH_SHORT).show();
+				
+				Log.e(TAG, getString(R.string.error_did_not_return_image));
+				return;
+			}
+			
 			bitmap = BitmapFactory.decodeFile(mTempImageUri.getPath());
 			break;
 		default: 
@@ -272,21 +280,20 @@ public class ImageFragment extends Fragment{
 		// continue processing bitmap
 		String imageName = (new File(mTempImageUri.getPath())).getName();
 		Log.v(TAG, "Added image " + imageName);
-		this.mNameImageMap.put(imageName, bitmap);
+		mNameImageMap.put(imageName, bitmap);
 		mListAdapter.notifyDataSetChanged();
 		
+		mTempImageUri = null;
 		//Toast.makeText(getActivity(), selectedImage.toString(),
 		//		Toast.LENGTH_LONG).show();
 		
 	}
-
-
 	
-	
-	public Uri getImage(){
-		return mTempImageUri;
+	public Map<String,Bitmap> getImages(){
+		return mNameImageMap;
 	}
 
 
+	
 
 }

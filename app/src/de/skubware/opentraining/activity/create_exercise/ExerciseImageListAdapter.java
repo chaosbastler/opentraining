@@ -27,23 +27,29 @@ import java.util.Map;
 import de.skubware.opentraining.R;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+
 
 public class ExerciseImageListAdapter extends BaseAdapter{
+	/** Tag for logging*/
+	private final String TAG = "ExerciseImageListAdapter";
 
 	private Context mContext;
 	private static LayoutInflater mInflater = null;
 
-	private Map<String,Bitmap> mNameImageMap= new HashMap<String,Bitmap>();
+	private Map<String,Bitmap> mNameImageMap = new HashMap<String,Bitmap>();
 
+	// our ViewHolder, caches imageView
+	static class ViewHolderItem {
+	    ImageView imageViewItem;
+	}
 
 	public ExerciseImageListAdapter(Context context, Map<String,Bitmap> nameImageMap) {
 		mContext = context;
@@ -74,20 +80,45 @@ public class ExerciseImageListAdapter extends BaseAdapter{
 	}
 
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		//View vi = convertView;
-		View vi = mInflater.inflate(de.skubware.opentraining.R.layout.exercise_image_list_row, null);
 		
-		ImageView imageView = (ImageView) vi.findViewById(R.id.exercise_image);
-		imageView.setImageBitmap(getBitmap(position));
-		imageView.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				ShowImageDialog.showImageDialog(getBitmap(position), mContext);
-			}
-		});
+		ViewHolderItem viewHolder;
+		
+		if(convertView==null){
+	        // inflate the layout
+	        convertView = mInflater.inflate(de.skubware.opentraining.R.layout.exercise_image_list_row, null);
 
-
-		return vi;
+	         
+	        // set up the ViewHolder
+	        viewHolder = new ViewHolderItem();
+	        viewHolder.imageViewItem = (ImageView) convertView.findViewById(R.id.exercise_image);
+	         
+	        // store the holder with the view.
+	        convertView.setTag(viewHolder);
+	         
+	    }else{
+	        // avoided calling findViewById() on resource each time, use the viewHolder
+	        viewHolder = (ViewHolderItem) convertView.getTag();
+	    }
+	     
+	    Bitmap objectItem = this.getBitmap(position);
+	     
+	    // assign values if the object is not null
+	    if(objectItem != null) {
+	        // get the TextView from the ViewHolder and then set the text (item name) and tag (item ID) values
+	        viewHolder.imageViewItem.setImageBitmap(getBitmap(position));
+	        viewHolder.imageViewItem.setTag(getImageName(position));
+	        viewHolder.imageViewItem.setOnClickListener(new OnClickListener(){
+	        	@Override
+	        	public void onClick(View v) {
+	        		ShowImageDialog.showImageDialog(getBitmap(position), mContext);
+	        	}
+	        });
+	    }else{
+	    	Log.e(TAG, "No bitmap found for position: " + position);
+	    }
+	     
+	    return convertView;
+		
 
 	}
 
