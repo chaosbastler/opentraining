@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,10 +28,8 @@ import android.util.Log;
 
 /**
  * Class for representing the license of an image. Currently not used, will be
- * required in future(when there are more exercises with images from different
+ * required in future (when there are more exercises with images from different
  * authors).
- * 
- * @author Christian Skubich
  */
 public class License implements Serializable {
 	/** Default serialVersionUID */
@@ -46,23 +44,34 @@ public class License implements Serializable {
 	 */
 	public enum LicenseType {
 		/** Similar to public domain */
-		CC0("http://creativecommons.org/publicdomain/zero/1.0/"),
+		CC0("http://creativecommons.org/publicdomain/zero/1.0/", "CC0"),
 		/** Attribution to author required */
-		CC_BY_UNPORTED("http://creativecommons.org/licenses/by/3.0/");
+		CC_BY_UNPORTED("http://creativecommons.org/licenses/by/3.0/", "CC-BY-3.0"),
+		UNKNOWN("http://http://creativecommons.org/", "Unknown")
+		;
 
 		/** URL to the license */
 		URL urlToLicense;
+		
+		String mShortName;
 
 		/**
 		 * 
 		 * @param url
 		 */
-		LicenseType(String url) {
+		LicenseType(String url, String short_name) {
+			mShortName = short_name;
+					
 			try {
 				this.urlToLicense = new URL(url);
 			} catch (MalformedURLException e) {
 				Log.e(TAG, "MalformedURL: " + url, e);
 			}
+		}
+		
+		@Override
+		public String toString(){
+			return mShortName;
 		}
 	}
 
@@ -74,10 +83,11 @@ public class License implements Serializable {
 
 	/**
 	 * Default constructor without parameters. LicenseType is set to
-	 * {@link LicenseType#CC0}, author may remain empty.
+	 * {@link LicenseType#UNKNOWN}, author may remain empty.
 	 */
 	public License() {
-		this.type = LicenseType.CC0;
+		this.type = LicenseType.UNKNOWN;
+		this.author = "Unknown";
 	}
 
 	/**

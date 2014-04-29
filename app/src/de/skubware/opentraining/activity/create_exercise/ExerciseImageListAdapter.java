@@ -20,11 +20,12 @@
 
 package de.skubware.opentraining.activity.create_exercise;
 
-import java.util.HashMap;
-
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.basic.License;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -44,31 +45,38 @@ public class ExerciseImageListAdapter extends BaseAdapter{
 	private Context mContext;
 	private static LayoutInflater mInflater = null;
 
-	private Map<String,Bitmap> mNameImageMap = new HashMap<String,Bitmap>();
-
-	// our ViewHolder, caches imageView
+	private List<ImageData> mImageList = new ArrayList<ImageData>();
+	
+	/** Container-class for the data that belongs to an image */
+	static class ImageData {
+		Bitmap bitmap;
+		String name;
+		License imageLicense;
+	}
+	
+	// ViewHolder, caches imageView
 	static class ViewHolderItem {
 	    ImageView imageViewItem;
 	}
 
-	public ExerciseImageListAdapter(Context context, Map<String,Bitmap> nameImageMap) {
+	public ExerciseImageListAdapter(Context context, List<ImageData> imageList) {
 		mContext = context;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		mNameImageMap = nameImageMap;
+		mImageList = imageList;
 	}
 
 	public int getCount() {
-		return mNameImageMap.values().size();
+		return mImageList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return mNameImageMap.get(getImageName(position));
+		return mImageList.get(position);
 	}
 	
 	public Bitmap getBitmap(int position){
-		return (Bitmap) getItem(position);
+		return ((ImageData) getItem(position)).bitmap;
 	}
 
 	public long getItemId(int position) {
@@ -76,7 +84,7 @@ public class ExerciseImageListAdapter extends BaseAdapter{
 	}
 	
 	public String getImageName(int position){
-		return (String) mNameImageMap.keySet().toArray()[position];
+		return (String) mImageList.get(position).name;
 	}
 
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -110,24 +118,22 @@ public class ExerciseImageListAdapter extends BaseAdapter{
 	        viewHolder.imageViewItem.setOnClickListener(new OnClickListener(){
 	        	@Override
 	        	public void onClick(View v) {
-	        		ShowImageDialog.showImageDialog(getBitmap(position), mContext);
+	        		new EditImageMetadataDialog((Activity) mContext, position, ExerciseImageListAdapter.this);
 	        	}
 	        });
+	        	        
 	    }else{
 	    	Log.e(TAG, "No bitmap found for position: " + position);
 	    }
 	     
 	    return convertView;
-		
-
 	}
 
-	public void remove(String name) {
-		mNameImageMap.remove(name);
-	}	
+    	
 	
 	public void remove(int position){
-		mNameImageMap.remove(getImageName(position));
+		mImageList.remove(position);
+		notifyDataSetChanged();
 	}
 
 	

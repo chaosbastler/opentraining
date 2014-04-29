@@ -34,6 +34,8 @@
     <string name="chose_photo">Chose photo</string>
     <string name="no_images_there">There are no images</string>
     <string name="error_did_not_return_image">Error, no image has been returend</string>
+    <string name="edit_image_metadata">Edit image metadata</string>
+    <string name="delete_image">Delete image</string>
     
     <!-- SpinnerDataFragment -->    
     <string name="swipe_to_dismiss_advise">If you want to remove a list item, just swipe it away</string>

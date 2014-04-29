@@ -31,8 +31,6 @@ import java.util.TreeSet;
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -49,10 +47,10 @@ import android.view.MenuItem.OnMenuItemClickListener;
 
 
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.create_exercise.ExerciseImageListAdapter.ImageData;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
-import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import android.widget.Toast;
 
@@ -243,11 +241,11 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		SortedSet<SportsEquipment> equipmentList = new TreeSet<SportsEquipment>(equipmentDataFragment.getChosenObjects());
 
 		// save image
-		Map<String,Bitmap> imageMap = imageFragment.getImages();
+		List<ImageData> imageDataList = imageFragment.getImages();
 		List<File> imageList = new ArrayList<File>();
 		
-		for(String imgName:imageMap.keySet()){
-			imageList.add(new File(imgName));
+		for(ImageData image:imageDataList){
+			imageList.add(new File(image.name));
 		}
 
 		

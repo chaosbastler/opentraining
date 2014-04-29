@@ -25,13 +25,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.List;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -49,11 +47,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.activity.start_training.SwipeDismissListViewTouchListener;
+import de.skubware.opentraining.activity.create_exercise.ExerciseImageListAdapter.ImageData;
+import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.db.IDataProvider;
 
 public class ImageFragment extends Fragment{
@@ -66,7 +64,7 @@ public class ImageFragment extends Fragment{
 
 	private ListView mImageListView;
 	private ExerciseImageListAdapter mListAdapter;
-	private Map<String, Bitmap> mNameImageMap = new HashMap<String, Bitmap>();
+	private List<ImageData> mImageList = new ArrayList<ImageData>();
 	
 	public ImageFragment() {
 	}
@@ -76,6 +74,24 @@ public class ImageFragment extends Fragment{
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+    
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View layout = inflater.inflate(R.layout.fragment_create_exercise_image_fragment, container, false);
+
+
+		mImageListView = (ListView) layout.findViewById(R.id.listview_exercise_images);
+		
+		// set list adapter and empty list element
+		mImageListView.setEmptyView(layout.findViewById(android.R.id.empty));
+		mListAdapter = new ExerciseImageListAdapter(getActivity(), mImageList);
+		mImageListView.setAdapter(mListAdapter);		
+				
+		return layout;
+	}
+	
     
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -103,7 +119,8 @@ public class ImageFragment extends Fragment{
 		});
 	}
 	
-	String mCurrentPhotoPath;
+	
+    
 
 	/**
 	 * Generates a unique filename and creates an empty file to use.
@@ -139,8 +156,6 @@ public class ImageFragment extends Fragment{
 	        customImageFolder      /* directory */
 	    );
 
-	    // Save a file: path for use with ACTION_VIEW intents
-	    mCurrentPhotoPath = "file:" + image.getAbsolutePath();
 	    return Uri.fromFile(image);
 	}
 	
@@ -161,39 +176,7 @@ public class ImageFragment extends Fragment{
 			Log.e(TAG, "No camera activity for handling camera intent");
 		}
 	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View layout = inflater.inflate(R.layout.fragment_create_exercise_image_fragment, container, false);
 
-
-		mImageListView = (ListView) layout.findViewById(R.id.listview_exercise_images);
-		
-		// set list adapter and empty list element
-		mImageListView.setEmptyView(layout.findViewById(android.R.id.empty));
-		mListAdapter = new ExerciseImageListAdapter(getActivity(), mNameImageMap);
-		mImageListView.setAdapter(mListAdapter);
-		
-		
-		SwipeDismissListViewTouchListener touchListener = new SwipeDismissListViewTouchListener(
-				mImageListView,
-				new SwipeDismissListViewTouchListener.OnDismissCallback() {
-					@Override
-					public void onDismiss(ListView listView,
-							int[] reverseSortedPositions) {
-						for (int position : reverseSortedPositions) {
-							mListAdapter.remove(position);
-						}
-						mListAdapter.notifyDataSetChanged();
-					}
-				});
-		mImageListView.setOnTouchListener(touchListener);	
-		
-		
-		return layout;
-	}
-	
 
 	
 
@@ -280,7 +263,13 @@ public class ImageFragment extends Fragment{
 		// continue processing bitmap
 		String imageName = (new File(mTempImageUri.getPath())).getName();
 		Log.v(TAG, "Added image " + imageName);
-		mNameImageMap.put(imageName, bitmap);
+		
+		ImageData image = new ImageData();
+		image.name = imageName;
+		image.bitmap = bitmap;
+		image.imageLicense = new License();
+		mImageList.add(image);
+		
 		mListAdapter.notifyDataSetChanged();
 		
 		mTempImageUri = null;
@@ -289,8 +278,8 @@ public class ImageFragment extends Fragment{
 		
 	}
 	
-	public Map<String,Bitmap> getImages(){
-		return mNameImageMap;
+	public List<ImageData> getImages(){
+		return Collections.unmodifiableList(mImageList);
 	}
 
 

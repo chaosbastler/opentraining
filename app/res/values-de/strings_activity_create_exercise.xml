@@ -33,7 +33,9 @@
     <string name="chose_photo">Foto wählen</string>
     <string name="no_images_there">Keine Bilder vorhanden</string>
     <string name="error_did_not_return_image">Fehler: es wurde kein Bild zurückgegeben</string>
-    
+    <string name="edit_image_metadata">Bild-Metadaten bearbeiten</string>
+    <string name="delete_image">Bild entfernen</string>
+
     <!-- SpinnerDataFragment -->    
     <string name="swipe_to_dismiss_advise">Listenelemente können durch swipen entfernt werden</string>
     <string name="object_already_in_list">%s wurde bereits hinzugefügt</string>

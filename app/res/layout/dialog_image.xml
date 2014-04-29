@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="5dp" >
 
-    <ImageView
-        android:id="@+id/thumbnail_imageview"
+    <EditText
+        android:id="@+id/edit_text_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/license_spinner"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/EditText01"
+        android:layout_alignBottom="@+id/EditText01"
+        android:layout_alignParentLeft="true"
+        android:text="Author:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/license_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edit_text_author"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/TextView01" />
+
+    <TextView
+        android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignTop="@+id/license_spinner"
+        android:text="@string/license"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
