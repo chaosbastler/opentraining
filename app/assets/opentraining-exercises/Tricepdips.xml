@@ -4,8 +4,8 @@
   <Locale language="it" name="Dips (con dip station)"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Dip Barren"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-1.gif"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2-1.gif"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2-2.gif"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Tricep-dips-2.gif"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Tricep-dips-1.gif"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Tricep-dips-2-1.gif"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Tricep-dips-2-2.gif"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Tricep-dips-2.gif"/>
 </ExerciseType>

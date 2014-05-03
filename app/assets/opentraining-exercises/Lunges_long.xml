@@ -5,6 +5,6 @@
   <SportsEquipment name="Langhantel"/>
   <Muscle name="Po" level="3"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lunges-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Lunges-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Lunges-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Lunges-2.png"/>
 </ExerciseType>

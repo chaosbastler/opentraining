@@ -4,6 +4,6 @@
   <Locale language="it" name="Sollevamento Gambe"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>
   <SportsEquipment name="Keine"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Leg-raises-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Leg-raises-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Leg-raises-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Leg-raises-2.png"/>
 </ExerciseType>

@@ -4,6 +4,6 @@
   <Locale language="it" name="Flessioni (piedi su palla)"/>
   <Muscle name="Brustmuskel" level="3"/>
   <SportsEquipment name="Swiss Ball"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Push-up-with-feet-on-an-exercise-ball-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Push-up-with-feet-on-an-exercise-ball-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Push-up-with-feet-on-an-exercise-ball-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Push-up-with-feet-on-an-exercise-ball-2.png"/>
 </ExerciseType>

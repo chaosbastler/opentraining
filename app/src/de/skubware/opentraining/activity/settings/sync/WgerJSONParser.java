@@ -37,6 +37,8 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.License;
+import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.IDataProvider;
@@ -52,7 +54,6 @@ public class WgerJSONParser {
 	private List<ExerciseType.Builder> mNewExerciseBuilderList = new ArrayList<ExerciseType.Builder>();
 
 	//TODO Find better solution, remove static methods and fields
-	// add new class that parses licenses
 	private static IDataProvider mDataProvider;
 	
 	/** Tag for logging */
@@ -78,7 +79,7 @@ public class WgerJSONParser {
 		// parse muscles
 		SparseArray<Muscle> muscleSparseArray = parseMuscles(muscleJSONString);
 		// parse licenses
-		SparseArray<String> licenseSparseArray = parseLicenses(licenseJSONString);
+		SparseArray<LicenseType> licenseSparseArray = parseLicenses(licenseJSONString);
 
 		// parse equipment (not required until REST-API supports this)
 		// SparseArray<SportsEquipment> equipmentSparseArray = parseEquipment(equipmentJSONString);
@@ -148,10 +149,9 @@ public class WgerJSONParser {
 			
 			if(jsonExercise.has("license")){
 				int licenseNumber = getLastNumberOfJson(jsonExercise.getString("license"));
-				String license = licenseSparseArray.get(licenseNumber);
+				LicenseType licenseType = licenseSparseArray.get(licenseNumber);
 				String license_author = jsonExercise.getString("license_author");
-				Log.v(TAG, "license=" + license + " license_author=" + license_author);
-				//TODO: add license + license_author to exercise data model
+				Log.v(TAG, "license=" + licenseType + " license_author=" + license_author);
 			}
 			
 			
@@ -220,8 +220,8 @@ public class WgerJSONParser {
 		return parse(musclesJSONString, Muscle.class);
 	}
 	
-	public static SparseArray<String> parseLicenses(String licenseJSONString) throws JSONException{
-		return parse(licenseJSONString, String.class);
+	public static SparseArray<LicenseType> parseLicenses(String licenseJSONString) throws JSONException{
+		return parse(licenseJSONString, LicenseType.class);
 	}
 	
 	private SparseArray<SportsEquipment> parseEquipment(String equipmentJSONString) throws JSONException{
@@ -270,10 +270,12 @@ public class WgerJSONParser {
 				if(short_name == null || short_name.equals(""))
 					Log.e(TAG, "Error, no short_name=" + short_name);
 				
-			}else if(c.equals(String.class)){
+			}else if(c.equals(LicenseType.class)){
 				// handle licenses
 				String short_name = singleObject.getString("short_name");
-				parsedObject = short_name;	
+				
+				parsedObject = mDataProvider.getLicenseTypeByName(short_name);	
+				
 				
 				if(short_name == null || short_name.equals(""))
 					Log.e(TAG, "Error, no short_name=" + short_name);

@@ -33,6 +33,8 @@ import java.util.Locale;
 
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.License;
+import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
@@ -385,6 +387,22 @@ public class DataProvider implements IDataProvider {
 
 	}
 
+	@Override
+	public List<LicenseType> getLicenseTypes(){
+		return java.util.Arrays.asList(License.LicenseType.values());
+	}
+	
+	@Override
+	public LicenseType getLicenseTypeByName(String name){
+		for(LicenseType license:getLicenseTypes()){
+			if(license.getShortName().equals(name))
+				return license;
+		}
+		
+		return LicenseType.UNKNOWN;
+	}
+	
+	
 	@Override
 	public List<Workout> getWorkouts() {
 		if (Cache.INSTANCE.getWorkouts() == null)

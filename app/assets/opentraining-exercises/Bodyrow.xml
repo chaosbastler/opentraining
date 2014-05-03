@@ -5,6 +5,6 @@
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Pull-Up Bar"/>
   <Tag name="Eigengewicht Übung"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Body-row-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Body-row-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Body-row-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Body-row-2.png"/>
 </ExerciseType>

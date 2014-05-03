@@ -4,6 +4,6 @@
   <Locale language="it" name="Sideplank"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Keine"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Side-plank-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Side-plank-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Side-plank-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Side-plank-2.png"/>
 </ExerciseType>

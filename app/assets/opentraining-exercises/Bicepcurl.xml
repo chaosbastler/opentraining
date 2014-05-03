@@ -4,6 +4,6 @@
   <Locale language="it" name="Trazioni (macchina)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Bizeps-Maschine"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-curl-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bicep-curl-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Bicep-curl-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Bicep-curl-2.png"/>
 </ExerciseType>

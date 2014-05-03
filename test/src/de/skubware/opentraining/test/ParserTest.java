@@ -20,7 +20,9 @@
 
 package de.skubware.opentraining.test;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,7 @@ import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FSet.SetParameter.*;
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.FitnessExercise;
+import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.TrainingEntry;
@@ -151,9 +154,9 @@ public class ParserTest extends AndroidTestCase {
 			if(w.getName().equals(mWorkout.getName())){
 				foundWorkout = true;
 				//TODO find bug in equals()
-				assertEquals(mWorkout.toDebugString(), w.toDebugString());
 				Log.d(TAG, "Expected: " + mWorkout.toDebugString());
 				Log.d(TAG, "Actual: " + w.toDebugString());
+				assertEquals(mWorkout.toDebugString(), w.toDebugString());
 				//assertEquals(mWorkout, w);
 			}
 		}
@@ -203,6 +206,21 @@ public class ParserTest extends AndroidTestCase {
 		tags.add(dataProvider.getExerciseTags().get(2));
 		tags.add(dataProvider.getExerciseTags().get(4));
 		builder.exerciseTags(tags);
+		
+		// images
+		List<File> images = new ArrayList<File>();
+		File TEST_IMG_0 = new File("Some path");
+		File TEST_IMG_1 = new File("Another path");
+		images.add(TEST_IMG_0);
+		images.add(TEST_IMG_1);
+		
+		// image licenses
+		Map<File, License> imageLicenseMap = new HashMap<File, License>();
+		License LICENSE_0 = new License();
+		License LICENSE_1 = new License(License.LicenseType.CC_BY_UNPORTED_3, "Some author");
+		imageLicenseMap.put(TEST_IMG_0, LICENSE_0);
+		imageLicenseMap.put(TEST_IMG_1, LICENSE_1);
+
 		
 		ExerciseType exerciseBefore = builder.build();
 		

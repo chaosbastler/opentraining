@@ -4,6 +4,6 @@
   <Locale language="it" name="Trazioni (gomiti vicini, barra SZ)"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="S-Z Curl Bar"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Close-grip-ez-bar-curl-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Close-grip-ez-bar-curl-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Close-grip-ez-bar-curl-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Close-grip-ez-bar-curl-2.png"/>
 </ExerciseType>

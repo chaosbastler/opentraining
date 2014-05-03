@@ -3,6 +3,6 @@
   <Locale language="en" name="Pullover (on ball, with weight)"/>
   <Locale language="it" name="Pullover (su palla, con peso)"/>
   <SportsEquipment name="Hantelscheibe"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Pullover-on-stability-ball-with-weight-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Pullover-on-stability-ball-with-weight-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Pullover-on-stability-ball-with-weight-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Pullover-on-stability-ball-with-weight-2.png"/>
 </ExerciseType>

@@ -5,6 +5,6 @@
   <Muscle name="Thigh" level="3"/>
   <Muscle name="Derriere" level="3"/>
   <SportsEquipment name="Dumbbell"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Pile-squat-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Pile-squat-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Pile-squat-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Pile-squat-2.png"/>
 </ExerciseType>

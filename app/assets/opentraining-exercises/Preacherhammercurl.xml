@@ -5,6 +5,6 @@
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="Dumbbell"/>
   <SportsEquipment name="Arm Curl Pad"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Preacher-hammer-curl-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Preacher-hammer-curl-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Preacher-hammer-curl-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Preacher-hammer-curl-2.png"/>
 </ExerciseType>

@@ -4,6 +4,6 @@
   <Locale language="it" name="Estensioni gluteo su swiss ball"/>
   <Muscle name="Rückenmuskeln" level="3"/>
   <SportsEquipment name="Swiss Ball"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Back-extension-on-stability-ball-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Back-extension-on-stability-ball-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Back-extension-on-stability-ball-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Back-extension-on-stability-ball-2.png"/>
 </ExerciseType>

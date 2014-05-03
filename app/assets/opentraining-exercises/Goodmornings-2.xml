@@ -4,6 +4,6 @@
   <Locale language="it" name="Buona Giornata (macchina)"/>
   <Muscle name="Back" level="3"/>
   <SportsEquipment name="Barbell Machine"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Good-mornings-2-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Good-mornings-2-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Good-mornings-2-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Good-mornings-2-2.png"/>
 </ExerciseType>

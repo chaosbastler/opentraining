@@ -46,7 +46,12 @@ public class License implements Serializable {
 		/** Similar to public domain */
 		CC0("http://creativecommons.org/publicdomain/zero/1.0/", "CC0"),
 		/** Attribution to author required */
-		CC_BY_UNPORTED("http://creativecommons.org/licenses/by/3.0/", "CC-BY-3.0"),
+		CC_BY_UNPORTED_3("http://creativecommons.org/licenses/by/3.0/", "CC-BY 3"),
+		CC_BY_UNPORTED_4("http://creativecommons.org/licenses/by/3.0/", "CC-BY 4"),
+		/** Share alike and attribution to author required */
+		CC_BY_SA_UNPORTED_3("http://creativecommons.org/licenses/by/3.0/", "CC-BY-SA 3"),
+		CC_BY_SA_UNPORTED_4("http://creativecommons.org/licenses/by/3.0/", "CC-BY-SA 4"),
+		/** Unknown */
 		UNKNOWN("http://http://creativecommons.org/", "Unknown")
 		;
 
@@ -71,6 +76,10 @@ public class License implements Serializable {
 		
 		@Override
 		public String toString(){
+			return mShortName;
+		}
+		
+		public String getShortName(){
 			return mShortName;
 		}
 	}
@@ -117,6 +126,11 @@ public class License implements Serializable {
 	 */
 	public String getAuthor() {
 		return this.author;
+	}
+	
+	@Override
+	public String toString(){
+		return "License: " + type.mShortName + ", Author: " + author;
 	}
 
 }

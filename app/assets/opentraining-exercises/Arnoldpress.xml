@@ -5,6 +5,6 @@
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Trainingsbank"/>
   <SportsEquipment name="Kurzhantel"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Arnold-press-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Arnold-press-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Arnold-press-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Arnold-press-2.png"/>
 </ExerciseType>

@@ -4,6 +4,6 @@
   <Locale language="it" name="Estensione tricipiti bassi"/>
   <SportsEquipment name="Kabelzug"/>
   <Muscle name="Trizeps" level="3"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Low-triceps-extension-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Low-triceps-extension-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Low-triceps-extension-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Low-triceps-extension-2.png"/>
 </ExerciseType>

@@ -48,7 +48,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	private Map<Locale, String> translationMap; // optional
 	private String description; // optional
 	private List<File> imagePaths; // optional
-	private Map<File, String> imageLicenseMap; // optional
+	private Map<File, License> imageLicenseMap; // optional
 	private int imageWidth; // optional
 	private int imageHeight; // optional
 	private SortedSet<SportsEquipment> requiredEquipment; // optional
@@ -72,7 +72,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		private Map<Locale, String> translationMap = new HashMap<Locale, String>(); // optional
 		private String description = ""; // optional
 		private List<File> imagePaths = new ArrayList<File>(); // optional
-		private Map<File, String> imageLicenseMap = new HashMap<File, String>(); // optional
+		private Map<File, License> imageLicenseMap = new HashMap<File, License>(); // optional
 		private int imageWidth = 214;
 		private int imageHeight = 137;
 		private SortedSet<SportsEquipment> neededTools = new TreeSet<SportsEquipment>(); // optional
@@ -110,7 +110,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 			return this;
 		}
 
-		public Builder imageLicenseText(Map<File, String> imageLicenseMap) {
+		public Builder imageLicenseMap(Map<File, License> imageLicenseMap) {
 			if (imageLicenseMap.size() > 0)
 				this.imageLicenseMap = imageLicenseMap;
 			return this;
@@ -187,7 +187,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 
 		this.translationMap = builder.translationMap;
 		this.description = builder.description;
-		this.imageLicenseMap = new HashMap<File, String>(builder.imageLicenseMap);
+		this.imageLicenseMap = new HashMap<File, License>(builder.imageLicenseMap);
 		this.imageHeight = builder.imageHeight;
 		this.imageWidth = builder.imageWidth;
 		this.exerciseTag = builder.exerciseTag;
@@ -301,7 +301,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	 * @see de.skubware.opentraining.basic.IExercise#getImageLicenseMap()
 	 */
 	@Override
-	public Map<File, String> getImageLicenseMap() {
+	public Map<File, License> getImageLicenseMap() {
 		return java.util.Collections.unmodifiableMap(this.imageLicenseMap);
 	}
 

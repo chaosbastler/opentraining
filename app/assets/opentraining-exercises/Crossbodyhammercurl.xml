@@ -4,6 +4,6 @@
   <Locale language="it" name="Piegamenti a Martello (corpo incrociato)"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="S-Z Curl Bar"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Cross-body-hammer-curl-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Cross-body-hammer-curl-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Cross-body-hammer-curl-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Cross-body-hammer-curl-2.png"/>
 </ExerciseType>

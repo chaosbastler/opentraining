@@ -52,7 +52,7 @@ public interface IExercise {
 	 * 
 	 * @return a map containing the licenses for the images
 	 */
-	public abstract Map<File, String> getImageLicenseMap();
+	public abstract Map<File, License> getImageLicenseMap();
 
 	/**
 	 * Getter for the width of the image

@@ -40,6 +40,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.License;
+import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.IDataProvider;
 
@@ -73,7 +75,7 @@ public class WgerImageDownloader {
 		outerloop:
 		for (ExerciseType.Builder exBuilder : exerciseBuilderList) {
 			List<File> newImagePathList = new ArrayList<File>();
-			Map<File, String> newImageLicenseMap = new HashMap<File, String>();
+			Map<File, License> newImageLicenseMap = new HashMap<File, License>();
 
 			ExerciseType ex = exBuilder.build();
 			for (File img : ex.getImagePaths()) {
@@ -85,16 +87,16 @@ public class WgerImageDownloader {
 				
 				
 				// parse JSON and get license
-				SparseArray<String> licenseSparseArray = WgerJSONParser.parseLicenses(mLicenseJSONString);
+				SparseArray<LicenseType> licenseSparseArray = WgerJSONParser.parseLicenses(mLicenseJSONString);
 
 				int licenseNumber = WgerJSONParser.getLastNumberOfJson(imageJSONObject.getString("license"));
-				String license = licenseSparseArray.get(licenseNumber);
+				LicenseType licenseType = licenseSparseArray.get(licenseNumber);
 				String author = imageJSONObject.getString("license_author");
-				Log.v(TAG, "license=" + license + " license_author=" + author);
+				Log.v(TAG, "license=" + licenseType.toString() + " license_author=" + author);
 				
+				License license = new License(licenseType, author);
 				//String licensePath = imageJSONObject.getString("license");
 
-				String licenseText = "License: " + license + ", Author: " + author;
 				
 				// skip exercise (and image download) if there's already one with the same name
 				DataHelper dataHelper = new DataHelper(mContext);
@@ -110,11 +112,11 @@ public class WgerImageDownloader {
 				// add image name + license to list/map
 				File imageFile = new File(imageName);
 				newImagePathList.add(imageFile);
-				newImageLicenseMap.put(imageFile, licenseText);
+				newImageLicenseMap.put(imageFile, license);
 			}
 			// set collected values for builder, add new object to exercise list
 			exBuilder.imagePath(newImagePathList);
-			exBuilder.imageLicenseText(newImageLicenseMap);
+			exBuilder.imageLicenseMap(newImageLicenseMap);
 
 			newExerciseList.add(exBuilder.build());
 

@@ -5,6 +5,6 @@
   <Muscle name="Biceps" level="3"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Barbell"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-floor-press-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="One-arm-floor-press-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="One-arm-floor-press-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="One-arm-floor-press-2.png"/>
 </ExerciseType>

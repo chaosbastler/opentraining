@@ -4,6 +4,6 @@
   <Locale language="it" name="Flessioni (swiss ball)"/>
   <Muscle name="Bauchmuskel" level="1"/>
   <SportsEquipment name="Swiss Ball"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Exercise-ball-pull-in-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Exercise-ball-pull-in-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Exercise-ball-pull-in-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Exercise-ball-pull-in-2.png"/>
 </ExerciseType>

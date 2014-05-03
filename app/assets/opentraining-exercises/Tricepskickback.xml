@@ -4,6 +4,6 @@
   <Locale language="it" name="Contraccolpo Tricipiti"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Triceps-kickback-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Triceps-kickback-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Triceps-kickback-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Triceps-kickback-2.png"/>
 </ExerciseType>

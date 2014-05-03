@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -49,7 +49,6 @@ import de.skubware.opentraining.basic.FSet.SetParameter;
 /**
  * A class to save plans and exercises as XML files.
  * 
- * @author Christian Skubich
  * 
  */
 public class XMLSaver {
@@ -276,12 +275,16 @@ public class XMLSaver {
 			for (File im : ex.getImagePaths()) {
 				Element imgE = doc.createElement("Image");
 				imgE.setAttribute("path", im.toString());
-				if(ex.getImageLicenseMap().containsKey(im)){
-					imgE.setAttribute("imageLicenseText", ex.getImageLicenseMap()
-						.get(im));
-				}else{
-					imgE.setAttribute("imageLicenseText", "Unknown");
+				
+				License license = ex.getImageLicenseMap().get(im);
+				if(license == null){
+					license = new License();
 				}
+				
+				imgE.setAttribute("author", license.getAuthor());
+				imgE.setAttribute("license", license.getLicenseType().getShortName());
+
+				
 				exE.appendChild(imgE);
 			}
 

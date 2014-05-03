@@ -24,6 +24,8 @@ import java.util.List;
 
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.License;
+import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
@@ -156,6 +158,24 @@ public interface IDataProvider {
 	 */
 	public ExerciseTag getExerciseTagByName(String name);
 
+	/**
+	 * Lists all available {@link LicenseType}s
+	 * 
+	 * @return All {@link LicenseType}s
+	 */
+	public List<LicenseType> getLicenseTypes();
+	
+	/**
+	 * Tries to find and return the {@link LicenseType} with the name.
+	 * If the License cannot be found LicenseType.UNKNOWN will be returned.
+	 * 
+	 * @param name
+	 *            The (short) name of the {@link LicenseType}
+	 * 
+	 * @return An {@link LicenseType} with the name or LicenseType.UNKNOWN.
+	 */
+	public LicenseType getLicenseTypeByName(String name);
+	
 	/**
 	 * Lists all {@link ExerciseTag}s
 	 * 

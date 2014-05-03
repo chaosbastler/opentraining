@@ -22,6 +22,7 @@ package de.skubware.opentraining.activity.create_exercise;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -49,6 +50,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_exercise.ExerciseImageListAdapter.ImageData;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.DataProvider;
@@ -243,14 +245,16 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		// save image
 		List<ImageData> imageDataList = imageFragment.getImages();
 		List<File> imageList = new ArrayList<File>();
-		
+		Map<File, License> imageLicenseMap = new HashMap<File, License>();
 		for(ImageData image:imageDataList){
-			imageList.add(new File(image.name));
+			File f = new File(image.name);
+			imageList.add(f);
+			imageLicenseMap.put(f, image.imageLicense);
 		}
 
 		
 		
-		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next()).description(description).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList);
+		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next()).description(description).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList).imageLicenseMap(imageLicenseMap);
 		ExerciseType ex = exerciseBuilder.build();
 		
 		// save exercise

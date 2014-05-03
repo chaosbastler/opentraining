@@ -4,6 +4,6 @@
   <Locale language="it" name="Flessioni"/>
   <Muscle name="Brustmuskel" level="3"/>
   <SportsEquipment name="Keine"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Push-ups-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Push-ups-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Push-ups-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Push-ups-2.png"/>
 </ExerciseType>

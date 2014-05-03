@@ -4,6 +4,6 @@
   <Locale language="it" name="Rotazione Interna con Cavo"/>
   <Muscle name="Shoulder" level="3"/>
   <SportsEquipment name="Kabelzug"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Cable-internal-rotation-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Cable-internal-rotation-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Cable-internal-rotation-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Cable-internal-rotation-2.png"/>
 </ExerciseType>

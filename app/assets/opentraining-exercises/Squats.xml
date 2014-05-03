@@ -3,10 +3,10 @@
   <Locale language="en" name="Squats"/>
   <Locale language="it" name="Squat"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-2-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-2-2.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-2.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-4-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Squats-4-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Squats-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Squats-2-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Squats-2-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Squats-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Squats-4-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Squats-4-2.png"/>
 </ExerciseType>

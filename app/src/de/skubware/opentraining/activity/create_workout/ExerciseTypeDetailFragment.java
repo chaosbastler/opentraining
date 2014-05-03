@@ -209,7 +209,7 @@ public class ExerciseTypeDetailFragment extends Fragment {
 				String license = "";
 
 				if (mExercise.getImageLicenseMap().values().iterator().hasNext()) {
-					license = mExercise.getImageLicenseMap().values().iterator().next();
+					license = mExercise.getImageLicenseMap().values().iterator().next().toString();
 				} else {
 					license = getString(R.string.no_license_available);
 				}

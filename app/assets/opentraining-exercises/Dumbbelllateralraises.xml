@@ -4,6 +4,6 @@
   <Locale language="it" name="Sollevamento Laterale (manubri) "/>
   <SportsEquipment name="Kurzhantel"/>
   <Muscle name="Schulter" level="3"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Dumbbell-lateral-raises-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Dumbbell-lateral-raises-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Dumbbell-lateral-raises-2.png"/>
 </ExerciseType>

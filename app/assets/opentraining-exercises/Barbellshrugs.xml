@@ -4,6 +4,6 @@
   <Locale language="it" name="Scrollate sbarra"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Langhantel"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-shrugs-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Barbell-shrugs-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Barbell-shrugs-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Barbell-shrugs-2.png"/>
 </ExerciseType>

@@ -5,6 +5,6 @@
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <SportsEquipment name="Trainingsbank"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bent-arm-pullover-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Bent-arm-pullover-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Bent-arm-pullover-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Bent-arm-pullover-2.png"/>
 </ExerciseType>

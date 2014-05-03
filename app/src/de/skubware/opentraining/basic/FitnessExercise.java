@@ -152,7 +152,7 @@ public class FitnessExercise implements IExercise, Serializable {
 	public String toDebugString() {
 		StringBuilder builder = new StringBuilder();
 
-		builder.append("ExerciseType: " + mExerciseType + "\n");
+		builder.append("ExerciseType: " + getLocalizedName() + "\n");
 		builder.append("Custom name: " + mCustomName + "\n");
 		for (FSet set : mFSetList) {
 			builder.append("\n FSet: " + set.toString());
@@ -254,7 +254,7 @@ public class FitnessExercise implements IExercise, Serializable {
 	}
 
 	@Override
-	public Map<File, String> getImageLicenseMap() {
+	public Map<File, License> getImageLicenseMap() {
 		return this.mExerciseType.getImageLicenseMap();
 	}
 

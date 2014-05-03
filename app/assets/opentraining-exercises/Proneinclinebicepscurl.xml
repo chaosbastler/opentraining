@@ -5,6 +5,6 @@
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="Dumbbell"/>
   <SportsEquipment name="Bench"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Prone-incline-biceps-curl-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Prone-incline-biceps-curl-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Prone-incline-biceps-curl-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Prone-incline-biceps-curl-2.png"/>
 </ExerciseType>

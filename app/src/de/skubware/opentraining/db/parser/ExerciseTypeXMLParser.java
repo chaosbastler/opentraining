@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ import android.content.Context;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
+import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
@@ -48,7 +49,6 @@ import java.util.TreeSet;
  * An implementation of a SaxParser for parsing .xml files to a ExerciseType
  * object
  * 
- * @author Christian Skubich
  */
 public class ExerciseTypeXMLParser extends DefaultHandler {
 	/** Tag for logging */
@@ -69,7 +69,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	private Map<Locale,String> translationMap = new HashMap<Locale, String>(); // optional
 	private String description;
 	private List<File> imagePaths = new ArrayList<File>();
-	private Map<File, String> imageLicenseMap = new HashMap<File, String>();
+	private Map<File, License> imageLicenseMap = new HashMap<File, License>();
 	private SortedSet<SportsEquipment> requiredEquipment = new TreeSet<SportsEquipment>();
 	private SortedSet<Muscle> activatedMuscles = new TreeSet<Muscle>();
 	private Map<Muscle, ActivationLevel> activationMap = new HashMap<Muscle, ActivationLevel>();
@@ -211,7 +211,19 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 		if (qname.equals("Image")) {
 			File im = new File(attributes.getValue("path"));
 			this.imagePaths.add(im);
-			this.imageLicenseMap.put(im, attributes.getValue("imageLicenseText"));
+			
+			String author = attributes.getValue("author");
+			String licenseTypeShortName = attributes.getValue("license");
+			LicenseType licenseType = mDataProvider.getLicenseTypeByName(licenseTypeShortName);
+			License license = null;
+			
+			if(author != null){ // licenseType cannot be null
+				license = new License(licenseType, author);
+			}else{
+				license = new License(); // has LicenseType Unknown
+			}
+			
+			this.imageLicenseMap.put(im, license);
 		}
 		if (qname.equals("RelatedURL")) {
 			try {
@@ -251,7 +263,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 			// let the builder do its job :)
 			this.exType = new ExerciseType.Builder(this.name).translationMap(this.translationMap).activatedMuscles(this.activatedMuscles).activationMap(this.activationMap).description(this.description)
 					.exerciseTags(this.exerciseTag).imagePath(this.imagePaths).neededTools(this.requiredEquipment).relatedURL(this.relatedURL)
-					.imageLicenseText(this.imageLicenseMap).hints(hints).iconPath(iconPath).build();
+					.imageLicenseMap(this.imageLicenseMap).hints(hints).iconPath(iconPath).build();
 
 			this.name = null;
 			

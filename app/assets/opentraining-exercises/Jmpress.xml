@@ -5,7 +5,7 @@
   <Muscle name="Triceps" level="3"/>
   <SportsEquipment name="Barbell"/>
   <SportsEquipment name="Bench"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Jm-press-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Jm-press-2.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Jm-press-3.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Jm-press-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Jm-press-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Jm-press-3.png"/>
 </ExerciseType>

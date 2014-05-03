@@ -4,6 +4,6 @@
   <Locale language="it" name="Trazioni Inverse (con piatto)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Hantelscheibe"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Reverse-plate-curls-1.png"/>
-  <Image imageLicenseText="License: Creative Commons Attribution-Share Alike 3.0 Unported, Author: Everkinetic" path="Reverse-plate-curls-2.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Reverse-plate-curls-1.png"/>
+  <Image author="Everkinetic" license="CC-BY-SA 3" path="Reverse-plate-curls-2.png"/>
 </ExerciseType>
