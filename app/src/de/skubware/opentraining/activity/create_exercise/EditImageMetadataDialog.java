@@ -57,6 +57,7 @@ public class EditImageMetadataDialog extends AlertDialog{
 		// get views with the important content
 		final EditText edit_text_author = (EditText) layout.findViewById(R.id.edit_text_author);
 		final Spinner license_spinner = (Spinner) layout.findViewById(R.id.license_spinner);
+		final Spinner position_spinner = (Spinner) layout.findViewById(R.id.position_spinner);
 
 		
 		// get image data
@@ -71,6 +72,9 @@ public class EditImageMetadataDialog extends AlertDialog{
 				LicenseType licenseType = (LicenseType) license_spinner.getSelectedItem();
 						
 				imageData.imageLicense = new License(licenseType, author);
+				
+				listAdapter.moveItem(position, position_spinner.getSelectedItemPosition());
+				
 				dialog.dismiss();
 			}
 		});
@@ -113,6 +117,16 @@ public class EditImageMetadataDialog extends AlertDialog{
 			licensePosition++;
 		}
 		
+		// set position
+		Integer[] positions = new Integer[listAdapter.getCount()];
+		for(int i = 0; i < listAdapter.getCount();i++){
+			positions[i] = i+1;
+		}
+		
+        ArrayAdapter<Integer> positionSpinnerAdapter = new ArrayAdapter<Integer>(mActivity, android.R.layout.simple_spinner_item, positions);
+        positionSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		position_spinner.setAdapter(positionSpinnerAdapter);
+		position_spinner.setSelection(position);
 		
 		// show the dialog
 		show();

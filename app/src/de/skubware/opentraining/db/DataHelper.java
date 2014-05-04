@@ -60,26 +60,25 @@ public class DataHelper {
 			is = mContext.getAssets().open(DataProvider.EXERCISE_FOLDER + "/" + name);
 			img = Drawable.createFromStream(is, "icon");
 			is.close();
-		} catch (FileNotFoundException e) {
-			Log.e(TAG, "Could not find drawable: " + name + "\n", e);
+		} catch (FileNotFoundException e) {			
+			if(img == null){
+				// Could not find drawable in assets folder. Will try to find image in custom image folder
+				img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.CUSTOM_IMAGES_FOLDER + "/" + name);
+			}
+			
+			if(img == null){
+				// Could not find drawable in assets or custom image folder. Will try to find image in synced image folder
+				img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.SYNCED_IMAGES_FOLDER + "/" + name);
+			}
+
+			if(img == null){
+				Log.e(TAG, "Could not find drawable in assets, custom image folder or in synced image folder: " + name + "\n", e);
+			}
+			
 		} catch (IOException e) {
-			Log.e(TAG, "Could not find drawable: " + name + "\n", e);
+			Log.e(TAG, "Could not find drawable :" + name + "\n", e);
 		}
-		
-		if(img == null){
-			Log.d(TAG, "Could not find drawable: " + name + " in assets folder. Will try to find image in custom image folder.");
-			img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.CUSTOM_IMAGES_FOLDER + "/" + name);
-		}
-		
-		if(img == null){
-			Log.d(TAG, "Could not find drawable: " + name + " in assets or custom image folder. Will try to find image in synced image folder.");
-			img = Drawable.createFromPath(mContext.getFilesDir().toString() + "/" + IDataProvider.SYNCED_IMAGES_FOLDER + "/" + name);
-		}
-
-
-		if(img == null){
-			Log.w(TAG, "Could not find drawable in custom image folder or in synced image folder: " + name + "\n");
-		}
+	
 		
 		return img;
 	}

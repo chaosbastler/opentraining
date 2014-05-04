@@ -26,10 +26,10 @@
         android:id="@+id/license_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/position_spinner"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/edit_text_author"
-        android:layout_marginTop="14dp"
-        android:layout_toRightOf="@+id/TextView01" />
+        android:layout_marginTop="14dp" />
 
     <TextView
         android:id="@+id/TextView02"
@@ -37,7 +37,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/license_spinner"
-        android:text="@string/license"
+        android:text="@string/license_colon"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/position_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/license_spinner"
+        android:layout_toRightOf="@+id/TextView03" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_below="@+id/license_spinner"
+        android:text="@string/position_colon"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

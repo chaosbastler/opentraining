@@ -136,5 +136,23 @@ public class ExerciseImageListAdapter extends BaseAdapter{
 		notifyDataSetChanged();
 	}
 
+	public void moveItem(int oldPosition, int newPosition){
+		if(oldPosition <0 || newPosition <0 || oldPosition > getCount()-1 || newPosition > getCount()-1 ){
+			Log.e(TAG, "moveItem cannot be done, as >= position is invalid. oldPosition=" + oldPosition + " , newPostion=" + newPosition + " , getCounter()=" + getCount());
+			return;
+		}
+		
+		if(newPosition == oldPosition)
+			return;
+		
+		ImageData movedItem = mImageList.remove(oldPosition);
+		// list size changed, so adapt newPosition  if necessary
+		//if(newPosition>oldPosition) newPosition--;
+		mImageList.add(newPosition, movedItem);
+
+		
+		notifyDataSetChanged();
+		
+	}
 	
 }
