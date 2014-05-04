@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,9 +31,7 @@ import java.util.TreeSet;
 
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 
 import android.support.v4.app.FragmentManager;
@@ -53,7 +51,9 @@ import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
+import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 import android.widget.Toast;
 
 /**
@@ -85,12 +85,12 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 	ViewPager mViewPager;
 
 
-
 	/** Static int for onActivityResult */
 	static final int TAKE_PICTURE = 447;
 	
 	/** Static int for onActivityResult */
 	static final int CHOSE_PICTURE = 555;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -165,6 +165,23 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		});
 		
 		return true;
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		
+		// clean up images
+		ImageFragment imageFragment = (ImageFragment) mSectionsPagerAdapter.getItem(2);
+		List<ImageData> images = imageFragment.getImages();
+		IDataProvider dataProvider = new DataProvider(this);
+		Cache.INSTANCE.updateCache(this);
+
+		for(ImageData image:images){
+			// remove not used/referenced images
+			dataProvider.deleteCustomImage(image.name, true);
+		}
+		
 	}
 
 	@Override
@@ -259,8 +276,6 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		
 		// save exercise
 		boolean succ = dataProvider.saveCustomExercise(ex);
-		
-
     
 		
 		if(!succ){
@@ -334,23 +349,9 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 	/**
 	 * Shows a toast message that explains "swipe-to-dismiss".
-	 * Will only be shown once.
 	 */
 	public void swipeToDismissAdvise(){
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		/*boolean showAdvise = sharedPrefs.getBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, true);
-		if(!showAdvise){
-			Log.v(TAG, "Will not show swipe-to-dismiss-advise");
-			return;
-		}*/
-			
 		Toast.makeText(this, getString(R.string.swipe_to_dismiss_advise), Toast.LENGTH_LONG).show();
-		
-		/*Log.v(TAG, "Show swipe-to-dismiss-advise has been shown once, will not be shown again.");
-
-		Editor editor = sharedPrefs.edit();
-		editor.putBoolean(PREFERENCE_SHOW_SWIPE_TO_DISMISS_ADVISE, false);
-		editor.commit();*/
 	}
 	
 }

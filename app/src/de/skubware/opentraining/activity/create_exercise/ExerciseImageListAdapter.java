@@ -25,6 +25,8 @@ import java.util.List;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.License;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -132,6 +134,12 @@ public class ExerciseImageListAdapter extends BaseAdapter{
     	
 	
 	public void remove(int position){
+		// delete image
+		ImageData img = mImageList.get(position);
+		IDataProvider dataProvider = new DataProvider(mContext);
+		dataProvider.deleteCustomImage(img.name, true); // if it is not a user-generated image this call will be ignored
+		
+		// remove from list adapter
 		mImageList.remove(position);
 		notifyDataSetChanged();
 	}

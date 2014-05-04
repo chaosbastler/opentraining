@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@ import java.util.List;
 
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -84,6 +83,33 @@ public interface IDataProvider {
 	 */
 	public boolean saveCustomExercise(ExerciseType ex);
 
+	/**
+	 * Deletes the (user-generated) exercise if available.
+	 * Will also delete related images if not referenced anywhere else.
+	 * 
+	 * @param ex
+	 *            The {@link ExerciseType} to delete.
+	 * 
+	 * @return true if successful
+	 */
+	public boolean deleteCustomExercise(ExerciseType ex);
+	
+	
+	/**
+	 * Deletes the (user-generated) image if available.
+	 * 
+	 * @param ex
+	 *            The name of the image to delete.
+	 * 
+	 * @param checkForReferences
+	 *            If this flag is set, images will not be deleted
+	 *            when they are referenced by any exercise.            
+	 * 
+	 * @return true if successful
+	 */
+	public boolean deleteCustomImage(String imageName, boolean checkForReferences);
+	
+	
 	/**
 	 * Saves the (synced) exercises to {@link SYNCED_EXERCISE_FOLDER}.
 	 * 

@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,7 +51,6 @@ import android.util.Log;
 
 /**
  * Implementation of {@link IDataProvider}.
- * 
  * 
  */
 public class DataProvider implements IDataProvider {
@@ -251,6 +250,64 @@ public class DataProvider implements IDataProvider {
 		
 		return succ;
 	}
+	
+	@Override
+	public boolean deleteCustomExercise(ExerciseType ex){
+		Log.d(TAG, "Trying to delete exercise: " + ex.toString());
+		File destination = new File(mContext.getFilesDir().toString() + "/"
+				+ IDataProvider.CUSTOM_EXERCISE_FOLDER);	
+	
+		File exerciseXML = new File(destination + "/" + ex.getUnlocalizedName() + ".xml");
+		if(!exerciseXML.exists()){
+			Log.e(TAG, "The exercise " + ex.toString() + " could not be deleted because the file: " + exerciseXML.getAbsolutePath() + " does not exist.");
+			return false;
+		}
+		
+		// check which images are not references elsewhere
+		List<File> imagesToDelete = ex.getImagePaths();
+		for(ExerciseType exercise:getExercises()){
+			if(!exercise.equals(ex)){
+				imagesToDelete.removeAll(exercise.getImagePaths());
+			}
+		}
+		
+		// now delete this images
+		boolean succ = true;
+		for(File f: imagesToDelete){
+			succ &= deleteCustomImage(f.getName(), false);
+		}
+			 
+		return exerciseXML.delete() & succ;
+	}
+	
+	
+	@Override
+	public boolean deleteCustomImage(String imageName, boolean checkForReferences){
+		File realImagePath = new File(mContext.getFilesDir().toString() + "/" + IDataProvider.CUSTOM_IMAGES_FOLDER + "/" + imageName);
+		
+		if(checkForReferences){
+			// check if image is referenced elsewhere
+			for(ExerciseType exercise:getExercises()){
+				if(exercise.getImagePaths().contains(new File(imageName))){
+					Log.i(TAG, "The image: " + imageName + " is referenced in the exercise: " + exercise + ", thus it will not be delted.");
+					return false;
+				}
+			}			
+		}
+		
+		
+		boolean fileSucc = realImagePath.delete();
+		
+		if(!fileSucc){
+			Log.e(TAG, "The image: " + imageName + " could not be delted.");
+		}else{
+			Log.v(TAG, "The image: " + imageName + " has been delted successfully.");
+		}
+		
+		return fileSucc;
+	}
+	
+	
 
 	@Override
 	public ExerciseType getExerciseByName(String name) {
