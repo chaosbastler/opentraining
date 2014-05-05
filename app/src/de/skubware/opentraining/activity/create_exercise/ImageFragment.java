@@ -64,16 +64,26 @@ public class ImageFragment extends Fragment{
 
 	private ListView mImageListView;
 	private ExerciseImageListAdapter mListAdapter;
-	private List<ImageData> mImageList = new ArrayList<ImageData>();
+	private ArrayList<ImageData> mImageList = new ArrayList<ImageData>();
+	
+	private final static String KEY_IMAGELIST_ADAPTER_DATA = "KEY_IMAGELIST_ADAPTER_DATA";
+
 	
 	public ImageFragment() {
 	}
 	
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	
+	/** 
+	 * Restore the instance state, e.g. after rotation.
+	 */
+	public void onCreate (Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
-    }
+	    if (savedInstanceState != null && savedInstanceState.containsKey(KEY_IMAGELIST_ADAPTER_DATA)) {
+	    	mImageList = savedInstanceState.getParcelableArrayList(KEY_IMAGELIST_ADAPTER_DATA);
+	    }
+	}
     
 	
 	@Override
@@ -119,7 +129,13 @@ public class ImageFragment extends Fragment{
 		});
 	}
 	
-	
+	/** 
+	 * Save instance state, e.g. for rotation.
+	 */
+	public void onSaveInstanceState(Bundle savedState) {
+	    super.onSaveInstanceState(savedState);
+	    savedState.putParcelableArrayList(KEY_IMAGELIST_ADAPTER_DATA, mImageList);
+	}
     
 
 	/**

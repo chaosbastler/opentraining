@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.Toast;
 
 /**
@@ -135,6 +134,8 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		} else if (item.getItemId() == R.id.menu_item_filter_settings) {
 			DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
 			dialog.show();
+		} else if(item.getItemId() == R.id.menu_item_create_exercise){
+			startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -188,16 +189,6 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		setupSearchView(mSearchView);	    
 		
 		
-		
-		// configure menu_item_create_exercise
-		/*MenuItem menu_item_create_exercise = (MenuItem) menu.findItem(R.id.menu_item_create_exercise);
-		menu_item_create_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
-				return true;
-			}
-		});*/
-
 		return super.onCreateOptionsMenu(menu);
 	}
 

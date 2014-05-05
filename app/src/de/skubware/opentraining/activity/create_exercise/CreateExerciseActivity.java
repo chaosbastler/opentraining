@@ -200,13 +200,17 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			FragmentTransaction fragmentTransaction) {
 	}
 
+	private static String makeFragmentName(int viewId, int index) {
+	     return "android:switcher:" + viewId + ":" + index;
+	}
+	
 	/** Saves the created exercise. */
 	private void saveExercise(){
-		NameFragment nameFragment = (NameFragment) mSectionsPagerAdapter.getItem(0);
-		DescriptionFragment descriptionFragment = (DescriptionFragment) mSectionsPagerAdapter.getItem(1);
-		ImageFragment imageFragment = (ImageFragment) mSectionsPagerAdapter.getItem(2);
-		SimpleDataFragment<Muscle> muscleDataFragment = (SpinnerDataFragment) mSectionsPagerAdapter.getItem(3);
-		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) mSectionsPagerAdapter.getItem(4);
+		NameFragment nameFragment = (NameFragment)  getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,0));//  mSectionsPagerAdapter.getItem(0);
+		DescriptionFragment descriptionFragment = (DescriptionFragment) getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,1));
+		ImageFragment imageFragment = (ImageFragment) getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,2));
+		SimpleDataFragment<Muscle> muscleDataFragment = (SpinnerDataFragment<Muscle>) getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,3));
+		EquipmentDataFragment equipmentDataFragment = (EquipmentDataFragment) getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,4));
 
 		DataProvider dataProvider = new DataProvider(this);
 
@@ -294,12 +298,6 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		
-		NameFragment mNameFragment = new NameFragment();
-		DescriptionFragment mDescriptionFragment = new DescriptionFragment();
-		ImageFragment mImageFragment= new ImageFragment();
-		MuscleDataFragment mMuscleDataFragment = new MuscleDataFragment();
-		EquipmentDataFragment mEquipmentDataFragment = new EquipmentDataFragment();
-
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -309,15 +307,15 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 			switch (position) {
 			case 0:
-				return mNameFragment;
+				return new NameFragment();
 			case 1:
-				return mDescriptionFragment;
+				return new DescriptionFragment();
 			case 2:	
-				return mImageFragment;
+				return new ImageFragment();
 			case 3:	
-				return mMuscleDataFragment;
+				return new MuscleDataFragment();
 			case 4:
-				return mEquipmentDataFragment;
+				return new EquipmentDataFragment();
 			}
 			
 			throw new IllegalStateException("No fragment for position: " + position);

@@ -103,10 +103,8 @@ public class NameFragment extends SpinnerDataFragment<NameFragment.NameTranslati
 			return getActivity().getString(R.string.exercise_name_empty);
 		}
 		
-		/*Object selectedItem = mSpinner.getItemAtPosition(position);
-		if(mObjectList.contains(selectedItem)){
-			return getActivity().getString(R.string.object_already_in_list, selectedItem.toString());
-		}*/
+		// two or more names for the same language are ok (will be saved as alternative name)
+		
 		return null;
 	}
 	
@@ -167,8 +165,11 @@ public class NameFragment extends SpinnerDataFragment<NameFragment.NameTranslati
 	    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
 	    public void onTextChanged(CharSequence s, int start, int before, int count) {
-			if(mDataProvider.getExerciseByName(s.toString()) != null )
+			if(mDataProvider.getExerciseByName(s.toString()) != null ){
 				mEditText.setError(getString(R.string.name_already_used));	
+			}else{
+				mEditText.setError(null);
+			}
 	    }
 
 	    public void afterTextChanged(Editable s) { }
@@ -178,6 +179,8 @@ public class NameFragment extends SpinnerDataFragment<NameFragment.NameTranslati
 	
 	
 	public static class NameTranslation extends Translatable{
+		private static final long serialVersionUID = 1L;
+		
 		Locale mLocale;
 		String mName;
 		NameTranslation(Locale locale, String name){

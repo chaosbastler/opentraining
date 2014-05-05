@@ -30,6 +30,8 @@ import de.skubware.opentraining.db.IDataProvider;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,10 +52,47 @@ public class ExerciseImageListAdapter extends BaseAdapter{
 	private List<ImageData> mImageList = new ArrayList<ImageData>();
 	
 	/** Container-class for the data that belongs to an image */
-	static class ImageData {
+	static class ImageData implements Parcelable{
+		
 		Bitmap bitmap;
 		String name;
 		License imageLicense;
+		
+		public ImageData(){
+		}
+		
+		public ImageData(Parcel in){
+			this.bitmap = (Bitmap) in.readParcelable(Bitmap.class.getClassLoader());
+			this.name = in.readString();
+			this.imageLicense = (License) in.readSerializable();
+		}
+		
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+		
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeParcelable(bitmap, 0);
+			dest.writeString(name);
+			dest.writeSerializable(imageLicense);
+		}
+		
+		static final Parcelable.Creator<ImageData> CREATOR
+        = new Parcelable.Creator<ImageData>() {
+			
+			@Override
+			public ImageData createFromParcel(Parcel in) {
+				return new ImageData(in);
+			}
+
+			@Override
+			public ImageData[] newArray(int size) {
+				return new ImageData[size];
+			}
+};
+		
 	}
 	
 	// ViewHolder, caches imageView

@@ -21,6 +21,7 @@
 
 package de.skubware.opentraining.activity.create_exercise;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +53,26 @@ import android.widget.Toast;
  * 
  * @param <T> The type of object that should be stored in the ListView and be returned by {@link #getChosenObjects()}
  */
-public abstract class SimpleDataFragment<T> extends Fragment {
+public abstract class SimpleDataFragment<T extends Serializable> extends Fragment {
 	protected ListView mListView;
 	protected ArrayAdapter<T> mListAdapter;
-	protected List<T> mObjectList = new ArrayList<T>();
+	protected ArrayList<T> mObjectList = new ArrayList<T>(); // ArrayList implements Serializable
 
+	private final static String KEY_LIST_ADAPTER_DATA = "KEY_LIST_ADAPTER_DATA";
+	
+	
+	/** 
+	 * Restore the instance state, e.g. after rotation.
+	 */
+	public void onCreate (Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+
+	    if (savedInstanceState != null && savedInstanceState.containsKey(KEY_LIST_ADAPTER_DATA)) {
+	    	mObjectList = (ArrayList<T>) savedInstanceState.getSerializable(KEY_LIST_ADAPTER_DATA);
+	    }
+	}
+	
+	
 	@Override
 	public void onViewCreated(View view, Bundle savedInstance){
 		mListView = (ListView) view.findViewById(R.id.listview);
@@ -83,6 +99,15 @@ public abstract class SimpleDataFragment<T> extends Fragment {
 				});
 		mListView.setOnTouchListener(touchListener);			
 	}
+	
+	/** 
+	 * Save instance state, e.g. for rotation.
+	 */
+	public void onSaveInstanceState(Bundle savedState) {
+	    super.onSaveInstanceState(savedState);
+	    savedState.putSerializable(KEY_LIST_ADAPTER_DATA, mObjectList);
+	}
+
 	
 	/**
 	 * Adds the selected item to the list view if constraints are fulfilled.
