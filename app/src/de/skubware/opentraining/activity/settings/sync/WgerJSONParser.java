@@ -37,7 +37,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 import de.skubware.opentraining.basic.ExerciseType;
-import de.skubware.opentraining.basic.License;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
@@ -99,7 +99,7 @@ public class WgerJSONParser {
 			if(dataProvider.exerciseExists(name))
 				continue;
 			
-			ExerciseType.Builder builder = new ExerciseType.Builder(name);
+			ExerciseType.Builder builder = new ExerciseType.Builder(name, ExerciseSource.SYNCED);
 			
 			// category (unused)
 			// String category = jsonExercise.getString("category");

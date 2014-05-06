@@ -6,6 +6,13 @@
     <string name="filter">Filter</string>
 
     
+    <!-- Exercise List Menu -->
+    <string name="menu_item_show_default_exercises_title">Show default exercises</string>
+    <string name="menu_item_show_synced_exercises_title">Show synced exercises</string>
+    <string name="menu_item_show_custom_exercises_title">Show custom exercises</string>
+    <string name="delete_exercise">Delete exercise</string>
+    
+    
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">ExerciseType Detail</string>
     <string name="title_exercisetype_list">ExerciseTypes</string>

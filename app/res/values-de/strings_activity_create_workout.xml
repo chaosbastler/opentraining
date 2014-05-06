@@ -3,7 +3,14 @@
     <!-- Exercise List -->
     <string name="search">Suche</string>
     <string name="filter">Filtern</string>
-
+    
+    
+    <!-- Exercise List Menu -->
+    <string name="menu_item_show_default_exercises_title">Standard Übungen anzeigen</string>
+    <string name="menu_item_show_synced_exercises_title">Synchronisierte Übungen anzeigen</string>
+    <string name="menu_item_show_custom_exercises_title">Eigene Übungen anzeigen</string>
+    <string name="delete_exercise">Übung löschen</string>
+    
 
     <!-- Exercise Detail -->
     <string name="title_exercisetype_detail">Übungsdetails</string>

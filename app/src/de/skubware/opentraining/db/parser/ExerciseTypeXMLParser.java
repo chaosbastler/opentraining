@@ -30,6 +30,7 @@ import android.content.Context;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -62,6 +63,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 
 
 	private ExerciseType exType;
+	private ExerciseSource mExerciseSource;
 	// required argument
 	private String name;
 
@@ -78,8 +80,9 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 	private List<String> hints = new ArrayList<String>();
 	private File iconPath = null;
 
-	public ExerciseTypeXMLParser(Context context) {
+	public ExerciseTypeXMLParser(Context context, ExerciseSource exerciseSource) {
 		mContext = context;
+		mExerciseSource = exerciseSource;
 		mDataProvider = new DataProvider(mContext);
 		
 		// create parser
@@ -261,7 +264,7 @@ public class ExerciseTypeXMLParser extends DefaultHandler {
 		if (qName.equals("ExerciseType")) {
 
 			// let the builder do its job :)
-			this.exType = new ExerciseType.Builder(this.name).translationMap(this.translationMap).activatedMuscles(this.activatedMuscles).activationMap(this.activationMap).description(this.description)
+			this.exType = new ExerciseType.Builder(this.name, this.mExerciseSource).translationMap(this.translationMap).activatedMuscles(this.activatedMuscles).activationMap(this.activationMap).description(this.description)
 					.exerciseTags(this.exerciseTag).imagePath(this.imagePaths).neededTools(this.requiredEquipment).relatedURL(this.relatedURL)
 					.imageLicenseMap(this.imageLicenseMap).hints(hints).iconPath(iconPath).build();
 

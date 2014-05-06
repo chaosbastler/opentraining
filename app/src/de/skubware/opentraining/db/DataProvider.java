@@ -33,6 +33,7 @@ import java.util.Locale;
 
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.License.LicenseType;
 import de.skubware.opentraining.basic.Muscle;
@@ -94,7 +95,7 @@ public class DataProvider implements IDataProvider {
 
 			for (String f : files) {
 				if (f.endsWith(".xml")) {
-					ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
+					ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext, ExerciseSource.DEFAULT);
 					ExerciseType ex = parser.read(mContext.getAssets().open(IDataProvider.EXERCISE_FOLDER + "/" + f));
 					list.add(ex);
 				}
@@ -136,7 +137,7 @@ public class DataProvider implements IDataProvider {
 
 		for (String f : customFiles) {
 			if (f.endsWith(".xml")) {
-				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
+				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext, ExerciseSource.CUSTOM);
 				ExerciseType ex = parser.read(new File(customExerciseFolder + "/" + f));
 				if(ex != null){
 					list.add(ex);
@@ -167,7 +168,7 @@ public class DataProvider implements IDataProvider {
 
 		for (String f : syncedFiles) {
 			if (f.endsWith(".xml")) {
-				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext);
+				ExerciseTypeXMLParser parser = new ExerciseTypeXMLParser(mContext, ExerciseSource.SYNCED);
 				ExerciseType ex = parser.read(new File(syncedExerciseFolder + "/" + f));
 				if(ex != null){
 					list.add(ex);
@@ -264,7 +265,7 @@ public class DataProvider implements IDataProvider {
 		}
 		
 		// check which images are not references elsewhere
-		List<File> imagesToDelete = ex.getImagePaths();
+		List<File> imagesToDelete = new ArrayList<File>(ex.getImagePaths()); // original List is Unmodifiable
 		for(ExerciseType exercise:getExercises()){
 			if(!exercise.equals(ex)){
 				imagesToDelete.removeAll(exercise.getImagePaths());
@@ -276,7 +277,10 @@ public class DataProvider implements IDataProvider {
 		for(File f: imagesToDelete){
 			succ &= deleteCustomImage(f.getName(), false);
 		}
-			 
+		
+		Cache.INSTANCE.getExercises().remove(ex);
+		Cache.INSTANCE.updateExerciseCache(mContext);
+		
 		return exerciseXML.delete() & succ;
 	}
 	

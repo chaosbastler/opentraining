@@ -29,6 +29,7 @@ import android.content.Context;
 import android.util.Log;
 
 import de.skubware.opentraining.basic.*;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FSet.SetParameter;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -171,7 +172,7 @@ public class WorkoutXMLParser extends DefaultHandler {
 			// this may happen if a custom(or synced) exercise has been deleted
 			if (mExerciseType == null) {
 				Log.e(TAG, "Could not find exercise, will create new custom exercise with the name " + exName, new NullPointerException("The exercise '" + exName + "' of the TrainingPlan couldn't be found in the database."));
-				mExerciseType = (new ExerciseType.Builder(exName)).build();
+				mExerciseType = (new ExerciseType.Builder(exName, ExerciseSource.CUSTOM)).build();
 				dataProvider.saveCustomExercise(mExerciseType);
 			}
 		}

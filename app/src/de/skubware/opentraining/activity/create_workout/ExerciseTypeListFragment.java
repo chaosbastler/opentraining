@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,10 +33,9 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ListView;
-import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.DataProvider;
@@ -102,7 +101,12 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	 * The current activated item position. Only used on tablets.
 	 */
 	private int mActivatedPosition = ListView.INVALID_POSITION;
+	
+	public static final String PREF_KEY_SHOW_DEFAULT_EXERCISES = "PREF_KEY_SHOW_DEFAULT_EXERCISES";
+	public static final String PREF_KEY_SHOW_SYNCED_EXERCISES = "PREF_KEY_SHOW_SYNCED_EXERCISES";
+	public static final String PREF_KEY_SHOW_CUSTOM_EXERCISES = "PREF_KEY_SHOW_CUSTOM_EXERCISES";
 
+	
 	/**
 	 * A callback interface that all activities containing this fragment must
 	 * implement. This mechanism allows activities to be notified of item
@@ -158,14 +162,14 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			@Override
 			public void onSharedPreferenceChanged(SharedPreferences pref, String key) {
 				Log.v(TAG, "Preference changed, will update shown exercises");
-				filterExercisesForMusclesAndEquipment();
+				filterExercises();
 			}
 
 		};
 		sharedPrefs.registerOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
 
 		
-		filterExercisesForMusclesAndEquipment();
+		filterExercises();
 	}
 
 	@Override
@@ -176,6 +180,11 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 		sharedPrefs.unregisterOnSharedPreferenceChangeListener(mOnSharedPreferenceChangeListener);
 	}
 	
+	private void filterExercises(){
+		filterExercisesForMusclesAndEquipment();
+		filterExercisesForSearchQuery();
+		filterExercisesForExerciseSource();
+	}
 	
 	/**
 	 * Filters the list of exercises for muscles and equipment.
@@ -263,6 +272,43 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 				mExericseList));	
 	}
 	
+	/**
+	 * Filters the list of exercises for their {@link ExerciseSource}}
+	 *  
+	 */
+	private void filterExercisesForExerciseSource() {
+		filterExercisesForSearchQuery();
+		
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		
+		boolean showDefaultExercises = sharedPrefs.getBoolean(PREF_KEY_SHOW_DEFAULT_EXERCISES, true);
+		boolean showSyncedExercises = sharedPrefs.getBoolean(PREF_KEY_SHOW_SYNCED_EXERCISES, true);
+		boolean showCustomExercises = sharedPrefs.getBoolean(PREF_KEY_SHOW_CUSTOM_EXERCISES, true);
+
+		for (ExerciseType ex : new ArrayList<ExerciseType>(mExericseList)) {
+			switch(ex.getExerciseSource()){
+				case DEFAULT:
+					if(!showDefaultExercises)
+						mExericseList.remove(ex);
+					break;
+				case SYNCED:
+					if(!showSyncedExercises)
+						mExericseList.remove(ex);
+					break;
+				case CUSTOM:
+					if(!showCustomExercises)
+						mExericseList.remove(ex);
+					break;
+			}
+			
+		}
+
+		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
+				mExericseList));	
+	}
+	
+	
+	
 
 
 	@Override
@@ -278,9 +324,11 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			// restore search query
 			if(savedInstanceState.containsKey(STATE_QUERY)){
 				mSearchQuery = savedInstanceState.getString(STATE_QUERY);
-				filterExercisesForMusclesAndEquipment();
-				filterExercisesForSearchQuery();
 			}
+			filterExercisesForMusclesAndEquipment();
+			filterExercisesForSearchQuery();
+			filterExercisesForExerciseSource();
+
 			
 			// restore scroll state
 			if(savedInstanceState.containsKey(STATE_SCROLL_INDEX) && savedInstanceState.containsKey(STATE_SCROLL_TOP)){
@@ -350,8 +398,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	@Override
 	public void onResume(){
 		super.onResume();
-		filterExercisesForMusclesAndEquipment();
-		filterExercisesForSearchQuery();
+		filterExercises();
 		restoreScrollState();
 	}
 	

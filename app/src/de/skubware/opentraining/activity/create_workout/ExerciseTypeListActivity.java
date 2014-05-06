@@ -20,14 +20,16 @@
 
 package de.skubware.opentraining.activity.create_workout;
 
-
-
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -85,9 +87,9 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		setContentView(R.layout.activity_exercisetype_list);
 		// Show the Up button in the action bar.
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		Bundle args = getIntent().getExtras();
-		if(args != null && args.containsKey(ARG_WORKOUT)){
+		if (args != null && args.containsKey(ARG_WORKOUT)) {
 			mWorkout = (Workout) args.getSerializable(ARG_WORKOUT);
 		}
 
@@ -124,19 +126,39 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			if (mWorkout != null)
+		SharedPreferences.Editor sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		
+		switch(item.getItemId()){
+			case android.R.id.home:
+				if (mWorkout != null)
+					showDialog();
+				else
+					finish();
+				break;
+			case R.id.menu_item_show_workout:
 				showDialog();
-			else
-				finish();
-		} else if (item.getItemId() == R.id.menu_item_show_workout) {
-			showDialog();
-		} else if (item.getItemId() == R.id.menu_item_filter_settings) {
-			DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
-			dialog.show();
-		} else if(item.getItemId() == R.id.menu_item_create_exercise){
-			startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
+				break;
+			case R.id.menu_item_filter_settings:
+				DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
+				dialog.show();	
+			case  R.id.menu_item_create_exercise:
+				startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
+				break;
+			case R.id.menu_item_show_default_exercises:
+				item.setChecked(!item.isChecked());
+				sharedPrefs.putBoolean(ExerciseTypeListFragment.PREF_KEY_SHOW_DEFAULT_EXERCISES, item.isChecked());
+				break;
+			case R.id.menu_item_show_synced_exercises:
+				item.setChecked(!item.isChecked());
+				sharedPrefs.putBoolean(ExerciseTypeListFragment.PREF_KEY_SHOW_SYNCED_EXERCISES, item.isChecked());
+				break;
+			case R.id.menu_item_show_custom_exercises:
+				item.setChecked(!item.isChecked());
+				sharedPrefs.putBoolean(ExerciseTypeListFragment.PREF_KEY_SHOW_CUSTOM_EXERCISES, item.isChecked());
+				break;
 		}
+		
+		sharedPrefs.commit();
 
 		return super.onOptionsItemSelected(item);
 	}
@@ -178,17 +200,51 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
 		getMenuInflater().inflate(R.menu.exercise_list_menu, menu);
 
 		MenuItem searchItem = menu.findItem(R.id.action_search);
-		
-		if(mSearchView == null) Log.e(TAG, "MenuItem searchItem is null.");
+
+		if (mSearchView == null)
+			Log.e(TAG, "MenuItem searchItem is null.");
 		mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-		if(mSearchView == null) Log.e(TAG, "SearchView is null");
-		setupSearchView(mSearchView);	    
-		
-		
+		if (mSearchView == null)
+			Log.e(TAG, "SearchView is null");
+		setupSearchView(mSearchView);
+
+		// show (or don't show) the menu_items for
+		// showing default/synced/custom exercises
+		IDataProvider dataProvider = new DataProvider(this);
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean hasCustomExercises = false;
+		boolean hasSyncedExercises = false;
+
+		for (ExerciseType ex : dataProvider.getExercises()) {
+			switch (ex.getExerciseSource()) {
+			case CUSTOM:
+				hasCustomExercises = true;
+				break;
+			case SYNCED:
+				hasSyncedExercises = true;
+				break;
+			case DEFAULT:
+				break;
+			}
+		}
+
+		MenuItem menu_item_show_default_exercises = menu.findItem(R.id.menu_item_show_default_exercises);
+		menu_item_show_default_exercises.setVisible(true); // default exercises
+															// should always be
+															// there
+		menu_item_show_default_exercises.setChecked(sharedPrefs.getBoolean(ExerciseTypeListFragment.PREF_KEY_SHOW_DEFAULT_EXERCISES, true));
+
+		MenuItem menu_item_show_synced_exercises = menu.findItem(R.id.menu_item_show_synced_exercises);
+		menu_item_show_synced_exercises.setVisible(hasSyncedExercises);
+		menu_item_show_synced_exercises.setChecked(sharedPrefs.getBoolean(ExerciseTypeListFragment.PREF_KEY_SHOW_SYNCED_EXERCISES, true));
+
+		MenuItem menu_item_show_custom_exercises = menu.findItem(R.id.menu_item_show_custom_exercises);
+		menu_item_show_custom_exercises.setVisible(hasCustomExercises);
+		menu_item_show_custom_exercises.setChecked(sharedPrefs.getBoolean(ExerciseTypeListFragment.PREF_KEY_SHOW_CUSTOM_EXERCISES, true));
+
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -236,23 +292,23 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 	public void onWorkoutChanged(Workout w) {
 		mWorkout = w;
 		// notify ExerciseTypeListAdapter
-		((ExerciseTypeListAdapter)((ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list)).getListAdapter()).notifyDataSetChanged();
+		((ExerciseTypeListAdapter) ((ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list))
+				.getListAdapter()).notifyDataSetChanged();
 	}
 
 	/**
 	 * Getter for {@link #mWorkout}. Used by {@code ExerciseTypeListAdapter} to
 	 * disable already selected exercises.
 	 */
-	protected Workout getWorkout(){
+	protected Workout getWorkout() {
 		return mWorkout;
 	}
-	
-	
+
 	private void setupSearchView(SearchView searchItem) {
 
 		OnQueryTextListener listener = (ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list);
-		
-		mSearchView.setIconified(true); 
+
+		mSearchView.setIconified(true);
 		mSearchView.setQuery("", false);
 		mSearchView.setOnQueryTextListener(listener);
 	}

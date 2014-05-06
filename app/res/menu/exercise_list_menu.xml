@@ -26,4 +26,27 @@
         yourapp:showAsAction="ifRoom"
         android:title="@string/create_exercise_activity_title"/>
     
+    <item 
+        android:id="@+id/menu_item_show_default_exercises"
+        android:visible="true" 
+        android:checked="true" 
+        android:checkable="true"
+        yourapp:showAsAction="never"
+        android:title="@string/menu_item_show_default_exercises_title"/>
+   
+   <item 
+      	android:id="@+id/menu_item_show_synced_exercises"
+        android:visible="false" 
+        android:checked="true" 
+        android:checkable="true"
+        yourapp:showAsAction="never"
+        android:title="@string/menu_item_show_synced_exercises_title"/> 
+        
+   <item 
+      	android:id="@+id/menu_item_show_custom_exercises"
+        android:visible="false" 
+        android:checked="true" 
+        android:checkable="true"
+        yourapp:showAsAction="never"
+        android:title="@string/menu_item_show_custom_exercises_title"/>    
 </menu>

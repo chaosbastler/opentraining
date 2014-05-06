@@ -17,5 +17,9 @@
         android:icon="@drawable/icon_info"
         android:title="@string/license_info"
         yourapp:showAsAction="ifRoom"/>
-
+    <item
+        android:id="@+id/menu_item_delete_exercise"
+        android:visible="false" 
+        android:title="@string/delete_exercise"
+        yourapp:showAsAction="never"/>
 </menu>

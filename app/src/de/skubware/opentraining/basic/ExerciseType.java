@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,9 +29,6 @@ import android.util.Log;
 
 /**
  * An instance of this class represents a certain type of (fitness) exercise.
- * <p>
- * 
- * 
  * 
  */
 
@@ -43,6 +40,8 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	static final String TAG = "ExerciseType";
 
 	private String name; // required
+	private ExerciseSource mExerciseSource; // required
+	
 	private String localizedName; // optional
 
 	private Map<Locale, String> translationMap; // optional
@@ -58,6 +57,19 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	private List<URL> relatedURL; // optional
 	private List<String> hints; // optional
 	private File iconPath; // optional
+
+	
+	/**
+	 * Indicates where an exercise is from.
+	 */
+	public enum ExerciseSource{
+		/** Default exercise of OpenTraining */
+		DEFAULT,
+		/** Downloaded from a service like wger.de */
+		SYNCED,
+		/** Created by the user himself */
+		CUSTOM;
+	}
 
 	/**
 	 * Inner builder class for creating new instances of {@link ExerciseType}.
@@ -82,14 +94,17 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		private List<URL> relatedURL = new ArrayList<URL>(); // optional
 		private List<String> hints = new ArrayList<String>(); // optional
 		private File iconPath = new File(""); // optional
+		private ExerciseSource mExerciseSource; // required
 
-		public Builder(String name) {
+		
+		public Builder(String name, ExerciseSource exerciseSource) {
 			// null name is NOT allowed
 			if (name == null) {
 				throw new NullPointerException();
 			}
 
 			this.name = name;
+			this.mExerciseSource = exerciseSource;
 		}
 
 		public Builder translationMap(Map<Locale, String> translationMap) {
@@ -184,6 +199,7 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 	 */
 	private ExerciseType(Builder builder) {
 		this.name = builder.name;
+		this.mExerciseSource = builder.mExerciseSource;
 
 		this.translationMap = builder.translationMap;
 		this.description = builder.description;
@@ -473,5 +489,11 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		return new HashMap<Locale, String>(translationMap);
 	}
 
-
+	/**
+	 * @return The {@link ExerciseSource} of this exercise
+	 */
+	public ExerciseSource getExerciseSource(){
+		return mExerciseSource;
+	}
+	
 }

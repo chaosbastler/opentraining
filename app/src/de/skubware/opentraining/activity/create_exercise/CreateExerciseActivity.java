@@ -51,6 +51,7 @@ import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
@@ -275,7 +276,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 
 		
 		
-		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next()).description(description).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList).imageLicenseMap(imageLicenseMap);
+		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next(), ExerciseSource.CUSTOM).description(description).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList).imageLicenseMap(imageLicenseMap);
 		ExerciseType ex = exerciseBuilder.build();
 		
 		// save exercise
