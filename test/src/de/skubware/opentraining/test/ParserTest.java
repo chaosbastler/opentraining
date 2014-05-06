@@ -36,6 +36,7 @@ import android.test.AndroidTestCase;
 import android.util.Log;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.FSet;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FSet.SetParameter.*;
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.FitnessExercise;
@@ -102,9 +103,9 @@ public class ParserTest extends AndroidTestCase {
 	
 	public void testSaveAndLoadWorkout(){
 		// create a workout
-		ExerciseType EX_1 = new ExerciseType.Builder(EXERCISE_NAME_1).build();
-		ExerciseType EX_2 = new ExerciseType.Builder(EXERCISE_NAME_2).build();
-		ExerciseType EX_3 = new ExerciseType.Builder(EXERCISE_NAME_3).build();
+		ExerciseType EX_1 = new ExerciseType.Builder(EXERCISE_NAME_1, ExerciseSource.CUSTOM).build();
+		ExerciseType EX_2 = new ExerciseType.Builder(EXERCISE_NAME_2, ExerciseSource.CUSTOM).build();
+		ExerciseType EX_3 = new ExerciseType.Builder(EXERCISE_NAME_3, ExerciseSource.CUSTOM).build();
 
 		
 		Repetition REP = new Repetition(1);
@@ -180,7 +181,7 @@ public class ParserTest extends AndroidTestCase {
 		IDataProvider dataProvider = new DataProvider(getContext());
 
 		
-		ExerciseType.Builder builder = new ExerciseType.Builder("NAME_1");
+		ExerciseType.Builder builder = new ExerciseType.Builder("NAME_1", ExerciseSource.CUSTOM);
 		
 		Map<Locale, String> translationMap = new HashMap<Locale, String>();
 		translationMap.put(Locale.GERMAN, "NAME_1");

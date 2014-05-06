@@ -25,6 +25,7 @@ import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.FSet;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FSet.SetParameter.*;
 
 /**
@@ -43,9 +44,9 @@ public class WorkoutTest extends AndroidTestCase {
 
 	public void testEquals(){
 		// create a workout
-		ExerciseType EX_1 = new ExerciseType.Builder(EXERCISE_NAME_1).build();
-		ExerciseType EX_2 = new ExerciseType.Builder(EXERCISE_NAME_2).build();
-		ExerciseType EX_3 = new ExerciseType.Builder(EXERCISE_NAME_3).build();
+		ExerciseType EX_1 = new ExerciseType.Builder(EXERCISE_NAME_1, ExerciseSource.CUSTOM).build();
+		ExerciseType EX_2 = new ExerciseType.Builder(EXERCISE_NAME_2, ExerciseSource.CUSTOM).build();
+		ExerciseType EX_3 = new ExerciseType.Builder(EXERCISE_NAME_3, ExerciseSource.CUSTOM).build();
 
 		
 		Repetition REP = new Repetition(1);
@@ -66,9 +67,9 @@ public class WorkoutTest extends AndroidTestCase {
 				
 		
 		// create a second workout
-		ExerciseType EX_1S = new ExerciseType.Builder(EXERCISE_NAME_1).build();
-		ExerciseType EX_2S = new ExerciseType.Builder(EXERCISE_NAME_2).build();
-		ExerciseType EX_3S = new ExerciseType.Builder(EXERCISE_NAME_3).build();
+		ExerciseType EX_1S = new ExerciseType.Builder(EXERCISE_NAME_1, ExerciseSource.CUSTOM).build();
+		ExerciseType EX_2S = new ExerciseType.Builder(EXERCISE_NAME_2, ExerciseSource.CUSTOM).build();
+		ExerciseType EX_3S = new ExerciseType.Builder(EXERCISE_NAME_3, ExerciseSource.CUSTOM).build();
 
 		
 		Repetition REPS = new Repetition(1);

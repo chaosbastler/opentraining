@@ -37,6 +37,7 @@ import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 
@@ -100,7 +101,7 @@ public class WgerJSONParserTest extends InstrumentationTestCase {
 		SortedSet<Muscle> muscles_1 = new TreeSet<Muscle>();
 		muscles_1.add(dataProvider.getMuscleByName(MUSCLE_1_1));
 		muscles_1.add(dataProvider.getMuscleByName(MUSCLE_1_2));
-		ExerciseType EXERCISE_ONE = new ExerciseType.Builder(EXERCISE_NAME_1).description(DESCRIPTION_1).activatedMuscles(muscles_1).build();
+		ExerciseType EXERCISE_ONE = new ExerciseType.Builder(EXERCISE_NAME_1, ExerciseSource.SYNCED).description(DESCRIPTION_1).activatedMuscles(muscles_1).build();
 		// only equals is not enough as ExerciseType.equals() only compares the name of the exercises
 		assertEquals(EXERCISE_ONE, EXERCISE_ONE_PARSED);
 		assertEquals(EXERCISE_ONE.getDescription(), EXERCISE_ONE_PARSED.getDescription());
@@ -109,7 +110,7 @@ public class WgerJSONParserTest extends InstrumentationTestCase {
 	
 		SortedSet<Muscle> muscles_2 = new TreeSet<Muscle>();
 		muscles_2.add(dataProvider.getMuscleByName(MUSCLE_2_1));
-		ExerciseType EXERCISE_TWO = new ExerciseType.Builder(EXERCISE_NAME_2).description(DESCRIPTION_2).activatedMuscles(muscles_2).build();
+		ExerciseType EXERCISE_TWO = new ExerciseType.Builder(EXERCISE_NAME_2, ExerciseSource.SYNCED).description(DESCRIPTION_2).activatedMuscles(muscles_2).build();
 		// only equals is not enough as ExerciseType.equals() only compares the name of the exercises
 		assertEquals(EXERCISE_TWO, EXERCISE_TWO_PARSED);
 		assertEquals(EXERCISE_TWO.getDescription(), EXERCISE_TWO_PARSED.getDescription());
