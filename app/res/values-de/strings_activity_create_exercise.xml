@@ -6,7 +6,12 @@
     <string name="exercise_saved">Die Übung wurde gespeichert.</string>
     <string name="provide_name">Du musst einen Namen eingeben.</string>
     <string name="name_already_used">Der Name wird bereits für einer andere Übung verwendet. Bitte wähle einen anderen Namen.</string>
-
+   
+    
+    <!-- Dialog SaveExercise? -->
+    <string name="save_exercise">"Übung speichern?"</string>
+    <string name="discard_exercise">Übung verwerfen</string>
+    <string name="should_exercise_be_saved">"Soll die Übung gespeichert werden?</string>
         
     <!-- Menu of CreateExerciseActivity -->
     <string name="text_about_creating_exercise">Es muss mindestens ein Name eingegeben werden, alle weiteren Angaben sind optional.</string>

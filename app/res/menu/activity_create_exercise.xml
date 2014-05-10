@@ -6,12 +6,6 @@
         android:icon="@drawable/icon_about"
         android:orderInCategory="100"
         android:title="@string/info"
-        android:showAsAction="never"/>
-    <item
-        android:id="@+id/menuitem_save_exercise"
-        android:icon="@drawable/icon_save"
-        android:orderInCategory="100"
-        android:title="@string/save_exercise"
-        android:showAsAction="always"/>
+        android:showAsAction="ifRoom"/>
 
 </menu>

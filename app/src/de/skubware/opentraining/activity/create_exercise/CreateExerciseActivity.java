@@ -31,6 +31,8 @@ import java.util.TreeSet;
 
 import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -40,6 +42,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -47,6 +50,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_exercise.ExerciseImageListAdapter.ImageData;
+import de.skubware.opentraining.activity.create_workout.DialogWorkoutOverviewFragment;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.Muscle;
@@ -56,6 +60,7 @@ import de.skubware.opentraining.db.Cache;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
 import android.widget.Toast;
+
 
 /**
  * An activity for creating new {@link ExerciseType}s.
@@ -156,15 +161,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			}
 		});
 		
-		// configure menuitem_save_exercise
-		MenuItem menuitem_save_exercise = (MenuItem) menu.findItem(R.id.menuitem_save_exercise);
-		menuitem_save_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {				
-				saveExercise();
-				return true;
-			}
-		});
-		
+
 		return true;
 	}
 	
@@ -206,6 +203,7 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 	}
 	
 	/** Saves the created exercise. */
+	@SuppressWarnings("unchecked")
 	private void saveExercise(){
 		NameFragment nameFragment = (NameFragment)  getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,0));//  mSectionsPagerAdapter.getItem(0);
 		DescriptionFragment descriptionFragment = (DescriptionFragment) getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.pager,1));
@@ -218,8 +216,6 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		
 		// handle names
 		Map<Locale, String> translationMap = nameFragment.getTranslationMap();
-		//String ex_name_english = basicDataFragment.getExerciseNameEnglish();
-		//String ex_name_german = basicDataFragment.getExerciseNameGerman();
 		
 		if(translationMap.isEmpty()){
 			Log.v(TAG, "User did not enter an exercise name.");
@@ -228,32 +224,6 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			return;
 		}
 		
-		/*if(ex_name_english.equals("") && ex_name_german.equals("")){
-			Log.v(TAG, "User did not enter an exercise name.");
-			Toast.makeText(this, getString(R.string.provide_name), Toast.LENGTH_LONG).show();
-			
-			return;
-		}
-		
-		
-		
-		if(!ex_name_english.equals("")){
-			if(dataProvider.getExerciseByName(ex_name_english) != null){
-				Toast.makeText(this, getString(R.string.name_already_used), Toast.LENGTH_LONG).show();
-				return;
-			}
-			
-			translationMap.put(Locale.ENGLISH, ex_name_english);
-		}
-			
-		if(!ex_name_german.equals("")){
-			if(dataProvider.getExerciseByName(ex_name_german) != null){
-				Toast.makeText(this, getString(R.string.name_already_used), Toast.LENGTH_LONG).show();
-				return;
-			}
-			
-			translationMap.put(Locale.GERMAN, ex_name_german);
-		}*/
 		
 		// handle description
 		String description = descriptionFragment.getExerciseDescription();
@@ -275,7 +245,6 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 		}
 
 		
-		
 		ExerciseType.Builder exerciseBuilder = new ExerciseType.Builder(translationMap.values().iterator().next(), ExerciseSource.CUSTOM).description(description).translationMap(translationMap).activatedMuscles(muscleList).neededTools(equipmentList).imagePath(imageList).imageLicenseMap(imageLicenseMap);
 		ExerciseType ex = exerciseBuilder.build();
 		
@@ -287,7 +256,40 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			Toast.makeText(this, getString(R.string.could_not_save_exercise), Toast.LENGTH_LONG).show();
 		}else{
 			Toast.makeText(this, getString(R.string.exercise_saved), Toast.LENGTH_LONG).show();
+			finish();
 		}
+	}
+	
+	/**
+	 * Show Dialog when user wants to go back.
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+			dialogBuilder.setTitle(getString(R.string.save_exercise))
+			.setMessage(getString(R.string.should_exercise_be_saved))
+			.setNegativeButton(getString(R.string.discard_exercise), new OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					finish();
+				}
+			})
+			.setNeutralButton(getString(R.string.cancel), new OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			})			
+			.setPositiveButton(getString(R.string.save), new OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					saveExercise();
+				}
+			}).create().show();			
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 

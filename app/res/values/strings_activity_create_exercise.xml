@@ -7,6 +7,11 @@
     <string name="provide_name">You have to provide a name.</string>
     <string name="name_already_used">The name is already used for another exercise. Please choose a different name.</string>
 
+    <!-- Dialog SaveExercise? -->
+    <string name="save_exercise">"Save exercise?"</string>
+    <string name="discard_exercise">Discard exercise</string>
+    <string name="should_exercise_be_saved">"Should the exercise be saved?</string>
+
     
     <!-- Menu of CreateExerciseActivity -->
     <string name="text_about_creating_exercise">You have to provide an exercise name, everything else is optional.</string>
