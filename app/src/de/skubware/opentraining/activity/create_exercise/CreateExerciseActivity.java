@@ -50,7 +50,6 @@ import android.view.MenuItem.OnMenuItemClickListener;
 
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_exercise.ExerciseImageListAdapter.ImageData;
-import de.skubware.opentraining.activity.create_workout.DialogWorkoutOverviewFragment;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.License;
 import de.skubware.opentraining.basic.Muscle;

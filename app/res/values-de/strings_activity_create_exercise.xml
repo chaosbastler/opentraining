@@ -17,7 +17,6 @@
     <string name="text_about_creating_exercise">Es muss mindestens ein Name eingegeben werden, alle weiteren Angaben sind optional.</string>
     <string name="title_about_creating_exercise">Über Übungen erstellen</string>
     <string name="info">Info</string>
-    <string name="save_exercise">Übung speichern</string>
         
     <!-- NameFragment -->
     <string name="title_name_fragment">Name</string>
