@@ -141,6 +141,7 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 			case R.id.menu_item_filter_settings:
 				DialogFilterMusclesAndEquipment dialog = new DialogFilterMusclesAndEquipment(this);
 				dialog.show();	
+				break;
 			case  R.id.menu_item_create_exercise:
 				startActivity(new Intent(ExerciseTypeListActivity.this, CreateExerciseActivity.class));
 				break;
@@ -284,6 +285,11 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 			if (resultCode == RESULT_OK) {
 				// Workout has been changed, so update data
 				mWorkout = (Workout) data.getSerializableExtra(ExerciseTypeListActivity.ARG_WORKOUT);
+			}else if(resultCode == ExerciseTypeDetailFragment.RESULT_EXERCISE_CHANGED){
+				// an exercise has been deleted, reload exercises
+				ExerciseType deltedEx = (ExerciseType) data.getExtras().getSerializable(ExerciseTypeDetailFragment.ARG_DELETED_EXERCISE);
+
+				this.onExerciseDeleted(deltedEx);
 			}
 		}
 	}
@@ -294,6 +300,12 @@ public class ExerciseTypeListActivity extends ActionBarActivity implements Exerc
 		// notify ExerciseTypeListAdapter
 		((ExerciseTypeListAdapter) ((ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list))
 				.getListAdapter()).notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onExerciseDeleted(ExerciseType deletedExercise){
+		// notify ExerciseTypeListFragment to update the list with exercises
+		((ExerciseTypeListFragment) getSupportFragmentManager().findFragmentById(R.id.exercisetype_list)).onExerciseDeleted(deletedExercise);
 	}
 
 	/**

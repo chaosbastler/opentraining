@@ -278,10 +278,19 @@ public class DataProvider implements IDataProvider {
 			succ &= deleteCustomImage(f.getName(), false);
 		}
 		
+
+		
+		boolean xmlDeleteSucc = exerciseXML.delete();
+		if(!xmlDeleteSucc){
+			Log.d(TAG, "The exercise XML of " + ex.toString() + " could not be deleted.");
+		}else{
+			Log.d(TAG, "The exercise XML of " + ex.toString() + " has been deleted.");
+		}
+		
 		Cache.INSTANCE.getExercises().remove(ex);
 		Cache.INSTANCE.updateExerciseCache(mContext);
 		
-		return exerciseXML.delete() & succ;
+		return xmlDeleteSucc & succ;
 	}
 	
 	

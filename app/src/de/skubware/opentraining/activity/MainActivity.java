@@ -118,42 +118,6 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-	/**
-	 * Configures the ListView for this activity.
-	 */
-	/*private void setUpList() {
-		ListView listview = (ListView) this.findViewById(R.id.activity_main_listview);
-
-		String[] values = new String[] { getString(R.string.create_workout), getString(R.string.manage_workouts),
-				getString(R.string.start_training), getString(R.string.settings) };
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-		listview.setAdapter(adapter);
-
-		listview.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				switch (position) {
-				case 0:
-					startActivity(new Intent(MainActivity.this, ExerciseTypeListActivity.class));
-					break;
-				case 1:
-					startActivity(new Intent(MainActivity.this, WorkoutListActivity.class));
-					break;
-				case 2:
-					showSelectWorkoutDialog();
-					break;
-				case 3:
-					startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-					break;
-				default:
-					Log.wtf(TAG, "This item should not exist.");
-				}
-			}
-		});
-	}*/
-
 	/** Shows a dialog for choosing a {@link Workout} */
 	private void showSelectWorkoutDialog() {
 		IDataProvider dataProvider = new DataProvider(this);

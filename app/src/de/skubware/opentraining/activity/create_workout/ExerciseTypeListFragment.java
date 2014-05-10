@@ -55,7 +55,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	public static final String TAG = "ExerciseTypeListFragment";
 
 	/** Currently display exercises */
-	private List<ExerciseType> mExericseList;
+	private List<ExerciseType> mExerciseList;
 
 	/** Last query. */
 	private String mSearchQuery = "";
@@ -141,10 +141,10 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 		super.onCreate(savedInstanceState);
 
 		IDataProvider dataProvider = new DataProvider(getActivity());
-		mExericseList = dataProvider.getExercises();
+		mExerciseList = dataProvider.getExercises();
 
 		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));
+				mExerciseList));
 
 		
 		//SelectMuscleDialog muscleDialog = new SelectMuscleDialog(getActivity());
@@ -181,6 +181,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	}
 	
 	private void filterExercises(){
+		// the order of the calls is important
 		filterExercisesForMusclesAndEquipment();
 		filterExercisesForSearchQuery();
 		filterExercisesForExerciseSource();
@@ -207,7 +208,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			}
 		}
 
-		mExericseList = dataProvider.getExercises();
+		mExerciseList = dataProvider.getExercises();
 		for (ExerciseType ex : dataProvider.getExercises()) {
 			boolean accepted = false;
 			for (Muscle m : acceptedMuscles) {
@@ -220,30 +221,30 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 
 			if (!accepted) {
 				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Muscles do not fit.");
-				mExericseList.remove(ex);
+				mExerciseList.remove(ex);
 				continue;
 			}
 
 			if (!acceptedEquipment.containsAll(ex.getRequiredEquipment())) {
 				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Equipment does not fit");
-				mExericseList.remove(ex);
+				mExerciseList.remove(ex);
 				continue;
 			}
 		}
 
 		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));	
+				mExerciseList));	
 	}
 
 	/**
-	 * Filters the list of exercises for the search query. The method
-	 * {@link #filterExercisesForMusclesAndEquipment()} will be called in this
-	 * method.
+	 * Filters the list of exercises for the search query. 
+	 * 
+	 * Do not forget to call {@link #filterExercisesForMusclesAndEquipment()} 
+	 * before.
 	 * 
 	 */
 	private void filterExercisesForSearchQuery() {
 		Log.d(TAG, "filterExercisesForSearchQuery() mSearchEquery=" + mSearchQuery);
-		filterExercisesForMusclesAndEquipment();
 
 		if (mSearchQuery == null)
 			mSearchQuery = "";
@@ -252,7 +253,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 		if (mSearchQuery.equals("") || mSearchQuery.replaceAll(" ", "").equals(""))
 			return;
 
-		for (ExerciseType ex : new ArrayList<ExerciseType>(mExericseList)) {
+		for (ExerciseType ex : new ArrayList<ExerciseType>(mExerciseList)) {
 			boolean accepted = false;
 
 			for (String name : ex.getAlternativeNames()) {
@@ -264,47 +265,45 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			}
 
 			if (!accepted) {
-				mExericseList.remove(ex);
+				mExerciseList.remove(ex);
 			}
 		}
 
 		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));	
+				mExerciseList));	
 	}
 	
 	/**
 	 * Filters the list of exercises for their {@link ExerciseSource}}
 	 *  
 	 */
-	private void filterExercisesForExerciseSource() {
-		filterExercisesForSearchQuery();
-		
+	private void filterExercisesForExerciseSource() {		
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		
 		boolean showDefaultExercises = sharedPrefs.getBoolean(PREF_KEY_SHOW_DEFAULT_EXERCISES, true);
 		boolean showSyncedExercises = sharedPrefs.getBoolean(PREF_KEY_SHOW_SYNCED_EXERCISES, true);
 		boolean showCustomExercises = sharedPrefs.getBoolean(PREF_KEY_SHOW_CUSTOM_EXERCISES, true);
 
-		for (ExerciseType ex : new ArrayList<ExerciseType>(mExericseList)) {
+		for (ExerciseType ex : new ArrayList<ExerciseType>(mExerciseList)) {
 			switch(ex.getExerciseSource()){
 				case DEFAULT:
 					if(!showDefaultExercises)
-						mExericseList.remove(ex);
+						mExerciseList.remove(ex);
 					break;
 				case SYNCED:
 					if(!showSyncedExercises)
-						mExericseList.remove(ex);
+						mExerciseList.remove(ex);
 					break;
 				case CUSTOM:
 					if(!showCustomExercises)
-						mExericseList.remove(ex);
+						mExerciseList.remove(ex);
 					break;
 			}
 			
 		}
 
 		setListAdapter(new ExerciseTypeListAdapter(getActivity(), android.R.layout.simple_list_item_single_choice, android.R.id.text1,
-				mExericseList));	
+				mExerciseList));	
 	}
 	
 	
@@ -325,9 +324,7 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 			if(savedInstanceState.containsKey(STATE_QUERY)){
 				mSearchQuery = savedInstanceState.getString(STATE_QUERY);
 			}
-			filterExercisesForMusclesAndEquipment();
-			filterExercisesForSearchQuery();
-			filterExercisesForExerciseSource();
+			filterExercises();
 
 			
 			// restore scroll state
@@ -453,8 +450,12 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 	public boolean onQueryTextSubmit(String query) {
 		Log.d(TAG, "onQueryTextSubmit(" + query + ")");
 		mSearchQuery = query;
-		filterExercisesForSearchQuery();
+		filterExercises();
 		return false;
+	}
+
+	public void onExerciseDeleted(ExerciseType deletedExercise) {
+		filterExercises();
 	}
 
 }

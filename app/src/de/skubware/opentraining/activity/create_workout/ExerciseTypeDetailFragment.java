@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,9 +43,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
+import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FitnessExercise;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
 
 /**
  * A fragment representing a single ExerciseType detail screen. This fragment is
@@ -54,7 +57,7 @@ import de.skubware.opentraining.db.DataHelper;
  */
 public class ExerciseTypeDetailFragment extends Fragment {
 	/** Tag for logging */
-	public static final String TAG = ExerciseTypeDetailFragment.class.getName();
+	public static final String TAG = "ExerciseTypeDetailFragment";
 
 	/**
 	 * The fragment argument representing the item ID that this fragment
@@ -64,6 +67,12 @@ public class ExerciseTypeDetailFragment extends Fragment {
 
 	public static final String ARG_WORKOUT = "workout";
 
+	/** Result-Code when the exercises changed (e.g. one has been deleted) */
+	public static final int RESULT_EXERCISE_CHANGED = 93278734;
+	
+	/** Key for passing the exercise that has been deleted. */
+	public static final String ARG_DELETED_EXERCISE = "delted_ex";
+	
 	/**
 	 * The {@link ExerciseType} this fragment is presenting.
 	 */
@@ -88,6 +97,11 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		 * Callback for when the Workout has changed.
 		 */
 		public void onWorkoutChanged(Workout w);
+		
+		/** 
+		 * Callback, when an exercise has been deleted. 
+		 */
+		public void onExerciseDeleted(ExerciseType deletedExercise);
 	}
 
 	@Override
@@ -240,6 +254,36 @@ public class ExerciseTypeDetailFragment extends Fragment {
 				return true;
 			}
 		});
+	
+		// configure menu_item_delete_exercise
+		if(mExercise.getExerciseSource().equals(ExerciseSource.CUSTOM)){
+			MenuItem menu_item_delete_exercise = (MenuItem) menu.findItem(R.id.menu_item_delete_exercise);
+			menu_item_delete_exercise.setVisible(true);
+			menu_item_delete_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					IDataProvider dataProvider = new DataProvider(getActivity());
+					dataProvider.deleteCustomExercise(mExercise);
+					
+					if (getActivity() instanceof Callbacks) {
+						// was launched by ExerciseTypeListActivity
+						((Callbacks) getActivity()).onExerciseDeleted(mExercise);
+					} else {
+						// was launched by ExerciseTypeDetailActivity
+						Intent i = new Intent();
+						i.putExtra(ARG_DELETED_EXERCISE, mExercise);
+						getActivity().setResult(RESULT_EXERCISE_CHANGED, i);
+						getActivity().finish();
+					}
+					
+										
+					return false;
+				}
+			});
+		}
+		
+		
 	}
+
 
 }
