@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7" versioncode="26" summary="Neue Übungen erstellen und französische Übersetzung" date="05/12/2014">
+        <change>Ein oft gewünschtes Feature ist endlich fertig: Eigene Übungen erstellen (Workout erstellen->Menü->Übung erstellen).</change>
+        <change>Französische Übersetzung der App hinzugefügt. Dank dafür an Kcchouette.</change>
+        <change>Bugfix: Der Übungs-Download funktioniert wieder.</change>    
+        <change>Dieses Update kommt leider etwas später als erhofft. Bitte meldet auch weiterhin alle Fehler/Probleme dieser App.</change>     
+    </release>    
     <release version="0.6.2" versioncode="25" summary="Bugfix für Android 2.x" date="03/25/2013">
         <change>Bugfix für Absturz auf älteren Android Geräten (Version 2.x). Ein weiteres Update mit einigen Fehlerbehebungen wird vermutlich innerhalb der nächsten 2 Wochen folgen.</change>
     </release>      

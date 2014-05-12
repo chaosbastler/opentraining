@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
-    <release version="0.6.2" versioncode="25" summary="Bugfix for Android 2.x" date="03/25/2013">
+    <release version="0.7" versioncode="26" summary="Creating new exercises and french translation" date="05/12/2014">
+        <change>Many user requested this feature and it's finally there: you can add your own exercises (Create Workout->Menu->Create exercise).</change>
+        <change>The app has been translated to French. Thanks to Kcchouette for this translation.</change>
+        <change>Bugfix: exercise download works again.</change>    
+        <change>Sorry this update took a bit longer than expected. Please continue reporting any issues that you experience.</change>     
+    </release>
+    <release version="0.6.2" versioncode="25" summary="Bugfix for Android 2.x" date="03/25/2014">
         <change>Bugfix for a crash on older Android devices (Version 2.x). Another update with some fixes will probably follow within the next two weeks.</change>
     </release>    
-    <release version="0.6.1" versioncode="24" summary="Spanish translation" date="01/30/2013">
+    <release version="0.6.1" versioncode="24" summary="Spanish translation" date="01/30/2014">
         <change>The app has been translated to Spanish. Thanks to Sebastián Di Luise for this translation.</change>
         <change>New design for navigation/start activity. Please send feedback if you experience any design or performance problems.</change>
         <change>Not finished in time for this update, but included in the next update: creating new exercises</change>
