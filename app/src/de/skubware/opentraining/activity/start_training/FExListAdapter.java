@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,7 +102,11 @@ public class FExListAdapter extends BaseAdapter {
 		if (!fEx.getImagePaths().isEmpty()) {		
 			String icon = fEx.getImagePaths().get(0).toString();
 			icon = icon.replace(".", "_icon.");
-			imageview_ex_image.setImageDrawable(data.getDrawable(icon));
+			Drawable iconDrawable = data.getDrawable(icon);
+			if(iconDrawable == null){
+				iconDrawable = data.getDrawable(fEx.getImagePaths().get(0).toString());
+			}
+			imageview_ex_image.setImageDrawable(iconDrawable);
 		} else {
 			// set default image if no image can be found
 			imageview_ex_image.setImageResource(R.drawable.ic_launcher);
