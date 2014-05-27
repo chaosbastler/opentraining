@@ -3,7 +3,7 @@ package de.skubware.opentraining.activity.start_training;
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
