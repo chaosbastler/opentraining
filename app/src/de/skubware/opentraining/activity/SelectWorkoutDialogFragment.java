@@ -1,7 +1,7 @@
 /**
  * 
  * This is OpenTraining, an Android application for planning your your fitness training.
- * Copyright (C) 2012-2013 Christian Skubich
+ * Copyright (C) 2012-2014 Christian Skubich
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -87,12 +87,19 @@ public class SelectWorkoutDialogFragment extends DialogFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				mWorkout = adapter.getItem(which);
 
-				// disable button for loading old training
-				if (mWorkout.getFitnessExercises().get(0).getTrainingEntryList().isEmpty()) {
-					disableButton();
-				} else {
-					enableButton();
+				enableButton();
+				// disable button for loading old training if there is at least one exercise that has no history
+				// this can happen when:
+				// - there has never been any training before
+				// - an exercise has been added (workout has been edited)
+				for(FitnessExercise fEx:mWorkout.getFitnessExercises()){
+					if(fEx.getTrainingEntryList().isEmpty()) {
+						disableButton();
+						break;
+					}	
 				}
+
+				
 			}
 			
 		}).setPositiveButton(getString(R.string.start_new_training), new OnClickListener() {
