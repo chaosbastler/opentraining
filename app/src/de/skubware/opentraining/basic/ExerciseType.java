@@ -100,7 +100,10 @@ public final class ExerciseType implements Comparable<ExerciseType>, IExercise, 
 		public Builder(String name, ExerciseSource exerciseSource) {
 			// null name is NOT allowed
 			if (name == null) {
-				throw new NullPointerException();
+				throw new NullPointerException("Name of exercise must not be null");
+			}
+			if (exerciseSource == null) {
+				throw new NullPointerException("Source of exercise must not be null");
 			}
 
 			this.name = name;

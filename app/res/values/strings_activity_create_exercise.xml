@@ -40,6 +40,7 @@
     <string name="error_did_not_return_image">Error, no image has been returend</string>
     <string name="edit_image_metadata">Edit image metadata</string>
     <string name="delete_image">Delete image</string>
+    <string name="author_colon">Author:</string>
     <string name="license_colon">License:</string>
     <string name="position_colon">Position:</string>
     

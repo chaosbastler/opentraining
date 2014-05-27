@@ -16,10 +16,8 @@
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/EditText01"
-        android:layout_alignBottom="@+id/EditText01"
         android:layout_alignParentLeft="true"
-        android:text="Author:"
+        android:text="@string/author_colon"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Spinner

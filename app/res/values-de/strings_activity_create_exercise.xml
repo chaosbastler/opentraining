@@ -39,6 +39,7 @@
     <string name="error_did_not_return_image">Fehler: es wurde kein Bild zurückgegeben</string>
     <string name="edit_image_metadata">Bild-Metadaten bearbeiten</string>
     <string name="delete_image">Bild entfernen</string>
+    <string name="author_colon">Autor:</string>
     <string name="license_colon">Lizenz:</string>
     <string name="position_colon">Position:</string>
 

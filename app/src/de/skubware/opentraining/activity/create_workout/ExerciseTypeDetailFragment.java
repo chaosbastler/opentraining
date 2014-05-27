@@ -256,7 +256,7 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		});
 	
 		// configure menu_item_delete_exercise
-		if(mExercise.getExerciseSource().equals(ExerciseSource.CUSTOM)){
+		if(mExercise != null  && mExercise.getExerciseSource() == ExerciseSource.CUSTOM){
 			MenuItem menu_item_delete_exercise = (MenuItem) menu.findItem(R.id.menu_item_delete_exercise);
 			menu_item_delete_exercise.setVisible(true);
 			menu_item_delete_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener(){
