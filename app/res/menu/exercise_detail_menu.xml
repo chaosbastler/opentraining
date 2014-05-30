@@ -22,4 +22,9 @@
         android:visible="false" 
         android:title="@string/delete_exercise"
         yourapp:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/menu_item_upload_exercise"
+        android:title="string menu_item_upload_exercise"
+        yourapp:showAsAction="never"/>
 </menu>

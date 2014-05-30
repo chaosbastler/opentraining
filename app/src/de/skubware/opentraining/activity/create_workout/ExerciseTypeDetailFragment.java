@@ -21,10 +21,20 @@
 package de.skubware.opentraining.activity.create_workout;
 
 
+import retrofit.RestAdapter;
+import retrofit.RestAdapter.LogLevel;
+import retrofit.android.AndroidLog;
+import retrofit.http.Body;
+import retrofit.http.PUT;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -49,6 +59,7 @@ import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
+import de.skubware.opentraining.db.parser.ExerciseTypeGSONSerializer;
 
 /**
  * A fragment representing a single ExerciseType detail screen. This fragment is
@@ -283,7 +294,82 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		}
 		
 		
+		// configure menu_item_upload_exercise
+		MenuItem menu_item_upload_exercise = (MenuItem) menu.findItem(R.id.menu_item_upload_exercise);
+		menu_item_upload_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			public boolean onMenuItemClick(MenuItem item) {
+				
+				UploadExerciseOperation exUpload = new UploadExerciseOperation();
+	            
+				exUpload.execute(mExercise);
+
+				/*if(mExercise.getDescription() == null || mExercise.getDescription().equals("")){
+					Toast.makeText(getActivity(), getString(R.string.no_description_available), Toast.LENGTH_LONG).show();
+					return true;
+				}*/
+				
+				//AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				//builder.setTitle(getString(R.string.description));
+				
+				
+				//builder.setMessage(Html.fromHtml(mExercise.getDescription()));
+				//builder.create().show();
+
+				return true;
+			}
+		});
+	
+		
 	}
 
+	public interface WgerRestService {		
+		  @PUT("/exercise/?username=chaosbastler&api_key=53069e6e627b9bb8abddff1fa1796fdecb7eaee7")
+		  public String createExercise(@Body String exerciseJsonString);
+	}
+	
+	
+	 private class UploadExerciseOperation extends AsyncTask<ExerciseType, Void, String> {
 
+	        @Override
+	        protected String doInBackground(ExerciseType ... exercise) {
+	        	
+	        	
+	        	GsonBuilder gsonBuilder = new GsonBuilder();
+				gsonBuilder.registerTypeAdapter(ExerciseType.class, new ExerciseTypeGSONSerializer());
+				gsonBuilder.setPrettyPrinting();
+				
+				Gson gson = gsonBuilder.create();
+				
+				String exJson = gson.toJson(exercise);
+				Log.e(TAG, exJson);
+				
+
+				RestAdapter restAdapter = new RestAdapter.Builder()
+			    .setEndpoint("https://wger.de/api/v1/")
+			    .setLog(new AndroidLog("WgerRestService"))
+			    .setLogLevel(LogLevel.FULL)
+			    .build();
+
+				WgerRestService service = restAdapter.create(WgerRestService.class);
+				service.createExercise(exJson);
+	        	
+	            
+	            return "Executed";
+	        }
+
+	        @Override
+	        protected void onPostExecute(String result) {
+	            //TextView txt = (TextView) findViewById(R.id.output);
+	            //txt.setText("Executed"); // txt.setText(result);
+	            // might want to change "executed" for the returned string passed
+	            // into onPostExecute() but that is upto you
+	        }
+
+	        @Override
+	        protected void onPreExecute() {}
+
+	        @Override
+	        protected void onProgressUpdate(Void... values) {}
+	    }
+	
 }
