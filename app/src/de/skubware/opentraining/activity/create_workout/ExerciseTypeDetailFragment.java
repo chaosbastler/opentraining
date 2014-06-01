@@ -283,6 +283,24 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		}
 		
 		
+		// configure menu_item_send_exercise_feedback
+			MenuItem menu_item_delete_exercise = (MenuItem) menu.findItem(R.id.menu_item_send_exercise_feedback);
+			menu_item_delete_exercise.setVisible(true);
+			menu_item_delete_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					
+					SendExerciseFeedbackDialog dialog = new SendExerciseFeedbackDialog(getActivity(), mExercise);
+					dialog.show();
+
+					return false;
+				}
+			});
+		
+		
+		
+
+		
 	}
 
 

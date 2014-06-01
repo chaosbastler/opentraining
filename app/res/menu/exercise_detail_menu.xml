@@ -22,4 +22,10 @@
         android:visible="false" 
         android:title="@string/delete_exercise"
         yourapp:showAsAction="never"/>
+    
+        <item
+        android:id="@+id/menu_item_send_exercise_feedback"
+        android:visible="false" 
+        android:title="@string/send_exercise_feedback"
+        yourapp:showAsAction="never"/>
 </menu>

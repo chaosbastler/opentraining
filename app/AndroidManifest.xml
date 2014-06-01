@@ -18,7 +18,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" android:name="de.skubware.opentraining.activity.acra.OpenTrainingApplication">
         <activity
             android:name="de.skubware.opentraining.activity.MainActivity"
             android:label="@string/app_name">
@@ -94,7 +94,12 @@
             android:label="@string/create_exercise_activity_title"
             android:icon="@drawable/icon_dumbbell" >
         </activity>
-        
+		<activity android:name="org.acra.CrashReportDialog"
+        	android:theme="@android:style/Theme.Dialog"
+        	android:launchMode="singleInstance"
+        	android:excludeFromRecents="true"
+        	android:finishOnTaskLaunch="true" />
+		
         <service android:enabled="true" android:name="de.skubware.opentraining.activity.settings.sync.OpenTrainingSyncService" />
         
     </application>
