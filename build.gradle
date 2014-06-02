@@ -52,8 +52,12 @@ android {
       resources.srcDirs = ['test/src']
     }
   }
-  lintOptions {
-    abortOnError false
+  buildTypes {
+    release {
+      lintOptions {
+        abortOnError false
+      }
+    }
   }
 }
 
