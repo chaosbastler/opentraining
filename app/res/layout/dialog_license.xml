@@ -86,6 +86,23 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
+            android:id="@+id/TextView09"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="39dp"
+            android:text="License of ACRA"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/released_button_background" />
+
+        <TextView
+            android:id="@+id/TextView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.08"
+            android:text="@string/license_acra"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
             android:id="@+id/text_view_license_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,6 +117,7 @@
             android:layout_height="wrap_content"
             android:text="@string/license_text_images"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+
     </LinearLayout>
 
 </ScrollView>
