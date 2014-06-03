@@ -88,12 +88,15 @@ public class SendExerciseFeedbackDialogFragment  extends DialogFragment{
 
 	@Override
 	public void onSaveInstanceState(Bundle bundle){
-		mUserMessage = mEditText.getEditableText().toString();
-		mReasonSelected = mReasonSpinner.getSelectedItemPosition();
-		
 		bundle.putSerializable(KEY_EXERCISE, mExercise);
-		bundle.putString(KEY_USER_MESSAGE, mUserMessage);
-		bundle.putInt(KEY_EXERCISE_UPDATE_REASON, mReasonSelected);
+		
+		if(mEditText != null && mReasonSpinner != null){
+			mUserMessage = mEditText.getEditableText().toString();
+			mReasonSelected = mReasonSpinner.getSelectedItemPosition();
+		
+			bundle.putString(KEY_USER_MESSAGE, mUserMessage);
+			bundle.putInt(KEY_EXERCISE_UPDATE_REASON, mReasonSelected);
+		}	
 	}
 	
 	@Override
