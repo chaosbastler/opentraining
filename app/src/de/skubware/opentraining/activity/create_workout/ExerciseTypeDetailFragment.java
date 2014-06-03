@@ -27,7 +27,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -42,6 +44,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.SelectWorkoutDialogFragment;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FitnessExercise;
@@ -290,8 +293,16 @@ public class ExerciseTypeDetailFragment extends Fragment {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					
-					SendExerciseFeedbackDialog dialog = new SendExerciseFeedbackDialog(getActivity(), mExercise);
-					dialog.show();
+					FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+					Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+					if (prev != null) {
+						ft.remove(prev);
+					}
+					ft.addToBackStack(null);
+
+					// Create and show the dialog.
+					DialogFragment newFragment = SendExerciseFeedbackDialogFragment.newInstance(mExercise);
+					newFragment.show(ft, "dialog");
 
 					return false;
 				}

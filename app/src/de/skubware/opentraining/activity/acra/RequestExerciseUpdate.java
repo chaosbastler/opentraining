@@ -22,6 +22,9 @@ package de.skubware.opentraining.activity.acra;
 
 import org.acra.ACRA;
 
+import android.content.Context;
+
+import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.ExerciseType;
 
 /**
@@ -39,20 +42,33 @@ public class RequestExerciseUpdate extends Exception{
 
 	
 	public enum ExerciseUpdateReason{
-		MISC("Miscellaneous"),
-		WRONG_INFORMATION("Wrong information"),
-		WRONG_IMAGE("Wrong image"),
-		EXERCISE_DUPLICATE("Exercise duplicate");
+		MISC("Miscellaneous", R.string.misc),
+		WRONG_INFORMATION("Wrong information", R.string.wrong_information),
+		WRONG_IMAGE("Wrong image",R.string.wrong_image),
+		EXERCISE_DUPLICATE("Exercise duplicate", R.string.exercise_duplicate);
 		
 		private String mLongName;
+		private String mTranslatedName = null;
+
+		private int mResID;
 		
-		ExerciseUpdateReason(String longName){
+		ExerciseUpdateReason(String longName, int resID){
 			mLongName = longName;
+			mResID = resID;
 		}
 		
 		@Override
 		public String toString(){
-			return mLongName;
+			if(mTranslatedName == null)
+				return mLongName;
+			else
+				return mTranslatedName;
+		}
+		
+		public static void translateEnums(Context context){
+			for(ExerciseUpdateReason reason:ExerciseUpdateReason.values()){
+				reason.mLongName = context.getString(reason.mResID);
+			}
 		}
 	}
 	
