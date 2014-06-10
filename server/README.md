@@ -1,0 +1,1 @@
+These php scripts are used for gathering user feedback/crash reports.

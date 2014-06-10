@@ -139,9 +139,7 @@ public class SendExerciseFeedbackDialogFragment  extends DialogFragment{
 
 				
 		        // send feedback 
-		        HashMap<String,String> ACRAData = new HashMap<String,String>();
-		        ACRAData.put("Feedback source ", TAG);
-		        ACRA.getErrorReporter().setReportSender(new ACRAFeedbackMailer(ACRAData));
+		        ACRA.getErrorReporter().setReportSender(new ACRAFeedbackMailer());
 		        // silentException prevents that the dialog for crash reports pops up
 				ACRA.getErrorReporter().handleSilentException(new RequestExerciseUpdate(mExercise, reason, userMsg));
 

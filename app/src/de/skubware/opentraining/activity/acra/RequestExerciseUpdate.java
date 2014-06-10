@@ -65,9 +65,13 @@ public class RequestExerciseUpdate extends Exception{
 				return mTranslatedName;
 		}
 		
+		public String getUnlocalizedName(){
+			return mLongName;
+		}
+		
 		public static void translateEnums(Context context){
 			for(ExerciseUpdateReason reason:ExerciseUpdateReason.values()){
-				reason.mLongName = context.getString(reason.mResID);
+				reason.mTranslatedName = context.getString(reason.mResID);
 			}
 		}
 	}
@@ -75,9 +79,8 @@ public class RequestExerciseUpdate extends Exception{
 	
 	public RequestExerciseUpdate(ExerciseType ex, ExerciseUpdateReason reason, String userMsg){
         ACRA.getErrorReporter().putCustomData("Exercise ", ex.getUnlocalizedName());
-        ACRA.getErrorReporter().putCustomData("Reason ", reason.toString());
+        ACRA.getErrorReporter().putCustomData("Reason ", reason.getUnlocalizedName());
         ACRA.getErrorReporter().putCustomData("User message ", userMsg);
-
 	}
 	
 }

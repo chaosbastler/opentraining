@@ -28,16 +28,12 @@ import android.util.Log;
  * Based on acra-mailer(https://github.com/d-a-n/acra-mailer) of d-a-n. 
  */
 public class ACRAFeedbackMailer implements ReportSender {
+	private final static String TAG = "ACRAFeedbackMailer";
+	
 	private final static String BASE_URL = "http://skubware.de/opentraining/acra_feedback.php";
 	private final static String SHARED_SECRET = "my_on_github_with_everyone_shared_secret";
-	private Map<String, String> custom_data = null;
 
-	public ACRAFeedbackMailer() {
-	}
 
-	public ACRAFeedbackMailer(HashMap<String, String> custom_data) {
-		this.custom_data = custom_data;
-	}
 
 	@Override
 	public void send(CrashReportData report) throws ReportSenderException {
@@ -51,14 +47,21 @@ public class ACRAFeedbackMailer implements ReportSender {
 
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
-			if (custom_data != null) {
-				for (Map.Entry<String, String> entry : custom_data.entrySet()) {
-					parameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-				}
-			}
 			parameters.add(new BasicNameValuePair("DATE", new Date().toString()));
 			parameters.add(new BasicNameValuePair("APP_VERSION_NAME", report.get(ReportField.APP_VERSION_NAME)));
-			parameters.add(new BasicNameValuePair("CUSTOM_DATA", report.get(ReportField.CUSTOM_DATA)));
+			
+			
+			String custom_data = report.get(ReportField.CUSTOM_DATA); // custom data has to be split
+			for(String keyValue:custom_data.split("\n")){
+				String[] splittedString =  keyValue.split("=");
+
+				if(splittedString.length >1){
+					parameters.add(new BasicNameValuePair(splittedString[0].trim(), splittedString[1].trim()));
+				}else{
+					Log.w(TAG, "No valid split for: " + splittedString);
+				}
+			}
+			
 			
 			httpPost.setEntity(new UrlEncodedFormEntity(parameters, HTTP.UTF_8));
 			httpClient.execute(httpPost);
