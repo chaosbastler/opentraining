@@ -166,7 +166,8 @@ public class WorkoutListFragment extends ListFragment {
 		}
 
 		if (oldWorkout == null) {
-			Log.e(TAG, "Changed Workout could not be found in WorkoutListActivity. changedWorkout: " + changedWorkout.toDebugString());
+			// no changed workout, but new one
+			mWorkoutList.add(changedWorkout);
 			return;
 		}
 

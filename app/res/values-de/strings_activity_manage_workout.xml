@@ -4,7 +4,14 @@
     <!-- WorkoutListFragment -->
     <string name="no_workout">Es wurde kein Workout gefunden.</string>
     
+  	<!-- WorkoutListActivityMenu -->
+    <string name="import_workout">Workout importieren</string>    
+    <string name="no_file_browser_found">Es wurde kein Datei Browser gefunden. Bitte installiere einen Datei-Browser.</string>
+    <string name="no_workout_passed">Der Datei Browser hat keine Workout Datei zurückgegeben.</string>
+    <string name="no_valid_workout">Die Datei %1$s ist kein gültiges Workout.</string>
+    <string name="workout_has_been_imported">Das Workout wurde importiert</string>
     
+            
     <!-- WorkoutDetailFragment -->
     <string name="workout_name">Workoutname</string>
     <string name="rename_workout">Umbenennen</string>
