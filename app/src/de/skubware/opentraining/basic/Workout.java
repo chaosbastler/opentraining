@@ -320,4 +320,16 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 		Log.d(TAG, "setEmptyRows() to " + this.emptyRows);
 	}
 
+	/**
+	  * Returns a new Workout only containing the Exercises, but no history(FSets).
+	  * The crated Workout will have the same name.
+	  */
+	public Workout getWorkoutWithoutHistory(){
+		List<FitnessExercise> fExList = new ArrayList<FitnessExercise>();
+		for(FitnessExercise fEx: this.fitnessExercises){
+			fExList.add(new FitnessExercise(fEx.getExType())); // copy exercises without FSets
+		}
+		Workout w = new Workout(this.name, fExList);
+		return w;
+	}
 }

@@ -21,7 +21,14 @@
     <string name="workout_name_cannot_be_empty">Workoutname darf nicht leer sein</string>
     <string name="error_during_saving">Das Workout konnte nicht gespeichert werden.</string>
     
-        
+    <!-- Share Workout -->
+    <string name="share_workout">Workout Teilen</string>
+    <string name="should_workout_history_be_included">Soll das Workout mit oder ohne Trainingsgeschichte geteilt werden?</string>
+    <string name="workout_with_history">Workout mit Trainingsgeschichte</string>
+    <string name="workout_without_history">Workout ohne Trainingsgeschichte</string>
+    <string name="send_workout_to">Workout senden zu ...</string>
+    
+    
     <!-- ShowWorkoutHTMLActivity -->
     <string name="title_activity_show_workout_html">HTML Export</string>
     <string name="share">Teilen</string>

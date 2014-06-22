@@ -588,10 +588,11 @@ public class DataProvider implements IDataProvider {
 		}
 
 	}
+	
 
+	
 	@Override
 	public boolean saveWorkout(Workout w) {
-		Log.d(TAG, "w==null: " + (w==null) + "  mContext==null: " + (mContext==null));
 		boolean succ = XMLSaver.writeTrainingPlan(w, mContext.getFilesDir());
 		
 		// update Cache, as Workout has changed
