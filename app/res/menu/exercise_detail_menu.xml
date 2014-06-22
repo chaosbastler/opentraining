@@ -25,6 +25,12 @@
     
     <item
         android:id="@+id/menu_item_upload_exercise"
-        android:title="string menu_item_upload_exercise"
+        android:title="string menu_item_upload_exercise"/>
+
+    <item
+        android:id="@+id/menu_item_send_exercise_feedback"
+        android:visible="false" 
+        android:title="@string/send_exercise_feedback"
         yourapp:showAsAction="never"/>
+        
 </menu>

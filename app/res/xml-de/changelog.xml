@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.1" versioncode="27" summary="Fehler melden und Übersetzungs-Updates" date="06/03/2014">
+        <change>Man kann nun leicht Fehler melden : Workout erstellen -> Übung wählen -> Menü -> Fehler melden</change>     
+        <change>Arabische Übersetzung der App hinzugefügt. Dank dafür an cwfowers.</change>
+        <change>Aktualisierung der französischen Übersetzung. Dank dafür nochmals an Kcchouette.</change>
+        <change>Bibliothek für das Senden von Absturzberichten hinzugefügt</change>
+        <change>Bugfix: 2 potentielle Abstürze behoben</change>
+    </release>    
     <release version="0.7" versioncode="26" summary="Neue Übungen erstellen und französische Übersetzung" date="05/12/2014">
         <change>Ein oft gewünschtes Feature ist endlich fertig: Eigene Übungen erstellen (Workout erstellen->Menü->Übung erstellen).</change>
         <change>Französische Übersetzung der App hinzugefügt. Dank dafür an Kcchouette.</change>

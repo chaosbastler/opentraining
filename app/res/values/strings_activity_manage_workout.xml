@@ -3,7 +3,14 @@
     
   	<!-- WorkoutListFragment -->
     <string name="no_workout">Did not find a workout.</string>
-
+    
+  	<!-- WorkoutListActivityMenu -->
+    <string name="import_workout">Import Workout</string>
+    <string name="no_file_browser_found">No file browser found. Please install a file browser.</string>
+    <string name="no_workout_passed">The file browser did not return a workout file.</string>
+    <string name="no_valid_workout">The file %1$s no valid workout file.</string>
+    <string name="workout_has_been_imported">The workout has been imported</string>
+    
     
     <!-- WorkoutDetailFragment -->
     <string name="workout_name">Workout name</string>
@@ -20,6 +27,13 @@
     <string name="cancel">Cancel</string>
     <string name="workout_name_cannot_be_empty">Workout name cannot be empty</string>
     <string name="error_during_saving">The workout could not be saved.</string>
+    
+    <!-- Share Workout -->
+    <string name="share_workout">Share Workout</string>
+    <string name="should_workout_history_be_included">Do you want to include the workout history or just send the workout?</string>
+    <string name="workout_with_history">Workout with history</string>
+    <string name="workout_without_history">Workout without history</string>
+    <string name="send_workout_to">Send Workout to ...</string>
     
     
     <!-- ShowWorkoutHTMLActivity -->

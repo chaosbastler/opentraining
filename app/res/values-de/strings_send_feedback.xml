@@ -1,0 +1,25 @@
+<resources>
+    
+    <!-- exercise detail menu -->
+   	<string name="send_exercise_feedback">Fehler melden</string>
+
+   	
+    <!-- SendExerciseFeedbackDialog -->
+    <string name="send_feedback_for_exercise">Feedback zu: %1$s</string>
+    <string name="issue">Problem:</string>
+    <string name="your_suggestion">Dein Lösungsvorschlag:</string>
+    <!-- ExerciseUpdateReason -->
+	<string name="misc">Sonstiges</string>
+	<string name="wrong_information">Falsche Daten</string>
+	<string name="wrong_image">Falsches Bild</string>
+	<string name="exercise_duplicate">Übung doppelt</string>
+    	
+    
+    
+    <!-- ACRA crash report dialog -->
+   	<string name="crash_dialog_text">Ein unerwarteter Fehler brachte die Anwendung leider zum Absturz. Bitte hilf bei der Fehlerbehebung indem du uns die Fehlerdaten mit \'OK\' zusendest.</string>
+    <string name="crash_dialog_comment_prompt">Du kannst zusätzlich noch einen Kommentar zu dem Fehler hinzufügen:</string>
+   	<string name="crash_dialog_ok_toast">Der Fehlerbericht wurde gesendet. Vielen Dank für die Mithilfe.</string>
+
+
+</resources>

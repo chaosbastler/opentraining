@@ -3,6 +3,10 @@
 <resources>
   <string name="search">Rechercher</string>
   <string name="filter">Filtrer</string>
+  <string name="menu_item_show_default_exercises_title">Montrer les exercices par défaut</string>
+  <string name="menu_item_show_synced_exercises_title">Montrer les exercices synchronisés</string>
+  <string name="menu_item_show_custom_exercises_title">Montrer les exercices personnalisés</string>
+  <string name="delete_exercise">Supprimer l\'exercice</string>
   <string name="title_exercisetype_detail">Détail de l\'exercice</string>
   <string name="title_exercisetype_list">Exercices</string>
   <string name="exercise_already_in_workout">Vous avez déjà ajouté cet exercice à votre entraînement.</string>

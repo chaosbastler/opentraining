@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.1" versioncode="27" summary="Report errors and translation updates" date="06/03/2014">
+        <change>You can now easily report errors: Create Workout -> Choose an exercise -> Menu -> Report Error</change>     
+        <change>The app has been (partly) translated to Arabic. Thanks to cwfowers for this translation.</change>
+        <change>Update of french translation. Thanks again to Kcchouette.</change>
+        <change>Added library for handling crash reports</change>
+        <change>Bugfix: fixed 2 potential crashes</change>
+    </release>
     <release version="0.7" versioncode="26" summary="Creating new exercises and french translation" date="05/12/2014">
         <change>Many user requested this feature and it's finally there: you can add your own exercises (Create Workout->Menu->Create exercise).</change>
         <change>The app has been translated to French. Thanks to Kcchouette for this translation.</change>

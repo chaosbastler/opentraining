@@ -20,16 +20,27 @@
 
 package de.skubware.opentraining.activity.manage_workouts;
 
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.basic.Workout;
+import de.skubware.opentraining.db.DataProvider;
+import de.skubware.opentraining.db.IDataProvider;
+import de.skubware.opentraining.db.parser.WorkoutXMLParser;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.Toast;
 
 /**
  * An activity representing a list of Workouts. This activity has different
@@ -55,6 +66,8 @@ public class WorkoutListActivity extends ActionBarActivity implements WorkoutLis
 	static final int RESULT_WORKOUT = 404;
 
 	static final int REQUEST_EXIT = 99;
+	
+	static final int PICKFILE_RESULT_CODE = 6432;
 
 	/** Constant for argument */
 	public static String ARG_WORKOUT = "workout";
@@ -84,6 +97,29 @@ public class WorkoutListActivity extends ActionBarActivity implements WorkoutLis
 			((WorkoutListFragment) getSupportFragmentManager().findFragmentById(R.id.workout_list)).setActivateOnItemClick(true);
 		}
 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.workout_list_menu, menu);
+
+		MenuItem menu_item_import_workout = (MenuItem) menu.findItem(R.id.menu_item_import_workout);
+		menu_item_import_workout.setOnMenuItemClickListener(new OnMenuItemClickListener(){
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent openFileintent = new Intent(Intent.ACTION_GET_CONTENT);
+				openFileintent.setType("*/*");
+		        try {
+		            startActivityForResult(openFileintent, PICKFILE_RESULT_CODE);
+		        } catch (ActivityNotFoundException e) {
+		            Log.e(TAG, "No activity can handle picking a file.");
+		            Toast.makeText(WorkoutListActivity.this, WorkoutListActivity.this.getString(R.string.no_file_browser_found), Toast.LENGTH_LONG).show();
+		        }
+				return false;
+			}
+		});
+		return true;
 	}
 
 	@Override
@@ -142,7 +178,42 @@ public class WorkoutListActivity extends ActionBarActivity implements WorkoutLis
 				finish();
 				return;
 			}
+			
+			
 
+		}
+		
+		if(requestCode == PICKFILE_RESULT_CODE){
+            if (resultCode == RESULT_OK) {
+            	// try to parse the Workout
+                String filePath = data.getData().getPath();
+                File workoutFile = new File(filePath);
+                WorkoutXMLParser parser = new WorkoutXMLParser();
+                Workout w = parser.read(workoutFile, this);
+                
+                if(w == null){
+                	Toast.makeText(this, getString(R.string.no_valid_workout, workoutFile.getName()), Toast.LENGTH_LONG).show();
+                }else{
+                	IDataProvider dataProvider = new DataProvider(this);
+                	Set<String> exisitingWorkoutNames = new HashSet<String>();
+                	for(Workout workout:dataProvider.getWorkouts()){
+                		exisitingWorkoutNames.add(workout.getName());
+                	}
+                		
+                	while(exisitingWorkoutNames.contains(w.getName())){
+                		Log.e(TAG, "Already a workout with the same name, will rename it");
+                		w.setName(w.getName() + "0");
+                	}
+                	
+                	dataProvider.saveWorkout(w);
+                	Toast.makeText(this, getString(R.string.workout_has_been_imported, workoutFile.getName()), Toast.LENGTH_LONG).show();
+                	this.onWorkoutChanged(w);
+                }
+            }else{
+            	// show error: no filepath returned
+            	Toast.makeText(this, getString(R.string.no_workout_passed), Toast.LENGTH_LONG).show();
+            }
+            
 		}
 	}
 

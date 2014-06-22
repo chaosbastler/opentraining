@@ -26,6 +26,7 @@
   <string name="downloading_exercises">Les exercices sont disponibles en téléchargement</string>
   <string name="downloading_language_files">Téléchargement des données linguistiques</string>
   <string name="downloading_muscle_files">Télécharger les fichiers sur les muscles</string>
+  <string name="downloading_images">Téléchargement des images (ceci peut prendre quelques minutes)</string>
   <string name="verifying_exercises">Exercices de révision</string>
   <string name="saving_exercises">Enregistrer les exercices</string>
   <string name="sync_finished">Synchronisation finie</string>

@@ -1,0 +1,24 @@
+<resources>
+    
+    <!-- exercise detail menu -->
+   	<string name="send_exercise_feedback">Report error</string>
+
+   	
+    <!-- SendExerciseFeedbackDialog -->
+    <string name="send_feedback_for_exercise">Feedback for: %1$s</string>
+    <string name="issue">Issue:</string>
+    <string name="your_suggestion">Your suggestion:</string>
+    <!-- ExerciseUpdateReason -->
+	<string name="misc">Miscellaneous</string>
+	<string name="wrong_information">Wrong information</string>
+	<string name="wrong_image">Wrong image</string>
+	<string name="exercise_duplicate">Exercise duplicate</string>
+    	
+        
+    <!-- ACRA crash report dialog -->
+   	<string name="crash_dialog_text">An unexpected error occurred forcing the application to stop. Please help by sending us error date by clicking \'OK\'.</string>
+    <string name="crash_dialog_comment_prompt">You might add your comments abouth the problem below:</string>
+   	<string name="crash_dialog_ok_toast">Report has been sent. Thank you for helping.</string>
+
+
+</resources>

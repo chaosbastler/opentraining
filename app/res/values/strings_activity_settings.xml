@@ -17,6 +17,8 @@
     <string name="translation_credits" translatable="false">
         Italian Translation by Andrea Brancaleoni (https://github.com/thypon)\n
         Spanish Translation by Sebastián Di Luise
+        French Translation by Kcchouette
+        Arabic Translation by cwfowers
     </string>
     <string name="license_text_images" translatable="false">
 The exercises images by Everkinetic are licensed under a Creative Commons Attribution-Share Alike 3.0 Unported License.\n\n
@@ -30,9 +32,9 @@ The license text can be found at: http://creativecommons.org/licenses/by/3.0/
  Copyright 2012 Roman Nurik
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
+ You may obtain a copy of the License at\n\n
  
-      http://www.apache.org/licenses/LICENSE-2.0
+      http://www.apache.org/licenses/LICENSE-2.0\n\n
  
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,13 +45,13 @@ The license text can be found at: http://creativecommons.org/licenses/by/3.0/
     
     <string name="license_inscription" translatable="false">
 Kroniek library
-(c) 2012 Martin van Zuilekom (http://martin.cubeactive.com)
+(c) 2012 Martin van Zuilekom (http://martin.cubeactive.com)\n\n
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+You may obtain a copy of the License at\n\n
 
-http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0\n\n
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -59,13 +61,13 @@ limitations under the License.
 </string>	
 
 <string name="license_fancy_coverflow" translatable="false">
-Copyright 2013 David Schreiber
+Copyright 2013 David Schreiber\n\n
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+   You may obtain a copy of the License at\n\n
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       http://www.apache.org/licenses/LICENSE-2.0\n\n
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -73,7 +75,22 @@ Copyright 2013 David Schreiber
    See the License for the specific language governing permissions and
    limitations under the License.
 </string>	
-    
+
+<string name="license_acra" translatable="false">
+Copyright 2010 Emmanuel Astier, Kevin Gaudin and others\n\n
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at\n\n
+
+http://www.apache.org/licenses/LICENSE-2.0\n\n
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</string>	
     
     <!-- Sync settings -->
     <string name="pref_header_sync_settings">Synchronization</string>
