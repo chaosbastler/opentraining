@@ -19,7 +19,7 @@
  */
 
 
-package de.skubware.opentraining.db.parser;
+package de.skubware.opentraining.db.rest;
 
 import java.lang.reflect.Type;
 
@@ -38,24 +38,26 @@ public class ExerciseTypeGSONSerializer implements JsonSerializer<ExerciseType>{
 		public JsonElement serialize(ExerciseType ex, Type typeOfSrc, JsonSerializationContext context) {
 			
 			JsonObject mainObject = new JsonObject();
-			mainObject.addProperty("category", "/api/v1/exercisecategory/8/");
-			mainObject.addProperty("comments", "[]");
-			mainObject.addProperty("creation_date", "null");
-			mainObject.addProperty("description", "Just an example ex for testing uploading.");
-			mainObject.addProperty("description", "Just an example ex for testing uploading.");
+			mainObject.addProperty("category", 10);
+			
+			if(ex.getDescription() != null && !ex.getDescription().equals("")){
+				mainObject.addProperty("description", ex.getDescription());
+			}else{
+				mainObject.addProperty("description", "-");
+			}
 
-			JsonArray equipmentJsonArray = new JsonArray();
-			equipmentJsonArray.add(new JsonPrimitive("/api/v1/equipment/1/"));
-			mainObject.add("equipment", equipmentJsonArray);
+			//JsonArray equipmentJsonArray = new JsonArray();
+			//equipmentJsonArray.add(new JsonPrimitive(4));
+			//mainObject.add("equipment", equipmentJsonArray);
 
-			mainObject.addProperty("language", "/api/v1/language/1/");
-			mainObject.addProperty("license", "/api/v1/license/1/");
-			mainObject.addProperty("license_author", "me ;)");
+			mainObject.addProperty("language", 1);
+			mainObject.addProperty("license", 1);
+			/*mainObject.addProperty("license_author", "me ;)");
 			mainObject.addProperty("muscles", "[]");
 			mainObject.addProperty("secondary", "[]");
-
+			*/
 			
-			mainObject.addProperty("name", "Rest Put Test Exercise");
+			mainObject.addProperty("name", ex.getUnlocalizedName());
 
 			return mainObject;
 		}

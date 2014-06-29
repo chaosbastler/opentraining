@@ -21,10 +21,28 @@
 package de.skubware.opentraining.activity.create_workout;
 
 
+import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.android.AndroidLog;
+import retrofit.client.ApacheClient;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
+import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.PUT;
 
 import com.google.gson.Gson;
@@ -53,16 +71,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+import de.skubware.opentraining.BuildConfig;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.SelectWorkoutDialogFragment;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FitnessExercise;
+import de.skubware.opentraining.basic.Muscle;
+import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
-import de.skubware.opentraining.db.parser.ExerciseTypeGSONSerializer;
+import de.skubware.opentraining.db.rest.ExerciseTypeGSONSerializer;
+import de.skubware.opentraining.db.rest.MuscleGSONDeserializer;
+import de.skubware.opentraining.db.rest.ServerModel;
+import de.skubware.opentraining.db.rest.ServerModel.MuscleCategory;
+import de.skubware.opentraining.db.rest.SportsEquipmentGSONDeserializer;
 
 /**
  * A fragment representing a single ExerciseType detail screen. This fragment is
@@ -351,8 +376,14 @@ public class ExerciseTypeDetailFragment extends Fragment {
 	}
 
 	public interface WgerRestService {		
-		  @PUT("/exercise/?username=chaosbastler&api_key=53069e6e627b9bb8abddff1fa1796fdecb7eaee7")
-		  public String createExercise(@Body String exerciseJsonString);
+		  @POST("/exercise/")
+		  public Response createExercise(@Body ExerciseType exercise);
+		  
+		  @GET("/equipment/")
+		  public ServerModel.Equipment[] getEquipment();
+		  
+		  @GET("/exercisecategory/")
+		  public ServerModel.MuscleCategory[] getMuscles();
 	}
 	
 	
@@ -364,24 +395,47 @@ public class ExerciseTypeDetailFragment extends Fragment {
 	        	
 	        	GsonBuilder gsonBuilder = new GsonBuilder();
 				gsonBuilder.registerTypeAdapter(ExerciseType.class, new ExerciseTypeGSONSerializer());
+				gsonBuilder.registerTypeAdapter(ServerModel.Equipment[].class, new SportsEquipmentGSONDeserializer());
+				gsonBuilder.registerTypeAdapter(ServerModel.MuscleCategory[].class, new MuscleGSONDeserializer());
 				gsonBuilder.setPrettyPrinting();
 				
 				Gson gson = gsonBuilder.create();
+
 				
-				String exJson = gson.toJson(exercise);
-				Log.e(TAG, exJson);
+				GsonConverter converter = new GsonConverter(gson);
 				
 
-				RestAdapter restAdapter = new RestAdapter.Builder()
-			    .setEndpoint("https://wger.de/api/v1/")
-			    .setLog(new AndroidLog("WgerRestService"))
-			    .setLogLevel(LogLevel.FULL)
-			    .build();
+				RestAdapter.Builder builder = new RestAdapter.Builder()
+				.setConverter(converter)
+			    .setEndpoint("http://preview.wger.de/api/v2/")
+			    .setRequestInterceptor(new RequestInterceptor() {  
+			    	@Override  
+			    	public void intercept(RequestFacade requestFacade) {  
+			    		requestFacade.addHeader("Authorization", "Token ba1ce753f54ba3b8ee4af301f07c58628a1c01bf");  
+			    	}  
+			    });
+				
+				// only log if debug-build
+				// (otherwise auth-token appears in log)
+		        if (BuildConfig.DEBUG){
+		        	builder.setLog(new AndroidLog("WgerRestService"))
+		        	.setLogLevel(LogLevel.FULL);
+		        }
+			    
+			    RestAdapter restAdapter = builder.build();
+				
 
 				WgerRestService service = restAdapter.create(WgerRestService.class);
-				service.createExercise(exJson);
-	        	
+				Response serverResponse = service.createExercise(exercise[0]);
+				Log.d(TAG, "Server response: " + serverResponse.toString());
+				
+				ServerModel.Equipment[] serverEquipment = service.getEquipment();
+				ServerModel.Equipment.toSportsEquipmentSparseArray(serverEquipment, getActivity());
 	            
+				
+				ServerModel.MuscleCategory[] serverMuscles = service.getMuscles();
+				Map<Muscle,MuscleCategory> muscleMap =  ServerModel.MuscleCategory.getMuscleMap(serverMuscles, getActivity());
+								
 	            return "Executed";
 	        }
 

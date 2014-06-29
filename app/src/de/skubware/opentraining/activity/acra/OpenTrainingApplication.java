@@ -25,6 +25,7 @@ import org.acra.*;
 import org.acra.annotation.*;
 
 import android.app.Application;
+import de.skubware.opentraining.BuildConfig;
 import de.skubware.opentraining.R;
 
 @ReportsCrashes(
@@ -44,8 +45,10 @@ public class OpenTrainingApplication  extends Application{
          super.onCreate();
 
          // The following line triggers the initialization of ACRA
-         ACRA.init(this);
-         ACRA.getErrorReporter().setReportSender(new ACRACrashReportMailer()); // default crash report sender
+         if (!BuildConfig.DEBUG){
+        	 ACRA.init(this);
+        	 ACRA.getErrorReporter().setReportSender(new ACRACrashReportMailer()); // default crash report sender
+         }
 	}
 
 	
