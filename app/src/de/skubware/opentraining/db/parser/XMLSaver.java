@@ -67,7 +67,7 @@ public class XMLSaver {
 	 * 
 	 * @return true, if writing was successful, false otherwise
 	 */
-	public static boolean writeTrainingPlan(Workout w, File destination) {
+	public static synchronized boolean writeTrainingPlan(Workout w, File destination) {
 		// check arguments
 		if (destination.isDirectory()) {
 			String filename = w.getName();
@@ -206,7 +206,7 @@ public class XMLSaver {
 	 * 
 	 * @return true, if writing was successful, false otherwise
 	 */
-	public static boolean writeExerciseType(ExerciseType ex, File destination) {
+	public static synchronized boolean writeExerciseType(ExerciseType ex, File destination) {
 
 		boolean success = true; // write the tp to an xml file with DOM
 		DocumentBuilder docBuilder;
