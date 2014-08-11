@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
 		setUpNavigation();
 
 		// load data/parse .xml files in background
-		final Context mContext = this;
+		final Context mContext = this.getApplicationContext();
 		new Thread() {
 			@Override
 			public void run() {
@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
 	private void setUpNavigation(){
 		FancyCoverFlow mFancyCoverFlow = (FancyCoverFlow) this.findViewById(R.id.fancyCoverFlow);
 
-		mFancyCoverFlow.setAdapter(new NavigationGalleryAdapter(this));
+		mFancyCoverFlow.setAdapter(new NavigationGalleryAdapter(this.getApplicationContext()));
 		mFancyCoverFlow.setUnselectedAlpha(0.5f);
 		mFancyCoverFlow.setUnselectedSaturation(0.0f);
 		mFancyCoverFlow.setUnselectedScale(0.2f);
@@ -101,13 +101,13 @@ public class MainActivity extends ActionBarActivity {
 					showSelectWorkoutDialog();
 					break;
 				case 1:
-					startActivity(new Intent(MainActivity.this, ExerciseTypeListActivity.class));
+					startActivity(new Intent(MainActivity.this.getApplicationContext(), ExerciseTypeListActivity.class));
 					break;
 				case 2:
-					startActivity(new Intent(MainActivity.this, WorkoutListActivity.class));
+					startActivity(new Intent(MainActivity.this.getApplicationContext(), WorkoutListActivity.class));
 					break;
 				case 3:
-					startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+					startActivity(new Intent(MainActivity.this.getApplicationContext(), SettingsActivity.class));
 					break;
 				default:
 					Log.wtf(TAG, "This item should not exist.");
