@@ -21,11 +21,11 @@
 package de.skubware.opentraining.db.rest;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.SparseArray;
 import de.skubware.opentraining.basic.Muscle;
 import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.db.DataProvider;
@@ -39,6 +39,7 @@ public class ServerModel {
 	 * Server equivalent to {@link Equipment}.
 	 */
 	public static class Equipment{
+
 		public int id;
 		public String name;
 		
@@ -53,16 +54,25 @@ public class ServerModel {
 			return eq;
 		}
 		
-		public static SparseArray<SportsEquipment> toSportsEquipmentSparseArray(ServerModel.Equipment[] oldArray, Context context){		
-			SparseArray<SportsEquipment> arr = new SparseArray<SportsEquipment>();
 
-		    for(ServerModel.Equipment eq:oldArray){
-				SportsEquipment parsedEquipment = eq.asSportsEquipment(context);
-				if(eq != null)
-					arr.put(eq.id, parsedEquipment);
+		/** @see MuscleCategory#getMuscleMap(MuscleCategory[], Context) */
+		public static Map<SportsEquipment,Equipment> getEquipmentMap(ServerModel.Equipment[] equipmentArr, Context context){
+			Map<SportsEquipment,Equipment> map = new HashMap<SportsEquipment,Equipment>();
+			
+			IDataProvider dataProvider = new DataProvider(context);
+
+			
+		    for(ServerModel.Equipment cat:equipmentArr){
+		    	SportsEquipment parsedObject = dataProvider.getEquipmentByName(cat.name); 
+				
+				if(parsedObject == null){
+					Log.e(TAG, "Could not find SportsEquipment: " + cat.name);
+				}else{					
+					map.put(parsedObject, cat);
+				}
 		    }
 		
-			return arr;
+			return map;
 		}
 
 	}
@@ -73,6 +83,7 @@ public class ServerModel {
 	 * Server equivalent to {@link Muscle}.
 	 */
 	public static class MuscleCategory{
+
 		public int id;
 		public String name;
 		
@@ -95,14 +106,56 @@ public class ServerModel {
 				
 				if(parsedMuscle == null){
 					Log.e(TAG, "Could not find Muscle: " + cat.name);
-				}else{					
+				}else if(map.get(parsedMuscle) == null){					
 					map.put(parsedMuscle, cat);
+				}else{
+					Log.e(TAG, "Muscle assigned two times, parsedMuscle: " + parsedMuscle.toString() + ", cat: " + cat.name + ", map.get(parsedMuscle):" + map.get(parsedMuscle));
 				}
+		    }
+		
+			return map;
+		}
+		
+		@Override
+		public String toString(){
+			return name + id;
+		}
+		
+
+	}
+	
+	
+	/**
+	 * Server equivalent to {@link Locale}.
+	 */
+	public static class Language{
+
+
+
+		public int id;
+		public String short_name;
+		public String full_name;
+
+
+		/**
+		 * Maps the server model of models with the app model of muscles.
+		 * 
+		 * @param categoryArr All muscles on server
+		 * @param context Current app context
+		 * @return A map of the muscle models
+		 */
+		public static Map<Locale,Language> getLanguageMap(ServerModel.Language[] languageArr, Context context){
+			Map<Locale,Language> map = new HashMap<Locale,Language>();
+			
+			
+		    for(ServerModel.Language l:languageArr){
+		    	Locale parsedLocale = new Locale(l.short_name);
+						
+				map.put(parsedLocale, l);
 		    }
 		
 			return map;
 		}
 
 	}
-	
 }

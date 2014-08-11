@@ -220,13 +220,13 @@ public class ExerciseTypeListFragment extends ListFragment implements OnQueryTex
 				accepted = true;
 
 			if (!accepted) {
-				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Muscles do not fit.");
+				// Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Muscles do not fit.");
 				mExerciseList.remove(ex);
 				continue;
 			}
 
 			if (!acceptedEquipment.containsAll(ex.getRequiredEquipment())) {
-				Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Equipment does not fit");
+				// Log.d(TAG, "Exercise: " + ex.toString() + " will not be shown. Equipment does not fit");
 				mExerciseList.remove(ex);
 				continue;
 			}

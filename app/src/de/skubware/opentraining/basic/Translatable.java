@@ -28,7 +28,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.util.Log;
 
 /**
  * A class that makes (dynamic) translation easier. The Android I18N mechanism

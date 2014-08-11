@@ -30,12 +30,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 
-public class MuscleGSONDeserializer implements JsonDeserializer<ServerModel.MuscleCategory[]>{
+public class LanguageGSONDeserializer implements JsonDeserializer<ServerModel.Language[]>{
 
 	@Override
-	public ServerModel.MuscleCategory[] deserialize(JsonElement json, Type type, JsonDeserializationContext jsonContext) throws JsonParseException {
-	    JsonArray muscleJsonArray = json.getAsJsonObject().get("results").getAsJsonArray();
-        return new Gson().fromJson(muscleJsonArray, ServerModel.MuscleCategory[].class);
+	public ServerModel.Language[] deserialize(JsonElement json, Type type, JsonDeserializationContext jsonContext) throws JsonParseException {
+	    JsonArray languageJsonArray = json.getAsJsonObject().get("results").getAsJsonArray();
+        return new Gson().fromJson(languageJsonArray, ServerModel.Language[].class);
 	}
 
 }

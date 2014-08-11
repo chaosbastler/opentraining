@@ -14,7 +14,7 @@
  {
    "de": { "name" : "Bizeps", "alternative_names": ["Biceps brachii", "Biceps femoris"] },
    "it": { "name" : "Bicipiti" },
-   "en": { "name" : "Biceps" }
+   "en": { "name" : "Biceps", "alternative_names": ["Arms"]  }
  },
     
  {
