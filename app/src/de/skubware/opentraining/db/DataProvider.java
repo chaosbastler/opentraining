@@ -636,11 +636,13 @@ public class DataProvider implements IDataProvider {
 	}
 
 	@Override
-	public boolean deleteWorkout(Workout w) {
+	public synchronized boolean deleteWorkout(Workout w) {
 		File directory = mContext.getFilesDir();
 		File workout_file = new File(directory.toString() + "/" + w.getName() + ".xml");
-		if (!workout_file.exists())
-			throw new IllegalArgumentException("The workout that should be deleted does not exist.");
+		
+		if(!workout_file.exists()){
+			Log.e(TAG, "The workout " + w.toDebugString() + " that should be deleted does not exist.");
+		}
 
 		boolean succ = workout_file.delete();
 		
