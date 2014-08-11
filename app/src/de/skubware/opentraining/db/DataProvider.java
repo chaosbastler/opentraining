@@ -187,7 +187,7 @@ public class DataProvider implements IDataProvider {
 			List<ExerciseType> exerciseList) {		
 		List<ExerciseType> unsavedExercises = new ArrayList<ExerciseType>();
 
-		if(exerciseList.isEmpty())
+		if(exerciseList == null || exerciseList.isEmpty())
 			return unsavedExercises;
 		
 		for (ExerciseType exercise : exerciseList) {
