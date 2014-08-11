@@ -92,7 +92,8 @@ public abstract class SimpleDataFragment<T extends Serializable> extends Fragmen
 					public void onDismiss(ListView listView,
 							int[] reverseSortedPositions) {
 						for (int position : reverseSortedPositions) {
-							mListAdapter.remove((T)(mListAdapter.getItem(position)));
+							if(mListAdapter.getCount() > position)
+								mListAdapter.remove((T)(mListAdapter.getItem(position)));
 						}
 						mListAdapter.notifyDataSetChanged();
 					}
