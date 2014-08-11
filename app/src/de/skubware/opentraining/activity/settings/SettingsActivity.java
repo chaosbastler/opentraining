@@ -211,6 +211,26 @@ public class SettingsActivity extends PreferenceActivity  implements OpenTrainin
 		bindPreferenceSummaryToValue(findPreference("default_workout_name"));
 		bindPreferenceSummaryToValue(findPreference("exercise_sync_url"));
 	}
+	
+	/** 
+	 *  Bugfix for newer Android Versions. Due to a security 
+	 *  issue (http://securityintelligence.com/new-vulnerability-android-framework-fragment-injection#.U-jNndame5k)
+	 *  this method HAS to be overwritten. Otherwise the app will crash (reproduced on Nexus 10 4.4.2 simulator). 
+	 */
+	@Override
+	protected boolean isValidFragment(String fragmentName){
+		List<String> validFragmentNames = new ArrayList<String>();
+		
+		validFragmentNames.add(LicensePreferenceFragment.class.getName());
+		validFragmentNames.add(TrainingTimerPreferenceFragment.class.getName());
+		validFragmentNames.add(SyncPreferenceFragment.class.getName());
+		validFragmentNames.add(MiscellaneousPreferenceFragment.class.getName());
+
+		if(validFragmentNames.contains(fragmentName))
+	    	return true;
+	  
+		return false;
+	}
 
 	/** {@inheritDoc} */
 	@Override
