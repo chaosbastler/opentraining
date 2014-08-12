@@ -21,33 +21,13 @@
 package de.skubware.opentraining.activity.create_workout;
 
 
-import java.io.UnsupportedEncodingException;
-import java.util.Locale;
-import java.util.Map;
 
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.RestAdapter.LogLevel;
-import retrofit.RetrofitError;
-import retrofit.android.AndroidLog;
-import retrofit.client.Response;
-import retrofit.converter.GsonConverter;
-import retrofit.http.Body;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.mime.MimeUtil;
-import retrofit.mime.TypedByteArray;
-import retrofit.mime.TypedInput;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
@@ -66,25 +46,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
-import de.skubware.opentraining.BuildConfig;
 import de.skubware.opentraining.R;
+import de.skubware.opentraining.activity.create_workout.upload_exercise.UploadExerciseAsyncTask;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FitnessExercise;
-import de.skubware.opentraining.basic.Muscle;
-import de.skubware.opentraining.basic.SportsEquipment;
 import de.skubware.opentraining.basic.Workout;
 import de.skubware.opentraining.db.DataHelper;
 import de.skubware.opentraining.db.DataProvider;
 import de.skubware.opentraining.db.IDataProvider;
-import de.skubware.opentraining.db.rest.ExerciseTypeGSONSerializer;
-import de.skubware.opentraining.db.rest.LanguageGSONDeserializer;
-import de.skubware.opentraining.db.rest.MuscleGSONDeserializer;
-import de.skubware.opentraining.db.rest.ServerModel;
-import de.skubware.opentraining.db.rest.ServerModel.Equipment;
-import de.skubware.opentraining.db.rest.ServerModel.Language;
-import de.skubware.opentraining.db.rest.ServerModel.MuscleCategory;
-import de.skubware.opentraining.db.rest.SportsEquipmentGSONDeserializer;
 
 /**
  * A fragment representing a single ExerciseType detail screen. This fragment is
@@ -324,21 +294,9 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		menu_item_upload_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				
-				UploadExerciseOperation exUpload = new UploadExerciseOperation();
+				UploadExerciseAsyncTask exUpload = new UploadExerciseAsyncTask(ExerciseTypeDetailFragment.this);
 	            
 				exUpload.execute(mExercise);
-
-				/*if(mExercise.getDescription() == null || mExercise.getDescription().equals("")){
-					Toast.makeText(getActivity(), getString(R.string.no_description_available), Toast.LENGTH_LONG).show();
-					return true;
-				}*/
-				
-				//AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				//builder.setTitle(getString(R.string.description));
-				
-				
-				//builder.setMessage(Html.fromHtml(mExercise.getDescription()));
-				//builder.create().show();
 
 				return true;
 			}
@@ -369,158 +327,6 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		
 		
 
-		
-	}
-
-	public interface WgerRestService {		
-		  @POST("/exercise/")
-		  public Response createExercise(@Body ExerciseType exercise);
-		  
-		  @GET("/equipment/")
-		  public ServerModel.Equipment[] getEquipment();
-		  
-		  @GET("/exercisecategory/")
-		  public ServerModel.MuscleCategory[] getMuscles();
-		  
-		  @GET("/language/")
-		  public ServerModel.Language[] getLanguages();
-	}
-	
-	
-	 private class UploadExerciseOperation extends AsyncTask<ExerciseType, Void, Throwable> {
-		  private final ProgressDialog dialog = new ProgressDialog(getActivity());
-		  
-		  
-		  protected void onPreExecute() {
-			     this.dialog.setMessage("Uploading exercise ...");
-			     this.dialog.show();
-			  }
-		  
-		
-		/**
-		 * @return Null if everything went fine, the original exception otherwise.
-		 */
-		@Override
-		protected Throwable doInBackground(ExerciseType... exercise) {
-
-			// prepare GsonBuilder
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(ExerciseType.class, new ExerciseTypeGSONSerializer());
-			gsonBuilder.registerTypeAdapter(ServerModel.Equipment[].class, new SportsEquipmentGSONDeserializer());
-			gsonBuilder.registerTypeAdapter(ServerModel.MuscleCategory[].class, new MuscleGSONDeserializer());
-			gsonBuilder.registerTypeAdapter(ServerModel.Language[].class, new LanguageGSONDeserializer());
-			gsonBuilder.setPrettyPrinting();
-
-			Gson gson = gsonBuilder.create();
-
-			GsonConverter converter = new GsonConverter(gson);
-
-			RestAdapter.Builder builder = new RestAdapter.Builder().setConverter(converter).setEndpoint("http://preview.wger.de/api/v2/")
-					.setRequestInterceptor(new RequestInterceptor() {
-						@Override
-						public void intercept(RequestFacade requestFacade) {
-							requestFacade.addHeader("Authorization", "Token ba1ce753f54ba3b8ee4af301f07c58628a1c01bf");
-						}
-					});
-
-			// only log if debug-build
-			// (otherwise auth-token appears in log)
-			if (BuildConfig.DEBUG) {
-				builder.setLog(new AndroidLog("WgerRestService")).setLogLevel(LogLevel.FULL);
-			}
-
-			RestAdapter restAdapter = builder.build();
-
-			WgerRestService service = restAdapter.create(WgerRestService.class);
-
-			// get server model of SportsEquipment
-			ServerModel.Equipment[] serverEquipment = service.getEquipment();
-			Map<SportsEquipment, Equipment> eqMap = Equipment.getEquipmentMap(serverEquipment, getActivity());
-			ExerciseTypeGSONSerializer.setEquipmentMap(eqMap);
-
-			// get server model of Muscle(categories)
-			ServerModel.MuscleCategory[] serverMuscles = service.getMuscles();
-			Map<Muscle, MuscleCategory> muscleMap = MuscleCategory.getMuscleMap(serverMuscles, getActivity());
-			ExerciseTypeGSONSerializer.setMuscleMap(muscleMap);
-
-			for (Muscle m : muscleMap.keySet()) {
-				Log.e(TAG, m.toString() + " = " + muscleMap.get(m) + "\n");
-			}
-
-			// get server model of Languages
-			ServerModel.Language[] serverLanguages = service.getLanguages();
-			Map<Locale, Language> languageMap = Language.getLanguageMap(serverLanguages, getActivity());
-			ExerciseTypeGSONSerializer.setLanguageMap(languageMap);
-
-			try {
-				service.createExercise(exercise[0]);		
-			} catch (RetrofitError retEr) {
-				if(retEr.getCause() != null)
-					return retEr.getCause();
-				else
-					return retEr;
-			}
-			
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Throwable ex) {
-			dialog.dismiss();
-
-			AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-			String msg;
-			String title;
-			if (ex == null) {
-				// everything went fine
-				title = "Upload successfull";
-				msg = "Upload finished";
-			} else {
-				title = "Upload failed";
-				if(ex instanceof RetrofitError){
-					// show server response to user
-					Response response = ((RetrofitError) ex).getResponse();
-					msg = response.getReason() + ": " + getBodyString(response);
-				}else{
-					// show custom error message if problem is known
-					msg = ex.getMessage();
-				}	
-			}
-			alertDialog.setMessage(msg);
-			alertDialog.setTitle(title);
-			alertDialog.create().show();
-		}
-
-		@Override
-		protected void onProgressUpdate(Void... values) {
-		}
-		
-		
-		/* Helper method for parsing the response body */
-		private String getBodyString(Response response) {
-
-			TypedInput body = response.getBody();
-
-			if (body != null) {
-
-				if (!(body instanceof TypedByteArray)) {
-					Log.e(TAG, "Could not parse.");
-					return "";
-				}
-
-				byte[] bodyBytes = ((TypedByteArray) body).getBytes();
-				String bodyMime = body.mimeType();
-				String bodyCharset = MimeUtil.parseCharset(bodyMime);
-				try {
-					return new String(bodyBytes, bodyCharset);
-				} catch (UnsupportedEncodingException e) {
-					Log.e(TAG, "Could not parse.");
-					return "";
-				}
-			}
-			return null;
-
-		}
 		
 	}
 
