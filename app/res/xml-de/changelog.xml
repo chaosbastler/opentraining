@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.2" versioncode="28" summary="Bugfixes" date="08/14/2014">
+        <change>Einige Bugs behoben, die zum Absturz der App führen können.</change>
+    </release> 
     <release version="0.7.1" versioncode="27" summary="Fehler melden und Übersetzungs-Updates" date="06/03/2014">
         <change>Man kann nun leicht Fehler melden : Workout erstellen -> Übung wählen -> Menü -> Fehler melden</change>     
         <change>Arabische Übersetzung der App hinzugefügt. Dank dafür an cwfowers.</change>

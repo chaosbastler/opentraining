@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.2" versioncode="28" summary="Bugfixes" date="08/14/2014">
+        <change>Fixed a couple of crashes</change>
+    </release>
     <release version="0.7.1" versioncode="27" summary="Report errors and translation updates" date="06/03/2014">
         <change>You can now easily report errors: Create Workout -> Choose an exercise -> Menu -> Report Error</change>     
         <change>The app has been (partly) translated to Arabic. Thanks to cwfowers for this translation.</change>

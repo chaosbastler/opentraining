@@ -26,6 +26,7 @@ package de.skubware.opentraining.activity.create_workout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import de.skubware.opentraining.R;
 import de.skubware.opentraining.activity.create_workout.upload_exercise.UploadExerciseAsyncTask;
+import de.skubware.opentraining.activity.create_workout.upload_exercise.UploadExerciseImagesAsyncTask;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
 import de.skubware.opentraining.basic.FitnessExercise;
@@ -292,11 +294,15 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		// configure menu_item_upload_exercise
 		MenuItem menu_item_upload_exercise = (MenuItem) menu.findItem(R.id.menu_item_upload_exercise);
 		menu_item_upload_exercise.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			public boolean onMenuItemClick(MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item) {	
+				Context context = ExerciseTypeDetailFragment.this.getActivity();
 				
-				UploadExerciseAsyncTask exUpload = new UploadExerciseAsyncTask(ExerciseTypeDetailFragment.this);
-	            
-				exUpload.execute(mExercise);
+				//UploadExerciseAsyncTask exUpload = new UploadExerciseAsyncTask(context);
+				//exUpload.execute(mExercise);
+				
+				
+				UploadExerciseImagesAsyncTask exImageUpload = new UploadExerciseImagesAsyncTask(context);
+				exImageUpload.execute(mExercise);
 
 				return true;
 			}
