@@ -5,11 +5,11 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.10.+'
+    classpath "com.android.tools.build:gradle:0.12.+"
   }
 }
 
-apply plugin: 'android'
+apply plugin: "com.android.application"
 
 repositories {
   mavenCentral()
@@ -17,7 +17,7 @@ repositories {
 
 android {
   compileSdkVersion 19
-  buildToolsVersion "19.1"
+  buildToolsVersion "19.1.0"
 
   defaultConfig {
     minSdkVersion 10
@@ -29,27 +29,27 @@ android {
   sourceSets {
     main {
       manifest {
-        srcFile 'app/AndroidManifest.xml'
+        srcFile "app/AndroidManifest.xml"
       }
       java {
-        srcDir 'app/src'
+        srcDir "app/src"
       }
       res {
-        srcDir 'app/res'
+        srcDir "app/res"
       }
       assets {
-        srcDir 'app/assets'
+        srcDir "app/assets"
       }
       resources {
-        srcDir 'app/src'
+        srcDir "app/src"
       }
     }
-    instrumentTest.setRoot('test')
+    instrumentTest.setRoot("test")
     instrumentTest {
-      java.srcDirs = ['test/src']
-      res.srcDirs = ['test/res']
-      assets.srcDirs = ['test/assets']
-      resources.srcDirs = ['test/src']
+      java.srcDirs = ["test/src"]
+      res.srcDirs = ["test/res"]
+      assets.srcDirs = ["test/assets"]
+      resources.srcDirs = ["test/src"]
     }
   }
   buildTypes {
@@ -62,9 +62,11 @@ android {
 }
 
 dependencies {
-  compile 'com.android.support:support-v4:19.1.+'
-  compile 'com.android.support:appcompat-v7:19.1.+'
-  compile fileTree(dir: 'app/libs',  include: '*.jar', exclude: 'acra-*')
-  compile 'ch.acra:acra:4.5.0'
+  compile "com.android.support:support-v4:19.1.+"
+  compile "com.android.support:appcompat-v7:19.1.+"
+  compile fileTree(dir: "app/libs",  include: "*.jar", exclude: "acra-*")
+  compile "ch.acra:acra:4.5.0"
   androidTestCompile("com.jayway.android.robotium:robotium-solo:4.2")
 }
+
+task wrapper (type: Wrapper) { gradleVersion = "1.11" }

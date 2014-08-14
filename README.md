@@ -41,7 +41,7 @@ Requirements
 ------------
 
   * Git
-  * Android-SDK v18
+  * Android-SDK v19
   * Android Support Repository
 
 Building with Eclipse
