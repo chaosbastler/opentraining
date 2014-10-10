@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.3" versioncode="29" summary="Japanese translation" date="10/10/2014">
+        <change>The app has been translated to Japanese. Thanks to naofum for this translation.</change>
+        <change>Italian translation has been updated.</change>
+    </release>
     <release version="0.7.2" versioncode="28" summary="Bugfixes" date="08/14/2014">
         <change>Fixed a couple of crashes</change>
     </release>
