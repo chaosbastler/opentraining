@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Butterfly (one arm, flat bench)">
   <Locale language="de" name="Butterflies (einarmig, Flachbank)"/>
   <Locale language="it" name="Farfalla (un braccio, panca piana)"/>
+  <Locale language="ja" name="バタフライ (片腕, フラットベンチ)"/>
   <Muscle name="Biceps" level="3"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Bench"/>

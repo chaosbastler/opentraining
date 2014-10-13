@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Crunch (mit Swissball)">
   <Locale language="en" name="Crunch (legs on swiss ball)"/>
   <Locale language="it" name="Addominali (gambe su swiss ball)"/>
+  <Locale language="ja" name="クランチ (足をバランスボール上で)"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Swiss Ball"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Crunches-with-legs-on-stability-ball-1.png"/>

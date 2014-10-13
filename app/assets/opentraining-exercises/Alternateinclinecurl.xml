@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Curl (incline, alternate)">
   <Locale language="de" name="Curl (geneigt, alternativ)"/>
   <Locale language="it" name="Trazioni (inclinato, alternativo)"/>
+  <Locale language="ja" name="カール (インクライン, 交互)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Alternate-incline-curl-1.png"/>

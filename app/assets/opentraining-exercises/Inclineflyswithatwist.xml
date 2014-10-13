@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Butterflies with a twist (incline)">
   <Locale language="de" name="Butterfly gedreht (geneigt, gedreht)"/>
   <Locale language="it" name="Rotazione farfalla (inclinata)"/>
+  <Locale language="ja" name="バタフライ ツイストあり (インクライン)"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Bench"/>
   <SportsEquipment name="Dumbbell"/>

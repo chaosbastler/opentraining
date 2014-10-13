@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Climbers Chin-Up">
   <Locale language="de" name="Klimmzug-Klettern"/>
   <Locale language="it" name="Scalata (spalliera)"/>
+  <Locale language="ja" name="クライマー チンアップ"/>
   <Muscle name="Shoulders" level="3"/>
   <SportsEquipment name="Pull-Up Bar"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Climbers-chin-up-1.png"/>

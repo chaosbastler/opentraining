@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Liegestütze (einarmig, auf Medizinball)">
   <Locale language="en" name="Push up (one arm, biased)"/>
   <Locale language="it" name="Flessioni (un braccio, storto)"/>
+  <Locale language="ja" name="プッシュ アップ (片腕, メディシンボール上で)"/>
   <Muscle name="Brustmuskel" level="3"/>
   <SportsEquipment name="Medizinball"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="One-armed-biased-push-up-1.png"/>

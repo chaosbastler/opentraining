@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Frontheben (Kurzhantel)">
   <Locale language="en" name="Dumbbell front raise (dumbell)"/>
   <Locale language="it" name="Sollevamento Anteriore (manubri)"/>
+  <Locale language="ja" name="ダンベル フロント レイズ (ダンベル)"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Dumbbell-front-raises-2-1.png"/>

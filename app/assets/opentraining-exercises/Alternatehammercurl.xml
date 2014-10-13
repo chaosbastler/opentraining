@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Hammer-Curl (alternate)">
   <Locale language="de" name="Hammer-Curl (alternativ)"/>
   <Locale language="it" name="Trazioni a Martello (alternativo)"/>
+  <Locale language="ja" name="ハンマーカール (交互)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Alternate-hammer-curl-1.png"/>

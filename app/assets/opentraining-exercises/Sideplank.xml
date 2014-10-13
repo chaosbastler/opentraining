@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Seitstütz">
   <Locale language="en" name="Sideplank"/>
   <Locale language="it" name="Sideplank"/>
+  <Locale language="ja" name="サイドプランク"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Keine"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Side-plank-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Squat (overhead)">
   <Locale language="de" name="Kniebeuge (über Kopf)"/>
   <Locale language="it" name="Squat (sbarra, sopra la testa)"/>
+  <Locale language="ja" name="スクアット (オーバーヘッド)"/>
   <Muscle name="Thigh" level="3"/>
   <Muscle name="Derriere" level="3"/>
   <SportsEquipment name="Barbell"/>

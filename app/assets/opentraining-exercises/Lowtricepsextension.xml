@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Trizepsstrecken (liegend, mit Kabelzug)">
   <Locale language="en" name="Low triceps extension"/>
   <Locale language="it" name="Estensione tricipiti bassi"/>
+  <Locale language="ja" name="ロー トライセップス エクステンション"/>
   <SportsEquipment name="Kabelzug"/>
   <Muscle name="Trizeps" level="3"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Low-triceps-extension-1.png"/>

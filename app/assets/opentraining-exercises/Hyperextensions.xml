@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Hyperextensions">
   <Locale language="en" name="Hyperextensions"/>
   <Locale language="it" name="Iperestensioni"/>
+  <Locale language="ja" name="ハイパーエクステンション"/>
   <Muscle name="Rückenmuskeln" level="3"/>
   <SportsEquipment name="Rückenstrecker"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Hyperextensions-1.png"/>

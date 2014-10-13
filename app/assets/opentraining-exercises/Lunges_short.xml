@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Ausfallschritt (Kurzhantel)">
   <Locale language="en" name="Lunges (dumbbell)"/>
   <Locale language="it" name="Affondi (manubri)"/>
+  <Locale language="ja" name="ランジ (ダンベル)"/>
   <SportsEquipment name="Kurzhantel"/>
   <Muscle name="Po" level="3"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>

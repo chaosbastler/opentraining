@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Brücke">
   <Locale language="en" name="Bridge"/>
   <Locale language="it" name="Ponte"/>
+  <Locale language="ja" name="ブリッジ"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Keine"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Bridge-1.png"/>

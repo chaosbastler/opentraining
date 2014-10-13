@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Curl (mit Gewichtsscheibe)">
   <Locale language="en" name="Reverse plate curls"/>
   <Locale language="it" name="Trazioni Inverse (con piatto)"/>
+  <Locale language="ja" name="リバース プレート カール"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Hantelscheibe"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Reverse-plate-curls-1.png"/>

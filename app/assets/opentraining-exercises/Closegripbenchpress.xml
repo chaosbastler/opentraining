@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Benchpress (close grip)">
   <Locale language="de" name="Bankdrücken (enger Griff)"/>
   <Locale language="it" name="Distensioni (panca, gomiti vicini)"/>
+  <Locale language="ja" name="ベンチプレス (クローズ グリップ)"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Bench"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Close-grip-bench-press-1.png"/>

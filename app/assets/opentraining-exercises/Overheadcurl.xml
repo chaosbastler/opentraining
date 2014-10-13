@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Curl (overhead)">
   <Locale language="de" name="Curl (über Kopf)"/>
   <Locale language="it" name="Trazioni (supra la testa)"/>
+  <Locale language="ja" name="カール (オーバーヘッド)"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="Cable"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Overhead-curl-1.png"/>

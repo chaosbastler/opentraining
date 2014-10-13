@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Bankdrücken (einarmig)">
   <Locale language="en" name="Bench press (one arm)"/>
   <Locale language="it" name="Pressa Panca (un braccio)"/>
+  <Locale language="ja" name="ベンチプレス (片腕)"/>
   <SportsEquipment name="Trainingsbank"/>
   <SportsEquipment name="Kurzhantel"/>
   <Muscle name="Bizeps" level="3"/>

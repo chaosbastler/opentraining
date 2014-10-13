@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Dumbbell-Press (incline)">
   <Locale language="de" name="Kurzhantel-Drücken (geneigt)"/>
   <Locale language="it" name="Pressa-Bilancieri (inclinato)"/>
+  <Locale language="ja" name="ダンベル プレス (インクライン)"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Bench"/>
   <SportsEquipment name="Dumbbell"/>

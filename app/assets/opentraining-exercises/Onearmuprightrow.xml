@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Rudern (einarmig, stehend)">
   <Locale language="en" name="Row (one arm, upright)"/>
   <Locale language="it" name="Vogata (un braccio, verticale)"/>
+  <Locale language="ja" name="ロー (片腕, アップライト)"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="One-arm-upright-row-1.png"/>

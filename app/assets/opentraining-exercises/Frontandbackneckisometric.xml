@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Neck (front and back, isometric)">
   <Locale language="de" name="Nacken (vorne und hinten, isometrisch)"/>
   <Locale language="it" name="Collo (avanti/indietro, isometrico)"/>
+  <Locale language="ja" name="ネック (前と後, アイソメトリック)"/>
   <Muscle name="Shoulder" level="3"/>
   <SportsEquipment name="None"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Front-and-back-neck-isometric-1.png"/>

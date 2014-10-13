@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Pile-Squat">
   <Locale language="de" name="Kniebeuge (mit Kurzhantel)"/>
   <Locale language="it" name="Squat (con manubrio)"/>
+  <Locale language="ja" name="パイル スクアット"/>
   <Muscle name="Thigh" level="3"/>
   <Muscle name="Derriere" level="3"/>
   <SportsEquipment name="Dumbbell"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Rudern (mit T-Bar Rudergerät)">
   <Locale language="en" name="T-Bar row"/>
   <Locale language="it" name="Vogata (con T-Bar)"/>
+  <Locale language="ja" name="T バー ロー"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Rudergerät"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="T-bar-row-1.png"/>

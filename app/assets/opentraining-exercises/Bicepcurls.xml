@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Curl (Langhantel)">
   <Locale language="en" name="Curl (barbell)"/>
   <Locale language="it" name="Trazioni (sbarra)"/>
+  <Locale language="ja" name="カール (バーベル)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Bicep-curls-1.png"/>

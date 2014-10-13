@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Curl (mit Kabelzug, liegend)">
   <Locale language="en" name="Lying bicep cabel curl"/>
   <Locale language="it" name="Trazioni (con cavo, sdraiato)"/>
+  <Locale language="ja" name="ライング バイセップ ケーブル カール"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kabelzug"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Lying-bicep-cable-curl-1.png"/>

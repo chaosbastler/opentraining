@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Calf Raises">
   <Locale language="de" name="Wadenheben"/>
   <Locale language="it" name="Sollevamento del Blocco"/>
+  <Locale language="ja" name="カーフ レイズ"/>
   <Muscle name="Thigh" level="3"/>
   <SportsEquipment name="Kabelzug"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Calf-raises-1.png"/>

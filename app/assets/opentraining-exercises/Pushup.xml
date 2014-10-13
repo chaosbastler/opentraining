@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Liegestütze (auf Swiss Ball)">
   <Locale language="en" name="Pushup (on swiss ball)"/>
   <Locale language="it" name="Flessioni (su swiss ball)"/>
+  <Locale language="ja" name="プッシュアップ (バランスボール上で)"/>
   <Muscle name="Brustmuskel" level="3"/>
   <SportsEquipment name="Swiss Ball"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Push-up-1.png"/>

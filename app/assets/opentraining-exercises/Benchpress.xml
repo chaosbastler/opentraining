@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Bankdrücken">
   <Locale language="en" name="Benchpress"/>
   <Locale language="it" name="Distensioni su panca"/>
+  <Locale language="ja" name="ベンチプレス"/>
   <Muscle name="Brustmuskel" level="3"/>
   <SportsEquipment name="Trainingsbank"/>
   <SportsEquipment name="Langhantel"/>

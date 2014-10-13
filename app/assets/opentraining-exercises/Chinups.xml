@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Chin-Ups">
   <Locale language="de" name="Klimmzug"/>
   <Locale language="it" name="Trazioni (spalliera)"/>
+  <Locale language="ja" name="チン アップ"/>
   <Muscle name="Shoulders" level="3"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="Pull-Up Bar"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Beinheben">
   <Locale language="en" name="Legraises"/>
   <Locale language="it" name="Sollevamento Gambe"/>
+  <Locale language="ja" name="レッグレイズ"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>
   <SportsEquipment name="Keine"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Leg-raises-1.png"/>

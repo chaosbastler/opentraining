@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Kickback (one legged)">
   <Locale language="de" name="Kickback (einbeinig)"/>
   <Locale language="it" name="Calcio all'indietro (una gamba)"/>
+  <Locale language="ja" name="キックバック (片脚)"/>
   <Muscle name="Derriere" level="3"/>
   <SportsEquipment name="Cable"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="One-legged-kickback-1.png"/>

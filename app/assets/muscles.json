@@ -2,60 +2,70 @@
  {
    "de": { "name" : "Bauchmuskeln", "alternative_names": ["Bauchmuskel", "Bauch", "Obliquus externus abdominis", "Rectus abdominis"] },
    "it": { "name" : "Addominali" },
+   "ja": { "name" : "腹筋", "alternative_names": ["アドミナル"] },
    "en": { "name" : "Abdominal muscle" }
  },
   
  {
    "de": { "name" : "Rückenmuskeln", "alternative_names": ["Rückenmuskel", "Rücken", "Latissimus dorsi"] },
    "it": { "name" : "Dorsali", "alternative_names": ["Schina", "Latissimus"]  },
+   "ja": { "name" : "背筋", "alternative_names": ["バック"] },
    "en": { "name" : "Back muscle", "alternative_names": ["Back", "Latissimus"]  }
  },
  
  {
    "de": { "name" : "Bizeps", "alternative_names": ["Biceps brachii", "Biceps femoris"] },
    "it": { "name" : "Bicipiti" },
+   "ja": { "name" : "上腕二頭筋", "alternative_names": ["バイセップス", "アーム"] },
    "en": { "name" : "Biceps", "alternative_names": ["Arms"]  }
  },
     
  {
    "de": { "name" : "Brustmuskel", "alternative_names": ["Pectoralis major"] },
    "it": { "name" : "Petto" },
+   "ja": { "name" : "胸", "alternative_names": ["チェスト"] },
    "en": { "name" : "Chest" }
  },
  
  {
    "de": { "name" : "Po", "alternative_names": ["Gluteus maximus"] },
    "it": { "name" : "Grande Gluteo", "alternative_names": ["Sedere"] },
+   "ja": { "name" : "尻" },
    "en": { "name" : "Derriere" }
  },
  
  {
    "de": { "name" : "Unterschenkelmuskel", "alternative_names": ["Unterschenkel", "Gastrocnemius", "Soleus"] },
    "it": { "name" : "Polpacci"},
+   "ja": { "name" : "下肢", "alternative_names": ["ロウアー レッグ"] },
    "en": { "name" : "Lower leg" }
  },
     
  {
    "de": { "name" : "Schulter", "alternative_names": ["Anterior deltoid", "Serratus anterior", "Trapezius"] },
    "it": { "name" : "Spalle", "alternative_names": ["Spalle"] },
+   "ja": { "name" : "肩", "alternative_names": ["ショルダー"] },
    "en": { "name" : "Shoulder", "alternative_names": ["Shoulders"] }
  }, 
  
  {
    "de": { "name" : "Oberschenkelmuskel", "alternative_names": ["Quadriceps femoris"] },
    "it": { "name" : "Quadricipiti"},
+   "ja": { "name" : "大腿" },
    "en": { "name" : "Thigh" }
  },   
  
  {
    "de": { "name" : "Trizeps", "alternative_names": ["Triceps brachii"] },
    "it": { "name" : "Tricipiti"},
+   "ja": { "name" : "上腕三頭筋", "alternative_names": ["トライセップス"] },
    "en": { "name" : "Triceps", "alternative_names": ["Triceps muscle"]  }
  },
  
  {
    "de":{ "name" : "Oberarm", "alternative_names": ["Musculus brachialis", "Brachialis"] },
    "it": { "name" : "Brachiali" },
+   "ja": { "name" : "上腕", "alternative_names": ["アッパー アーム"] },
    "en": { "name" : "upper arm" }
  }
     

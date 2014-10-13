@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Butterflies (incline)">
   <Locale language="de" name="Butterfly (geneigt)"/>
   <Locale language="it" name="Farfalla (inclinato)"/>
+  <Locale language="ja" name="バタフライ (インクライン)"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Bench"/>
   <SportsEquipment name="Dumbbell"/>

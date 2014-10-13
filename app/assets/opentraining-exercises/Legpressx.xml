@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Beinpresse">
   <Locale language="en" name="Legpress"/>
   <Locale language="it" name="Pressa Gambe"/>
+  <Locale language="ja" name="レッグプレス"/>
   <SportsEquipment name="Beinpresse"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Leg-press-1-1024x670.png"/>
