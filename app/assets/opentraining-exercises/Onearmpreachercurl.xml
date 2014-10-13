@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Curl (einarmig, auf Pult, Kurzhantel)">
   <Locale language="en" name="Preacher curl(one arm, biased)"/>
   <Locale language="it" name="Trazioni (un braccio, storto, preacher)"/>
+  <Locale language="ja" name="プリーチャー カール (片腕, バイアス)"/>
   <SportsEquipment name="Curlpult"/>
   <SportsEquipment name="Swiss Ball"/>
   <SportsEquipment name="Kurzhantel"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Crunch (auf Swiss Ball)">
   <Locale language="en" name="Crunch (on swiss ball)"/>
   <Locale language="it" name="Addominali (sulla swiss ball)"/>
+  <Locale language="ja" name="クランチ (バランスボール上で)"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Swiss Ball"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Stability-ball-abdominal-crunch-1.png"/>

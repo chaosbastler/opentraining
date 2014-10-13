@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Frontheben (Langhantel, eng)">
   <Locale language="en" name="Barbell upright rows"/>
   <Locale language="it" name="Sbarra alzata frontale (eng)"/>
+  <Locale language="ja" name="バーベル アップライト ロー"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Barbell-upright-rows-1.png"/>

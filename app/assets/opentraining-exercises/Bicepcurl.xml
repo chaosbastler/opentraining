@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Curl (with machine)">
   <Locale language="de" name="Curl (mit Gerät)"/>
   <Locale language="it" name="Trazioni (macchina)"/>
+  <Locale language="ja" name="カール (マシン使用)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Bizeps-Maschine"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Bicep-curl-1.png"/>

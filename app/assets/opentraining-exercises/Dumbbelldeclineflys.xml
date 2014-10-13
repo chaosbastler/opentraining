@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Butterfly (geneigt)">
   <Locale language="en" name="Dumbell decline flies"/>
   <Locale language="it" name="Farfalla (inclinato)"/>
+  <Locale language="ja" name="ダンベル デクライン フライ"/>
   <Muscle name="Brustmuskel" level="3"/>
   <SportsEquipment name="Trainingsbank"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Dumbbell-decline-flys-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Row (with pull-up bar)">
   <Locale language="de" name="Rudern (an Klimmzug-Stange)"/>
   <Locale language="it" name="Vogata (sbarra)"/>
+  <Locale language="ja" name="ロー (プルアップバー使用)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Pull-Up Bar"/>
   <Tag name="Eigengewicht Übung"/>

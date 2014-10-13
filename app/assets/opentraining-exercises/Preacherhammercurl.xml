@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Preacher Hammer-Curl">
   <Locale language="de" name="Preacher Hammer-Curl"/>
   <Locale language="it" name="Trazioni a Martello (preacher)"/>
+  <Locale language="ja" name="プリーチャー ハンマーカール"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="Dumbbell"/>
   <SportsEquipment name="Arm Curl Pad"/>

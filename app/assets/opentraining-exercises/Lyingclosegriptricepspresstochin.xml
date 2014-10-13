@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Trizepsdrücken über Kopf (liegend, 90°)">
   <Locale language="en" name="Triceps press to chin (lying, close grip)"/>
   <Locale language="it" name="Tricipiti premuti al mento (sdraiato, presa ridotta)"/>
+  <Locale language="ja" name="トライセップス プレス トゥ チン (ライング, クローズ グリップ)"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <SportsEquipment name="Trainingsbank"/>

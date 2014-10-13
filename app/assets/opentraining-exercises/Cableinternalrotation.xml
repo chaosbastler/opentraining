@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Cable Internal Rotation ">
   <Locale language="de" name="Innere Kabelzug-Rotation"/>
   <Locale language="it" name="Rotazione Interna con Cavo"/>
+  <Locale language="ja" name="ロープ内転"/>
   <Muscle name="Shoulder" level="3"/>
   <SportsEquipment name="Kabelzug"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Cable-internal-rotation-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Curl (auf Ball)">
   <Locale language="en" name="Curl (on ball)"/>
   <Locale language="it" name="Trazioni (sulla ball)"/>
+  <Locale language="ja" name="カール (ボール上で)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <SportsEquipment name="Swiss Ball"/>

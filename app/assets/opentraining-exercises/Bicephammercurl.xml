@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Hammer-Curl">
   <Locale language="en" name="Bicep hammer curl"/>
   <Locale language="it" name="Trazioni a martello con bicipiti"/>
+  <Locale language="ja" name="上腕二頭筋ハンマーカール"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Bicep-hammer-curl-1.png"/>

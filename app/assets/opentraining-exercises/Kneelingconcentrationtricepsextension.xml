@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Konzentrationscurl (kniend, mit Kabelzug)">
   <Locale language="en" name="Concentration triceps extension (kneeling)"/>
   <Locale language="it" name="Estensione tricipiti (concentrato, in ginocchio)"/>
+  <Locale language="ja" name="コンセントレーション トライセップス エクステンション (ニーリング)"/>
   <SportsEquipment name="Kabelzug"/>
   <Muscle name="Trizeps" level="3"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Kneeling-concentration-triceps-extension-1.png"/>

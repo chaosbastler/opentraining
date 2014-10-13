@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Hammer-Curl (crossbody)">
   <Locale language="de" name="Hammer-Curl (über Kreuz)"/>
   <Locale language="it" name="Piegamenti a Martello (corpo incrociato)"/>
+  <Locale language="ja" name="ハンマーカール (クロス ボディ)"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="S-Z Curl Bar"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Cross-body-hammer-curl-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Superman">
   <Locale language="en" name="Superman"/>
   <Locale language="it" name="Superman"/>
+  <Locale language="ja" name="スーパーマン"/>
   <SportsEquipment name="Keine"/>
   <Muscle name="Rückenmuskeln" level="3"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Supermans-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Good Mornings">
   <Locale language="de" name="Good Morning"/>
   <Locale language="it" name="Buona Giornata"/>
+  <Locale language="ja" name="グッド モーニング"/>
   <Muscle name="Back" level="3"/>
   <SportsEquipment name="Barbell"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Good-mornings-1.png"/>

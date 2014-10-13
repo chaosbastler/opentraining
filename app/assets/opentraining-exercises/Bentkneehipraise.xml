@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Knieheben">
   <Locale language="en" name="Bent knee hip raise"/>
   <Locale language="it" name="Sollevamento bacino (ginocchia piegate)"/>
+  <Locale language="ja" name="ベント ニー ヒップ レイズ"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Bent-knee-hip-raise-1.png"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Bent-knee-hip-raise-2.png"/>
 </ExerciseType>

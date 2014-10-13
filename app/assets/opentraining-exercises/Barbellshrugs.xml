@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Schulterheben (Langhantel)">
   <Locale language="en" name="Barbell shrugs"/>
   <Locale language="it" name="Scrollate sbarra"/>
+  <Locale language="ja" name="バーベル シュラッグ"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Barbell-shrugs-1.png"/>

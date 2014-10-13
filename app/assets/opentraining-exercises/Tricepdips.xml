@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Dips (mit Dip Barren)">
   <Locale language="en" name="Dips (with dip stands)"/>
   <Locale language="it" name="Dips (con dip station)"/>
+  <Locale language="ja" name="ディップス (ディップ スタンド使用)"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Dip Barren"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Tricep-dips-1.gif"/>

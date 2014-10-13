@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Leglift (at wall)">
   <Locale language="de" name="Beinheben (an Wand)"/>
   <Locale language="it" name="Sollevamento Gamba (al muro)"/>
+  <Locale language="ja" name="レッグリフト (壁で)"/>
   <Muscle name="Lower leg" level="3"/>
   <SportsEquipment name="None"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Leg-lift-1.png"/>

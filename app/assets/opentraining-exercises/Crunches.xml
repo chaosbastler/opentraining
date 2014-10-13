@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Crunch">
   <Locale language="en" name="Crunch"/>
   <Locale language="it" name="Addominali"/>
+  <Locale language="ja" name="クランチ"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Keine"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Crunches-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Bicep-Curl (alternate)">
   <Locale language="de" name="Bizeps-Curl (alternativ)"/>
   <Locale language="it" name="Trazioni sui Bicipiti (alternativo)"/>
+  <Locale language="ja" name="上腕二頭筋カール (交互)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Alternate-bicep-curl-1.png"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Seitheben (beidseitig)">
   <Locale language="en" name="Dumbbell lateral raise"/>
   <Locale language="it" name="Sollevamento Laterale (manubri) "/>
+  <Locale language="ja" name="ダンベル ラテラル レイズ"/>
   <SportsEquipment name="Kurzhantel"/>
   <Muscle name="Schulter" level="3"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Dumbbell-lateral-raises-1.png"/>

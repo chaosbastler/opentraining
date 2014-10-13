@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Curl (mit Kabelzug, auf Trainingsbank)">
   <Locale language="en" name="High cable cursl"/>
   <Locale language="it" name="Trazioni (cavo alto)"/>
+  <Locale language="ja" name="ハイ ケーブル カール"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kabelzug"/>
   <SportsEquipment name="Trainingsbank"/>

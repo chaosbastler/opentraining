@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Konzentrationscurls">
   <Locale language="en" name="Concentration curls"/>
   <Locale language="it" name="Piegamenti concentrati"/>
+  <Locale language="ja" name="コンセントレーション カール"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Concentration-curls-1.png"/>

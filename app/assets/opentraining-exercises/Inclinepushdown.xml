@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Pushdown (incline)">
   <Locale language="de" name="Pushdown (geneigt)"/>
   <Locale language="it" name="Pushdown (inclinato)"/>
+  <Locale language="ja" name="プッシュダウン (インクライン)"/>
   <Muscle name="Latissimus" level="3"/>
   <SportsEquipment name="Kabelzug"/>
   <SportsEquipment name="Bench"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Press (one arm, on floor)">
   <Locale language="de" name="Presse (einarmig, auf Boden)"/>
   <Locale language="it" name="Pressa (un braccio, per terra)"/>
+  <Locale language="ja" name="プレス (片腕, 床で)"/>
   <Muscle name="Biceps" level="3"/>
   <Muscle name="Chest" level="3"/>
   <SportsEquipment name="Barbell"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Frontheben (Langhantel)">
   <Locale language="en" name="Barbell front raises"/>
   <Locale language="it" name="Sollevamento Sbarra (frontale)"/>
+  <Locale language="ja" name="バーベル フロント レイズ"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Barbell-front-raises-1.png"/>

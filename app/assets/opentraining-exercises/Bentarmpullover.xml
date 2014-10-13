@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Trizepsdrücken über Kopf (liegend, 180°)">
   <Locale language="en" name="Bent arm pullover"/>
   <Locale language="it" name="Pullover a braccio piegato"/>
+  <Locale language="ja" name="ベント アーム プルオーバー"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <SportsEquipment name="Trainingsbank"/>

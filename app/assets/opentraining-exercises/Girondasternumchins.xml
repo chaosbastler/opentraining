@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Klimmzug">
   <Locale language="en" name="Gironda Sternum Chins"/>
   <Locale language="it" name="Sollevamento Sterno (Gironda)"/>
+  <Locale language="ja" name="ジロンダ スターナム チン"/>
   <Muscle name="Rückenmuskeln" level="3"/>
   <SportsEquipment name="Klimmzug Stange"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Gironda-sternum-chins-1.png"/>

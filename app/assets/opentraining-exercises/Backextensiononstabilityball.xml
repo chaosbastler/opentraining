@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Rückenstrecken auf Ball">
   <Locale language="en" name="Back extensions on swiss ball"/>
   <Locale language="it" name="Estensioni gluteo su swiss ball"/>
+  <Locale language="ja" name="バランスボール上でバックエクステンション"/>
   <Muscle name="Rückenmuskeln" level="3"/>
   <SportsEquipment name="Swiss Ball"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Back-extension-on-stability-ball-1.png"/>

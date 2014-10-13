@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Deadlift (one arm side)">
   <Locale language="de" name="Kreuzheben (einarmig)"/>
   <Locale language="it" name="Stacco da terra (un braccio, deadlift)"/>
+  <Locale language="ja" name="デッドリフト (片側)"/>
   <Muscle name="Thigh" level="3"/>
   <SportsEquipment name="Barbell"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="One-arm-side-deadlift-1.png"/>

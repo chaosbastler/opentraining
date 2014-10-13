@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Trizeps-Kickback">
   <Locale language="en" name="Triceps kickback"/>
   <Locale language="it" name="Contraccolpo Tricipiti"/>
+  <Locale language="ja" name="トライセップス キックバック"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Triceps-kickback-1.png"/>

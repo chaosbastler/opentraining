@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Curl (close grip, S-Z Bar)">
   <Locale language="de" name="Curl (enger Griff, mit SZ-Stange)"/>
   <Locale language="it" name="Trazioni (gomiti vicini, barra SZ)"/>
+  <Locale language="ja" name="カール (クローズ グリップ, S-Z バー)"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="S-Z Curl Bar"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Close-grip-ez-bar-curl-1.png"/>

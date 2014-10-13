@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Rudern (einarmig, mit Kurzhantel)">
   <Locale language="en" name="Rear deltoid row"/>
   <Locale language="it" name="Vogare (un braccio, con manubrio)"/>
+  <Locale language="ja" name="リア デルトイド ロー"/>
   <Muscle name="Rückenmuskeln" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <SportsEquipment name="Trainingsbank"/>

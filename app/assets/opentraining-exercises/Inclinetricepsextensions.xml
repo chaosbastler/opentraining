@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Trizepsstrecken (schräg liegend)">
   <Locale language="en" name="Incline triceps extensions"/>
   <Locale language="it" name="Estensione tricipiti (inclinato)"/>
+  <Locale language="ja" name="インクライン トライセップス エクステンション"/>
   <SportsEquipment name="Kurzhantel"/>
   <SportsEquipment name="Trainingsbank"/>
   <Muscle name="Trizeps" level="3"/>

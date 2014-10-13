@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Pullover (mit Gewichtsscheibe)">
   <Locale language="en" name="Pullover (on ball, with weight)"/>
   <Locale language="it" name="Pullover (su palla, con peso)"/>
+  <Locale language="ja" name="プルオーバー (ボール上で, ウエイト使用)"/>
   <SportsEquipment name="Hantelscheibe"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Pullover-on-stability-ball-with-weight-1.png"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Pullover-on-stability-ball-with-weight-2.png"/>

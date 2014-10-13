@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Ausfallschritt (Langhantel)">
   <Locale language="en" name="Lunges (barbell)"/>
   <Locale language="it" name="Affondi (sbarra)"/>
+  <Locale language="ja" name="ランジ (バーベル)"/>
   <SportsEquipment name="Langhantel"/>
   <Muscle name="Po" level="3"/>
   <Muscle name="Oberschenkelmuskel" level="3"/>

@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Squat (one leg)">
   <Locale language="de" name="Kniebeuge (einbeinig)"/>
   <Locale language="it" name="Squat (una gamba)"/>
+  <Locale language="ja" name="スクアット (片脚)"/>
   <Muscle name="Thigh" level="3"/>
   <Muscle name="Derriere" level="3"/>
   <SportsEquipment name="Barbell"/>

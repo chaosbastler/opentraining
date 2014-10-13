@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Butterfly (auf Hantelbank, einarmig)">
   <Locale language="en" name="Rear lateral raise (lying, one arm)"/>
   <Locale language="it" name="Sollevamenti posteriore/laterale (supino, un braccio)"/>
+  <Locale language="ja" name="リア ラテラル レイズ (ライング, 片腕)"/>
   <Muscle name="Schulter" level="3"/>
   <SportsEquipment name="Kurzhantel"/>
   <SportsEquipment name="Trainingsbank"/>

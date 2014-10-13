@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="Biceps Curl (prone, incline)">
   <Locale language="de" name="Biceps Curl (geneigt)"/>
   <Locale language="it" name="Trazioni Bicipiti (inclinato)"/>
+  <Locale language="ja" name="バイセップス カール (うつ伏せ, インクライン)"/>
   <Muscle name="Biceps" level="3"/>
   <SportsEquipment name="Dumbbell"/>
   <SportsEquipment name="Bench"/>

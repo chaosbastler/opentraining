@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Crunch (schräg)">
   <Locale language="en" name="Crunch (cross body)"/>
   <Locale language="it" name="Addominali (corpo incrociato)"/>
+  <Locale language="ja" name="クランチ (クロス ボディ)"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Keine"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Cross-body-crunch-1.png"/>

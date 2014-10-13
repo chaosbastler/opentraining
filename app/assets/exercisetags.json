@@ -2,18 +2,21 @@
  {
    "de": { "name" : "Eigengewicht Übung", "description" : "Eine Übung, bei der nur das eigene Körpergewicht die Intensität bestimmt."},
    "it": { "name" : "Il Tuo Peso", "description" : "Solamente il tuo peso determina l'intensità dell'esercizio."},
+   "ja": { "name" : "自体重", "description" : "自分の体重だけで運動の強度を定義します." },
    "en": { "name" : "Own weight", "description" : "Only the own body weight defines the intensity of the exercise." }
  },
  
  {
    "de": { "name" : "Einsteiger Übung", "description" : "Eine Übung für Anfänger."},
    "it": { "name" : "Esercizio facile", "description" : "Un esercizio per principianti."},
+   "ja": { "name" : "初心者向けエクササイズ", "description" : "初心者向けのエクササイズ." },
    "en": { "name" : "Beginner exercise", "description" : "An exercise for beginners." }
  },
 
  {
    "de": { "name" : "Fortgeschrittenen Übung", "description" : "Eine Übung für erfahrene Athleten."},
    "it": { "name" : "Esercizio avanzato", "description" : "Un esercizio per atleti esperti."},
+   "ja": { "name" : "上級者向けエクササイズ", "description" : "経験者アスリート向けのエクササイズ." },
    "en": { "name" : "Advanced exercise", "description" : "An exercise for experienced athletes." }
  },
     
@@ -21,12 +24,14 @@
  {
    "de": { "name" : "Komplexe Übung", "description" : "Eine Übung, die mehrer Muskelgruppen anspricht."},
    "it": { "name" : "Esercizio complesso", "description" : "Un esercizio che incice su molti muscoli."},
+   "ja": { "name" : "複雑なエクササイズ", "description" : "複数の筋力向けのエクササイズ." },
    "en": { "name" : "Complex exercise", "description" : "An exercise for multiple muscles." }
  },
         
  {
    "de": { "name" : "Isolierte Übung", "description" : "Eine Übung, die gezielt eine einzelne Muskelgruppe anspricht." },
    "it": { "name" : "Esercizio isolato", "description" : "Un esercizio che incide su un solo muscolo."},
+   "ja": { "name" : "アイソレーション エクササイズ", "description" : "個別の筋力を鍛えるエクササイズ." },
    "en": { "name" : "Isolated exercise", "description" : "An exercise that addresses only one muscle."}
  }
  

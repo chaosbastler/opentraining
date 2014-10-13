@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Crunch (geneigt)">
   <Locale language="en" name="Crunch (declined)"/>
   <Locale language="it" name="Addominali (inclinato)"/>
+  <Locale language="ja" name="クランチ (デクライン)"/>
   <Muscle name="Bauchmuskeln" level="3"/>
   <SportsEquipment name="Sit Up Bank"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Decline-crunch-1.png"/>

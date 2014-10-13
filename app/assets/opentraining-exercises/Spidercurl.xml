@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Spidercurl">
   <Locale language="en" name="Spidercurl"/>
   <Locale language="it" name="Spidercurl"/>
+  <Locale language="ja" name="スパイダーカール"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Langhantel"/>
   <SportsEquipment name="Curlpult"/>

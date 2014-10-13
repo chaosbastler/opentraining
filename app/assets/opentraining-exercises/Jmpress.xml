@@ -2,6 +2,7 @@
 <ExerciseType language="en" name="JM Press">
   <Locale language="de" name="JM Presse"/>
   <Locale language="it" name="Pressa JM"/>
+  <Locale language="ja" name="JM プレス"/>
   <Muscle name="Triceps" level="3"/>
   <SportsEquipment name="Barbell"/>
   <SportsEquipment name="Bench"/>

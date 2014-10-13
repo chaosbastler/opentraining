@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Trizepsstrecken (liegend)">
   <Locale language="en" name="Triceps extension across face (lying)"/>
   <Locale language="it" name="Estensione tricipiti lungo la faccia (supino)"/>
+  <Locale language="ja" name="トライセップス エクステンション アクロス フェイス (ライング)"/>
   <Muscle name="Trizeps" level="3"/>
   <SportsEquipment name="Trainingsbank"/>
   <SportsEquipment name="Kurzhantel"/>

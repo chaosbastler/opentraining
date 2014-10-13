@@ -2,6 +2,7 @@
 <ExerciseType language="de" name="Hammercurl (mit Kabelzug)">
   <Locale language="en" name="Hammer curls with rope"/>
   <Locale language="it" name="Trazioni a martello (corda)"/>
+  <Locale language="ja" name="ハンマーカール (ロープ使用)"/>
   <Muscle name="Bizeps" level="3"/>
   <SportsEquipment name="Kabelzug"/>
   <Image author="Everkinetic" license="CC-BY-SA 3" path="Hammer-curls-with-rope-1.png"/>
