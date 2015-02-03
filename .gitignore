@@ -13,3 +13,6 @@ app/svg/.SVG
 # gradle
 /build
 /.gradle
+/.idea
+local.properties
+opentraining.iml
