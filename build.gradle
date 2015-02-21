@@ -62,8 +62,8 @@ android {
 }
 
 dependencies {
-  compile "com.android.support:support-v4:21.0.3"
-  compile "com.android.support:appcompat-v7:21.0.3"
+  compile "com.android.support:support-v4:21.0.0+"
+  compile "com.android.support:appcompat-v7:21.0.0+"
   compile fileTree(dir: "app/libs",  include: "*.jar", exclude: "acra-*")
   compile "ch.acra:acra:4.5.0"
   androidTestCompile("com.jayway.android.robotium:robotium-solo:4.2")
