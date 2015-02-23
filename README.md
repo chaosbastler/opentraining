@@ -1,4 +1,4 @@
-Open Training [![Build Status](https://travis-ci.org/chaosbastler/opentraining.png)](https://travis-ci.org/chaosbastler/opentraining)
+Open Training
 =============
 
 Open Training is an Android app for planning your fitness training.
