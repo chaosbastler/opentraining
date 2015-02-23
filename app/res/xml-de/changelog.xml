@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
     <release version="0.7.4" versioncode="30" summary="Charts" date="02/23/2015">
-        <change>Statt einer Tabelle wird der Trainingsverlauf nun mit einem Diagramm dargestellt</change>
+        <change>Statt mit einer Tabelle wird der Trainingsverlauf nun mit einem Diagramm dargestellt</change>
         <change>Keine Unterstützung mehr für Android 2.x und 3.x (aufgrund der verwendeten Bibliothek für Diagramme)</change>
         <change>Update der verwendeten Android Support Library</change>
     </release>
