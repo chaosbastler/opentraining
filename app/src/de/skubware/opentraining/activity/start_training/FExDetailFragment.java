@@ -220,7 +220,7 @@ public class FExDetailFragment extends Fragment implements DialogFragmentAddEntr
 				ft.addToBackStack(null);
 
 				// Create and show the dialog.
-				DialogFragment newFragment = DialogFragmentTrainingEntryTable
+				DialogFragment newFragment = DialogFragmentHistory
 						.newInstance(mExercise);
 				newFragment.show(ft, "dialog");
 
