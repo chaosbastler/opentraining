@@ -20,7 +20,7 @@ android {
   buildToolsVersion "21.1.2"
 
   defaultConfig {
-    minSdkVersion 14
+    minSdkVersion 15
     targetSdkVersion 21
     versionCode 1
     versionName "1.0"
@@ -69,6 +69,7 @@ dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.2'
     compile 'org.quanqi:mpandroidchart:1.7.5'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile('de.greenrobot:greendao:1.3.0')
 }
 
 task wrapper (type: Wrapper) { gradleVersion = "1.11" }

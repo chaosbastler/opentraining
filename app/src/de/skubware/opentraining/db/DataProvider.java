@@ -28,9 +28,19 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
+import de.skubware.opentraining.DBMuscle;
+import de.skubware.opentraining.DBMuscleDao;
+import de.skubware.opentraining.DBTranslation;
+import de.skubware.opentraining.DBTranslationDao;
+import de.skubware.opentraining.DaoMaster;
+import de.skubware.opentraining.DaoSession;
 import de.skubware.opentraining.basic.ExerciseTag;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
@@ -46,7 +56,11 @@ import de.skubware.opentraining.db.parser.MuscleJSONParser;
 import de.skubware.opentraining.db.parser.SportsEquipmentJSONParser;
 import de.skubware.opentraining.db.parser.WorkoutXMLParser;
 import de.skubware.opentraining.db.parser.XMLSaver;
+
+
+
 import android.content.Context;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 
@@ -357,14 +371,65 @@ public class DataProvider implements IDataProvider {
 	 * @return The loaded {@link Muscle}s
 	 */
 	List<Muscle> loadMuscles() {
-		List<Muscle> list = new ArrayList<Muscle>();
+        List<Muscle> list = new ArrayList<Muscle>();
 
-		try {
-			IParser<List<Muscle>> muscleParser = new MuscleJSONParser();
-			list = muscleParser.parse(mContext.getAssets().open(IDataProvider.MUSCLE_FILE));
-		} catch (IOException ioEx) {
-			Log.e(TAG, "Error during parsing muscles.", ioEx);
-		}
+        SQLiteOpenHelper db = new DaoMaster.DevOpenHelper(mContext, "opentraining-db", null);
+        DaoMaster daoMaster = new DaoMaster(db.getWritableDatabase());
+        DaoSession daoSession = daoMaster.newSession();
+        DBMuscleDao muscleDao = daoSession.getDBMuscleDao();
+        DBTranslationDao translationDao = daoSession.getDBTranslationDao();
+        List<DBMuscle> muscleList = muscleDao.loadAll();
+
+        // MIGRATE FROM JSON TO SQLite DB
+        if(muscleList.isEmpty()){
+            try {
+                IParser<List<Muscle>> muscleParser = new MuscleJSONParser();
+                list = muscleParser.parse(mContext.getAssets().open(IDataProvider.MUSCLE_FILE));
+            } catch (IOException ioEx) {
+                Log.e(TAG, "Error during parsing muscles.", ioEx);
+            }
+
+            for(Muscle m:list){
+
+                DBMuscle dbMuscle = new DBMuscle();
+                dbMuscle.setPrimary_name(m.getName());
+
+                for(Locale l:m.getNameMap().keySet()){
+                    for(String translatedName:m.getNameMap().get(l)){
+                        DBTranslation t = new DBTranslation();
+                        t.setLocale(l.toString());
+                        t.setDBMuscle(dbMuscle);
+                        t.setTranslated_name(translatedName);
+                        translationDao.insert(t);
+                    }
+                }
+
+
+                daoSession.insert(dbMuscle);
+            }
+
+        }
+
+
+        for(DBMuscle m:muscleList){
+            m.getPrimary_name();
+            List<DBTranslation> translationList = m.getDBTranslationList();
+
+            Map<Locale, Set<String>> translationMap = new HashMap<Locale, Set<String>>();
+
+            for(DBTranslation t:translationList){
+                Locale l = new Locale(t.getLocale());
+                if(translationMap.containsKey(l)){
+                    translationMap.get(l).add(t.getTranslated_name());
+                }else{
+                    Set<String> nameSet = new HashSet<>();
+                    nameSet.add(t.getTranslated_name());
+                    translationMap.put(l, nameSet);
+                }
+            }
+        }
+
+
 
 		return list;
 
@@ -483,6 +548,7 @@ public class DataProvider implements IDataProvider {
 	
 
 	public List<Workout> loadWorkouts() {
+
 		List<Workout> workoutList = new ArrayList<Workout>();
 
 		// list files in directory that end with ".xml"

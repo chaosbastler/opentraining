@@ -56,7 +56,15 @@ public abstract class Translatable implements Comparable<Translatable>, Serializ
 	/** The (primary) name of the Translatable */
 	protected String name;
 
-	/**
+    public Map<Locale, Set<String>> getNameMap() {
+        return nameMap;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    /**
 	 * Default constructor.
 	 * 
 	 * @param locale
