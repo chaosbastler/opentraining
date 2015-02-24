@@ -36,9 +36,9 @@
 
 
     <!-- DialogWorkoutOverviewFragment -->
-    <string name="save_workout">Workout speichern</string>
+    <string name="save_workout">Speichern</string>
     <string name="add_more_exercises">Mehr Übungen hinzufügen</string>
-    <string name="discard">Workout verwerfen</string>
+    <string name="discard">Verwerfen</string>
     <string name="title_exercise_detail">Übungsdetails</string>
     <string name="title_exercise_list">Übungen</string>
     <string name="override">Überschreiben</string>

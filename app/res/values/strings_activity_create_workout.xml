@@ -37,9 +37,9 @@
 
     
     <!-- DialogWorkoutOverviewFragment -->
-    <string name="save_workout">Save workout</string>
+    <string name="save_workout">Save</string>
     <string name="add_more_exercises">Add more exercises</string>
-    <string name="discard">"Discard workout</string>
+    <string name="discard">"Discard</string>
     <string name="title_exercise_detail">Exercise Detail</string>
     <string name="title_exercise_list">Exercise</string>
     <string name="override">Override</string>

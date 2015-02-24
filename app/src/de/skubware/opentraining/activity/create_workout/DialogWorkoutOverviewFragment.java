@@ -43,6 +43,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -123,40 +124,36 @@ public class DialogWorkoutOverviewFragment extends DialogFragment {
 						}).create().show();
 			}
 		});
-		
+
+
 		
 		return new AlertDialog.Builder(getActivity()).setTitle(mWorkout.getName()).setView(v).setCancelable(true)
-				.setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// check if name is empty
-						final String workoutName = mEditTextWorkoutName.getText().toString();
-						if (workoutName.equals("") || workoutName.replaceAll(" ", "").equals("")){
-							Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
-							return;
-						}
-						
-						// check if file already exists
-						if (fileAlreadyExists(workoutName)) {
-							showOverrideDialog();	
-							return;
-						}
+                .setPositiveButton(getString(R.string.save_workout), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // check if name is empty
+                        final String workoutName = mEditTextWorkoutName.getText().toString();
+                        if (workoutName.equals("") || workoutName.replaceAll(" ", "").equals("")){
+                            Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
+                            return;
+                        }
 
-						
-						saveWorkout(getActivity());
-					}
-				}).setNeutralButton(getString(R.string.add_more_exercises), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						continueAddingExercises();
-					}
-				}).setNegativeButton(getString(R.string.discard), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						finishActivities(getActivity());
-					}
-				}).create();
-	}
+                        // check if file already exists
+                        if (fileAlreadyExists(workoutName)) {
+                            showOverrideDialog();
+                            return;
+                        }
+
+
+                        saveWorkout(getActivity());
+                    }
+                }).setNegativeButton(getString(R.string.discard), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishActivities(getActivity());
+                    }
+                }).create();
+    }
 	
 
 	
@@ -173,11 +170,7 @@ public class DialogWorkoutOverviewFragment extends DialogFragment {
 	
 	
 
-	/**
-	 * Saves the Workout with the given name.
-	 * 
-	 * @param workoutName The name of the Workout.
-	 */
+
 	private void saveWorkout(Activity activity){
 		if(mWorkout.getFitnessExercises().isEmpty()){
 			Log.w(TAG, "User tried to save an empty Workout. Will skip saving.");

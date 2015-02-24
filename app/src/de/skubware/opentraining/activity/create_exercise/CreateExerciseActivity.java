@@ -275,12 +275,6 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 					finish();
 				}
 			})
-			.setNeutralButton(getString(R.string.cancel), new OnClickListener(){
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			})			
 			.setPositiveButton(getString(R.string.save), new OnClickListener(){
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.5" versioncode="31" summary="Dialog Bugfix" date="02/24/2015">
+        <change>Fixes a bug concerning two dialogs (not all options were visible)</change>
+    </release>
     <release version="0.7.4" versioncode="30" summary="Charts" date="02/23/2015">
         <change>The training history is now visualized by a chart (instead of a table)</change>
         <change>No support anymore for Android 2.x and 3.x (due to the used chart library)</change>
