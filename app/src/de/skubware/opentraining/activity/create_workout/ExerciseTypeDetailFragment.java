@@ -21,9 +21,6 @@
 package de.skubware.opentraining.activity.create_workout;
 
 
-
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -37,6 +34,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,9 +44,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import at.technikum.mti.fancycoverflow.FancyCoverFlow;
 import de.skubware.opentraining.R;
-import de.skubware.opentraining.activity.create_workout.upload_exercise.UploadExerciseAsyncTask;
 import de.skubware.opentraining.activity.create_workout.upload_exercise.UploadExerciseImagesAsyncTask;
 import de.skubware.opentraining.basic.ExerciseType;
 import de.skubware.opentraining.basic.ExerciseType.ExerciseSource;
@@ -135,30 +135,41 @@ public class ExerciseTypeDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_exercisetype_detail, container, false);
+        ViewGroup rootLayout = (ViewGroup) rootView.findViewById(R.id.fragment_exercisetype_detail_layout);
 
-		// show the current exercise
-
-		ImageView imageview = (ImageView) rootView.findViewById(R.id.imageview);
-
-		// set gesture detector
-		this.mGestureScanner = new GestureDetector(this.getActivity(), new ExerciseDetailOnGestureListener(this, imageview, mExercise));
-
-		// Images
+		// If Image Exists
 		if (!mExercise.getImagePaths().isEmpty()) {
-			DataHelper data = new DataHelper(getActivity());
-			imageview.setImageDrawable(data.getDrawable(mExercise.getImagePaths().get(0).toString()));
+            // Create Image View
+            ImageView imageView = new ImageView (rootView.getContext());
+            imageView.setLayoutParams(new FancyCoverFlow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+            rootLayout.addView(imageView);
+            imageView.setVisibility(View.VISIBLE);
+
+            // set gesture detector
+            this.mGestureScanner = new GestureDetector(this.getActivity(), new ExerciseDetailOnGestureListener
+                    (this, imageView, mExercise));
+
+            //Set Image
+            DataHelper data = new DataHelper(getActivity());
+			imageView.setImageDrawable(data.getDrawable(mExercise.getImagePaths().get(0).toString()));
+
+
+            rootView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return mGestureScanner.onTouchEvent(event);
+                }
+            });
 		} else {
-			imageview.setImageResource(R.drawable.ic_launcher);
+            TextView textView = new TextView (rootView.getContext());
+            textView.setLayoutParams(new FancyCoverFlow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+            textView.setGravity(Gravity.CENTER);
+            textView.setPadding(10,10,10,10);
+            textView.setText(Html.fromHtml(mExercise.getDescription()));
+            rootLayout.addView(textView);
 		}
-
-
-		rootView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				return mGestureScanner.onTouchEvent(event);
-			}
-		});
-
 		return rootView;
 	}
 
