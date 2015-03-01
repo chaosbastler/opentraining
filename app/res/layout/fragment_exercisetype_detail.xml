@@ -13,14 +13,4 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:padding="20dp"
-        android:src="@drawable/ic_launcher"
-        tools:ignore="ContentDescription" />
-
 </RelativeLayout>
