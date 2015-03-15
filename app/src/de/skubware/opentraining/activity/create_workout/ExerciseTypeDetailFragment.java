@@ -141,8 +141,9 @@ public class ExerciseTypeDetailFragment extends Fragment {
 		if (!mExercise.getImagePaths().isEmpty()) {
             // Create Image View
             ImageView imageView = new ImageView (rootView.getContext());
-            imageView.setLayoutParams(new FancyCoverFlow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setPadding(20, 20, 20, 20);
             rootLayout.addView(imageView);
             imageView.setVisibility(View.VISIBLE);
 
@@ -163,7 +164,7 @@ public class ExerciseTypeDetailFragment extends Fragment {
             });
 		} else {
             TextView textView = new TextView (rootView.getContext());
-            textView.setLayoutParams(new FancyCoverFlow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(10,10,10,10);
