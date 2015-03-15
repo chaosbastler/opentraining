@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
+    <release version="0.7.6" versioncode="32" summary="Portugiesische Übersetzung" date="03/?/2015">
+        <change>Portugiesische Übersetzung der App hinzugefügt. Dank dafür an Narigao.</change>
+        <change>Wenn kein Bild verfügbar ist wird nun stattdessen die Beschreibung angezeigt.</change>
+    </release>
     <release version="0.7.5" versioncode="31" summary="Dialog Bugfix" date="02/24/2015">
         <change>Behebt einen Fehler bei 2 Dialogen (es waren nicht alle Optionen sichtbar)</change>
     </release>
