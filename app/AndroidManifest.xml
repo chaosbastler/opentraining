@@ -1,7 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.skubware.opentraining"
-    android:versionCode="30"
-    android:versionName="0.7.4"
     android:installLocation="auto" >
 
     <uses-sdk
