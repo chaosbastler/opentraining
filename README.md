@@ -1,13 +1,13 @@
+Open Training is looking for a new maintainer
+=============
+I don't have enough time to work regularly on this project anymore. If anyone wants to continue this project please contact me.
+
+
 Open Training
 =============
 
 Open Training is an Android app for planning your fitness training.
 
-More information:
-http://skubware.de/opentraining/
-
-At the moment I'm in contact with the developer of wger(https://wger.de).
-In the future OpenTraining might be able to sync exercises or even training plans with wger.
 
 Where can I download the app?
 -----------------------------
