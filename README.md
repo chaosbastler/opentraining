@@ -23,18 +23,24 @@ Open Source Project for SOEN343 Software Architecture and Design
 
 > Montreal, Quebec, Canada
 
-## Summary of the project
+##Initial Project Link
 
-## Milestones
+Original Author: Christian Skubich
+
+https://github.com/chaosbastler/opentraining
+
+##Summary of the project
+
+##Milestones
 
 - Milestone 1
-  - Download Milestone 1:
+  - Download Milestone 1: download
 - Milestone 2
-  - Download Milestone 2:
-  - Download Domain Name Diagram PDF: 
+  - Download Milestone 2: download
+  - Download Domain Name Diagram PDF: download
 - Milestone 3
-  - Download Milestone 3:
-  - Download Conceptual Class Diagram PDF:
-  - Download Actual Class Diagram PDF:
+  - Download Milestone 3: download
+  - Download Conceptual Class Diagram PDF: download
+  - Download Actual Class Diagram PDF: download
 - Milestone 4
 - Project Presentation
