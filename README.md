@@ -11,17 +11,13 @@ Open Source Project for SOEN343 Software Architecture and Design
 * Nitesh Arora
 * Gilles Philippe Dubuc
 
-> Submitted to
+Submitted to<br />
+Professor Peter C. Rigby
 
-> Professor Peter C. Rigby
-
-> Department of Computer Science and Software Engineering
-
-> Faculty of Computer Science and Software Engineering
-
-> Concordia University
-
-> Montreal, Quebec, Canada
+Department of Computer Science and Software Engineering<br />
+Faculty of Computer Science and Software Engineering<br />
+Concordia University<br />
+Montreal, Quebec, Canada
 
 ##Initial Project Link
 
@@ -43,8 +39,8 @@ We are to try and refactor this application during our academic term in SOEN343.
   - Download Milestone 2: download
   - Download Domain Name Diagram PDF: download
 - Milestone 3
-  - Download Milestone 3: download
-  - Download Conceptual Class Diagram PDF: download
-  - Download Actual Class Diagram PDF: download
+  - Download Milestone 3: <a href="https://drive.google.com/file/d/0B0zPBaqv8_MRRk5jOVlXTTZFZzg/view?usp=sharing">download</a>
+  - Download Conceptual Class Diagram PDF: <a href="https://drive.google.com/file/d/0B0zPBaqv8_MRMjdOMDA1ZTFBaGc/view?usp=sharing">download</a>
+  - Download Actual Class Diagram PDF: <a href="https://drive.google.com/file/d/0B0zPBaqv8_MRNlRrcDlVTXByUkk/view?usp=sharing">download</a>
 - Milestone 4
 - Project Presentation
