@@ -31,6 +31,10 @@ https://github.com/chaosbastler/opentraining
 
 ##Summary of the project
 
+Open Training is an open source Android application that is used to create fitness program by adding their own exercises and customizing them by changing the number of sets, repetitions. Afterwards, you can follow these workout programs as you train by tracking your progress.
+
+We are to try and refactor this application during our academic term in SOEN343.
+
 ##Milestones
 
 - Milestone 1
