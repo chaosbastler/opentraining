@@ -35,6 +35,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,8 +90,7 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 		final View v = inflater.inflate(R.layout.fragment_dialog_rename_workout, null);
 
 		// show old name
-		final EditText edittext_workout_name = (EditText) v.findViewById(R.id.edittext_workout_name);
-		edittext_workout_name.setText(mWorkout.getName());
+		final EditText edittext_workout_name = showOldName(v);
 
 		return new AlertDialog.Builder(getActivity()).setTitle(mWorkout.getName()).setView(v).setCancelable(true)
 				.setPositiveButton(getString(R.string.save), new DialogInterface.OnClickListener() {
@@ -99,44 +99,19 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 						String enterendName = edittext_workout_name.getText().toString();
 
 						// check if name is valid(not empty, not used)
-						if (enterendName.equals("")) {
-							Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
-							return;
-						}
-
-						if (fileAlreadyExists(enterendName)) {
-							Toast.makeText(getActivity(), getString(R.string.workout_already_exists), Toast.LENGTH_LONG).show();
-							return;
-						}
+						if (checkValidity(enterendName)) return;
 
 						// delete old Workout
-						IDataProvider dataProvider = new DataProvider(getActivity());
-						dataProvider.deleteWorkout(mWorkout);
-
-						mWorkout.setName(enterendName);
+						IDataProvider dataProvider = deleteOldWorkout(enterendName);
 
 						// save new Workout
-						boolean success = dataProvider.saveWorkout(mWorkout);
-						if (!success) {
-							Log.wtf(TAG, "Error during saving workout. Old workout was lost. This should never happen.");
-							Toast.makeText(getActivity(), getString(R.string.error_during_saving), Toast.LENGTH_LONG).show();
-							return;
-						}
+						if (saveNewWorkout(dataProvider)) return;
 
 						// finally update GUI
-						TextView textview_workout_name = (TextView) getActivity().findViewById(R.id.textview_workout_name);
-						textview_workout_name.setText(enterendName);
+						updateGUI(enterendName);
 
 						// update Workout in Activity
-						if (getActivity() instanceof WorkoutListActivity) {
-							((WorkoutListActivity) getActivity()).onWorkoutChanged(mWorkout);
-						} else {
-							// was launched by WorkoutDetailActivity
-							// so set result to update WorkoutListActivity later
-							Intent i = new Intent();
-							i.putExtra(WorkoutListActivity.ARG_WORKOUT, mWorkout);
-							getActivity().setResult(Activity.RESULT_OK, i);
-						}
+						updateWorkoutInActivity();
 
 						dialog.dismiss();
 					}
@@ -146,6 +121,62 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 						dialog.dismiss();
 					}
 				}).create();
+	}
+
+	private void updateWorkoutInActivity() {
+		if (getActivity() instanceof WorkoutListActivity) {
+            ((WorkoutListActivity) getActivity()).onWorkoutChanged(mWorkout);
+        } else {
+            // was launched by WorkoutDetailActivity
+            // so set result to update WorkoutListActivity later
+            Intent i = new Intent();
+            i.putExtra(WorkoutListActivity.ARG_WORKOUT, mWorkout);
+            getActivity().setResult(Activity.RESULT_OK, i);
+        }
+	}
+
+	private void updateGUI(String enterendName) {
+		TextView textview_workout_name = (TextView) getActivity().findViewById(R.id.textview_workout_name);
+		textview_workout_name.setText(enterendName);
+	}
+
+	private boolean saveNewWorkout(IDataProvider dataProvider) {
+		boolean success = dataProvider.saveWorkout(mWorkout);
+		if (!success) {
+            Log.wtf(TAG, "Error during saving workout. Old workout was lost. This should never happen.");
+            Toast.makeText(getActivity(), getString(R.string.error_during_saving), Toast.LENGTH_LONG).show();
+			return true;
+        }
+		return false;
+	}
+
+	@NonNull
+	private IDataProvider deleteOldWorkout(String enterendName) {
+		IDataProvider dataProvider = new DataProvider(getActivity());
+		dataProvider.deleteWorkout(mWorkout);
+
+		mWorkout.setName(enterendName);
+		return dataProvider;
+	}
+
+	private boolean checkValidity(String enterendName) {
+		if (enterendName.equals("")) {
+            Toast.makeText(getActivity(), getString(R.string.workout_name_cannot_be_empty), Toast.LENGTH_LONG).show();
+			return true;
+        }
+
+		if (fileAlreadyExists(enterendName)) {
+            Toast.makeText(getActivity(), getString(R.string.workout_already_exists), Toast.LENGTH_LONG).show();
+			return true;
+        }
+		return false;
+	}
+
+	@NonNull
+	private EditText showOldName(View v) {
+		final EditText edittext_workout_name = (EditText) v.findViewById(R.id.edittext_workout_name);
+		edittext_workout_name.setText(mWorkout.getName());
+		return edittext_workout_name;
 	}
 
 	/**
