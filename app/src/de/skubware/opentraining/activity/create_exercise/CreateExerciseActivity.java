@@ -298,23 +298,11 @@ public class CreateExerciseActivity extends ActionBarActivity implements
 			super(fm);
 		}
 
-		@Override
-		public Fragment getItem(int position) {
 
-			switch (position) {
-			case 0:
-				return new NameFragment();
-			case 1:
-				return new DescriptionFragment();
-			case 2:	
-				return new ImageFragment();
-			case 3:	
-				return new MuscleDataFragment();
-			case 4:
-				return new EquipmentDataFragment();
-			}
-			
-			throw new IllegalStateException("No fragment for position: " + position);
+		public Fragment getItem(int position)
+		{
+			FragmentFactory fragmentFactory = new FragmentFactory();
+			return fragmentFactory.generateFragment(position);
 		}
 
 		@Override
