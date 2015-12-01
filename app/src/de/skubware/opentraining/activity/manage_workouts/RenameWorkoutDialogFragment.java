@@ -112,10 +112,7 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 						}
 
 						// delete old Workout
-						IDataProvider dataProvider = new DataProvider(getActivity());
-						dataProvider.deleteWorkout(mWorkout);
-
-						mWorkout.setName(enterendName);
+						IDataProvider dataProvider = deleteOldWorkout(enterendName);
 
 						// save new Workout
 						boolean success = dataProvider.saveWorkout(mWorkout);
@@ -126,22 +123,13 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 						}
 
 						// finally update GUI
-						TextView textview_workout_name = (TextView) getActivity().findViewById(R.id.textview_workout_name);
-						textview_workout_name.setText(enterendName);
+						updateGUI(enterendName);
 
 						// update Workout in Activity
-						if (getActivity() instanceof WorkoutListActivity) {
-							((WorkoutListActivity) getActivity()).onWorkoutChanged(mWorkout);
-						} else {
-							// was launched by WorkoutDetailActivity
-							// so set result to update WorkoutListActivity later
-							Intent i = new Intent();
-							i.putExtra(WorkoutListActivity.ARG_WORKOUT, mWorkout);
-							getActivity().setResult(Activity.RESULT_OK, i);
-						}
-
-						dialog.dismiss();
+						updateWorkoutInActivity(dialog);
 					}
+
+					
 				}).setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -150,6 +138,39 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 				}).create();
 	}
 
+	//-----new methods
+	private void updateWorkoutInActivity(DialogInterface dialog) {
+		if (getActivity() instanceof WorkoutListActivity) {
+			((WorkoutListActivity) getActivity()).onWorkoutChanged(mWorkout);
+		} else {
+			// was launched by WorkoutDetailActivity
+			// so set result to update WorkoutListActivity later
+			Intent i = new Intent();
+			i.putExtra(WorkoutListActivity.ARG_WORKOUT, mWorkout);
+			getActivity().setResult(Activity.RESULT_OK, i);
+		}
+
+		dialog.dismiss();
+	}
+
+	private void updateGUI(String enterendName) {
+		TextView textview_workout_name = (TextView) getActivity().findViewById(R.id.textview_workout_name);
+		textview_workout_name.setText(enterendName);
+	}
+
+	private IDataProvider deleteOldWorkout(String enterendName) {
+		IDataProvider dataProvider = new DataProvider(getActivity());
+		dataProvider.deleteWorkout(mWorkout);
+
+		mWorkout.setName(enterendName);
+		return dataProvider;
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * Checks if a Workout file with the same name already exists.
 	 * 
