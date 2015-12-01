@@ -53,7 +53,6 @@ import android.widget.Toast;
  * @author Christian Skubich
  * 
  */
-
 public class RenameWorkoutDialogFragment extends DialogFragment {
 	/** Tag for logging */
 	private static final String TAG = "RenameWorkoutDialogFragment";
@@ -83,8 +82,7 @@ public class RenameWorkoutDialogFragment extends DialogFragment {
 		mWorkout = (Workout) getArguments().getSerializable(ARG_ID_WORKOUT);
 
 	}
-	
-	//This is the method we will refactor.
+
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		LayoutInflater inflater = LayoutInflater.from(getActivity());
