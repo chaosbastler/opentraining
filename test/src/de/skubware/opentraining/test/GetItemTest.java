@@ -19,27 +19,27 @@ public class GetItemTest extends AndroidTestCase {
 
     public void TestNameFragment() {
         NameFragment nameFragment = new NameFragment();
-        Assert.assertSame("The NameFragment obtained is not the one expected", nameFragment, exerciseActivity.mSectionsPagerAdapter.getItem(0));
+        Assert.assertSame("The expected object is not of type NameFragment.", nameFragment, exerciseActivity.mSectionsPagerAdapter.getItem(0));
     }
 
     public void TestDescriptionFragment() {
         DescriptionFragment descFragment = new DescriptionFragment();
-        Assert.assertSame("The DescriptionFragment obtained is not the one expected", descFragment, exerciseActivity.mSectionsPagerAdapter.getItem(1));
+        Assert.assertSame("The expected object is not of type DescriptionFragment.", descFragment, exerciseActivity.mSectionsPagerAdapter.getItem(1));
     }
 
     public void TestImageFragment() {
         ImageFragment imageFragment = new ImageFragment();
-        Assert.assertSame("The ImageFragment obtained is not the one expected", imageFragment, exerciseActivity.mSectionsPagerAdapter.getItem(2));
+        Assert.assertSame("The expected object is not of type ImageFragment.", imageFragment, exerciseActivity.mSectionsPagerAdapter.getItem(2));
     }
 
     public void TestMuscleDataFragment() {
         MuscleDataFragment muscleFragment = new MuscleDataFragment();
-        Assert.assertSame("The MuscleDataFragment obtained is not the one expected", muscleFragment, exerciseActivity.mSectionsPagerAdapter.getItem(3));
+        Assert.assertSame("The expected object is not of type MuscleDataFragment.", muscleFragment, exerciseActivity.mSectionsPagerAdapter.getItem(3));
     }
 
     public void TestEquipmentDataFragment() {
         EquipmentDataFragment equipmentFragment = new EquipmentDataFragment();
-        Assert.assertSame("The EquipmentDataFragment obtained is not the one expected", equipmentFragment, exerciseActivity.mSectionsPagerAdapter.getItem(4));
+        Assert.assertSame("The expected object is not of type EquipmentDataFragment.", equipmentFragment, exerciseActivity.mSectionsPagerAdapter.getItem(4));
     }
 
 }
