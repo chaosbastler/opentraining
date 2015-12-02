@@ -1,81 +1,46 @@
-Open Training is looking for a new maintainer
-=============
-I don't have enough time to work regularly on this project anymore. If anyone wants to continue this project please contact me.
+# SOEN343: Open Training Android App
+Open Source Project for SOEN343 Software Architecture and Design
 
 
-Open Training
-=============
+**Team Members:**
 
-Open Training is an Android app for planning your fitness training.
+* Jonathan Phillips
+* Joseph Daaboul
+* Sam Kazerouni
+* Eric Leon
+* Nitesh Arora
+* Gilles Philippe Dubuc
 
+Submitted to<br />
+Professor Peter C. Rigby
 
-Where can I download the app?
------------------------------
-Google Play Store: https://play.google.com/store/apps/details?id=de.skubware.opentraining
+Department of Computer Science and Software Engineering<br />
+Faculty of Computer Science and Software Engineering<br />
+Concordia University<br />
+Montreal, Quebec, Canada
 
-F-Droid.org (catalogue of FOSS): https://f-droid.org/repository/browse/?fdid=de.skubware.opentraining
+##Initial Project Link
 
-You can also use this QR-Codes:
+Original Author: Christian Skubich
 
-<a href='http://www.qrcode-generator.de' border='0' style='cursor:default'><img src='https://chart.googleapis.com/chart?cht=qr&chl=https://play.google.com/store/apps/details?id=de.skubware.opentraining&chs=150x150&choe=UTF-8&chld=L|2' alt='qrcodes'></a>
-<a href='http://www.qrcode-generator.de' border='0' style='cursor:default'><img src='https://chart.googleapis.com/chart?cht=qr&chl=https://f-droid.org/repository/browse/?fdid=de.skubware.opentraining&chs=150x150&choe=UTF-8&chld=L|2' alt='hier qr code erstellen'></a>
+https://github.com/chaosbastler/opentraining
 
-Programming language
---------------------
-Java (and some shell scripts for development)
+##Summary of the project
 
-License
--------
-GPL 3
-Exercises are CC licensed(currently all CC-BY-SA)
+Open Training is an open source Android application that is used to create fitness program by adding their own exercises and customizing them by changing the number of sets, repetitions. Afterwards, you can follow these workout programs as you train by tracking your progress.
 
-Translations
-------------
-English, German. More wanted! Help here: http://crowdin.net/project/opentraining
+We are to try and refactor this application during our academic term in SOEN343.
 
+##Milestones
 
-Building Instruction
-====================
-
-Requirements
-------------
-
-  * Git
-  * Android-SDK v19
-  * Android Support Repository
-
-Building with Eclipse
---------------------- 
-
-#### 1. Clone the repository
-
-    $ git clone git://github.com/chaosbastler/opentraining.git
-
-#### 2. Checkout dependencies
-
-    $ git submodule init
-
-    $ git submodule update
-
-#### 3. Change Eclipse workspace
-
-#### 4. Import 'app'
-    * File -> Import -> Existing Projects into Workspace
-#### 5. Import 'test'
-    * File -> Import -> Existing Projects into Workspace
-
-#### 6. Import support library
-    * Instructions: http://developer.android.com/tools/support-library/setup.html#add-library; 'Adding libraries with resources', step 1 to 4 should be enough
-
-#### 6. Disable Lint für support library
-    *Click right on project 'android-support-v7-appcompat' -> Properties -> Android Lint Preferences -> Ignore all
-
-
-Building with gradle
---------------------
-
-#### 1. Connect your phone with USB
-
-#### 2. Build & Install
-
-    $ gradle installDebug
+- Milestone 1
+  - Download Milestone 1: download
+- Milestone 2
+  - Download Milestone 2: download
+  - Download Domain Name Diagram PDF: download
+- Milestone 3
+  - Download Milestone 3: <a href="https://drive.google.com/file/d/0B0zPBaqv8_MRRk5jOVlXTTZFZzg/view?usp=sharing">download</a>
+  - Download Conceptual Class Diagram PDF: <a href="https://drive.google.com/file/d/0B0zPBaqv8_MRMjdOMDA1ZTFBaGc/view?usp=sharing">download</a>
+  - Download Actual Class Diagram PDF: <a href="https://drive.google.com/file/d/0B0zPBaqv8_MRNlRrcDlVTXByUkk/view?usp=sharing">download</a>
+- Milestone 4
+- Project Presentation

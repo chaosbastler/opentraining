@@ -20,10 +20,16 @@
 
 package de.skubware.opentraining.basic;
 
-import java.io.Serializable;
-import java.util.*;
-
 import android.util.Log;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * This class represents a single workout. A workout needs a name and consists
@@ -111,23 +117,6 @@ public class Workout implements Iterable<FitnessExercise>, Serializable {
 		}
 	}
 
-	/**
-	 * Returns a set of dates, for which {@link TrainingEntry}s do exist.
-	 * 
-	 * @return A set of dates, for which training entries do exist.
-	 */
-	/*
-	 * public Set<Date> getTrainingEntryDates(){ List<Date> dateList = new
-	 * ArrayList<Date>(); for(FitnessExercise fEx:this.fitnessExercises){
-	 * for(TrainingEntry e:fEx.getTrainingEntryList()){
-	 * dateList.add(e.getDate()); } }
-	 * 
-	 * // assert that number dates is correct Set<Date> dateSet = new
-	 * HashSet<Date>(dateList); if( dateList.size() != (dateSet.size() *
-	 * this.fitnessExercises.size()) ){ throw new
-	 * AssertionError("Incorrect number of TrainingEntries. This should not happen."
-	 * ); } return dateSet; }
-	 */
 
 	/**
 	 * Checks if there are TrainingEntries for the FitnessExercises.
