@@ -6,8 +6,6 @@ import de.skubware.opentraining.activity.create_exercise.CreateExerciseActivity;
 
 /**
  * Created by Joseph Daaboul and Sam Kazerouni on 12/1/2015.
- *
- * Checks if there is a difference between the obtained Fragment and expected Fragment object.
  */
 
 /**
