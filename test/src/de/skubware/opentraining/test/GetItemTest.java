@@ -19,27 +19,27 @@ public class GetItemTest extends AndroidTestCase {
 
     public void TestNameFragment() {
         NameFragment nameFragment = new NameFragment();
-        Assert.assertSame("They are not the same", nameFragment, exerciseActivity.mSectionsPagerAdapter.getItem(0));
+        Assert.assertSame("The NameFragment obtained is not the one expected", nameFragment, exerciseActivity.mSectionsPagerAdapter.getItem(0));
     }
 
     public void TestDescriptionFragment() {
         DescriptionFragment descFragment = new DescriptionFragment();
-        Assert.assertSame("They are not the same", descFragment, exerciseActivity.mSectionsPagerAdapter.getItem(1));
+        Assert.assertSame("The DescriptionFragment obtained is not the one expected", descFragment, exerciseActivity.mSectionsPagerAdapter.getItem(1));
     }
 
     public void TestImageFragment() {
         ImageFragment imageFragment = new ImageFragment();
-        Assert.assertSame("They are not the same", imageFragment, exerciseActivity.mSectionsPagerAdapter.getItem(2));
+        Assert.assertSame("The ImageFragment obtained is not the one expected", imageFragment, exerciseActivity.mSectionsPagerAdapter.getItem(2));
     }
 
     public void TestMuscleDataFragment() {
         MuscleDataFragment muscleFragment = new MuscleDataFragment();
-        Assert.assertSame("They are not the same", muscleFragment, exerciseActivity.mSectionsPagerAdapter.getItem(3));
+        Assert.assertSame("The MuscleDataFragment obtained is not the one expected", muscleFragment, exerciseActivity.mSectionsPagerAdapter.getItem(3));
     }
 
     public void TestEquipmentDataFragment() {
         EquipmentDataFragment equipmentFragment = new EquipmentDataFragment();
-        Assert.assertSame("They are not the same", equipmentFragment, exerciseActivity.mSectionsPagerAdapter.getItem(4));
+        Assert.assertSame("The EquipmentDataFragment obtained is not the one expected", equipmentFragment, exerciseActivity.mSectionsPagerAdapter.getItem(4));
     }
 
 }
