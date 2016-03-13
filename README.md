@@ -1,5 +1,7 @@
 Open Training is looking for a new maintainer
 =============
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 I don't have enough time to work regularly on this project anymore. If anyone wants to continue this project please contact me.
 
 
@@ -44,27 +46,21 @@ Requirements
   * Android-SDK v19
   * Android Support Repository
 
-Building with Eclipse
+Building with Eclipse (TODO: add instructions for android studio)
 --------------------- 
 
 #### 1. Clone the repository
 
     $ git clone git://github.com/chaosbastler/opentraining.git
 
-#### 2. Checkout dependencies
+#### 2. Change Eclipse workspace
 
-    $ git submodule init
-
-    $ git submodule update
-
-#### 3. Change Eclipse workspace
-
-#### 4. Import 'app'
+#### 3. Import 'app'
     * File -> Import -> Existing Projects into Workspace
-#### 5. Import 'test'
+#### 4. Import 'test'
     * File -> Import -> Existing Projects into Workspace
 
-#### 6. Import support library
+#### 5. Import support library
     * Instructions: http://developer.android.com/tools/support-library/setup.html#add-library; 'Adding libraries with resources', step 1 to 4 should be enough
 
 #### 6. Disable Lint für support library
