@@ -9,6 +9,9 @@ Open Training
 =============
 
 Open Training is an Android app for planning your fitness training.
+its app helps you to make you fit and garented give a muscular look (if you follow all the rule given by "Open Training" app.
+thank you!
+
 
 
 Where can I download the app?
@@ -21,6 +24,11 @@ You can also use this QR-Codes:
 
 <a href='http://www.qrcode-generator.de' border='0' style='cursor:default'><img src='https://chart.googleapis.com/chart?cht=qr&chl=https://play.google.com/store/apps/details?id=de.skubware.opentraining&chs=150x150&choe=UTF-8&chld=L|2' alt='qrcodes'></a>
 <a href='http://www.qrcode-generator.de' border='0' style='cursor:default'><img src='https://chart.googleapis.com/chart?cht=qr&chl=https://f-droid.org/repository/browse/?fdid=de.skubware.opentraining&chs=150x150&choe=UTF-8&chld=L|2' alt='hier qr code erstellen'></a>
+
+instruction
+-----------
+all instraction is provide by your app in first open time.
+if you not able to understand please vigit our official site that is (http://unmaintained.tech/badge.svg)] or (http://unmaintained.tech/).
 
 Programming language
 --------------------
